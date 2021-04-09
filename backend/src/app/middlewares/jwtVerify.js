@@ -1,17 +1,31 @@
-import jwt from 'jsonwebtoken'
-import authConfig from '../../config/auth'
+import jwt from 'jsonwebtoken';
+import {promisify} from 'util';
+import authConfig from '../../config/auth';
 
-export default (req, res, next) => {
-  const token = req.headers['x-access-token'];
+export default async (req, res, next) => {
+  const {authorization} = req.headers;
 
-  if(!token)
-    return res.status(401).json({auth: false, message: "Token não informado!"});
+  // Ausência do token
+  if (!authorization) {
+    return res.status(401).json({
+      error: 'Falha na autenticação, token não informado.'
+    });
+  }
 
-  jwt.verify(token, authConfig.secret, function(err, decoded){
-    if(err)
-      return res.status(500).json({auth: false, message: 'Token inválido.'});
+  // Desestruturação de vetor (Bearer, ...token)
+  const [, token] = authorization.split(' ');
 
-    req.userId = decoded.id;
-    next();
-  });
-}
+  try {
+    /**
+     * É usado o promisify podemos usar o async/await
+     * ao invés do velho callback do verify()
+     */
+    const {id} = await promisify(jwt.verify)(token, authConfig.secret);
+    req.userId = id;
+  } catch (error) {
+    return res.status(401).json({
+      error: 'Falha na autenticação, token inválido!'
+    });
+  }
+  return next();
+};
