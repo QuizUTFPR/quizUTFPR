@@ -1,5 +1,5 @@
 import Sequelize, { Model } from "sequelize";
-// import bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 
 class Teacher extends Model {
   static init(sequelize) {
@@ -18,8 +18,7 @@ class Teacher extends Model {
 
     this.addHook("beforeSave", async teacher => {
       if (teacher.password) {
-        // teacher.password_hash = await bcrypt.hash(teacher.password, 8);
-        teacher.password_hash = teacher.password;
+        teacher.password_hash = await bcrypt.hash(teacher.password, 8);
       }
     });
 
@@ -31,7 +30,7 @@ class Teacher extends Model {
   }
 
   checkPassword(password) {
-    return password == this.password_hash;
+    return bcrypt.compare(password, this.password_hash);
   }
 }
 

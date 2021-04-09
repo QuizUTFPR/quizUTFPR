@@ -1,4 +1,8 @@
 import * as Yup from "yup";
+import authConfig from '../../config/auth'
+import jwt from 'jsonwebtoken'
+
+// MODELS
 import Teacher from "../models/TeacherModel";
 
 class SessionController {
@@ -15,9 +19,13 @@ class SessionController {
 
     const {email, password} = req.body;
 
-    const teacher = await Teacher.findOne({ where: { email } });
+
+    //REQUISIÇÂO LDAP
+
+    let teacher = await Teacher.findOne({ where: { email } });
     if (!teacher) {
-      return res.status(401).json({ error: 'Cadastro não encontrado!' });
+      //cadastro professor
+      teacher = await Teacher.create(req.body);
     }
 
     if (!(await teacher.checkPassword(password))) {
@@ -32,7 +40,9 @@ class SessionController {
         name,
         email,
       },
-      token: "123"
+      token: jwt.sign({id}, authConfig.secret, {
+        expiresIn: authConfig.expireIn
+      })
     });
   }
 }
