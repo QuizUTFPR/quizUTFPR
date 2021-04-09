@@ -3,7 +3,7 @@ import { Router } from "express";
 // Crio uma instância do método Router;
 const router = new Router();
 
-import User from "./user";
+import Teacher from "./teacher";
 
 /**
 Nosso primeiro verbo é o GET;
@@ -14,6 +14,7 @@ router.get("/", (req, res) => {
   return res.status(200).json({ message: "Hello World! ;-)" });
 });
 
-router.use("/user", User);
+
+router.use("/", Teacher);
 
 export default router;

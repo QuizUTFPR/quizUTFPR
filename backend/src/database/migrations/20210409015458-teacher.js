@@ -1,6 +1,8 @@
+'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("users", {
+    return queryInterface.createTable("teacher", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -20,11 +22,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      provider: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
-      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false
@@ -32,11 +29,11 @@ module.exports = {
       updated_at: {
         type: Sequelize.DATE,
         allowNull: false
-      }
+      },
     });
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable("users");
+    return queryInterface.dropTable("teacher");
   }
 };

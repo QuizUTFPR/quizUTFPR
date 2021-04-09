@@ -1,8 +1,11 @@
 import Sequelize from "sequelize";
 import DatabaseConfig from "../config/database";
 
+//Models
+import Teacher from '../app/models/TeacherModel'
+
 //Buffer
-const models = [];
+const models = [Teacher];
 
 class Database {
   constructor() {

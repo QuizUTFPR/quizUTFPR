@@ -1,7 +1,7 @@
 import Sequelize, { Model } from "sequelize";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
 
-class User extends Model {
+class Teacher extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -9,19 +9,19 @@ class User extends Model {
         email: Sequelize.STRING,
         // O campo 'virtual' nao existe no db, apenas na execução
         password: Sequelize.VIRTUAL,
-        password_hash: Sequelize.STRING,
-        provider: Sequelize.BOOLEAN
+        password_hash: Sequelize.STRING
       },
       {
         sequelize
       }
     );
 
-    // this.addHook("beforeSave", async user => {
-    //   if (user.password) {
-    //     user.password_hash = await bcrypt.hash(user.password, 8);
-    //   }
-    // });
+    this.addHook("beforeSave", async teacher => {
+      if (teacher.password) {
+        // teacher.password_hash = await bcrypt.hash(teacher.password, 8);
+        teacher.password_hash = teacher.password;
+      }
+    });
 
     return this;
   }
@@ -31,8 +31,8 @@ class User extends Model {
   }
 
   checkPassword(password) {
-    // return bcrypt.compare(password, this.password_hash);
+    return password == this.password_hash;
   }
 }
 
-export default User;
+export default Teacher;
