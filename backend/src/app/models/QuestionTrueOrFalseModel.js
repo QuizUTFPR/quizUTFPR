@@ -1,6 +1,6 @@
 import Sequelize, { Model } from "sequelize";
 
-class Question extends Model {
+class QuestionTrueOrFalse extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -18,7 +18,13 @@ class Question extends Model {
     return this;
   }
 
-  static associate(models) {}
+  static associate(models) {
+    this.belongsToMany(models.QuestionTrueOrFalseQuiz, {
+      through: { model: models.QuestionTrueOrFalseQuizModel, unique: false },
+      foreignKey: "idQuestion",
+      constraints: false
+    });
+  }
 }
 
-export default Question;
+export default QuestionTrueOrFalse;

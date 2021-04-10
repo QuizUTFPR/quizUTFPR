@@ -20,6 +20,11 @@ class Quiz extends Model {
 
   static associate(models) {
     this.belongsTo(models.File, { foreignKey: "idImage", as: "image" });
+    this.belongsToMany(models.QuestionTrueOrFalseQuiz, {
+      through: { model: models.QuestionTrueOrFalseQuizModel, unique: false },
+      foreignKey: "idQuiz",
+      constraints: false
+    });
   }
 }
 

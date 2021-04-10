@@ -12,7 +12,8 @@ class Teacher extends Model {
         password_hash: Sequelize.STRING
       },
       {
-        sequelize
+        sequelize,
+        tableName: "teacher"
       }
     );
 
@@ -25,8 +26,7 @@ class Teacher extends Model {
     return this;
   }
 
-  static associate(models) {
-  }
+  static associate(models) {}
 
   checkPassword(password) {
     return bcrypt.compare(password, this.password_hash);

@@ -3,9 +3,10 @@ import { Router } from "express";
 // Crio uma instância do método Router;
 const router = new Router();
 
-//MODELS
+// ROUTES
 import Teacher from "./teacher";
 import File from "./file";
+import Quiz from "./quiz";
 
 //MIDDLEWARES
 import verifyJWT from "../app/middlewares/jwtVerify";
@@ -16,9 +17,6 @@ router.use("/", Teacher);
 router.use(verifyJWT);
 
 router.use("/file", File);
-
-router.get("/teste", (req, res) => {
-  return res.status(200).json({ message: "Hello World! ;-)" });
-});
+router.use("/quiz", Quiz);
 
 export default router;
