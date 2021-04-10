@@ -2,32 +2,28 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("quiz", {
+    return queryInterface.createTable("questionTrueOrFalse", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
       },
       title: {
         type: Sequelize.STRING(300),
         allowNull: false
       },
-      description: {
-        type: Sequelize.TEXT,
+      correctAnswer: {
+        type: Sequelize.BOOLEAN,
         allowNull: false
       },
-      visibility: {
-        type: Sequelize.STRING(10),
-        allowNull: false
+      timer: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        defaultValue: 30
       },
-      id_image: {
+      difficultyLevel: {
         type: Sequelize.INTEGER,
-        foreignKey: true,
-        references: { model: "files", key: "id" },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
-        allowNull: true
+        allowNull: false
       },
       created_at: {
         type: Sequelize.DATE,
@@ -41,6 +37,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable("quiz");
+    return queryInterface.dropTable("questionTrueOrFalse");
   }
 };
