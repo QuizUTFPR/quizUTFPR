@@ -17,9 +17,9 @@ class QuestionTrueOrFalseQuiz extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Question, {
+    this.belongsTo(models.QuestionTrueOrFalse, {
       foreignKey: "idQuestion",
-      as: "question"
+      as: "questionTrueOrFalse"
     });
     this.belongsTo(models.Quiz, {
       foreignKey: "idQuiz",

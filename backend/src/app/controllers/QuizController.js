@@ -5,10 +5,11 @@ class QuizController {
   async store(req, res) {
     const schema = Yup.object().shape({
       title: Yup.string()
-        .length(300)
+        .min(1, "Seu título deve conter pelo menos um caracter.")
+        .max(300, "Máximo de caracteres atingidos.")
         .required(),
       description: Yup.string().required(),
-      visibility: Yup.string(10).required,
+      visibility: Yup.string().required().max(10),
       idImage: Yup.number()
     });
 

@@ -4,9 +4,12 @@ import DatabaseConfig from "../config/database";
 //Models
 import Teacher from "../app/models/TeacherModel";
 import File from "../app/models/FileModel";
+import QuestionTrueOrFalse from '../app/models/QuestionTrueOrFalseModel'
+import Quiz from '../app/models/QuizModel';
+import QuestionTrueOrFalseQuiz from '../app/models/QuestionTrueOrFalseQuizModel'
 
 //Buffer
-const models = [Teacher, File];
+const models = [Teacher, File, Quiz, QuestionTrueOrFalse, QuestionTrueOrFalseQuiz];
 
 class Database {
   constructor() {

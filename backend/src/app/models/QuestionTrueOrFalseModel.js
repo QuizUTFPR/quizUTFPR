@@ -4,7 +4,7 @@ class QuestionTrueOrFalse extends Model {
   static init(sequelize) {
     super.init(
       {
-        title: Sequelize.STRING(300),
+        title: Sequelize.STRING,
         correctAnswer: Sequelize.BOOLEAN,
         timer: Sequelize.INTEGER.UNSIGNED,
         difficultyLevel: Sequelize.INTEGER
@@ -19,10 +19,12 @@ class QuestionTrueOrFalse extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.QuestionTrueOrFalseQuiz, {
-      through: { model: models.QuestionTrueOrFalseQuizModel, unique: false },
-      foreignKey: "idQuestion",
-      constraints: false
+    this.belongsToMany(models.Quiz, {
+      through: {
+        model: models.QuestionTrueOrFalseQuiz,
+        foreignKey: "idQuestion",
+        as: "quizzes"
+      },
     });
   }
 }
