@@ -7,7 +7,7 @@ class Quiz extends Model {
         title: Sequelize.STRING,
         description: Sequelize.STRING,
         visibility: Sequelize.STRING,
-        idImage: Sequelize.INTEGER
+        id_image: Sequelize.INTEGER
       },
       {
         sequelize,
@@ -19,13 +19,13 @@ class Quiz extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: "idImage", as: "image" });
+    this.belongsTo(models.File, { foreignKey: "id_image", as: "image" });
     this.belongsToMany(models.QuestionTrueOrFalse, {
       through: {
-        model: models.QuestionTrueOrFalseQuiz,
-        foreignKey: "idQuiz",
-        as: 'questionsTrueOrFalse'
+        model: models.QuestionTrueOrFalseQuiz
       },
+      foreignKey: "quiz_id",
+      as: 'questionsTrueOrFalse'
     });
   }
 }

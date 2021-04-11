@@ -4,9 +4,8 @@ import { Router } from "express";
 const router = new Router();
 
 // CONTROLLERS
-import QuizController from "../app/controllers/QuizController";
+import QuestionTrueOrFalse from "../app/controllers/QuestionTrueOrFalseController";
 
-router.post("/create", QuizController.store);
+router.post("/trueOrFalse/create", QuestionTrueOrFalse.store);
 
-router.get("/getQuiz", QuizController.show);
 export default router;

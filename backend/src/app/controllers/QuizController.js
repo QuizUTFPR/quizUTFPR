@@ -1,6 +1,8 @@
 import * as Yup from "yup";
 import Quiz from "../models/QuizModel";
 
+import QuestionTrueOrFalse from '../models/QuestionTrueOrFalseModel'
+
 class QuizController {
   async store(req, res) {
     const schema = Yup.object().shape({
@@ -10,7 +12,7 @@ class QuizController {
         .required(),
       description: Yup.string().required(),
       visibility: Yup.string().required().max(10),
-      idImage: Yup.number()
+      id_image: Yup.number()
     });
 
     //Check body of requisiton
@@ -27,7 +29,20 @@ class QuizController {
   // Lista todos os registros
   async index() {}
   // Exibe um único registro
-  async show() {}
+  async show(req, res) {
+
+    const {id} = req.body;
+
+    const Quiz = await Quiz.findAll({
+    include: [
+      {model: QuestionTrueOrFalse, as: 'questionsTrueOrFalse'}
+    ],
+    });
+
+
+    return res.json(Quiz);
+
+  }
 
   // Altera um único registro
   update() {}

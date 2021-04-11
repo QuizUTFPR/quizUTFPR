@@ -7,6 +7,7 @@ const router = new Router();
 import Teacher from "./teacher";
 import File from "./file";
 import Quiz from "./quiz";
+import Question from './question'
 
 //MIDDLEWARES
 import verifyJWT from "../app/middlewares/jwtVerify";
@@ -18,5 +19,6 @@ router.use(verifyJWT);
 
 router.use("/file", File);
 router.use("/quiz", Quiz);
+router.use("/question", Question);
 
 export default router;

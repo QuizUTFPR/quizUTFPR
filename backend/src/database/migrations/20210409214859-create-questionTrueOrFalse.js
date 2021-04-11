@@ -10,10 +10,10 @@ module.exports = {
         autoIncrement: true
       },
       title: {
-        type: Sequelize.STRING(300),
+        type: Sequelize.STRING,
         allowNull: false
       },
-      correctAnswer: {
+      correct_answer: {
         type: Sequelize.BOOLEAN,
         allowNull: false
       },
@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER.UNSIGNED,
         defaultValue: 30
       },
-      difficultyLevel: {
+      difficulty_level: {
         type: Sequelize.INTEGER,
         allowNull: false
       },

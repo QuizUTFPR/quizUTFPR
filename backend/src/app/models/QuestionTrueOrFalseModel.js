@@ -11,7 +11,7 @@ class QuestionTrueOrFalse extends Model {
       },
       {
         sequelize,
-        tableName: "quesitonTrueOrFalse"
+        tableName: "questionTrueOrFalse"
       }
     );
 
@@ -21,10 +21,10 @@ class QuestionTrueOrFalse extends Model {
   static associate(models) {
     this.belongsToMany(models.Quiz, {
       through: {
-        model: models.QuestionTrueOrFalseQuiz,
-        foreignKey: "idQuestion",
-        as: "quizzes"
+        model: models.QuestionTrueOrFalseQuiz
       },
+      foreignKey: "question_id",
+      as: "quizzes"
     });
   }
 }

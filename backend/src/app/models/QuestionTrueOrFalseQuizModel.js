@@ -1,15 +1,30 @@
 import Sequelize, { Model } from "sequelize";
 
+import QuizModel from '../models/QuizModel'
+import QuestionTrueOrFalseModel from '../models/QuestionTrueOrFalseModel'
+
 class QuestionTrueOrFalseQuiz extends Model {
   static init(sequelize) {
     super.init(
       {
-        idQuestion: Sequelize.INTEGER,
-        idQuiz: Sequelize.INTEGER
+        question_id: {
+          type: Sequelize.INTEGER,
+            references: {
+              model: QuestionTrueOrFalseModel,
+              key: 'id'
+            }
+        },
+        quiz_id: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: QuizModel,
+            key: 'id'
+          }
+        },
       },
       {
         sequelize,
-        tableName: "questionTrueOrFalseQuizModel"
+        tableName: "questionTrueOrFalseQuiz"
       }
     );
 
@@ -17,14 +32,14 @@ class QuestionTrueOrFalseQuiz extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.QuestionTrueOrFalse, {
-      foreignKey: "idQuestion",
-      as: "questionTrueOrFalse"
-    });
-    this.belongsTo(models.Quiz, {
-      foreignKey: "idQuiz",
-      as: "quiz"
-    });
+    // this.belongsTo(models.QuestionTrueOrFalse, {
+    //   foreignKey: "question_id",
+    //   as: "questionTrueOrFalse"
+    // });
+    // this.belongsTo(models.Quiz, {
+    //   foreignKey: "quiz_id",
+    //   as: "quiz"
+    // });
   }
 }
 
