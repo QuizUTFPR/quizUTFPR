@@ -6,10 +6,9 @@ import Teacher from "../app/models/TeacherModel";
 import File from "../app/models/FileModel";
 import QuestionTrueOrFalse from '../app/models/QuestionTrueOrFalseModel'
 import Quiz from '../app/models/QuizModel';
-import QuestionTrueOrFalseQuiz from '../app/models/QuestionTrueOrFalseQuizModel'
 
 //Buffer
-const models = [Teacher, File, Quiz, QuestionTrueOrFalse, QuestionTrueOrFalseQuiz];
+const models = [Teacher, File, Quiz, QuestionTrueOrFalse];
 
 class Database {
   constructor() {
@@ -20,11 +19,14 @@ class Database {
     // Inicializa conexao
     this.connection = new Sequelize(DatabaseConfig);
 
+    console.log("Iniciando relacionamentos!");
     // Percorre o vetor e acessa o método inicializador e associações
     models
       .map(model => model.init(this.connection))
       .map(model => model.associate && model.associate(this.connection.models));
-  }
+
+    console.log("Finalizou!")
+    }
 }
 
 export default new Database();

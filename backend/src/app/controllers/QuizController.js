@@ -33,14 +33,14 @@ class QuizController {
 
     const {id} = req.body;
 
-    const Quiz = await Quiz.findAll({
+    const quiz = await Quiz.findAll({
     include: [
       {model: QuestionTrueOrFalse, as: 'questionsTrueOrFalse'}
     ],
     });
 
 
-    return res.json(Quiz);
+    return res.json(quiz);
 
   }
 

@@ -3,9 +3,9 @@ Importo a biblioteca express;
 Importo as rotas externas e seus demais verbos (POST, GET, PUT, DELETE);
 Importo as variáveis de ambiente
 **/
+import "dotenv";
 import express from "express";
 import routes from "./routes";
-import dotenv from "dotenv";
 
 // Importando banco de dados
 import "./database";
@@ -13,7 +13,6 @@ import "./database";
 class App {
   // O construtor irá invocar minha instância e os middlewares;
   constructor() {
-    dotenv.config();
     this.server = express();
     this.middleware();
     this.routes();

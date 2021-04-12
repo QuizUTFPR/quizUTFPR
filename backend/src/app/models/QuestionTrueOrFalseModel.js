@@ -19,13 +19,13 @@ class QuestionTrueOrFalse extends Model {
   }
 
   static associate(models) {
+    console.log("Associação question true or false!")
     this.belongsToMany(models.Quiz, {
-      through: {
-        model: models.QuestionTrueOrFalseQuiz
-      },
+      through: 'questiontrueorfalsequiz',
       foreignKey: "question_id",
       as: "quizzes"
     });
+
   }
 }
 

@@ -7,13 +7,19 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
-        references: { model: "questionTrueOrFalse", key: "id" } // Quiz hasMany Questions
+        references: {
+          model: "questionTrueOrFalse",
+          key: "id"
+        } // Quiz hasMany Questions
       },
       quiz_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
-        references: { model: "quiz", key: "id" } // question belongsToMany Quiz
+        references: {
+          model: "quiz",
+          key: "id"
+        } // question belongsToMany Quiz
       },
       created_at: {
         type: Sequelize.DATE,

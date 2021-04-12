@@ -19,14 +19,13 @@ class Quiz extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: "id_image", as: "image" });
+    console.log("associação quiz!");
     this.belongsToMany(models.QuestionTrueOrFalse, {
-      through: {
-        model: models.QuestionTrueOrFalseQuiz
-      },
+      through: 'questiontrueorfalsequiz',
       foreignKey: "quiz_id",
       as: 'questionsTrueOrFalse'
     });
+    this.belongsTo(models.File, { foreignKey: "id_image", as: "image" });
   }
 }
 

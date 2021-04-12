@@ -1,6 +1,20 @@
 import * as Yup from "yup";
 import QuestionTrueOrFalse from "../models/QuestionTrueOrFalseModel";
-import QuestionTrueOrFalseQuiz from '../models/QuestionTrueOrFalseQuizModel'
+import Quiz from '../models/QuizModel'
+
+function getAllMethods(obj) {
+    var result = [];
+    for (var id in obj) {
+      try {
+        if (typeof(obj[id]) == "function") {
+          result.push(id + ": " + obj[id].toString());
+        }
+        } catch (err) {
+          result.push(id + ": inaccessible");
+        }
+      }
+    return result;
+  }
 
 class QuestionTrueOrFalseController {
   async store(req, res){
@@ -15,30 +29,28 @@ class QuestionTrueOrFalseController {
         quiz_id: Yup.number().required()
     });
 
+
     //Check body of requisiton
     if (!(await schema.isValid(req.body)))
-      return res.status(401).json({ error: "Falha na validação!" });
+    return res.status(401).json({ error: "Falha na validação!" });
 
-    const {
-      id,
-      title,
-      correctAnswer,
-      timer,
-      difficultyLevel
-    } = await QuestionTrueOrFalse.create(req.body);
+    const {quiz_id} = req.body;
+
+    const quiz = await Quiz.findByPk(quiz_id);
+
+    if(!quiz) return res.status(400).json({error: 'Quiz não encontrado!'})
+
+    const questionTrueOrFalse = await QuestionTrueOrFalse.create(req.body);
 
 
-    const questionQuiz = await QuestionTrueOrFalseQuiz.create({
-      question_id: id,
-      quiz_id: req.body.id_quiz
-    });
+    /**
+    * Quando se cria um relacionamento de N para N no Sequelize ele monta um monte de funcionalidades
+    * a mais, por exemplo o 'add', que nós setamos com 'addTech()' e depois passamos o model '(tech)'
+    * dentro do 'addTech(tech)' para que ele possa ter acesso e criar a tecnologia se ele não achou.
+    */
+    await quiz.addQuestionsTrueOrFalse(questionTrueOrFalse)
 
-    return res.json({
-      title,
-      correctAnswer,
-      timer,
-      difficultyLevel
-    });
+    return res.json(questionTrueOrFalse);
   }
 
   // Lista todos os registros
