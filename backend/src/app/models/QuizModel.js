@@ -25,6 +25,13 @@ class Quiz extends Model {
       foreignKey: "quiz_id",
       as: 'questionsTrueOrFalse'
     });
+
+    this.belongsToMany(models.Tag, {
+      through: 'quiz_tags',
+      foreignKey: "quiz_id",
+      as: 'tags'
+    })
+
     this.belongsTo(models.File, { foreignKey: "id_image", as: "image" });
   }
 }
