@@ -21,7 +21,7 @@ class Quiz extends Model {
   static associate(models) {
     console.log("associação quiz!");
     this.belongsToMany(models.QuestionTrueOrFalse, {
-      through: 'questiontrueorfalsequiz',
+      through: 'question_true_or_false_quiz',
       foreignKey: "quiz_id",
       as: 'questionsTrueOrFalse'
     });

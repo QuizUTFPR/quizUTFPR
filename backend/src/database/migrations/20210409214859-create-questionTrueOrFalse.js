@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("questionTrueOrFalse", {
+    return queryInterface.createTable("question_true_or_false", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -37,6 +37,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable("questionTrueOrFalse");
+    return queryInterface.dropTable("question_true_or_false");
   }
 };

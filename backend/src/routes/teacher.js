@@ -4,8 +4,8 @@ import { Router } from "express";
 const router = new Router();
 
 // CONTROLLERS
-import SessionController from '../app/controllers/SessionController';
+import SessionTeacherController from '../app/controllers/SessionTeacherController';
 
-router.post("/login",  SessionController.store);
+router.post("/login",  SessionTeacherController.store);
 
 export default router;
