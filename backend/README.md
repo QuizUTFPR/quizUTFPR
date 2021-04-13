@@ -14,15 +14,18 @@ expiresIn: "10h" // expira em 10 horas
 expiresIn: 120 // expira em 120ms
 expiresIn: "120s" // expira em 120s
 
-DB_HOST=
-DB_PORT=
-DB_USER=
-DB_PASS=
-DB_NAME=
-DB_DIALECT=
+```bash
+$ DB_HOST=
+$ DB_PORT=
+$ DB_USER=
+$ DB_PASS=
+$ DB_NAME=
+$ DB_DIALECT=
 
-SECRET=
-EXPIRE_IN=
+$ SECRET=
+$ EXPIRE_IN=
+```
+
 
 
 ## Criando Banco de Dados
