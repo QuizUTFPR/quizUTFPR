@@ -1,4 +1,7 @@
+require("dotenv").config();
+
+
 export default {
-  secret: "123456",
-  expireIn: '2d'
+  secret: process.env.SECRET
+  expireIn: process.env.EXPIRE_IN
 }
