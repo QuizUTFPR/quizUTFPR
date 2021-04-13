@@ -9,11 +9,12 @@ Gere seu secret no site: https://www.md5hashgenerator.com/ utilizando uma frase
 
 No campo expire_in, informe quanto tempo o token será válido, exemplos:
 
-expiresIn: '2d' // expira em 2 dias
-expiresIn: "10h" // expira em 10 horas
-expiresIn: 120 // expira em 120ms
-expiresIn: "120s" // expira em 120s
-
+```bash
+$ expiresIn: '2d' // expira em 2 dias
+$ expiresIn: "10h" // expira em 10 horas
+$ expiresIn: 120 // expira em 120ms
+$ expiresIn: "120s" // expira em 120s
+```
 ```bash
 $ DB_HOST=
 $ DB_PORT=
