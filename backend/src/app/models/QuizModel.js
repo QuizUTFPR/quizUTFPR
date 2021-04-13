@@ -4,6 +4,7 @@ class Quiz extends Model {
   static init(sequelize) {
     super.init(
       {
+        id_teacher: Sequelize.INTEGER,
         title: Sequelize.STRING,
         description: Sequelize.STRING,
         visibility: Sequelize.STRING,
@@ -20,10 +21,16 @@ class Quiz extends Model {
 
   static associate(models) {
     console.log("associação quiz!");
-    this.belongsToMany(models.QuestionTrueOrFalse, {
-      through: 'question_true_or_false_quiz',
+
+    this.belongsTo(models.Teacher, {
+      foreignKey: "id_teacher",
+      as: "teacher"
+    });
+
+    this.belongsToMany(models.Question, {
+      through: 'question_quiz',
       foreignKey: "quiz_id",
-      as: 'questionsTrueOrFalse'
+      as: 'questions'
     });
 
     this.belongsToMany(models.Tag, {

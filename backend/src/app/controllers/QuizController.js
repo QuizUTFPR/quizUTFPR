@@ -1,7 +1,10 @@
 import * as Yup from "yup";
 import Quiz from "../models/QuizModel";
 
+import Teacher from '../models/TeacherModel'
+import Question from '../models/QuestionModel'
 import QuestionTrueOrFalse from '../models/QuestionTrueOrFalseModel'
+
 import Tag from '../models/TagModel'
 
 function getAllMethods(obj) {
@@ -39,16 +42,21 @@ class QuizController {
     if (!(await schema.isValid(req.body)))
       return res.status(401).json({ error: "Falha na validação!" });
 
-    const quiz = await Quiz.create(req.body);
+    const id_teacher = req.userId;
+    const quiz = await Quiz.create({...req.body, id_teacher});
 
     const {tags} = req.body;
 
     tags.map(async (tagObject) => {
-      const [tag, created] = await Tag.findOrCreate({
+
+      //tag =  TAG FOUND OR CREATE
+      //Created = flag to inform if some tag was created
+      const [tag, Created] = await Tag.findOrCreate({
         where: {
           name: tagObject.name
         }
       });
+
       tag.addQuiz(quiz);
     });
 
@@ -68,9 +76,15 @@ class QuizController {
     attributes: ['id','title', 'description', 'visibility', 'id_image'],
     include: [
       {
-        model: QuestionTrueOrFalse,
-        as: 'questionsTrueOrFalse',
-        attributes: ['id', 'title', 'correctAnswer', 'timer', 'difficultyLevel'],
+        model: Teacher,
+        as: 'teacher',
+        attributes: ['name', 'email']
+      },
+      {
+        model: Question,
+        as: 'questions',
+        include: ['answer'],
+        attributes: ['title', 'timer', 'difficultyLevel'],
         through: {
           attributes: []
         }
@@ -85,6 +99,7 @@ class QuizController {
       }
     ],
     });
+
 
 
     return res.json(quiz);

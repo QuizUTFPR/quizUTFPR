@@ -1,4 +1,6 @@
 import * as Yup from "yup";
+
+import Question from '../models/QuestionModel'
 import QuestionTrueOrFalse from "../models/QuestionTrueOrFalseModel";
 import Quiz from '../models/QuizModel'
 
@@ -34,23 +36,34 @@ class QuestionTrueOrFalseController {
     if (!(await schema.isValid(req.body)))
     return res.status(401).json({ error: "Falha na validação!" });
 
-    const {quiz_id} = req.body;
+    const {title, correctAnswer, timer, difficultyLevel, quiz_id} = req.body;
 
     const quiz = await Quiz.findByPk(quiz_id);
 
     if(!quiz) return res.status(400).json({error: 'Quiz não encontrado!'})
 
-    const questionTrueOrFalse = await QuestionTrueOrFalse.create(req.body);
+
+    const question = await Question.create({title, timer, difficultyLevel});
+
+    const id_question =  question.id;
 
 
+    const questionTrueOrFalse = await QuestionTrueOrFalse.create({
+      id_question,
+      correctAnswer 
+    });
+
+
+    // await questionTrueOrFalse.setQuestion(question);
     /**
     * Quando se cria um relacionamento de N para N no Sequelize ele monta um monte de funcionalidades
     * a mais, por exemplo o 'add', que nós setamos com 'addTech()' e depois passamos o model '(tech)'
     * dentro do 'addTech(tech)' para que ele possa ter acesso e criar a tecnologia se ele não achou.
     */
-    await quiz.addQuestionsTrueOrFalse(questionTrueOrFalse)
 
-    return res.json(questionTrueOrFalse);
+    await quiz.addQuestion(question)
+
+    return res.json(question);
   }
 
   // Lista todos os registros

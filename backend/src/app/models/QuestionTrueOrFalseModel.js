@@ -1,13 +1,13 @@
 import Sequelize, { Model } from "sequelize";
 
+// import Question from './QuestionModel'
+
 class QuestionTrueOrFalse extends Model {
   static init(sequelize) {
     super.init(
       {
-        title: Sequelize.STRING,
-        correctAnswer: Sequelize.BOOLEAN,
-        timer: Sequelize.INTEGER.UNSIGNED,
-        difficultyLevel: Sequelize.INTEGER
+        id_question: Sequelize.INTEGER,
+        correctAnswer: Sequelize.BOOLEAN
       },
       {
         sequelize,
@@ -19,13 +19,10 @@ class QuestionTrueOrFalse extends Model {
   }
 
   static associate(models) {
-    console.log("Associação question true or false!")
-    this.belongsToMany(models.Quiz, {
-      through: 'question_true_or_false_quiz',
-      foreignKey: "question_id",
-      as: "quizzes"
-    });
-
+    // this.belongsTo(models.Question, {
+    //   foreignKey: "id_question",
+    //   as: "question"
+    // });
   }
 }
 

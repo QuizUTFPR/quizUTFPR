@@ -9,6 +9,12 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true
       },
+      id_teacher: {
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        references: { model: "teacher", key: "id" },
+        allowNull: false
+      },
       title: {
         type: Sequelize.STRING(300),
         allowNull: false
