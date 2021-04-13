@@ -1,25 +1,12 @@
 import * as Yup from "yup";
-import Quiz from "../models/QuizModel";
 
+// MODELS
+import Quiz from "../models/QuizModel";
 import Teacher from '../models/TeacherModel'
 import Question from '../models/QuestionModel'
-import QuestionTrueOrFalse from '../models/QuestionTrueOrFalseModel'
-
+import Answer from '../models/AnswerModel'
 import Tag from '../models/TagModel'
 
-function getAllMethods(obj) {
-  var result = [];
-  for (var id in obj) {
-    try {
-      if (typeof(obj[id]) == "function") {
-        result.push(id + ": " + obj[id].toString());
-      }
-      } catch (err) {
-        result.push(id + ": inaccessible");
-      }
-    }
-  return result;
-}
 
 class QuizController {
   async store(req, res) {
@@ -83,11 +70,15 @@ class QuizController {
       {
         model: Question,
         as: 'questions',
-        include: ['answer'],
-        attributes: ['title', 'timer', 'difficultyLevel'],
+        attributes: ['id', 'title', 'timer', 'difficultyLevel'],
         through: {
           attributes: []
-        }
+        },
+        include: [{
+          model: Answer,
+          as: 'answer',
+          attributes: ['title', 'is_correct']
+        }]
       },
       {
         model: Tag,

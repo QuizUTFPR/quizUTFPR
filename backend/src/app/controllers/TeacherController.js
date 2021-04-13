@@ -1,4 +1,6 @@
 import * as Yup from "yup";
+
+// MODELS
 import Teacher from "../models/TeacherModel";
 
 class TeacherController {

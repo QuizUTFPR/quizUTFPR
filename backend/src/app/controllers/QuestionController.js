@@ -1,34 +1,26 @@
 import * as Yup from "yup";
 
+// MODELS
 import Question from '../models/QuestionModel'
-import QuestionTrueOrFalse from "../models/QuestionTrueOrFalseModel";
+import Answer from "../models/AnswerModel";
 import Quiz from '../models/QuizModel'
 
-function getAllMethods(obj) {
-    var result = [];
-    for (var id in obj) {
-      try {
-        if (typeof(obj[id]) == "function") {
-          result.push(id + ": " + obj[id].toString());
-        }
-        } catch (err) {
-          result.push(id + ": inaccessible");
-        }
-      }
-    return result;
-  }
-
-class QuestionTrueOrFalseController {
+class QuestionController {
   async store(req, res){
     const schema = Yup.object().shape({
-      title: Yup.string()
-        .min(1, "Seu título deve conter pelo menos um caracter.")
-        .max(300, "Máximo de caracteres atingidos.")
-        .required(),
-        correctAnswer: Yup.bool().required(),
+        title: Yup.string()
+          .min(1, "Seu título deve conter pelo menos um caracter.")
+          .max(300, "Máximo de caracteres atingidos.")
+          .required(),
         timer: Yup.number().required(),
         difficultyLevel: Yup.number().required(),
-        quiz_id: Yup.number().required()
+        quiz_id: Yup.number().required(),
+        answer: Yup.array().of(
+          Yup.object().shape({
+            title: Yup.string().required(),
+            is_correct: Yup.bool().required()
+          })
+      ).required()
     });
 
 
@@ -36,7 +28,7 @@ class QuestionTrueOrFalseController {
     if (!(await schema.isValid(req.body)))
     return res.status(401).json({ error: "Falha na validação!" });
 
-    const {title, correctAnswer, timer, difficultyLevel, quiz_id} = req.body;
+    const {title, timer, difficultyLevel, quiz_id, answer} = req.body;
 
     const quiz = await Quiz.findByPk(quiz_id);
 
@@ -45,16 +37,13 @@ class QuestionTrueOrFalseController {
 
     const question = await Question.create({title, timer, difficultyLevel});
 
-    const id_question =  question.id;
+    const id_question = question.id;
 
+    answer.map(async (answerItem) => {
+      const answerCreated = await Answer.create({...answerItem, id_question});
+      question.addAnswer(answerCreated);
+    })
 
-    const questionTrueOrFalse = await QuestionTrueOrFalse.create({
-      id_question,
-      correctAnswer 
-    });
-
-
-    // await questionTrueOrFalse.setQuestion(question);
     /**
     * Quando se cria um relacionamento de N para N no Sequelize ele monta um monte de funcionalidades
     * a mais, por exemplo o 'add', que nós setamos com 'addTech()' e depois passamos o model '(tech)'
@@ -77,4 +66,4 @@ class QuestionTrueOrFalseController {
   async delete() {}
 }
 
-export default new QuestionTrueOrFalseController();
+export default new QuestionController();

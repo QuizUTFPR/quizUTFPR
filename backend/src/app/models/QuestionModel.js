@@ -25,11 +25,11 @@ class Question extends Model {
       as: "quizzes"
     });
 
-  this.hasOne(models.QuestionTrueOrFalse, {
+  this.hasMany(models.Answer, {
       foreignKey: "id_question",
       as: "answer"
     });
-    
+
   }
 }
 

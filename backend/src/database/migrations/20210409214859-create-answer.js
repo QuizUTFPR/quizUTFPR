@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("question_true_or_false", {
+    return queryInterface.createTable("answer", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -15,7 +15,11 @@ module.exports = {
         foreignKey: true,
         references: { model: "question", key: "id" },
       },
-      correct_answer: {
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      is_correct: {
         type: Sequelize.BOOLEAN,
         allowNull: false
       },
@@ -31,6 +35,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable("question_true_or_false");
+    return queryInterface.dropTable("answer");
   }
 };

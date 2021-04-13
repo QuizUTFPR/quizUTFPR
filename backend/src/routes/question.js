@@ -4,8 +4,8 @@ import { Router } from "express";
 const router = new Router();
 
 // CONTROLLERS
-import QuestionTrueOrFalse from "../app/controllers/QuestionTrueOrFalseController";
+import Question from "../app/controllers/QuestionController";
 
-router.post("/trueOrFalse/create", QuestionTrueOrFalse.store);
+router.post("/create", Question.store);
 
 export default router;
