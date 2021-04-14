@@ -7,5 +7,7 @@ const router = new Router();
 import Question from "../app/controllers/QuestionController";
 
 router.post("/create", Question.store);
+router.get("/", Question.index);
+router.get("/:tag", Question.show);
 
 export default router;

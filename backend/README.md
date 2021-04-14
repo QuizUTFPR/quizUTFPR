@@ -1,5 +1,13 @@
-## Configurando .env
+## Tecnologias necessárias
 
+## 🚀 Tecnologias
+
+- [Node.js][https://nodejs.org/en/]
+- [MySQL][https://dev.mysql.com/downloads/installer/]
+- [Yarn][https://classic.yarnpkg.com/en/docs/install/#windows-stable]
+- [Postman][https://www.postman.com/downloads/]
+
+## Configurando .env
 
 Crie um arquivo .env informando todos os dados pedidos abaixo
 

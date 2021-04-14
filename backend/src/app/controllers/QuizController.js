@@ -9,91 +9,164 @@ import Tag from "../models/TagModel";
 
 class QuizController {
   async store(req, res) {
-    const schema = Yup.object().shape({
-      title: Yup.string()
-        .min(1, "Seu título deve conter pelo menos um caracter.")
-        .max(300, "Máximo de caracteres atingidos.")
-        .required(),
-      description: Yup.string().required(),
-      visibility: Yup.string()
-        .required()
-        .max(10),
-      id_image: Yup.number(),
-      tags: Yup.array()
-        .of(
-          Yup.object().shape({
-            name: Yup.string()
-          })
-        )
-        .required("Informe as tags do quiz!")
-    });
-
-    //Check body of requisiton
-    if (!(await schema.isValid(req.body)))
-      return res.status(401).json({ error: "Falha na validação!" });
-
-    const id_teacher = req.userId;
-    const quiz = await Quiz.create({ ...req.body, id_teacher });
-
-    const { tags } = req.body;
-
-    tags.map(async tagObject => {
-      //tag =  TAG FOUND OR CREATE
-      //Created = flag to inform if some tag was created
-      const [tag, Created] = await Tag.findOrCreate({
-        where: {
-          name: tagObject.name
-        }
+    try{
+      const schema = Yup.object().shape({
+        title: Yup.string()
+          .min(1, "Seu título deve conter pelo menos um caracter.")
+          .max(300, "Máximo de caracteres atingidos.")
+          .required(),
+        description: Yup.string().required(),
+        visibility: Yup.string()
+          .required()
+          .max(10),
+        id_image: Yup.number(),
+        tags: Yup.array()
+          .of(
+            Yup.object().shape({
+              name: Yup.string()
+            })
+          )
+          .required("Informe as tags do quiz!")
       });
 
-      tag.addQuiz(quiz);
-    });
+      //Check body of requisiton
+      if (!(await schema.isValid(req.body)))
+        return res.status(401).json({ error: "Falha na validação!" });
 
-    return res.json({
-      quiz
-    });
+      const id_teacher = req.userId;
+      const quiz = await Quiz.create({ ...req.body, id_teacher });
+
+      const { tags } = req.body;
+
+      tags.map(async tagObject => {
+        //tag =  TAG FOUND OR CREATE
+        //Created = flag to inform if some tag was created
+        const [tag, Created] = await Tag.findOrCreate({
+          where: {
+            name: tagObject.name
+          }
+        });
+
+        tag.addQuiz(quiz);
+      });
+
+      return res.status(200).json({
+        quiz
+      });
+    }catch(err){
+      return res.status(500).json(err);
+    }
   }
 
   // Lista todos os registros
   async index(req, res) {
-    const quiz = await Quiz.findAll({
-      attributes: ["id", "title", "description", "visibility", "id_image"],
-      include: [
-        {
-          model: Teacher,
-          as: "teacher",
-          attributes: ["name", "email"]
-        },
-        {
-          model: Question,
-          as: "questions",
-          attributes: ["id", "title", "timer", "difficultyLevel"],
-          through: {
-            attributes: []
+    try{
+      const quizzes = await Quiz.findAll({
+        attributes: ["id", "title", "description", "visibility", "id_image"],
+        include: [
+          {
+            model: Teacher,
+            as: "teacher",
+            attributes: ["name", "email"]
           },
-          include: [
-            {
-              model: Answer,
-              as: "answer",
-              attributes: ["title", "is_correct"]
+          {
+            model: Question,
+            as: "questions",
+            attributes: ["id", "title", "timer", "difficultyLevel"],
+            through: {
+              attributes: []
+            },
+            include: [
+              {
+                model: Answer,
+                as: "answer",
+                attributes: ["title", "is_correct"]
+              },{
+                model: Tag,
+                as: "tags_question",
+                attributes: ["name"],
+                through: {
+                  attributes: []
+                }
+              }
+            ]
+          },
+          {
+            model: Tag,
+            as: "tags_quiz",
+            attributes: ["name"],
+            through: {
+              attributes: []
             }
-          ]
-        },
-        {
-          model: Tag,
-          as: "tags",
-          attributes: ["name"],
-          through: {
-            attributes: []
           }
-        }
-      ]
-    });
+        ]
+      });
 
-    return res.json(quiz);
+      if(!quizzes.length)
+      return res.status(400).json({error: "Não existe nenhum quiz cadastrado."});
+
+
+      return res.status(200).json(quizzes);
+    }catch(err){
+      return res.status(500).json(err);
+    }
   }
   // Exibe um único registro
-  async show() {}
+  async show(req, res) {
+    try{
+      const {tag} = req.params;
+
+      const quiz = await Quiz.findAll({
+        attributes: ["id", "title", "description", "visibility", "id_image"],
+        include: [
+          {
+            model: Teacher,
+            as: "teacher",
+            attributes: ["name", "email"]
+          },
+          {
+            model: Question,
+            as: "questions",
+            attributes: ["id", "title", "timer", "difficultyLevel"],
+            through: {
+              attributes: []
+            },
+            include: [
+              {
+                model: Answer,
+                as: "answer",
+                attributes: ["title", "is_correct"]
+              },{
+                model: Tag,
+                as: "tags_question",
+                attributes: ["name"],
+                through: {
+                  attributes: []
+                }
+              }
+            ]
+          },
+          {
+            model: Tag,
+            as: "tags_quiz",
+            attributes: ["name"],
+            where: {
+              name: tag
+            },
+            through: {
+              attributes: []
+            }
+          }
+        ]
+      });
+
+      if(!quiz.length) return res.status(400).json({error: "Não existe nenhum quiz com a tag informada."});
+
+      return res.status(200).json(quiz);
+    }catch(err){
+      return res.status(500).json(err);
+    }
+  }
 
   // Altera um único registro
   update() {}

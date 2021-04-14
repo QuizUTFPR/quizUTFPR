@@ -8,43 +8,47 @@ import Teacher from "../models/TeacherModel";
 class SessionController {
   // Cadastra um único registro
   async store(req, res) {
-    const schema = Yup.object().shape({
-      email: Yup.string().email().required(),
-      password: Yup.string().required()
-    });
+    try{
+      const schema = Yup.object().shape({
+        email: Yup.string().email().required(),
+        password: Yup.string().required()
+      });
 
-    //Check body of requisiton
-    if(!(await schema.isValid(req.body)))
-      return res.status(401).json({error: 'Falha na validação!'});
+      //Check body of requisiton
+      if(!(await schema.isValid(req.body)))
+        return res.status(401).json({error: 'Falha na validação!'});
 
-    const {email, password} = req.body;
+      const {email, password} = req.body;
 
 
-    //REQUISIÇÂO LDAP
+      //REQUISIÇÂO LDAP
 
-    let teacher = await Teacher.findOne({ where: { email } });
-    if (!teacher) {
-      //cadastro professor
-      teacher = await Teacher.create(req.body);
+      //cadastro professor caso nao existir no sistema
+      let teacher = await Teacher.findOne({ where: { email } });
+      if (!teacher) teacher = await Teacher.create(req.body);
+
+
+      if (!(await teacher.checkPassword(password)))
+        return res.status(401).json({ error: 'Senha Incorreta!' });
+
+
+      const { id, name } = teacher;
+
+      return res.json({
+        teacher: {
+          id,
+          name,
+          email,
+        },
+        token: jwt.sign({id}, authConfig.secret, {
+          expiresIn: authConfig.expireIn
+        })
+      });
+
+    }catch(err){
+      return res.status(500).json(err)
     }
-
-    if (!(await teacher.checkPassword(password))) {
-      return res.status(401).json({ error: 'Senha Incorreta!' });
     }
-
-    const { id, name } = teacher;
-
-    return res.json({
-      teacher: {
-        id,
-        name,
-        email,
-      },
-      token: jwt.sign({id}, authConfig.secret, {
-        expiresIn: authConfig.expireIn
-      })
-    });
-  }
 }
 
 export default new SessionController();

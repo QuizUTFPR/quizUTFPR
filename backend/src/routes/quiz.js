@@ -6,7 +6,8 @@ const router = new Router();
 // CONTROLLERS
 import QuizController from "../app/controllers/QuizController";
 
+router.get("/", QuizController.index);
 router.post("/create", QuizController.store);
+router.get("/:tag", QuizController.show);
 
-router.get("/getQuiz", QuizController.show);
 export default router;

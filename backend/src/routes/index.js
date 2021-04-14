@@ -8,6 +8,7 @@ import Teacher from "./teacher";
 import File from "./file";
 import Quiz from "./quiz";
 import Question from './question'
+import Tag from './tag'
 
 //MIDDLEWARES
 import verifyJWT from "../app/middlewares/jwtVerify";
@@ -20,5 +21,6 @@ router.use(verifyJWT);
 router.use("/file", File);
 router.use("/quiz", Quiz);
 router.use("/question", Question);
+router.use("/tag", Tag);
 
 export default router;

@@ -25,10 +25,15 @@ class Question extends Model {
       as: "quizzes"
     });
 
-    this.belongsToMany(models.Question, {
+    this.hasMany(models.Answer, {
+      foreignKey: "id_question",
+      as: "answer"
+    });
+
+    this.belongsToMany(models.Tag, {
       through: "question_tags",
       foreignKey: "question_id",
-      as: "tags"
+      as: "tags_question"
     });
   }
 }

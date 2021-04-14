@@ -28,7 +28,7 @@ class Tag extends Model {
     });
 
     this.belongsToMany(models.Question, {
-      through: "qestion_tags",
+      through: "question_tags",
       foreignKey: "tag_name",
       as: "questions"
     });
