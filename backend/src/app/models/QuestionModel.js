@@ -18,18 +18,18 @@ class Question extends Model {
   }
 
   static associate(models) {
-    console.log("Associação question!")
+    console.log("Associação question!");
     this.belongsToMany(models.Quiz, {
-      through: 'question_quiz',
+      through: "question_quiz",
       foreignKey: "question_id",
       as: "quizzes"
     });
 
-  this.hasMany(models.Answer, {
-      foreignKey: "id_question",
-      as: "answer"
+    this.belongsToMany(models.Question, {
+      through: "question_tags",
+      foreignKey: "question_id",
+      as: "tags"
     });
-
   }
 }
 
