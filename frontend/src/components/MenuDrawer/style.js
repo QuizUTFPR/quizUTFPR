@@ -4,7 +4,10 @@ import {
   Drawer,
   Badge,
   Typography,
-  Box
+  Box,
+  ListItemIcon,
+  ListItemText,
+  ListItem
 } from '@material-ui/core';
 
 const WidthDrawer = '210px';
@@ -68,4 +71,17 @@ export const AdminDescription = styled(Typography)`
   font-size: 0.9em;
   font-weight: 500;
   opacity: 0.8;
+`
+
+export const StyledListItem = styled(ListItem)`
+  color: ${({theme}) => theme.palette.primary.main};
+`
+
+
+export const StyledListItemIcon = styled(ListItemIcon)`
+  color: ${({theme}) => theme.palette.primary.main};
+`
+
+export const StyledListItemText = styled(ListItemText)`
+  color: ${({theme}) => theme.palette.primary.main};
 `

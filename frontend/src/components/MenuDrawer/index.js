@@ -3,9 +3,6 @@ import React from 'react';
 import {
   List,
   Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Avatar 
 } from '@material-ui/core';
 
@@ -23,7 +20,10 @@ import {
   TextBox,
   StyledBadge,
   AdminName,
-  AdminDescription
+  AdminDescription,
+  StyledListItemIcon,
+  StyledListItemText,
+  StyledListItem
 } from './style'
 
 const MenuDrawer = () => {
@@ -78,19 +78,19 @@ const MenuDrawer = () => {
         <Divider />
         <List>
           {FirstMenu.map((option) => (
-            <ListItem button key={option.text}>
-              <ListItemIcon>{option.icon}</ListItemIcon>
-              <ListItemText color='primary' primary={option.text} />
-            </ListItem>
+            <StyledListItem button key={option.text}>
+              <StyledListItemIcon>{option.icon}</StyledListItemIcon>
+              <StyledListItemText color='primary' primary={option.text} />
+            </StyledListItem>
           ))}
         </List>
         <Divider />
         <List>
           {SecondMenu.map((option) => (
-            <ListItem button key={option.text}>
-              <ListItemIcon>{option.icon}</ListItemIcon>
-              <ListItemText primary={option.text} />
-            </ListItem>
+            <StyledListItem button key={option.text}>
+              <StyledListItemIcon>{option.icon}</StyledListItemIcon>
+              <StyledListItemText primary={option.text} />
+            </StyledListItem>
           ))}
         </List>
       </StyledDrawer>

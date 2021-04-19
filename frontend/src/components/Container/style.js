@@ -7,6 +7,6 @@ import {
 export const GridContainer = styled(Grid)`
   padding: 20px;
   margin: 30px;
-  background: red;
+  background: ${({theme}) => theme.palette.background.bgContainer};
   border-radius: 5px;
 `

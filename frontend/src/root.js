@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { CssBaseline, createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import {ThemeProvider} from 'styled-components'
 
 import GlobalStyle from './theme/globalStyle';
 
@@ -19,13 +20,19 @@ const theme = createMuiTheme({
   palette:{
     primary: {
       main: '#2B2E4A'
+    },
+    background: {
+      bgWebSite: '#F4F5F9',
+      bgContainer: 'white'
     }
   }
 });
 
 function Root() {
+  
   return (
     <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalStyle />
       <BrowserRouter>
@@ -36,6 +43,7 @@ function Root() {
           </Switch>
         </Suspense>
       </BrowserRouter>
+      </ThemeProvider>
     </MuiThemeProvider>
   )
 }
