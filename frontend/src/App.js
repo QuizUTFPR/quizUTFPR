@@ -1,23 +1,34 @@
 import React, { lazy, Suspense} from 'react'
+import styled from 'styled-components'
 import { LinearProgress } from '@material-ui/core'
 import { Switch, Route } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 
 // ROUTES
-import {HOME, LOGIN} from "@routes"
+import {
+  HOME
+} from '@routes';
+
+// COMPONENTS
+const Menu = lazy(() => import('./components/MenuDrawer'));
 
 // PAGES
-const Login = lazy(() => import('./pages/Login'));
-const Main = lazy(() => import('./pages/Main'));
+const Home = lazy(() => import('./pages/Home'));
+
+const Div = styled.div`
+  display: flex;
+`
 
 
 function App() {
   return (
     <Suspense fallback={<LinearProgress />}>
+      <Div>
+      <Menu />
       <Switch>
-        <Route path={LOGIN} component={Login} />
-        <Route component={Main} />
+        <Route path={HOME} component={Home} exact />
       </Switch>
+      </Div>
     </Suspense>
   );
 }

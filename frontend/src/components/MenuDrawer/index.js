@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  Drawer,
   List,
   Divider,
   ListItem,
@@ -19,6 +18,7 @@ import {
 } from '@material-ui/icons';
 
 import {
+  StyledDrawer,
   AvatarBox,
   TextBox,
   StyledBadge,
@@ -55,7 +55,7 @@ const MenuDrawer = () => {
   ]
 
   return (
-    <Drawer
+    <StyledDrawer
         variant="permanent"
         anchor="left"
       >
@@ -93,7 +93,7 @@ const MenuDrawer = () => {
             </ListItem>
           ))}
         </List>
-      </Drawer>
+      </StyledDrawer>
   );
 }
 

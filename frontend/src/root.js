@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { CssBaseline, createMuiTheme, MuiThemeProvider } from '@material-ui/core'
-import App from './App'
 
 import GlobalStyle from './theme/globalStyle';
+
+// ROUTES
+import {LOGIN} from "@routes"
+
+// PAGES
+const Login = lazy(() => import('./pages/Login'));
+const App = lazy(() => import('./App'));
 
 
 const theme = createMuiTheme({
@@ -23,9 +29,12 @@ function Root() {
       <CssBaseline />
       <GlobalStyle />
       <BrowserRouter>
-        <Switch>
-          <Route component={App} />
-        </Switch>
+        <Suspense fallback={<p>Carregando...</p>}>
+          <Switch>
+            <Route path={LOGIN} exact component={Login} />
+            <Route component={App} />
+          </Switch>
+        </Suspense>
       </BrowserRouter>
     </MuiThemeProvider>
   )

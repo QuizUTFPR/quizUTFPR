@@ -1,11 +1,17 @@
 import styled, {keyframes} from 'styled-components'
 
 import {
+  Drawer,
   Badge,
   Typography,
-  Box,
-  Drawer
+  Box
 } from '@material-ui/core';
+
+const WidthDrawer = '210px';
+
+export const StyledDrawer = styled(Drawer)`
+  width: ${WidthDrawer};
+`
 
 export const AvatarBox = styled(Box)`
   && {
