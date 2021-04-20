@@ -1,7 +1,6 @@
 import React from "react";
-import { Formik, Form, Field } from 'formik';
-import { TextField, SimpleFileUpload  } from 'formik-material-ui';
-
+import { useFormik} from 'formik';
+import {TextField} from '@material-ui/core'
 
 // COMPONENTS
 import GridContainer from "@components/Container";
@@ -9,11 +8,21 @@ import GridContainer from "@components/Container";
 //STYLE
 
 // MATERIAL-UI COMPONENTS
-import { Grid, Button, Typography, Divider, MenuItem } from "@material-ui/core";
+import { Grid, Button, Typography, Divider } from "@material-ui/core";
 
 // MATERIAL-UI ICONS
 
 const CriarQuiz = () => {
+
+  const formik = useFormik({
+    initialValues: {
+      title: ''
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    }
+
+  })
 
   return (
     <GridContainer container spacing={3}>
@@ -27,78 +36,23 @@ const CriarQuiz = () => {
         <Divider  />
       </Grid>
 
-      <Formik
-        initialValues={{
-          title: '',
-          description: '',
-          visibility: ''
-        }}
       
-        onSubmit={(values, { setSubmitting }) => {
-          setSubmitting(false);
-          alert(JSON.stringify(values, null, 2));
-        }}
-      >
-      {({ submitForm, isSubmitting }) => (
-        <Form>
-         <Field
-            component={TextField}
-            label="Título"
-            inputProps={{
-              type: "text"
-            }}
-            name="title"
-            variant='outlined'
-            required
-          />
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          label="Título"
+          name="title"
+          variant='outlined'
+          value={formik.values.title}
+          onChange={formik.handleChange}
+          required
+        />
 
-          <Field
-            component={TextField}
-            label="Descrição"
-            name="description"
-            variant='outlined'
-            inputProps={{
-              type: "text"
-            }}
-            required
-            multiline
-            rows={10}
-          />
-          
-          <Field
-            component={TextField}
-            name="visibility"
-            variant='outlined'
-            label="Vísibilidade"
-            inputProps={{
-              id: 'visibility',
-            }}
-            required
-            defaultValue={'public'}
-            select
-            autoWidth
-          >
-            <MenuItem value={'public'}>Público</MenuItem>
-            <MenuItem value={'other'}>Outros</MenuItem>
-          </Field>
-          
-          <Field 
-            component={SimpleFileUpload} 
-            name="file" 
-            label="Imagem de Capa"
-          />
+        <Button variant="contained" color="primary" type="submit">
+          AVANÇAR
+        </Button>
+      </form>
 
-          <Button
-            variant="contained"
-            color="primary"
-            disabled={isSubmitting}
-            onClick={submitForm}
-          >
-            AVANÇAR
-          </Button>
-        </Form>
-      )}
-    </Formik>
+
 
      
     </GridContainer>
