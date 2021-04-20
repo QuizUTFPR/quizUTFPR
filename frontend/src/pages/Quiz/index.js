@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
 // COMPONENTS
-import GridContainer from "../../components/Container";
-import Card from "../../components/Card";
+import GridContainer from "@components/Container";
+import Card from "@components/Card";
+import Modal from '@components/Modal'
 
 // MATERIAL-UI COMPONENTS
 import { Grid, Button, IconButton, Typography } from "@material-ui/core";
@@ -22,6 +23,7 @@ const Quiz = () => {
   };
 
   return (
+    <>
     <GridContainer container>
       <Grid container align="center" justify="space-between">
         <Grid item>
@@ -30,7 +32,7 @@ const Quiz = () => {
           </Typography>
         </Grid>
         <Grid item>
-          <Button variant="contained" color="primary">
+          <Button variant="contained" color="primary" onClick={handleOpen}>
             Criar Quiz
           </Button>
         </Grid>
@@ -50,6 +52,16 @@ const Quiz = () => {
         </IconButton>
       </Card>
     </GridContainer>
+    <Modal
+      open={open} handleClose={handleClose}
+      modalTitle="CadastrarQuiz"
+      modalDescription="EscolhaDoModoDeQuiz"
+    >
+      <div>
+        <p>Modal aberto!</p>
+      </div>
+    </Modal>
+    </>
   );
 };
 

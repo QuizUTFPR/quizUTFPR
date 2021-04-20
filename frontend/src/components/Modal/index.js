@@ -1,17 +1,16 @@
 import React from "react";
-import { Modal, Backdrop, Fade } from "@material-ui/core";
+import { Backdrop, Fade } from "@material-ui/core";
+import {StyledModal} from './style'
 
 const ModalWrapper = ({
   open,
-  setOpen,
-  handleOpen,
   handleClose,
   modalTitle,
   modalDescription,
   children
 }) => {
   return (
-    <Modal
+    <StyledModal
       aria-labelledby={modalTitle}
       aria-describedby={modalDescription}
       open={open}
@@ -23,7 +22,7 @@ const ModalWrapper = ({
       }}
     >
       <Fade in={open}>{children}</Fade>
-    </Modal>
+    </StyledModal>
   );
 };
 
