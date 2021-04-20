@@ -1,78 +1,56 @@
-import React from 'react'
-import styled from 'styled-components'
-
-import { 
-  Typography, 
-} from '@material-ui/core';
+import React, { useState } from "react";
 
 // COMPONENTS
-import GridContainer from '../../components/Container'
+import GridContainer from "../../components/Container";
+import Card from "../../components/Card";
 
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  IconButton,
-  CardActions
-} from '@material-ui/core';
+// MATERIAL-UI COMPONENTS
+import { Grid, Button, IconButton, Typography } from "@material-ui/core";
 
-import {
-  Edit,
-  Delete
-} from '@material-ui/icons';
+// MATERIAL-UI ICONS
+import { Edit, Delete } from "@material-ui/icons";
 
+const Quiz = () => {
+  const [open, setOpen] = useState(false);
 
-const StyledCard = styled(Card)`
-  display: flex;
-`
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-const StyledCardMedia = styled(CardMedia)`
-  width: 20%;
-  height: 140px;
-`
-
-const StyledCardContent = styled(CardContent)`
-  flex-basis: 0;
-  flex-grow: 1;
-  flex-shrink: 1;
-`
-const StyledCardActions = styled(CardActions)`
-  && {
-    button span {
-      color: ${({theme}) => theme.palette.primary.main};
-    }
-  }
-`
-
-const Home = () => {
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <GridContainer container>
-      <StyledCard >
-        <StyledCardMedia
-          image="https://www.incimages.com/uploaded_files/image/1920x1080/getty_509107562_2000133320009280346_351827.jpg"
-          title="Live from space album cover"
-        />
-        <StyledCardContent>
-          <Typography color='primary' component="h5" variant="h5">
-            Título Aqui...
+      <Grid container align="center" justify="space-between">
+        <Grid item>
+          <Typography color="primary" component="h4" variant="h4">
+            Quizzes Cadastrados
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Descrição aqui...
-          </Typography>
-        </StyledCardContent>
-        <StyledCardActions>
-          <IconButton>
-            <Edit />
-          </IconButton>
-          <IconButton>
-            <Delete />
-          </IconButton>
-        </StyledCardActions>
-    </StyledCard>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color="primary">
+            Criar Quiz
+          </Button>
+        </Grid>
+      </Grid>
+
+      <Card
+        image="https://www.incimages.com/uploaded_files/image/1920x1080/getty_509107562_2000133320009280346_351827.jpg"
+        imageTitle="Live from space album cover"
+        title="Título Aqui..."
+        description="Descrição aqui..."
+      >
+        <IconButton>
+          <Edit />
+        </IconButton>
+        <IconButton>
+          <Delete />
+        </IconButton>
+      </Card>
     </GridContainer>
-  )
-}
+  );
+};
 
-
-export default Home;
+export default Quiz;
