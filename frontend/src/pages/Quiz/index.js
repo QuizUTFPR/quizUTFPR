@@ -5,8 +5,10 @@ import GridContainer from "@components/Container";
 import Card from "@components/Card";
 import Modal from '@components/Modal'
 
+//STYLE
+
 // MATERIAL-UI COMPONENTS
-import { Grid, Button, IconButton, Typography } from "@material-ui/core";
+import { Grid, Button, IconButton, Typography, Divider  } from "@material-ui/core";
 
 // MATERIAL-UI ICONS
 import { Edit, Delete } from "@material-ui/icons";
@@ -14,28 +16,24 @@ import { Edit, Delete } from "@material-ui/icons";
 const Quiz = () => {
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
-    <GridContainer container>
+    <GridContainer container spacing={3}>
       <Grid container align="center" justify="space-between">
-        <Grid item>
-          <Typography color="primary" component="h4" variant="h4">
-            Quizzes Cadastrados
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Button variant="contained" color="primary" onClick={handleOpen}>
-            Criar Quiz
-          </Button>
-        </Grid>
+        <Typography color="primary" component="h4" variant="h4">
+          Quizzes Cadastrados
+        </Typography>
+
+        <Button variant="contained" color="primary" onClick={handleOpen}>
+          Criar Quiz
+        </Button>
+      </Grid>
+
+      <Grid item>
+        <Divider  />
       </Grid>
 
       <Card
@@ -52,6 +50,7 @@ const Quiz = () => {
         </IconButton>
       </Card>
     </GridContainer>
+    
     <Modal
       open={open} handleClose={handleClose}
       modalTitle="CadastrarQuiz"

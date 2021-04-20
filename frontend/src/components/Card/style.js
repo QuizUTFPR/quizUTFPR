@@ -8,7 +8,6 @@ export const StyledCard = styled(Card)`
 
 export const StyledCardMedia = styled(CardMedia)`
   width: 20%;
-  height: 140px;
 `;
 
 export const StyledCardContent = styled(CardContent)`

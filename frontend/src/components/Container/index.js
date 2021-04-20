@@ -2,9 +2,9 @@ import React from 'react'
 
 import {GridContainer} from './style'
 
-const Container = ({children}) => {
+const Container = ({children, ...props}) => {
   return (
-    <GridContainer>
+    <GridContainer {...props}>
       {children}
     </GridContainer>
   );

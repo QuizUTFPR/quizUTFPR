@@ -5,6 +5,8 @@ import {
 } from '@material-ui/core';
 
 export const GridContainer = styled(Grid)`
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   margin: 30px;
   background: ${({theme}) => theme.palette.background.bgContainer};
