@@ -84,7 +84,7 @@ const MenuDrawer = () => {
         <Divider />
         <List>
           {FirstMenu.map((option) => (
-            <Link to={option.to} style={{textDecoration: 'none'}}>
+            <Link key={option.text} to={option.to} style={{textDecoration: 'none'}}>
               <StyledListItem button key={option.text}>
                 <StyledListItemIcon>{option.icon}</StyledListItemIcon>
                 <StyledListItemText color='primary' primary={option.text} />

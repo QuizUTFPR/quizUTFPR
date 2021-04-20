@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from 'react-router-dom';
+
 
 // COMPONENTS
 import GridContainer from "@components/Container";
 import Card from "@components/Card";
-import Modal from '@components/Modal'
 
-//STYLE
+// ROUTES
+import {
+  CREATE_QUIZ
+} from '@routes';
 
 // MATERIAL-UI COMPONENTS
 import { Grid, Button, IconButton, Typography, Divider  } from "@material-ui/core";
@@ -14,20 +18,18 @@ import { Grid, Button, IconButton, Typography, Divider  } from "@material-ui/cor
 import { Edit, Delete } from "@material-ui/icons";
 
 const Quiz = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
-    <>
     <GridContainer container spacing={3}>
       <Grid container align="center" justify="space-between">
         <Typography color="primary" component="h4" variant="h4">
           Quizzes Cadastrados
         </Typography>
 
-        <Button variant="contained" color="primary" onClick={handleOpen}>
+        <Button 
+          variant="contained" color="primary"
+          component={Link} to={CREATE_QUIZ}
+        >
           Criar Quiz
         </Button>
       </Grid>
@@ -50,17 +52,6 @@ const Quiz = () => {
         </IconButton>
       </Card>
     </GridContainer>
-    
-    <Modal
-      open={open} handleClose={handleClose}
-      modalTitle="CadastrarQuiz"
-      modalDescription="EscolhaDoModoDeQuiz"
-    >
-      <div>
-        <p>Modal aberto!</p>
-      </div>
-    </Modal>
-    </>
   );
 };
 
