@@ -6,7 +6,8 @@ import { Switch, Route } from 'react-router-dom'
 
 // ROUTES
 import {
-  HOME
+  HOME,
+  QUIZZES
 } from '@routes';
 
 // COMPONENTS
@@ -14,6 +15,7 @@ const Menu = lazy(() => import('./components/MenuDrawer'));
 
 // PAGES
 const Home = lazy(() => import('./pages/Home'));
+const Quizzes = lazy(() => import('./pages/Quizzes'));
 
 const Div = styled.div`
   display: flex;
@@ -27,6 +29,7 @@ function App() {
       <Menu />
       <Switch>
         <Route path={HOME} component={Home} exact />
+        <Route path={QUIZZES} component={Quizzes} exact />
       </Switch>
       </Div>
     </Suspense>

@@ -9,6 +9,6 @@ export const GridContainer = styled(Grid)`
   margin: 30px;
   background: ${({theme}) => theme.palette.background.bgContainer};
   border-radius: 5px;
-  max-width: calc(100% - 210px - 60px);
+  width: calc(100% - 210px - 60px);
   overflow-wrap: break-word;
 `

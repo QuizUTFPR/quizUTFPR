@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 import {
   List,
@@ -26,20 +27,25 @@ import {
   StyledListItem
 } from './style'
 
+import {QUIZZES, HOME} from '@routes'
+
 const MenuDrawer = () => {
 
   const FirstMenu = [
     {
       text: 'Inicio',
-      icon: <Home />
+      icon: <Home />,
+      to: HOME
     },
     {
       text: 'Minhas Turmas',
-      icon: <Class />
+      icon: <Class />,
+      to: ''
     },
     {
       text: 'Meus Quizzes',
-      icon: <LibraryBooks />
+      icon: <LibraryBooks />,
+      to: QUIZZES 
     }
   ]
 
@@ -78,10 +84,12 @@ const MenuDrawer = () => {
         <Divider />
         <List>
           {FirstMenu.map((option) => (
-            <StyledListItem button key={option.text}>
-              <StyledListItemIcon>{option.icon}</StyledListItemIcon>
-              <StyledListItemText color='primary' primary={option.text} />
-            </StyledListItem>
+            <Link to={option.to} style={{textDecoration: 'none'}}>
+              <StyledListItem button key={option.text}>
+                <StyledListItemIcon>{option.icon}</StyledListItemIcon>
+                <StyledListItemText color='primary' primary={option.text} />
+              </StyledListItem>
+            </Link>
           ))}
         </List>
         <Divider />
