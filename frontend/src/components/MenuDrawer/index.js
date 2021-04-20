@@ -27,7 +27,7 @@ import {
   StyledListItem
 } from './style'
 
-import {QUIZZES, HOME} from '@routes'
+import {QUIZ, HOME} from '@routes'
 
 const MenuDrawer = () => {
 
@@ -45,7 +45,7 @@ const MenuDrawer = () => {
     {
       text: 'Meus Quizzes',
       icon: <LibraryBooks />,
-      to: QUIZZES 
+      to: QUIZ 
     }
   ]
 
