@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import { TextField } from "@material-ui/core";
 
@@ -18,7 +18,7 @@ const CriarQuiz = () => {
       title: "",
       description: "",
       visibility: "public",
-      tags: ['ola', 'teste']
+      tags: ['UTFPR', 'QUIZ']
     },
     onSubmit: values => {
       console.log(values);
@@ -73,8 +73,9 @@ const CriarQuiz = () => {
         </TextField>
 
         <ChipInput
-          value={formik.values.tags}
-          onChange={formik.handleChange}
+          valueFormik={formik.values.tags}
+          suggestions={['Aprenda', 'JavaScript']}
+          onChange={(_, value) => formik.setFieldValue('tags', value)}
         />
 
         <Button variant="contained" color="primary" type="submit">
