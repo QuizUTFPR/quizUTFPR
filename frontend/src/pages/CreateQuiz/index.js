@@ -1,11 +1,10 @@
-import React from "react";
-import { useFormik} from 'formik';
-import {TextField} from '@material-ui/core'
+import React, { useState } from "react";
+import { useFormik } from "formik";
+import { TextField } from "@material-ui/core";
 
 // COMPONENTS
 import GridContainer from "@components/Container";
-
-import ChipInput from '@components/ChipInput'
+import ChipInput from "@components/ChipInput";
 
 // MATERIAL-UI COMPONENTS
 import { Grid, Button, Typography, Divider, MenuItem } from "@material-ui/core";
@@ -13,22 +12,19 @@ import { Grid, Button, Typography, Divider, MenuItem } from "@material-ui/core";
 // MATERIAL-UI ICONS
 
 const CriarQuiz = () => {
+  const [tagList, setTagList] = useState([]);
 
   const formik = useFormik({
     initialValues: {
-      title: '',
-      description: '',
-      visibility: 'public',
-      tags: [{
-        key: 0,
-        label: 'UTFPR'
-      }]
+      title: "",
+      description: "",
+      visibility: "public",
+      tags: []
     },
-    onSubmit: (values) => {
+    onSubmit: values => {
       console.log(values);
     }
-
-  })
+  });
 
   return (
     <GridContainer container spacing={3}>
@@ -39,42 +35,58 @@ const CriarQuiz = () => {
       </Grid>
 
       <Grid item>
-        <Divider  />
+        <Divider />
       </Grid>
 
-      
       <form onSubmit={formik.handleSubmit}>
         <TextField
-          label="Título" id="title" variant='filled'
-          value={formik.values.title} onChange={formik.handleChange}
+          label="Título"
+          id="title"
+          variant="filled"
+          value={formik.values.title}
+          onChange={formik.handleChange}
           required
         />
 
         <TextField
-          label="Descrição" id="description" variant='filled'
-          value={formik.values.description} onChange={formik.handleChange}
-          required multiline row={5} rowsMax={5}
+          label="Descrição"
+          id="description"
+          variant="filled"
+          value={formik.values.description}
+          onChange={formik.handleChange}
+          required
+          multiline
+          row={5}
+          rowsMax={5}
         />
 
         <TextField
-          label="Visibilidade" id="visibility" variant='filled'
-          value={formik.values.visibility} onChange={formik.handleChange}
-          required select
+          label="Visibilidade"
+          id="visibility"
+          variant="filled"
+          value={formik.values.visibility}
+          onChange={formik.handleChange}
+          required
+          select
         >
-          <MenuItem value='public'>Público</MenuItem>
-          <MenuItem value='other'>Outros</MenuItem>
+          <MenuItem value="public">Público</MenuItem>
+          <MenuItem value="other">Outros</MenuItem>
         </TextField>
 
-        <ChipInput />
+        <ChipInput
+          initialState={formik.values.tags}
+          id="tags"
+          label="Tags"
+          variant="filled"
+          required
+          tagList={tagList}
+          setTagList={setTagList}
+        />
 
         <Button variant="contained" color="primary" type="submit">
           AVANÇAR
         </Button>
       </form>
-
-
-
-     
     </GridContainer>
   );
 };
