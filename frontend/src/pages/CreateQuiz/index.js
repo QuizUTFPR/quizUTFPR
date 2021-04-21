@@ -12,14 +12,13 @@ import { Grid, Button, Typography, Divider, MenuItem } from "@material-ui/core";
 // MATERIAL-UI ICONS
 
 const CriarQuiz = () => {
-  const [tagList, setTagList] = useState([]);
 
   const formik = useFormik({
     initialValues: {
       title: "",
       description: "",
       visibility: "public",
-      tags: []
+      tags: ['ola', 'teste']
     },
     onSubmit: values => {
       console.log(values);
@@ -74,13 +73,8 @@ const CriarQuiz = () => {
         </TextField>
 
         <ChipInput
-          initialState={formik.values.tags}
-          id="tags"
-          label="Tags"
-          variant="filled"
-          required
-          tagList={tagList}
-          setTagList={setTagList}
+          value={formik.values.tags}
+          onChange={formik.handleChange}
         />
 
         <Button variant="contained" color="primary" type="submit">
