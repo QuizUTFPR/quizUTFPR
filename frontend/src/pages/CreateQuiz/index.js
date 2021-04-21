@@ -5,7 +5,7 @@ import {TextField} from '@material-ui/core'
 // COMPONENTS
 import GridContainer from "@components/Container";
 
-//STYLE
+import ChipInput from '@components/ChipInput'
 
 // MATERIAL-UI COMPONENTS
 import { Grid, Button, Typography, Divider, MenuItem } from "@material-ui/core";
@@ -64,6 +64,8 @@ const CriarQuiz = () => {
           <MenuItem value='public'>Público</MenuItem>
           <MenuItem value='other'>Outros</MenuItem>
         </TextField>
+
+        <ChipInput />
 
         <Button variant="contained" color="primary" type="submit">
           AVANÇAR
