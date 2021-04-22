@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
-import {IconButton, Grid, Typography, Divider, Button } from '@material-ui/core'
+import {IconButton, Grid, Typography, Divider } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
+import {StyledSearchTagButton} from './style'
 
 // COMPONENTS
 import GridContainer from '@components/Container'
@@ -26,7 +27,7 @@ const QuestionDatabase = ({handleClose}) => {
       </Grid>
     </Grid>
 
-    <Grid container justify='center' alignItems='center'>
+    <Grid container justify='center' alignItems='center' spacing={2}>
       <Grid item xs={9}>
         <TagInput
           fullWidth
@@ -36,7 +37,7 @@ const QuestionDatabase = ({handleClose}) => {
         />
       </Grid>
       <Grid item xs={3}>
-        <Button fullWidth color='primary' variant='contained'>Pesquisar</Button>
+        <StyledSearchTagButton fullWidth color='primary' variant='contained'>Pesquisar</StyledSearchTagButton>
       </Grid>
     </Grid>
 
