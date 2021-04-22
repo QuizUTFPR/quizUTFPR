@@ -23,11 +23,11 @@ const CriarQuiz = () => {
       title: "",
       description: "",
       visibility: "public",
-      file: "",
+      file: {},
       tags: ["UTFPR", "QUIZ"]
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 1));
+      console.log(values)
     }
   });
 
@@ -69,9 +69,12 @@ const CriarQuiz = () => {
             fullWidth
             label="Visibilidade"
             id="visibility"
+            name='visibility'
             variant="filled"
             value={formik.values.visibility}
-            onChange={formik.handleChange}
+            onChange={(event) => 
+              formik.setFieldValue("visibility", event.target.value)
+            }
             required
             select
           >
@@ -100,9 +103,9 @@ const CriarQuiz = () => {
             type="file"
             name="Imagem de Capa"
             id="file"
-            onChange={event => {
-              formik.setFieldValue("file", event.currentTarget.files[0].name);
-            }}
+            onChange={event => 
+              formik.setFieldValue("file", event.target.files[0])
+            }
           />
         </Grid>
 
