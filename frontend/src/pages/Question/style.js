@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 
 export const ContainerGrid = styled(Grid)``;
 
@@ -22,3 +22,9 @@ export const StyledFieldOfQuestion = styled(Grid)`
 export const StyledActionsButton = styled(Grid)`
   background: blue;
 `;
+
+export const StyledButton = styled(Button)`
+  && {
+    height: 100%;
+  }
+`
