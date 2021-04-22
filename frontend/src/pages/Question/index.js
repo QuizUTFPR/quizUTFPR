@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 
-import { Grid, Typography, Button, Divider } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  Button,
+  TextField,
+  Divider,
+  Checkbox
+} from "@material-ui/core";
 
 import {
-  StyledGrid,
+  StyledRightGrid,
+  StyledLeftGrid,
   ContainerGrid,
   StyledAddQuestionButton,
   StyledFieldOfQuestion,
-  StyledActionsButton
+  StyledActionsButton,
+  StyledDividerGrid
 } from "./style";
 
 // COMPONENTS
@@ -23,11 +32,13 @@ const Question = () => {
     <>
     <ContainerGrid container justify="space-between">
       <Grid item xs={2}>
-        <StyledGrid container align="center" justify="center">
-          <Typography color="primary" component="h5" variant="h5">
-            Questões
-          </Typography>
-        </StyledGrid>
+        <StyledLeftGrid container align="center" justify="center">
+          <Grid item>
+            <Typography color="primary" component="h5" variant="h5">
+              Questões
+            </Typography>
+          </Grid>
+        </StyledLeftGrid>
       </Grid>
 
       <Grid item xs={8}>
@@ -44,9 +55,88 @@ const Question = () => {
               </Button>
             </Grid>
           </Grid>
+
+          <Grid item>
+            <Divider />
+          </Grid>
+
           <StyledFieldOfQuestion container justify="center">
-            <Typography>Título da Questão...</Typography>
+            <Grid item>
+              <TextField
+                fullWidth
+                label="Título da Questão..."
+                id="title"
+                value={""}
+                onChange={() => console.log("mudou")}
+                required
+                autoFocus
+              />
+            </Grid>
+
+            <Grid item>
+              <TextField
+                type="file"
+                name="Imagem de Capa"
+                id="file"
+                onChange={event => console.log("file:", event.target.files[0])}
+              />
+            </Grid>
+
+            <Grid item>
+              <Grid container>
+                <Grid item>
+                  <Checkbox defaultChecked size="small" color="primary" />
+                  <TextField
+                    fullWidth
+                    label="Questão 1"
+                    id="firstQuestion"
+                    value={""}
+                    onChange={console.log("mudou 2")}
+                    required
+                  />
+                </Grid>
+
+                <Grid item>
+                  <Checkbox defaultChecked size="small" color="primary" />
+                  <TextField
+                    fullWidth
+                    label="Questão 2"
+                    id="secondQuestion"
+                    value={""}
+                    onChange={console.log("mudou3")}
+                    required
+                  />
+                </Grid>
+
+                <Grid item>
+                  <Checkbox defaultChecked size="small" color="primary" />
+                  <TextField
+                    fullWidth
+                    label="Questão 3"
+                    id="thirdQuestion"
+                    value={""}
+                    onChange={console.log("mudou3")}
+                  />
+                </Grid>
+
+                <Grid item>
+                  <Checkbox defaultChecked size="small" color="primary" />
+                  <TextField
+                    fullWidth
+                    label="Questão 4"
+                    id="foirthQuestion"
+                    value={""}
+                    onChange={console.log("mudou4")}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
           </StyledFieldOfQuestion>
+
+          <Grid item>
+            <Divider />
+          </Grid>
+
           <Grid container justify="space-around">
             <Grid item xs={3} align="center" justify="center">
               <Button fullwidth variant="contained" color="secondary">
@@ -62,11 +152,13 @@ const Question = () => {
         </Grid>
       </Grid>
       <Grid item xs={2}>
-        <StyledGrid container align="center" justify="center">
-          <Typography color="primary" component="h5" variant="h5">
-            Detalhes
-          </Typography>
-        </StyledGrid>
+        <StyledRightGrid container align="center" justify="center">
+          <Grid item>
+            <Typography color="primary" component="h5" variant="h5">
+              Detalhes
+            </Typography>
+          </Grid>
+        </StyledRightGrid>
       </Grid>
     </ContainerGrid>
     
