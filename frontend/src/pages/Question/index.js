@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Grid,
@@ -19,8 +19,17 @@ import {
   StyledDividerGrid
 } from "./style";
 
+// COMPONENTS
+import Modal from '@components/Modal'
+import QuestionDatabase from './QuestionDatabase'
+
 const Question = () => {
+  const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(false);
+  const handleOpenQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(true);
+  const handleCloseQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(false);
+
   return (
+    <>
     <ContainerGrid container justify="space-between">
       <Grid item xs={2}>
         <StyledLeftGrid container align="center" justify="center">
@@ -41,7 +50,7 @@ const Question = () => {
               </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button fullwidth variant="contained" color="primary">
+              <Button onClick={handleOpenQuestionDatabaseModal} fullwidth variant="contained" color="primary">
                 USAR QUESTÃO DO BANCO
               </Button>
             </Grid>
@@ -152,6 +161,17 @@ const Question = () => {
         </StyledRightGrid>
       </Grid>
     </ContainerGrid>
+    
+    {/* MODALS */}
+    <Modal
+      open={isModalQuestionDatabaseOpen}
+      modalTitle="Utilizar questões do banco de dados"
+      modalDescription="As questões são buscadas utilizando tag's"
+    >
+      <QuestionDatabase handleClose={handleCloseQuestionDatabaseModal} />
+    </Modal>
+
+    </>
   );
 };
 
