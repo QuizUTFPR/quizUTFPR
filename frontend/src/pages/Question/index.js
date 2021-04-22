@@ -73,11 +73,10 @@ const Question = () => {
     {/* MODALS */}
     <Modal
       open={isModalQuestionDatabaseOpen}
-      handleClose={handleCloseQuestionDatabaseModal}
       modalTitle="Utilizar questões do banco de dados"
       modalDescription="As questões são buscadas utilizando tag's"
     >
-      <QuestionDatabase />
+      <QuestionDatabase handleClose={handleCloseQuestionDatabaseModal} />
     </Modal>
 
     </>
