@@ -1,17 +1,20 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { CssBaseline, createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import { CssBaseline, createMuiTheme, MuiThemeProvider, LinearProgress } from '@material-ui/core'
 import {ThemeProvider} from 'styled-components'
 
 import GlobalStyle from './theme/globalStyle';
 
 // ROUTES
-import {LOGIN} from "@routes"
+import {
+  LOGIN,
+  QUESTION
+} from "@routes"
 
 // PAGES
 const Login = lazy(() => import('./pages/Login'));
 const App = lazy(() => import('./App'));
-
+const Question = lazy(() => import('./pages/Question'));
 
 const theme = createMuiTheme({
   typography: {
@@ -36,9 +39,12 @@ function Root() {
       <CssBaseline />
       <GlobalStyle />
       <BrowserRouter>
-        <Suspense fallback={<p>Carregando...</p>}>
+        <Suspense fallback={<LinearProgress />}>
+          {/* criação de questao */}
+          
           <Switch>
             <Route path={LOGIN} exact component={Login} />
+            <Route path={QUESTION} exact component={Question} />
             <Route component={App} />
           </Switch>
         </Suspense>
