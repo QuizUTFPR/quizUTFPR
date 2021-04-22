@@ -6,22 +6,28 @@ import GridContainer from "@components/Container";
 import ChipInput from "@components/ChipInput";
 
 // MATERIAL-UI COMPONENTS
-import { Grid, Button, Typography, Divider, MenuItem, TextField } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  Typography,
+  Divider,
+  MenuItem,
+  TextField
+} from "@material-ui/core";
 
 // MATERIAL-UI ICONS
 
 const CriarQuiz = () => {
-
-
   const formik = useFormik({
     initialValues: {
       title: "",
       description: "",
       visibility: "public",
-      tags: ['UTFPR', 'QUIZ']
+      file: "",
+      tags: ["UTFPR", "QUIZ"]
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 1))
+      alert(JSON.stringify(values, null, 1));
     }
   });
 
@@ -37,9 +43,13 @@ const CriarQuiz = () => {
         <Divider />
       </Grid>
 
-      <Grid container component='form' 
-        justify='center' align='center'
-        onSubmit={formik.handleSubmit} spacing={2}
+      <Grid
+        container
+        component="form"
+        justify="center"
+        align="center"
+        onSubmit={formik.handleSubmit}
+        spacing={2}
       >
         <Grid item xs={6}>
           <TextField
@@ -85,20 +95,29 @@ const CriarQuiz = () => {
           />
         </Grid>
 
-        
+        <Grid item xs={12}>
+          <TextField
+            type="file"
+            name="Imagem de Capa"
+            id="file"
+            onChange={event => {
+              formik.setFieldValue("file", event.currentTarget.files[0].name);
+            }}
+          />
+        </Grid>
 
         <Grid item xs={12}>
           <ChipInput
             fullWidth
             valueFormik={formik.values.tags}
-            suggestions={['Aprenda', 'JavaScript']}
-            onChange={(_, value) => formik.setFieldValue('tags', value)}
+            suggestions={["Aprenda", "JavaScript"]}
+            onChange={(_, value) => formik.setFieldValue("tags", value)}
           />
         </Grid>
 
         <Grid item xs={6}>
           <Button fullWidth variant="contained" color="primary" type="submit">
-            AVANÇAR
+            CRIAR
           </Button>
         </Grid>
       </Grid>
