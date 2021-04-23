@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import {
   Grid,
@@ -24,9 +24,12 @@ import Modal from '@components/Modal'
 import QuestionDatabase from './QuestionDatabase'
 
 const Question = () => {
+  const modalQuestionDatabaseRef = useRef(null);
   const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(false);
   const handleOpenQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(true);
   const handleCloseQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(false);
+
+  console.log(modalQuestionDatabaseRef)
 
   return (
     <>
@@ -44,13 +47,13 @@ const Question = () => {
       <Grid item xs={8}>
         <Grid container>
           <Grid container justify="space-around">
-            <Grid item xs={3} align="center" justify="center">
-              <Button fullwidth variant="contained" color="primary">
+            <Grid item xs={3}>
+              <Button fullWidth  variant="contained" color="primary">
                 CRIAR NOVA QUESTÃO
               </Button>
             </Grid>
             <Grid item xs={3}>
-              <Button onClick={handleOpenQuestionDatabaseModal} fullwidth variant="contained" color="primary">
+              <Button fullWidth onClick={handleOpenQuestionDatabaseModal}  variant="contained" color="primary">
                 USAR QUESTÃO DO BANCO
               </Button>
             </Grid>
@@ -138,13 +141,13 @@ const Question = () => {
           </Grid>
 
           <Grid container justify="space-around">
-            <Grid item xs={3} align="center" justify="center">
-              <Button fullwidth variant="contained" color="secondary">
+            <Grid item xs={3} >
+              <Button fullWidth variant="contained" color="secondary">
                 CANCELAR
               </Button>
             </Grid>
-            <Grid item xs={3} align="center" justify="center">
-              <Button fullwidth variant="contained" color="primary">
+            <Grid item xs={3} >
+              <Button fullWidth variant="contained" color="primary">
                 FINALIZAR
               </Button>
             </Grid>
@@ -167,8 +170,11 @@ const Question = () => {
       open={isModalQuestionDatabaseOpen}
       modalTitle="Utilizar questões do banco de dados"
       modalDescription="As questões são buscadas utilizando tag's"
+      ref={modalQuestionDatabaseRef}
     >
-      <QuestionDatabase handleClose={handleCloseQuestionDatabaseModal} />
+      <QuestionDatabase 
+        handleClose={handleCloseQuestionDatabaseModal}
+      />
     </Modal>
 
     </>

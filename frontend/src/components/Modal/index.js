@@ -1,15 +1,15 @@
-import React from "react";
+import React,{forwardRef} from "react";
 import PropTypes from 'prop-types'
 import { Backdrop, Fade } from "@material-ui/core";
 import {StyledModal} from './style'
 
-const ModalWrapper = ({
-  open,
-  handleClose,
-  modalTitle,
-  modalDescription,
-  children
-}) => {
+const ModalWrapper = forwardRef((props, ref) => {
+  const {open,
+    handleClose,
+    modalTitle,
+    modalDescription,
+    children} = props;
+
   return (
     <StyledModal
       aria-labelledby={modalTitle}
@@ -21,11 +21,14 @@ const ModalWrapper = ({
       BackdropProps={{
         timeout: 500
       }}
+      ref={ref}
     >
-      <Fade in={open}>{children}</Fade>
+      <Fade in={open}>
+        {children}
+      </Fade>
     </StyledModal>
   );
-};
+});
 
 ModalWrapper.defaultProps = {
   onClose: () => {}
