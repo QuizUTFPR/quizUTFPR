@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 import {
   Grid,
@@ -21,7 +21,6 @@ import Modal from '@components/Modal'
 import QuestionDatabase from './QuestionDatabase'
 
 const Question = () => {
-  const modalQuestionDatabaseRef = useRef(null);
   const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(false);
   const handleOpenQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(true);
   const handleCloseQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(false);
@@ -166,11 +165,8 @@ const Question = () => {
       open={isModalQuestionDatabaseOpen}
       modalTitle="Utilizar questões do banco de dados"
       modalDescription="As questões são buscadas utilizando tag's"
-      ref={modalQuestionDatabaseRef}
       >
-        
       <QuestionDatabase 
-        
         handleClose={handleCloseQuestionDatabaseModal}
       />
     </Modal>
