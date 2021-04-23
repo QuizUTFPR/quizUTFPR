@@ -13,10 +13,7 @@ import {
   StyledRightGrid,
   StyledLeftGrid,
   ContainerGrid,
-  StyledAddQuestionButton,
-  StyledFieldOfQuestion,
-  StyledActionsButton,
-  StyledDividerGrid
+  StyledFieldOfQuestion
 } from "./style";
 
 // COMPONENTS
@@ -29,7 +26,6 @@ const Question = () => {
   const handleOpenQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(true);
   const handleCloseQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(false);
 
-  console.log(modalQuestionDatabaseRef)
 
   return (
     <>
@@ -70,7 +66,7 @@ const Question = () => {
                 label="Título da Questão..."
                 id="title"
                 value={""}
-                onChange={() => console.log("mudou")}
+                onChange={() => {}}
                 required
                 autoFocus
               />
@@ -94,7 +90,7 @@ const Question = () => {
                     label="Questão 1"
                     id="firstQuestion"
                     value={""}
-                    onChange={console.log("mudou 2")}
+                    onChange={() => {}}
                     required
                   />
                 </Grid>
@@ -106,7 +102,7 @@ const Question = () => {
                     label="Questão 2"
                     id="secondQuestion"
                     value={""}
-                    onChange={console.log("mudou3")}
+                    onChange={() => {}}
                     required
                   />
                 </Grid>
@@ -118,7 +114,7 @@ const Question = () => {
                     label="Questão 3"
                     id="thirdQuestion"
                     value={""}
-                    onChange={console.log("mudou3")}
+                    onChange={() => {}}
                   />
                 </Grid>
 
@@ -129,7 +125,7 @@ const Question = () => {
                     label="Questão 4"
                     id="foirthQuestion"
                     value={""}
-                    onChange={console.log("mudou4")}
+                    onChange={() => {}}
                   />
                 </Grid>
               </Grid>
@@ -171,8 +167,10 @@ const Question = () => {
       modalTitle="Utilizar questões do banco de dados"
       modalDescription="As questões são buscadas utilizando tag's"
       ref={modalQuestionDatabaseRef}
-    >
+      >
+        
       <QuestionDatabase 
+        
         handleClose={handleCloseQuestionDatabaseModal}
       />
     </Modal>

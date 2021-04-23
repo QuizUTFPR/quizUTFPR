@@ -1,7 +1,7 @@
 import React,{forwardRef} from "react";
 import PropTypes from 'prop-types'
 import { Backdrop, Fade } from "@material-ui/core";
-import {StyledModal} from './style'
+import {StyledModal} from './style';
 
 const ModalWrapper = forwardRef((props, ref) => {
   const {open,
@@ -9,8 +9,10 @@ const ModalWrapper = forwardRef((props, ref) => {
     modalTitle,
     modalDescription,
     children} = props;
+    
+    
 
-  return (
+    return (
     <StyledModal
       aria-labelledby={modalTitle}
       aria-describedby={modalDescription}
@@ -28,7 +30,7 @@ const ModalWrapper = forwardRef((props, ref) => {
       </Fade>
     </StyledModal>
   );
-});
+})
 
 ModalWrapper.defaultProps = {
   onClose: () => {}

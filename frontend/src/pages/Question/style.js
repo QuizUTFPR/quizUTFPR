@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Grid, Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 export const ContainerGrid = styled(Grid)``;
 
