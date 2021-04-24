@@ -12,7 +12,7 @@ const InputAutoComplete = ({ stateValue, onChange, suggestions, variant, label, 
         freeSolo
         onChange={(e) => console.log(e)}
         renderInput={(params) => (
-          <TextField {...params} />
+          <TextField {...params} variant={variant} label={label} placeholder={placeholder} />
         )}
       />
   );

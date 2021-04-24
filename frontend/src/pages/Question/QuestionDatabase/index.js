@@ -7,6 +7,7 @@ import {StyledSearchTagButton} from './style'
 // COMPONENTS
 import GridContainer from '@components/Container'
 import InputAutoComplete from '@components/AutoCompleteInput'
+import Questions from './question'
 
 const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
@@ -37,8 +38,8 @@ const QuestionDatabase = forwardRef((props, ref) => {
               suggestions={["aprenda", "ola"]}
               onChange={(e) => {console.log(e)}}
               variant='filled'
-              label="Tag's"
-              placeholder="Digite aqui as tag's"
+              label="Tag"
+              placeholder="Digite a Tag de questões que você deseja pesquisar..."
             />
           </Grid>
           <Grid item xs={3}>
@@ -47,6 +48,8 @@ const QuestionDatabase = forwardRef((props, ref) => {
         </Grid>
   
         <Grid item><Divider /></Grid>
+
+        <Questions />
       </Wrapper>
     )
   })
