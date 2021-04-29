@@ -24,6 +24,7 @@ export const StyledAddQuestionButton = styled(Grid)`
 
 export const StyledFieldOfQuestion = styled(Grid)`
   /* background: green; */
+  padding: 20px;
   height: calc(100vh - 48px - 48px);
 `;
 
