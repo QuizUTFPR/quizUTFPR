@@ -109,12 +109,21 @@ const Wrapper = forwardRef((props, ref) => (
 ));
 
 const QuestionDatabase = forwardRef((props, ref) => {
+
   const [checkboxes, setCheckboxes] = useState([]);
 
-  const handleQuestionChecked = (question, id) => (e) => {
+  useEffect(() => {
+    FakeQuestions.map((item) => {
+      if(props.questions.includes(item)){
+        setCheckboxes(prevState => ({...prevState, [item.title]: true}))
+      }
+    })
+  }, [])
+
+  const handleQuestionChecked = (question) => (e) => {
     setCheckboxes(prevState => ({
       ...prevState,
-      [id]: e.target.checked
+      [question.title]: e.target.checked
     }))
 
     if(e.target.checked){
@@ -170,12 +179,12 @@ const QuestionDatabase = forwardRef((props, ref) => {
             </Grid>
           )} */}
           
-          {FakeQuestions.map((question, index) => (
-            <Grid key={index} item xs={12}>
+          {FakeQuestions.map((question) => (
+            <Grid key={question.title} item xs={12}>
               <Question 
-                question={question} id={index} 
-                checked={checkboxes[index]} 
-                onChange={() => handleQuestionChecked(question, index)} 
+                question={question} id={question.title} 
+                checked={checkboxes[question.title]} 
+                onChange={() => handleQuestionChecked(question)} 
               />
             </Grid>
           ))}          
