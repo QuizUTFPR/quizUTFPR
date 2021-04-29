@@ -1,4 +1,4 @@
-import React, {forwardRef, useState} from 'react'
+import React, {forwardRef, useState, useEffect} from 'react'
 
 import {IconButton, Grid, Typography, Divider } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
@@ -109,7 +109,6 @@ const Wrapper = forwardRef((props, ref) => (
 ));
 
 const QuestionDatabase = forwardRef((props, ref) => {
-  
   const [checkboxes, setCheckboxes] = useState([]);
 
   const handleQuestionChecked = (question, id) => (e) => {
@@ -161,6 +160,16 @@ const QuestionDatabase = forwardRef((props, ref) => {
         <Grid item><Divider /></Grid>
 
         <Grid container spacing={3} justify='center' style={{ overflow: 'scroll', height:'calc(100vh - 25px - 72px - 48px - 60px)' }}>
+          {/* {FakeQuestions.filter(element => !props.questions.includes(element)).map((question, index)=>
+            <Grid key={index} item xs={12}>
+              <Question 
+                question={question} id={index} 
+                checked={checkboxes[index]} 
+                onChange={() => handleQuestionChecked(question, index)} 
+              />
+            </Grid>
+          )} */}
+          
           {FakeQuestions.map((question, index) => (
             <Grid key={index} item xs={12}>
               <Question 

@@ -37,18 +37,18 @@ const Question = () => {
     <>
     <ContainerGrid container justify="space-between">
       <Grid item xs={2}>
-        <StyledLeftGrid container justify='center' >
+        <StyledLeftGrid container align='center' >
           <Grid item xs={12}>
             <Typography color="primary" component="h5" variant="h5">
               Questões
             </Typography>
           </Grid>
 
-          {questions.map(item => (
-            <Grid item xs={12}>
-              <Typography color="primary">
+          {questions.map((item) => (
+            <Grid item xs={12} key={item.title}>
+              <Button color="primary" variant='outlined' fullWidth>
                 {item.title}
-              </Typography>
+              </Button>
           </Grid>
           ))}
         </StyledLeftGrid>
@@ -183,6 +183,7 @@ const Question = () => {
       style={{ overflow: 'scroll' }}
       >
       <QuestionDatabase
+        questions={questions}
         handleaddQuestion={addQuestion}
         handleRemoveQuestion={removeQuestion}
         handleClose={handleCloseQuestionDatabaseModal}
