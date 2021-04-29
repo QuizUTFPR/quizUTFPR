@@ -37,12 +37,20 @@ const Question = () => {
     <>
     <ContainerGrid container justify="space-between">
       <Grid item xs={2}>
-        <StyledLeftGrid container align="center" justify="center">
-          <Grid item>
+        <StyledLeftGrid container justify='center' >
+          <Grid item xs={12}>
             <Typography color="primary" component="h5" variant="h5">
               Questões
             </Typography>
           </Grid>
+
+          {questions.map(item => (
+            <Grid item xs={12}>
+              <Typography color="primary">
+                {item.title}
+              </Typography>
+          </Grid>
+          ))}
         </StyledLeftGrid>
       </Grid>
 
