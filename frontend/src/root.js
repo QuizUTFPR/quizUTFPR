@@ -45,9 +45,9 @@ function Root() {
         <Suspense fallback={<LinearProgress />}>
           <Switch>
             <Route path={LOGIN} exact component={Login} />
-            <QuestionQuizProvider>
-              <Route path={QUESTION} exact component={Question} />
-            </QuestionQuizProvider>
+            <Route path={QUESTION} exact render={ (props)=> (
+              <QuestionQuizProvider> <Question {...props} /></QuestionQuizProvider>
+            )} />
             <Route component={App} />
           </Switch>
         </Suspense>
