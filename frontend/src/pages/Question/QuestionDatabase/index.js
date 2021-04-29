@@ -119,18 +119,10 @@ const QuestionDatabase = forwardRef((props, ref) => {
     }))
 
     if(e.target.checked){
-      addQuestion(question)
+      props.handleaddQuestion(question);
     }else{
-      removeQuestion(question);
+      props.handleRemoveQuestion(question);
     }
-  }
-
-  const removeQuestion = (question) => {
-    props.handleRemoveQuestion(question);
-  }
-
-  const addQuestion = (question) => {
-    props.handleaddQuestion(question);
   }
 
 
