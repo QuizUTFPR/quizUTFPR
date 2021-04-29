@@ -60,8 +60,14 @@ const QuestionDatabase = forwardRef((props, ref) => {
   
         <Grid item><Divider /></Grid>
 
-        <Question id={0} checked={checkboxes[0]} onChange={handleQuestionChecked} />
-        <Question id={1} checked={checkboxes[1]} onChange={handleQuestionChecked} />
+        <Grid container spacing={3} justify='center'>
+          <Grid item>
+            <Question id={0} checked={checkboxes[0]} onChange={handleQuestionChecked} />
+          </Grid>
+          <Grid item>
+            <Question id={1} checked={checkboxes[1]} onChange={handleQuestionChecked} />
+          </Grid>          
+        </Grid>
       </Wrapper>
     )
   })

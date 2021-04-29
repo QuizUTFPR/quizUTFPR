@@ -5,6 +5,9 @@ import {ThemeProvider} from 'styled-components'
 
 import GlobalStyle from './theme/globalStyle';
 
+//CONTEXT
+import QuestionQuizProvider from '@context/questions_quiz'
+
 // ROUTES
 import {
   LOGIN,
@@ -40,11 +43,11 @@ function Root() {
       <GlobalStyle />
       <BrowserRouter>
         <Suspense fallback={<LinearProgress />}>
-          {/* criação de questao */}
-          
           <Switch>
             <Route path={LOGIN} exact component={Login} />
-            <Route path={QUESTION} exact component={Question} />
+            <QuestionQuizProvider>
+              <Route path={QUESTION} exact component={Question} />
+            </QuestionQuizProvider>
             <Route component={App} />
           </Switch>
         </Suspense>

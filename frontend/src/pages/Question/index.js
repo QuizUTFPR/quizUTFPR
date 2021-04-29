@@ -16,11 +16,18 @@ import {
   StyledFieldOfQuestion
 } from "./style";
 
+//HOOKS
+import useQuestionQuiz from '@hooks/QuestionQuiz'
+
 // COMPONENTS
 import Modal from '@components/Modal'
 import QuestionDatabase from './QuestionDatabase'
 
 const Question = () => {
+  const {questions, setQuestions} = useQuestionQuiz();
+
+  console.log(questions);
+
   const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(false);
   const handleOpenQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(true);
   const handleCloseQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(false);

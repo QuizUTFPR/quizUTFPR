@@ -13,6 +13,8 @@ module.exports = {
           '@components': './components/',
           '@assets': './assets/',
           '@routes': './routes.js',
+          '@hooks': './hooks/',
+          '@context': './context/'
         },
       },
     },
