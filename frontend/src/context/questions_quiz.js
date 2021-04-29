@@ -17,3 +17,5 @@ const QuestionQuiz = ({ children }) => {
 QuestionQuiz.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export default QuestionQuiz;
