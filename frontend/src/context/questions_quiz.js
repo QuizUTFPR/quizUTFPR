@@ -4,28 +4,24 @@ import PropTypes from 'prop-types';
 export const QuestionQuizContext = createContext();
 
 const QuestionQuiz = ({ children }) => {
-  const [questions, setQuestions] = useState([{
-    title: "Chabu é erro?",
-    correctAnswer: true,
-    timer: 15,
-    difficultyLevel: 3,
-    quiz_id: 2,
-    answer: [
-        {
-            title: "Verdadeiro",
-            is_correct: true
-        },
-        {
-            title: "Mentira",
-            is_correct: false
-        }
-    ],
-    tags: [{name: "erro"}]
-  }]);
+  const [questions, setQuestions] = useState([]);
 
+
+  const addQuestion = (item) => {
+    setQuestions(prevState => [
+      ...prevState,
+      item
+    ]
+    )
+  }
+
+  const removeQuestion = (item) => {
+    const newQuestions = questions.filter((element) => element != item)
+    setQuestions(newQuestions);
+  }
 
   return (
-    <QuestionQuizContext.Provider value={{ questions, setQuestions}}>
+    <QuestionQuizContext.Provider value={{ questions, setQuestions, addQuestion, removeQuestion}}>
       {children}
     </QuestionQuizContext.Provider>
   );

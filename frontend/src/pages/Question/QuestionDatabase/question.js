@@ -48,7 +48,7 @@ const CheckBox = styled.input.attrs({
   display: none;
 `
 
-const Questions = ({id, checked, onChange}) => {
+const Questions = ({id, checked, onChange, question}) => {
   return (
     <QuestionCard variant="outlined" checked={Boolean(checked)}>
       <CardActionArea component='label'>
@@ -59,21 +59,22 @@ const Questions = ({id, checked, onChange}) => {
               <Typography color="textSecondary" gutterBottom>Multípla Escolha</Typography>
             </Grid>
             <Grid item>
-              <Typography color="textSecondary" gutterBottom>Fácil</Typography>
+              <Typography color="textSecondary" gutterBottom>{question.difficultyLevel}</Typography>
             </Grid>
           </Grid>
           <Divider />
           <TitleQuestion variant="h5" component="h2" color='primary'>
-            Título da Questão
+            {question.title}
           </TitleQuestion>
           <Typography  color="textSecondary">
             Alternativas
           </Typography>
           <Grid container spacing={1}>
-            <Grid item xs={12} md={6}><WrongAnswer>Alternativa Errada</WrongAnswer></Grid>
-            <Grid item xs={12} md={6}><CorrectgAnswer>Alternativa Correta</CorrectgAnswer></Grid>
-            <Grid item xs={12} md={6}><WrongAnswer>Alternativa Errada</WrongAnswer></Grid>
-            <Grid item xs={12} md={6}><WrongAnswer>Alternativa Errada</WrongAnswer></Grid>
+            {question.answer.map((item) => (
+              <Grid item xs={12} md={6} key={item.title}>
+                {item.is_correct ? <CorrectgAnswer>{item.title}</CorrectgAnswer> : <WrongAnswer>{item.title}</WrongAnswer>}
+              </Grid>
+            ))}
           </Grid>
         </CardContent>
       </CardActionArea>

@@ -24,9 +24,14 @@ import Modal from "@components/Modal";
 import QuestionDatabase from "./QuestionDatabase";
 
 const Question = () => {
-  const { questions, setQuestions } = useQuestionQuiz();
+  const {
+    questions,
+    setQuestions,
+    addQuestion,
+    removeQuestion
+  } = useQuestionQuiz();
 
-  console.log(questions);
+  console.log("Questões do Quiz:", questions);
 
   const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(
     false
@@ -40,12 +45,20 @@ const Question = () => {
     <>
       <ContainerGrid container justify="space-between">
         <Grid item xs={2}>
-          <StyledLeftGrid container align="center" justify="center">
-            <Grid item>
+          <StyledLeftGrid container align="center">
+            <Grid item xs={12}>
               <Typography color="primary" component="h5" variant="h5">
                 Questões
               </Typography>
             </Grid>
+
+            {questions.map(item => (
+              <Grid item xs={12} key={item.title}>
+                <Button color="primary" variant="outlined" fullWidth>
+                  {item.title}
+                </Button>
+              </Grid>
+            ))}
           </StyledLeftGrid>
         </Grid>
 
@@ -67,6 +80,10 @@ const Question = () => {
                   USAR QUESTÃO DO BANCO
                 </Button>
               </Grid>
+            </Grid>
+
+            <Grid item>
+              <Divider />
             </Grid>
 
             <StyledFieldOfQuestion
@@ -180,6 +197,7 @@ const Question = () => {
             </Grid>
           </Grid>
         </Grid>
+
         <Grid item xs={2}>
           <StyledRightGrid container align="center" justify="center">
             <Grid item>
@@ -196,8 +214,14 @@ const Question = () => {
         open={isModalQuestionDatabaseOpen}
         modalTitle="Utilizar questões do banco de dados"
         modalDescription="As questões são buscadas utilizando tag's"
+        style={{ overflow: "scroll" }}
       >
-        <QuestionDatabase handleClose={handleCloseQuestionDatabaseModal} />
+        <QuestionDatabase
+          questions={questions}
+          handleaddQuestion={addQuestion}
+          handleRemoveQuestion={removeQuestion}
+          handleClose={handleCloseQuestionDatabaseModal}
+        />
       </Modal>
     </>
   );
