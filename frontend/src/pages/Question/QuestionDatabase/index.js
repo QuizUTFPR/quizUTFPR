@@ -9,6 +9,101 @@ import GridContainer from '@components/Container'
 import InputAutoComplete from '@components/AutoCompleteInput'
 import Question from './question'
 
+
+const FakeQuestions = [{
+    title: "Chabu é erro?",
+    correctAnswer: true,
+    timer: 15,
+    difficultyLevel: 3,
+    quiz_id: 2,
+    answer: [
+        {
+            title: "Verdadeiro",
+            is_correct: true
+        },
+        {
+            title: "Mentira",
+            is_correct: false
+        }
+    ],
+    tags: [{name: "erro"}]
+  },
+  {
+    title: "Chabu é correto?",
+    correctAnswer: true,
+    timer: 15,
+    difficultyLevel: 3,
+    quiz_id: 2,
+    answer: [
+        {
+            title: "Verdadeiro",
+            is_correct: true
+        },
+        {
+            title: "Mentira",
+            is_correct: false
+        }
+    ],
+    tags: [{name: "erro"}]
+  },
+  {
+    title: "Chabu é teste?",
+    correctAnswer: true,
+    timer: 15,
+    difficultyLevel: 3,
+    quiz_id: 2,
+    answer: [
+        {
+            title: "Verdadeiro",
+            is_correct: true
+        },
+        {
+            title: "Mentira",
+            is_correct: false
+        }
+    ],
+    tags: [{name: "erro"}]
+  },
+  {
+    title: "Chabu é aaa?",
+    correctAnswer: true,
+    timer: 15,
+    difficultyLevel: 3,
+    quiz_id: 2,
+    answer: [
+        {
+            title: "Verdadeiro",
+            is_correct: true
+        },
+        {
+            title: "Mentira",
+            is_correct: false
+        }
+    ],
+    tags: [{name: "erro"}]
+  },
+  {
+    title: "Chabu é dawdawdawdwa?",
+    correctAnswer: true,
+    timer: 15,
+    difficultyLevel: 3,
+    quiz_id: 2,
+    answer: [
+        {
+            title: "Verdadeiro",
+            is_correct: true
+        },
+        {
+            title: "Mentira",
+            is_correct: false
+        }
+    ],
+    tags: [{name: "erro"}]
+  }
+  ]
+
+
+
 const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
 ));
@@ -17,17 +112,30 @@ const QuestionDatabase = forwardRef((props, ref) => {
   
   const [checkboxes, setCheckboxes] = useState([]);
 
-  const handleQuestionChecked = (id) => (e) => {
+  const handleQuestionChecked = (question, id) => (e) => {
     setCheckboxes(prevState => ({
       ...prevState,
       [id]: e.target.checked
     }))
-    console.log(checkboxes)
+
+    if(e.target.checked){
+      addQuestion(question)
+    }else{
+      removeQuestion(question);
+    }
+  }
+
+  const removeQuestion = (question) => {
+    props.handleRemoveQuestion(question);
+  }
+
+  const addQuestion = (question) => {
+    props.handleaddQuestion(question);
   }
 
 
   return(
-      <Wrapper container spacing={3}>
+      <Wrapper container spacing={3} >
         <Grid container justify='center' alignItems='center'>
           <Grid item xs={3} md={1}>
             <IconButton aria-label="closeModal" onClick={props.handleClose}>
@@ -60,13 +168,16 @@ const QuestionDatabase = forwardRef((props, ref) => {
   
         <Grid item><Divider /></Grid>
 
-        <Grid container spacing={3} justify='center'>
-          <Grid item>
-            <Question id={0} checked={checkboxes[0]} onChange={handleQuestionChecked} />
-          </Grid>
-          <Grid item>
-            <Question id={1} checked={checkboxes[1]} onChange={handleQuestionChecked} />
-          </Grid>          
+        <Grid container spacing={3} justify='center' style={{ overflow: 'scroll', height:'calc(100vh - 25px - 72px - 48px - 60px)' }}>
+          {FakeQuestions.map((question, index) => (
+            <Grid key={index} item xs={12}>
+              <Question 
+                question={question} id={index} 
+                checked={checkboxes[index]} 
+                onChange={() => handleQuestionChecked(question, index)} 
+              />
+            </Grid>
+          ))}          
         </Grid>
       </Wrapper>
     )

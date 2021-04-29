@@ -24,9 +24,9 @@ import Modal from '@components/Modal'
 import QuestionDatabase from './QuestionDatabase'
 
 const Question = () => {
-  const {questions, setQuestions} = useQuestionQuiz();
+  const {questions, setQuestions, addQuestion, removeQuestion} = useQuestionQuiz();
 
-  console.log(questions);
+  console.log("Questões do Quiz:",questions)
 
   const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(false);
   const handleOpenQuestionDatabaseModal = () => setModalQuestionDatabaseOpen(true);
@@ -172,8 +172,11 @@ const Question = () => {
       open={isModalQuestionDatabaseOpen}
       modalTitle="Utilizar questões do banco de dados"
       modalDescription="As questões são buscadas utilizando tag's"
+      style={{ overflow: 'scroll' }}
       >
-      <QuestionDatabase 
+      <QuestionDatabase
+        handleaddQuestion={addQuestion}
+        handleRemoveQuestion={removeQuestion}
         handleClose={handleCloseQuestionDatabaseModal}
       />
     </Modal>
