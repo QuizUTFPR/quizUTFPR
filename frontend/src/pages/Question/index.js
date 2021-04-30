@@ -6,14 +6,17 @@ import {
   Button,
   TextField,
   Divider,
-  Checkbox
+  AppBar,
+  Toolbar
 } from "@material-ui/core";
 
 import {
   StyledRightGrid,
   StyledLeftGrid,
   ContainerGrid,
-  StyledFieldOfQuestion
+  StyledFieldOfQuestion,
+  StyledAnswerInput,
+  StyledTitleInput
 } from "./style";
 
 //HOOKS
@@ -24,12 +27,7 @@ import Modal from "@components/Modal";
 import QuestionDatabase from "./QuestionDatabase";
 
 const Question = () => {
-  const {
-    questions,
-    setQuestions,
-    addQuestion,
-    removeQuestion
-  } = useQuestionQuiz();
+  const { questions, addQuestion, removeQuestion } = useQuestionQuiz();
 
   console.log("Questões do Quiz:", questions);
 
@@ -43,6 +41,18 @@ const Question = () => {
 
   return (
     <>
+      <AppBar position="static" color="transparent">
+        <Toolbar>
+          <Grid container justify="space-between">
+            <Button color="secondary" variant="outlined">
+              Sair
+            </Button>
+            <Button color="primary" variant="contained">
+              Finalzar
+            </Button>
+          </Grid>
+        </Toolbar>
+      </AppBar>
       <ContainerGrid container justify="space-between">
         <Grid item xs={2}>
           <StyledLeftGrid container align="center">
@@ -86,18 +96,14 @@ const Question = () => {
               <Divider />
             </Grid>
 
-            <StyledFieldOfQuestion
-              container
-              justify="space-between"
-              direction="column"
-              alignItems="center"
-            >
-              <Grid item>
-                <TextField
-                  label="Título da Questão..."
+            <StyledFieldOfQuestion container justify="center" spacing={5}>
+              <Grid item xs={12}>
+                <StyledTitleInput
+                  fullWidth
+                  placeholder="Digite o enunciado aqui..."
                   id="title"
-                  value={""}
-                  onChange={() => {}}
+                  // value={""}
+                  // onChange={() => {}}
                   required
                   autoFocus
                 />
@@ -114,87 +120,43 @@ const Question = () => {
                 />
               </Grid>
 
-              <Grid item>
-                <Grid container spacing={8} justify="space-between">
-                  <Grid item>
-                    <Grid container alignItems="flex-end">
-                      <Grid item>
-                        <Checkbox size="medium" color="primary" />
-                      </Grid>
-                      <Grid item>
-                        <TextField
+                <Grid container spacing={2} justify="space-between">
+                      <Grid item xs={12} md={6}>
+                        <StyledAnswerInput
                           fullWidth
-                          label="Questão 1"
+                          placeholder="Digite a alternativa 1..."
                           id="firstQuestion"
                           required
                         />
-                      </Grid>
-                    </Grid>
                   </Grid>
 
-                  <Grid item>
-                    <Grid container alignItems="flex-end">
-                      <Grid item>
-                        <Checkbox size="medium" color="primary" />
-                      </Grid>
-                      <Grid item>
-                        <TextField
+                      <Grid item xs={12} md={6}>
+                        <StyledAnswerInput
                           fullWidth
-                          label="Questão 2"
+                          placeholder="Digite a alternativa 2..."
                           id="secondQuestion"
                           required
                         />
-                      </Grid>
                     </Grid>
-                  </Grid>
-                </Grid>
 
-                <Grid container spacing={8} justify="space-between">
-                  <Grid item>
-                    <Grid container alignItems="flex-end">
-                      <Grid item>
-                        <Checkbox size="medium" color="primary" />
-                      </Grid>
-                      <Grid item>
-                        <TextField
+                      <Grid item xs={12} md={6}>
+                        <StyledAnswerInput
                           fullWidth
-                          label="Questão 3"
+                          placeholder="Digite a alternativa 3..."
                           id="thirdQuestion"
                         />
                       </Grid>
-                    </Grid>
-                  </Grid>
+              
 
-                  <Grid item>
-                    <Grid container alignItems="flex-end">
-                      <Grid item>
-                        <Checkbox size="medium" color="primary" />
-                      </Grid>
-                      <Grid item>
-                        <TextField
+                      <Grid item xs={12} md={6}>
+                        <StyledAnswerInput
                           fullWidth
-                          label="Questão 4"
+                          placeholder="Digite a alternativa 4..."
                           id="fourthQuestion"
                         />
-                      </Grid>
-                    </Grid>
-                  </Grid>
                 </Grid>
               </Grid>
             </StyledFieldOfQuestion>
-
-            <Grid container justify="space-around">
-              <Grid item xs={3}>
-                <Button fullWidth variant="contained" color="secondary">
-                  CANCELAR
-                </Button>
-              </Grid>
-              <Grid item xs={3}>
-                <Button fullWidth variant="contained" color="primary">
-                  FINALIZAR
-                </Button>
-              </Grid>
-            </Grid>
           </Grid>
         </Grid>
 
