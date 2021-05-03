@@ -16,7 +16,8 @@ import {
   ContainerGrid,
   StyledFieldOfQuestion,
   StyledAnswerInput,
-  StyledTitleInput
+  StyledTitleInput,
+  StyledButtonsContainer
 } from "./style";
 
 //HOOKS
@@ -74,7 +75,7 @@ const Question = () => {
 
         <Grid item xs={8}>
           <Grid container>
-            <Grid container justify="space-around">
+            <StyledButtonsContainer container justify="space-around">
               <Grid item xs={3}>
                 <Button fullWidth variant="contained" color="primary">
                   CRIAR NOVA QUESTÃO
@@ -90,11 +91,7 @@ const Question = () => {
                   USAR QUESTÃO DO BANCO
                 </Button>
               </Grid>
-            </Grid>
-
-            <Grid item>
-              <Divider />
-            </Grid>
+            </StyledButtonsContainer>
 
             <StyledFieldOfQuestion container justify="center" spacing={5}>
               <Grid item xs={12}>
@@ -120,40 +117,39 @@ const Question = () => {
                 />
               </Grid>
 
-                <Grid container spacing={2} justify="space-between">
-                      <Grid item xs={12} md={6}>
-                        <StyledAnswerInput
-                          fullWidth
-                          placeholder="Digite a alternativa 1..."
-                          id="firstQuestion"
-                          required
-                        />
-                  </Grid>
+              <Grid container spacing={2} justify="space-between">
+                <Grid item xs={12} md={6}>
+                  <StyledAnswerInput
+                    type="text"
+                    placeholder="Digite a alternativa 1..."
+                    id="firstQuestion"
+                    required
+                  />
+                </Grid>
 
-                      <Grid item xs={12} md={6}>
-                        <StyledAnswerInput
-                          fullWidth
-                          placeholder="Digite a alternativa 2..."
-                          id="secondQuestion"
-                          required
-                        />
-                    </Grid>
+                <Grid item xs={12} md={6}>
+                  <StyledAnswerInput
+                    fullWidth
+                    placeholder="Digite a alternativa 2..."
+                    id="secondQuestion"
+                    required
+                  />
+                </Grid>
 
-                      <Grid item xs={12} md={6}>
-                        <StyledAnswerInput
-                          fullWidth
-                          placeholder="Digite a alternativa 3..."
-                          id="thirdQuestion"
-                        />
-                      </Grid>
-              
+                <Grid item xs={12} md={6}>
+                  <StyledAnswerInput
+                    fullWidth
+                    placeholder="Digite a alternativa 3..."
+                    id="thirdQuestion"
+                  />
+                </Grid>
 
-                      <Grid item xs={12} md={6}>
-                        <StyledAnswerInput
-                          fullWidth
-                          placeholder="Digite a alternativa 4..."
-                          id="fourthQuestion"
-                        />
+                <Grid item xs={12} md={6}>
+                  <StyledAnswerInput
+                    fullWidth
+                    placeholder="Digite a alternativa 4..."
+                    id="fourthQuestion"
+                  />
                 </Grid>
               </Grid>
             </StyledFieldOfQuestion>
