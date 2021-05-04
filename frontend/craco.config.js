@@ -14,7 +14,8 @@ module.exports = {
           '@assets': './assets/',
           '@routes': './routes.js',
           '@hooks': './hooks/',
-          '@context': './context/'
+          '@context': './context/',
+          '@api': './services/api.js'
         },
       },
     },

@@ -10,11 +10,16 @@ import QuestionQuizProvider from '@context/questions_quiz'
 //HOOKS
 import useAuth from '@hooks/Auth'
 
+// ROUTES
+import {
+  LOGIN,
+  QUESTION
+} from '@routes'
+
 // PAGES
 const MainPage = lazy(() => import('./pages/MainPage'));
 const Login = lazy(() => import('./pages/Login'));
 const Question = lazy(() => import('./pages/Question'));
-
 
 function App() {
   const auth = useAuth();
