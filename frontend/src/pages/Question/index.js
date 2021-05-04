@@ -45,6 +45,10 @@ const Question = () => {
               Sair
             </Button>
             
+
+            <Typography component="h4" variant="h4" color="primary">
+              Título do Quiz
+            </Typography>
           </Grid>
         </Toolbar>
       </AppBar>
@@ -54,14 +58,13 @@ const Question = () => {
 
         {/* LEFT */}
         <Grid item xs={2}>
-          <StyledLeftGrid container align='center'>
+          <StyledLeftGrid container align="center">
             <Grid item xs={12}>
               <Typography color="primary" component="h5" variant="h5">
                 Questões
               </Typography>
             </Grid>
 
-            
             <Grid container>
               {questions.map(item => (
                 <Grid item xs={12} key={item.title}>
@@ -70,7 +73,6 @@ const Question = () => {
                   </Button>
                 </Grid>
               ))}
-            
             </Grid>
             <GridButtonNewQuestion item xs={12}>
               <Button 
@@ -93,8 +95,6 @@ const Question = () => {
                   fullWidth
                   placeholder="DIGITE O ENUNCIADO AQUI"
                   id="title"
-                  // value={""}
-                  // onChange={() => {}}
                   required
                   autoFocus
                 />
