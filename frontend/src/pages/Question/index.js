@@ -83,13 +83,13 @@ const Question = () => {
 
         <Grid item xs={8}>
           <Grid container>
-            <StyledButtonsContainer container justify="space-around">
+            {/* <StyledButtonsContainer container justify="space-around">
               <Grid item xs={3}>
                 <Button fullWidth variant="contained" color="primary">
                   CRIAR NOVA QUESTÃO
                 </Button>
               </Grid>
-              {/* <Grid item xs={3}>
+              <Grid item xs={3}>
                 <Button
                   fullWidth
                   onClick={handleOpenQuestionDatabaseModal}
@@ -98,8 +98,8 @@ const Question = () => {
                 >
                   USAR QUESTÃO DO BANCO
                 </Button>
-              </Grid> */}
-            </StyledButtonsContainer>
+              </Grid> 
+             </StyledButtonsContainer> */}
 
             <StyledFieldOfQuestion container justify="center" spacing={5}>
               <Grid item xs={12}>
