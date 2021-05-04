@@ -5,7 +5,6 @@ import {
   Typography,
   Button,
   TextField,
-  Divider,
   AppBar,
   Toolbar
 } from "@material-ui/core";
@@ -14,10 +13,9 @@ import {
   StyledRightGrid,
   StyledLeftGrid,
   ContainerGrid,
-  StyledFieldOfQuestion,
   StyledAnswerInput,
   StyledTitleInput,
-  StyledButtonsContainer,
+  StyledGrid,
   GridButtonNewQuestion
 } from "./style";
 
@@ -26,19 +24,17 @@ import useQuestionQuiz from "@hooks/QuestionQuiz";
 
 // COMPONENTS
 import Modal from "@components/Modal";
-import QuestionDatabase from "../QuestionDatabase";
 import TypeOfQuestion from '../TypeOfQuestion'
 
 const Question = () => {
-  const { questions, addQuestion, removeQuestion } = useQuestionQuiz();
+  const { questions } = useQuestionQuiz();
 
   console.log("Questões do Quiz:", questions);
 
-  const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(false);
   const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(false);
 
-  const handleOpenModal = (setModal) => () => setModal(true);
-  const handleCloseModal = (setModal) => () => setModal(false);
+  const handleOpenModalTypeQuestion = () => setModalTypeOfQuestionOpen(true);
+  const handleCloseModalTypeQuestion = () => setModalTypeOfQuestionOpen(false);
 
   return (
     <>
@@ -48,13 +44,15 @@ const Question = () => {
             <Button color="secondary" variant="outlined">
               Sair
             </Button>
-            <Button color="primary" variant="contained">
-              Finalizar
-            </Button>
+            
           </Grid>
         </Toolbar>
       </AppBar>
+
+
       <ContainerGrid container>
+
+        {/* LEFT */}
         <Grid item xs={2}>
           <StyledLeftGrid container align='center'>
             <Grid item xs={12}>
@@ -76,7 +74,7 @@ const Question = () => {
             </Grid>
             <GridButtonNewQuestion item xs={12}>
               <Button 
-                onClick={handleOpenModal(setModalTypeOfQuestionOpen)} 
+                onClick={handleOpenModalTypeQuestion} 
                 fullWidth variant="contained" 
                 color="primary"
               >
@@ -86,27 +84,10 @@ const Question = () => {
           </StyledLeftGrid>
         </Grid>
 
-        <Grid item xs={8}>
-          <Grid container>
-            {/* <StyledButtonsContainer container justify="space-around">
-              <Grid item xs={3}>
-                <Button fullWidth variant="contained" color="primary">
-                  CRIAR NOVA QUESTÃO
-                </Button>
-              </Grid>
-              <Grid item xs={3}>
-                <Button
-                  fullWidth
-                  onClick={handleOpenQuestionDatabaseModal}
-                  variant="contained"
-                  color="primary"
-                >
-                  USAR QUESTÃO DO BANCO
-                </Button>
-              </Grid> 
-             </StyledButtonsContainer> */}
 
-            <StyledFieldOfQuestion container justify="center" spacing={5}>
+        {/* MIDDLE */}
+        <Grid item xs={8}>
+            <StyledGrid container justify="center">
               <Grid item xs={12}>
                 <StyledTitleInput
                   fullWidth
@@ -130,7 +111,7 @@ const Question = () => {
                 />
               </Grid>
 
-              <Grid container spacing={2} justify="space-between">
+              <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                   <StyledAnswerInput
                     type="text"
@@ -165,10 +146,17 @@ const Question = () => {
                   />
                 </Grid>
               </Grid>
-            </StyledFieldOfQuestion>
+            
+            <Grid item xs={12}>
+              <Button fullWidth color="primary" variant="contained">
+                  FINALIZAR
+              </Button>
+            </Grid>
+            </StyledGrid>
           </Grid>
-        </Grid>
+          
 
+        {/* RIGHT */}
         <Grid item xs={2}>
           <StyledRightGrid container align="center" justify="center">
             <Grid item>
@@ -178,23 +166,11 @@ const Question = () => {
             </Grid>
           </StyledRightGrid>
         </Grid>
+
+
       </ContainerGrid>
 
       {/* MODALS */}
-      <Modal
-        open={isModalQuestionDatabaseOpen}
-        modalTitle="Utilizar questões do banco de dados"
-        modalDescription="As questões são buscadas utilizando tag's"
-        style={{ overflow: "scroll" }}
-      >
-        <QuestionDatabase
-          questions={questions}
-          handleaddQuestion={addQuestion}
-          handleRemoveQuestion={removeQuestion}
-          handleClose={handleCloseModal(setModalQuestionDatabaseOpen)}
-        />
-      </Modal>
-
       <Modal
         open={isModalTypeOfQuestionOpen}
         modalTitle="Qual tipo de questão deseja criar?"
@@ -202,8 +178,9 @@ const Question = () => {
         style={{ overflow: "scroll" }}
       >
         <TypeOfQuestion
-          handleClose={handleCloseModal(setModalTypeOfQuestionOpen)}
+          handleClose={handleCloseModalTypeQuestion}
         />
+        
       </Modal>
     </>
   );

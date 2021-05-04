@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { CssBaseline, MuiThemeProvider, LinearProgress } from '@material-ui/core'
+import { CssBaseline, MuiThemeProvider } from '@material-ui/core'
 import {ThemeProvider} from 'styled-components'
 import App from './App'
 

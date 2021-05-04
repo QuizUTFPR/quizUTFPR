@@ -7,9 +7,7 @@ export const ContainerGrid = styled(Grid)`
 `;
 
 export const StyledGrid = styled(Grid)`
-  /* width: 20%; */
   height: 100%;
-  /* background: palevioletred; */
   padding: 20px;
 `;
 
@@ -27,21 +25,6 @@ export const StyledButtonsContainer = styled(Grid)`
   margin-top: 5px;
 `;
 
-export const StyledAddQuestionButton = styled(Grid)`
-  /* background: blue; */
-`;
-
-export const StyledFieldOfQuestion = styled(Grid)`
-  /* background: green; */
-  height: 100%;
-  padding: 20px;
-  margin: 1px;
-  /* height: calc(100vh - 48px - 48px); */
-`;
-
-export const StyledActionsButton = styled(Grid)`
-  background: blue;
-`;
 
 export const StyledAnswerInput = styled.input`
   width: 100%;
