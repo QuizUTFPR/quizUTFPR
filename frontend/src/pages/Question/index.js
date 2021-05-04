@@ -92,7 +92,7 @@ const Question = () => {
 
         {/* MIDDLE */}
         <Grid item xs={8}>
-            <StyledGrid container justify="center">
+            <StyledGrid container justify="center" align='center'>
               <Grid item xs={12}>
                 <StyledTitleInput
                   fullWidth
