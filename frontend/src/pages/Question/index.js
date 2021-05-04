@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import {
   Grid,
   Typography,
-  Button,
   TextField,
   AppBar,
-  Toolbar
+  Toolbar,
+  Button
 } from "@material-ui/core";
 
 import {
@@ -25,6 +25,8 @@ import useQuestionQuiz from "@hooks/QuestionQuiz";
 // COMPONENTS
 import Modal from "@components/Modal";
 import TypeOfQuestion from '../TypeOfQuestion'
+import StyledButton from '@components/Button'
+
 
 const Question = () => {
   const { questions } = useQuestionQuiz();
@@ -40,10 +42,10 @@ const Question = () => {
     <>
       <AppBar position="static" color="transparent">
         <Toolbar>
-          <Grid container justify="space-between">
-            <Button color="secondary" variant="outlined">
+          <Grid container justify="space-between" alignItems='center'>
+            <StyledButton color="secondary" variant="outlined">
               Sair
-            </Button>
+            </StyledButton>
             
 
             <Typography component="h4" variant="h4" color="primary">
@@ -75,13 +77,13 @@ const Question = () => {
               ))}
             </Grid>
             <GridButtonNewQuestion item xs={12}>
-              <Button 
+              <StyledButton 
                 onClick={handleOpenModalTypeQuestion} 
                 fullWidth variant="contained" 
                 color="primary"
               >
                 CRIAR NOVA QUESTÃO
-              </Button>
+              </StyledButton>
             </GridButtonNewQuestion>
           </StyledLeftGrid>
         </Grid>
@@ -148,9 +150,9 @@ const Question = () => {
               </Grid>
             
             <Grid item xs={12}>
-              <Button fullWidth color="primary" variant="contained">
+              <StyledButton fullWidth color="primary" variant="contained">
                   FINALIZAR
-              </Button>
+              </StyledButton>
             </Grid>
             </StyledGrid>
           </Grid>
