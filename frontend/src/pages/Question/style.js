@@ -46,9 +46,11 @@ export const StyledAnswerInput = styled.input`
   background: white;
   border-radius: 5px;
   border: none;
+  transition: 0.3s;
+  outline: none;
 
-  &:focus {
-    border: 1px solid grey;
+  :focus {
+    border: 2px solid #ececec;
   }
 `;
 

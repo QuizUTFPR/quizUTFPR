@@ -49,27 +49,35 @@ const Question = () => {
               Sair
             </Button>
             <Button color="primary" variant="contained">
-              Finalzar
+              Finalizar
             </Button>
           </Grid>
         </Toolbar>
       </AppBar>
       <ContainerGrid container justify="space-between">
         <Grid item xs={2}>
-          <StyledLeftGrid container align="center">
+          <StyledLeftGrid container align="center" justify="center">
             <Grid item xs={12}>
               <Typography color="primary" component="h5" variant="h5">
                 Questões
               </Typography>
             </Grid>
 
-            {questions.map(item => (
-              <Grid item xs={12} key={item.title}>
-                <Button color="primary" variant="outlined" fullWidth>
-                  {item.title}
-                </Button>
-              </Grid>
-            ))}
+            <Grid container>
+              {questions.map(item => (
+                <Grid item xs={10} key={item.title}>
+                  <Button color="primary" variant="outlined" fullWidth>
+                    {item.title}
+                  </Button>
+                </Grid>
+              ))}
+            </Grid>
+
+            <Grid item xs={10}>
+              <Button fullWidth variant="contained" color="primary">
+                CRIAR NOVA QUESTÃO
+              </Button>
+            </Grid>
           </StyledLeftGrid>
         </Grid>
 
@@ -81,7 +89,7 @@ const Question = () => {
                   CRIAR NOVA QUESTÃO
                 </Button>
               </Grid>
-              <Grid item xs={3}>
+              {/* <Grid item xs={3}>
                 <Button
                   fullWidth
                   onClick={handleOpenQuestionDatabaseModal}
@@ -90,7 +98,7 @@ const Question = () => {
                 >
                   USAR QUESTÃO DO BANCO
                 </Button>
-              </Grid>
+              </Grid> */}
             </StyledButtonsContainer>
 
             <StyledFieldOfQuestion container justify="center" spacing={5}>
