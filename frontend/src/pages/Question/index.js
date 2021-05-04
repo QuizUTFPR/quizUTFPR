@@ -17,7 +17,8 @@ import {
   StyledFieldOfQuestion,
   StyledAnswerInput,
   StyledTitleInput,
-  StyledButtonsContainer
+  StyledButtonsContainer,
+  GridButtonNewQuestion
 } from "./style";
 
 //HOOKS
@@ -25,20 +26,19 @@ import useQuestionQuiz from "@hooks/QuestionQuiz";
 
 // COMPONENTS
 import Modal from "@components/Modal";
-import QuestionDatabase from "./QuestionDatabase";
+import QuestionDatabase from "../QuestionDatabase";
+import TypeOfQuestion from '../TypeOfQuestion'
 
 const Question = () => {
   const { questions, addQuestion, removeQuestion } = useQuestionQuiz();
 
   console.log("Questões do Quiz:", questions);
 
-  const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(
-    false
-  );
-  const handleOpenQuestionDatabaseModal = () =>
-    setModalQuestionDatabaseOpen(true);
-  const handleCloseQuestionDatabaseModal = () =>
-    setModalQuestionDatabaseOpen(false);
+  const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(false);
+  const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(false);
+
+  const handleOpenModal = (setModal) => () => setModal(true);
+  const handleCloseModal = (setModal) => () => setModal(false);
 
   return (
     <>
@@ -54,30 +54,35 @@ const Question = () => {
           </Grid>
         </Toolbar>
       </AppBar>
-      <ContainerGrid container justify="space-between">
+      <ContainerGrid container>
         <Grid item xs={2}>
-          <StyledLeftGrid container align="center" justify="center">
+          <StyledLeftGrid container align='center'>
             <Grid item xs={12}>
               <Typography color="primary" component="h5" variant="h5">
                 Questões
               </Typography>
             </Grid>
 
+            
             <Grid container>
               {questions.map(item => (
-                <Grid item xs={10} key={item.title}>
+                <Grid item xs={12} key={item.title}>
                   <Button color="primary" variant="outlined" fullWidth>
                     {item.title}
                   </Button>
                 </Grid>
               ))}
+            
             </Grid>
-
-            <Grid item xs={10}>
-              <Button fullWidth variant="contained" color="primary">
+            <GridButtonNewQuestion item xs={12}>
+              <Button 
+                onClick={handleOpenModal(setModalTypeOfQuestionOpen)} 
+                fullWidth variant="contained" 
+                color="primary"
+              >
                 CRIAR NOVA QUESTÃO
               </Button>
-            </Grid>
+            </GridButtonNewQuestion>
           </StyledLeftGrid>
         </Grid>
 
@@ -105,7 +110,7 @@ const Question = () => {
               <Grid item xs={12}>
                 <StyledTitleInput
                   fullWidth
-                  placeholder="Digite o enunciado aqui..."
+                  placeholder="DIGITE O ENUNCIADO AQUI"
                   id="title"
                   // value={""}
                   // onChange={() => {}}
@@ -129,7 +134,7 @@ const Question = () => {
                 <Grid item xs={12} md={6}>
                   <StyledAnswerInput
                     type="text"
-                    placeholder="Digite a alternativa 1..."
+                    placeholder="DIGITE A ALTERNATIVA 1"
                     id="firstQuestion"
                     required
                   />
@@ -138,7 +143,7 @@ const Question = () => {
                 <Grid item xs={12} md={6}>
                   <StyledAnswerInput
                     fullWidth
-                    placeholder="Digite a alternativa 2..."
+                    placeholder="DIGITE A ALTERNATIVA 2"
                     id="secondQuestion"
                     required
                   />
@@ -147,7 +152,7 @@ const Question = () => {
                 <Grid item xs={12} md={6}>
                   <StyledAnswerInput
                     fullWidth
-                    placeholder="Digite a alternativa 3..."
+                    placeholder="DIGITE A ALTERNATIVA 3"
                     id="thirdQuestion"
                   />
                 </Grid>
@@ -155,7 +160,7 @@ const Question = () => {
                 <Grid item xs={12} md={6}>
                   <StyledAnswerInput
                     fullWidth
-                    placeholder="Digite a alternativa 4..."
+                    placeholder="DIGITE A ALTERNATIVA 4"
                     id="fourthQuestion"
                   />
                 </Grid>
@@ -186,7 +191,18 @@ const Question = () => {
           questions={questions}
           handleaddQuestion={addQuestion}
           handleRemoveQuestion={removeQuestion}
-          handleClose={handleCloseQuestionDatabaseModal}
+          handleClose={handleCloseModal(setModalQuestionDatabaseOpen)}
+        />
+      </Modal>
+
+      <Modal
+        open={isModalTypeOfQuestionOpen}
+        modalTitle="Qual tipo de questão deseja criar?"
+        modalDescription="Escolha o tipo da questão..."
+        style={{ overflow: "scroll" }}
+      >
+        <TypeOfQuestion
+          handleClose={handleCloseModal(setModalTypeOfQuestionOpen)}
         />
       </Modal>
     </>

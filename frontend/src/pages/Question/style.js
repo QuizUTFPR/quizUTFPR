@@ -10,6 +10,7 @@ export const StyledGrid = styled(Grid)`
   /* width: 20%; */
   height: 100%;
   /* background: palevioletred; */
+  padding: 20px;
 `;
 
 export const StyledRightGrid = styled(StyledGrid)`
@@ -18,6 +19,8 @@ export const StyledRightGrid = styled(StyledGrid)`
 
 export const StyledLeftGrid = styled(StyledGrid)`
   border-right: 1px solid;
+
+
 `;
 
 export const StyledButtonsContainer = styled(Grid)`
@@ -46,10 +49,10 @@ export const StyledAnswerInput = styled.input`
   background: white;
   border-radius: 5px;
   border: none;
-  transition: 0.3s;
   outline: none;
+  transition: border 0.3s linear;
 
-  :focus {
+  &:focus {
     border: 2px solid #ececec;
   }
 `;
@@ -58,3 +61,9 @@ export const StyledTitleInput = styled(StyledAnswerInput)`
   text-align: center;
   font-weight: bolder;
 `;
+
+export const GridButtonNewQuestion = styled(Grid)`
+  &&{
+    align-self: flex-end;
+  }
+`
