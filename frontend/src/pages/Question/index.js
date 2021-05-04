@@ -5,7 +5,6 @@ import {
   Typography,
   Button,
   TextField,
-  Divider,
   AppBar,
   Toolbar
 } from "@material-ui/core";
@@ -17,7 +16,6 @@ import {
   StyledFieldOfQuestion,
   StyledAnswerInput,
   StyledTitleInput,
-  StyledButtonsContainer,
   GridButtonNewQuestion
 } from "./style";
 
@@ -27,18 +25,22 @@ import useQuestionQuiz from "@hooks/QuestionQuiz";
 // COMPONENTS
 import Modal from "@components/Modal";
 import QuestionDatabase from "../QuestionDatabase";
-import TypeOfQuestion from '../TypeOfQuestion'
+import TypeOfQuestion from "../TypeOfQuestion";
 
 const Question = () => {
   const { questions, addQuestion, removeQuestion } = useQuestionQuiz();
 
   console.log("Questões do Quiz:", questions);
 
-  const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(false);
-  const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(false);
+  const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(
+    false
+  );
+  const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(
+    false
+  );
 
-  const handleOpenModal = (setModal) => () => setModal(true);
-  const handleCloseModal = (setModal) => () => setModal(false);
+  const handleOpenModal = setModal => () => setModal(true);
+  const handleCloseModal = setModal => () => setModal(false);
 
   return (
     <>
@@ -48,6 +50,11 @@ const Question = () => {
             <Button color="secondary" variant="outlined">
               Sair
             </Button>
+
+            <Typography component="h4" variant="h4" color="primary">
+              Título do Quiz
+            </Typography>
+
             <Button color="primary" variant="contained">
               Finalizar
             </Button>
@@ -56,14 +63,13 @@ const Question = () => {
       </AppBar>
       <ContainerGrid container>
         <Grid item xs={2}>
-          <StyledLeftGrid container align='center'>
+          <StyledLeftGrid container align="center">
             <Grid item xs={12}>
               <Typography color="primary" component="h5" variant="h5">
                 Questões
               </Typography>
             </Grid>
 
-            
             <Grid container>
               {questions.map(item => (
                 <Grid item xs={12} key={item.title}>
@@ -72,12 +78,12 @@ const Question = () => {
                   </Button>
                 </Grid>
               ))}
-            
             </Grid>
             <GridButtonNewQuestion item xs={12}>
-              <Button 
-                onClick={handleOpenModal(setModalTypeOfQuestionOpen)} 
-                fullWidth variant="contained" 
+              <Button
+                onClick={handleOpenModal(setModalTypeOfQuestionOpen)}
+                fullWidth
+                variant="contained"
                 color="primary"
               >
                 CRIAR NOVA QUESTÃO
@@ -112,8 +118,6 @@ const Question = () => {
                   fullWidth
                   placeholder="DIGITE O ENUNCIADO AQUI"
                   id="title"
-                  // value={""}
-                  // onChange={() => {}}
                   required
                   autoFocus
                 />
