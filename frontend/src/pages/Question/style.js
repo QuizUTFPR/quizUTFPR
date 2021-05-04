@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+import StyledButton from '@components/Button'
 import { Grid } from "@material-ui/core";
 
 export const ContainerGrid = styled(Grid)`
@@ -25,7 +26,9 @@ export const StyledButtonsContainer = styled(Grid)`
   margin-top: 5px;
 `;
 
-
+export const GridRegisterQuestion = styled(Grid)`
+  align-self: flex-end;
+`
 export const StyledAnswerInput = styled.input`
   width: 100%;
   padding: 20px 10px;

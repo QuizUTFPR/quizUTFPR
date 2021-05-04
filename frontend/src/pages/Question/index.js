@@ -16,7 +16,8 @@ import {
   StyledAnswerInput,
   StyledTitleInput,
   StyledGrid,
-  GridButtonNewQuestion
+  GridButtonNewQuestion,
+  GridRegisterQuestion
 } from "./style";
 
 //HOOKS
@@ -80,7 +81,7 @@ const Question = () => {
               <StyledButton 
                 onClick={handleOpenModalTypeQuestion} 
                 fullWidth variant="contained" 
-                color="primary"
+                color="secondary"
               >
                 CRIAR NOVA QUESTÃO
               </StyledButton>
@@ -149,11 +150,11 @@ const Question = () => {
                 </Grid>
               </Grid>
             
-            <Grid item xs={12}>
+            <GridRegisterQuestion item xs={12}>
               <StyledButton fullWidth color="primary" variant="contained">
                   FINALIZAR
               </StyledButton>
-            </Grid>
+            </GridRegisterQuestion>
             </StyledGrid>
           </Grid>
           
