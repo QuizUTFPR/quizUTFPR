@@ -4,40 +4,31 @@ import { LinearProgress } from '@material-ui/core'
 import { Switch, Route } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 
-// ROUTES
-import {
-  HOME,
-  QUIZ,
-  CREATE_QUIZ,
-  CLASSES
-} from '@routes';
+// CONTEXT
+import QuestionQuizProvider from '@context/questions_quiz'
 
-// COMPONENTS
-const Menu = lazy(() => import('./components/MenuDrawer'));
+//HOOKS
+import useAuth from '@hooks/Auth'
 
 // PAGES
-const Home = lazy(() => import('./pages/Home'));
-const Quiz = lazy(() => import('./pages/MyQuizzes'));
-const CreateQuiz = lazy(() => import ('./pages/CreateQuiz'));
-const Classes = lazy(() => import('./pages/Classes'));
-
-const Div = styled.div`
-  display: flex;
-`
+const MainPage = lazy(() => import('./pages/MainPage'));
+const Login = lazy(() => import('./pages/Login'));
+const Question = lazy(() => import('./pages/Question'));
 
 
 function App() {
+  const auth = useAuth();
+  console.log(auth)
+
   return (
     <Suspense fallback={<LinearProgress />}>
-      <Div>
-      <Menu />
       <Switch>
-        <Route path={HOME} component={Home} exact />
-        <Route path={QUIZ} component={Quiz} exact />
-        <Route path={CREATE_QUIZ} component={CreateQuiz}  />
-        <Route path={CLASSES} component={Classes} />
+        <Route path={LOGIN} component={Login} />
+        <Route path={QUESTION} exact render={ (props)=> (
+          <QuestionQuizProvider> <Question {...props} /></QuestionQuizProvider>
+        )} />
+        <Route component={MainPage} />
       </Switch>
-      </Div>
     </Suspense>
   );
 }
