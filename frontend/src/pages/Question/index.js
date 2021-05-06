@@ -26,8 +26,10 @@ import useQuestionQuiz from "@hooks/QuestionQuiz";
 
 // COMPONENTS
 import Modal from "@components/Modal";
-import TypeOfQuestion from '../TypeOfQuestion'
 import StyledButton from '@components/Button'
+
+// PAGES
+import TypeOfQuestion from '../TypeOfQuestion'
 
 
 const Question = () => {
