@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useFormik } from "formik";
 
 import {
   Grid,
@@ -32,12 +33,23 @@ import StyledButton from '@components/Button'
 const Question = () => {
   const { questions } = useQuestionQuiz();
 
-  console.log("Questões do Quiz:", questions);
-
   const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(false);
-
   const handleOpenModalTypeQuestion = () => setModalTypeOfQuestionOpen(true);
   const handleCloseModalTypeQuestion = () => setModalTypeOfQuestionOpen(false);
+  
+  const [questionOnScreen, setQuestionOnScreen] = useState(questions[0]);
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: questionOnScreen,
+    onSubmit: values => {
+      console.log(values)
+    }
+  });
+
+  const handleChangeQuestion = (question) => () => {
+    setQuestionOnScreen(question);
+  }
 
   return (
     <>
@@ -69,9 +81,9 @@ const Question = () => {
             </Grid>
 
             <Grid container>
-              {questions.map(item => (
-                <Grid item xs={12} key={item.title}>
-                  <Button color="primary" variant="outlined" fullWidth>
+              {questions.map((item, index) => (
+                <Grid item xs={12} key={index}>
+                  <Button color="primary" variant="outlined" fullWidth onClick={handleChangeQuestion(item)}>
                     {item.title}
                   </Button>
                 </Grid>
@@ -92,7 +104,7 @@ const Question = () => {
 
         {/* MIDDLE */}
         <Grid item xs={8}>
-            <StyledGrid container justify="center" align='center'>
+            <StyledGrid container justify="center" align='center' component='form' onSubmit={formik.handleSubmit}>
               <Grid item xs={12}>
                 <StyledTitleInput
                   fullWidth
@@ -100,6 +112,8 @@ const Question = () => {
                   id="title"
                   required
                   autoFocus
+                  value={formik.values.title}
+                  onChange={formik.handleChange}
                 />
               </Grid>
 
@@ -114,45 +128,24 @@ const Question = () => {
                 />
               </Grid>
 
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                  <StyledAnswerInput
-                    type="text"
-                    placeholder="DIGITE A ALTERNATIVA 1"
-                    id="firstQuestion"
-                    required
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <StyledAnswerInput
-                    fullWidth
-                    placeholder="DIGITE A ALTERNATIVA 2"
-                    id="secondQuestion"
-                    required
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <StyledAnswerInput
-                    fullWidth
-                    placeholder="DIGITE A ALTERNATIVA 3"
-                    id="thirdQuestion"
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <StyledAnswerInput
-                    fullWidth
-                    placeholder="DIGITE A ALTERNATIVA 4"
-                    id="fourthQuestion"
-                  />
-                </Grid>
+              <Grid container align='center' justify='center' spacing={2}>
+                {formik.values.answer.map((item, index) => (
+                  <Grid item xs={12} md={6} key={index}>
+                    <StyledAnswerInput
+                      type="text"
+                      placeholder={`DIGITE A ALTERNATIVA ${index+1}`}
+                      id={`answer[${index}].title`}
+                      value={item.title}
+                      onChange={formik.handleChange}
+                      required
+                    />
+                  </Grid>
+                ))}
               </Grid>
             
             <GridRegisterQuestion item xs={12}>
-              <StyledButton fullWidth color="primary" variant="contained">
-                  FINALIZAR
+              <StyledButton type='submit' fullWidth color="primary" variant="contained">
+                  SALVAR ALTERAÇÕES
               </StyledButton>
             </GridRegisterQuestion>
             </StyledGrid>
