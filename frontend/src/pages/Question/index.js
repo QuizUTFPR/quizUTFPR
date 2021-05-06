@@ -176,17 +176,16 @@ const Question = () => {
         <Grid item xs={2}>
           <StyledRightGrid
             container
-            spacing={3}
             align="center"
             direction="column"
           >
-            <Grid item>
+            <Grid item style={{marginBottom: '40px'}}>
               <Typography color="primary" component="h5" variant="h5">
                 Detalhes
               </Typography>
             </Grid>
 
-            <Grid item>
+            <Grid item style={{marginBottom: '20px'}}>
               <TextField
                 fullWidth
                 label="Tempo"
@@ -223,7 +222,7 @@ const Question = () => {
                 <MenuItem value="1">1</MenuItem>
               </TextField>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <ChipInput
                 fullWidth
                 suggestions={["Aprenda", "JavaScript"]}
@@ -231,7 +230,7 @@ const Question = () => {
                 id="tags"
                 onChange={formik.handleChange}
               />
-            </Grid>
+            </Grid> */}
           </StyledRightGrid>
         </Grid>
       </ContainerGrid>
