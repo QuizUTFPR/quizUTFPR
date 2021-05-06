@@ -5,7 +5,6 @@ import {
   Grid,
   Typography,
   TextField,
-  AppBar,
   Toolbar,
   Button
 } from "@material-ui/core";
@@ -18,7 +17,8 @@ import {
   StyledTitleInput,
   StyledGrid,
   GridButtonNewQuestion,
-  GridRegisterQuestion
+  GridRegisterQuestion,
+  StyledAppBar
 } from "./style";
 
 //HOOKS
@@ -55,20 +55,24 @@ const Question = () => {
 
   return (
     <>
-      <AppBar position="static" color="transparent">
+      <StyledAppBar position="static" color="transparent">
         <Toolbar>
           <Grid container justify="space-between" alignItems='center'>
             <StyledButton color="secondary" variant="outlined">
-              Sair
+              SAIR
             </StyledButton>
             
 
             <Typography component="h4" variant="h4" color="primary">
               Título do Quiz
             </Typography>
+
+            <StyledButton color="primary" variant="contained">
+              FINALIZAR
+            </StyledButton>
           </Grid>
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
 
 
       <ContainerGrid container>

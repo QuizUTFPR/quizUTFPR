@@ -30,6 +30,14 @@ export const MockupQuestionMultipleChoice = {
     {
       title: "",
       is_correct: false
+    },
+    {
+      title: "",
+      is_correct: false
+    },
+    {
+      title: "",
+      is_correct: false
     }
   ],
   tags: []
@@ -40,6 +48,18 @@ export const initialValue = {
   correctAnswer: true,
   timer: 30,
   answer: [
+    {
+      title: "",
+      is_correct: false
+    },
+    {
+      title: "",
+      is_correct: false
+    },
+    {
+      title: "",
+      is_correct: true
+    },
     {
       title: "",
       is_correct: false

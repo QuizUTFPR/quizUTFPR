@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 import StyledButton from '@components/Button'
-import { Grid } from "@material-ui/core";
+import { Grid, AppBar } from "@material-ui/core";
+
+export const StyledAppBar = styled(AppBar)`
+  background: white;
+`
 
 export const ContainerGrid = styled(Grid)`
   height: calc(100vh - 64px);
@@ -10,16 +14,17 @@ export const ContainerGrid = styled(Grid)`
 export const StyledGrid = styled(Grid)`
   height: 100%;
   padding: 20px;
+
 `;
 
 export const StyledRightGrid = styled(StyledGrid)`
-  border-left: 1px solid;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  background: white;
 `;
 
 export const StyledLeftGrid = styled(StyledGrid)`
-  border-right: 1px solid;
-
-
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  background: white;
 `;
 
 export const StyledButtonsContainer = styled(Grid)`
@@ -46,6 +51,8 @@ export const StyledAnswerInput = styled.input`
 export const StyledTitleInput = styled(StyledAnswerInput)`
   text-align: center;
   font-weight: bolder;
+  height: 100px;
+  font-size: 1.2em;
 `;
 
 export const GridButtonNewQuestion = styled(Grid)`

@@ -22,7 +22,7 @@ const FakeQuestions = [{
             is_correct: true
         },
         {
-            title: "Mentira",
+            title: "Falso",
             is_correct: false
         }
     ],
@@ -40,7 +40,7 @@ const FakeQuestions = [{
             is_correct: true
         },
         {
-            title: "Mentira",
+            title: "Falso",
             is_correct: false
         }
     ],
@@ -58,7 +58,7 @@ const FakeQuestions = [{
             is_correct: true
         },
         {
-            title: "Mentira",
+            title: "Falso",
             is_correct: false
         }
     ],
@@ -76,7 +76,7 @@ const FakeQuestions = [{
             is_correct: true
         },
         {
-            title: "Mentira",
+            title: "Falso",
             is_correct: false
         }
     ],
@@ -94,7 +94,7 @@ const FakeQuestions = [{
             is_correct: true
         },
         {
-            title: "Mentira",
+            title: "Falso",
             is_correct: false
         }
     ],
