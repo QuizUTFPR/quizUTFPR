@@ -51,7 +51,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
 
           <Grid item xs={9} md={11}>
             <Typography variant='h5' color='primary'>
-              Título do Quiz (colocar aqui)
+              Preferências do Quiz
             </Typography>
           </Grid>
         </Grid>
