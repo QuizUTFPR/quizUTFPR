@@ -9,7 +9,9 @@ import {
   TextField,
   Toolbar,
   Button,
-  MenuItem
+  Box,
+  MenuItem,
+  Checkbox 
 } from "@material-ui/core";
 
 import {
@@ -61,18 +63,27 @@ const Question = () => {
     <>
       <StyledAppBar position="static" color="transparent">
         <Toolbar>
-          <Grid container justify="space-between" alignItems="center">
-            <StyledButton color="secondary" variant="outlined">
-              SAIR
-            </StyledButton>
+          <Grid container justify='space-between' alignItems="center">
+            <Grid item>
+              <StyledButton color="secondary" variant="outlined">
+                Sair
+              </StyledButton>
+            </Grid>
 
-            <Typography component="h4" variant="h4" color="primary">
-              Título do Quiz
-            </Typography>
+            <Grid item>
+              <Typography component="h4" variant="h4" color="primary">
+                Título do Quiz
+              </Typography>
+            </Grid>
 
-            <StyledButton color="primary" variant="contained">
-              FINALIZAR
-            </StyledButton>
+            <Box >
+              <StyledButton style={{marginRight: '20px'}} color="primary" variant="outlined">
+                Salvar
+              </StyledButton>
+              <StyledButton color="primary" variant="contained">
+                Finalizar
+              </StyledButton>
+            </Box>
           </Grid>
         </Toolbar>
       </StyledAppBar>
@@ -147,6 +158,12 @@ const Question = () => {
             <Grid container align="center" justify="center" spacing={2}>
               {formik.values.answer.map((item, index) => (
                 <Grid item xs={12} md={6} key={index}>
+                  <Checkbox
+                    id={`answer[${index}].is_correct`}
+                    checked={item.is_correct}
+                    onChange={formik.handleChange}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                  />
                   <StyledAnswerInput
                     type="text"
                     placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
@@ -159,14 +176,14 @@ const Question = () => {
               ))}
             </Grid>
 
-            <GridRegisterQuestion item xs={12}>
+            <GridRegisterQuestion item xs={6}>
               <StyledButton
                 type="submit"
                 fullWidth
-                color="primary"
-                variant="contained"
+                color="secondary"
+                variant="outlined"
               >
-                SALVAR ALTERAÇÕES
+                Excluir Questão
               </StyledButton>
             </GridRegisterQuestion>
           </StyledGrid>
@@ -204,7 +221,7 @@ const Question = () => {
               </TextField>
             </Grid>
 
-            <Grid item>
+            {/* <Grid item style={{marginBottom: '20px'}}>
               <TextField
                 fullWidth
                 label="Alternativa Correta"
@@ -221,8 +238,9 @@ const Question = () => {
               >
                 <MenuItem value="1">1</MenuItem>
               </TextField>
-            </Grid>
-            {/* <Grid item>
+            </Grid> */}
+
+            <Grid item style={{marginBottom: '20px'}}>
               <ChipInput
                 fullWidth
                 suggestions={["Aprenda", "JavaScript"]}
@@ -230,7 +248,7 @@ const Question = () => {
                 id="tags"
                 onChange={formik.handleChange}
               />
-            </Grid> */}
+            </Grid>
           </StyledRightGrid>
         </Grid>
       </ContainerGrid>
