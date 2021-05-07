@@ -37,7 +37,7 @@ import StyledButton from "@components/Button";
 import TypeOfQuestion from "../TypeOfQuestion";
 
 const Question = () => {
-  const { questions } = useQuestionQuiz();
+  const { questions, updateItem } = useQuestionQuiz();
 
   const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(
     false
@@ -45,7 +45,10 @@ const Question = () => {
   const handleOpenModalTypeQuestion = () => setModalTypeOfQuestionOpen(true);
   const handleCloseModalTypeQuestion = () => setModalTypeOfQuestionOpen(false);
 
-  const [questionOnScreen, setQuestionOnScreen] = useState(questions[0]);
+  const [questionOnScreen, setQuestionOnScreen] = useState({
+    index: 0,
+    question: questions[0],
+  });
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -55,9 +58,10 @@ const Question = () => {
     }
   });
 
-  const handleChangeQuestion = question => () => {
-    setQuestionOnScreen(question);
-  };
+  const handleChangeQuestion = (question, index) => () => {
+    setQuestionOnScreen({ index, question });
+  };   
+
 
   return (
     <>
@@ -105,7 +109,7 @@ const Question = () => {
                     color="primary"
                     variant="outlined"
                     fullWidth
-                    onClick={handleChangeQuestion(item)}
+                    onClick={handleChangeQuestion(item, index)}
                   >
                     {item.title}
                   </Button>
@@ -131,8 +135,6 @@ const Question = () => {
             container
             justify="center"
             align="center"
-            component="form"
-            onSubmit={formik.handleSubmit}
           >
             <Grid item xs={12}>
               <StyledTitleInput
@@ -141,8 +143,11 @@ const Question = () => {
                 id="title"
                 required
                 autoFocus
-                value={formik.values.title}
-                onChange={formik.handleChange}
+                value={formik.values.question.title}
+                onChange={(e) => {
+                  formik.handleChange("question.title")(e)
+                  updateItem(e.target.value, "title", formik.values.index)
+                }}
               />
             </Grid>
 
@@ -156,10 +161,10 @@ const Question = () => {
             </Grid>
 
             <Grid container align="center" justify="center" spacing={2}>
-              {formik.values.answer.map((item, index) => (
+              {formik.values.question.answer.map((item, index) => (
                 <Grid item xs={12} md={6} key={index}>
                   <Checkbox
-                    id={`answer[${index}].is_correct`}
+                    id={`question.answer[${index}].is_correct`}
                     checked={item.is_correct}
                     onChange={formik.handleChange}
                     inputProps={{ 'aria-label': 'primary checkbox' }}
@@ -167,7 +172,7 @@ const Question = () => {
                   <StyledAnswerInput
                     type="text"
                     placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
-                    id={`answer[${index}].title`}
+                    id={`question.answer[${index}].title`}
                     value={item.title}
                     onChange={formik.handleChange}
                     required
@@ -244,7 +249,7 @@ const Question = () => {
               <ChipInput
                 fullWidth
                 suggestions={["Aprenda", "JavaScript"]}
-                value={formik.values.tags}
+                value={formik.values.question.tags}
                 id="tags"
                 onChange={formik.handleChange}
               />

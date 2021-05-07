@@ -80,9 +80,33 @@ const QuestionQuiz = ({ children }) => {
     setQuestions(newQuestions);
   };
 
+  const updateItem = (value, nameOfValue, index) => {
+    console.log(nameOfValue, value)
+    const newQuestions = questions.map((question, i) => {
+      if(i === index){
+        return {
+          ...question,
+          [nameOfValue]: value
+        }
+      }
+
+      return question
+    })
+
+    setQuestions(newQuestions)
+  } 
+
   return (
     <QuestionQuizContext.Provider
-      value={{ questions, setQuestions, addQuestion, removeQuestion, MockupQuestionTrueOrFalse, MockupQuestionMultipleChoice }}
+      value={{ 
+        questions, 
+        setQuestions, 
+        addQuestion, 
+        removeQuestion, 
+        MockupQuestionTrueOrFalse, 
+        MockupQuestionMultipleChoice,
+        updateItem
+      }}
     >
       {children}
     </QuestionQuizContext.Provider>
