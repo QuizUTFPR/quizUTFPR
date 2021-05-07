@@ -11,7 +11,7 @@ import {
   Button,
   Box,
   MenuItem,
-  Checkbox 
+  Checkbox
 } from "@material-ui/core";
 
 import {
@@ -37,7 +37,7 @@ import StyledButton from "@components/Button";
 import TypeOfQuestion from "../TypeOfQuestion";
 
 const Question = () => {
-  const { questions, updateItem } = useQuestionQuiz();
+  const { questions, updateQuestion, updateAnswer } = useQuestionQuiz();
 
   const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(
     false
@@ -47,27 +47,34 @@ const Question = () => {
 
   const [questionOnScreen, setQuestionOnScreen] = useState({
     index: 0,
-    question: questions[0],
+    question: questions[0]
   });
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: questionOnScreen,
-    onSubmit: values => {
-      console.log(values);
-    }
+    initialValues: questionOnScreen
   });
 
   const handleChangeQuestion = (question, index) => () => {
     setQuestionOnScreen({ index, question });
-  };   
+  };
 
+  const [timer, setTimer] = useState(null);
+
+  const handleUpdateContext = (handleUpdate, ...params) => {
+    if (timer) {
+      clearTimeout(timer);
+      setTimer(null);
+    }
+
+    setTimer(setTimeout(() => handleUpdate(...params), 1500));
+  };
 
   return (
     <>
       <StyledAppBar position="static" color="transparent">
         <Toolbar>
-          <Grid container justify='space-between' alignItems="center">
+          <Grid container justify="space-between" alignItems="center">
             <Grid item>
               <StyledButton color="secondary" variant="outlined">
                 Sair
@@ -80,8 +87,12 @@ const Question = () => {
               </Typography>
             </Grid>
 
-            <Box >
-              <StyledButton style={{marginRight: '20px'}} color="primary" variant="outlined">
+            <Box>
+              <StyledButton
+                style={{ marginRight: "20px" }}
+                color="primary"
+                variant="outlined"
+              >
                 Salvar
               </StyledButton>
               <StyledButton color="primary" variant="contained">
@@ -131,11 +142,7 @@ const Question = () => {
 
         {/* MIDDLE */}
         <Grid item xs={8}>
-          <StyledGrid
-            container
-            justify="center"
-            align="center"
-          >
+          <StyledGrid container justify="center" align="center">
             <Grid item xs={12}>
               <StyledTitleInput
                 fullWidth
@@ -144,9 +151,9 @@ const Question = () => {
                 required
                 autoFocus
                 value={formik.values.question.title}
-                onChange={(e) => {
-                  formik.handleChange("question.title")(e)
-                  updateItem(e.target.value, "title", formik.values.index)
+                onChange={e => {
+                  formik.handleChange("question.title")(e);
+                  updateQuestion(e.target.value, "title", formik.values.index);
                 }}
               />
             </Grid>
@@ -165,16 +172,35 @@ const Question = () => {
                 <Grid item xs={12} md={6} key={index}>
                   <Checkbox
                     id={`question.answer[${index}].is_correct`}
-                    checked={item.is_correct}
-                    onChange={formik.handleChange}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                    checked={Boolean(item.is_correct)}
+                    onChange={e => {
+                      formik.handleChange(
+                        `question.answer[${index}].is_correct`
+                      )(e);
+                      updateAnswer(
+                        e.target.checked,
+                        "is_correct",
+                        formik.values.index,
+                        index
+                      );
+                    }}
+                    inputProps={{ "aria-label": "primary checkbox" }}
                   />
                   <StyledAnswerInput
                     type="text"
                     placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
                     id={`question.answer[${index}].title`}
                     value={item.title}
-                    onChange={formik.handleChange}
+                    onChange={e => {
+                      formik.handleChange(`question.answer[${index}].title`)(e);
+                      handleUpdateContext(
+                        updateAnswer,
+                        e.target.value,
+                        "title",
+                        formik.values.index,
+                        index
+                      );
+                    }}
                     required
                   />
                 </Grid>
@@ -196,18 +222,14 @@ const Question = () => {
 
         {/* RIGHT */}
         <Grid item xs={2}>
-          <StyledRightGrid
-            container
-            align="center"
-            direction="column"
-          >
-            <Grid item style={{marginBottom: '40px'}}>
+          <StyledRightGrid container align="center" direction="column">
+            <Grid item style={{ marginBottom: "40px" }}>
               <Typography color="primary" component="h5" variant="h5">
                 Detalhes
               </Typography>
             </Grid>
 
-            <Grid item style={{marginBottom: '20px'}}>
+            <Grid item style={{ marginBottom: "20px" }}>
               <TextField
                 fullWidth
                 label="Tempo"
@@ -245,7 +267,7 @@ const Question = () => {
               </TextField>
             </Grid> */}
 
-            <Grid item style={{marginBottom: '20px'}}>
+            <Grid item style={{ marginBottom: "20px" }}>
               <ChipInput
                 fullWidth
                 suggestions={["Aprenda", "JavaScript"]}

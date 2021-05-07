@@ -17,7 +17,7 @@ export const MockupQuestionTrueOrFalse = {
     }
   ],
   tags: []
-}
+};
 
 export const MockupQuestionMultipleChoice = {
   title: "Título Questão",
@@ -41,7 +41,7 @@ export const MockupQuestionMultipleChoice = {
     }
   ],
   tags: []
-}
+};
 
 export const initialValue = {
   title: "Questão 1",
@@ -80,32 +80,62 @@ const QuestionQuiz = ({ children }) => {
     setQuestions(newQuestions);
   };
 
-  const updateItem = (value, nameOfValue, index) => {
-    console.log(nameOfValue, value)
+  const updateQuestion = (value, key, index) => {
+    console.log("params: ", value, key, index);
+    console.log(questions[index]);
     const newQuestions = questions.map((question, i) => {
-      if(i === index){
+      if (i === index) {
         return {
           ...question,
-          [nameOfValue]: value
-        }
+          [key]: value
+        };
       }
 
-      return question
-    })
+      return question;
+    });
 
-    setQuestions(newQuestions)
-  } 
+    setQuestions(newQuestions);
+  };
+
+  const updateAnswer = (value, key, indexQuestion, indexAnswer) => {
+    const newQuestions = questions.map((question, i) => {
+      if (i === indexQuestion) {
+        return {
+          ...question,
+          answer: [
+            ...question.answer.map((answer, index) => {
+              if (index === indexAnswer) {
+                return {
+                  ...answer,
+                  [key]: value
+                };
+              }
+
+              return answer;
+            })
+          ]
+        };
+      }
+
+      return question;
+    });
+
+    console.log(newQuestions);
+
+    setQuestions(newQuestions);
+  };
 
   return (
     <QuestionQuizContext.Provider
-      value={{ 
-        questions, 
-        setQuestions, 
-        addQuestion, 
-        removeQuestion, 
-        MockupQuestionTrueOrFalse, 
+      value={{
+        questions,
+        setQuestions,
+        addQuestion,
+        removeQuestion,
+        MockupQuestionTrueOrFalse,
         MockupQuestionMultipleChoice,
-        updateItem
+        updateQuestion,
+        updateAnswer
       }}
     >
       {children}
