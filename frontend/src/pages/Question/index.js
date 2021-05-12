@@ -59,16 +59,6 @@ const Question = () => {
     setQuestionOnScreen({ index, question });
   };
 
-  const [timer, setTimer] = useState(null);
-
-  const handleUpdateContext = (handleUpdate, ...params) => {
-    if (timer) {
-      clearTimeout(timer);
-      setTimer(null);
-    }
-
-    setTimer(setTimeout(() => handleUpdate(...params), 1500));
-  };
 
   return (
     <>
@@ -145,7 +135,6 @@ const Question = () => {
           <StyledGrid container justify="center" align="center">
             <Grid item xs={12}>
               <StyledTitleInput
-                fullWidth
                 placeholder="DIGITE O ENUNCIADO AQUI"
                 id="title"
                 required
@@ -189,18 +178,12 @@ const Question = () => {
                   <StyledAnswerInput
                     type="text"
                     placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
-                    id={`question.answer[${index}].title`}
+                    formikID={`question.answer[${index}].title`}
+                    contextID="title"
                     value={item.title}
-                    onChange={e => {
-                      formik.handleChange(`question.answer[${index}].title`)(e);
-                      handleUpdateContext(
-                        updateAnswer,
-                        e.target.value,
-                        "title",
-                        formik.values.index,
-                        index
-                      );
-                    }}
+                    formik={formik}
+                    updateAnswer={updateAnswer}
+                    index={index}
                     required
                   />
                 </Grid>
