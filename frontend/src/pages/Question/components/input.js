@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, memo } from 'react'
 
 
-const QuestionInput = ({formikID, contextID, formik, updateAnswer, index, ...props}) => {
+const QuestionInput = ({formikID, contextID, valueOfIndex,handleFormikChange, updateAnswer, index, value, ...props}) => {
 
     const [timer, setTimer] = useState(null);
 
@@ -16,14 +16,15 @@ const QuestionInput = ({formikID, contextID, formik, updateAnswer, index, ...pro
 
     return (
         <input
+            value={value}
             id={formikID}
             onChange={e => {
-                formik.handleChange(formikID)(e);
+                handleFormikChange(formikID)(e);
                 handleUpdateContext(
                 updateAnswer,
                 e.target.value,
                 contextID,
-                formik.values.index,
+                valueOfIndex,
                 index
                 );
             }}
@@ -32,4 +33,4 @@ const QuestionInput = ({formikID, contextID, formik, updateAnswer, index, ...pro
     )
 }
 
-export default QuestionInput
+export default memo(QuestionInput);

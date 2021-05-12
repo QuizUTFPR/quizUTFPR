@@ -56,7 +56,9 @@ const Question = () => {
   });
 
   const handleChangeQuestion = (question, index) => () => {
+    console.log("mudou")
     setQuestionOnScreen({ index, question });
+    console.log(question)
   };
 
 
@@ -181,9 +183,10 @@ const Question = () => {
                     formikID={`question.answer[${index}].title`}
                     contextID="title"
                     value={item.title}
-                    formik={formik}
+                    handleFormikChange={formik.handleChange}
                     updateAnswer={updateAnswer}
                     index={index}
+                    valueOfIndex={formik.values.index}
                     required
                   />
                 </Grid>
