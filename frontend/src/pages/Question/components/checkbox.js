@@ -1,7 +1,8 @@
 import React, { useState, memo } from 'react'
 
+import { Checkbox } from "@material-ui/core";
 
-const QuestionInput = ({formikID, handleFormikChange, handlePropsChange, ...props}) => {
+const CheckBoxInput = ({formikID, handleFormikChange, handlePropsChange, ...props}) => {
 
     const [timer, setTimer] = useState(null);
 
@@ -15,15 +16,15 @@ const QuestionInput = ({formikID, handleFormikChange, handlePropsChange, ...prop
     };
 
     return (
-        <input
+        <Checkbox
             id={formikID}
             onChange={e => {
                 handleFormikChange(formikID)(e);
-                handleUpdateContext({value: e.target.value, ...handlePropsChange} );
+                handleUpdateContext({value: e.target.checked, ...handlePropsChange} );
             }}
             {...props}
         />
     )
 }
 
-export default memo(QuestionInput);
+export default memo(CheckBoxInput);

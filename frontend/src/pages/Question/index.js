@@ -9,9 +9,7 @@ import {
   TextField,
   Toolbar,
   Button,
-  Box,
-  MenuItem,
-  Checkbox
+  Box
 } from "@material-ui/core";
 
 import {
@@ -32,6 +30,8 @@ import useQuestionQuiz from "@hooks/QuestionQuiz";
 // COMPONENTS
 import Modal from "@components/Modal";
 import StyledButton from "@components/Button";
+import CheckBox from './components/checkbox'
+import SelectInput from './components/select'
 
 // PAGES
 import TypeOfQuestion from "../TypeOfQuestion";
@@ -56,12 +56,10 @@ const Question = () => {
   });
 
   const handleChangeQuestion = (question, index) => () => {
-    console.log("mudou")
     setQuestionOnScreen({ index, question });
-    console.log(question)
   };
 
-
+  
   return (
     <>
       <StyledAppBar position="static" color="transparent">
@@ -138,14 +136,16 @@ const Question = () => {
             <Grid item xs={12}>
               <StyledTitleInput
                 placeholder="DIGITE O ENUNCIADO AQUI"
-                id="title"
+                formikID="question.title"
+                handleFormikChange={formik.handleChange}
+                value={formik.values.question.title}
+                handlePropsChange={{
+                  handleUpdate: updateQuestion,
+                  key: "title",
+                  index: formik.values.index
+                }}
                 required
                 autoFocus
-                value={formik.values.question.title}
-                onChange={e => {
-                  formik.handleChange("question.title")(e);
-                  updateQuestion(e.target.value, "title", formik.values.index);
-                }}
               />
             </Grid>
 
@@ -161,32 +161,30 @@ const Question = () => {
             <Grid container align="center" justify="center" spacing={2}>
               {formik.values.question.answer.map((item, index) => (
                 <Grid item xs={12} md={6} key={index}>
-                  <Checkbox
-                    id={`question.answer[${index}].is_correct`}
-                    checked={Boolean(item.is_correct)}
-                    onChange={e => {
-                      formik.handleChange(
-                        `question.answer[${index}].is_correct`
-                      )(e);
-                      updateAnswer(
-                        e.target.checked,
-                        "is_correct",
-                        formik.values.index,
-                        index
-                      );
-                    }}
+                  <CheckBox
                     inputProps={{ "aria-label": "primary checkbox" }}
+                    checked={Boolean(item.is_correct)}
+                    formikID={`question.answer[${index}].is_correct`}
+                    handleFormikChange={formik.handleChange}
+                    handlePropsChange={{
+                      handleUpdate: updateAnswer,
+                      key: "is_correct",
+                      indexQuestion: formik.values.index,
+                      indexAnswer: index
+                    }}
                   />
                   <StyledAnswerInput
                     type="text"
                     placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
                     formikID={`question.answer[${index}].title`}
-                    contextID="title"
                     value={item.title}
                     handleFormikChange={formik.handleChange}
-                    updateAnswer={updateAnswer}
-                    index={index}
-                    valueOfIndex={formik.values.index}
+                    handlePropsChange={{
+                      handleUpdate: updateAnswer,
+                      key:"title",
+                      indexQuestion: formik.values.index,
+                      indexAnswer: index
+                    }}
                     required
                   />
                 </Grid>
@@ -216,42 +214,26 @@ const Question = () => {
             </Grid>
 
             <Grid item style={{ marginBottom: "20px" }}>
-              <TextField
+              <SelectInput
                 fullWidth
                 label="Tempo"
-                id="time"
                 name="time"
                 variant="outlined"
-                InputLabelProps={{ shrink: true }}
-                // value={formik.values.visibility}
-                // onChange={event =>
-                //   formik.setFieldValue("visibility", event.target.value)
-                // }
+                formikID="question.timer"
+                value={formik.values.question.timer}
+                handleFormikChange={formik.handleChange}
+                handlePropsChange={{
+                  handleUpdate: updateQuestion,
+                  key: "timer",
+                  index: formik.values.index
+                }}
                 required
-                select
               >
-                <MenuItem value={30}>30 segundos</MenuItem>
-              </TextField>
+                <option value={92}>92 segundos</option>
+                <option value={30}>30 segundos</option>
+              </SelectInput>
             </Grid>
 
-            {/* <Grid item style={{marginBottom: '20px'}}>
-              <TextField
-                fullWidth
-                label="Alternativa Correta"
-                id="correctAnswer"
-                name="correctAnswer"
-                variant="outlined"
-                InputLabelProps={{ shrink: true }}
-                // value={formik.values.visibility}
-                // onChange={event =>
-                //   formik.setFieldValue("visibility", event.target.value)
-                // }
-                required
-                select
-              >
-                <MenuItem value="1">1</MenuItem>
-              </TextField>
-            </Grid> */}
 
             <Grid item style={{ marginBottom: "20px" }}>
               <ChipInput

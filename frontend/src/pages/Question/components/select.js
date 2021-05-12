@@ -1,8 +1,9 @@
-import React, { useState, memo } from 'react'
+import React, { useState } from 'react'
 
+import { TextField } from "@material-ui/core";
+  
 
-const QuestionInput = ({formikID, handleFormikChange, handlePropsChange, ...props}) => {
-
+const SelectInput = ({children, formikID, handleFormikChange, handlePropsChange, ...props}) => {
     const [timer, setTimer] = useState(null);
 
     const handleUpdateContext = ({handleUpdate, ...params}) => {
@@ -12,18 +13,25 @@ const QuestionInput = ({formikID, handleFormikChange, handlePropsChange, ...prop
       }
 
       setTimer(setTimeout(() => handleUpdate({...params}), 500));
-    };
+    }
 
+    
     return (
-        <input
+        <TextField
             id={formikID}
             onChange={e => {
                 handleFormikChange(formikID)(e);
                 handleUpdateContext({value: e.target.value, ...handlePropsChange} );
             }}
             {...props}
-        />
+            select
+            SelectProps={{native: true}}
+        >
+          {children}
+        </TextField>
     )
+
+
 }
 
-export default memo(QuestionInput);
+export default SelectInput;

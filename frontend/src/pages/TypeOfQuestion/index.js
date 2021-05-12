@@ -25,7 +25,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
     addQuestion, 
     removeQuestion, 
     MockupQuestionTrueOrFalse, 
-    MockupQuestionMultipleChoice 
+    MockupQuestionMultipleChoice
   } = useQuestionQuiz();
 
   const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] = useState(false);
