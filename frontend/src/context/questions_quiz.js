@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import PropTypes from "prop-types";
 
 export const QuestionQuizContext = createContext();
@@ -86,7 +86,7 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const removeQuestion = index => {
-    const newQuestions = questions.filter((element, i) =>  { if(i != index)  return element; });
+    const newQuestions = questions.filter((element, i) =>  { if(i !== index)  return element; });
     setQuestions(newQuestions);
   };
 
@@ -106,7 +106,6 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const updateAnswer = ({value, key, indexQuestion, indexAnswer}) => {
-    console.log(value, key, indexQuestion, indexAnswer)
     const newQuestions = questions.map((question, i) => {
       if (i === indexQuestion) {
         return {

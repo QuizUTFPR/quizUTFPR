@@ -168,17 +168,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
   
         <Grid item><Divider /></Grid>
 
-        <Grid container spacing={3} justify='center' style={{ overflow: 'scroll', height:'calc(100vh - 25px - 72px - 48px - 60px)' }}>
-          {/* {FakeQuestions.filter(element => !props.questions.includes(element)).map((question, index)=>
-            <Grid key={index} item xs={12}>
-              <Question 
-                question={question} id={index} 
-                checked={checkboxes[index]} 
-                onChange={() => handleQuestionChecked(question, index)} 
-              />
-            </Grid>
-          )} */}
-          
+        <Grid container spacing={3} justify='center' style={{ overflow: 'scroll', height:'calc(100vh - 25px - 72px - 48px - 60px)' }}>     
           {FakeQuestions.map((question) => (
             <Grid key={question.title} item xs={12}>
               <Question 

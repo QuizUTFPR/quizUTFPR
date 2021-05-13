@@ -32,7 +32,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
   const handleOpenModalQuestionDB = () => setModalQuestionDatabaseOpen(true);
   const handleCloseModalQuestionDB = () => setModalQuestionDatabaseOpen(false);
 
-  const handleAddQuestion = (mockup) => () => {
+  const handleAddQuestion =  (mockup) => () => {
     addQuestion(mockup);
     props.updateScreen(mockup, questions.length)()
     props.handleClose();

@@ -60,6 +60,15 @@ const Question = () => {
     setQuestionOnScreen({ index, question });
   };
 
+  const handleRemoveQuestion = () => {
+    removeQuestion(formik.values.index)
+
+    const indexOfQuestionOnScreen = formik.values.index;
+    const indexOfTheLastQuestionOnContext = questions.length-1;
+    const newIndex = (indexOfQuestionOnScreen === indexOfTheLastQuestionOnContext) ? indexOfTheLastQuestionOnContext : indexOfQuestionOnScreen;
+    handleChangeQuestion(questions[newIndex], newIndex)()
+  }
+  
   return (
     <>
       <StyledAppBar position="static" color="transparent">
@@ -205,14 +214,7 @@ const Question = () => {
                   fullWidth
                   color="secondary"
                   variant="outlined"
-                  onClick={() => {
-                    removeQuestion(formik.values.index)
-
-                    let newIndex = formik.values.index;
-                    if(newIndex === questions.length-1) newIndex = questions.length-2
-
-                    handleChangeQuestion(questions[newIndex], newIndex)()
-                  }}
+                  onClick={handleRemoveQuestion}
                 >
                   Excluir Questão
                 </StyledButton>
