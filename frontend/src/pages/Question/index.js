@@ -227,7 +227,7 @@ const Question = () => {
           <StyledRightGrid container align="center" direction="column">
             <Grid item style={{ marginBottom: "40px" }}>
               <Typography color="primary" component="h5" variant="h5">
-                Detalhes
+                Detalhes da Questão
               </Typography>
             </Grid>
             

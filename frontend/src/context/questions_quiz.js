@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export const QuestionQuizContext = createContext();
 
 export const MockupQuestionTrueOrFalse = {
-  title: "Título Questão",
+  title: "",
   timer: 30,
   image: null,
   answer: [
@@ -21,7 +21,7 @@ export const MockupQuestionTrueOrFalse = {
 };
 
 export const MockupQuestionMultipleChoice = {
-  title: "Título Questão",
+  title: "",
   timer: 30,
   image: null,
   answer: [
@@ -46,7 +46,7 @@ export const MockupQuestionMultipleChoice = {
 };
 
 export const initialValue = [{
-  title: "Questão 1",
+  title: "",
   correctAnswer: true,
   timer: 30,
   image: null,
@@ -106,7 +106,7 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const updateAnswer = ({value, key, indexQuestion, indexAnswer}) => {
-  
+    console.log(value, key, indexQuestion, indexAnswer)
     const newQuestions = questions.map((question, i) => {
       if (i === indexQuestion) {
         return {
