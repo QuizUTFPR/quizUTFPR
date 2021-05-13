@@ -161,7 +161,6 @@ const Question = () => {
                   id="question.image"
                   onChange={event => {
                     formik.setFieldValue("question.image", URL.createObjectURL(event.target.files[0]))
-                    console.log("file:", URL.createObjectURL(event.target.files[0]))
                   }}
                 />
               </Grid>
