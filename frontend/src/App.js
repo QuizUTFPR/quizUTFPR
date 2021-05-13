@@ -19,7 +19,6 @@ const Question = lazy(() => import("./pages/Question"));
 
 function App() {
   const auth = useAuth();
-  console.log(auth);
 
   return (
     <Suspense fallback={<LinearProgress />}>

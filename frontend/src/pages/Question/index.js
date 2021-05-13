@@ -60,6 +60,8 @@ const Question = () => {
     setQuestionOnScreen({ index, question });
   };
 
+  console.log(questions)
+
   return (
     <>
       <StyledAppBar position="static" color="transparent">

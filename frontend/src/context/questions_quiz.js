@@ -88,7 +88,6 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const updateQuestion = ({value, key, index}) => {
-    console.log("params: ", value, key, index);
     const newQuestions = questions.map((question, i) => {
       if (i === index) {
         return {
@@ -100,7 +99,6 @@ const QuestionQuiz = ({ children }) => {
       return question;
     });
 
-    console.log(newQuestions)
     setQuestions(newQuestions);
   };
 
@@ -128,7 +126,6 @@ const QuestionQuiz = ({ children }) => {
       return question;
     });
 
-    console.log("novas", newQuestions);
 
     setQuestions(newQuestions);
   };

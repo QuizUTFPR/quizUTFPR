@@ -15,8 +15,7 @@ export default function ChipsArray({value, onChange, suggestions}) {
         renderTags={(value, getTagProps) =>
           value.map((option, index) => (
             <Chip variant="outlined" label={option} {...getTagProps({ index })} />
-          ))
-        }
+          ))}
         renderInput={(params) => (
           <TextField {...params} variant="filled" label="Tag's" placeholder="Digite aqui as tag's desejadas" />
         )}
