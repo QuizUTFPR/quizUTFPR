@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 
-import ChipInput from "@components/ChipInput";
 
 import {
   Grid,
@@ -32,6 +31,7 @@ import Modal from "@components/Modal";
 import StyledButton from "@components/Button";
 import CheckBox from './components/checkbox'
 import SelectInput from './components/select'
+import TagInput from "./components/tagInput";
 
 // PAGES
 import TypeOfQuestion from "../TypeOfQuestion";
@@ -236,12 +236,17 @@ const Question = () => {
 
 
             <Grid item style={{ marginBottom: "20px" }}>
-              <ChipInput
+              <TagInput
                 fullWidth
                 suggestions={["Aprenda", "JavaScript"]}
                 value={formik.values.question.tags}
-                id="tags"
-                onChange={formik.handleChange}
+                formikID="question.tags"
+                handleFormikChange={formik.setFieldValue}
+                handlePropsChange={{
+                  handleUpdate: updateQuestion,
+                  key: "tags",
+                  index: formik.values.index
+                }}
               />
             </Grid>
           </StyledRightGrid>
