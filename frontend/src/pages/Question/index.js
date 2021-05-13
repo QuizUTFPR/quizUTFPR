@@ -37,7 +37,7 @@ import TagInput from "./components/tagInput";
 import TypeOfQuestion from "../TypeOfQuestion";
 
 const Question = () => {
-  const { questions, updateQuestion, updateAnswer } = useQuestionQuiz();
+  const { questions, updateQuestion, updateAnswer, removeQuestion } = useQuestionQuiz();
 
   const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(
     false
@@ -59,7 +59,7 @@ const Question = () => {
     setQuestionOnScreen({ index, question });
   };
 
-  
+  console.log("questions", questions, !!questions.length, questions.length)
   return (
     <>
       <StyledAppBar position="static" color="transparent">
@@ -133,74 +133,78 @@ const Question = () => {
         {/* MIDDLE */}
         <Grid item xs={8}>
           <StyledGrid container justify="center" align="center">
-            <Grid item xs={12}>
-              <StyledTitleInput
-                placeholder="DIGITE O ENUNCIADO AQUI"
-                formikID="question.title"
-                handleFormikChange={formik.handleChange}
-                value={formik.values.question.title}
-                handlePropsChange={{
-                  handleUpdate: updateQuestion,
-                  key: "title",
-                  index: formik.values.index
-                }}
-                required
-                autoFocus
-              />
-            </Grid>
-
-            <Grid item>
-              <TextField
-                type="file"
-                name="Imagem de Capa"
-                id="file"
-                onChange={event => console.log("file:", event.target.files[0])}
-              />
-            </Grid>
-
-            <Grid container align="center" justify="center" spacing={2}>
-              {formik.values.question.answer.map((item, index) => (
-                <Grid item xs={12} md={6} key={index}>
-                  <CheckBox
-                    inputProps={{ "aria-label": "primary checkbox" }}
-                    checked={Boolean(item.is_correct)}
-                    formikID={`question.answer[${index}].is_correct`}
-                    handleFormikChange={formik.handleChange}
-                    handlePropsChange={{
-                      handleUpdate: updateAnswer,
-                      key: "is_correct",
-                      indexQuestion: formik.values.index,
-                      indexAnswer: index
-                    }}
-                  />
-                  <StyledAnswerInput
-                    type="text"
-                    placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
-                    formikID={`question.answer[${index}].title`}
-                    value={item.title}
-                    handleFormikChange={formik.handleChange}
-                    handlePropsChange={{
-                      handleUpdate: updateAnswer,
-                      key:"title",
-                      indexQuestion: formik.values.index,
-                      indexAnswer: index
-                    }}
-                    required
-                  />
-                </Grid>
-              ))}
-            </Grid>
-
-            <GridRegisterQuestion item xs={6}>
-              <StyledButton
-                type="submit"
-                fullWidth
-                color="secondary"
-                variant="outlined"
-              >
-                Excluir Questão
-              </StyledButton>
-            </GridRegisterQuestion>
+          {!!questions.length ?  <>
+              <Grid item xs={12}>
+                <StyledTitleInput
+                  placeholder="DIGITE O ENUNCIADO AQUI"
+                  formikID="question.title"
+                  handleFormikChange={formik.handleChange}
+                  value={formik.values.question.title}
+                  handlePropsChange={{
+                    handleUpdate: updateQuestion,
+                    key: "title",
+                    index: formik.values.index
+                  }}
+                  required
+                  autoFocus
+                />
+              </Grid>
+  
+              <Grid item>
+                <TextField
+                  type="file"
+                  name="Imagem de Capa"
+                  id="file"
+                  onChange={event => console.log("file:", event.target.files[0])}
+                />
+              </Grid>
+  
+              <Grid container align="center" justify="center" spacing={2}>
+                {formik.values.question.answer.map((item, index) => (
+                  <Grid item xs={12} md={6} key={index}>
+                    <CheckBox
+                      inputProps={{ "aria-label": "primary checkbox" }}
+                      checked={Boolean(item.is_correct)}
+                      formikID={`question.answer[${index}].is_correct`}
+                      handleFormikChange={formik.handleChange}
+                      handlePropsChange={{
+                        handleUpdate: updateAnswer,
+                        key: "is_correct",
+                        indexQuestion: formik.values.index,
+                        indexAnswer: index
+                      }}
+                    />
+                    <StyledAnswerInput
+                      type="text"
+                      placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
+                      formikID={`question.answer[${index}].title`}
+                      value={item.title}
+                      handleFormikChange={formik.handleChange}
+                      handlePropsChange={{
+                        handleUpdate: updateAnswer,
+                        key:"title",
+                        indexQuestion: formik.values.index,
+                        indexAnswer: index
+                      }}
+                      required
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+  
+              <GridRegisterQuestion item xs={6}>
+                <StyledButton
+                  type="submit"
+                  fullWidth
+                  color="secondary"
+                  variant="outlined"
+                  onClick={() => removeQuestion(formik.values.question)}
+                >
+                  Excluir Questão
+                </StyledButton>
+              </GridRegisterQuestion>
+              </> 
+              :  <p>Vazio!</p>}
           </StyledGrid>
         </Grid>
 
@@ -212,8 +216,9 @@ const Question = () => {
                 Detalhes
               </Typography>
             </Grid>
-
-            <Grid item style={{ marginBottom: "20px" }}>
+            
+            {!!questions.length ?  <>
+              <Grid item style={{ marginBottom: "20px" }}>
               <SelectInput
                 fullWidth
                 label="Tempo"
@@ -249,6 +254,8 @@ const Question = () => {
                 }}
               />
             </Grid>
+            </> : <p>Vazio!</p>}
+            
           </StyledRightGrid>
         </Grid>
       </ContainerGrid>
