@@ -114,7 +114,7 @@ const Question = () => {
                     fullWidth
                     onClick={handleChangeQuestion(item, index)}
                   >
-                    {item.title}
+                    {!!item.title ? item.title : "Sem Título"}
                   </CardSelectQuestion>
                 </Grid>
               ))}
