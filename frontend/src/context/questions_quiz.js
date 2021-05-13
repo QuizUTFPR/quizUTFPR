@@ -6,6 +6,7 @@ export const QuestionQuizContext = createContext();
 export const MockupQuestionTrueOrFalse = {
   title: "Título Questão",
   timer: 30,
+  image: null,
   answer: [
     {
       title: "Verdadeiro",
@@ -22,6 +23,7 @@ export const MockupQuestionTrueOrFalse = {
 export const MockupQuestionMultipleChoice = {
   title: "Título Questão",
   timer: 30,
+  image: null,
   answer: [
     {
       title: "",
@@ -47,6 +49,7 @@ export const initialValue = [{
   title: "Questão 1",
   correctAnswer: true,
   timer: 30,
+  image: null,
   answer: [
     {
       title: "",

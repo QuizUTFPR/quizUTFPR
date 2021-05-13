@@ -151,13 +151,18 @@ const Question = () => {
                   autoFocus
                 />
               </Grid>
-  
+                  
+              <img src={formik.values.question.image} />
+
               <Grid item>
                 <TextField
                   type="file"
                   name="Imagem de Capa"
-                  id="file"
-                  onChange={event => console.log("file:", event.target.files[0])}
+                  id="question.image"
+                  onChange={event => {
+                    formik.setFieldValue("question.image", URL.createObjectURL(event.target.files[0]))
+                    console.log("file:", URL.createObjectURL(event.target.files[0]))
+                  }}
                 />
               </Grid>
   
