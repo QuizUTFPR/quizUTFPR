@@ -5,7 +5,8 @@ import {
 } from '@material-ui/core';
 
 // COMPONENTS
-import GridContainer from '../../components/Container'
+import GridContainer from '@components/Container'
+import DragZone from '@components/DragZone'
 
 const Home = () => {
 
@@ -16,6 +17,7 @@ const Home = () => {
           dawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwafwfawf
           dawdawdawdawdwadwadwaddawwwwwwwwwwwwwwwwwwwwwwdd
         </Typography>
+        <DragZone />
     </GridContainer>
   )
 }
