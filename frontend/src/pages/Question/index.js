@@ -201,7 +201,14 @@ const Question = () => {
                   fullWidth
                   color="secondary"
                   variant="outlined"
-                  onClick={() => removeQuestion(formik.values.question)}
+                  onClick={() => {
+                    removeQuestion(formik.values.index)
+
+                    let newIndex = formik.values.index;
+                    if(newIndex === questions.length-1) newIndex = questions.length-2
+
+                    handleChangeQuestion(questions[newIndex], newIndex)()
+                  }}
                 >
                   Excluir Questão
                 </StyledButton>

@@ -82,8 +82,8 @@ const QuestionQuiz = ({ children }) => {
      setQuestions(prevState => [...prevState, item]);
   };
 
-  const removeQuestion = item => {
-    const newQuestions = questions.filter(element => element != item);
+  const removeQuestion = index => {
+    const newQuestions = questions.filter((element, i) =>  { if(i != index)  return element; });
     setQuestions(newQuestions);
   };
 
