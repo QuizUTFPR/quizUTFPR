@@ -26,7 +26,7 @@ const FakeQuestions = [{
             is_correct: false
         }
     ],
-    tags: [{name: "erro"}]
+    tags: ["erro"]
   },
   {
     title: "Chabu é correto?",
@@ -44,7 +44,7 @@ const FakeQuestions = [{
             is_correct: false
         }
     ],
-    tags: [{name: "erro"}]
+    tags: ["erro"]
   },
   {
     title: "Chabu é teste?",
@@ -62,7 +62,7 @@ const FakeQuestions = [{
             is_correct: false
         }
     ],
-    tags: [{name: "erro"}]
+    tags: ["erro"]
   },
   {
     title: "Chabu é aaa?",
@@ -80,7 +80,7 @@ const FakeQuestions = [{
             is_correct: false
         }
     ],
-    tags: [{name: "erro"}]
+    tags: ["erro"]
   },
   {
     title: "Chabu é dawdawdawdwa?",
@@ -98,7 +98,7 @@ const FakeQuestions = [{
             is_correct: false
         }
     ],
-    tags: [{name: "erro"}]
+    tags: ["erro"]
   }
   ]
 
