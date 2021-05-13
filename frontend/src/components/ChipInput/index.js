@@ -3,13 +3,13 @@ import { Chip, TextField } from "@material-ui/core";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
-export default function ChipsArray({valueFormik, onChange, suggestions}) {
+export default function ChipsArray({value, onChange, suggestions}) {
   return (
     <Autocomplete
         multiple
         id="tags-filled"
         options={suggestions.map((item) => item)}
-        value={valueFormik}
+        value={value}
         freeSolo
         onChange={onChange}
         renderTags={(value, getTagProps) =>

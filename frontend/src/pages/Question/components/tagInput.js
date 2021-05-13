@@ -15,12 +15,11 @@ const TagInput = ({children, formikID, handleFormikChange, handlePropsChange, ..
       setTimer(setTimeout(() => handleUpdate({...params}), 500));
     }
 
-    
     return (
         <ChipInput
             id={formikID}
             onChange={(_, tags) => {
-                handleFormikChange("tags", tags);
+                handleFormikChange("question.tags", tags);
                 handleUpdateContext({value: tags, ...handlePropsChange} );
             }}
             {...props}

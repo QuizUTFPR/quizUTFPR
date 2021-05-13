@@ -129,7 +129,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
         <Grid item xs={12}>
           <ChipInput
             fullWidth
-            valueFormik={formik.values.tags}
+            value={formik.values.tags}
             suggestions={["Aprenda", "JavaScript"]}
             onChange={(_, value) => formik.setFieldValue("tags", value)}
           />
