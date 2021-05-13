@@ -7,8 +7,8 @@ import {
   Typography,
   TextField,
   Toolbar,
-  Button,
-  Box
+  Box,
+  Button
 } from "@material-ui/core";
 
 import {
@@ -20,7 +20,8 @@ import {
   StyledGrid,
   GridButtonNewQuestion,
   GridRegisterQuestion,
-  StyledAppBar
+  StyledAppBar,
+  CardSelectQuestion
 } from "./style";
 
 //HOOKS
@@ -37,7 +38,7 @@ import TagInput from "./components/tagInput";
 import TypeOfQuestion from "../TypeOfQuestion";
 
 const Question = () => {
-  const { questions, updateQuestion, updateAnswer, removeQuestion } = useQuestionQuiz();
+  const { questions, updateQuestion, updateAnswer, removeQuestion, saveQuestionOnDatabase } = useQuestionQuiz();
 
   const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(
     false
@@ -59,7 +60,6 @@ const Question = () => {
     setQuestionOnScreen({ index, question });
   };
 
-  console.log("questions", questions, !!questions.length, questions.length)
   return (
     <>
       <StyledAppBar position="static" color="transparent">
@@ -82,6 +82,7 @@ const Question = () => {
                 style={{ marginRight: "20px" }}
                 color="primary"
                 variant="outlined"
+                onClick={saveQuestionOnDatabase}
               >
                 Salvar
               </StyledButton>
@@ -106,14 +107,15 @@ const Question = () => {
             <Grid container>
               {questions.map((item, index) => (
                 <Grid item xs={12} key={index}>
-                  <Button
+                  <CardSelectQuestion
+                    isonscreen={(index === questionOnScreen.index) ? "true" : "false"}
                     color="primary"
                     variant="outlined"
                     fullWidth
                     onClick={handleChangeQuestion(item, index)}
                   >
                     {item.title}
-                  </Button>
+                  </CardSelectQuestion>
                 </Grid>
               ))}
             </Grid>
@@ -161,8 +163,9 @@ const Question = () => {
   
               <Grid container align="center" justify="center" spacing={2}>
                 {formik.values.question.answer.map((item, index) => (
-                  <Grid item xs={12} md={6} key={index}>
+                  <Grid item xs={12} md={6} key={index} style={{display: "flex", height: "80px", alignItems: "center"}}>
                     <CheckBox
+                      style={{width: "50px", height: "50px"}}
                       inputProps={{ "aria-label": "primary checkbox" }}
                       checked={Boolean(item.is_correct)}
                       formikID={`question.answer[${index}].is_correct`}
@@ -267,7 +270,7 @@ const Question = () => {
         modalDescription="Escolha o tipo da questão..."
         style={{ overflow: "scroll" }}
       >
-        <TypeOfQuestion handleClose={handleCloseModalTypeQuestion} />
+        <TypeOfQuestion updateScreen={handleChangeQuestion} handleClose={handleCloseModalTypeQuestion} />
       </Modal>
     </>
   );

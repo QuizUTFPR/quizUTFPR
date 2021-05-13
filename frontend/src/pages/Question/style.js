@@ -1,12 +1,22 @@
 import styled from "styled-components";
 
 import StyledButton from '@components/Button'
-import { Grid, AppBar } from "@material-ui/core";
+import { Grid, AppBar, Button } from "@material-ui/core";
 import QuestionInput from './components/input'
 
 export const StyledAppBar = styled(AppBar)`
   background: white;
 `
+
+export const CardSelectQuestion = styled(Button)`
+  background: ${({isonscreen, theme}) => isonscreen == "true" ? theme.palette.primary.main : ''};
+  color: ${({isonscreen}) => isonscreen == "true" ? 'white' : ''};
+
+  &&:hover{
+    background: ${({isonscreen, theme}) => isonscreen == "true" ? '' : theme.palette.primary.main};
+    color: ${({isonscreen, theme}) => isonscreen == "true" ? theme.palette.primary.main : 'white'};
+  }
+  `
 
 export const ContainerGrid = styled(Grid)`
   height: calc(100vh - 64px);

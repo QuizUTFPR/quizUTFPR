@@ -32,8 +32,9 @@ const TypeOfQuestion = forwardRef((props, ref) => {
   const handleOpenModalQuestionDB = () => setModalQuestionDatabaseOpen(true);
   const handleCloseModalQuestionDB = () => setModalQuestionDatabaseOpen(false);
 
-  const handleAddQuestion = (mockup) => async () => {
-    await addQuestion(mockup);
+  const handleAddQuestion = (mockup) => () => {
+    addQuestion(mockup);
+    props.updateScreen(mockup, questions.length)()
     props.handleClose();
   };
 
@@ -72,7 +73,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
             <Button 
               fullWidth startIcon={<SaveIcon />} 
               color='secondary' variant='outlined'
-              onClick={handleAddQuestion(MockupQuestionMultipleChoice)}
+              onClick={ handleAddQuestion(MockupQuestionMultipleChoice) }
             >
               Multipla Escolha
             </Button>

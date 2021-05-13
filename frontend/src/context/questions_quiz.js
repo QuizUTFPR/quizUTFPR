@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 export const QuestionQuizContext = createContext();
@@ -43,7 +43,7 @@ export const MockupQuestionMultipleChoice = {
   tags: []
 };
 
-export const initialValue = {
+export const initialValue = [{
   title: "Questão 1",
   correctAnswer: true,
   timer: 30,
@@ -66,13 +66,20 @@ export const initialValue = {
     }
   ],
   tags: []
-};
+}];
+
+
 
 const QuestionQuiz = ({ children }) => {
-  const [questions, setQuestions] = useState([initialValue]);
+  const [questions, setQuestions] = useState(initialValue);
 
-  const addQuestion = item => {
-    setQuestions(prevState => [...prevState, item]);
+
+  const saveQuestionOnDatabase = () => {
+    console.log("query" ,questions)
+  }
+
+  const addQuestion =  (item) => {
+     setQuestions(prevState => [...prevState, item]);
   };
 
   const removeQuestion = item => {
@@ -136,7 +143,8 @@ const QuestionQuiz = ({ children }) => {
         MockupQuestionTrueOrFalse,
         MockupQuestionMultipleChoice,
         updateQuestion,
-        updateAnswer
+        updateAnswer,
+        saveQuestionOnDatabase
       }}
     >
       {children}
