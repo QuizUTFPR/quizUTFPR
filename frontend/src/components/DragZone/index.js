@@ -13,7 +13,10 @@ const StyledDropzone = (props) => {
         isDragReject
     } = useDropzone({
         accept: 'image/*', 
-        maxFiles:1
+        maxFiles:1,
+        onDrop: files => {
+            props.teste(props.id, URL.createObjectURL(files[0]))
+          }
         });
   
     const files = acceptedFiles.map(file => (

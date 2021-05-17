@@ -33,6 +33,8 @@ import StyledButton from "@components/Button";
 import CheckBox from './components/checkbox'
 import SelectInput from './components/select'
 import TagInput from "./components/tagInput";
+import DragZone from '@components/DragZone'
+
 
 // PAGES
 import TypeOfQuestion from "../TypeOfQuestion";
@@ -161,18 +163,15 @@ const Question = () => {
                 />
               </Grid>
                   
-              <img src={formik.values.question.image} />
 
-              <Grid item>
-                <TextField
-                  type="file"
-                  name="Imagem de Capa"
-                  id="question.image"
-                  onChange={event => {
-                    formik.setFieldValue("question.image", URL.createObjectURL(event.target.files[0]))
-                  }}
-                />
-              </Grid>
+              <img src={formik.values.question.image} />
+              <DragZone
+                formikSetField={formik.setFieldValue}
+                id="question.image"
+                teste={formik.setFieldValue}
+                name="Imagem de Capa"
+              />
+
   
               <Grid container align="center" justify="center" spacing={2}>
                 {formik.values.question.answer.map((item, index) => (
