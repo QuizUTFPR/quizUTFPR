@@ -70,3 +70,8 @@ export const GridButtonNewQuestion = styled(Grid)`
     align-self: flex-end;
   }
 `
+
+export const PreviewImage = styled.img`
+  max-width: 400px;
+  margin-bottom: -40px;
+`

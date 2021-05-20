@@ -15,7 +15,7 @@ const StyledDropzone = (props) => {
         accept: 'image/*', 
         maxFiles:1,
         onDrop: files => {
-            props.teste(props.id, URL.createObjectURL(files[0]))
+            props.handleChange(files);
           }
         });
   

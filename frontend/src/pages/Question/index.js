@@ -21,7 +21,8 @@ import {
   GridButtonNewQuestion,
   GridRegisterQuestion,
   StyledAppBar,
-  CardSelectQuestion
+  CardSelectQuestion,
+  PreviewImage
 } from "./style";
 
 //HOOKS
@@ -33,8 +34,7 @@ import StyledButton from "@components/Button";
 import CheckBox from './components/checkbox'
 import SelectInput from './components/select'
 import TagInput from "./components/tagInput";
-import DragZone from '@components/DragZone'
-
+import DragImageInput from './components/dragImage'
 
 // PAGES
 import TypeOfQuestion from "../TypeOfQuestion";
@@ -58,8 +58,13 @@ const Question = () => {
     initialValues: questionOnScreen
   });
 
-  const handleChangeQuestion = (question, index) => () => {
-    setQuestionOnScreen({ index, question });
+  const handleChangeQuestion = (oldQuestion, index) => () => {
+    const question = {
+    ...oldQuestion,
+    image: (oldQuestion.image === null) ? null : URL.createObjectURL(oldQuestion.image)
+    };
+
+    setQuestionOnScreen({ index, question});
   };
 
   const handleRemoveQuestion = () => {
@@ -70,6 +75,7 @@ const Question = () => {
     const newIndex = (indexOfQuestionOnScreen === indexOfTheLastQuestionOnContext) ? indexOfTheLastQuestionOnContext : indexOfQuestionOnScreen;
     handleChangeQuestion(questions[newIndex], newIndex)()
   }
+
   
   return (
     <>
@@ -163,14 +169,23 @@ const Question = () => {
                 />
               </Grid>
                   
+              
+              <Grid item xs={12}>
+              ̣  <PreviewImage src={formik.values.question.image} />
+              </Grid>
 
-              <img src={formik.values.question.image} />
-              <DragZone
-                formikSetField={formik.setFieldValue}
-                id="question.image"
-                teste={formik.setFieldValue}
-                name="Imagem de Capa"
-              />
+              <Grid item xs={12}>
+                <DragImageInput
+                  formikID="question.image"
+                  name="Imagem de Capa"
+                  handleFormikChange={formik.setFieldValue}
+                  handlePropsChange={{
+                    handleUpdate: updateQuestion,
+                    key: "image",
+                    index: formik.values.index
+                  }}
+                />
+              </Grid>
 
   
               <Grid container align="center" justify="center" spacing={2}>
