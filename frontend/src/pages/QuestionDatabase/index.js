@@ -1,13 +1,17 @@
 import React, {forwardRef, useState, useEffect} from 'react'
 
 import {IconButton, Grid, Typography, Divider } from '@material-ui/core'
-import { Close } from '@material-ui/icons'
 import {StyledSearchTagButton} from './style'
 
 // COMPONENTS
 import GridContainer from '@components/Container'
 import InputAutoComplete from '@components/AutoCompleteInput'
 import Question from './question'
+
+
+// ICONS
+import { Close, Search } from '@material-ui/icons'
+
 
 
 const FakeQuestions = [{
@@ -177,7 +181,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
             />
           </Grid>
           <Grid item xs={3}>
-            <StyledSearchTagButton fullWidth color='primary' variant='contained'>Pesquisar</StyledSearchTagButton>
+            <StyledSearchTagButton startIcon={<Search />}  fullWidth color='primary' variant='contained'>Pesquisar</StyledSearchTagButton>
           </Grid>
         </Grid>
   

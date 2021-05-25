@@ -10,7 +10,10 @@ import QuestionDatabase from "../QuestionDatabase";
 import Button from '@components/Button'
 
 // ASSETS
-import SaveIcon from '@material-ui/icons/Save';
+import {
+  Save,
+  Search
+} from '@material-ui/icons/';
 
 //HOOKS
 import useQuestionQuiz from "@hooks/QuestionQuiz";
@@ -64,6 +67,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
               fullWidth
               onClick={handleOpenModalQuestionDB}
               variant="contained"
+              startIcon={<Search />} 
               color="primary"
             >
               USAR QUESTÃO DO BANCO
@@ -71,7 +75,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
           </Grid>
           <Grid item xs={6}>
             <Button 
-              fullWidth startIcon={<SaveIcon />} 
+              fullWidth startIcon={<Save />} 
               color='secondary' variant='outlined'
               onClick={ handleAddQuestion(MockupQuestionMultipleChoice) }
             >
@@ -80,7 +84,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
           </Grid>
           <Grid item xs={6}>
           <Button 
-              fullWidth startIcon={<SaveIcon />} 
+              fullWidth startIcon={<Save />} 
               color='secondary' variant='outlined'
               onClick={handleAddQuestion(MockupQuestionTrueOrFalse)}
             >

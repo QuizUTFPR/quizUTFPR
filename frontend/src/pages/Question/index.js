@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import {
+  ExitToApp, 
+  Save,
+  CheckCircle,
+  AddCircle,
+  Delete
+} from '@material-ui/icons/';
 
 
 import {
@@ -96,7 +103,7 @@ const Question = () => {
         <Toolbar>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
-              <StyledButton color="secondary" variant="outlined">
+              <StyledButton color="secondary" variant="outlined" startIcon={<ExitToApp />} size="large">
                 Sair
               </StyledButton>
             </Grid>
@@ -113,10 +120,12 @@ const Question = () => {
                 color="primary"
                 variant="outlined"
                 onClick={saveQuestionOnDatabase}
+                startIcon={<Save />} size="large"
               >
                 Salvar
               </StyledButton>
-              <StyledButton color="primary" variant="contained">
+              <StyledButton color="primary" variant="contained"
+              startIcon={<CheckCircle />} size="large">
                 Finalizar
               </StyledButton>
             </Box>
@@ -125,7 +134,9 @@ const Question = () => {
       </StyledAppBar>
 
       <ContainerGrid container>
+
         {/* LEFT */}
+
         <Grid item xs={2}>
           <StyledLeftGrid container align="center">
             <Grid item xs={12}>
@@ -155,12 +166,15 @@ const Question = () => {
                 fullWidth
                 variant="contained"
                 color="secondary"
-              >
+                startIcon={<AddCircle />} size="large"
+                >
                 CRIAR NOVA QUESTÃO
               </StyledButton>
             </GridButtonNewQuestion>
           </StyledLeftGrid>
         </Grid>
+
+
 
         {/* MIDDLE */}
         <Grid item xs={7}>
@@ -242,6 +256,7 @@ const Question = () => {
                   color="secondary"
                   variant="outlined"
                   onClick={handleClickOpenAlert}
+                  startIcon={<Delete />} size="large"
                 >
                   Excluir Questão
                 </StyledButton>
@@ -251,7 +266,11 @@ const Question = () => {
           </StyledGrid>
         </Grid>
 
+
+
         {/* RIGHT */}
+
+
         <Grid item xs={3}>
           <StyledRightGrid container align="center" direction="column">
             <Grid item style={{ marginBottom: "40px" }}>
@@ -297,13 +316,12 @@ const Question = () => {
                 }}
               />
             </GridItemStyledRight>
-            </> : <p>Vazio!</p>}
             
             <GridItemStyledRight item style={{alignSelf: "start"}}>
               <FormControlLabel
                 control={
                   <CheckBox
-                    disabled={Boolean(formik.values.question.id)}
+                  disabled={Boolean(formik.values.question.id)}
                     style={{width: "50px", height: "50px"}}
                     inputProps={{ "aria-label": "primary checkbox", "label": "teste" }}
                     checked={formik.values.question.availableOnQuestionsDB}
@@ -315,10 +333,11 @@ const Question = () => {
                       index: formik.values.index
                     }}
                     />
-                }
-                label="Disponivel no Banco de Questão" 
+                  }
+                  label="Disponivel no Banco de Questão" 
               />
             </GridItemStyledRight>
+          </> : <p>Vazio!</p>}
             
 
           </StyledRightGrid>
