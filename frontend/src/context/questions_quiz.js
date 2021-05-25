@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export const QuestionQuizContext = createContext();
 
 export const MockupQuestionTrueOrFalse = {
+  copy: false,
   title: '',
   timer: 30,
   image: null,
@@ -22,6 +23,7 @@ export const MockupQuestionTrueOrFalse = {
 };
 
 export const MockupQuestionMultipleChoice = {
+  copy: false,
   title: '',
   timer: 30,
   image: null,
@@ -49,6 +51,7 @@ export const MockupQuestionMultipleChoice = {
 
 export const initialValue = [
   {
+    copy: false,
     title: '',
     correctAnswer: true,
     timer: 30,

@@ -107,3 +107,17 @@ export const WrapperMessage = styled.div`
   align-items: center;
   opacity: 0.6;
 `;
+
+export const CopiedQuestionMessage = styled(Grid)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  && {
+    span {
+      margin-left: 10px;
+    }
+  }
+
+  opacity: 0.5;
+  font-weight: bolder;
+`;

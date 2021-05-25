@@ -13,6 +13,7 @@ import { StyledSearchTagButton } from './style';
 
 const FakeQuestions = [
   {
+    copy: true,
     id: -1,
     availableOnQuestionsDB: false,
     title: 'Chabu é erro?',
@@ -34,6 +35,7 @@ const FakeQuestions = [
     tags: ['erro'],
   },
   {
+    copy: true,
     id: -1,
     availableOnQuestionsDB: false,
     title: 'Chabu é correto?',
@@ -55,6 +57,7 @@ const FakeQuestions = [
     tags: ['erro'],
   },
   {
+    copy: true,
     id: -1,
     availableOnQuestionsDB: false,
     title: 'Chabu é teste?',
@@ -76,6 +79,7 @@ const FakeQuestions = [
     tags: ['erro'],
   },
   {
+    copy: true,
     id: -1,
     availableOnQuestionsDB: false,
     title: 'Chabu é aaa?',
@@ -97,6 +101,7 @@ const FakeQuestions = [
     tags: ['erro'],
   },
   {
+    copy: true,
     id: -1,
     availableOnQuestionsDB: false,
     title: 'Chabu é dawdawdawdwa?',

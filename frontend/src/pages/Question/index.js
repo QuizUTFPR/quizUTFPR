@@ -8,6 +8,7 @@ import {
   Delete,
   Done,
   Warning,
+  FileCopy,
 } from '@material-ui/icons/';
 
 import { Grid, Typography, Toolbar, FormControlLabel } from '@material-ui/core';
@@ -35,7 +36,9 @@ import {
   StyledMessage,
   BoxStyledAction,
   WrapperMessage,
+  CopiedQuestionMessage,
 } from './style';
+
 import CheckBox from './components/checkbox';
 import SelectInput from './components/select';
 import TagInput from './components/tagInput';
@@ -212,6 +215,14 @@ const Question = () => {
           <StyledGrid container justify="center" align="center">
             {questions.length ? (
               <>
+                {formik.values.question.copy && (
+                  <CopiedQuestionMessage item xs={12}>
+                    <FileCopy />
+                    <span>
+                      Esta questão é uma copia retirada do banco de questões.
+                    </span>
+                  </CopiedQuestionMessage>
+                )}
                 <Grid item xs={12}>
                   <StyledTitleInput
                     placeholder="DIGITE O ENUNCIADO AQUI"
