@@ -1,11 +1,17 @@
 import React from 'react';
+
+// COMPONENTS
 import { Link } from 'react-router-dom';
-
 import { List, Divider, Avatar } from '@material-ui/core';
-
 import { Help, Home, Class, LibraryBooks, ExitToApp } from '@material-ui/icons';
 
+// HOOKS
+import useAuth from '@hooks/Auth';
+
+// ROTAS
 import { QUIZ, HOME, CLASSES } from '@routes';
+
+// STYLES
 import {
   StyledDrawer,
   AvatarBox,
@@ -19,6 +25,8 @@ import {
 } from './style';
 
 const MenuDrawer = () => {
+  const { teacherInfo, logout } = useAuth();
+
   const FirstMenu = [
     {
       text: 'Inicio',
@@ -41,10 +49,12 @@ const MenuDrawer = () => {
     {
       text: 'FAQ',
       icon: <Help />,
+      onClick: () => console.log('FAQ'),
     },
     {
       text: 'Desconectar',
       icon: <ExitToApp />,
+      onClick: logout,
     },
   ];
 
@@ -66,7 +76,7 @@ const MenuDrawer = () => {
         </StyledBadge>
 
         <TextBox>
-          <AdminName color="primary">Professor Oclim</AdminName>
+          <AdminName color="primary">{teacherInfo.teacher.name}</AdminName>
           <AdminDescription color="primary">UTFPR</AdminDescription>
         </TextBox>
       </AvatarBox>
@@ -89,7 +99,7 @@ const MenuDrawer = () => {
       <Divider />
       <List>
         {SecondMenu.map((option) => (
-          <StyledListItem button key={option.text}>
+          <StyledListItem button key={option.text} onClick={option.onClick}>
             <StyledListItemIcon>{option.icon}</StyledListItemIcon>
             <StyledListItemText primary={option.text} />
           </StyledListItem>

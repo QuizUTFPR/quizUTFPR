@@ -13,6 +13,10 @@ import {
 // ASSETS
 import { ReactComponent as Illustration } from '@assets/login_illustration.svg';
 
+// HOOKS
+import useAuth from '@hooks/Auth';
+
+import { HOME } from '@routes';
 import {
   StyledContainer,
   DescriptionsGrid,
@@ -23,9 +27,13 @@ import {
   StyledButton,
 } from './style';
 
-const Login = () => {
+// ROTAS
+
+const LoginPage = ({ history }) => {
+  const { login } = useAuth();
+
   const [values, setValues] = useState({
-    username: '',
+    email: '',
     password: '',
     showPassword: false,
   });
@@ -62,16 +70,17 @@ const Login = () => {
             component="form"
             onSubmit={(e) => {
               e.preventDefault();
-              console.log(values.password, values.username);
+              login(values.email, values.password);
+              history.push(HOME);
             }}
           >
             <StyledInput
               color="primary"
               variant="filled"
-              id="username"
-              label="Usuário"
-              value={values.username}
-              onChange={handleChange('username')}
+              id="email"
+              label="E-mail"
+              value={values.email}
+              onChange={handleChange('email')}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -121,4 +130,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

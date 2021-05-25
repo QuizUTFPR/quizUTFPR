@@ -6,7 +6,7 @@ Importo as variáveis de ambiente
 import "dotenv";
 import express from "express";
 import routes from "./routes";
-
+import cors from 'cors'
 // Importando banco de dados
 import "./database";
 
@@ -24,6 +24,7 @@ class App {
     para entender quando meu corpo de requisição for um JSON;
     **/
     this.server.use(express.json());
+    this.server.use(cors());
   }
 
   routes() {

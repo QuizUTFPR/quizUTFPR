@@ -1,24 +1,47 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { LinearProgress } from '@material-ui/core';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types'
 
 // CONTEXT
 import QuestionQuizProvider from '@context/questions_quiz';
 
 // HOOKS
-// import useAuth from '@hooks/Auth';
+import useAuth from '@hooks/Auth';
 
 // ROUTES
-import { LOGIN, QUESTION } from '@routes';
+import { LOGIN, QUESTION, HOME } from '@routes';
 
 // PAGES
 const MainPage = lazy(() => import('./pages/MainPage'));
 const Login = lazy(() => import('./pages/Login'));
 const Question = lazy(() => import('./pages/Question'));
 
-function App() {
-  // const auth = useAuth();
+function App({ location }) {
+  const { teacherInfo, setTeacherInfo } = useAuth();
+
+  useEffect(() => {
+    const token = localStorage.getItem('@TOKEN');
+    const teacher = localStorage.getItem('@TEACHER');
+
+    console.log('token', token);
+    console.log('teacher', teacher);
+
+    if (token && teacher) {
+      setTeacherInfo({
+        token,
+        teacher: JSON.parse(teacher),
+      });
+    }
+  }, []);
+
+  if (teacherInfo.token && location.pathname === LOGIN) {
+    return <Redirect to={HOME} />;
+  }
+
+  if (!teacherInfo.token && location.pathname !== LOGIN) {
+    return <Redirect to={LOGIN} />;
+  }
 
   return (
     <Suspense fallback={<LinearProgress />}>

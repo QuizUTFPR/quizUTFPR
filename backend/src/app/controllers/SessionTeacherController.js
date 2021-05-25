@@ -36,7 +36,6 @@ class SessionController {
 
       return res.json({
         teacher: {
-          id,
           name,
           email,
         },

@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import { LinearProgress } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
+
 // import PropTypes from 'prop-types'
 
 // ROUTES
