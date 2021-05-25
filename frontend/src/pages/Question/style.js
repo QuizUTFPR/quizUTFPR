@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Grid, AppBar, Button } from "@material-ui/core";
+import { Grid, AppBar, Button, Box } from "@material-ui/core";
 import QuestionInput from './components/input'
 
 export const StyledAppBar = styled(AppBar)`
@@ -85,4 +85,21 @@ export const PreviewImage = styled.img`
 export const GridQuestions = styled(Grid)`
   overflow-y: auto;
   height: calc(100vh - 250px);
+`
+
+export const StyledMessage = styled.span`
+  font-weight: bolder;
+  margin-right: 10px;
+  padding-left: 5px;
+`
+
+export const BoxStyledAction = styled(Box)`
+  display: flex;
+  align-items: center;
+`
+
+export const WrapperMessage = styled.div`
+  display: flex;
+  align-items: center;
+  opacity: .6;
 `

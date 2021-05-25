@@ -78,22 +78,27 @@ export const initialValue = [{
 
 const QuestionQuiz = ({ children }) => {
   const [questions, setQuestions] = useState(initialValue);
+  const [isSaved, setSaved] = useState(true);
 
 
   const saveQuestionOnDatabase = () => {
+    setSaved(true);
     console.log("query" ,questions)
   }
 
   const addQuestion =  (item) => {
-     setQuestions(prevState => [...prevState, item]);
+    setSaved(false);
+    setQuestions(prevState => [...prevState, item]);
   };
 
   const removeQuestion = index => {
+    setSaved(false);
     const newQuestions = questions.filter((element, i) =>  { if(i !== index)  return element; });
     setQuestions(newQuestions);
   };
 
   const updateQuestion = ({value, key, index}) => {
+    setSaved(false);
     const newQuestions = questions.map((question, i) => {
       if (i === index) {
         return {
@@ -109,6 +114,7 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const updateAnswer = ({value, key, indexQuestion, indexAnswer}) => {
+    setSaved(false);
     const newQuestions = questions.map((question, i) => {
       if (i === indexQuestion) {
         return {
@@ -139,6 +145,7 @@ const QuestionQuiz = ({ children }) => {
     <QuestionQuizContext.Provider
       value={{
         questions,
+        isSaved,
         setQuestions,
         addQuestion,
         removeQuestion,

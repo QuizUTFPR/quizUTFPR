@@ -5,17 +5,16 @@ import {
   Save,
   CheckCircle,
   AddCircle,
-  Delete
+  Delete,
+  Done,
+  Warning
 } from '@material-ui/icons/';
 
 
 import {
   Grid,
   Typography,
-  TextField,
   Toolbar,
-  Box,
-  Button,
   FormControlLabel
 } from "@material-ui/core";
 
@@ -33,7 +32,10 @@ import {
   CardSelectQuestion,
   PreviewImage,
   GridItemStyledRight,
-  GridQuestions
+  GridQuestions,
+  StyledMessage,
+  BoxStyledAction,
+  WrapperMessage
 } from "./style";
 
 //HOOKS
@@ -52,7 +54,14 @@ import AlertRemoveMessage from './components/confirmRemove'
 import TypeOfQuestion from "../TypeOfQuestion";
 
 const Question = () => {
-  const { questions, updateQuestion, updateAnswer, removeQuestion, saveQuestionOnDatabase } = useQuestionQuiz();
+  const { 
+    questions, 
+    updateQuestion, 
+    updateAnswer, 
+    removeQuestion, 
+    saveQuestionOnDatabase,
+    isSaved
+  } = useQuestionQuiz();
 
   const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(
     false
@@ -97,7 +106,7 @@ const Question = () => {
     handleChangeQuestion(questions[newIndex], newIndex)()
   }
 
-  //teste
+  console.log("saved", isSaved)
   
   return (
     <>
@@ -116,13 +125,27 @@ const Question = () => {
               </Typography>
             </Grid>
 
-            <Box>
+            <BoxStyledAction>
+              {isSaved ?
+                <WrapperMessage>
+                  <Done />
+                  <StyledMessage>Salvo</StyledMessage>
+                </WrapperMessage>
+                :
+                <WrapperMessage>
+                  <Warning />
+                  <StyledMessage>Não Salvo</StyledMessage>
+                </WrapperMessage> 
+              }
+              
+              
               <StyledButton
                 style={{ marginRight: "20px" }}
                 color="primary"
                 variant="outlined"
                 onClick={saveQuestionOnDatabase}
                 startIcon={<Save />} size="large"
+                disabled={isSaved}
               >
                 Salvar
               </StyledButton>
@@ -130,7 +153,7 @@ const Question = () => {
               startIcon={<CheckCircle />} size="large">
                 Finalizar
               </StyledButton>
-            </Box>
+            </BoxStyledAction>
           </Grid>
         </Toolbar>
       </StyledAppBar>
