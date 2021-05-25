@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef } from 'react';
 
 // COMPONENTS
 import {
@@ -6,10 +6,10 @@ import {
   DialogActions,
   DialogContentText,
   DialogContent,
-  DialogTitle
-} from "@material-ui/core";
+  DialogTitle,
+} from '@material-ui/core';
 
-import GridContainer from "@components/Container";
+import GridContainer from '@components/Container';
 
 const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />

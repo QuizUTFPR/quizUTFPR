@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useFormik } from "formik";
+import React, { useState } from 'react';
+import { useFormik } from 'formik';
 import {
   Save,
   CheckCircle,
@@ -7,20 +7,20 @@ import {
   Delete,
   Done,
   Warning,
-  FileCopy
-} from "@material-ui/icons/";
-import { Link } from "react-router-dom";
+  FileCopy,
+} from '@material-ui/icons/';
+import { Link } from 'react-router-dom';
 
 // ROUTES
-import { QUIZ } from "@routes";
+import { QUIZ } from '@routes';
 
 // HOOKS
-import useQuestionQuiz from "@hooks/QuestionQuiz";
+import useQuestionQuiz from '@hooks/QuestionQuiz';
 
 // COMPONENTS
-import { Grid, Typography, Toolbar, FormControlLabel } from "@material-ui/core";
-import Modal from "@components/Modal";
-import StyledButton from "@components/Button";
+import { Grid, Typography, Toolbar, FormControlLabel } from '@material-ui/core';
+import Modal from '@components/Modal';
+import StyledButton from '@components/Button';
 import {
   StyledRightGrid,
   StyledLeftGrid,
@@ -39,18 +39,18 @@ import {
   BoxStyledAction,
   WrapperMessage,
   CopiedQuestionMessage,
-  StyledExitIcon
-} from "./style";
+  StyledExitIcon,
+} from './style';
 
-import CheckBox from "./components/checkbox";
-import SelectInput from "./components/select";
-import TagInput from "./components/tagInput";
-import DragImageInput from "./components/dragImage";
-import AlertRemoveMessage from "./components/confirmRemove";
-import AlertFinish from "./components/confirmFinish";
+import CheckBox from './components/checkbox';
+import SelectInput from './components/select';
+import TagInput from './components/tagInput';
+import DragImageInput from './components/dragImage';
+import AlertRemoveMessage from './components/confirmRemove';
+import AlertFinish from './components/confirmFinish';
 
 // PAGES
-import TypeOfQuestion from "../TypeOfQuestion";
+import TypeOfQuestion from '../TypeOfQuestion';
 
 const Question = () => {
   const {
@@ -59,7 +59,7 @@ const Question = () => {
     updateAnswer,
     removeQuestion,
     saveQuestionOnDatabase,
-    isSaved
+    isSaved,
   } = useQuestionQuiz();
 
   const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] =
@@ -80,12 +80,12 @@ const Question = () => {
 
   const [questionOnScreen, setQuestionOnScreen] = useState({
     index: 0,
-    question: questions[0]
+    question: questions[0],
   });
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: questionOnScreen
+    initialValues: questionOnScreen,
   });
 
   const handleChangeQuestion = (oldQuestion, index) => () => {
@@ -96,7 +96,7 @@ const Question = () => {
       image:
         oldQuestion.image === null
           ? null
-          : URL.createObjectURL(oldQuestion.image)
+          : URL.createObjectURL(oldQuestion.image),
     };
 
     setQuestionOnScreen({ index, question });
@@ -116,7 +116,7 @@ const Question = () => {
   };
 
   const handleFinish = () => {
-    console.log("finalizou");
+    console.log('finalizou');
   };
 
   return (
@@ -157,7 +157,7 @@ const Question = () => {
               )}
 
               <StyledButton
-                style={{ marginRight: "20px" }}
+                style={{ marginRight: '20px' }}
                 color="primary"
                 variant="outlined"
                 onClick={saveQuestionOnDatabase}
@@ -198,14 +198,14 @@ const Question = () => {
                 <Grid item xs={12} key={index}>
                   <CardSelectQuestion
                     isonscreen={
-                      index === questionOnScreen.index ? "true" : "false"
+                      index === questionOnScreen.index ? 'true' : 'false'
                     }
                     color="primary"
                     variant="outlined"
                     fullWidth
                     onClick={handleChangeQuestion(item, index)}
                   >
-                    {item.title ? item.title : "Sem Título"}
+                    {item.title ? item.title : 'Sem Título'}
                   </CardSelectQuestion>
                 </Grid>
               ))}
@@ -247,8 +247,8 @@ const Question = () => {
                     value={formik.values.question.title}
                     handlePropsChange={{
                       handleUpdate: updateQuestion,
-                      key: "title",
-                      index: formik.values.index
+                      key: 'title',
+                      index: formik.values.index,
                     }}
                     required
                     autoFocus
@@ -266,8 +266,8 @@ const Question = () => {
                     handleFormikChange={formik.setFieldValue}
                     handlePropsChange={{
                       handleUpdate: updateQuestion,
-                      key: "image",
-                      index: formik.values.index
+                      key: 'image',
+                      index: formik.values.index,
                     }}
                   />
                 </Grid>
@@ -281,22 +281,22 @@ const Question = () => {
                       // eslint-disable-next-line react/no-array-index-key
                       key={index}
                       style={{
-                        display: "flex",
-                        height: "80px",
-                        alignItems: "center"
+                        display: 'flex',
+                        height: '80px',
+                        alignItems: 'center',
                       }}
                     >
                       <CheckBox
-                        style={{ width: "50px", height: "50px" }}
-                        inputProps={{ "aria-label": "primary checkbox" }}
+                        style={{ width: '50px', height: '50px' }}
+                        inputProps={{ 'aria-label': 'primary checkbox' }}
                         checked={Boolean(item.is_correct)}
                         formikID={`question.answer[${index}].is_correct`}
                         handleFormikChange={formik.handleChange}
                         handlePropsChange={{
                           handleUpdate: updateAnswer,
-                          key: "is_correct",
+                          key: 'is_correct',
                           indexQuestion: formik.values.index,
-                          indexAnswer: index
+                          indexAnswer: index,
                         }}
                       />
                       <StyledAnswerInput
@@ -307,9 +307,9 @@ const Question = () => {
                         handleFormikChange={formik.handleChange}
                         handlePropsChange={{
                           handleUpdate: updateAnswer,
-                          key: "title",
+                          key: 'title',
                           indexQuestion: formik.values.index,
-                          indexAnswer: index
+                          indexAnswer: index,
                         }}
                         required
                       />
@@ -341,7 +341,7 @@ const Question = () => {
 
         <Grid item xs={3}>
           <StyledRightGrid container align="center" direction="column">
-            <Grid item style={{ marginBottom: "40px" }}>
+            <Grid item style={{ marginBottom: '40px' }}>
               <Typography color="primary" component="h5" variant="h5">
                 Detalhes da Questão
               </Typography>
@@ -360,8 +360,8 @@ const Question = () => {
                     handleFormikChange={formik.handleChange}
                     handlePropsChange={{
                       handleUpdate: updateQuestion,
-                      key: "timer",
-                      index: formik.values.index
+                      key: 'timer',
+                      index: formik.values.index,
                     }}
                     required
                   >
@@ -373,35 +373,35 @@ const Question = () => {
                 <GridItemStyledRight item>
                   <TagInput
                     fullWidth
-                    suggestions={["Aprenda", "JavaScript"]}
+                    suggestions={['Aprenda', 'JavaScript']}
                     value={formik.values.question.tags}
                     formikID="question.tags"
                     handleFormikChange={formik.setFieldValue}
                     handlePropsChange={{
                       handleUpdate: updateQuestion,
-                      key: "tags",
-                      index: formik.values.index
+                      key: 'tags',
+                      index: formik.values.index,
                     }}
                   />
                 </GridItemStyledRight>
 
-                <GridItemStyledRight item style={{ alignSelf: "start" }}>
+                <GridItemStyledRight item style={{ alignSelf: 'start' }}>
                   <FormControlLabel
                     control={
                       <CheckBox
                         disabled={Boolean(formik.values.question.copy)}
-                        style={{ width: "50px", height: "50px" }}
+                        style={{ width: '50px', height: '50px' }}
                         inputProps={{
-                          "aria-label": "primary checkbox",
-                          label: "teste"
+                          'aria-label': 'primary checkbox',
+                          label: 'teste',
                         }}
                         checked={formik.values.question.availableOnQuestionsDB}
                         formikID="question.availableOnQuestionsDB"
                         handleFormikChange={formik.handleChange}
                         handlePropsChange={{
                           handleUpdate: updateQuestion,
-                          key: "availableOnQuestionsDB",
-                          index: formik.values.index
+                          key: 'availableOnQuestionsDB',
+                          index: formik.values.index,
                         }}
                       />
                     }
@@ -421,7 +421,7 @@ const Question = () => {
         open={isModalTypeOfQuestionOpen}
         modalTitle="Qual tipo de questão deseja criar?"
         modalDescription="Escolha o tipo da questão..."
-        style={{ overflow: "scroll" }}
+        style={{ overflow: 'scroll' }}
       >
         <TypeOfQuestion
           updateScreen={handleChangeQuestion}
