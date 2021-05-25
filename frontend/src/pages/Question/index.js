@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import {
   Save,
@@ -9,7 +10,6 @@ import {
   Warning,
   FileCopy,
 } from '@material-ui/icons/';
-import { Link } from 'react-router-dom';
 
 // ROUTES
 import { QUIZ } from '@routes';
@@ -55,6 +55,7 @@ import TypeOfQuestion from '../TypeOfQuestion';
 const Question = () => {
   const {
     questions,
+    getAllQuestionOfTheQuiz,
     updateQuestion,
     updateAnswer,
     removeQuestion,
@@ -77,6 +78,13 @@ const Question = () => {
 
   const handleOpenFinishAlert = () => setOpenFinishAlert(true);
   const handleCloseFinishAlert = () => setOpenFinishAlert(false);
+
+  // eslint-disable-next-line camelcase
+  const { id_quiz } = useParams();
+  useEffect(() => {
+    // eslint-disable-next-line camelcase
+    getAllQuestionOfTheQuiz(id_quiz);
+  }, []);
 
   const [questionOnScreen, setQuestionOnScreen] = useState({
     index: 0,

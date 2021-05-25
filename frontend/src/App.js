@@ -48,11 +48,10 @@ function App({ location }) {
       <Switch>
         <Route path={LOGIN} component={Login} />
         <Route
-          path={QUESTION}
+          path={`${QUESTION}:id_quiz`}
           exact
           render={(props) => (
             <QuestionQuizProvider>
-              {' '}
               <Question {...props} />
             </QuestionQuizProvider>
           )}

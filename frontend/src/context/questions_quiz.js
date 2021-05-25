@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import api from '@api';
 
 export const QuestionQuizContext = createContext();
 
@@ -83,6 +84,11 @@ const QuestionQuiz = ({ children }) => {
   const [questions, setQuestions] = useState(initialValue);
   const [isSaved, setSaved] = useState(true);
 
+  const getAllQuestionOfTheQuiz = async (id) => {
+    const { data } = await api.get(`/question/quiz/${id}`);
+    console.log(data);
+  };
+
   const saveQuestionOnDatabase = () => {
     setSaved(true);
     console.log('query', questions);
@@ -148,6 +154,7 @@ const QuestionQuiz = ({ children }) => {
         questions,
         isSaved,
         setQuestions,
+        getAllQuestionOfTheQuiz,
         addQuestion,
         removeQuestion,
         MockupQuestionTrueOrFalse,

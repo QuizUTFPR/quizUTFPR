@@ -10,10 +10,10 @@ import {
   StyledCardActions,
 } from './style';
 
-const Card = ({ image, imageTitle, title, description, children }) => (
+const Card = ({ image, imageTitle, title, description, idQuiz, children }) => (
   <StyledCard>
     <StyledCardMedia component="img" image={image} title={imageTitle} />
-    <CardActionArea component={Link} to={QUESTION}>
+    <CardActionArea component={Link} to={`${QUESTION}${idQuiz}`}>
       <StyledCardContent>
         <Typography color="primary" component="h5" variant="h5">
           {title}

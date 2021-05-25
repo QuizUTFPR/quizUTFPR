@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import GridContainer from '@components/Container';
 import Button from '@components/Button';
 import ChipInput from '@components/ChipInput';
+import DragImageInput from '@components/DragZone';
 import {
   IconButton,
   Grid,
@@ -17,19 +18,24 @@ import {
 // ASSETS
 // import SaveIcon from '@material-ui/icons/Save';
 import { Close } from '@material-ui/icons';
+import { PreviewImage } from './style';
 
 const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
 ));
 
+// eslint-disable-next-line no-unused-vars
 const TypeOfQuestion = forwardRef((props, ref) => {
+  const { quiz } = props;
+
   const formik = useFormik({
     initialValues: {
-      title: '',
-      description: '',
-      visibility: 'public',
-      file: {},
-      tags: ['UTFPR', 'QUIZ'],
+      title: quiz.title,
+      description: quiz.description,
+      visibility: quiz.visibility,
+      imageObj: {},
+      imageUrl: '',
+      tags: quiz.tags_quiz.map((tag) => tag.name),
     },
     onSubmit: (values) => {
       console.log(values);
@@ -37,7 +43,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
   });
 
   return (
-    <Wrapper container spacing={3} ref={ref}>
+    <Wrapper container spacing={3}>
       <Grid container justify="center" alignItems="center">
         <Grid item xs={3} md={1}>
           <IconButton aria-label="closeModal" onClick={props.handleClose}>
@@ -65,13 +71,14 @@ const TypeOfQuestion = forwardRef((props, ref) => {
         spacing={2}
       >
         <Grid item xs={12}>
-          <TextField
-            type="file"
-            name="Imagem de Capa"
-            id="file"
-            onChange={(event) =>
-              formik.setFieldValue('file', event.target.files[0])
-            }
+          <PreviewImage src={formik.values.imageUrl} />
+        </Grid>
+        <Grid item xs={12}>
+          <DragImageInput
+            handleChange={(files) => {
+              formik.setFieldValue('imageObj', files[0]);
+              formik.setFieldValue('imageUrl', URL.createObjectURL(files[0]));
+            }}
           />
         </Grid>
 

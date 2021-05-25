@@ -23,7 +23,6 @@ const Auth = ({ children }) => {
         teacher: data.teacher,
       });
 
-      api.defaults.headers.Authorization = `Bearer ${data.token}`;
       localStorage.setItem('@TOKEN', data.token);
       localStorage.setItem('@TEACHER', JSON.stringify(data.teacher));
 
