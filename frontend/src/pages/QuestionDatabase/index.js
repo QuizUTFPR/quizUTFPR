@@ -16,6 +16,7 @@ const FakeQuestions = [{
     timer: 15,
     difficultyLevel: 3,
     quiz_id: 2,
+    image: null,
     answer: [
         {
             title: "Verdadeiro",
@@ -32,6 +33,7 @@ const FakeQuestions = [{
     title: "Chabu é correto?",
     correctAnswer: true,
     timer: 15,
+    image: null,
     difficultyLevel: 3,
     quiz_id: 2,
     answer: [
@@ -50,6 +52,7 @@ const FakeQuestions = [{
     title: "Chabu é teste?",
     correctAnswer: true,
     timer: 15,
+    image: null,
     difficultyLevel: 3,
     quiz_id: 2,
     answer: [
@@ -68,6 +71,7 @@ const FakeQuestions = [{
     title: "Chabu é aaa?",
     correctAnswer: true,
     timer: 15,
+    image: null,
     difficultyLevel: 3,
     quiz_id: 2,
     answer: [
@@ -86,6 +90,7 @@ const FakeQuestions = [{
     title: "Chabu é dawdawdawdwa?",
     correctAnswer: true,
     timer: 15,
+    image: null,
     difficultyLevel: 3,
     quiz_id: 2,
     answer: [

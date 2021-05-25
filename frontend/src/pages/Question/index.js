@@ -35,6 +35,7 @@ import CheckBox from './components/checkbox'
 import SelectInput from './components/select'
 import TagInput from "./components/tagInput";
 import DragImageInput from './components/dragImage'
+import AlertRemoveMessage from './components/confirmRemove'
 
 // PAGES
 import TypeOfQuestion from "../TypeOfQuestion";
@@ -45,6 +46,12 @@ const Question = () => {
   const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] = useState(
     false
   );
+  
+  const [openAlert, setOpenAlert] = useState(false);
+
+  const handleClickOpenAlert = () => setOpenAlert(true);
+  const handleCloseAlert = () => setOpenAlert(false);
+
   const handleOpenModalTypeQuestion = () => setModalTypeOfQuestionOpen(true);
   const handleCloseModalTypeQuestion = () => setModalTypeOfQuestionOpen(false);
 
@@ -59,6 +66,8 @@ const Question = () => {
   });
 
   const handleChangeQuestion = (oldQuestion, index) => () => {
+    if(index < 0) return;
+    
     const question = {
     ...oldQuestion,
     image: (oldQuestion.image === null) ? null : URL.createObjectURL(oldQuestion.image)
@@ -72,7 +81,8 @@ const Question = () => {
 
     const indexOfQuestionOnScreen = formik.values.index;
     const indexOfTheLastQuestionOnContext = questions.length-1;
-    const newIndex = (indexOfQuestionOnScreen === indexOfTheLastQuestionOnContext) ? indexOfTheLastQuestionOnContext : indexOfQuestionOnScreen;
+    const newIndex = (indexOfQuestionOnScreen === indexOfTheLastQuestionOnContext) ? indexOfTheLastQuestionOnContext-1 : indexOfQuestionOnScreen;
+   
     handleChangeQuestion(questions[newIndex], newIndex)()
   }
 
@@ -228,7 +238,7 @@ const Question = () => {
                   fullWidth
                   color="secondary"
                   variant="outlined"
-                  onClick={handleRemoveQuestion}
+                  onClick={handleClickOpenAlert}
                 >
                   Excluir Questão
                 </StyledButton>
@@ -298,6 +308,13 @@ const Question = () => {
         style={{ overflow: "scroll" }}
       >
         <TypeOfQuestion updateScreen={handleChangeQuestion} handleClose={handleCloseModalTypeQuestion} />
+      </Modal>
+
+      <Modal 
+        open={openAlert}
+        onClose={handleCloseAlert}
+      >
+        <AlertRemoveMessage handleClose={handleCloseAlert} onClick={handleRemoveQuestion} />
       </Modal>
     </>
   );
