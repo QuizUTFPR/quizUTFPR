@@ -1,24 +1,20 @@
-import React from 'react'
+import React from 'react';
 
-import { 
-  Typography, 
-} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 // COMPONENTS
-import GridContainer from '@components/Container'
+import GridContainer from '@components/Container';
 
-const Home = () => {
-
-  return (
-    <GridContainer container>
-        <Typography color='primary'>Seja Bem-Vindo ao Painel de Control!</Typography>
-        <Typography color='primary'>
-          dawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwafwfawf
-          dawdawdawdawdwadwadwaddawwwwwwwwwwwwwwwwwwwwwwdd
-        </Typography>
-    </GridContainer>
-  )
-}
-
+const Home = () => (
+  <GridContainer container>
+    <Typography color="primary">
+      Seja Bem-Vindo ao Painel de Control!
+    </Typography>
+    <Typography color="primary">
+      dawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwafwfawf
+      dawdawdawdawdwadwadwaddawwwwwwwwwwwwwwwwwwwwwwdd
+    </Typography>
+  </GridContainer>
+);
 
 export default Home;

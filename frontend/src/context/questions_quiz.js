@@ -1,109 +1,108 @@
-import React, { createContext, useState } from "react";
-import PropTypes from "prop-types";
+import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export const QuestionQuizContext = createContext();
 
 export const MockupQuestionTrueOrFalse = {
-  title: "",
+  title: '',
   timer: 30,
   image: null,
   availableOnQuestionsDB: false,
   answer: [
     {
-      title: "Verdadeiro",
-      is_correct: false
+      title: 'Verdadeiro',
+      is_correct: false,
     },
     {
-      title: "Falso",
-      is_correct: false
-    }
+      title: 'Falso',
+      is_correct: false,
+    },
   ],
-  tags: []
+  tags: [],
 };
 
 export const MockupQuestionMultipleChoice = {
-  title: "",
+  title: '',
   timer: 30,
   image: null,
   availableOnQuestionsDB: false,
   answer: [
     {
-      title: "",
-      is_correct: false
+      title: '',
+      is_correct: false,
     },
     {
-      title: "",
-      is_correct: false
+      title: '',
+      is_correct: false,
     },
     {
-      title: "",
-      is_correct: false
+      title: '',
+      is_correct: false,
     },
     {
-      title: "",
-      is_correct: false
-    }
+      title: '',
+      is_correct: false,
+    },
   ],
-  tags: []
+  tags: [],
 };
 
-export const initialValue = [{
-  title: "",
-  correctAnswer: true,
-  timer: 30,
-  image: null,
-  availableOnQuestionsDB: false,
-  answer: [
-    {
-      title: "",
-      is_correct: false
-    },
-    {
-      title: "",
-      is_correct: false
-    },
-    {
-      title: "",
-      is_correct: true
-    },
-    {
-      title: "",
-      is_correct: false
-    }
-  ],
-  tags: []
-}];
-
-
+export const initialValue = [
+  {
+    title: '',
+    correctAnswer: true,
+    timer: 30,
+    image: null,
+    availableOnQuestionsDB: false,
+    answer: [
+      {
+        title: '',
+        is_correct: false,
+      },
+      {
+        title: '',
+        is_correct: false,
+      },
+      {
+        title: '',
+        is_correct: true,
+      },
+      {
+        title: '',
+        is_correct: false,
+      },
+    ],
+    tags: [],
+  },
+];
 
 const QuestionQuiz = ({ children }) => {
   const [questions, setQuestions] = useState(initialValue);
   const [isSaved, setSaved] = useState(true);
 
-
   const saveQuestionOnDatabase = () => {
     setSaved(true);
-    console.log("query" ,questions)
-  }
-
-  const addQuestion =  (item) => {
-    setSaved(false);
-    setQuestions(prevState => [...prevState, item]);
+    console.log('query', questions);
   };
 
-  const removeQuestion = index => {
+  const addQuestion = (item) => {
     setSaved(false);
-    const newQuestions = questions.filter((element, i) =>  { if(i !== index)  return element; });
+    setQuestions((prevState) => [...prevState, item]);
+  };
+
+  const removeQuestion = (index) => {
+    setSaved(false);
+    const newQuestions = questions.filter((element, i) => i !== index);
     setQuestions(newQuestions);
   };
 
-  const updateQuestion = ({value, key, index}) => {
+  const updateQuestion = ({ value, key, index }) => {
     setSaved(false);
     const newQuestions = questions.map((question, i) => {
       if (i === index) {
         return {
           ...question,
-          [key]: value
+          [key]: value,
         };
       }
 
@@ -113,7 +112,7 @@ const QuestionQuiz = ({ children }) => {
     setQuestions(newQuestions);
   };
 
-  const updateAnswer = ({value, key, indexQuestion, indexAnswer}) => {
+  const updateAnswer = ({ value, key, indexQuestion, indexAnswer }) => {
     setSaved(false);
     const newQuestions = questions.map((question, i) => {
       if (i === indexQuestion) {
@@ -124,19 +123,18 @@ const QuestionQuiz = ({ children }) => {
               if (index === indexAnswer) {
                 return {
                   ...answer,
-                  [key]: value
+                  [key]: value,
                 };
               }
 
               return answer;
-            })
-          ]
+            }),
+          ],
         };
       }
 
       return question;
     });
-
 
     setQuestions(newQuestions);
   };
@@ -153,7 +151,7 @@ const QuestionQuiz = ({ children }) => {
         MockupQuestionMultipleChoice,
         updateQuestion,
         updateAnswer,
-        saveQuestionOnDatabase
+        saveQuestionOnDatabase,
       }}
     >
       {children}
@@ -162,7 +160,7 @@ const QuestionQuiz = ({ children }) => {
 };
 
 QuestionQuiz.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default QuestionQuiz;

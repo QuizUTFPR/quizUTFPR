@@ -1,9 +1,9 @@
-import React from "react";
-import { useFormik } from "formik";
+import React from 'react';
+import { useFormik } from 'formik';
 
 // COMPONENTS
-import GridContainer from "@components/Container";
-import ChipInput from "@components/ChipInput";
+import GridContainer from '@components/Container';
+import ChipInput from '@components/ChipInput';
 
 // MATERIAL-UI COMPONENTS
 import {
@@ -12,23 +12,23 @@ import {
   Typography,
   Divider,
   MenuItem,
-  TextField
-} from "@material-ui/core";
+  TextField,
+} from '@material-ui/core';
 
 // MATERIAL-UI ICONS
 
 const CriarQuiz = () => {
   const formik = useFormik({
     initialValues: {
-      title: "",
-      description: "",
-      visibility: "public",
+      title: '',
+      description: '',
+      visibility: 'public',
       file: {},
-      tags: ["UTFPR", "QUIZ"]
+      tags: ['UTFPR', 'QUIZ'],
     },
-    onSubmit: values => {
-      console.log(values)
-    }
+    onSubmit: (values) => {
+      console.log(values);
+    },
   });
 
   return (
@@ -69,11 +69,11 @@ const CriarQuiz = () => {
             fullWidth
             label="Visibilidade"
             id="visibility"
-            name='visibility'
+            name="visibility"
             variant="filled"
             value={formik.values.visibility}
-            onChange={(event) => 
-              formik.setFieldValue("visibility", event.target.value)
+            onChange={(event) =>
+              formik.setFieldValue('visibility', event.target.value)
             }
             required
             select
@@ -103,8 +103,8 @@ const CriarQuiz = () => {
             type="file"
             name="Imagem de Capa"
             id="file"
-            onChange={event => 
-              formik.setFieldValue("file", event.target.files[0])
+            onChange={(event) =>
+              formik.setFieldValue('file', event.target.files[0])
             }
           />
         </Grid>
@@ -113,8 +113,8 @@ const CriarQuiz = () => {
           <ChipInput
             fullWidth
             value={formik.values.tags}
-            suggestions={["Aprenda", "JavaScript"]}
-            onChange={(_, value) => formik.setFieldValue("tags", value)}
+            suggestions={['Aprenda', 'JavaScript']}
+            onChange={(_, value) => formik.setFieldValue('tags', value)}
           />
         </Grid>
 
@@ -123,7 +123,6 @@ const CriarQuiz = () => {
             CRIAR
           </Button>
         </Grid>
-        
       </Grid>
     </GridContainer>
   );

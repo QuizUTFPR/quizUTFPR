@@ -1,25 +1,28 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 // COMPONENTS
-import GridContainer from "@components/Container";
-import Card from "@components/Card";
-import Modal from "@components/Modal";
+import GridContainer from '@components/Container';
+import Card from '@components/Card';
+import Modal from '@components/Modal';
 
 // PAGES
 import QuizPreferences from '@pages/EditQuizPreferences';
 
 // ROUTES
-import {
-  CREATE_QUIZ
-} from '@routes';
+import { CREATE_QUIZ } from '@routes';
 
 // MATERIAL-UI COMPONENTS
-import { Grid, Button, IconButton, Typography, Divider  } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  IconButton,
+  Typography,
+  Divider,
+} from '@material-ui/core';
 
 // MATERIAL-UI ICONS
-import { Edit, Delete } from "@material-ui/icons";
+import { Edit, Delete } from '@material-ui/icons';
 
 const Quiz = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -34,16 +37,18 @@ const Quiz = () => {
             Quizzes Cadastrados
           </Typography>
 
-          <Button 
-            variant="contained" color="primary"
-            component={Link} to={CREATE_QUIZ}
+          <Button
+            variant="contained"
+            color="primary"
+            component={Link}
+            to={CREATE_QUIZ}
           >
             Criar Quiz
           </Button>
         </Grid>
 
         <Grid item>
-          <Divider  />
+          <Divider />
         </Grid>
 
         <Card
@@ -66,12 +71,9 @@ const Quiz = () => {
         open={isModalOpen}
         modalTitle="Prefêrencias do Quiz"
         modalDescription="Edite os dados de seu quiz..."
-        style={{ overflow: "scroll" }}
+        style={{ overflow: 'scroll' }}
       >
-        <QuizPreferences
-          handleClose={handleCloseModal}
-        />
-        
+        <QuizPreferences handleClose={handleCloseModal} />
       </Modal>
     </>
   );

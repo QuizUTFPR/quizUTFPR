@@ -1,20 +1,13 @@
-import React, {useRef} from "react";
-import PropTypes from 'prop-types'
-import {StyledModal} from './style';
-
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
+import { StyledModal } from './style';
 
 const ModalWrapper = (props) => {
-  const {
-    open,
-    handleClose,
-    modalTitle,
-    modalDescription,
-    children
-  } = props;
-    
-    const ref = useRef(null);
+  const { open, handleClose, modalTitle, modalDescription, children } = props;
 
-    return (
+  const ref = useRef(null);
+
+  return (
     <StyledModal
       aria-labelledby={modalTitle}
       aria-describedby={modalDescription}
@@ -25,13 +18,13 @@ const ModalWrapper = (props) => {
       {children}
     </StyledModal>
   );
-}
+};
 
 ModalWrapper.defaultProps = {
-  onClose: () => {}
-}
+  handleClose: () => {},
+};
 ModalWrapper.propTypes = {
-  onClose: PropTypes.func
+  handleClose: PropTypes.func,
 };
 
 export default ModalWrapper;

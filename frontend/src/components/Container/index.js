@@ -1,13 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import {GridContainer} from './style'
+import { GridContainer } from './style';
 
-const Container = ({children, ...props}) => {
-  return (
-    <GridContainer {...props}>
-      {children}
-    </GridContainer>
-  );
-}
+const Container = ({ children, ...props }) => (
+  <GridContainer {...props}>{children}</GridContainer>
+);
 
-export default Container
+export default Container;

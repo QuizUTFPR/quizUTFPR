@@ -1,23 +1,26 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { Grid, AppBar, Button, Box } from "@material-ui/core";
-import QuestionInput from './components/input'
+import { Grid, AppBar, Button, Box } from '@material-ui/core';
+import QuestionInput from './components/input';
 
 export const StyledAppBar = styled(AppBar)`
   background: white;
-`
+`;
 
 export const CardSelectQuestion = styled(Button)`
   height: 60px;
   width: 100%;
-  background: ${({isonscreen, theme}) => isonscreen === "true" ? theme.palette.primary.main : ''};
-  color: ${({isonscreen}) => isonscreen === "true" ? 'white' : ''};
+  background: ${({ isonscreen, theme }) =>
+    isonscreen === 'true' ? theme.palette.primary.main : ''};
+  color: ${({ isonscreen }) => (isonscreen === 'true' ? 'white' : '')};
 
-  &&:hover{
-    background: ${({isonscreen, theme}) => isonscreen === "true" ? '' : theme.palette.primary.main};
-    color: ${({isonscreen, theme}) => isonscreen === "true" ? theme.palette.primary.main : 'white'};
+  &&:hover {
+    background: ${({ isonscreen, theme }) =>
+      isonscreen === 'true' ? '' : theme.palette.primary.main};
+    color: ${({ isonscreen, theme }) =>
+      isonscreen === 'true' ? theme.palette.primary.main : 'white'};
   }
-  `
+`;
 
 export const ContainerGrid = styled(Grid)`
   height: calc(100vh - 64px);
@@ -26,20 +29,21 @@ export const ContainerGrid = styled(Grid)`
 export const StyledGrid = styled(Grid)`
   height: 100%;
   padding: 20px;
-
 `;
 
 export const GridItemStyledRight = styled(Grid)`
-  margin-bottom: 20px; 
-`
+  margin-bottom: 20px;
+`;
 
 export const StyledRightGrid = styled(StyledGrid)`
-  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+    0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
   background: white;
 `;
 
-export const StyledLeftGrid = styled(StyledGrid)` 
-  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+export const StyledLeftGrid = styled(StyledGrid)`
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+    0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
   background: white;
 `;
 
@@ -49,7 +53,7 @@ export const StyledButtonsContainer = styled(Grid)`
 
 export const GridRegisterQuestion = styled(Grid)`
   align-self: flex-end;
-`
+`;
 export const StyledAnswerInput = styled(QuestionInput)`
   width: 100%;
   padding: 20px 10px;
@@ -72,34 +76,34 @@ export const StyledTitleInput = styled(StyledAnswerInput)`
 `;
 
 export const GridButtonNewQuestion = styled(Grid)`
-  &&{
+  && {
     align-self: flex-end;
   }
-`
+`;
 
 export const PreviewImage = styled.img`
   max-width: 400px;
   margin-bottom: -40px;
-`
+`;
 
 export const GridQuestions = styled(Grid)`
   overflow-y: auto;
   height: calc(100vh - 250px);
-`
+`;
 
 export const StyledMessage = styled.span`
   font-weight: bolder;
   margin-right: 10px;
   padding-left: 5px;
-`
+`;
 
 export const BoxStyledAction = styled(Box)`
   display: flex;
   align-items: center;
-`
+`;
 
 export const WrapperMessage = styled.div`
   display: flex;
   align-items: center;
-  opacity: .6;
-`
+  opacity: 0.6;
+`;

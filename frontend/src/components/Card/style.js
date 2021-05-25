@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { Card, CardMedia, CardContent, CardActions } from "@material-ui/core";
+import { Card, CardMedia, CardContent, CardActions } from '@material-ui/core';
 
 export const StyledCard = styled(Card)`
   display: flex;

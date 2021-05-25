@@ -8,6 +8,6 @@ export default createGlobalStyle`
     flex-direction: column;
     min-height: 100vh;
     font-family: 'Roboto', sans-serif;
-    background: ${({theme}) => theme.palette.background.bgWebSite};
+    background: ${({ theme }) => theme.palette.background.bgWebSite};
   }
 `;

@@ -1,5 +1,4 @@
-import React, { forwardRef } from 'react'
-
+import React, { forwardRef } from 'react';
 
 // COMPONENTS
 import {
@@ -7,45 +6,44 @@ import {
   DialogActions,
   DialogContentText,
   DialogContent,
-  DialogTitle
+  DialogTitle,
 } from '@material-ui/core';
-import GridContainer from '@components/Container'
-
+import GridContainer from '@components/Container';
 
 const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
 ));
 
+// eslint-disable-next-line no-unused-vars
 const AlertRemoveQuestion = forwardRef((props, ref) => {
-  const {
-    onClick,
-    handleClose
-  } = props;
+  const { onClick, handleClose } = props;
 
-  const handleRemove  = () => {
+  const handleRemove = () => {
     onClick();
     handleClose();
-  }
+  };
 
-  return(
+  return (
     <Wrapper>
-        <DialogTitle id="alert-dialog-title">{"Deseja mesmo excluir a questão?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            A questão será excluida do modo de edição, porém, somente sera persistida a exclusão pressionar o botão de salvar alterações.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancelar
-          </Button>
-          <Button onClick={handleRemove} color="primary" autoFocus>
-            Excluir
-          </Button>
-        </DialogActions>
+      <DialogTitle id="alert-dialog-title">
+        Deseja mesmo excluir a questão?
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          A questão será excluida do modo de edição, porém, somente sera
+          persistida a exclusão pressionar o botão de salvar alterações.
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          Cancelar
+        </Button>
+        <Button onClick={handleRemove} color="primary" autoFocus>
+          Excluir
+        </Button>
+      </DialogActions>
     </Wrapper>
-    )
-  })
-
+  );
+});
 
 export default AlertRemoveQuestion;

@@ -1,29 +1,32 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo } from 'react';
 
+const QuestionInput = ({
+  formikID,
+  handleFormikChange,
+  handlePropsChange,
+  ...props
+}) => {
+  const [timer, setTimer] = useState(null);
 
-const QuestionInput = ({formikID, handleFormikChange, handlePropsChange, ...props}) => {
+  const handleUpdateContext = ({ handleUpdate, ...params }) => {
+    if (timer) {
+      clearTimeout(timer);
+      setTimer(null);
+    }
 
-    const [timer, setTimer] = useState(null);
+    setTimer(setTimeout(() => handleUpdate({ ...params }), 500));
+  };
 
-    const handleUpdateContext = ({handleUpdate, ...params}) => {
-      if (timer) {
-        clearTimeout(timer);
-        setTimer(null);
-      }
-
-      setTimer(setTimeout(() => handleUpdate({...params}), 500));
-    };
-
-    return (
-        <input
-            id={formikID}
-            onChange={e => {
-                handleFormikChange(formikID)(e);
-                handleUpdateContext({value: e.target.value, ...handlePropsChange} );
-            }}
-            {...props}
-        />
-    )
-}
+  return (
+    <input
+      id={formikID}
+      onChange={(e) => {
+        handleFormikChange(formikID)(e);
+        handleUpdateContext({ value: e.target.value, ...handlePropsChange });
+      }}
+      {...props}
+    />
+  );
+};
 
 export default memo(QuestionInput);

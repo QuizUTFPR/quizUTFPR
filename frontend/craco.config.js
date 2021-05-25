@@ -16,7 +16,7 @@ module.exports = {
           '@hooks': './hooks/',
           '@context': './context/',
           '@api': './services/api.js',
-          '@pages': './pages/'
+          '@pages': './pages/',
         },
       },
     },
