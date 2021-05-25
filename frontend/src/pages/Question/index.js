@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import {
-  ExitToApp,
   Save,
   CheckCircle,
   AddCircle,
@@ -10,13 +9,16 @@ import {
   Warning,
   FileCopy,
 } from '@material-ui/icons/';
+import { Link } from 'react-router-dom';
 
-import { Grid, Typography, Toolbar, FormControlLabel } from '@material-ui/core';
+// ROUTES
+import { QUIZ } from '@routes';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
 // COMPONENTS
+import { Grid, Typography, Toolbar, FormControlLabel } from '@material-ui/core';
 import Modal from '@components/Modal';
 import StyledButton from '@components/Button';
 import {
@@ -37,6 +39,7 @@ import {
   BoxStyledAction,
   WrapperMessage,
   CopiedQuestionMessage,
+  StyledExitIcon,
 } from './style';
 
 import CheckBox from './components/checkbox';
@@ -113,9 +116,11 @@ const Question = () => {
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
               <StyledButton
+                component={Link}
+                to={QUIZ}
                 color="secondary"
                 variant="outlined"
-                startIcon={<ExitToApp />}
+                startIcon={<StyledExitIcon />}
                 size="large"
               >
                 Sair

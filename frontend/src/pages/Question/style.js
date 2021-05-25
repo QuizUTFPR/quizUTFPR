@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { Grid, AppBar, Button, Box } from '@material-ui/core';
+import { ExitToApp } from '@material-ui/icons/';
 import QuestionInput from './components/input';
 
 export const StyledAppBar = styled(AppBar)`
@@ -120,4 +121,8 @@ export const CopiedQuestionMessage = styled(Grid)`
 
   opacity: 0.5;
   font-weight: bolder;
+`;
+
+export const StyledExitIcon = styled(ExitToApp)`
+  transform: rotate(180deg);
 `;
