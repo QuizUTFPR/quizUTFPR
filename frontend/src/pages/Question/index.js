@@ -97,6 +97,7 @@ const Question = () => {
     handleChangeQuestion(questions[newIndex], newIndex)()
   }
 
+  //teste
   
   return (
     <>
