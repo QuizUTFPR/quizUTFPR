@@ -373,7 +373,7 @@ const Question = () => {
                   <FormControlLabel
                     control={
                       <CheckBox
-                        disabled={Boolean(formik.values.question.id)}
+                        disabled={Boolean(formik.values.question.copy)}
                         style={{ width: '50px', height: '50px' }}
                         inputProps={{
                           'aria-label': 'primary checkbox',
