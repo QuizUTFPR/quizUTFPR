@@ -8,6 +8,8 @@ export const StyledAppBar = styled(AppBar)`
 `
 
 export const CardSelectQuestion = styled(Button)`
+  height: 60px;
+  width: 100%;
   background: ${({isonscreen, theme}) => isonscreen === "true" ? theme.palette.primary.main : ''};
   color: ${({isonscreen}) => isonscreen === "true" ? 'white' : ''};
 
@@ -78,4 +80,9 @@ export const GridButtonNewQuestion = styled(Grid)`
 export const PreviewImage = styled.img`
   max-width: 400px;
   margin-bottom: -40px;
+`
+
+export const GridQuestions = styled(Grid)`
+  overflow-y: auto;
+  height: calc(100vh - 250px);
 `

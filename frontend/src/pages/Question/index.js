@@ -32,7 +32,8 @@ import {
   StyledAppBar,
   CardSelectQuestion,
   PreviewImage,
-  GridItemStyledRight
+  GridItemStyledRight,
+  GridQuestions
 } from "./style";
 
 //HOOKS
@@ -145,7 +146,7 @@ const Question = () => {
               </Typography>
             </Grid>
 
-            <Grid container>
+            <GridQuestions container>
               {questions.map((item, index) => (
                 <Grid item xs={12} key={index}>
                   <CardSelectQuestion
@@ -159,7 +160,8 @@ const Question = () => {
                   </CardSelectQuestion>
                 </Grid>
               ))}
-            </Grid>
+            </GridQuestions>
+
             <GridButtonNewQuestion item xs={12}>
               <StyledButton
                 onClick={handleOpenModalTypeQuestion}
@@ -337,7 +339,7 @@ const Question = () => {
                   label="Disponivel no Banco de Questão" 
               />
             </GridItemStyledRight>
-          </> : <p>Vazio!</p>}
+            </> : <p>Vazio!</p>}
             
 
           </StyledRightGrid>
