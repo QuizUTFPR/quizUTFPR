@@ -11,6 +11,8 @@ import Question from './question'
 
 
 const FakeQuestions = [{
+    id: -1,
+    availableOnQuestionsDB: false,
     title: "Chabu é erro?",
     correctAnswer: true,
     timer: 15,
@@ -30,6 +32,8 @@ const FakeQuestions = [{
     tags: ["erro"]
   },
   {
+    id: -1,
+    availableOnQuestionsDB: false,
     title: "Chabu é correto?",
     correctAnswer: true,
     timer: 15,
@@ -49,6 +53,8 @@ const FakeQuestions = [{
     tags: ["erro"]
   },
   {
+    id: -1,
+    availableOnQuestionsDB: false,
     title: "Chabu é teste?",
     correctAnswer: true,
     timer: 15,
@@ -68,6 +74,8 @@ const FakeQuestions = [{
     tags: ["erro"]
   },
   {
+    id: -1,
+    availableOnQuestionsDB: false,
     title: "Chabu é aaa?",
     correctAnswer: true,
     timer: 15,
@@ -87,6 +95,8 @@ const FakeQuestions = [{
     tags: ["erro"]
   },
   {
+    id: -1,
+    availableOnQuestionsDB: false,
     title: "Chabu é dawdawdawdwa?",
     correctAnswer: true,
     timer: 15,

@@ -27,12 +27,16 @@ export const StyledGrid = styled(Grid)`
 
 `;
 
+export const GridItemStyledRight = styled(Grid)`
+  margin-bottom: 20px; 
+`
+
 export const StyledRightGrid = styled(StyledGrid)`
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
   background: white;
 `;
 
-export const StyledLeftGrid = styled(StyledGrid)`
+export const StyledLeftGrid = styled(StyledGrid)` 
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
   background: white;
 `;

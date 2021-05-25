@@ -8,8 +8,10 @@ import {
   TextField,
   Toolbar,
   Box,
-  Button
+  Button,
+  FormControlLabel
 } from "@material-ui/core";
+
 
 import {
   StyledRightGrid,
@@ -22,7 +24,8 @@ import {
   GridRegisterQuestion,
   StyledAppBar,
   CardSelectQuestion,
-  PreviewImage
+  PreviewImage,
+  GridItemStyledRight
 } from "./style";
 
 //HOOKS
@@ -160,7 +163,7 @@ const Question = () => {
         </Grid>
 
         {/* MIDDLE */}
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <StyledGrid container justify="center" align="center">
           {!!questions.length ?  <>
               <Grid item xs={12}>
@@ -249,7 +252,7 @@ const Question = () => {
         </Grid>
 
         {/* RIGHT */}
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <StyledRightGrid container align="center" direction="column">
             <Grid item style={{ marginBottom: "40px" }}>
               <Typography color="primary" component="h5" variant="h5">
@@ -258,7 +261,7 @@ const Question = () => {
             </Grid>
             
             {!!questions.length ?  <>
-              <Grid item style={{ marginBottom: "20px" }}>
+              <GridItemStyledRight item>
               <SelectInput
                 fullWidth
                 label="Tempo"
@@ -277,10 +280,10 @@ const Question = () => {
                 <option value={92}>92 segundos</option>
                 <option value={30}>30 segundos</option>
               </SelectInput>
-            </Grid>
+            </GridItemStyledRight>
 
 
-            <Grid item style={{ marginBottom: "20px" }}>
+            <GridItemStyledRight item>
               <TagInput
                 fullWidth
                 suggestions={["Aprenda", "JavaScript"]}
@@ -293,9 +296,31 @@ const Question = () => {
                   index: formik.values.index
                 }}
               />
-            </Grid>
+            </GridItemStyledRight>
             </> : <p>Vazio!</p>}
             
+            <GridItemStyledRight item style={{alignSelf: "start"}}>
+              <FormControlLabel
+                control={
+                  <CheckBox
+                    disabled={Boolean(formik.values.question.id)}
+                    style={{width: "50px", height: "50px"}}
+                    inputProps={{ "aria-label": "primary checkbox", "label": "teste" }}
+                    checked={formik.values.question.availableOnQuestionsDB}
+                    formikID={`question.availableOnQuestionsDB`}
+                    handleFormikChange={formik.handleChange}
+                    handlePropsChange={{
+                      handleUpdate: updateQuestion,
+                      key: "availableOnQuestionsDB",
+                      index: formik.values.index
+                    }}
+                    />
+                }
+                label="Disponivel no Banco de Questão" 
+              />
+            </GridItemStyledRight>
+            
+
           </StyledRightGrid>
         </Grid>
       </ContainerGrid>

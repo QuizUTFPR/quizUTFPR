@@ -1,7 +1,7 @@
 import React from "react";
-import { Chip, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import { ChipStyled } from './style'
 
 export default function ChipsArray({value, onChange, suggestions}) {
   return (
@@ -14,7 +14,7 @@ export default function ChipsArray({value, onChange, suggestions}) {
         onChange={onChange}
         renderTags={(value, getTagProps) =>
           value.map((option, index) => (
-            <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+            <ChipStyled variant="outlined" label={option} {...getTagProps({ index })} />
           ))}
         renderInput={(params) => (
           <TextField {...params} variant="filled" label="Tag's" placeholder="Digite aqui as tag's desejadas" />

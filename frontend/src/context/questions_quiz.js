@@ -7,6 +7,7 @@ export const MockupQuestionTrueOrFalse = {
   title: "",
   timer: 30,
   image: null,
+  availableOnQuestionsDB: false,
   answer: [
     {
       title: "Verdadeiro",
@@ -24,6 +25,7 @@ export const MockupQuestionMultipleChoice = {
   title: "",
   timer: 30,
   image: null,
+  availableOnQuestionsDB: false,
   answer: [
     {
       title: "",
@@ -50,6 +52,7 @@ export const initialValue = [{
   correctAnswer: true,
   timer: 30,
   image: null,
+  availableOnQuestionsDB: false,
   answer: [
     {
       title: "",
