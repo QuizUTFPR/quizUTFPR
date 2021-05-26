@@ -53,7 +53,6 @@ const Quiz = () => {
     getQuizzes();
   }, []);
 
-  console.log(quizzes);
   return (
     <>
       <GridContainer container spacing={3}>

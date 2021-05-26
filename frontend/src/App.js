@@ -24,8 +24,8 @@ function App({ location }) {
     const token = localStorage.getItem('@TOKEN');
     const teacher = localStorage.getItem('@TEACHER');
 
-    console.log('token', token);
-    console.log('teacher', teacher);
+    // console.log('token', token);
+    // console.log('teacher', teacher);
 
     if (token && teacher) {
       setTeacherInfo({

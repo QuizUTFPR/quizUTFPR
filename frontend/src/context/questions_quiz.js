@@ -86,7 +86,21 @@ const QuestionQuiz = ({ children }) => {
 
   const getAllQuestionOfTheQuiz = async (id) => {
     const { data } = await api.get(`/question/quiz/${id}`);
-    console.log(data);
+
+    const initialQuestions = data.map((question) => ({
+      id: question.id,
+      copy: false,
+      availableOnQuestionsDB: false,
+      image: null,
+      title: question.title,
+      timer: question.timer,
+      difficultyLevel: question.difficultyLevel,
+      tags: question.tags_question.map((tag) => tag.name),
+      answer: question.answer,
+    }));
+
+    setQuestions(initialQuestions);
+    return initialQuestions[0];
   };
 
   const saveQuestionOnDatabase = () => {

@@ -79,17 +79,22 @@ const Question = () => {
   const handleOpenFinishAlert = () => setOpenFinishAlert(true);
   const handleCloseFinishAlert = () => setOpenFinishAlert(false);
 
-  // eslint-disable-next-line camelcase
-  const { id_quiz } = useParams();
-  useEffect(() => {
-    // eslint-disable-next-line camelcase
-    getAllQuestionOfTheQuiz(id_quiz);
-  }, []);
-
   const [questionOnScreen, setQuestionOnScreen] = useState({
     index: 0,
     question: questions[0],
   });
+
+  // eslint-disable-next-line camelcase
+  const { id_quiz } = useParams();
+  useEffect(() => {
+    const fetch = async () => {
+      // eslint-disable-next-line camelcase
+      const firstQuestion = await getAllQuestionOfTheQuiz(id_quiz);
+      setQuestionOnScreen({ index: 0, question: firstQuestion });
+    };
+
+    fetch();
+  }, []);
 
   const formik = useFormik({
     enableReinitialize: true,
