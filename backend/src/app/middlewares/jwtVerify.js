@@ -4,7 +4,8 @@ import authConfig from '../../config/auth';
 
 export default async (req, res, next) => {
   const {authorization} = req.headers;
-
+  
+  console.log(req.headers)
   // Ausência do token
   if (!authorization) {
     return res.status(401).json({

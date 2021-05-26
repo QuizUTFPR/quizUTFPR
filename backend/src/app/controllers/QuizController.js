@@ -69,28 +69,28 @@ class QuizController {
             as: "teacher",
             attributes: ["name", "email"]
           },
-          {
-            model: Question,
-            as: "questions",
-            attributes: ["id", "title", "timer", "difficultyLevel"],
-            through: {
-              attributes: []
-            },
-            include: [
-              {
-                model: Answer,
-                as: "answer",
-                attributes: ["title", "is_correct"]
-              },{
-                model: Tag,
-                as: "tags_question",
-                attributes: ["name"],
-                through: {
-                  attributes: []
-                }
-              }
-            ]
-          },
+          //{
+            //model: Question,
+            //as: "questions",
+            //attributes: ["id", "title", "timer", "difficultyLevel"],
+            //through: {
+             // attributes: []
+            //},
+            //include: [
+             // {
+               // model: Answer,
+            //    as: "answer",
+             //   attributes: ["title", "is_correct"]
+            //  },{
+             //   model: Tag,
+             //   as: "tags_question",
+              //  attributes: ["name"],
+              //  through: {
+               //   attributes: []
+              //  }
+              //}
+            //]
+          //},
           {
             model: Tag,
             as: "tags_quiz",
