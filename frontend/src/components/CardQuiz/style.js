@@ -4,6 +4,7 @@ import { Card, CardMedia, CardContent, CardActions } from '@material-ui/core';
 
 export const StyledCard = styled(Card)`
   display: flex;
+  margin-bottom: 20px;
 `;
 
 export const StyledCardMedia = styled(CardMedia)`
