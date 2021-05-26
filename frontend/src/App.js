@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { LinearProgress } from '@material-ui/core';
 import { Switch, Route, Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types'
@@ -18,14 +18,12 @@ const Login = lazy(() => import('./pages/Login'));
 const Question = lazy(() => import('./pages/Question'));
 
 function App({ location }) {
+  const [checkedToken, setCheckedToken] = useState(false);
   const { teacherInfo, setTeacherInfo } = useAuth();
 
   useEffect(() => {
     const token = localStorage.getItem('@TOKEN');
     const teacher = localStorage.getItem('@TEACHER');
-
-    // console.log('token', token);
-    // console.log('teacher', teacher);
 
     if (token && teacher) {
       setTeacherInfo({
@@ -33,7 +31,10 @@ function App({ location }) {
         teacher: JSON.parse(teacher),
       });
     }
+    setCheckedToken(true);
   }, []);
+
+  if (!checkedToken) return <LinearProgress />;
 
   if (teacherInfo.token && location.pathname === LOGIN) {
     return <Redirect to={HOME} />;

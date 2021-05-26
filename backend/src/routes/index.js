@@ -18,7 +18,7 @@ router.use("/", Teacher);
 //Todas as rotas abaixo que forem chamadas abaixo deveram ser autenticadas
 router.use(verifyJWT);
 
-router.use("/file", File);
+router.use("/files", File);
 router.use("/quiz", Quiz);
 router.use("/question", Question);
 router.use("/tag", Tag);

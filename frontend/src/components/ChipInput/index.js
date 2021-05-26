@@ -3,9 +3,10 @@ import { TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { ChipStyled } from './style';
 
-export default function ChipsArray({ value, onChange, suggestions }) {
+export default function ChipsArray({ value, onChange, suggestions, ...props }) {
   return (
     <Autocomplete
+      {...props}
       multiple
       id="tags-filled"
       options={suggestions.map((item) => item)}

@@ -1,11 +1,14 @@
 import React from 'react';
 import { useFormik } from 'formik';
+import api from '@api';
+
+// ROTAS
+import { QUIZ } from '@routes';
 
 // COMPONENTS
 import GridContainer from '@components/Container';
 import ChipInput from '@components/ChipInput';
-
-// MATERIAL-UI COMPONENTS
+import DragImageInput from '@components/DragZone';
 import {
   Grid,
   Button,
@@ -14,20 +17,44 @@ import {
   MenuItem,
   TextField,
 } from '@material-ui/core';
+import { PreviewImage } from './style';
 
-// MATERIAL-UI ICONS
-
-const CriarQuiz = () => {
+const CriarQuiz = ({ history }) => {
   const formik = useFormik({
     initialValues: {
       title: '',
       description: '',
       visibility: 'public',
-      file: {},
+      imageObj: null,
+      imageUrl: '',
       tags: ['UTFPR', 'QUIZ'],
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      let responseFile = null;
+
+      if (values.imageObj !== null) {
+        const file = new FormData();
+        file.append('file', values.imageObj);
+
+        responseFile = await api.post('/files', file);
+      }
+
+      const quiz = {
+        title: values.title,
+        tags: values.tags,
+        description: values.description,
+        visibility: values.visibility,
+      };
+
+      if (responseFile) {
+        quiz.id_image = responseFile.data.id;
+      }
+
+      const responseQuiz = await api.post('/quiz/create', quiz);
+
+      if (responseQuiz.status === 200) {
+        history.push(QUIZ);
+      }
     },
   });
 
@@ -51,6 +78,18 @@ const CriarQuiz = () => {
         onSubmit={formik.handleSubmit}
         spacing={2}
       >
+        <Grid item xs={12}>
+          <PreviewImage src={formik.values.imageUrl} />
+        </Grid>
+        <Grid item xs={12}>
+          <DragImageInput
+            handleChange={(files) => {
+              formik.setFieldValue('imageObj', files[0]);
+              formik.setFieldValue('imageUrl', URL.createObjectURL(files[0]));
+            }}
+          />
+        </Grid>
+
         <Grid item xs={6}>
           <TextField
             fullWidth
@@ -95,17 +134,6 @@ const CriarQuiz = () => {
             multiline
             rows={5}
             rowsMax={5}
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <TextField
-            type="file"
-            name="Imagem de Capa"
-            id="file"
-            onChange={(event) =>
-              formik.setFieldValue('file', event.target.files[0])
-            }
           />
         </Grid>
 

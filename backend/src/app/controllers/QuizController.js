@@ -6,6 +6,7 @@ import Teacher from "../models/TeacherModel";
 import Question from "../models/QuestionModel";
 import Answer from "../models/AnswerModel";
 import Tag from "../models/TagModel";
+import File from '../models/FileModel';
 
 class QuizController {
   async store(req, res) {
@@ -20,13 +21,7 @@ class QuizController {
           .required()
           .max(10),
         id_image: Yup.number(),
-        tags: Yup.array()
-          .of(
-            Yup.object().shape({
-              name: Yup.string()
-            })
-          )
-          .required("Informe as tags do quiz!")
+        tags: Yup.array().required("Informe as tags do quiz!")
       });
 
       //Check body of requisiton
@@ -34,8 +29,10 @@ class QuizController {
         return res.status(401).json({ error: "Falha na validação!" });
 
       const id_teacher = req.userId;
-      const quiz = await Quiz.create({ ...req.body, id_teacher });
 
+      const quiz = await Quiz.create({ ...req.body, id_teacher });
+      console.log("passado",req.body);
+      console.log("quiz",quiz);
       const { tags } = req.body;
 
       tags.map(async tagObject => {
@@ -43,12 +40,14 @@ class QuizController {
         //Created = flag to inform if some tag was created
         const [tag, Created] = await Tag.findOrCreate({
           where: {
-            name: tagObject.name
+            name: tagObject
           }
         });
 
         tag.addQuiz(quiz);
       });
+
+    
 
       return res.status(200).json({
         quiz
@@ -68,6 +67,11 @@ class QuizController {
             model: Teacher,
             as: "teacher",
             attributes: ["name", "email"]
+          },
+          {
+            model: File,
+            as: "image_quiz",
+            attributes: ["url","path", "name"]       
           },
           //{
             //model: Question,
@@ -103,11 +107,12 @@ class QuizController {
       });
 
       if(!quizzes.length)
-      return res.status(400).json({error: "Não existe nenhum quiz cadastrado."});
+      return res.status(204).json({error: "Não existe nenhum quiz cadastrado."});
 
 
       return res.status(200).json(quizzes);
     }catch(err){
+      console.log(err)
       return res.status(500).json(err);
     }
   }
@@ -160,7 +165,7 @@ class QuizController {
         ]
       });
 
-      if(!quiz.length) return res.status(400).json({error: "Não existe nenhum quiz com a tag informada."});
+      if(!quiz.length) return res.status(204).json({error: "Não existe nenhum quiz com a tag informada."});
 
       return res.status(200).json(quiz);
     }catch(err){

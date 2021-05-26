@@ -30,7 +30,7 @@ module.exports = {
       id_image: {
         type: Sequelize.INTEGER,
         foreignKey: true,
-        references: { model: "files", key: "id" },
+        references: { model: "file", key: "id" },
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
         allowNull: true

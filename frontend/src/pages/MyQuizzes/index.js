@@ -26,7 +26,7 @@ import {
 import { Edit, Delete } from '@material-ui/icons';
 
 const Quiz = () => {
-  const [quizzes, setQuizzes] = useState([]);
+  const [quizzes, setQuizzes] = useState(false);
 
   const [isModalOpen, setModalOpen] = useState({
     open: false,
@@ -43,8 +43,10 @@ const Quiz = () => {
   useEffect(() => {
     const getQuizzes = async () => {
       try {
-        const { data } = await api.get('/quiz');
-        setQuizzes(data);
+        const response = await api.get('/quiz');
+
+        if (response.status !== 200) return;
+        setQuizzes(response.data);
       } catch (err) {
         console.log(err);
       }
@@ -70,27 +72,34 @@ const Quiz = () => {
             Criar Quiz
           </Button>
         </Grid>
-
         <Grid item>
           <Divider />
         </Grid>
-        {quizzes.map((quiz) => (
-          <Card
-            key={quiz.id}
-            image="https://www.incimages.com/uploaded_files/image/1920x1080/getty_509107562_2000133320009280346_351827.jpg"
-            imageTitle={quiz.title}
-            title={quiz.title}
-            description={quiz.description}
-            idQuiz={quiz.id}
-          >
-            <IconButton onClick={handleOpenModal(quiz)}>
-              <Edit />
-            </IconButton>
-            <IconButton>
-              <Delete />
-            </IconButton>
-          </Card>
-        ))}
+        {!quizzes ? (
+          <p>Vazio!</p>
+        ) : (
+          quizzes.map((quiz) => (
+            <Card
+              key={quiz.id}
+              image={
+                quiz.image_quiz != null
+                  ? quiz.image_quiz.url
+                  : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png'
+              }
+              imageTitle={quiz.title}
+              title={quiz.title}
+              description={quiz.description}
+              idQuiz={quiz.id}
+            >
+              <IconButton onClick={handleOpenModal(quiz)}>
+                <Edit />
+              </IconButton>
+              <IconButton>
+                <Delete />
+              </IconButton>
+            </Card>
+          ))
+        )}
       </GridContainer>
 
       {/* MODALS */}

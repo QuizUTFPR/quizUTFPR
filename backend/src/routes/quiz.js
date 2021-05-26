@@ -5,8 +5,9 @@ const router = new Router();
 
 // CONTROLLERS
 import QuizController from "../app/controllers/QuizController";
+import QuizTeacherController from '../app/controllers/QuizTeacherController'
 
-router.get("/", QuizController.index);
+router.get("/", QuizTeacherController.index);
 router.post("/create", QuizController.store);
 router.get("/:tag", QuizController.show);
 

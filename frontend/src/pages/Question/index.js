@@ -244,30 +244,6 @@ const Question = () => {
           <StyledGrid container justify="center" align="center">
             {questions.length ? (
               <>
-                {formik.values.question.copy && (
-                  <CopiedQuestionMessage item xs={12}>
-                    <FileCopy />
-                    <span>
-                      Esta questão é uma copia retirada do banco de questões.
-                    </span>
-                  </CopiedQuestionMessage>
-                )}
-                <Grid item xs={12}>
-                  <StyledTitleInput
-                    placeholder="DIGITE O ENUNCIADO AQUI"
-                    formikID="question.title"
-                    handleFormikChange={formik.handleChange}
-                    value={formik.values.question.title}
-                    handlePropsChange={{
-                      handleUpdate: updateQuestion,
-                      key: 'title',
-                      index: formik.values.index,
-                    }}
-                    required
-                    autoFocus
-                  />
-                </Grid>
-
                 <Grid item xs={12}>
                   ̣ <PreviewImage src={formik.values.question.image} />
                 </Grid>
@@ -282,6 +258,22 @@ const Question = () => {
                       key: 'image',
                       index: formik.values.index,
                     }}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <StyledTitleInput
+                    placeholder="DIGITE O ENUNCIADO AQUI"
+                    formikID="question.title"
+                    handleFormikChange={formik.handleChange}
+                    value={formik.values.question.title}
+                    handlePropsChange={{
+                      handleUpdate: updateQuestion,
+                      key: 'title',
+                      index: formik.values.index,
+                    }}
+                    required
+                    autoFocus
                   />
                 </Grid>
 
@@ -399,27 +391,38 @@ const Question = () => {
                 </GridItemStyledRight>
 
                 <GridItemStyledRight item style={{ alignSelf: 'start' }}>
-                  <FormControlLabel
-                    control={
-                      <CheckBox
-                        disabled={Boolean(formik.values.question.copy)}
-                        style={{ width: '50px', height: '50px' }}
-                        inputProps={{
-                          'aria-label': 'primary checkbox',
-                          label: 'teste',
-                        }}
-                        checked={formik.values.question.availableOnQuestionsDB}
-                        formikID="question.availableOnQuestionsDB"
-                        handleFormikChange={formik.handleChange}
-                        handlePropsChange={{
-                          handleUpdate: updateQuestion,
-                          key: 'availableOnQuestionsDB',
-                          index: formik.values.index,
-                        }}
-                      />
-                    }
-                    label="Disponivel no Banco de Questão"
-                  />
+                  {!formik.values.question.copy ? (
+                    <FormControlLabel
+                      control={
+                        <CheckBox
+                          disabled={Boolean(formik.values.question.copy)}
+                          style={{ width: '50px', height: '50px' }}
+                          inputProps={{
+                            'aria-label': 'primary checkbox',
+                            label: 'teste',
+                          }}
+                          checked={
+                            formik.values.question.availableOnQuestionsDB
+                          }
+                          formikID="question.availableOnQuestionsDB"
+                          handleFormikChange={formik.handleChange}
+                          handlePropsChange={{
+                            handleUpdate: updateQuestion,
+                            key: 'availableOnQuestionsDB',
+                            index: formik.values.index,
+                          }}
+                        />
+                      }
+                      label="Disponivel no Banco de Questão"
+                    />
+                  ) : (
+                    <CopiedQuestionMessage item xs={12}>
+                      <FileCopy />
+                      <span>
+                        Esta questão é uma copia retirada do banco de questões.
+                      </span>
+                    </CopiedQuestionMessage>
+                  )}
                 </GridItemStyledRight>
               </>
             ) : (

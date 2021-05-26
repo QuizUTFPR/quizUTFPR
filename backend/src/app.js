@@ -7,6 +7,7 @@ import "dotenv";
 import express from "express";
 import routes from "./routes";
 import cors from 'cors'
+import path from 'path';
 // Importando banco de dados
 import "./database";
 
@@ -16,6 +17,7 @@ class App {
     this.server = express();
     this.middleware();
     this.routes();
+    
   }
 
   middleware() {
@@ -25,6 +27,10 @@ class App {
     **/
     this.server.use(express.json());
     this.server.use(cors());
+    this.server.use(
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
   }
 
   routes() {

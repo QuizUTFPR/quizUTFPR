@@ -34,6 +34,9 @@ export const StyledGrid = styled(Grid)`
 
 export const GridItemStyledRight = styled(Grid)`
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 export const StyledRightGrid = styled(StyledGrid)`

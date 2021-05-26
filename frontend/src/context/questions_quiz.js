@@ -85,9 +85,11 @@ const QuestionQuiz = ({ children }) => {
   const [isSaved, setSaved] = useState(true);
 
   const getAllQuestionOfTheQuiz = async (id) => {
-    const { data } = await api.get(`/question/quiz/${id}`);
+    const response = await api.get(`/question/quiz/${id}`);
 
-    const initialQuestions = data.map((question) => ({
+    if (response.status !== 200) return initialValue[0];
+
+    const initialQuestions = response.data.map((question) => ({
       id: question.id,
       copy: false,
       availableOnQuestionsDB: false,

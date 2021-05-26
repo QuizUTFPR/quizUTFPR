@@ -43,7 +43,7 @@ class QuestionController {
 
       const quiz = await Quiz.findByPk(quiz_id);
 
-      if (!quiz) return res.status(400).json({ error: "Quiz não encontrado!" });
+      if (!quiz) return res.status(204).json({ error: "Quiz não encontrado!" });
 
       const question = await Question.create({ title, timer, difficultyLevel });
 
@@ -104,7 +104,7 @@ class QuestionController {
         ]
       });
 
-      if(!questions.length) return res.status(400).json({error: "Não existe nenhuma questão cadastrada."});
+      if(!questions.length) return res.status(204).json({error: "Não existe nenhuma questão cadastrada."});
 
       return res.status(200).json(questions);
 
@@ -141,7 +141,7 @@ class QuestionController {
       });
 
       if(!questions.length)
-        return res.status(400).json({error: "Não existe nenhuma questão com a tag informada."});
+        return res.status(204).json({error: "Não existe nenhuma questão cadastrada."});
 
       return res.status(200).json(questions);
 
