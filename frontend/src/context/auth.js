@@ -34,9 +34,9 @@ const Auth = ({ children }) => {
   };
 
   const logout = () => {
-    setTeacherInfo(initialValue);
     localStorage.clear('@TOKEN');
     localStorage.clear('@TEACHER');
+    setTeacherInfo(initialValue);
   };
 
   return (

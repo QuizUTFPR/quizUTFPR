@@ -48,7 +48,7 @@ const Quiz = () => {
         if (response.status !== 200) return;
         setQuizzes(response.data);
       } catch (err) {
-        console.log(err);
+        //
       }
     };
 
