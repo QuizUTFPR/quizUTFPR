@@ -9,6 +9,7 @@ import QuizTeacherController from '../app/controllers/QuizTeacherController'
 
 router.get("/", QuizTeacherController.index);
 router.post("/create", QuizController.store);
+router.put("/update", QuizController.update);
 router.get("/:tag", QuizController.show);
 
 export default router;

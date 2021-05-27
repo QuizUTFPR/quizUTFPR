@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { useFormik } from 'formik';
+import api from '@api';
 
 // COMPONENTS
 import GridContainer from '@components/Container';
@@ -25,24 +26,45 @@ const Wrapper = forwardRef((props, ref) => (
 ));
 
 // eslint-disable-next-line no-unused-vars
-const TypeOfQuestion = forwardRef((props, ref) => {
+const EditPreferences = forwardRef((props, ref) => {
   const { quiz } = props;
-  console.log(quiz);
 
   const formik = useFormik({
     initialValues: {
+      id: quiz.id,
       title: quiz.title,
       description: quiz.description,
       visibility: quiz.visibility,
-      imageObj: {},
+      imageObj: null,
       imageUrl: quiz.image_quiz ? quiz.image_quiz.url : '',
       tags: quiz.tags_quiz.map((tag) => tag.name),
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      let responseFile = null;
+
+      if (values.imageObj !== null) {
+        const file = new FormData();
+        file.append('file', values.imageObj);
+
+        responseFile = await api.post('/files', file);
+      }
+
+      const quizUpdated = {
+        id: values.id,
+        title: values.title,
+        tags: values.tags,
+        description: values.description,
+        visibility: values.visibility,
+      };
+
+      if (responseFile) {
+        quizUpdated.id_image = responseFile.data.id;
+      }
+
+      const responseQuiz = await api.put('/quiz/update', quizUpdated);
+      if (responseQuiz.status === 200) props.handleClose();
     },
   });
-  console.log(formik.values);
   return (
     <Wrapper container spacing={3}>
       <Grid container justify="center" alignItems="center">
@@ -149,4 +171,4 @@ const TypeOfQuestion = forwardRef((props, ref) => {
   );
 });
 
-export default TypeOfQuestion;
+export default EditPreferences;

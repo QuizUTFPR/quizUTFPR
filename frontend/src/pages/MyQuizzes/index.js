@@ -53,7 +53,7 @@ const Quiz = () => {
     };
 
     getQuizzes();
-  }, []);
+  }, [isModalOpen]);
 
   return (
     <>

@@ -8,6 +8,8 @@ import Answer from "../models/AnswerModel";
 import Tag from "../models/TagModel";
 import File from '../models/FileModel';
 
+import getMethod from '../utils/getMethodsOfAssociation'
+
 class QuizController {
   async store(req, res) {
     try{
@@ -174,7 +176,67 @@ class QuizController {
   }
 
   // Altera um único registro
-  update() {}
+  async update(req, res) {
+    try{
+      const schema = Yup.object().shape({
+        id: Yup.number().required(),
+        title: Yup.string()
+          .min(1, "Seu título deve conter pelo menos um caracter.")
+          .max(300, "Máximo de caracteres atingidos.")
+          .required(),
+        description: Yup.string().required(),
+        visibility: Yup.string()
+          .required()
+          .max(10),
+        id_image: Yup.number(),
+        tags: Yup.array().required("Informe as tags do quiz!")
+      });
+
+      //Check body of requisiton
+      if (!(await schema.isValid(req.body)))
+        return res.status(401).json({ error: "Falha na validação!" });
+
+        const {id, tags, title, description,
+         visibility, id_image} = req.body
+        const quiz = await Quiz.findByPk(id);
+        quiz.title = title;
+        quiz.description = description;
+        quiz.visibility = visibility;
+        if(id_image) quiz.id_image = id_image;
+        quiz.save();
+        
+
+        const tagsAlreadyInQuiz = await quiz.getTags_quiz();
+        const arrayTagsAlreadyInQuiz = tagsAlreadyInQuiz.map(item => item.name);
+        
+
+        tags.map(async tagObject => {
+          const [tag, Created] = await Tag.findOrCreate({
+            where: {
+              name: tagObject
+            }
+          });
+          
+          if(!arrayTagsAlreadyInQuiz.find(element => element == tag)){
+            tag.addQuiz(quiz);
+          }
+        });
+        
+        tagsAlreadyInQuiz.map(tagInQuiz => {
+          if(!tags.find(element => element == tagInQuiz.name)){
+            tagInQuiz.removeQuiz(quiz);
+          }
+        })
+      
+  
+        return res.status(200).json({
+          quiz
+        });
+
+    }catch(err){
+      return res.status(500).json(err);
+    }
+  }
   // Remove um único registro
   async delete() {}
 }
