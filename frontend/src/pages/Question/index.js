@@ -47,7 +47,7 @@ import SelectInput from './components/select';
 import TagInput from './components/tagInput';
 import DragImageInput from './components/dragImage';
 import AlertRemoveMessage from './components/confirmRemove';
-import AlertFinish from './components/confirmFinish';
+import AlertGetOut from './components/confirmGetOut';
 
 // PAGES
 import TypeOfQuestion from '../TypeOfQuestion';
@@ -74,10 +74,10 @@ const Question = () => {
   const handleOpenModalTypeQuestion = () => setModalTypeOfQuestionOpen(true);
   const handleCloseModalTypeQuestion = () => setModalTypeOfQuestionOpen(false);
 
-  const [openFinishAlert, setOpenFinishAlert] = useState(false);
+  const [openGetOutAlert, setOpenGetOutAlert] = useState(false);
 
-  const handleOpenFinishAlert = () => setOpenFinishAlert(true);
-  const handleCloseFinishAlert = () => setOpenFinishAlert(false);
+  const handleOpenGetOutAlert = () => setOpenGetOutAlert(true);
+  const handleCloseGetOutAlert = () => setOpenGetOutAlert(false);
 
   const [questionOnScreen, setQuestionOnScreen] = useState({
     index: 0,
@@ -128,8 +128,8 @@ const Question = () => {
     handleChangeQuestion(questions[newIndex], newIndex)();
   };
 
-  const handleFinish = () => {
-    console.log('finalizou');
+  const handleGetOut = () => {
+    console.log('saiu');
   };
 
   return (
@@ -143,6 +143,7 @@ const Question = () => {
                 to={QUIZ}
                 color="secondary"
                 variant="outlined"
+                onClick={!isSaved && handleOpenGetOutAlert}
                 startIcon={<StyledExitIcon />}
                 size="large"
               >
@@ -183,7 +184,6 @@ const Question = () => {
               <StyledButton
                 color="primary"
                 variant="contained"
-                onClick={handleOpenFinishAlert}
                 startIcon={<CheckCircle />}
                 size="large"
               >
@@ -452,10 +452,10 @@ const Question = () => {
         />
       </Modal>
 
-      <Modal open={openFinishAlert} onClose={handleCloseFinishAlert}>
-        <AlertFinish
-          handleClose={handleCloseFinishAlert}
-          onClick={handleFinish}
+      <Modal open={openGetOutAlert} onClose={handleCloseGetOutAlert}>
+        <AlertGetOut
+          handleClose={handleCloseGetOutAlert}
+          onClick={handleGetOut}
         />
       </Modal>
     </>
