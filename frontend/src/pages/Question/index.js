@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import {
   Save,
@@ -52,7 +52,7 @@ import AlertGetOut from './components/confirmGetOut';
 // PAGES
 import TypeOfQuestion from '../TypeOfQuestion';
 
-const Question = () => {
+const Question = ({ history }) => {
   const {
     questions,
     getAllQuestionOfTheQuiz,
@@ -129,7 +129,8 @@ const Question = () => {
   };
 
   const handleGetOut = () => {
-    console.log('saiu');
+    if (isSaved) history.push(QUIZ);
+    else handleOpenGetOutAlert();
   };
 
   return (
@@ -139,11 +140,9 @@ const Question = () => {
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
               <StyledButton
-                component={Link}
-                to={QUIZ}
                 color="secondary"
                 variant="outlined"
-                onClick={!isSaved && handleOpenGetOutAlert}
+                onClick={handleGetOut}
                 startIcon={<StyledExitIcon />}
                 size="large"
               >
@@ -438,6 +437,7 @@ const Question = () => {
         modalTitle="Qual tipo de questão deseja criar?"
         modalDescription="Escolha o tipo da questão..."
         style={{ overflow: 'scroll' }}
+        handleClose={handleCloseModalTypeQuestion}
       >
         <TypeOfQuestion
           updateScreen={handleChangeQuestion}
@@ -445,18 +445,15 @@ const Question = () => {
         />
       </Modal>
 
-      <Modal open={openAlert} onClose={handleCloseAlert}>
+      <Modal open={openAlert} handleClose={handleCloseAlert}>
         <AlertRemoveMessage
           handleClose={handleCloseAlert}
           onClick={handleRemoveQuestion}
         />
       </Modal>
 
-      <Modal open={openGetOutAlert} onClose={handleCloseGetOutAlert}>
-        <AlertGetOut
-          handleClose={handleCloseGetOutAlert}
-          onClick={handleGetOut}
-        />
+      <Modal open={openGetOutAlert} handleClose={handleCloseGetOutAlert}>
+        <AlertGetOut handleClose={handleCloseGetOutAlert} />
       </Modal>
     </>
   );

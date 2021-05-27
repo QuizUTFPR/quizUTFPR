@@ -21,12 +21,7 @@ const Wrapper = forwardRef((props, ref) => (
 
 // eslint-disable-next-line no-unused-vars
 const GetOutAlert = forwardRef((props, ref) => {
-  const { onClick, handleClose } = props;
-
-  const handleGetOut = () => {
-    onClick();
-    handleClose();
-  };
+  const { handleClose } = props;
 
   return (
     <Wrapper>
@@ -41,12 +36,7 @@ const GetOutAlert = forwardRef((props, ref) => {
         <Button onClick={handleClose} color="primary">
           Cancelar
         </Button>
-        <Button
-          component={Link}
-          to={QUIZ}
-          onClick={handleGetOut}
-          color="primary"
-        >
+        <Button component={Link} to={QUIZ} color="primary">
           Sair mesmo assim
         </Button>
       </DialogActions>

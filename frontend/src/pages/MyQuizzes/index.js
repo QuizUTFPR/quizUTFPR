@@ -108,6 +108,7 @@ const Quiz = () => {
         modalTitle="Prefêrencias do Quiz"
         modalDescription="Edite os dados de seu quiz..."
         style={{ overflow: 'scroll' }}
+        handleClose={handleCloseModal}
       >
         <QuizPreferences
           quiz={isModalOpen.quiz}

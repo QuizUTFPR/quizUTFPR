@@ -27,6 +27,7 @@ const Wrapper = forwardRef((props, ref) => (
 // eslint-disable-next-line no-unused-vars
 const TypeOfQuestion = forwardRef((props, ref) => {
   const { quiz } = props;
+  console.log(quiz);
 
   const formik = useFormik({
     initialValues: {
@@ -34,14 +35,14 @@ const TypeOfQuestion = forwardRef((props, ref) => {
       description: quiz.description,
       visibility: quiz.visibility,
       imageObj: {},
-      imageUrl: '',
+      imageUrl: quiz.image_quiz ? quiz.image_quiz.url : '',
       tags: quiz.tags_quiz.map((tag) => tag.name),
     },
     onSubmit: (values) => {
       console.log(values);
     },
   });
-
+  console.log(formik.values);
   return (
     <Wrapper container spacing={3}>
       <Grid container justify="center" alignItems="center">
