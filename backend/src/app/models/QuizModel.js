@@ -41,7 +41,8 @@ class Quiz extends Model {
     this.belongsToMany(models.Tag, {
       through: 'quiz_tags',
       foreignKey: "quiz_id",
-      as: 'tags_quiz'
+      as: 'tags_quiz',
+      onDelete: 'CASCADE',
     })
 
     this.belongsTo(models.File, { foreignKey: "id_image", as: "image" });

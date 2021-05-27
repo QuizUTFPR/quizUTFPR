@@ -33,7 +33,8 @@ class Question extends Model {
     this.belongsToMany(models.Tag, {
       through: "question_tags",
       foreignKey: "question_id",
-      as: "tags_question"
+      as: "tags_question",
+      onDelete: 'CASCADE',
     });
   }
 }

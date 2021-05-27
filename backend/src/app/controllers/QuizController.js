@@ -238,7 +238,23 @@ class QuizController {
     }
   }
   // Remove um único registro
-  async delete() {}
+  async delete(req, res) {
+    try{
+      const {id_quiz} = req.body;
+
+      console.log(req)
+
+      const numberOfRowsDeleted = await Quiz.destroy({
+        where: { id: id_quiz }
+      });
+
+      if(numberOfRowsDeleted < 1) return res.status(204).json({error: "Não existe nenhum quiz com o ID informado."});
+      
+      return res.status(200).json(numberOfRowsDeleted);
+    }catch(err){
+      return res.status(500).json(err);
+    }
+  }
 }
 
 export default new QuizController();

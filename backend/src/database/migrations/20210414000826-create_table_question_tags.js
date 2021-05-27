@@ -7,6 +7,7 @@ module.exports = {
         type: Sequelize.STRING(100),
         primaryKey: true,
         allowNull: false,
+        onDelete: 'CASCADE',
         references: {
           model: "tag",
           key: "name"
@@ -16,6 +17,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
+        onDelete: 'CASCADE',
         references: {
           model: "question",
           key: "id"
