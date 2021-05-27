@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
-import {
-  Save,
-  CheckCircle,
-  AddCircle,
-  Delete,
-  Done,
-  Warning,
-  FileCopy,
-} from '@material-ui/icons/';
 
 // ROUTES
 import { QUIZ } from '@routes';
@@ -18,34 +9,12 @@ import { QUIZ } from '@routes';
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
 // COMPONENTS
-import { Grid, Typography, Toolbar, FormControlLabel } from '@material-ui/core';
 import Modal from '@components/Modal';
-import StyledButton from '@components/Button';
-import {
-  StyledRightGrid,
-  StyledLeftGrid,
-  ContainerGrid,
-  StyledAnswerInput,
-  StyledTitleInput,
-  StyledGrid,
-  GridButtonNewQuestion,
-  GridRegisterQuestion,
-  StyledAppBar,
-  CardSelectQuestion,
-  PreviewImage,
-  GridItemStyledRight,
-  GridQuestions,
-  StyledMessage,
-  BoxStyledAction,
-  WrapperMessage,
-  CopiedQuestionMessage,
-  StyledExitIcon,
-} from './style';
-
-import CheckBox from './components/checkbox';
-import SelectInput from './components/select';
-import TagInput from './components/tagInput';
-import DragImageInput from './components/dragImage';
+import { ContainerGrid } from './style';
+import Header from './components/header';
+import LeftSide from './components/leftSide';
+import MiddleSide from './components/middleSide';
+import RightSide from './components/rightSide';
 import AlertRemoveMessage from './components/confirmRemove';
 import AlertGetOut from './components/confirmGetOut';
 
@@ -53,6 +22,8 @@ import AlertGetOut from './components/confirmGetOut';
 import TypeOfQuestion from '../TypeOfQuestion';
 
 const Question = ({ history, location }) => {
+  // eslint-disable-next-line camelcase
+  const { id_quiz } = useParams();
   const {
     questions,
     getAllQuestionOfTheQuiz,
@@ -63,43 +34,35 @@ const Question = ({ history, location }) => {
     isSaved,
   } = useQuestionQuiz();
 
-  const [isModalTypeOfQuestionOpen, setModalTypeOfQuestionOpen] =
-    useState(false);
-
+  const [openTypeOfQuestion, setOpenTypeOfQuestion] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
-
-  const handleClickOpenAlert = () => setOpenAlert(true);
-  const handleCloseAlert = () => setOpenAlert(false);
-
-  const handleOpenModalTypeQuestion = () => setModalTypeOfQuestionOpen(true);
-  const handleCloseModalTypeQuestion = () => setModalTypeOfQuestionOpen(false);
-
   const [openGetOutAlert, setOpenGetOutAlert] = useState(false);
-
-  const handleOpenGetOutAlert = () => setOpenGetOutAlert(true);
-  const handleCloseGetOutAlert = () => setOpenGetOutAlert(false);
-
-  const [questionOnScreen, setQuestionOnScreen] = useState({
+  const [onScreen, setOnScreen] = useState({
     index: 0,
     question: questions[0],
   });
 
-  // eslint-disable-next-line camelcase
-  const { id_quiz } = useParams();
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: onScreen,
+  });
+
+  const handleClickOpenAlert = () => setOpenAlert(true);
+  const handleCloseAlert = () => setOpenAlert(false);
+  const handleOpenModalTypeQuestion = () => setOpenTypeOfQuestion(true);
+  const handleCloseModalTypeQuestion = () => setOpenTypeOfQuestion(false);
+  const handleOpenGetOutAlert = () => setOpenGetOutAlert(true);
+  const handleCloseGetOutAlert = () => setOpenGetOutAlert(false);
+
   useEffect(() => {
     const fetch = async () => {
       // eslint-disable-next-line camelcase
       const firstQuestion = await getAllQuestionOfTheQuiz(id_quiz);
-      setQuestionOnScreen({ index: 0, question: firstQuestion });
+      setOnScreen({ index: 0, question: firstQuestion });
     };
 
     fetch();
   }, []);
-
-  const formik = useFormik({
-    enableReinitialize: true,
-    initialValues: questionOnScreen,
-  });
 
   const handleChangeQuestion = (oldQuestion, index) => () => {
     if (index < 0) return;
@@ -112,7 +75,7 @@ const Question = ({ history, location }) => {
           : URL.createObjectURL(oldQuestion.image),
     };
 
-    setQuestionOnScreen({ index, question });
+    setOnScreen({ index, question });
   };
 
   const handleRemoveQuestion = () => {
@@ -135,305 +98,42 @@ const Question = ({ history, location }) => {
 
   return (
     <>
-      <StyledAppBar position="static" color="transparent">
-        <Toolbar>
-          <Grid container justify="space-between" alignItems="center">
-            <Grid item>
-              <StyledButton
-                color="secondary"
-                variant="outlined"
-                onClick={handleGetOut}
-                startIcon={<StyledExitIcon />}
-                size="large"
-              >
-                Sair
-              </StyledButton>
-            </Grid>
-
-            <Grid item>
-              <Typography component="h4" variant="h4" color="primary">
-                {location.state ? location.state.title : 'Sem Título'}
-              </Typography>
-            </Grid>
-
-            <BoxStyledAction>
-              {isSaved ? (
-                <WrapperMessage>
-                  <Done />
-                  <StyledMessage>Salvo</StyledMessage>
-                </WrapperMessage>
-              ) : (
-                <WrapperMessage>
-                  <Warning />
-                  <StyledMessage>Não Salvo</StyledMessage>
-                </WrapperMessage>
-              )}
-
-              <StyledButton
-                style={{ marginRight: '20px' }}
-                color="primary"
-                variant="outlined"
-                onClick={saveQuestionOnDatabase}
-                startIcon={<Save />}
-                size="large"
-                disabled={isSaved}
-              >
-                Salvar
-              </StyledButton>
-              <StyledButton
-                color="primary"
-                variant="contained"
-                startIcon={<CheckCircle />}
-                size="large"
-              >
-                Finalizar
-              </StyledButton>
-            </BoxStyledAction>
-          </Grid>
-        </Toolbar>
-      </StyledAppBar>
+      <Header
+        handleGetOut={handleGetOut}
+        location={location}
+        saveQuestionOnDatabase={saveQuestionOnDatabase}
+        isSaved={isSaved}
+      />
 
       <ContainerGrid container>
         {/* LEFT */}
-
-        <Grid item xs={2}>
-          <StyledLeftGrid container align="center">
-            <Grid item xs={12}>
-              <Typography color="primary" component="h5" variant="h5">
-                Questões
-              </Typography>
-            </Grid>
-
-            <GridQuestions container>
-              {questions.map((item, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <Grid item xs={12} key={index}>
-                  <CardSelectQuestion
-                    isonscreen={
-                      index === questionOnScreen.index ? 'true' : 'false'
-                    }
-                    color="primary"
-                    variant="outlined"
-                    fullWidth
-                    onClick={handleChangeQuestion(item, index)}
-                  >
-                    {item.title ? item.title : 'Sem Título'}
-                  </CardSelectQuestion>
-                </Grid>
-              ))}
-            </GridQuestions>
-
-            <GridButtonNewQuestion item xs={12}>
-              <StyledButton
-                onClick={handleOpenModalTypeQuestion}
-                fullWidth
-                variant="contained"
-                color="secondary"
-                startIcon={<AddCircle />}
-                size="large"
-              >
-                CRIAR NOVA QUESTÃO
-              </StyledButton>
-            </GridButtonNewQuestion>
-          </StyledLeftGrid>
-        </Grid>
+        <LeftSide
+          questions={questions}
+          questionOnScreen={onScreen}
+          handleOpenModalTypeQuestion={handleOpenModalTypeQuestion}
+          handleChangeQuestion={handleChangeQuestion}
+        />
 
         {/* MIDDLE */}
-        <Grid item xs={7}>
-          <StyledGrid container justify="center" align="center">
-            {questions.length ? (
-              <>
-                <Grid item xs={12}>
-                  ̣ <PreviewImage src={formik.values.question.image} />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <DragImageInput
-                    formikID="question.image"
-                    name="Imagem de Capa"
-                    handleFormikChange={formik.setFieldValue}
-                    handlePropsChange={{
-                      handleUpdate: updateQuestion,
-                      key: 'image',
-                      index: formik.values.index,
-                    }}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <StyledTitleInput
-                    placeholder="DIGITE O ENUNCIADO AQUI"
-                    formikID="question.title"
-                    handleFormikChange={formik.handleChange}
-                    value={formik.values.question.title}
-                    handlePropsChange={{
-                      handleUpdate: updateQuestion,
-                      key: 'title',
-                      index: formik.values.index,
-                    }}
-                    required
-                    autoFocus
-                  />
-                </Grid>
-
-                <Grid container align="center" justify="center" spacing={2}>
-                  {formik.values.question.answer.map((item, index) => (
-                    <Grid
-                      item
-                      xs={12}
-                      md={6}
-                      // eslint-disable-next-line react/no-array-index-key
-                      key={index}
-                      style={{
-                        display: 'flex',
-                        height: '80px',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <CheckBox
-                        style={{ width: '50px', height: '50px' }}
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                        checked={Boolean(item.is_correct)}
-                        formikID={`question.answer[${index}].is_correct`}
-                        handleFormikChange={formik.handleChange}
-                        handlePropsChange={{
-                          handleUpdate: updateAnswer,
-                          key: 'is_correct',
-                          indexQuestion: formik.values.index,
-                          indexAnswer: index,
-                        }}
-                      />
-                      <StyledAnswerInput
-                        type="text"
-                        placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
-                        formikID={`question.answer[${index}].title`}
-                        value={item.title}
-                        handleFormikChange={formik.handleChange}
-                        handlePropsChange={{
-                          handleUpdate: updateAnswer,
-                          key: 'title',
-                          indexQuestion: formik.values.index,
-                          indexAnswer: index,
-                        }}
-                        required
-                      />
-                    </Grid>
-                  ))}
-                </Grid>
-
-                <GridRegisterQuestion item xs={6}>
-                  <StyledButton
-                    type="submit"
-                    fullWidth
-                    color="secondary"
-                    variant="outlined"
-                    onClick={handleClickOpenAlert}
-                    startIcon={<Delete />}
-                    size="large"
-                  >
-                    Excluir Questão
-                  </StyledButton>
-                </GridRegisterQuestion>
-              </>
-            ) : (
-              <p>Vazio!</p>
-            )}
-          </StyledGrid>
-        </Grid>
+        <MiddleSide
+          questions={questions}
+          formik={formik}
+          updateQuestion={updateQuestion}
+          updateAnswer={updateAnswer}
+          handleClickOpenAlert={handleClickOpenAlert}
+        />
 
         {/* RIGHT */}
-
-        <Grid item xs={3}>
-          <StyledRightGrid container align="center" direction="column">
-            <Grid item style={{ marginBottom: '40px' }}>
-              <Typography color="primary" component="h5" variant="h5">
-                Detalhes da Questão
-              </Typography>
-            </Grid>
-
-            {questions.length ? (
-              <>
-                <GridItemStyledRight item>
-                  <SelectInput
-                    fullWidth
-                    label="Tempo"
-                    name="time"
-                    variant="outlined"
-                    formikID="question.timer"
-                    value={formik.values.question.timer}
-                    handleFormikChange={formik.handleChange}
-                    handlePropsChange={{
-                      handleUpdate: updateQuestion,
-                      key: 'timer',
-                      index: formik.values.index,
-                    }}
-                    required
-                  >
-                    <option value={92}>92 segundos</option>
-                    <option value={30}>30 segundos</option>
-                  </SelectInput>
-                </GridItemStyledRight>
-
-                <GridItemStyledRight item>
-                  <TagInput
-                    fullWidth
-                    suggestions={['Aprenda', 'JavaScript']}
-                    value={formik.values.question.tags}
-                    formikID="question.tags"
-                    handleFormikChange={formik.setFieldValue}
-                    handlePropsChange={{
-                      handleUpdate: updateQuestion,
-                      key: 'tags',
-                      index: formik.values.index,
-                    }}
-                  />
-                </GridItemStyledRight>
-
-                <GridItemStyledRight item style={{ alignSelf: 'start' }}>
-                  {!formik.values.question.copy ? (
-                    <FormControlLabel
-                      control={
-                        <CheckBox
-                          disabled={Boolean(formik.values.question.copy)}
-                          style={{ width: '50px', height: '50px' }}
-                          inputProps={{
-                            'aria-label': 'primary checkbox',
-                            label: 'teste',
-                          }}
-                          checked={
-                            formik.values.question.availableOnQuestionsDB
-                          }
-                          formikID="question.availableOnQuestionsDB"
-                          handleFormikChange={formik.handleChange}
-                          handlePropsChange={{
-                            handleUpdate: updateQuestion,
-                            key: 'availableOnQuestionsDB',
-                            index: formik.values.index,
-                          }}
-                        />
-                      }
-                      label="Disponivel no Banco de Questão"
-                    />
-                  ) : (
-                    <CopiedQuestionMessage item xs={12}>
-                      <FileCopy />
-                      <span>
-                        Esta questão é uma copia retirada do banco de questões.
-                      </span>
-                    </CopiedQuestionMessage>
-                  )}
-                </GridItemStyledRight>
-              </>
-            ) : (
-              <p>Vazio!</p>
-            )}
-          </StyledRightGrid>
-        </Grid>
+        <RightSide
+          formik={formik}
+          updateQuestion={updateQuestion}
+          questions={questions}
+        />
       </ContainerGrid>
 
       {/* MODALS */}
       <Modal
-        open={isModalTypeOfQuestionOpen}
+        open={openTypeOfQuestion}
         modalTitle="Qual tipo de questão deseja criar?"
         modalDescription="Escolha o tipo da questão..."
         style={{ overflow: 'scroll' }}

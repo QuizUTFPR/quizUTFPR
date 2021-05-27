@@ -35,7 +35,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
     props.updateScreen(mockup, questions.length)();
     props.handleClose();
   };
-  console.log(isModalQuestionDatabaseOpen);
+
   return (
     <>
       <StyledWrapper
