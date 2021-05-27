@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import * as yup from 'yup';
 import PropTypes from 'prop-types';
 import api from '@api';
 
@@ -107,7 +108,28 @@ const QuestionQuiz = ({ children }) => {
 
   const saveQuestionOnDatabase = () => {
     setSaved(true);
-    console.log('query', questions);
+
+    const schemeQuestion = yup.object().shape({
+      id: yup.number().required(),
+      copy: yup.boolean().required(),
+      availableOnQuestionsDB: yup.boolean().required(),
+      // eslint-disable-next-line react/forbid-prop-types
+      image: yup.object().nullable(),
+      title: yup.string().min(1).required(),
+      timer: yup.number().required(),
+      difficultyLevel: yup.number().required(),
+      tags: yup.array().of(yup.string()).required(),
+      // eslint-disable-next-line react/forbid-prop-types
+      answer: yup.array().of(yup.object()),
+    });
+
+    questions.map(async (question) => {
+      if (!(await schemeQuestion.isValid(question))) {
+        console.log('invalido', question);
+      } else {
+        console.log('valido', question);
+      }
+    });
   };
 
   const addQuestion = (item) => {
