@@ -3,24 +3,28 @@ import { TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const InputAutoComplete = ({
+  id,
   stateValue,
-  // onChange,
+  onChange,
   suggestions,
   variant,
   label,
   placeholder,
 }) => (
   <Autocomplete
-    id="free-solo-input"
     options={suggestions.map((item) => item)}
-    value={stateValue}
     freeSolo
-    onChange={(e) => console.log(e)}
+    id={id}
+    value={stateValue}
+    onChange={(e, value) => onChange(id)(value)}
     renderInput={(params) => (
       <TextField
+        required
         {...params}
+        id={id}
         variant={variant}
         label={label}
+        onChange={onChange}
         placeholder={placeholder}
       />
     )}

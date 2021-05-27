@@ -1,7 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 
 // COMPONENTS
-import GridContainer from '@components/Container';
 import Modal from '@components/Modal';
 import Button from '@components/Button';
 import { IconButton, Grid, Typography, Divider } from '@material-ui/core';
@@ -13,9 +12,8 @@ import { Save, Search, Close } from '@material-ui/icons/';
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 import QuestionDatabase from '../QuestionDatabase';
 
-const Wrapper = forwardRef((props, ref) => (
-  <GridContainer ref={ref} {...props} />
-));
+// STYLE
+import { StyledWrapper } from './style';
 
 // eslint-disable-next-line no-unused-vars
 const TypeOfQuestion = forwardRef((props, ref) => {
@@ -37,10 +35,14 @@ const TypeOfQuestion = forwardRef((props, ref) => {
     props.updateScreen(mockup, questions.length)();
     props.handleClose();
   };
-
+  console.log(isModalQuestionDatabaseOpen);
   return (
     <>
-      <Wrapper container spacing={3}>
+      <StyledWrapper
+        container
+        spacing={3}
+        isVisible={isModalQuestionDatabaseOpen}
+      >
         <Grid container justify="center" alignItems="center">
           <Grid item xs={3} md={1}>
             <IconButton aria-label="closeModal" onClick={props.handleClose}>
@@ -94,7 +96,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
             </Button>
           </Grid>
         </Grid>
-      </Wrapper>
+      </StyledWrapper>
 
       <Modal
         open={isModalQuestionDatabaseOpen}

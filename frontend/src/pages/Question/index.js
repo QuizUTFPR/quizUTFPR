@@ -52,7 +52,7 @@ import AlertGetOut from './components/confirmGetOut';
 // PAGES
 import TypeOfQuestion from '../TypeOfQuestion';
 
-const Question = ({ history }) => {
+const Question = ({ history, location }) => {
   const {
     questions,
     getAllQuestionOfTheQuiz,
@@ -152,7 +152,7 @@ const Question = ({ history }) => {
 
             <Grid item>
               <Typography component="h4" variant="h4" color="primary">
-                Título do Quiz
+                {location.state ? location.state.title : 'Sem Título'}
               </Typography>
             </Grid>
 
