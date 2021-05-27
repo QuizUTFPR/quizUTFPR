@@ -33,8 +33,8 @@ class QuizController {
       const id_teacher = req.userId;
 
       const quiz = await Quiz.create({ ...req.body, id_teacher });
-      console.log("passado",req.body);
-      console.log("quiz",quiz);
+
+
       const { tags } = req.body;
 
       tags.map(async tagObject => {
@@ -114,7 +114,6 @@ class QuizController {
 
       return res.status(200).json(quizzes);
     }catch(err){
-      console.log(err)
       return res.status(500).json(err);
     }
   }
@@ -242,7 +241,6 @@ class QuizController {
     try{
       const {id_quiz} = req.body;
 
-      console.log(req)
 
       const numberOfRowsDeleted = await Quiz.destroy({
         where: { id: id_quiz }
