@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+// HOOKS
+import useQuestionQuiz from '@hooks/QuestionQuiz';
+
 import { TextField } from '@material-ui/core';
 
 const SelectInput = ({
@@ -11,19 +14,27 @@ const SelectInput = ({
 }) => {
   const [timer, setTimer] = useState(null);
 
+  const { setTyping } = useQuestionQuiz();
+
   const handleUpdateContext = ({ handleUpdate, ...params }) => {
     if (timer) {
       clearTimeout(timer);
       setTimer(null);
     }
 
-    setTimer(setTimeout(() => handleUpdate({ ...params }), 500));
+    setTimer(
+      setTimeout(() => {
+        handleUpdate({ ...params });
+        setTyping(false);
+      }, 500)
+    );
   };
 
   return (
     <TextField
       id={formikID}
       onChange={(e) => {
+        setTyping(true);
         handleFormikChange(formikID)(e);
         handleUpdateContext({ value: e.target.value, ...handlePropsChange });
       }}

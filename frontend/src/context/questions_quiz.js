@@ -1,11 +1,12 @@
 import React, { createContext, useState } from 'react';
-import * as yup from 'yup';
 import PropTypes from 'prop-types';
 import api from '@api';
+import * as yup from 'yup';
 
 export const QuestionQuizContext = createContext();
 
 export const MockupQuestionTrueOrFalse = {
+  id: -1,
   copy: false,
   title: '',
   timer: 30,
@@ -25,6 +26,7 @@ export const MockupQuestionTrueOrFalse = {
 };
 
 export const MockupQuestionMultipleChoice = {
+  id: -1,
   copy: false,
   title: '',
   timer: 30,
@@ -53,6 +55,7 @@ export const MockupQuestionMultipleChoice = {
 
 export const initialValue = [
   {
+    id: -1,
     copy: false,
     title: '',
     correctAnswer: true,
@@ -82,8 +85,16 @@ export const initialValue = [
 ];
 
 const QuestionQuiz = ({ children }) => {
+  const initialValueErrors = {
+    title: false,
+    is_correct: false,
+    answer: false,
+  };
+
   const [questions, setQuestions] = useState(initialValue);
   const [isSaved, setSaved] = useState(true);
+  const [isTyping, setTyping] = useState(false);
+  const [errors, setErrors] = useState(initialValueErrors);
 
   const getAllQuestionOfTheQuiz = async (id) => {
     const response = await api.get(`/question/quiz/${id}`);
@@ -108,43 +119,22 @@ const QuestionQuiz = ({ children }) => {
 
   const saveQuestionOnDatabase = () => {
     setSaved(true);
-
-    const schemeQuestion = yup.object().shape({
-      id: yup.number().required(),
-      copy: yup.boolean().required(),
-      availableOnQuestionsDB: yup.boolean().required(),
-      // eslint-disable-next-line react/forbid-prop-types
-      image: yup.object().nullable(),
-      title: yup.string().min(1).required(),
-      timer: yup.number().required(),
-      difficultyLevel: yup.number().required(),
-      tags: yup.array().of(yup.string()).required(),
-      // eslint-disable-next-line react/forbid-prop-types
-      answer: yup.array().of(yup.object()),
-    });
-
-    questions.map(async (question) => {
-      if (!(await schemeQuestion.isValid(question))) {
-        console.log('invalido', question);
-      } else {
-        console.log('valido', question);
-      }
-    });
   };
 
   const addQuestion = (item) => {
-    setSaved(false);
     setQuestions((prevState) => [...prevState, item]);
+    setSaved(false);
+    setErrors(initialValueErrors);
   };
 
   const removeQuestion = (index) => {
-    setSaved(false);
     const newQuestions = questions.filter((element, i) => i !== index);
     setQuestions(newQuestions);
+    setSaved(false);
+    setErrors(initialValueErrors);
   };
 
   const updateQuestion = ({ value, key, index }) => {
-    setSaved(false);
     const newQuestions = questions.map((question, i) => {
       if (i === index) {
         return {
@@ -157,10 +147,11 @@ const QuestionQuiz = ({ children }) => {
     });
 
     setQuestions(newQuestions);
+    setSaved(false);
+    setErrors(initialValueErrors);
   };
 
   const updateAnswer = ({ value, key, indexQuestion, indexAnswer }) => {
-    setSaved(false);
     const newQuestions = questions.map((question, i) => {
       if (i === indexQuestion) {
         return {
@@ -184,13 +175,49 @@ const QuestionQuiz = ({ children }) => {
     });
 
     setQuestions(newQuestions);
+    setSaved(false);
+    setErrors(initialValueErrors);
   };
+
+  const validationSchemeQuestion = yup.object().shape({
+    id: yup.number().required(),
+    copy: yup.boolean().required(),
+    availableOnQuestionsDB: yup.boolean().required(),
+    image: yup.object().nullable(),
+    title: yup.string().min(1).required(),
+    timer: yup.number().required(),
+    difficultyLevel: yup.number(),
+    tags: yup.array().of(yup.string()).required(),
+    answer: yup
+      .array()
+      .of(
+        yup.object().shape({
+          title: yup.string().required(),
+          is_correct: yup.bool().required(),
+        })
+      )
+      .test((answer) => {
+        // eslint-disable-next-line camelcase
+        const isRight = answer.map(({ is_correct }) => is_correct);
+        if (!isRight.includes(true)) {
+          return new yup.ValidationError(
+            'Please check one checkbox',
+            null,
+            'is_correct'
+          );
+        }
+        return true;
+      }),
+  });
 
   return (
     <QuestionQuizContext.Provider
       value={{
         questions,
         isSaved,
+        setSaved,
+        isTyping,
+        setTyping,
         setQuestions,
         getAllQuestionOfTheQuiz,
         addQuestion,
@@ -200,6 +227,10 @@ const QuestionQuiz = ({ children }) => {
         updateQuestion,
         updateAnswer,
         saveQuestionOnDatabase,
+        validationSchemeQuestion,
+        errors,
+        setErrors,
+        initialValueErrors,
       }}
     >
       {children}

@@ -31,7 +31,12 @@ const Question = ({ history, location }) => {
     updateAnswer,
     removeQuestion,
     saveQuestionOnDatabase,
+    validationSchemeQuestion,
     isSaved,
+    isTyping,
+    errors,
+    setErrors,
+    initialValueErrors,
   } = useQuestionQuiz();
 
   const [openTypeOfQuestion, setOpenTypeOfQuestion] = useState(false);
@@ -66,7 +71,6 @@ const Question = ({ history, location }) => {
 
   const handleChangeQuestion = (oldQuestion, index) => () => {
     if (index < 0) return;
-
     const question = {
       ...oldQuestion,
       image:
@@ -76,6 +80,7 @@ const Question = ({ history, location }) => {
     };
 
     setOnScreen({ index, question });
+    setErrors(initialValueErrors);
   };
 
   const handleRemoveQuestion = () => {
@@ -96,13 +101,41 @@ const Question = ({ history, location }) => {
     else handleOpenGetOutAlert();
   };
 
+  const handleSave = () => {
+    // eslint-disable-next-line prefer-const
+    let isValid = true;
+
+    questions.forEach(async (question, index) => {
+      await validationSchemeQuestion
+        .validate(question, { abortEarly: false })
+        .catch((error) => {
+          // eslint-disable-next-line prefer-const
+          let newErrors = {};
+          error.inner.forEach(({ path }) => {
+            // eslint-disable-next-line prefer-const
+            let key = path;
+            if (key.includes('answer')) key = 'answer';
+
+            newErrors = { ...newErrors, [key]: true };
+          });
+          handleChangeQuestion(question, index)();
+          setErrors(newErrors);
+
+          isValid = false;
+        });
+    });
+
+    if (isValid) saveQuestionOnDatabase();
+  };
+
   return (
     <>
       <Header
         handleGetOut={handleGetOut}
         location={location}
-        saveQuestionOnDatabase={saveQuestionOnDatabase}
+        handleSave={handleSave}
         isSaved={isSaved}
+        isTyping={isTyping}
       />
 
       <ContainerGrid container>
@@ -116,6 +149,7 @@ const Question = ({ history, location }) => {
 
         {/* MIDDLE */}
         <MiddleSide
+          errors={errors}
           questions={questions}
           formik={formik}
           updateQuestion={updateQuestion}

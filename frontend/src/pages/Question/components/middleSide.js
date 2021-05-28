@@ -23,6 +23,7 @@ const MiddleSide = ({
   updateQuestion,
   updateAnswer,
   handleClickOpenAlert,
+  errors,
 }) => (
   <Grid item xs={7}>
     <StyledGrid container justify="center" align="center">
@@ -46,6 +47,7 @@ const MiddleSide = ({
           </Grid>
 
           <Grid item xs={12}>
+            {errors.title && <span>Informe o título!</span>}
             <StyledTitleInput
               placeholder="DIGITE O ENUNCIADO AQUI"
               formikID="question.title"
@@ -60,7 +62,8 @@ const MiddleSide = ({
               autoFocus
             />
           </Grid>
-
+          {errors.is_correct && <span>Informe uma alternativa correta.</span>}
+          {errors.answer && <span>Informe todas as alternativas.</span>}
           <Grid container align="center" justify="center" spacing={2}>
             {formik.values.question.answer.map((item, index) => (
               <Grid

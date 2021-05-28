@@ -1,5 +1,8 @@
 import React, { useState, memo } from 'react';
 
+// HOOKS
+import useQuestionQuiz from '@hooks/QuestionQuiz';
+
 const QuestionInput = ({
   formikID,
   handleFormikChange,
@@ -7,6 +10,7 @@ const QuestionInput = ({
   ...props
 }) => {
   const [timer, setTimer] = useState(null);
+  const { setTyping } = useQuestionQuiz();
 
   const handleUpdateContext = ({ handleUpdate, ...params }) => {
     if (timer) {
@@ -14,13 +18,18 @@ const QuestionInput = ({
       setTimer(null);
     }
 
-    setTimer(setTimeout(() => handleUpdate({ ...params }), 500));
+    setTimer(
+      setTimeout(() => {
+        handleUpdate({ ...params });
+      }, 500)
+    );
   };
 
   return (
     <input
       id={formikID}
       onChange={(e) => {
+        setTyping(true);
         handleFormikChange(formikID)(e);
         handleUpdateContext({ value: e.target.value, ...handlePropsChange });
       }}

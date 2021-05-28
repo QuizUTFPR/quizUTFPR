@@ -1,5 +1,8 @@
 import React, { useState, memo } from 'react';
 
+// HOOKS
+import useQuestionQuiz from '@hooks/QuestionQuiz';
+
 import { Checkbox } from '@material-ui/core';
 
 const CheckBoxInput = ({
@@ -9,6 +12,7 @@ const CheckBoxInput = ({
   ...props
 }) => {
   const [timer, setTimer] = useState(null);
+  const { setTyping } = useQuestionQuiz();
 
   const handleUpdateContext = ({ handleUpdate, ...params }) => {
     if (timer) {
@@ -16,13 +20,19 @@ const CheckBoxInput = ({
       setTimer(null);
     }
 
-    setTimer(setTimeout(() => handleUpdate({ ...params }), 500));
+    setTimer(
+      setTimeout(() => {
+        handleUpdate({ ...params });
+        setTyping(false);
+      }, 500)
+    );
   };
 
   return (
     <Checkbox
       id={formikID}
       onChange={(e) => {
+        setTyping(true);
         handleFormikChange(formikID)(e);
         handleUpdateContext({ value: e.target.checked, ...handlePropsChange });
       }}
