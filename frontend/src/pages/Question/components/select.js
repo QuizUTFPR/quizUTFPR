@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
 import { TextField } from '@material-ui/core';
 
-const SelectInput = ({
+export default function SelectInput({
   children,
   formikID,
   handleFormikChange,
   handlePropsChange,
   ...props
-}) => {
+}) {
   const [timer, setTimer] = useState(null);
 
   const { setTyping } = useQuestionQuiz();
@@ -30,6 +30,35 @@ const SelectInput = ({
     );
   };
 
+  const mySelect = useMemo(
+    () => (
+      <MemoizedSelect
+        handleUpdateContext={handleUpdateContext}
+        formikID={formikID}
+        handleFormikChange={handleFormikChange}
+        handlePropsChange={handlePropsChange}
+        setTyping={setTyping}
+        {...props}
+      >
+        {children}
+      </MemoizedSelect>
+    ),
+    [props.value]
+  );
+
+  return <>{mySelect}</>;
+}
+
+function MemoizedSelect({
+  formikID,
+  setTyping,
+  handleFormikChange,
+  handleUpdateContext,
+  handlePropsChange,
+  children,
+  ...props
+}) {
+  console.log(formikID, props.value);
   return (
     <TextField
       id={formikID}
@@ -45,6 +74,4 @@ const SelectInput = ({
       {children}
     </TextField>
   );
-};
-
-export default SelectInput;
+}

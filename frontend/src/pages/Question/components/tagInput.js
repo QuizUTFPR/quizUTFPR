@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
 import ChipInput from '@components/ChipInput';
 
-const TagInput = ({
+export default function TagInput({
   children,
   formikID,
   handleFormikChange,
   handlePropsChange,
   ...props
-}) => {
+}) {
   const [timer, setTimer] = useState(null);
   const { setTyping } = useQuestionQuiz();
 
@@ -29,6 +29,33 @@ const TagInput = ({
     );
   };
 
+  const myTagInput = useMemo(
+    () => (
+      <MemoizedTagInput
+        handleUpdateContext={handleUpdateContext}
+        formikID={formikID}
+        setTyping={setTyping}
+        handlePropsChange={handlePropsChange}
+        handleFormikChange={handleFormikChange}
+        {...props}
+      />
+    ),
+    [props.value]
+  );
+
+  return <>{myTagInput}</>;
+}
+
+function MemoizedTagInput({
+  formikID,
+  setTyping,
+  handleFormikChange,
+  handleUpdateContext,
+  handlePropsChange,
+  ...props
+}) {
+  console.log(formikID, props.value);
+
   return (
     <ChipInput
       id={formikID}
@@ -40,6 +67,4 @@ const TagInput = ({
       {...props}
     />
   );
-};
-
-export default TagInput;
+}

@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState } from 'react';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
@@ -38,4 +38,4 @@ const DragImageInput = ({
   return <DragZone handleChange={changeContextValue} {...props} />;
 };
 
-export default memo(DragImageInput);
+export default DragImageInput;
