@@ -128,53 +128,52 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const removeQuestion = (index) => {
-    const newQuestions = questions.filter((element, i) => i !== index);
-    setQuestions(newQuestions);
+    setQuestions((prevState) => prevState.filter((element, i) => i !== index));
     setSaved(false);
     setErrors(initialValueErrors);
   };
 
   const updateQuestion = ({ value, key, index }) => {
-    const newQuestions = questions.map((question, i) => {
-      if (i === index) {
-        return {
-          ...question,
-          [key]: value,
-        };
-      }
+    setQuestions((prevState) =>
+      prevState.map((question, i) => {
+        if (i === index) {
+          return {
+            ...question,
+            [key]: value,
+          };
+        }
 
-      return question;
-    });
-
-    setQuestions(newQuestions);
+        return question;
+      })
+    );
     setSaved(false);
     setErrors(initialValueErrors);
   };
 
   const updateAnswer = ({ value, key, indexQuestion, indexAnswer }) => {
-    const newQuestions = questions.map((question, i) => {
-      if (i === indexQuestion) {
-        return {
-          ...question,
-          answer: [
-            ...question.answer.map((answer, index) => {
-              if (index === indexAnswer) {
-                return {
-                  ...answer,
-                  [key]: value,
-                };
-              }
+    setQuestions((prevState) =>
+      prevState.map((question, i) => {
+        if (i === indexQuestion) {
+          return {
+            ...question,
+            answer: [
+              ...question.answer.map((answer, index) => {
+                if (index === indexAnswer) {
+                  return {
+                    ...answer,
+                    [key]: value,
+                  };
+                }
 
-              return answer;
-            }),
-          ],
-        };
-      }
+                return answer;
+              }),
+            ],
+          };
+        }
 
-      return question;
-    });
-
-    setQuestions(newQuestions);
+        return question;
+      })
+    );
     setSaved(false);
     setErrors(initialValueErrors);
   };

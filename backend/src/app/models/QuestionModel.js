@@ -22,12 +22,14 @@ class Question extends Model {
     this.belongsToMany(models.Quiz, {
       through: "question_quiz",
       foreignKey: "question_id",
-      as: "quizzes"
+      as: "quizzes",
+      onDelete: 'CASCADE',
     });
 
     this.hasMany(models.Answer, {
       foreignKey: "id_question",
-      as: "answer"
+      as: "answer",
+      onDelete: 'CASCADE',
     });
 
     this.belongsToMany(models.Tag, {

@@ -241,10 +241,12 @@ class QuizController {
     try{
       const {id_quiz} = req.body;
 
-
+      console.log("id",id_quiz)
       const numberOfRowsDeleted = await Quiz.destroy({
         where: { id: id_quiz }
       });
+
+      console.log(numberOfRowsDeleted)
 
       if(numberOfRowsDeleted < 1) return res.status(204).json({error: "Não existe nenhum quiz com o ID informado."});
       

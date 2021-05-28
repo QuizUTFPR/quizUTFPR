@@ -35,7 +35,8 @@ class Quiz extends Model {
     this.belongsToMany(models.Question, {
       through: 'question_quiz',
       foreignKey: "quiz_id",
-      as: 'questions'
+      as: 'questions',
+      onDelete: 'CASCADE',
     });
 
     this.belongsToMany(models.Tag, {

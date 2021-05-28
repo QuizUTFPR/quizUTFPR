@@ -38,7 +38,6 @@ const Question = ({ history, location }) => {
     setErrors,
     initialValueErrors,
   } = useQuestionQuiz();
-
   const [openTypeOfQuestion, setOpenTypeOfQuestion] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [openGetOutAlert, setOpenGetOutAlert] = useState(false);
@@ -71,15 +70,17 @@ const Question = ({ history, location }) => {
 
   const handleChangeQuestion = (oldQuestion, index) => () => {
     if (index < 0) return;
-    const question = {
-      ...oldQuestion,
-      image:
-        oldQuestion.image === null
-          ? null
-          : URL.createObjectURL(oldQuestion.image),
-    };
 
-    setOnScreen({ index, question });
+    setOnScreen({
+      index,
+      question: {
+        ...oldQuestion,
+        image:
+          oldQuestion.image === null
+            ? null
+            : URL.createObjectURL(oldQuestion.image),
+      },
+    });
     setErrors(initialValueErrors);
   };
 
@@ -102,30 +103,22 @@ const Question = ({ history, location }) => {
   };
 
   const handleSave = () => {
-    // eslint-disable-next-line prefer-const
-    let isValid = true;
-
     questions.forEach(async (question, index) => {
-      await validationSchemeQuestion
-        .validate(question, { abortEarly: false })
-        .catch((error) => {
-          // eslint-disable-next-line prefer-const
-          let newErrors = {};
-          error.inner.forEach(({ path }) => {
-            // eslint-disable-next-line prefer-const
-            let key = path;
-            if (key.includes('answer')) key = 'answer';
+      await validationSchemeQuestion.validate(question).catch((error) => {
+        // eslint-disable-next-line prefer-const
+        let newErrors = {};
 
-            newErrors = { ...newErrors, [key]: true };
-          });
-          handleChangeQuestion(question, index)();
-          setErrors(newErrors);
+        // eslint-disable-next-line prefer-const
+        let key = error.path;
+        if (key.includes('answer')) key = 'answer';
 
-          isValid = false;
-        });
+        newErrors = { ...newErrors, [key]: true };
+
+        handleChangeQuestion(question, index)();
+        setErrors(newErrors);
+      });
     });
-
-    if (isValid) saveQuestionOnDatabase();
+    saveQuestionOnDatabase();
   };
 
   return (

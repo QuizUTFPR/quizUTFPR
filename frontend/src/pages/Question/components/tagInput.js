@@ -54,7 +54,7 @@ function MemoizedTagInput({
   handlePropsChange,
   ...props
 }) {
-  console.log(formikID, props.value);
+  // console.log(formikID, props.value);
 
   return (
     <ChipInput
