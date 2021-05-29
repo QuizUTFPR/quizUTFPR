@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
@@ -15,22 +15,18 @@ export default function CheckBoxInput({
   const [timer, setTimer] = useState(null);
   const { setTyping } = useQuestionQuiz();
 
-  const handleUpdateContext = useCallback(
-    ({ handleUpdate, ...params }) => {
-      if (timer) {
-        clearTimeout(timer);
-        setTimer(null);
-      }
-
-      setTimer(
-        setTimeout(() => {
-          handleUpdate({ ...params });
-          setTyping(false);
-        }, 500)
-      );
-    },
-    [handlePropsChange]
-  );
+  const handleUpdateContext = ({ handleUpdate, ...params }) => {
+    if (timer) {
+      clearTimeout(timer);
+      setTimer(null);
+    }
+    setTimer(
+      setTimeout(() => {
+        handleUpdate({ ...params });
+        setTyping(false);
+      }, 0)
+    );
+  };
 
   const myCheckbox = useMemo(
     () => (
@@ -44,7 +40,7 @@ export default function CheckBoxInput({
         {...props}
       />
     ),
-    [checked]
+    [checked, handlePropsChange]
   );
 
   return <>{myCheckbox}</>;

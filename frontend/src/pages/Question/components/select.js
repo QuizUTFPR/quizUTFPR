@@ -43,7 +43,7 @@ export default function SelectInput({
         {children}
       </MemoizedSelect>
     ),
-    [props.value]
+    [props.value, handlePropsChange]
   );
 
   return <>{mySelect}</>;

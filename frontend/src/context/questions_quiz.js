@@ -58,7 +58,6 @@ export const initialValue = [
     id: -1,
     copy: false,
     title: '',
-    correctAnswer: true,
     timer: 30,
     image: null,
     availableOnQuestionsDB: false,
@@ -73,7 +72,7 @@ export const initialValue = [
       },
       {
         title: '',
-        is_correct: true,
+        is_correct: false,
       },
       {
         title: '',
@@ -151,21 +150,22 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const updateAnswer = ({ value, key, indexQuestion, indexAnswer }) => {
+    console.log(value, key, indexQuestion, indexAnswer);
     setQuestions((prevState) =>
       prevState.map((question, i) => {
         if (i === indexQuestion) {
           return {
             ...question,
             answer: [
-              ...question.answer.map((answer, index) => {
+              ...question.answer.map((answerItem, index) => {
                 if (index === indexAnswer) {
                   return {
-                    ...answer,
+                    ...answerItem,
                     [key]: value,
                   };
                 }
 
-                return answer;
+                return answerItem;
               }),
             ],
           };

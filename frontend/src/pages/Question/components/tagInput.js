@@ -40,7 +40,7 @@ export default function TagInput({
         {...props}
       />
     ),
-    [props.value]
+    [props.value, handlePropsChange]
   );
 
   return <>{myTagInput}</>;

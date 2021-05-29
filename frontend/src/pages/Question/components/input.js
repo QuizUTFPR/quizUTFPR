@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
@@ -13,22 +13,19 @@ export default function QuestionInput({
   const [timer, setTimer] = useState(null);
   const { setTyping, isTyping } = useQuestionQuiz();
 
-  const handleUpdateContext = useCallback(
-    ({ handleUpdate, ...params }) => {
-      if (timer) {
-        clearTimeout(timer);
-        setTimer(null);
-      }
+  const handleUpdateContext = ({ handleUpdate, ...params }) => {
+    if (timer) {
+      clearTimeout(timer);
+      setTimer(null);
+    }
 
-      setTimer(
-        setTimeout(() => {
-          handleUpdate({ ...params });
-          setTyping(false);
-        }, 500)
-      );
-    },
-    [handlePropsChange]
-  );
+    setTimer(
+      setTimeout(() => {
+        handleUpdate({ ...params });
+        setTyping(false);
+      }, 500)
+    );
+  };
 
   const myInput = useMemo(
     () => (
@@ -43,7 +40,7 @@ export default function QuestionInput({
         {...props}
       />
     ),
-    [value]
+    [value, handlePropsChange]
   );
 
   return <>{myInput}</>;
