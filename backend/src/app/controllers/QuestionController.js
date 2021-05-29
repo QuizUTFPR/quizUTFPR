@@ -11,6 +11,9 @@ class QuestionController {
   async store(req, res) {
     try{
       const schema = Yup.object().shape({
+        id: yup.number().required(),
+        copy: yup.boolean().required(),
+        availableOnQuestionsDB: yup.boolean().required(),
         title: Yup.string()
           .min(1, "Seu título deve conter pelo menos um caracter.")
           .max(300, "Máximo de caracteres atingidos.")
@@ -18,34 +21,50 @@ class QuestionController {
         timer: Yup.number().required(),
         difficultyLevel: Yup.number().required(),
         quiz_id: Yup.number().required(),
+        tags: yup.array().of(yup.string()).required("Informe as tags da questão!"),
+        id_image: Yup.number(),
         answer: Yup.array()
           .of(
             Yup.object().shape({
               title: Yup.string().required(),
               is_correct: Yup.bool().required()
             })
-          )
-          .required(),
-          tags: Yup.array()
-          .of(
-            Yup.object().shape({
-              name: Yup.string()
-            })
-          )
-          .required("Informe as tags da questão!")
+          ).required("Informe as alternativas.")
       });
 
       //Check body of requisiton
       if (!(await schema.isValid(req.body)))
         return res.status(401).json({ error: "Falha na validação!" });
 
-      const { title, timer, difficultyLevel, quiz_id, answer } = req.body;
+      const {
+        id,
+        copy,
+        availableOnQuestionsDB,
+        title, 
+        timer, 
+        difficultyLevel, 
+        quiz_id, 
+        answer,
+        tags,
+        id_image,
+      } = req.body;
 
       const quiz = await Quiz.findByPk(quiz_id);
 
       if (!quiz) return res.status(204).json({ error: "Quiz não encontrado!" });
 
-      const question = await Question.create({ title, timer, difficultyLevel });
+      const question = await Question.findOrCreate({ 
+        defaults: {
+          title: title, 
+          timer: timer, 
+          difficulty_level: difficultyLevel,
+          copy: copy,
+          available_on_questions_db: availableOnQuestionsDB,
+          id_image: id_image
+        },
+        where: {
+          id: id
+        }});
 
       const id_question = question.id;
 
@@ -62,7 +81,6 @@ class QuestionController {
 
       await quiz.addQuestion(question);
 
-      const { tags } = req.body;
 
       tags.map(async tagObject => {
         //tag =  TAG FOUND OR CREATE
