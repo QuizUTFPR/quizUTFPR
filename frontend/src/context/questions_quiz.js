@@ -83,13 +83,13 @@ export const initialValue = [
   },
 ];
 
-const QuestionQuiz = ({ children }) => {
-  const initialValueErrors = {
-    title: false,
-    is_correct: false,
-    answer: false,
-  };
+const initialValueErrors = {
+  title: false,
+  is_correct: false,
+  answer: false,
+};
 
+const QuestionQuiz = ({ children }) => {
   const [questions, setQuestions] = useState(initialValue);
   const [isSaved, setSaved] = useState(true);
   const [isTyping, setTyping] = useState(false);
@@ -117,6 +117,7 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const saveQuestionOnDatabase = () => {
+    console.log('salvando', questions);
     setSaved(true);
   };
 
@@ -150,7 +151,6 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const updateAnswer = ({ value, key, indexQuestion, indexAnswer }) => {
-    console.log(value, key, indexQuestion, indexAnswer);
     setQuestions((prevState) =>
       prevState.map((question, i) => {
         if (i === indexQuestion) {
@@ -177,6 +177,39 @@ const QuestionQuiz = ({ children }) => {
     setSaved(false);
     setErrors(initialValueErrors);
   };
+
+  const validationSchemeArrayQuestion = yup.array().of(
+    yup.object().shape({
+      id: yup.number().required(),
+      copy: yup.boolean().required(),
+      availableOnQuestionsDB: yup.boolean().required(),
+      image: yup.object().nullable(),
+      title: yup.string().min(1).required(),
+      timer: yup.number().required(),
+      difficultyLevel: yup.number(),
+      tags: yup.array().of(yup.string()).required(),
+      answer: yup
+        .array()
+        .of(
+          yup.object().shape({
+            title: yup.string().required(),
+            is_correct: yup.bool().required(),
+          })
+        )
+        .test((answer) => {
+          // eslint-disable-next-line camelcase
+          const isRight = answer.map(({ is_correct }) => is_correct);
+          if (!isRight.includes(true)) {
+            return new yup.ValidationError(
+              'Please check one checkbox',
+              null,
+              'is_correct'
+            );
+          }
+          return true;
+        }),
+    })
+  );
 
   const validationSchemeQuestion = yup.object().shape({
     id: yup.number().required(),
@@ -227,6 +260,7 @@ const QuestionQuiz = ({ children }) => {
         updateAnswer,
         saveQuestionOnDatabase,
         validationSchemeQuestion,
+        validationSchemeArrayQuestion,
         errors,
         setErrors,
         initialValueErrors,

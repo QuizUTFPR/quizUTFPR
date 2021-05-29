@@ -56,7 +56,6 @@ function MemoizedInput({
   handlePropsChange,
   ...props
 }) {
-  // console.log(formikID, value);
   return (
     <input
       value={value}

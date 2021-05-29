@@ -58,7 +58,6 @@ function MemoizedSelect({
   children,
   ...props
 }) {
-  // console.log(formikID, props.value);
   return (
     <TextField
       id={formikID}

@@ -55,7 +55,6 @@ function MemoizedCheckbox({
   checked,
   ...props
 }) {
-  // console.log(formikID, checked);
   return (
     <Checkbox
       id={formikID}

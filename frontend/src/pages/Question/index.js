@@ -31,6 +31,7 @@ const Question = ({ history, location }) => {
     updateAnswer,
     removeQuestion,
     saveQuestionOnDatabase,
+    validationSchemeArrayQuestion,
     validationSchemeQuestion,
     isSaved,
     isTyping,
@@ -102,23 +103,35 @@ const Question = ({ history, location }) => {
     else handleOpenGetOutAlert();
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    // VERIFICO SE AS QUESTÃO ESTÃO VALIDAS
+    if (await validationSchemeArrayQuestion.isValid(questions)) {
+      saveQuestionOnDatabase();
+      return;
+    }
+
+    // PROCURO QUAL QUESTÃO É INVALIDA E QUAIS SEUS ERROS
     questions.forEach(async (question, index) => {
-      await validationSchemeQuestion.validate(question).catch((error) => {
-        // eslint-disable-next-line prefer-const
-        let newErrors = {};
+      await validationSchemeQuestion
+        .validate(question, { abortEarly: false })
+        .catch((error) => {
+          let newErrors = {};
+          // eslint-disable-next-line prefer-const
 
-        // eslint-disable-next-line prefer-const
-        let key = error.path;
-        if (key.includes('answer')) key = 'answer';
+          error.inner.forEach(({ path }) => {
+            // eslint-disable-next-line prefer-const
+            let key = path;
+            if (key.includes('answer')) key = 'answer';
 
-        newErrors = { ...newErrors, [key]: true };
-
-        handleChangeQuestion(question, index)();
-        setErrors(newErrors);
-      });
+            newErrors = { ...newErrors, [key]: true };
+          });
+          handleChangeQuestion(question, index)();
+          setErrors((prevState) => ({
+            ...prevState,
+            ...newErrors,
+          }));
+        });
     });
-    saveQuestionOnDatabase();
   };
 
   return (
