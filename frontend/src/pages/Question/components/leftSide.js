@@ -1,5 +1,4 @@
 import React from 'react';
-
 // ICONS
 import { AddCircle } from '@material-ui/icons/';
 
@@ -27,7 +26,7 @@ const LeftSide = ({
         </Typography>
       </Grid>
 
-      <GridQuestions container>
+      <GridQuestions container spacing={1}>
         {questions.map((item, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <Grid item xs={12} key={index}>

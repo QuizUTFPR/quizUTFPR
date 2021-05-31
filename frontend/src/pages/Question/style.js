@@ -10,7 +10,6 @@ export const StyledAppBar = styled(AppBar)`
 
 export const CardSelectQuestion = styled(Button)`
   height: 60px;
-  width: 100%;
   background: ${({ isonscreen, theme }) =>
     isonscreen === 'true' ? theme.palette.primary.main : ''};
   color: ${({ isonscreen }) => (isonscreen === 'true' ? 'white' : '')};
@@ -20,6 +19,13 @@ export const CardSelectQuestion = styled(Button)`
       isonscreen === 'true' ? '' : theme.palette.primary.main};
     color: ${({ isonscreen, theme }) =>
       isonscreen === 'true' ? theme.palette.primary.main : 'white'};
+  }
+  && span {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
   }
 `;
 
@@ -93,6 +99,9 @@ export const PreviewImage = styled.img`
 export const GridQuestions = styled(Grid)`
   overflow-y: auto;
   height: calc(100vh - 250px);
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
 `;
 
 export const StyledMessage = styled.span`
