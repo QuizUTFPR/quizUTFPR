@@ -29,7 +29,7 @@ const DragImageInput = ({
     );
   };
 
-  const changeContextValue = (files) => {
+  const changeContextValue = async (files) => {
     setTyping(true);
     handleFormikChange(formikID[0], files[0]);
     handleFormikChange(formikID[1], URL.createObjectURL(files[0]));

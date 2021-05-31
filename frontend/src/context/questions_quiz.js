@@ -116,7 +116,6 @@ const QuestionQuiz = ({ children }) => {
     const response = await api.get(`/question/quiz/${id}`);
 
     if (response.status !== 200) return initialValue[0];
-    console.log(response.data);
     const initialQuestions = response.data.map((question) => ({
       id: question.id,
       copy: question.copy,
@@ -135,8 +134,6 @@ const QuestionQuiz = ({ children }) => {
 
   // eslint-disable-next-line camelcase
   const saveQuestionOnDatabase = (id_quiz) => {
-    console.log('questoes', questions);
-
     try {
       questionToRemove.map((removed) =>
         api.delete('/question/delete', { data: { id: removed.id } })
@@ -159,7 +156,6 @@ const QuestionQuiz = ({ children }) => {
           ...item,
           quiz_id: id_quiz,
         });
-        console.log(response);
         if (response.status !== 200) throw new Error('questao nao criada');
       });
     } catch (error) {
@@ -172,16 +168,21 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const addQuestion = (item) => {
-    setQuestions((prevState) => [...prevState, { ...item }]);
+    const updatedQuestions = [...questions, { ...item }];
+    setQuestions(updatedQuestions);
     setSaved(false);
     setErrors(initialValueErrors);
   };
 
   const removeQuestion = (index) => {
+    const updatedQuestion = questions.filter((element, i) => i !== index);
+
     setQuestionToRemove((prevState) => [...prevState, questions[index]]);
-    setQuestions((prevState) => prevState.filter((element, i) => i !== index));
+    setQuestions(updatedQuestion);
     setSaved(false);
     setErrors(initialValueErrors);
+
+    return updatedQuestion;
   };
 
   const updateQuestion = ({ value, key, index }) => {

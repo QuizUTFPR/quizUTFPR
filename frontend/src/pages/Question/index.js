@@ -68,19 +68,18 @@ const Question = ({ history, location }) => {
     fetchQuestions();
   }, []);
 
-  const handleChangeQuestion = (oldQuestion, index) => () => {
+  const handleChangeQuestion = (question, index) => () => {
     if (index < 0) return;
+
     setOnScreen({
       index,
-      question: {
-        ...oldQuestion,
-      },
+      question,
     });
     setErrors(initialValueErrors);
   };
 
-  const handleRemoveQuestion = () => {
-    removeQuestion(formik.values.index);
+  const handleRemoveQuestion = async () => {
+    const question = removeQuestion(formik.values.index);
 
     const indexOfQuestionOnScreen = formik.values.index;
     const indexOfTheLastQuestionOnContext = questions.length - 1;
@@ -89,7 +88,7 @@ const Question = ({ history, location }) => {
         ? indexOfTheLastQuestionOnContext - 1
         : indexOfQuestionOnScreen;
 
-    handleChangeQuestion(questions[newIndex], newIndex)();
+    handleChangeQuestion(question[newIndex], newIndex)();
   };
 
   const handleGetOut = () => {

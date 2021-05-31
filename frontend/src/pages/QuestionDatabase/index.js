@@ -33,44 +33,43 @@ const QuestionDatabase = forwardRef((props, ref) => {
     initialValues: {
       tag: '',
       questions: [],
-      suggestions: ['aprenda', 'ola'],
+      suggestions: [],
     },
     onSubmit: async ({ tag }) => {
       const { data } = await api.get(`question/${tag}`);
+      if (data) {
+        const newQuestions = await Promise.all(
+          data.map(
+            async ({
+              tags_question,
+              image_question,
+              difficulty_level,
+              answer,
+              ...rest
+            }) => ({
+              ...rest,
+              copy: true,
+              id: -1,
+              difficultyLevel: difficulty_level,
+              availableOnQuestionsDB: false,
+              imageObj:
+                image_question &&
+                (await getFileFromUrl(image_question.url, image_question.name)),
+              imageUrl: image_question && image_question.url,
+              tags: tags_question.map((item) => item.name),
+              answer: answer.map((item) => ({ ...item, id: -1 })),
+            })
+          )
+        );
 
-      const newQuestions = await Promise.all(
-        data.map(
-          async ({
-            tags_question,
-            image_question,
-            difficulty_level,
-            answer,
-            ...rest
-          }) => ({
-            ...rest,
-            copy: true,
-            id: -1,
-            difficultyLevel: difficulty_level,
-            availableOnQuestionsDB: false,
-            imageObj: await getFileFromUrl(
-              image_question.url,
-              image_question.name
-            ),
-            imageUrl: image_question.url,
-            tags: tags_question.map((item) => item.name),
-            answer: answer.map((item) => ({ ...item, id: -1 })),
-          })
-        )
-      );
-
-      formik.setFieldValue('questions', newQuestions);
+        formik.setFieldValue('questions', newQuestions);
+      }
     },
   });
 
   useEffect(() => {
     const getTags = async () => {
       const { data } = await api.get('/tag/question');
-      console.log('tags', data);
       if (data) {
         const newSuggestions = data.map((tag) => tag.name);
         formik.setFieldValue('suggestions', newSuggestions);
