@@ -129,5 +129,4 @@ const MiddleSide = ({
     </StyledGrid>
   </Grid>
 );
-
 export default MiddleSide;

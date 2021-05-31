@@ -99,7 +99,7 @@ const Question = ({ history, location }) => {
   const handleSave = async () => {
     // VERIFICO SE AS QUESTÃO ESTÃO VALIDAS
     if (await validationSchemeArrayQuestion.isValid(questions)) {
-      saveQuestionOnDatabase();
+      saveQuestionOnDatabase(id_quiz);
       return;
     }
 
@@ -119,7 +119,6 @@ const Question = ({ history, location }) => {
             newErrors = { ...newErrors, [key]: true };
           });
 
-          console.log(newErrors);
           handleChangeQuestion(question, index)();
           setErrors((prevState) => ({
             ...prevState,
@@ -128,8 +127,6 @@ const Question = ({ history, location }) => {
         });
     });
   };
-
-  console.log('formik', formik.values);
 
   return (
     <>

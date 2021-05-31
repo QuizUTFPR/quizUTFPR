@@ -69,7 +69,7 @@ const Questions = ({ id, checked, onChange, question }) => (
         <Typography color="textSecondary">Alternativas</Typography>
         <Grid container spacing={1}>
           {question.answer.map((item) => (
-            <Grid item xs={12} md={6} key={item.title}>
+            <Grid item xs={12} md={6} key={item.id}>
               {item.is_correct ? (
                 <CorrectgAnswer>{item.title}</CorrectgAnswer>
               ) : (

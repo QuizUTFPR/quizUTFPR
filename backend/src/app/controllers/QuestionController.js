@@ -234,13 +234,19 @@ class QuestionController {
       if(!question)
         return res.status(204).json({error: "Questão não encontrada!"})
 
+      const {id_image} = question; 
+
+      const file = await File.findByPk(id_image);
+
+      if(file) file.destroy();
+
       const answers = await question.getAnswer();
       const tags = await question.getTags_question();
 
 
       console.log(question);
       answers.map(item => item.destroy());
-      tags.map(item =>  item.destroy());
+      tags.map(item =>  question.removeTags_question(item));
       question.destroy();
 
       return res.status(200).json(question);

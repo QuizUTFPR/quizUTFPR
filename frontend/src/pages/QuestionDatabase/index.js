@@ -46,9 +46,11 @@ const QuestionDatabase = forwardRef((props, ref) => {
   useEffect(() => {
     const getTags = async () => {
       const { data } = await api.get('/tag/question');
-
-      const newSuggestions = data.map((tag) => tag.name);
-      formik.setFieldValue('suggestions', newSuggestions);
+      console.log('tag questions', data);
+      if (data) {
+        const newSuggestions = data.map((tag) => tag.name);
+        formik.setFieldValue('suggestions', newSuggestions);
+      }
     };
 
     getTags();

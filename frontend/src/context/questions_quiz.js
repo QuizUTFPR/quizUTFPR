@@ -107,7 +107,6 @@ const initialValueErrors = {
 
 const QuestionQuiz = ({ children }) => {
   const [questions, setQuestions] = useState(initialValue);
-  const [quizId, setQuizID] = useState(-1);
   const [isSaved, setSaved] = useState(true);
   const [isTyping, setTyping] = useState(false);
   const [errors, setErrors] = useState(initialValueErrors);
@@ -115,12 +114,10 @@ const QuestionQuiz = ({ children }) => {
 
   const getAllQuestionOfTheQuiz = async (id) => {
     const response = await api.get(`/question/quiz/${id}`);
-    setQuizID(parseInt(id, 10));
 
     if (response.status !== 200) return initialValue[0];
 
     const initialQuestions = response.data.map((question) => ({
-      quiz_id: parseInt(id, 10),
       id: question.id,
       copy: false,
       availableOnQuestionsDB: false,
@@ -136,7 +133,8 @@ const QuestionQuiz = ({ children }) => {
     return initialQuestions[0];
   };
 
-  const saveQuestionOnDatabase = () => {
+  // eslint-disable-next-line camelcase
+  const saveQuestionOnDatabase = (id_quiz) => {
     try {
       questionToRemove.map((removed) =>
         api.delete('/question/delete', { data: { id: removed.id } })
@@ -153,20 +151,23 @@ const QuestionQuiz = ({ children }) => {
         if (responseFile) {
           item.id_image = responseFile.data.id;
         }
-        const response = await api.post('/question/create', item);
+        const response = await api.post('/question/create', {
+          ...item,
+          quiz_id: id_quiz,
+        });
         if (response.status !== 200) throw new Error('questao nao criada');
       });
     } catch (error) {
       console.log(error);
       return false;
     }
-    setTimeout(() => getAllQuestionOfTheQuiz(quizId), 1000);
+    setTimeout(() => getAllQuestionOfTheQuiz(id_quiz), 1000);
     setSaved(true);
     return true;
   };
 
   const addQuestion = (item) => {
-    setQuestions((prevState) => [...prevState, { ...item, quiz_id: quizId }]);
+    setQuestions((prevState) => [...prevState, { ...item }]);
     setSaved(false);
     setErrors(initialValueErrors);
   };
@@ -225,7 +226,6 @@ const QuestionQuiz = ({ children }) => {
 
   const validationSchemeArrayQuestion = yup.array().of(
     yup.object().shape({
-      quiz_id: yup.number().required(),
       id: yup.number().required(),
       copy: yup.boolean().required(),
       availableOnQuestionsDB: yup.boolean().required(),
@@ -260,7 +260,6 @@ const QuestionQuiz = ({ children }) => {
   );
 
   const validationSchemeQuestion = yup.object().shape({
-    quiz_id: yup.number().required(),
     id: yup.number().required(),
     copy: yup.boolean().required(),
     availableOnQuestionsDB: yup.boolean().required(),
