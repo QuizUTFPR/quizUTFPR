@@ -59,6 +59,8 @@ class QuestionController {
 
       let question = await Question.findByPk(id);
 
+      console.log("questao", req.body)
+
       if(!question){
         //CASO QUESTÃO NÃO EXISTIR CRIO A MESMA E AS ALTERNATIVAS
         try {
@@ -71,6 +73,8 @@ class QuestionController {
             quiz_id: quiz_id, 
             id_image: id_image,
           }) 
+
+          console.log(question);
         } catch (error) {
           return res.status(500).json(error);
         }
@@ -90,7 +94,6 @@ class QuestionController {
 
       answer.map(async answerItem => {
         const answerFounded = await Answer.findByPk(answerItem.id);
-        
         if(!answerFounded){
           try{
           const newAnser = await Answer.create({
@@ -142,6 +145,8 @@ class QuestionController {
         }
       })
 
+
+      console.log("FINALIZOUUUUUUUUUUUUUUUUUUUUUUUUUU")
       return res.status(200).json(question);
     }catch(err){
       return res.status(500).json(err);
@@ -152,7 +157,7 @@ class QuestionController {
   async index(req, res) {
     try{
       const questions = await Question.findAll({
-        attributes: ['id', 'title', 'timer', 'difficulty_level'],
+        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db'],
         include: [
           {
             model: Answer,
@@ -190,12 +195,20 @@ class QuestionController {
       const {tag} = req.params;
 
       const questions = await Question.findAll({
-        attributes: ['id', 'title', 'timer', 'difficulty_level'],
+        where: {
+          available_on_questions_db: true,
+        },
+        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db'],
         include: [
           {
             model: Answer,
             as: 'answer',
             attributes: ['id', 'title', 'is_correct']
+          },
+          {
+            model: File,
+            as: "image_question",
+            attributes: ["url","path", "name"]       
           },
           {
             model: Tag,

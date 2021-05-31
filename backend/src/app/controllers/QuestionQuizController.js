@@ -18,7 +18,7 @@ class QuestionQuizController {
       const quiz = await Quiz.findByPk(id);
 
       const questionOfQuiz = await quiz.getQuestions({
-        attributes: ['id', 'title', 'timer', 'difficulty_level'],
+        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db'],
         include: [
           {
             model: Answer,

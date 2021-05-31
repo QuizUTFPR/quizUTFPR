@@ -17,6 +17,14 @@ const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
 ));
 
+async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
+  const response = await fetch(url);
+  const data = await response.blob();
+  return new File([data], name, {
+    type: response.headers.get('content-type') || defaultType,
+  });
+}
+
 // eslint-disable-next-line no-unused-vars
 const QuestionDatabase = forwardRef((props, ref) => {
   const [checkboxes, setCheckboxes] = useState([]);
@@ -30,24 +38,29 @@ const QuestionDatabase = forwardRef((props, ref) => {
     onSubmit: async ({ tag }) => {
       const { data } = await api.get(`question/${tag}`);
 
-      const newQuestions = data.map(
-        ({
-          tags_question,
-          image_question,
-          difficulty_level,
-          answer,
-          ...rest
-        }) => ({
-          ...rest,
-          copy: true,
-          id: -1,
-          difficultyLevel: difficulty_level,
-          availableOnQuestionsDB: false,
-          imageObj: null,
-          imageUrl: image_question.url,
-          tags: tags_question.map((item) => item.name),
-          answer: answer.map((item) => ({ ...item, id: -1 })),
-        })
+      const newQuestions = await Promise.all(
+        data.map(
+          async ({
+            tags_question,
+            image_question,
+            difficulty_level,
+            answer,
+            ...rest
+          }) => ({
+            ...rest,
+            copy: true,
+            id: -1,
+            difficultyLevel: difficulty_level,
+            availableOnQuestionsDB: false,
+            imageObj: await getFileFromUrl(
+              image_question.url,
+              image_question.name
+            ),
+            imageUrl: image_question.url,
+            tags: tags_question.map((item) => item.name),
+            answer: answer.map((item) => ({ ...item, id: -1 })),
+          })
+        )
       );
 
       formik.setFieldValue('questions', newQuestions);
