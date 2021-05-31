@@ -6,8 +6,8 @@ import Teacher from "../models/TeacherModel";
 import Question from "../models/QuestionModel";
 import Answer from "../models/AnswerModel";
 import Tag from "../models/TagModel";
+import File from '../models/FileModel';
 
-import getMethod from '../utils/getMethodsOfAssociation'
 
 class QuestionQuizController {
   // Lista todos os registros
@@ -18,12 +18,17 @@ class QuestionQuizController {
       const quiz = await Quiz.findByPk(id);
 
       const questionOfQuiz = await quiz.getQuestions({
-        attributes: ['id', 'title', 'timer', 'difficultyLevel'],
+        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db'],
         include: [
           {
             model: Answer,
             as: 'answer',
-            attributes: ["title", "is_correct"]
+            attributes: ["id","title", "is_correct"]
+          },
+          {
+            model: File,
+            as: "image_question",
+            attributes: ["url","path", "name"]       
           },
           {
             model: Tag,

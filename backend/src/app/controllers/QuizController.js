@@ -8,7 +8,6 @@ import Answer from "../models/AnswerModel";
 import Tag from "../models/TagModel";
 import File from '../models/FileModel';
 
-import getMethod from '../utils/getMethodsOfAssociation'
 
 class QuizController {
   async store(req, res) {
@@ -33,8 +32,8 @@ class QuizController {
       const id_teacher = req.userId;
 
       const quiz = await Quiz.create({ ...req.body, id_teacher });
-      console.log("passado",req.body);
-      console.log("quiz",quiz);
+
+
       const { tags } = req.body;
 
       tags.map(async tagObject => {
@@ -114,7 +113,6 @@ class QuizController {
 
       return res.status(200).json(quizzes);
     }catch(err){
-      console.log(err)
       return res.status(500).json(err);
     }
   }
@@ -134,7 +132,7 @@ class QuizController {
           {
             model: Question,
             as: "questions",
-            attributes: ["id", "title", "timer", "difficultyLevel"],
+            attributes: ["id", "title", "timer", "difficulty_level"],
             through: {
               attributes: []
             },
@@ -229,16 +227,31 @@ class QuizController {
         })
       
   
-        return res.status(200).json({
-          quiz
-        });
+        return res.status(200).json(quiz);
 
     }catch(err){
       return res.status(500).json(err);
     }
   }
   // Remove um único registro
-  async delete() {}
+  async delete(req, res) {
+    try{
+      const {id_quiz} = req.body;
+
+      console.log("id",id_quiz)
+      const numberOfRowsDeleted = await Quiz.destroy({
+        where: { id: id_quiz }
+      });
+
+      console.log(numberOfRowsDeleted)
+
+      if(numberOfRowsDeleted < 1) return res.status(204).json({error: "Não existe nenhum quiz com o ID informado."});
+      
+      return res.status(200).json(numberOfRowsDeleted);
+    }catch(err){
+      return res.status(500).json(err);
+    }
+  }
 }
 
 export default new QuizController();

@@ -7,15 +7,18 @@ module.exports = {
         type: Sequelize.STRING(100),
         primaryKey: true,
         allowNull: false,
+        onDelete: 'CASCADE',
         references: {
           model: "tag",
           key: "name"
-        }
+        },
+        
       },
       quiz_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNull: false,
+        onDelete: 'CASCADE',
         references: {
           model: "quiz",
           key: "id"

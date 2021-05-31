@@ -1,145 +1,83 @@
+/* eslint-disable camelcase */
 import React, { forwardRef, useState, useEffect } from 'react';
-
-import { IconButton, Grid, Typography, Divider } from '@material-ui/core';
+import { useFormik } from 'formik';
+import api from '@api';
 
 // COMPONENTS
 import GridContainer from '@components/Container';
 import InputAutoComplete from '@components/AutoCompleteInput';
+import { IconButton, Grid, Typography, Divider } from '@material-ui/core';
 import { Close, Search } from '@material-ui/icons';
 import Question from './question';
 
 // ICONS
 import { StyledSearchTagButton } from './style';
 
-const FakeQuestions = [
-  {
-    copy: true,
-    id: -1,
-    availableOnQuestionsDB: false,
-    title: 'Chabu é erro?',
-    correctAnswer: true,
-    timer: 15,
-    difficultyLevel: 3,
-    quiz_id: 2,
-    image: null,
-    answer: [
-      {
-        title: 'Verdadeiro',
-        is_correct: true,
-      },
-      {
-        title: 'Falso',
-        is_correct: false,
-      },
-    ],
-    tags: ['erro'],
-  },
-  {
-    copy: true,
-    id: -1,
-    availableOnQuestionsDB: false,
-    title: 'Chabu é correto?',
-    correctAnswer: true,
-    timer: 15,
-    image: null,
-    difficultyLevel: 3,
-    quiz_id: 2,
-    answer: [
-      {
-        title: 'Verdadeiro',
-        is_correct: true,
-      },
-      {
-        title: 'Falso',
-        is_correct: false,
-      },
-    ],
-    tags: ['erro'],
-  },
-  {
-    copy: true,
-    id: -1,
-    availableOnQuestionsDB: false,
-    title: 'Chabu é teste?',
-    correctAnswer: true,
-    timer: 15,
-    image: null,
-    difficultyLevel: 3,
-    quiz_id: 2,
-    answer: [
-      {
-        title: 'Verdadeiro',
-        is_correct: true,
-      },
-      {
-        title: 'Falso',
-        is_correct: false,
-      },
-    ],
-    tags: ['erro'],
-  },
-  {
-    copy: true,
-    id: -1,
-    availableOnQuestionsDB: false,
-    title: 'Chabu é aaa?',
-    correctAnswer: true,
-    timer: 15,
-    image: null,
-    difficultyLevel: 3,
-    quiz_id: 2,
-    answer: [
-      {
-        title: 'Verdadeiro',
-        is_correct: true,
-      },
-      {
-        title: 'Falso',
-        is_correct: false,
-      },
-    ],
-    tags: ['erro'],
-  },
-  {
-    copy: true,
-    id: -1,
-    availableOnQuestionsDB: false,
-    title: 'Chabu é dawdawdawdwa?',
-    correctAnswer: true,
-    timer: 15,
-    image: null,
-    difficultyLevel: 3,
-    quiz_id: 2,
-    answer: [
-      {
-        title: 'Verdadeiro',
-        is_correct: true,
-      },
-      {
-        title: 'Falso',
-        is_correct: false,
-      },
-    ],
-    tags: ['erro'],
-  },
-];
-
 const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
 ));
+
+async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
+  const response = await fetch(url);
+  const data = await response.blob();
+  return new File([data], name, {
+    type: response.headers.get('content-type') || defaultType,
+  });
+}
 
 // eslint-disable-next-line no-unused-vars
 const QuestionDatabase = forwardRef((props, ref) => {
   const [checkboxes, setCheckboxes] = useState([]);
 
+  const formik = useFormik({
+    initialValues: {
+      tag: '',
+      questions: [],
+      suggestions: ['aprenda', 'ola'],
+    },
+    onSubmit: async ({ tag }) => {
+      const { data } = await api.get(`question/${tag}`);
+
+      const newQuestions = await Promise.all(
+        data.map(
+          async ({
+            tags_question,
+            image_question,
+            difficulty_level,
+            answer,
+            ...rest
+          }) => ({
+            ...rest,
+            copy: true,
+            id: -1,
+            difficultyLevel: difficulty_level,
+            availableOnQuestionsDB: false,
+            imageObj: await getFileFromUrl(
+              image_question.url,
+              image_question.name
+            ),
+            imageUrl: image_question.url,
+            tags: tags_question.map((item) => item.name),
+            answer: answer.map((item) => ({ ...item, id: -1 })),
+          })
+        )
+      );
+
+      formik.setFieldValue('questions', newQuestions);
+    },
+  });
+
   useEffect(() => {
-    FakeQuestions.map((item) => {
-      if (props.questions.includes(item)) {
-        setCheckboxes((prevState) => ({ ...prevState, [item.title]: true }));
-        return true;
+    const getTags = async () => {
+      const { data } = await api.get('/tag/question');
+      console.log('tags', data);
+      if (data) {
+        const newSuggestions = data.map((tag) => tag.name);
+        formik.setFieldValue('suggestions', newSuggestions);
       }
-      return false;
-    });
+    };
+
+    getTags();
   }, []);
 
   const handleQuestionChecked = (question) => (e) => {
@@ -154,7 +92,6 @@ const QuestionDatabase = forwardRef((props, ref) => {
       props.handleRemoveQuestion(question);
     }
   };
-
   return (
     <Wrapper container spacing={3}>
       <Grid container justify="center" alignItems="center">
@@ -170,15 +107,21 @@ const QuestionDatabase = forwardRef((props, ref) => {
         </Grid>
       </Grid>
 
-      <Grid container justify="center" alignItems="center" spacing={2}>
+      <Grid
+        component="form"
+        onSubmit={formik.handleSubmit}
+        container
+        justify="center"
+        alignItems="center"
+        spacing={2}
+      >
         <Grid item xs={9}>
           <InputAutoComplete
             fullWidth
-            stateValue="tag"
-            suggestions={['aprenda', 'ola']}
-            onChange={(e) => {
-              console.log(e);
-            }}
+            id="tag"
+            stateValue={formik.values.tag}
+            suggestions={formik.values.suggestions}
+            onChange={formik.handleChange}
             variant="filled"
             label="Tag"
             placeholder="Digite a Tag de questões que você deseja pesquisar..."
@@ -188,6 +131,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
           <StyledSearchTagButton
             startIcon={<Search />}
             fullWidth
+            type="submit"
             color="primary"
             variant="contained"
           >
@@ -195,21 +139,22 @@ const QuestionDatabase = forwardRef((props, ref) => {
           </StyledSearchTagButton>
         </Grid>
       </Grid>
-
-      <Grid item>
-        <Divider />
-      </Grid>
-
+      {!!formik.values.questions.length && (
+        <Grid item>
+          <Divider />
+        </Grid>
+      )}
       <Grid
         container
         spacing={3}
         justify="center"
         style={{
-          overflow: 'scroll',
-          height: 'calc(100vh - 25px - 72px - 48px - 60px)',
+          overflow: 'auto',
+          minHeight: '40px',
+          maxHeight: 'calc(100vh - 25px - 72px - 48px - 60px)',
         }}
       >
-        {FakeQuestions.map((question) => (
+        {formik.values.questions.map((question) => (
           <Grid key={question.title} item xs={12}>
             <Question
               question={question}

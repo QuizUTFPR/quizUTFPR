@@ -13,7 +13,13 @@ import {
 const Card = ({ image, imageTitle, title, description, idQuiz, children }) => (
   <StyledCard>
     <StyledCardMedia component="img" image={image} title={imageTitle} />
-    <CardActionArea component={Link} to={`${QUESTION}${idQuiz}`}>
+    <CardActionArea
+      component={Link}
+      to={{
+        pathname: `${QUESTION}${idQuiz}`,
+        state: { title },
+      }}
+    >
       <StyledCardContent>
         <Typography color="primary" component="h5" variant="h5">
           {title}

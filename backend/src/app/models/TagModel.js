@@ -24,13 +24,15 @@ class Tag extends Model {
     this.belongsToMany(models.Quiz, {
       through: "quiz_tags",
       foreignKey: "tag_name",
-      as: "quizzes"
+      as: "quizzes",
+      onDelete: 'CASCADE',
     });
 
     this.belongsToMany(models.Question, {
       through: "question_tags",
       foreignKey: "tag_name",
-      as: "questions"
+      as: "questions",
+      onDelete: 'CASCADE',
     });
   }
 }

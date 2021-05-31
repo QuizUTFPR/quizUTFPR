@@ -27,33 +27,43 @@ import { Edit, Delete } from '@material-ui/icons';
 
 const Quiz = () => {
   const [quizzes, setQuizzes] = useState(false);
-
   const [isModalOpen, setModalOpen] = useState({
     open: false,
     quiz: null,
   });
+
+  const getQuizzes = async () => {
+    try {
+      const response = await api.get('/quiz');
+
+      if (response.status !== 200) setQuizzes(false);
+      else setQuizzes(response.data);
+    } catch (err) {
+      //
+    }
+  };
+
   const handleOpenModal = (quiz) => () => {
     setModalOpen({
       open: true,
       quiz,
     });
   };
-  const handleCloseModal = () => setModalOpen({ open: false, quiz: null });
+  const handleCloseModal = () => {
+    setModalOpen({ open: false, quiz: null });
+    getQuizzes();
+  };
+
+  const handleRemoveQuiz = async (idQuiz) => {
+    await api.delete('/quiz/delete', {
+      data: { id_quiz: idQuiz },
+    });
+    getQuizzes();
+  };
 
   useEffect(() => {
-    const getQuizzes = async () => {
-      try {
-        const response = await api.get('/quiz');
-
-        if (response.status !== 200) return;
-        setQuizzes(response.data);
-      } catch (err) {
-        //
-      }
-    };
-
     getQuizzes();
-  }, [isModalOpen]);
+  }, []);
 
   return (
     <>
@@ -94,7 +104,7 @@ const Quiz = () => {
               <IconButton onClick={handleOpenModal(quiz)}>
                 <Edit />
               </IconButton>
-              <IconButton>
+              <IconButton onClick={() => handleRemoveQuiz(quiz.id)}>
                 <Delete />
               </IconButton>
             </Card>

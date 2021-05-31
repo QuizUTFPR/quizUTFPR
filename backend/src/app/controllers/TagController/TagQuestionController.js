@@ -13,7 +13,7 @@ class TagQuestionController {
           model: Question,
           as: "questions",
           required: true,
-          attributes: ["id", "title", "timer", "difficultyLevel"],
+          attributes: ["id", "title", "timer", "difficulty_level"],
           through: {
             attributes: []
           }

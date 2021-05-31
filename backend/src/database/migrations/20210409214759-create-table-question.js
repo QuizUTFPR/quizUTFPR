@@ -9,6 +9,14 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
+      copy: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      available_on_questions_db: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
       title: {
         type: Sequelize.STRING,
         allowNull: false
@@ -20,6 +28,14 @@ module.exports = {
       difficulty_level: {
         type: Sequelize.INTEGER,
         allowNull: false
+      },
+      id_image: {
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        references: { model: "file", key: "id" },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
+        allowNull: true
       },
       created_at: {
         type: Sequelize.DATE,
