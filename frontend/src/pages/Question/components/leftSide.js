@@ -37,7 +37,7 @@ const LeftSide = ({
               fullWidth
               onClick={handleChangeQuestion(item, index)}
             >
-              {item.title ? item.title : 'Sem Título'}
+              {item.title ? item.title : 'Sem Enunciado'}
             </CardSelectQuestion>
           </Grid>
         ))}
@@ -52,7 +52,7 @@ const LeftSide = ({
           startIcon={<AddCircle />}
           size="large"
         >
-          CRIAR NOVA QUESTÃO
+          CRIAR
         </StyledButton>
       </GridButtonNewQuestion>
     </StyledLeftGrid>

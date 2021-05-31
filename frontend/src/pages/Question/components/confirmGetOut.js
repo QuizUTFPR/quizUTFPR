@@ -6,7 +6,6 @@ import { QUIZ } from '@routes';
 
 // COMPONENTS
 import {
-  Button,
   DialogActions,
   DialogContentText,
   DialogContent,
@@ -14,6 +13,7 @@ import {
 } from '@material-ui/core';
 
 import GridContainer from '@components/Container';
+import Button from '@components/Button';
 
 const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
@@ -33,10 +33,10 @@ const GetOutAlert = forwardRef((props, ref) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color="primary" variant="outlined">
           Cancelar
         </Button>
-        <Button component={Link} to={QUIZ} color="primary">
+        <Button component={Link} to={QUIZ} color="primary" variant="contained">
           Sair mesmo assim
         </Button>
       </DialogActions>

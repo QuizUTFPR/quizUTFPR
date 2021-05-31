@@ -2,13 +2,13 @@ import React, { forwardRef } from 'react';
 
 // COMPONENTS
 import {
-  Button,
   DialogActions,
   DialogContentText,
   DialogContent,
   DialogTitle,
 } from '@material-ui/core';
 import GridContainer from '@components/Container';
+import Button from '@components/Button';
 
 const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
@@ -32,10 +32,15 @@ const AlertRemoveQuestion = forwardRef((props, ref) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color="primary" variant="outlined">
           Cancelar
         </Button>
-        <Button onClick={handleRemove} color="primary" autoFocus>
+        <Button
+          onClick={handleRemove}
+          color="primary"
+          variant="contained"
+          autoFocus
+        >
           Excluir
         </Button>
       </DialogActions>

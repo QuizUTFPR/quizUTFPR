@@ -55,7 +55,7 @@ const RightSide = ({ formik, updateQuestion, questions }) => (
           <GridItemStyledRight item>
             <TagInput
               fullWidth
-              suggestions={['Aprenda', 'JavaScript']}
+              suggestions={[]}
               value={formik.values.question.tags}
               formikID="question.tags"
               handleFormikChange={formik.setFieldValue}
@@ -88,7 +88,7 @@ const RightSide = ({ formik, updateQuestion, questions }) => (
                     }}
                   />
                 }
-                label="Disponivel no Banco de Questão"
+                label="Disponível no Banco de Questão"
               />
             ) : (
               <CopiedQuestionMessage item xs={12}>

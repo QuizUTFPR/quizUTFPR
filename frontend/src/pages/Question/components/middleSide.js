@@ -1,12 +1,11 @@
 import React from 'react';
-
 // ICONS
-import { Delete } from '@material-ui/icons/';
+import { Delete, Check } from '@material-ui/icons/';
 
 // COMPONENTS
 import StyledButton from '@components/Button';
 import { Grid } from '@material-ui/core';
-import CheckBox from './checkbox';
+import ErrorMessage from '@components/Messages/error';
 import DragImageInput from './dragImage';
 
 import {
@@ -15,6 +14,8 @@ import {
   StyledGrid,
   GridRegisterQuestion,
   PreviewImage,
+  HiddenCheckBox,
+  ShowCheckBox,
 } from '../style';
 
 const MiddleSide = ({
@@ -46,8 +47,12 @@ const MiddleSide = ({
             />
           </Grid>
 
+          {errors.title && (
+            <ErrorMessage>
+              Por favor, informe o enunciado da questão.
+            </ErrorMessage>
+          )}
           <Grid item xs={12}>
-            {errors.title && <span>Informe o título!</span>}
             <StyledTitleInput
               placeholder="DIGITE O ENUNCIADO AQUI"
               formikID="question.title"
@@ -62,8 +67,19 @@ const MiddleSide = ({
               autoFocus
             />
           </Grid>
-          {errors.is_correct && <span>Informe uma alternativa correta.</span>}
-          {errors.answer && <span>Informe todas as alternativas.</span>}
+          <Grid item xs={12}>
+            {errors.is_correct && (
+              <ErrorMessage style={{ marginBottom: '10px' }}>
+                Por favor, informe ao menos uma alternativa correta.
+              </ErrorMessage>
+            )}
+
+            {errors.answer && (
+              <ErrorMessage>
+                Por favor, escreva todas as alternativas.
+              </ErrorMessage>
+            )}
+          </Grid>
           <Grid container align="center" justify="center" spacing={2}>
             {formik.values.question.answer.map((item, index) => (
               <Grid
@@ -78,19 +94,24 @@ const MiddleSide = ({
                   alignItems: 'center',
                 }}
               >
-                <CheckBox
-                  style={{ width: '50px', height: '50px' }}
-                  inputProps={{ 'aria-label': 'primary checkbox' }}
-                  checked={Boolean(item.is_correct)}
-                  formikID={`question.answer[${index}].is_correct`}
-                  handleFormikChange={formik.handleChange}
-                  handlePropsChange={{
-                    handleUpdate: updateAnswer,
-                    key: 'is_correct',
-                    indexQuestion: formik.values.index,
-                    indexAnswer: index,
-                  }}
-                />
+                <>
+                  <ShowCheckBox checked={Boolean(item.is_correct)}>
+                    <Check />
+                  </ShowCheckBox>
+                  <HiddenCheckBox
+                    style={{ width: '50px', height: '50px' }}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                    checked={Boolean(item.is_correct)}
+                    formikID={`question.answer[${index}].is_correct`}
+                    handleFormikChange={formik.handleChange}
+                    handlePropsChange={{
+                      handleUpdate: updateAnswer,
+                      key: 'is_correct',
+                      indexQuestion: formik.values.index,
+                      indexAnswer: index,
+                    }}
+                  />
+                </>
                 <StyledAnswerInput
                   type="text"
                   placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}

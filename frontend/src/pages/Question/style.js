@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Grid, AppBar, Button, Box } from '@material-ui/core';
 import { ExitToApp } from '@material-ui/icons/';
 import QuestionInput from './components/input';
+import CheckBox from './components/checkbox';
 
 export const StyledAppBar = styled(AppBar)`
   background: white;
@@ -68,20 +69,22 @@ export const StyledAnswerInput = styled(QuestionInput)`
   width: 100%;
   padding: 20px 10px;
   background: white;
-  border-radius: 5px;
+  border-radius: 0 10px 10px 0;
   border: none;
   outline: none;
   transition: border 0.3s linear;
-
-  &:focus {
-    border: 2px solid #ececec;
-  }
 `;
 
-export const StyledTitleInput = styled(StyledAnswerInput)`
+export const StyledTitleInput = styled(QuestionInput)`
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 20px 10px;
+  background: white;
   text-align: center;
   font-weight: bolder;
   height: 100px;
+  transition: border 0.3s linear;
   font-size: 1.2em;
 `;
 
@@ -137,4 +140,32 @@ export const CopiedQuestionMessage = styled(Grid)`
 
 export const StyledExitIcon = styled(ExitToApp)`
   transform: rotate(180deg);
+`;
+
+export const HiddenCheckBox = styled(CheckBox)`
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+
+  && :hover {
+    background: red;
+  }
+`;
+
+export const ShowCheckBox = styled.span`
+  cursor: pointer;
+  height: 59px;
+  width: 70px;
+  border: 2px solid rgba(0, 0, 0, 0.54);
+  border-radius: 3px 0 0 3px;
+  background: ${({ checked, theme }) =>
+    checked ? theme.palette.secondary.main : 'white'};
+  && svg {
+    display: ${({ checked }) => (checked ? '' : 'none')};
+    fill: white;
+    margin-top: calc(100% - 48px);
+    font-size: 2.5em;
+  }
 `;
