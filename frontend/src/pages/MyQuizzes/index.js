@@ -55,10 +55,9 @@ const Quiz = () => {
   };
 
   const handleRemoveQuiz = async (idQuiz) => {
-    const response = await await api.delete('/quiz/delete', {
+    await api.delete('/quiz/delete', {
       data: { id_quiz: idQuiz },
     });
-    console.log(response);
     getQuizzes();
   };
 

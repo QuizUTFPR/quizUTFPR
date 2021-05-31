@@ -59,14 +59,13 @@ const Question = ({ history, location }) => {
   const handleOpenGetOutAlert = () => setOpenGetOutAlert(true);
   const handleCloseGetOutAlert = () => setOpenGetOutAlert(false);
 
+  const fetchQuestions = async () => {
+    // eslint-disable-next-line camelcase
+    const firstQuestion = await getAllQuestionOfTheQuiz(id_quiz);
+    setOnScreen({ index: 0, question: firstQuestion });
+  };
   useEffect(() => {
-    const fetch = async () => {
-      // eslint-disable-next-line camelcase
-      const firstQuestion = await getAllQuestionOfTheQuiz(id_quiz);
-      setOnScreen({ index: 0, question: firstQuestion });
-    };
-
-    fetch();
+    fetchQuestions();
   }, []);
 
   const handleChangeQuestion = (oldQuestion, index) => () => {
@@ -97,12 +96,10 @@ const Question = ({ history, location }) => {
     if (isSaved) history.push(QUIZ);
     else handleOpenGetOutAlert();
   };
-
   const handleSave = async () => {
     // VERIFICO SE AS QUESTÃO ESTÃO VALIDAS
     if (await validationSchemeArrayQuestion.isValid(questions)) {
-      const success = saveQuestionOnDatabase();
-      if (success) history.go(0);
+      saveQuestionOnDatabase();
       return;
     }
 
@@ -121,7 +118,6 @@ const Question = ({ history, location }) => {
 
             newErrors = { ...newErrors, [key]: true };
           });
-          console.log(newErrors);
           handleChangeQuestion(question, index)();
           setErrors((prevState) => ({
             ...prevState,
@@ -130,7 +126,6 @@ const Question = ({ history, location }) => {
         });
     });
   };
-  // console.log('questions', formik.values);
   return (
     <>
       <Header

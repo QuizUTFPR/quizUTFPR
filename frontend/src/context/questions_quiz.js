@@ -12,6 +12,7 @@ export const MockupQuestionTrueOrFalse = {
   timer: 30,
   imageObj: null,
   imageUrl: '',
+  difficultyLevel: 3,
   availableOnQuestionsDB: false,
   answer: [
     {
@@ -33,6 +34,7 @@ export const MockupQuestionMultipleChoice = {
   copy: false,
   title: '',
   timer: 30,
+  difficultyLevel: 3,
   imageObj: null,
   imageUrl: '',
   availableOnQuestionsDB: false,
@@ -69,6 +71,7 @@ export const initialValue = [
     timer: 30,
     imageObj: null,
     imageUrl: '',
+    difficultyLevel: 3,
     availableOnQuestionsDB: false,
     answer: [
       {
@@ -137,8 +140,6 @@ const QuestionQuiz = ({ children }) => {
       questions.map(async (item) => {
         let responseFile = null;
         if (item.imageObj !== null) {
-          console.log('criou imagem!');
-
           const file = new FormData();
           file.append('file', item.imageObj);
 
@@ -148,16 +149,14 @@ const QuestionQuiz = ({ children }) => {
         if (responseFile) {
           item.id_image = responseFile.data.id;
         }
-
         const response = await api.post('/question/create', item);
-
         if (response.status !== 200) throw new Error('questao nao criada');
       });
     } catch (error) {
       console.log(error);
       return false;
     }
-
+    setTimeout(() => getAllQuestionOfTheQuiz(quizId), 1000);
     setSaved(true);
     return true;
   };
