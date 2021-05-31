@@ -6,6 +6,7 @@ import api from '@api';
 import GridContainer from '@components/Container';
 import Card from '@components/CardQuiz';
 import Modal from '@components/Modal';
+import AlertRemoveMessage from '@components/ConfirmRemove';
 
 // PAGES
 import QuizPreferences from '@pages/EditQuizPreferences';
@@ -31,6 +32,9 @@ const Quiz = () => {
     open: false,
     quiz: null,
   });
+  const [openAlert, setOpenAlert] = useState({ open: false, idQuiz: null });
+  const handleClickOpenAlert = (idQuiz) => setOpenAlert({ open: true, idQuiz });
+  const handleCloseAlert = () => setOpenAlert({ open: false, idQuiz: null });
 
   const getQuizzes = async () => {
     try {
@@ -54,9 +58,9 @@ const Quiz = () => {
     getQuizzes();
   };
 
-  const handleRemoveQuiz = async (idQuiz) => {
+  const handleRemoveQuiz = async () => {
     await api.delete('/quiz/delete', {
-      data: { id_quiz: idQuiz },
+      data: { id_quiz: openAlert.idQuiz },
     });
     getQuizzes();
   };
@@ -104,7 +108,7 @@ const Quiz = () => {
               <IconButton onClick={handleOpenModal(quiz)}>
                 <Edit />
               </IconButton>
-              <IconButton onClick={() => handleRemoveQuiz(quiz.id)}>
+              <IconButton onClick={() => handleClickOpenAlert(quiz.id)}>
                 <Delete />
               </IconButton>
             </Card>
@@ -123,6 +127,15 @@ const Quiz = () => {
         <QuizPreferences
           quiz={isModalOpen.quiz}
           handleClose={handleCloseModal}
+        />
+      </Modal>
+
+      <Modal open={openAlert.open} handleClose={handleCloseAlert}>
+        <AlertRemoveMessage
+          handleClose={handleCloseAlert}
+          onClick={handleRemoveQuiz}
+          title="Deseja mesmo excluir o Quiz?"
+          description="O Quiz será excluido e todas suas questões também serão excluídas."
         />
       </Modal>
     </>

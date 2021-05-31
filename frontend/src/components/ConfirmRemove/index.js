@@ -16,7 +16,7 @@ const Wrapper = forwardRef((props, ref) => (
 
 // eslint-disable-next-line no-unused-vars
 const AlertRemoveQuestion = forwardRef((props, ref) => {
-  const { onClick, handleClose } = props;
+  const { onClick, handleClose, title, description } = props;
 
   const handleRemove = () => {
     onClick();
@@ -25,13 +25,10 @@ const AlertRemoveQuestion = forwardRef((props, ref) => {
 
   return (
     <Wrapper>
-      <DialogTitle id="alert-dialog-title">
-        Deseja mesmo excluir a questão?
-      </DialogTitle>
+      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          A questão será excluida do modo de edição, porém, somente sera
-          persistida a exclusão pressionar o botão de salvar alterações.
+          {description}
         </DialogContentText>
       </DialogContent>
       <DialogActions>

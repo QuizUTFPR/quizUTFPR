@@ -10,12 +10,12 @@ import useQuestionQuiz from '@hooks/QuestionQuiz';
 
 // COMPONENTS
 import Modal from '@components/Modal';
+import AlertRemoveMessage from '@components/ConfirmRemove';
 import { ContainerGrid } from './style';
 import Header from './components/header';
 import LeftSide from './components/leftSide';
 import MiddleSide from './components/middleSide';
 import RightSide from './components/rightSide';
-import AlertRemoveMessage from './components/confirmRemove';
 import AlertGetOut from './components/confirmGetOut';
 
 // PAGES
@@ -182,6 +182,9 @@ const Question = ({ history, location }) => {
         <AlertRemoveMessage
           handleClose={handleCloseAlert}
           onClick={handleRemoveQuestion}
+          title="Deseja mesmo excluir a questão?"
+          description="A questão será excluida do modo de edição, porém, somente sera
+          persistida a exclusão pressionar o botão de salvar alterações."
         />
       </Modal>
 
