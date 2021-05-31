@@ -7,6 +7,8 @@ import Quiz from "../models/QuizModel";
 import Tag from "../models/TagModel";
 import File from '../models/FileModel';
 
+import getMethod from '../utils/getMethodsOfAssociation'
+
 class QuestionController {
   async store(req, res) {
     try{
@@ -34,7 +36,7 @@ class QuestionController {
           ).required("Informe as alternativas.")
       });
 
-      console.log("criando")
+      console.log("CRIANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO \n\n ")
       //Check body of requisiton
       if (!(await schema.isValid(req.body)))
         return res.status(401).json({ error: "Falha na validação!" });
@@ -52,13 +54,11 @@ class QuestionController {
         id_image,
       } = req.body;
 
-      console.log("valido")
       const quiz = await Quiz.findByPk(quiz_id);
-      console.log("quiz")
       if (!quiz) return res.status(204).json({ error: "Quiz não encontrado!" });
 
       let question = await Question.findByPk(id);
-      console.log(id_image)
+
       if(!question){
         //CASO QUESTÃO NÃO EXISTIR CRIO A MESMA E AS ALTERNATIVAS
         try {
@@ -224,7 +224,30 @@ class QuestionController {
   // Altera um único registro
   update() {}
   // Remove um único registro
-  async delete() {}
+  async delete(req, res) {
+    try {
+      const {id} = req.body;
+      console.log("id aqui", id)
+
+      const question = await Question.findByPk(id);
+      
+      if(!question)
+        return res.status(204).json({error: "Questão não encontrada!"})
+
+      const answers = await question.getAnswer();
+      const tags = await question.getTags_question();
+
+
+      console.log(question);
+      answers.map(item => item.destroy());
+      tags.map(item =>  item.destroy());
+      question.destroy();
+
+      return res.status(200).json(question);
+    } catch (error) {
+      return res.status(500).json(err);
+    }
+  }
 }
 
 export default new QuestionController();

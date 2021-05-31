@@ -11,5 +11,7 @@ router.post("/create", Question.store);
 router.get("/", Question.index);
 router.get("/:tag", Question.show);
 router.get("/quiz/:id", QuestionQuiz.index);
+router.delete("/delete", Question.delete);
+
 
 export default router;

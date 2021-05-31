@@ -111,9 +111,11 @@ const QuestionQuiz = ({ children }) => {
   const [isSaved, setSaved] = useState(true);
   const [isTyping, setTyping] = useState(false);
   const [errors, setErrors] = useState(initialValueErrors);
+  const [questionToRemove, setQuestionToRemove] = useState([]);
 
   const getAllQuestionOfTheQuiz = async (id) => {
     const response = await api.get(`/question/quiz/${id}`);
+    setQuizID(parseInt(id, 10));
 
     if (response.status !== 200) return initialValue[0];
 
@@ -130,13 +132,15 @@ const QuestionQuiz = ({ children }) => {
       tags: question.tags_question.map((tag) => tag.name),
       answer: question.answer,
     }));
-    setQuizID(parseInt(id, 10));
     setQuestions(initialQuestions);
     return initialQuestions[0];
   };
 
   const saveQuestionOnDatabase = () => {
     try {
+      questionToRemove.map((removed) =>
+        api.delete('/question/delete', { data: { id: removed.id } })
+      );
       questions.map(async (item) => {
         let responseFile = null;
         if (item.imageObj !== null) {
@@ -168,6 +172,7 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const removeQuestion = (index) => {
+    setQuestionToRemove((prevState) => [...prevState, questions[index]]);
     setQuestions((prevState) => prevState.filter((element, i) => i !== index));
     setSaved(false);
     setErrors(initialValueErrors);

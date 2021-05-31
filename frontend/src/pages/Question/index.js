@@ -118,6 +118,8 @@ const Question = ({ history, location }) => {
 
             newErrors = { ...newErrors, [key]: true };
           });
+
+          console.log(newErrors);
           handleChangeQuestion(question, index)();
           setErrors((prevState) => ({
             ...prevState,
@@ -126,6 +128,9 @@ const Question = ({ history, location }) => {
         });
     });
   };
+
+  console.log('formik', formik.values);
+
   return (
     <>
       <Header
