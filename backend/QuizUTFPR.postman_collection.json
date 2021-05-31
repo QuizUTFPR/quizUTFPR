@@ -59,7 +59,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Chabu é erro?\",\r\n    \"correctAnswer\": true,\r\n    \"timer\": 15,\r\n    \"difficultyLevel\": 3,\r\n    \"quiz_id\": 2,\r\n    \"answer\": [\r\n        {\r\n            \"title\": \"Verdadeiro\",\r\n            \"is_correct\": true\r\n        },\r\n        {\r\n            \"title\": \"Mentira\",\r\n            \"is_correct\": false\r\n        }\r\n    ],\r\n    \"tags\": [\r\n        {\"name\": \"erro\"}\r\n    ]\r\n}",
+							"raw": "{\r\n    \"title\": \"Chabu é erro?\",\r\n    \"correctAnswer\": true,\r\n    \"timer\": 15,\r\n    \"difficulty_level\": 3,\r\n    \"quiz_id\": 2,\r\n    \"answer\": [\r\n        {\r\n            \"title\": \"Verdadeiro\",\r\n            \"is_correct\": true\r\n        },\r\n        {\r\n            \"title\": \"Mentira\",\r\n            \"is_correct\": false\r\n        }\r\n    ],\r\n    \"tags\": [\r\n        {\"name\": \"erro\"}\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

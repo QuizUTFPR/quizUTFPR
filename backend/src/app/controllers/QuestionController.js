@@ -5,15 +5,16 @@ import Question from "../models/QuestionModel";
 import Answer from "../models/AnswerModel";
 import Quiz from "../models/QuizModel";
 import Tag from "../models/TagModel";
-
+import File from '../models/FileModel';
 
 class QuestionController {
   async store(req, res) {
     try{
       const schema = Yup.object().shape({
-        id: yup.number().required(),
-        copy: yup.boolean().required(),
-        availableOnQuestionsDB: yup.boolean().required(),
+        quiz_id: Yup.number().required(),
+        id: Yup.number().required(),
+        copy: Yup.boolean().required(),
+        availableOnQuestionsDB: Yup.boolean().required(),
         title: Yup.string()
           .min(1, "Seu título deve conter pelo menos um caracter.")
           .max(300, "Máximo de caracteres atingidos.")
@@ -21,17 +22,19 @@ class QuestionController {
         timer: Yup.number().required(),
         difficultyLevel: Yup.number().required(),
         quiz_id: Yup.number().required(),
-        tags: yup.array().of(yup.string()).required("Informe as tags da questão!"),
-        id_image: Yup.number(),
+        tags: Yup.array().of(Yup.string()).required("Informe as tags da questão!"),
+        id_image: Yup.number().nullable(),
         answer: Yup.array()
           .of(
             Yup.object().shape({
+              id: Yup.number().required(),
               title: Yup.string().required(),
               is_correct: Yup.bool().required()
             })
           ).required("Informe as alternativas.")
       });
 
+      console.log("criando")
       //Check body of requisiton
       if (!(await schema.isValid(req.body)))
         return res.status(401).json({ error: "Falha na validação!" });
@@ -49,50 +52,95 @@ class QuestionController {
         id_image,
       } = req.body;
 
+      console.log("valido")
       const quiz = await Quiz.findByPk(quiz_id);
-
+      console.log("quiz")
       if (!quiz) return res.status(204).json({ error: "Quiz não encontrado!" });
 
-      const question = await Question.findOrCreate({ 
-        defaults: {
-          title: title, 
-          timer: timer, 
-          difficulty_level: difficultyLevel,
-          copy: copy,
-          available_on_questions_db: availableOnQuestionsDB,
-          id_image: id_image
-        },
-        where: {
-          id: id
-        }});
+      let question = await Question.findByPk(id);
+      console.log(id_image)
+      if(!question){
+        //CASO QUESTÃO NÃO EXISTIR CRIO A MESMA E AS ALTERNATIVAS
+        try {
+          question = await Question.create({
+            copy: copy,
+            available_on_questions_db: availableOnQuestionsDB,
+            title: title, 
+            timer: timer, 
+            difficulty_level: difficultyLevel, 
+            quiz_id: quiz_id, 
+            id_image: id_image,
+          }) 
+        } catch (error) {
+          return res.status(500).json(error);
+        }
+      }else{
+        // CASO QUESTÃO JÁ EXISTA REALIZO AS ALTERAÇÕES AQUI
+        question.title = title;
+        question.timer = timer;
+        question.difficulty_level = difficultyLevel;
+        question.copy = copy;
+        question.available_on_questions_db = availableOnQuestionsDB;
+        if(id_image)  question.id_image = id_image;
+        question.save();
+      }
 
+      // ATUALIZANDO OU CRIANDO AS QUESTÕES
       const id_question = question.id;
 
       answer.map(async answerItem => {
-        const answerCreated = await Answer.create({ ...answerItem, id_question });
-        question.addAnswer(answerCreated);
+        const answerFounded = await Answer.findByPk(answerItem.id);
+        
+        if(!answerFounded){
+          try{
+          const newAnser = await Answer.create({
+              id_question: id_question,
+              title: answerItem.title, 
+              is_correct: answerItem.is_correct
+            });
+          }catch(err){
+            return res.status(500).json(error);
+          }
+        }else{
+          answerFounded.title = answerItem.title;
+          answerFounded.is_correct = answerItem.is_correct;
+          answerFounded.save();
+        }
       });
 
-      /**
-       * Quando se cria um relacionamento de N para N no Sequelize ele monta um monte de funcionalidades
-       * a mais, por exemplo o 'add', que nós setamos com 'addTech()' e depois passamos o model '(tech)'
-       * dentro do 'addTech(tech)' para que ele possa ter acesso e criar a tecnologia se ele não achou.
-       */
+      const idAnswerReceived = answer.map(item => item.id);
+      const AnswerAlreadyInQuestion = await question.getAnswer();
+
+      AnswerAlreadyInQuestion.map(answer => {
+        if(!idAnswerReceived.find(elementID => elementID == answer.id)){
+          answer.destroy();
+        }
+      })
+      
+
 
       await quiz.addQuestion(question);
-
-
+      // ATUALIZANDO TAG DAS QUESTÕES
+      const tagsAlreadyInQuestion = await question.getTags_question();
+      const arrayTagsAlreadyInQuestion = tagsAlreadyInQuestion.map(item => item.name);
+      
       tags.map(async tagObject => {
-        //tag =  TAG FOUND OR CREATE
-        //Created = flag to inform if some tag was created
         const [tag, Created] = await Tag.findOrCreate({
           where: {
-            name: tagObject.name
+            name: tagObject
           }
         });
-
-        tag.addQuestion(question);
+        if(!arrayTagsAlreadyInQuestion.find(element => element == tag)){
+          tag.addQuestion(question);
+        }
       });
+
+      //REMOVENDO TAGS QUE FORAM RETIRADAS DA QUESTÃO
+      tagsAlreadyInQuestion.map(tagInQuestion => {
+        if(!tags.find(element => element == tagInQuestion.name)){
+          tagInQuestion.removeQuestion(question);
+        }
+      })
 
       return res.status(200).json(question);
     }catch(err){
@@ -104,12 +152,17 @@ class QuestionController {
   async index(req, res) {
     try{
       const questions = await Question.findAll({
-        attributes: ['id', 'title', 'timer', 'difficultyLevel'],
+        attributes: ['id', 'title', 'timer', 'difficulty_level'],
         include: [
           {
             model: Answer,
             as: 'answer',
             attributes: ['id', 'title', 'is_correct']
+          },
+          {
+            model: File,
+            as: "image_question",
+            attributes: ["url","path", "name"]       
           },
           {
             model: Tag,
@@ -137,7 +190,7 @@ class QuestionController {
       const {tag} = req.params;
 
       const questions = await Question.findAll({
-        attributes: ['id', 'title', 'timer', 'difficultyLevel'],
+        attributes: ['id', 'title', 'timer', 'difficulty_level'],
         include: [
           {
             model: Answer,

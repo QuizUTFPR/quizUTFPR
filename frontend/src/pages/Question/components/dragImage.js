@@ -31,8 +31,20 @@ const DragImageInput = ({
 
   const changeContextValue = (files) => {
     setTyping(true);
-    handleFormikChange(formikID, URL.createObjectURL(files[0]));
-    handleUpdateContext({ value: files[0], ...handlePropsChange });
+    handleFormikChange(formikID[0], files[0]);
+    handleFormikChange(formikID[1], URL.createObjectURL(files[0]));
+    handleUpdateContext({
+      value: files[0],
+      key: handlePropsChange.key[0],
+      index: handlePropsChange.index,
+      handleUpdate: handlePropsChange.handleUpdate,
+    });
+    handleUpdateContext({
+      value: URL.createObjectURL(files[0]),
+      key: handlePropsChange.key[1],
+      index: handlePropsChange.index,
+      handleUpdate: handlePropsChange.handleUpdate,
+    });
   };
 
   return <DragZone handleChange={changeContextValue} {...props} />;

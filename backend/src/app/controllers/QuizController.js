@@ -8,7 +8,6 @@ import Answer from "../models/AnswerModel";
 import Tag from "../models/TagModel";
 import File from '../models/FileModel';
 
-import getMethod from '../utils/getMethodsOfAssociation'
 
 class QuizController {
   async store(req, res) {
@@ -133,7 +132,7 @@ class QuizController {
           {
             model: Question,
             as: "questions",
-            attributes: ["id", "title", "timer", "difficultyLevel"],
+            attributes: ["id", "title", "timer", "difficulty_level"],
             through: {
               attributes: []
             },
@@ -228,9 +227,7 @@ class QuizController {
         })
       
   
-        return res.status(200).json({
-          quiz
-        });
+        return res.status(200).json(quiz);
 
     }catch(err){
       return res.status(500).json(err);

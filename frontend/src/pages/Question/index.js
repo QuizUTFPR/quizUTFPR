@@ -71,15 +71,10 @@ const Question = ({ history, location }) => {
 
   const handleChangeQuestion = (oldQuestion, index) => () => {
     if (index < 0) return;
-
     setOnScreen({
       index,
       question: {
         ...oldQuestion,
-        image:
-          oldQuestion.image === null
-            ? null
-            : URL.createObjectURL(oldQuestion.image),
       },
     });
     setErrors(initialValueErrors);
@@ -106,7 +101,8 @@ const Question = ({ history, location }) => {
   const handleSave = async () => {
     // VERIFICO SE AS QUESTÃO ESTÃO VALIDAS
     if (await validationSchemeArrayQuestion.isValid(questions)) {
-      saveQuestionOnDatabase();
+      const success = saveQuestionOnDatabase();
+      if (success) history.go(0);
       return;
     }
 
@@ -125,6 +121,7 @@ const Question = ({ history, location }) => {
 
             newErrors = { ...newErrors, [key]: true };
           });
+          console.log(newErrors);
           handleChangeQuestion(question, index)();
           setErrors((prevState) => ({
             ...prevState,
@@ -133,7 +130,7 @@ const Question = ({ history, location }) => {
         });
     });
   };
-
+  // console.log('questions', formik.values);
   return (
     <>
       <Header

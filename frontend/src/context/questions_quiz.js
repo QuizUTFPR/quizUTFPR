@@ -10,14 +10,17 @@ export const MockupQuestionTrueOrFalse = {
   copy: false,
   title: '',
   timer: 30,
-  image: null,
+  imageObj: null,
+  imageUrl: '',
   availableOnQuestionsDB: false,
   answer: [
     {
+      id: -1,
       title: 'Verdadeiro',
       is_correct: false,
     },
     {
+      id: -1,
       title: 'Falso',
       is_correct: false,
     },
@@ -30,22 +33,27 @@ export const MockupQuestionMultipleChoice = {
   copy: false,
   title: '',
   timer: 30,
-  image: null,
+  imageObj: null,
+  imageUrl: '',
   availableOnQuestionsDB: false,
   answer: [
     {
+      id: -1,
       title: '',
       is_correct: false,
     },
     {
+      id: -1,
       title: '',
       is_correct: false,
     },
     {
+      id: -1,
       title: '',
       is_correct: false,
     },
     {
+      id: -1,
       title: '',
       is_correct: false,
     },
@@ -59,22 +67,27 @@ export const initialValue = [
     copy: false,
     title: '',
     timer: 30,
-    image: null,
+    imageObj: null,
+    imageUrl: '',
     availableOnQuestionsDB: false,
     answer: [
       {
+        id: -1,
         title: '',
         is_correct: false,
       },
       {
+        id: -1,
         title: '',
         is_correct: false,
       },
       {
+        id: -1,
         title: '',
         is_correct: false,
       },
       {
+        id: -1,
         title: '',
         is_correct: false,
       },
@@ -91,6 +104,7 @@ const initialValueErrors = {
 
 const QuestionQuiz = ({ children }) => {
   const [questions, setQuestions] = useState(initialValue);
+  const [quizId, setQuizID] = useState(-1);
   const [isSaved, setSaved] = useState(true);
   const [isTyping, setTyping] = useState(false);
   const [errors, setErrors] = useState(initialValueErrors);
@@ -101,28 +115,55 @@ const QuestionQuiz = ({ children }) => {
     if (response.status !== 200) return initialValue[0];
 
     const initialQuestions = response.data.map((question) => ({
+      quiz_id: parseInt(id, 10),
       id: question.id,
       copy: false,
       availableOnQuestionsDB: false,
-      image: null,
+      imageObj: null,
+      imageUrl: question.image_question ? question.image_question.url : '',
       title: question.title,
       timer: question.timer,
-      difficultyLevel: question.difficultyLevel,
+      difficultyLevel: question.difficulty_level,
       tags: question.tags_question.map((tag) => tag.name),
       answer: question.answer,
     }));
-
+    setQuizID(parseInt(id, 10));
     setQuestions(initialQuestions);
     return initialQuestions[0];
   };
 
   const saveQuestionOnDatabase = () => {
-    console.log('salvando', questions);
+    try {
+      questions.map(async (item) => {
+        let responseFile = null;
+        if (item.imageObj !== null) {
+          console.log('criou imagem!');
+
+          const file = new FormData();
+          file.append('file', item.imageObj);
+
+          responseFile = await api.post('/files', file);
+        }
+
+        if (responseFile) {
+          item.id_image = responseFile.data.id;
+        }
+
+        const response = await api.post('/question/create', item);
+
+        if (response.status !== 200) throw new Error('questao nao criada');
+      });
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+
     setSaved(true);
+    return true;
   };
 
   const addQuestion = (item) => {
-    setQuestions((prevState) => [...prevState, item]);
+    setQuestions((prevState) => [...prevState, { ...item, quiz_id: quizId }]);
     setSaved(false);
     setErrors(initialValueErrors);
   };
@@ -180,11 +221,13 @@ const QuestionQuiz = ({ children }) => {
 
   const validationSchemeArrayQuestion = yup.array().of(
     yup.object().shape({
+      quiz_id: yup.number().required(),
       id: yup.number().required(),
       copy: yup.boolean().required(),
       availableOnQuestionsDB: yup.boolean().required(),
-      image: yup.object().nullable(),
-      title: yup.string().min(1).required(),
+      // eslint-disable-next-line react/forbid-prop-types
+      imageObj: yup.object().nullable(),
+      imageUrl: yup.string(),
       timer: yup.number().required(),
       difficultyLevel: yup.number(),
       tags: yup.array().of(yup.string()).required(),
@@ -192,6 +235,7 @@ const QuestionQuiz = ({ children }) => {
         .array()
         .of(
           yup.object().shape({
+            id: yup.number().required(),
             title: yup.string().required(),
             is_correct: yup.bool().required(),
           })
@@ -212,10 +256,13 @@ const QuestionQuiz = ({ children }) => {
   );
 
   const validationSchemeQuestion = yup.object().shape({
+    quiz_id: yup.number().required(),
     id: yup.number().required(),
     copy: yup.boolean().required(),
     availableOnQuestionsDB: yup.boolean().required(),
-    image: yup.object().nullable(),
+    // eslint-disable-next-line react/forbid-prop-types
+    imageObj: yup.object().nullable(),
+    imageUrl: yup.string(),
     title: yup.string().min(1).required(),
     timer: yup.number().required(),
     difficultyLevel: yup.number(),
@@ -224,6 +271,7 @@ const QuestionQuiz = ({ children }) => {
       .array()
       .of(
         yup.object().shape({
+          id: yup.number().required(),
           title: yup.string().required(),
           is_correct: yup.bool().required(),
         })
