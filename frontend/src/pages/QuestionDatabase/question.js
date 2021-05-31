@@ -68,8 +68,9 @@ const Questions = ({ id, checked, onChange, question }) => (
         </TitleQuestion>
         <Typography color="textSecondary">Alternativas</Typography>
         <Grid container spacing={1}>
-          {question.answer.map((item) => (
-            <Grid item xs={12} md={6} key={item.id}>
+          {question.answer.map((item, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Grid item xs={12} md={6} key={`${item.id}+${item.title}+${index}`}>
               {item.is_correct ? (
                 <CorrectgAnswer>{item.title}</CorrectgAnswer>
               ) : (

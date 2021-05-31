@@ -116,11 +116,11 @@ const QuestionQuiz = ({ children }) => {
     const response = await api.get(`/question/quiz/${id}`);
 
     if (response.status !== 200) return initialValue[0];
-
+    console.log(response.data);
     const initialQuestions = response.data.map((question) => ({
       id: question.id,
-      copy: false,
-      availableOnQuestionsDB: false,
+      copy: question.copy,
+      availableOnQuestionsDB: question.available_on_questions_db,
       imageObj: null,
       imageUrl: question.image_question ? question.image_question.url : '',
       title: question.title,
@@ -135,10 +135,13 @@ const QuestionQuiz = ({ children }) => {
 
   // eslint-disable-next-line camelcase
   const saveQuestionOnDatabase = (id_quiz) => {
+    console.log('questoes', questions);
+
     try {
       questionToRemove.map((removed) =>
         api.delete('/question/delete', { data: { id: removed.id } })
       );
+
       questions.map(async (item) => {
         let responseFile = null;
         if (item.imageObj !== null) {
@@ -151,10 +154,12 @@ const QuestionQuiz = ({ children }) => {
         if (responseFile) {
           item.id_image = responseFile.data.id;
         }
+
         const response = await api.post('/question/create', {
           ...item,
           quiz_id: id_quiz,
         });
+        console.log(response);
         if (response.status !== 200) throw new Error('questao nao criada');
       });
     } catch (error) {

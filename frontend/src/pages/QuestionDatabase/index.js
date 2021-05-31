@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { forwardRef, useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import api from '@api';
@@ -29,15 +30,25 @@ const QuestionDatabase = forwardRef((props, ref) => {
     onSubmit: async ({ tag }) => {
       const { data } = await api.get(`question/${tag}`);
 
-      // eslint-disable-next-line camelcase
-      const newQuestions = data.map(({ tags_question, ...rest }) => ({
-        ...rest,
-        copy: true,
-        id: -1,
-        availableOnQuestionsDB: false,
-        image: null,
-        tags: tags_question.map((item) => item.name),
-      }));
+      const newQuestions = data.map(
+        ({
+          tags_question,
+          image_question,
+          difficulty_level,
+          answer,
+          ...rest
+        }) => ({
+          ...rest,
+          copy: true,
+          id: -1,
+          difficultyLevel: difficulty_level,
+          availableOnQuestionsDB: false,
+          imageObj: null,
+          imageUrl: image_question.url,
+          tags: tags_question.map((item) => item.name),
+          answer: answer.map((item) => ({ ...item, id: -1 })),
+        })
+      );
 
       formik.setFieldValue('questions', newQuestions);
     },
@@ -46,7 +57,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
   useEffect(() => {
     const getTags = async () => {
       const { data } = await api.get('/tag/question');
-      console.log('tag questions', data);
+      console.log('tags', data);
       if (data) {
         const newSuggestions = data.map((tag) => tag.name);
         formik.setFieldValue('suggestions', newSuggestions);
