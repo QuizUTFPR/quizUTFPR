@@ -29,7 +29,7 @@ class SessionController {
 
 
       if (!(await teacher.checkPassword(password)))
-        return res.status(401).json({ error: 'Senha Incorreta!' });
+        return res.status(403).json({ error: 'Senha Incorreta!' });
 
 
       const { id, name } = teacher;
