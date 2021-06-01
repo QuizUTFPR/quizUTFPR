@@ -3,107 +3,16 @@ import PropTypes from 'prop-types';
 import api from '@api';
 import * as yup from 'yup';
 
+import {
+  // TrueOrFalseAnswer,
+  // MultipleChoiceAnswer,
+  MockupQuestionTrueOrFalse,
+  MockupQuestionMultipleChoice,
+  initialValue,
+  initialValueErrors,
+} from './mockups_question_quiz';
+
 export const QuestionQuizContext = createContext();
-
-export const MockupQuestionTrueOrFalse = {
-  id: -1,
-  copy: false,
-  title: '',
-  timer: 30,
-  imageObj: null,
-  imageUrl: '',
-  difficultyLevel: 3,
-  availableOnQuestionsDB: false,
-  answer: [
-    {
-      id: -1,
-      title: 'Verdadeiro',
-      is_correct: false,
-    },
-    {
-      id: -1,
-      title: 'Falso',
-      is_correct: false,
-    },
-  ],
-  tags: [],
-};
-
-export const MockupQuestionMultipleChoice = {
-  id: -1,
-  copy: false,
-  title: '',
-  timer: 30,
-  difficultyLevel: 3,
-  imageObj: null,
-  imageUrl: '',
-  availableOnQuestionsDB: false,
-  answer: [
-    {
-      id: -1,
-      title: '',
-      is_correct: false,
-    },
-    {
-      id: -1,
-      title: '',
-      is_correct: false,
-    },
-    {
-      id: -1,
-      title: '',
-      is_correct: false,
-    },
-    {
-      id: -1,
-      title: '',
-      is_correct: false,
-    },
-  ],
-  tags: [],
-};
-
-export const initialValue = [
-  {
-    id: -1,
-    copy: false,
-    title: '',
-    timer: 30,
-    imageObj: null,
-    imageUrl: '',
-    difficultyLevel: 3,
-    availableOnQuestionsDB: false,
-    answer: [
-      {
-        id: -1,
-        title: '',
-        is_correct: false,
-      },
-      {
-        id: -1,
-        title: '',
-        is_correct: false,
-      },
-      {
-        id: -1,
-        title: '',
-        is_correct: false,
-      },
-      {
-        id: -1,
-        title: '',
-        is_correct: false,
-      },
-    ],
-    tags: [],
-  },
-];
-
-const initialValueErrors = {
-  title: false,
-  is_correct: false,
-  answer: false,
-};
 
 const QuestionQuiz = ({ children }) => {
   const [questions, setQuestions] = useState(initialValue);
