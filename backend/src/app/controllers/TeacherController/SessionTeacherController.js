@@ -1,9 +1,9 @@
 import * as Yup from "yup";
-import authConfig from '../../config/auth'
+import authConfig from '../../../config/auth'
 import jwt from 'jsonwebtoken'
 
 // MODELS
-import Teacher from "../models/TeacherModel";
+import Teacher from "../../models/TeacherModel";
 
 class SessionController {
   // Cadastra um único registro

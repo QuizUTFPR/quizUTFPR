@@ -1,12 +1,12 @@
 import * as Yup from "yup";
 
 // MODELS
-import Quiz from "../models/QuizModel";
-import Teacher from "../models/TeacherModel";
-import Question from "../models/QuestionModel";
-import Answer from "../models/AnswerModel";
-import Tag from "../models/TagModel";
-import File from '../models/FileModel';
+import Quiz from "../../models/QuizModel";
+import Teacher from "../../models/TeacherModel";
+import Question from "../../models/QuestionModel";
+import Answer from "../../models/AnswerModel";
+import Tag from "../../models/TagModel";
+import File from '../../models/FileModel';
 
 
 class QuizController {

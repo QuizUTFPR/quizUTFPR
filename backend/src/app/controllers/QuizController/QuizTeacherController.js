@@ -1,10 +1,10 @@
 import * as Yup from "yup";
 
 // MODELS
-import Teacher from "../models/TeacherModel";
-import Quiz from "../models/QuizModel";
-import Tag from "../models/TagModel";
-import File from '../models/FileModel';
+import Teacher from "../../models/TeacherModel";
+import Quiz from "../../models/QuizModel";
+import Tag from "../../models/TagModel";
+import File from '../../models/FileModel';
 
 class QuizTeacherController {
   // Lista todos os registros

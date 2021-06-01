@@ -1,13 +1,13 @@
 import * as Yup from "yup";
 
 // MODELS
-import Question from "../models/QuestionModel";
-import Answer from "../models/AnswerModel";
-import Quiz from "../models/QuizModel";
-import Tag from "../models/TagModel";
-import File from '../models/FileModel';
+import Question from "../../models/QuestionModel";
+import Answer from "../../models/AnswerModel";
+import Quiz from "../../models/QuizModel";
+import Tag from "../../models/TagModel";
+import File from '../../models/FileModel';
 
-import getMethod from '../utils/getMethodsOfAssociation'
+import getMethod from '../../utils/getMethodsOfAssociation'
 
 class QuestionController {
   async store(req, res) {

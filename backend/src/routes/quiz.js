@@ -4,8 +4,8 @@ import { Router } from "express";
 const router = new Router();
 
 // CONTROLLERS
-import QuizController from "../app/controllers/QuizController";
-import QuizTeacherController from '../app/controllers/QuizTeacherController'
+import QuizController from "../app/controllers/QuizController/QuizController";
+import QuizTeacherController from '../app/controllers/QuizController/QuizTeacherController'
 
 router.get("/", QuizTeacherController.index);
 router.post("/create", QuizController.store);

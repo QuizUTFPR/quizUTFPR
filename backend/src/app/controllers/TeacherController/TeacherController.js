@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 // MODELS
-import Teacher from "../models/TeacherModel";
+import Teacher from "../../models/TeacherModel";
 
 class TeacherController {
   // Lista todos os registros
