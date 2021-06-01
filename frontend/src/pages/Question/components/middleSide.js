@@ -101,6 +101,7 @@ const MiddleSide = ({
                   </ShowOption>
                   {formik.values.question.type === 'multiple_choice' ? (
                     <HiddenCheckBox
+                      qtdAnswers={formik.values.question.answer.length}
                       style={{ width: '50px', height: '50px' }}
                       checked={Boolean(item.is_correct)}
                       formikID={`question.answer[${index}].is_correct`}
@@ -114,6 +115,7 @@ const MiddleSide = ({
                     />
                   ) : (
                     <HiddenRadio
+                      qtdAnswers={formik.values.question.answer.length}
                       style={{ width: '50px', height: '50px' }}
                       value={item.is_correct}
                       formikID={`question.answer[${index}].is_correct`}
@@ -132,6 +134,7 @@ const MiddleSide = ({
                   )}
                 </>
                 <StyledAnswerInput
+                  qtdAnswers={formik.values.question.answer.length}
                   type="text"
                   placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
                   formikID={`question.answer[${index}].title`}

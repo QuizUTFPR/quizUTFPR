@@ -14,7 +14,12 @@ import SelectInput from './select';
 import TagInput from './tagInput';
 import CheckBox from './checkbox';
 
-const RightSide = ({ formik, updateQuestion, questions }) => (
+const RightSide = ({
+  formik,
+  updateQuestion,
+  questions,
+  handleOpenChangeTypeQuestion,
+}) => (
   <Grid item xs={3}>
     <StyledRightGrid container align="center" direction="column">
       <Grid item style={{ marginBottom: '40px' }}>
@@ -25,6 +30,35 @@ const RightSide = ({ formik, updateQuestion, questions }) => (
 
       {questions.length ? (
         <>
+          <GridItemStyledRight item>
+            <SelectInput
+              fullWidth
+              label="Tipo da Questão"
+              name="type"
+              variant="outlined"
+              formikID=""
+              value={formik.values.question.type}
+              handleFormikChange={() => (e) => {
+                handleOpenChangeTypeQuestion({
+                  open: true,
+                  indexQuestion: formik.values.index,
+                  type: e.target.value,
+                  formikUpdate: formik.setFieldValue,
+                  formikTypeID: 'question.type',
+                  formikAnswerID: 'question.answer',
+                });
+              }}
+              handlePropsChange={{
+                handleUpdate: () => {},
+                value: '',
+              }}
+              required
+            >
+              <option value="multiple_choice">Múltipla Escolha</option>
+              <option value="single_choice">Verdadeiro ou Falso</option>
+            </SelectInput>
+          </GridItemStyledRight>
+
           <GridItemStyledRight item>
             <SelectInput
               fullWidth
@@ -65,6 +99,28 @@ const RightSide = ({ formik, updateQuestion, questions }) => (
                 index: formik.values.index,
               }}
             />
+          </GridItemStyledRight>
+
+          <GridItemStyledRight item>
+            <SelectInput
+              fullWidth
+              label="Nível de Dificuldade"
+              name="difficultyLevel"
+              variant="outlined"
+              formikID="question.difficultyLevel"
+              value={formik.values.question.difficultyLevel}
+              handleFormikChange={formik.handleChange}
+              handlePropsChange={{
+                handleUpdate: updateQuestion,
+                key: 'difficultyLevel',
+                index: formik.values.index,
+              }}
+              required
+            >
+              <option value={1}>Fácil</option>
+              <option value={2}>Médio</option>
+              <option value={3}>Difícil</option>
+            </SelectInput>
           </GridItemStyledRight>
 
           <GridItemStyledRight item style={{ alignSelf: 'start' }}>

@@ -4,8 +4,8 @@ import api from '@api';
 import * as yup from 'yup';
 
 import {
-  // TrueOrFalseAnswer,
-  // MultipleChoiceAnswer,
+  TrueOrFalseAnswer,
+  MultipleChoiceAnswer,
   MockupQuestionTrueOrFalse,
   MockupQuestionMultipleChoice,
   initialValue,
@@ -140,6 +140,38 @@ const QuestionQuiz = ({ children }) => {
     setErrors(initialValueErrors);
   };
 
+  const changeTypeQuestion = ({
+    indexQuestion,
+    type,
+    handleClose,
+    formikUpdate,
+    formikID,
+    formikAnswerID,
+  }) => {
+    const choosedType =
+      type === 'multiple_choice' ? MultipleChoiceAnswer : TrueOrFalseAnswer;
+
+    formikUpdate(formikID, type);
+    formikUpdate(formikAnswerID, choosedType);
+
+    setQuestions((prevState) =>
+      prevState.map((question, i) => {
+        if (i === indexQuestion) {
+          return {
+            ...question,
+            type,
+            answer: choosedType,
+          };
+        }
+        return question;
+      })
+    );
+
+    handleClose();
+    setSaved(false);
+    setErrors(initialValueErrors);
+  };
+
   const validationSchemeArrayQuestion = yup.array().of(
     yup.object().shape({
       id: yup.number().required(),
@@ -227,6 +259,7 @@ const QuestionQuiz = ({ children }) => {
         MockupQuestionMultipleChoice,
         updateQuestion,
         updateAnswer,
+        changeTypeQuestion,
         saveQuestionOnDatabase,
         validationSchemeQuestion,
         validationSchemeArrayQuestion,
