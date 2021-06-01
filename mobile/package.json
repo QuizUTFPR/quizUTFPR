@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "0.21.1",
+    "babel-plugin-module-resolver": "^4.1.0",
     "expo": "~41.0.1",
     "expo-status-bar": "~1.0.4",
     "prop-types": "^15.7.2",
