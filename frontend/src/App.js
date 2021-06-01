@@ -78,7 +78,7 @@ function App({ location, history }) {
             </QuestionQuizProvider>
           )}
         />
-        <Route component={MainPage} />
+        <Route exact component={MainPage} />
       </Switch>
     </Suspense>
   );

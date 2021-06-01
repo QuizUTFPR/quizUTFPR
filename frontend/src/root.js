@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
 import { ThemeProvider } from 'styled-components';
 import AuthProvider from '@context/auth';
+
 import App from './App';
 
 import GlobalStyle from './theme/globalStyle';
@@ -19,7 +20,7 @@ function Root() {
         <AuthProvider>
           <BrowserRouter>
             <Switch>
-              <Route component={App} />
+              <Route exact component={App} />
             </Switch>
           </BrowserRouter>
         </AuthProvider>

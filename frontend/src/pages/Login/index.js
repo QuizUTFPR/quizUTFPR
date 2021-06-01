@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 // COMPONENTS
 import { Grid, InputAdornment, IconButton } from '@material-ui/core';
+import ErrorMessage from '@components/Messages/error';
 
 import {
   AccountCircle,
@@ -38,6 +39,8 @@ const LoginPage = ({ history }) => {
     showPassword: false,
   });
 
+  const [error, setError] = useState(false);
+
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -68,10 +71,14 @@ const LoginPage = ({ history }) => {
             item
             xs={12}
             component="form"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
-              login(values.email, values.password);
-              history.push(HOME);
+              const response = await login(values.email, values.password);
+              if (response.status === 200) {
+                history.push(HOME);
+              } else {
+                setError(response.data.error);
+              }
             }}
           >
             <StyledInput
@@ -118,6 +125,11 @@ const LoginPage = ({ history }) => {
               }}
             />
 
+            {error && (
+              <ErrorMessage style={{ marginBottom: '20px' }}>
+                {error}
+              </ErrorMessage>
+            )}
             <Grid item align="center">
               <StyledButton type="submit" color="primary" variant="contained">
                 ENTRAR

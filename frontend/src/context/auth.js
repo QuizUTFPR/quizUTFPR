@@ -16,7 +16,8 @@ const Auth = ({ children }) => {
     if (!email || !password) return 'Erro';
 
     try {
-      const { data } = await api.post('/login', { email, password });
+      const response = await api.post('/login', { email, password });
+      const { data } = response;
 
       setTeacherInfo({
         token: data.token,
@@ -26,10 +27,9 @@ const Auth = ({ children }) => {
       localStorage.setItem('@TOKEN', data.token);
       localStorage.setItem('@TEACHER', JSON.stringify(data.teacher));
 
-      return 200;
+      return response;
     } catch (err) {
-      console.log(err);
-      return err;
+      return { ...err.response };
     }
   };
 

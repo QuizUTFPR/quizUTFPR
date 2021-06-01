@@ -28,8 +28,8 @@ const MainPage = () => (
       <Switch>
         <Route path={HOME} component={Home} exact />
         <Route path={QUIZ} component={Quiz} exact />
-        <Route path={CREATE_QUIZ} component={CreateQuiz} />
-        <Route path={CLASSES} component={Classes} />
+        <Route path={CREATE_QUIZ} component={CreateQuiz} exact />
+        <Route path={CLASSES} component={Classes} exact />
       </Switch>
     </Div>
   </Suspense>
