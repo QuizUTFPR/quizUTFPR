@@ -10,6 +10,7 @@ class Question extends Model {
         id_image: Sequelize.INTEGER,
         timer: Sequelize.INTEGER.UNSIGNED,
         difficulty_level: Sequelize.INTEGER,
+        type: Sequelize.ENUM('multiple_choice', 'single_choice')
       },
       {
         sequelize,

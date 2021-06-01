@@ -37,6 +37,11 @@ module.exports = {
         onDelete: "SET NULL",
         allowNull: true
       },
+      type: {
+        type: Sequelize.ENUM('multiple_choice', 'single_choice'),
+        allowNull: false,
+        defaultValue: 'multiple_choice'
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false

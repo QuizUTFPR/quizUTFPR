@@ -15,7 +15,8 @@ import {
   GridRegisterQuestion,
   PreviewImage,
   HiddenCheckBox,
-  ShowCheckBox,
+  ShowOption,
+  HiddenRadio,
 } from '../style';
 
 const MiddleSide = ({
@@ -95,22 +96,40 @@ const MiddleSide = ({
                 }}
               >
                 <>
-                  <ShowCheckBox checked={Boolean(item.is_correct)}>
+                  <ShowOption checked={Boolean(item.is_correct)}>
                     <Check />
-                  </ShowCheckBox>
-                  <HiddenCheckBox
-                    style={{ width: '50px', height: '50px' }}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                    checked={Boolean(item.is_correct)}
-                    formikID={`question.answer[${index}].is_correct`}
-                    handleFormikChange={formik.handleChange}
-                    handlePropsChange={{
-                      handleUpdate: updateAnswer,
-                      key: 'is_correct',
-                      indexQuestion: formik.values.index,
-                      indexAnswer: index,
-                    }}
-                  />
+                  </ShowOption>
+                  {formik.values.question.type === 'multiple_choice' ? (
+                    <HiddenCheckBox
+                      style={{ width: '50px', height: '50px' }}
+                      checked={Boolean(item.is_correct)}
+                      formikID={`question.answer[${index}].is_correct`}
+                      handleFormikChange={formik.handleChange}
+                      handlePropsChange={{
+                        handleUpdate: updateAnswer,
+                        key: 'is_correct',
+                        indexQuestion: formik.values.index,
+                        indexAnswer: index,
+                      }}
+                    />
+                  ) : (
+                    <HiddenRadio
+                      style={{ width: '50px', height: '50px' }}
+                      value={item.is_correct}
+                      formikID={`question.answer[${index}].is_correct`}
+                      formikOtherID={`question.answer[${
+                        index === 0 ? 1 : 0
+                      }].is_correct`}
+                      handleFormikChange={formik.setFieldValue}
+                      handlePropsChange={{
+                        handleUpdate: updateAnswer,
+                        key: 'is_correct',
+                        indexQuestion: formik.values.index,
+                        indexAnswer: index,
+                        indexOtherAnswer: index === 0 ? 1 : 0,
+                      }}
+                    />
+                  )}
                 </>
                 <StyledAnswerInput
                   type="text"

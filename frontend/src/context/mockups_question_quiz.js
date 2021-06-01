@@ -2,7 +2,7 @@ export const TrueOrFalseAnswer = [
   {
     id: -1,
     title: 'Verdadeiro',
-    is_correct: false,
+    is_correct: true,
   },
   {
     id: -1,
@@ -36,6 +36,7 @@ export const MultipleChoiceAnswer = [
 
 export const MockupQuestionTrueOrFalse = {
   id: -1,
+  type: 'single_choice',
   copy: false,
   title: '',
   timer: 30,
@@ -49,6 +50,7 @@ export const MockupQuestionTrueOrFalse = {
 
 export const MockupQuestionMultipleChoice = {
   id: -1,
+  type: 'multiple_choice',
   copy: false,
   title: '',
   timer: 30,
@@ -63,6 +65,7 @@ export const MockupQuestionMultipleChoice = {
 export const initialValue = [
   {
     id: -1,
+    type: 'multiple_choice',
     copy: false,
     title: '',
     timer: 30,

@@ -27,7 +27,7 @@ class QuizController {
 
       //Check body of requisiton
       if (!(await schema.isValid(req.body)))
-        return res.status(401).json({ error: "Falha na validação!" });
+        return res.status(400).json({ error: "Falha na validação!" });
 
       const id_teacher = req.userId;
 
@@ -74,28 +74,6 @@ class QuizController {
             as: "image_quiz",
             attributes: ["url","path", "name"]       
           },
-          //{
-            //model: Question,
-            //as: "questions",
-            //attributes: ["id", "title", "timer", "difficultyLevel"],
-            //through: {
-             // attributes: []
-            //},
-            //include: [
-             // {
-               // model: Answer,
-            //    as: "answer",
-             //   attributes: ["title", "is_correct"]
-            //  },{
-             //   model: Tag,
-             //   as: "tags_question",
-              //  attributes: ["name"],
-              //  through: {
-               //   attributes: []
-              //  }
-              //}
-            //]
-          //},
           {
             model: Tag,
             as: "tags_quiz",
@@ -132,7 +110,7 @@ class QuizController {
           {
             model: Question,
             as: "questions",
-            attributes: ["id", "title", "timer", "difficulty_level"],
+            attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
             through: {
               attributes: []
             },
@@ -192,7 +170,7 @@ class QuizController {
 
       //Check body of requisiton
       if (!(await schema.isValid(req.body)))
-        return res.status(401).json({ error: "Falha na validação!" });
+        return res.status(400).json({ error: "Falha na validação!" });
 
         const {id, tags, title, description,
          visibility, id_image} = req.body
@@ -238,12 +216,9 @@ class QuizController {
     try{
       const {id_quiz} = req.body;
 
-      console.log("id",id_quiz)
       const numberOfRowsDeleted = await Quiz.destroy({
         where: { id: id_quiz }
       });
-
-      console.log(numberOfRowsDeleted)
 
       if(numberOfRowsDeleted < 1) return res.status(204).json({error: "Não existe nenhum quiz com o ID informado."});
       

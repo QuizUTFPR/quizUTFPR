@@ -55,13 +55,12 @@ const QuestionDatabase = forwardRef((props, ref) => {
               imageObj:
                 image_question &&
                 (await getFileFromUrl(image_question.url, image_question.name)),
-              imageUrl: image_question && image_question.url,
+              imageUrl: image_question ? image_question.url : '',
               tags: tags_question.map((item) => item.name),
               answer: answer.map((item) => ({ ...item, id: -1 })),
             })
           )
         );
-
         formik.setFieldValue('questions', newQuestions);
       }
     },

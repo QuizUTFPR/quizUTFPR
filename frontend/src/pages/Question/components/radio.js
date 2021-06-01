@@ -3,13 +3,12 @@ import React, { useState, useMemo } from 'react';
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
-import { Checkbox } from '@material-ui/core';
-
 export default function CheckBoxInput({
   formikID,
+  formikOtherID,
   handleFormikChange,
   handlePropsChange,
-  checked,
+  value,
   ...props
 }) {
   const [timer, setTimer] = useState(null);
@@ -20,6 +19,7 @@ export default function CheckBoxInput({
       clearTimeout(timer);
       setTimer(null);
     }
+
     setTimer(
       setTimeout(() => {
         handleUpdate({ ...params });
@@ -27,43 +27,68 @@ export default function CheckBoxInput({
       }, 0)
     );
   };
-
-  const myCheckbox = useMemo(
+  // console.log(formikID);
+  const myRadio = useMemo(
     () => (
-      <MemoizedCheckbox
+      <MemoizedRadio
         formikID={formikID}
+        formikOtherID={formikOtherID}
         handleFormikChange={handleFormikChange}
         handlePropsChange={handlePropsChange}
         handleUpdateContext={handleUpdateContext}
-        checked={checked}
+        value={value}
         setTyping={setTyping}
         {...props}
       />
     ),
-    [checked, handlePropsChange]
+    [value, handlePropsChange]
   );
 
-  return <>{myCheckbox}</>;
+  return <>{myRadio}</>;
 }
 
-function MemoizedCheckbox({
-  type,
+function MemoizedRadio({
   formikID,
+  formikOtherID,
   setTyping,
   handleFormikChange,
   handleUpdateContext,
   handlePropsChange,
-  checked,
+  value,
   ...props
 }) {
   return (
-    <Checkbox
+    <input
+      type="radio"
       id={formikID}
-      checked={checked}
-      onChange={(e) => {
+      name="alternativa"
+      value={value}
+      onChange={() => {
+        const {
+          handleUpdate,
+          key,
+          indexQuestion,
+          indexAnswer,
+          indexOtherAnswer,
+        } = handlePropsChange;
         setTyping(true);
-        handleFormikChange(formikID)(e);
-        handleUpdateContext({ value: e.target.checked, ...handlePropsChange });
+        handleFormikChange(formikID, true);
+        handleFormikChange(formikOtherID, false);
+
+        handleUpdateContext({
+          value: true,
+          handleUpdate,
+          key,
+          indexQuestion,
+          indexAnswer,
+        });
+        handleUpdateContext({
+          value: false,
+          handleUpdate,
+          key,
+          indexQuestion,
+          indexAnswer: indexOtherAnswer,
+        });
       }}
       {...props}
     />

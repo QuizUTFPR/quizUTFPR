@@ -4,6 +4,7 @@ import { Grid, AppBar, Button, Box } from '@material-ui/core';
 import { ExitToApp } from '@material-ui/icons/';
 import QuestionInput from './components/input';
 import CheckBox from './components/checkbox';
+import MyRadio from './components/radio';
 
 export const StyledAppBar = styled(AppBar)`
   background: white;
@@ -69,8 +70,9 @@ export const StyledAnswerInput = styled(QuestionInput)`
   width: 100%;
   padding: 20px 10px;
   background: white;
-  border-radius: 0 10px 10px 0;
-  border: none;
+  border-radius: 0 5px 5px 0;
+  border: 2px solid ${({ theme }) => theme.palette.primary.main};
+  border-left: none;
   outline: none;
   transition: border 0.3s linear;
 `;
@@ -142,26 +144,31 @@ export const StyledExitIcon = styled(ExitToApp)`
   transform: rotate(180deg);
 `;
 
+export const HiddenRadio = styled(MyRadio)`
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+`;
+
 export const HiddenCheckBox = styled(CheckBox)`
   position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
-
-  && :hover {
-    background: red;
-  }
 `;
 
-export const ShowCheckBox = styled.span`
+export const ShowOption = styled.span`
   cursor: pointer;
   height: 59px;
   width: 70px;
-  border: 2px solid rgba(0, 0, 0, 0.54);
-  border-radius: 3px 0 0 3px;
+  //border: 2px solid rgba(0, 0, 0, 0.54);
+  border: 2px solid ${({ theme }) => theme.palette.primary.main};
+  border-radius: 5px 0 0 5px;
   background: ${({ checked, theme }) =>
-    checked ? theme.palette.secondary.main : 'white'};
+    checked ? theme.palette.primary.main : 'white'};
   && svg {
     display: ${({ checked }) => (checked ? '' : 'none')};
     fill: white;

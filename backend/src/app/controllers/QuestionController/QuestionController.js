@@ -7,7 +7,6 @@ import Quiz from "../../models/QuizModel";
 import Tag from "../../models/TagModel";
 import File from '../../models/FileModel';
 
-import getMethod from '../../utils/getMethodsOfAssociation'
 
 class QuestionController {
   async store(req, res) {
@@ -26,6 +25,7 @@ class QuestionController {
         quiz_id: Yup.number().required(),
         tags: Yup.array().of(Yup.string()).required("Informe as tags da questão!"),
         id_image: Yup.number().nullable(),
+        type: Yup.string().required("Informe o tipo da questão"),
         answer: Yup.array()
           .of(
             Yup.object().shape({
@@ -39,7 +39,7 @@ class QuestionController {
       console.log("CRIANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO \n\n ")
       //Check body of requisiton
       if (!(await schema.isValid(req.body)))
-        return res.status(401).json({ error: "Falha na validação!" });
+        return res.status(400).json({ error: "Falha na validação!" });
 
       const {
         id,
@@ -51,6 +51,7 @@ class QuestionController {
         quiz_id, 
         answer,
         tags,
+        type,
         id_image,
       } = req.body;
 
@@ -72,6 +73,7 @@ class QuestionController {
             difficulty_level: difficultyLevel, 
             quiz_id: quiz_id, 
             id_image: id_image,
+            type: type
           }) 
 
           console.log(question);
@@ -84,6 +86,7 @@ class QuestionController {
         question.timer = timer;
         question.difficulty_level = difficultyLevel;
         question.copy = copy;
+        question.type = type;
         question.available_on_questions_db = availableOnQuestionsDB;
         if(id_image)  question.id_image = id_image;
         question.save();
@@ -157,7 +160,7 @@ class QuestionController {
   async index(req, res) {
     try{
       const questions = await Question.findAll({
-        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db'],
+        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
         include: [
           {
             model: Answer,
@@ -198,7 +201,7 @@ class QuestionController {
         where: {
           available_on_questions_db: true,
         },
-        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db'],
+        attributes: ['id', 'title', 'timer', 'difficulty_level', 'type'],
         include: [
           {
             model: Answer,

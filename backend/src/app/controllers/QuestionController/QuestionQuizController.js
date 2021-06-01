@@ -17,8 +17,11 @@ class QuestionQuizController {
 
       const quiz = await Quiz.findByPk(id);
 
+      if(!quiz)
+        return res.status(204).json({error: "Quiz não encontrado!"})
+
       const questionOfQuiz = await quiz.getQuestions({
-        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db'],
+        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
         include: [
           {
             model: Answer,

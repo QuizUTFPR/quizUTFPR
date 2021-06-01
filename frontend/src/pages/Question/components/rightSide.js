@@ -72,6 +72,7 @@ const RightSide = ({ formik, updateQuestion, questions }) => (
               <FormControlLabel
                 control={
                   <CheckBox
+                    type="multiple_choice"
                     disabled={Boolean(formik.values.question.copy)}
                     style={{ width: '50px', height: '50px' }}
                     inputProps={{

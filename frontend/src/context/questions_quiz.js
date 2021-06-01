@@ -27,6 +27,7 @@ const QuestionQuiz = ({ children }) => {
     if (response.status !== 200) return initialValue[0];
     const initialQuestions = response.data.map((question) => ({
       id: question.id,
+      type: question.type,
       copy: question.copy,
       availableOnQuestionsDB: question.available_on_questions_db,
       imageObj: null,
@@ -142,6 +143,7 @@ const QuestionQuiz = ({ children }) => {
   const validationSchemeArrayQuestion = yup.array().of(
     yup.object().shape({
       id: yup.number().required(),
+      type: yup.string().required(),
       copy: yup.boolean().required(),
       availableOnQuestionsDB: yup.boolean().required(),
       // eslint-disable-next-line react/forbid-prop-types
@@ -176,6 +178,7 @@ const QuestionQuiz = ({ children }) => {
 
   const validationSchemeQuestion = yup.object().shape({
     id: yup.number().required(),
+    type: yup.string().required(),
     copy: yup.boolean().required(),
     availableOnQuestionsDB: yup.boolean().required(),
     // eslint-disable-next-line react/forbid-prop-types
