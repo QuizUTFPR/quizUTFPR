@@ -51,12 +51,19 @@ const LoginPage = ({ history }) => {
 
   return (
     <StyledContainer>
-      <Grid container alignItems="center">
-        <Grid item xs={6}>
+      <Grid container justify="center" alignItems="center">
+        <Grid
+          style={{ display: 'flex', justifyContent: 'center' }}
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={6}
+        >
           <Illustration />
         </Grid>
 
-        <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Grid item xs={12} sm={12} md={12} lg={6}>
           <DescriptionsGrid item xs={12}>
             <Title variant="h4" color="primary">
               Login
