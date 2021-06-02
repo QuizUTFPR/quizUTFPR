@@ -8,6 +8,7 @@ module.exports = function (api) {
         {
           alias: {
             pages: './src/pages',
+            assets: './assets',
           },
         },
       ],

@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 // PAGES
-import Home from './pages/Home';
+import InitialScreen from './pages/InitialScreen.js';
 
 const Stack = createStackNavigator();
 
@@ -12,8 +12,8 @@ const Stack = createStackNavigator();
 function Routes() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="InitialScreen" component={InitialScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
