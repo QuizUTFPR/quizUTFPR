@@ -172,6 +172,33 @@ const QuestionQuiz = ({ children }) => {
     setErrors(initialValueErrors);
   };
 
+  const questionToDown = (index, handleChangeQuestion) => {
+    const targetQuestion = questions[index];
+
+    setQuestions((prevState) => [
+      ...prevState.slice(0, index),
+      prevState[index + 1],
+      prevState[index],
+      ...prevState.slice(index + 2),
+    ]);
+    setSaved(false);
+    setErrors(initialValueErrors);
+    handleChangeQuestion(targetQuestion, index + 1)();
+  };
+  const questionToUp = (index, handleChangeQuestion) => {
+    const targetQuestion = questions[index];
+
+    setQuestions((prevState) => [
+      ...prevState.slice(0, index - 1),
+      prevState[index],
+      prevState[index - 1],
+      ...prevState.slice(index + 1),
+    ]);
+    setSaved(false);
+    setErrors(initialValueErrors);
+    handleChangeQuestion(targetQuestion, index - 1)();
+  };
+
   const validationSchemeArrayQuestion = yup.array().of(
     yup.object().shape({
       id: yup.number().required(),
@@ -266,6 +293,8 @@ const QuestionQuiz = ({ children }) => {
         errors,
         setErrors,
         initialValueErrors,
+        questionToDown,
+        questionToUp,
       }}
     >
       {children}

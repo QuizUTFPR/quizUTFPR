@@ -40,6 +40,8 @@ const Question = ({ history, location }) => {
     errors,
     setErrors,
     initialValueErrors,
+    questionToDown,
+    questionToUp,
   } = useQuestionQuiz();
   const [openChangeTypeQuestionModal, setTypeQuestionModal] = useState({
     open: false,
@@ -162,6 +164,8 @@ const Question = ({ history, location }) => {
           questionOnScreen={onScreen}
           handleOpenModalTypeQuestion={handleOpenModalTypeQuestion}
           handleChangeQuestion={handleChangeQuestion}
+          handleToUp={questionToUp}
+          handleToDown={questionToDown}
         />
 
         {/* MIDDLE */}

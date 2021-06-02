@@ -1,9 +1,14 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 // ICONS
-import { AddCircle } from '@material-ui/icons/';
+import {
+  AddCircle,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
+} from '@material-ui/icons/';
 
 // COMPONENTS
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, IconButton } from '@material-ui/core';
 import StyledButton from '@components/Button';
 import {
   StyledLeftGrid,
@@ -17,8 +22,10 @@ const LeftSide = ({
   questionOnScreen,
   handleOpenModalTypeQuestion,
   handleChangeQuestion,
+  handleToDown,
+  handleToUp,
 }) => (
-  <Grid item xs={2}>
+  <Grid item xs={3}>
     <StyledLeftGrid container align="center">
       <Grid item xs={12}>
         <Typography color="primary" component="h5" variant="h5">
@@ -26,19 +33,48 @@ const LeftSide = ({
         </Typography>
       </Grid>
 
-      <GridQuestions container spacing={1}>
+      <GridQuestions container spacing={2} justify="center" align="center">
         {questions.map((item, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <Grid item xs={12} key={index}>
-            <CardSelectQuestion
-              isonscreen={index === questionOnScreen.index ? 'true' : 'false'}
-              color="primary"
-              variant="outlined"
-              fullWidth
-              onClick={handleChangeQuestion(item, index)}
+          <Grid item key={index} xs={12} style={{ display: 'flex' }}>
+            <Grid
+              item
+              xs={1}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
             >
-              {item.title ? item.title : 'Sem Enunciado'}
-            </CardSelectQuestion>
+              {index !== 0 && (
+                <IconButton
+                  onClick={() => handleToUp(index, handleChangeQuestion)}
+                  size="small"
+                  style={{ padding: '0' }}
+                >
+                  <KeyboardArrowUp />
+                </IconButton>
+              )}
+              {index !== questions.length - 1 && (
+                <IconButton
+                  onClick={() => handleToDown(index, handleChangeQuestion)}
+                  size="small"
+                  style={{ padding: '0' }}
+                >
+                  <KeyboardArrowDown />
+                </IconButton>
+              )}
+            </Grid>
+            <Grid item xs={11}>
+              <CardSelectQuestion
+                fullWidth
+                isonscreen={index === questionOnScreen.index ? 'true' : 'false'}
+                color="primary"
+                variant="outlined"
+                onClick={handleChangeQuestion(item, index)}
+              >
+                {item.title ? item.title : 'Sem Enunciado'}
+              </CardSelectQuestion>
+            </Grid>
           </Grid>
         ))}
       </GridQuestions>
