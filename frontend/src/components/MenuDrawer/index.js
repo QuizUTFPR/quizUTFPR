@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // COMPONENTS
 import { Link } from 'react-router-dom';
 import { List, Divider, Avatar } from '@material-ui/core';
-import { Help, Home, Class, LibraryBooks, ExitToApp } from '@material-ui/icons';
+import {
+  Help,
+  Home,
+  Class,
+  LibraryBooks,
+  ExitToApp,
+  ArrowBackIos,
+  ArrowForwardIos,
+} from '@material-ui/icons';
 
 // HOOKS
 import useAuth from '@hooks/Auth';
@@ -22,10 +30,17 @@ import {
   StyledListItemIcon,
   StyledListItemText,
   StyledListItem,
+  StyledIconButton,
 } from './style';
 
 const MenuDrawer = () => {
   const { teacherInfo, logout } = useAuth();
+
+  const [open, setOpen] = useState(true);
+
+  const handleDrawer = () => {
+    setOpen((prevState) => !prevState);
+  };
 
   const FirstMenu = [
     {
@@ -57,55 +72,65 @@ const MenuDrawer = () => {
       onClick: logout,
     },
   ];
-
+  console.log(open);
   return (
-    <StyledDrawer variant="permanent" anchor="left">
-      <AvatarBox>
-        <StyledBadge
-          overlap="circle"
-          variant="dot"
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right',
-          }}
+    <>
+      <StyledDrawer open={open} variant="permanent" anchor="left">
+        <StyledIconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawer}
+          edge="start"
         >
-          <Avatar
-            alt="Remy Sharp"
-            src="https://image.flaticon.com/icons/png/512/147/147144.png"
-          />
-        </StyledBadge>
-
-        <TextBox>
-          <AdminName color="primary">{teacherInfo.teacher.name}</AdminName>
-          <AdminDescription color="primary">UTFPR</AdminDescription>
-        </TextBox>
-      </AvatarBox>
-
-      <Divider />
-      <List>
-        {FirstMenu.map((option) => (
-          <Link
-            key={option.text}
-            to={option.to}
-            style={{ textDecoration: 'none' }}
+          {open ? <ArrowBackIos /> : <ArrowForwardIos />}
+        </StyledIconButton>
+        <AvatarBox>
+          <StyledBadge
+            overlap="circle"
+            variant="dot"
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
           >
-            <StyledListItem button key={option.text}>
+            <Avatar
+              alt="Remy Sharp"
+              src="https://image.flaticon.com/icons/png/512/147/147144.png"
+            />
+          </StyledBadge>
+
+          <TextBox>
+            <AdminName color="primary">{teacherInfo.teacher.name}</AdminName>
+            <AdminDescription color="primary">UTFPR</AdminDescription>
+          </TextBox>
+        </AvatarBox>
+
+        {open && <Divider />}
+        <List>
+          {FirstMenu.map((option) => (
+            <Link
+              key={option.text}
+              to={option.to}
+              style={{ textDecoration: 'none' }}
+            >
+              <StyledListItem button key={option.text}>
+                <StyledListItemIcon>{option.icon}</StyledListItemIcon>
+                <StyledListItemText color="primary" primary={option.text} />
+              </StyledListItem>
+            </Link>
+          ))}
+        </List>
+        {open && <Divider />}
+        <List>
+          {SecondMenu.map((option) => (
+            <StyledListItem button key={option.text} onClick={option.onClick}>
               <StyledListItemIcon>{option.icon}</StyledListItemIcon>
-              <StyledListItemText color="primary" primary={option.text} />
+              <StyledListItemText primary={option.text} />
             </StyledListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {SecondMenu.map((option) => (
-          <StyledListItem button key={option.text} onClick={option.onClick}>
-            <StyledListItemIcon>{option.icon}</StyledListItemIcon>
-            <StyledListItemText primary={option.text} />
-          </StyledListItem>
-        ))}
-      </List>
-    </StyledDrawer>
+          ))}
+        </List>
+      </StyledDrawer>
+    </>
   );
 };
 

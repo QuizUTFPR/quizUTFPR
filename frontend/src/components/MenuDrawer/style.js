@@ -8,12 +8,23 @@ import {
   ListItemIcon,
   ListItemText,
   ListItem,
+  IconButton,
 } from '@material-ui/core';
 
 const WidthDrawer = '210px';
+const WidthIcon = '50px;';
+export const StyledIconButton = styled(IconButton)`
+  margin-left: ${WidthDrawer};
+  width: ${WidthIcon};
+`;
 
 export const StyledDrawer = styled(Drawer)`
-  width: ${WidthDrawer};
+  width: ${({ open }) =>
+    open ? `calc(${WidthDrawer} + 50px)` : `${WidthIcon}`};
+  && div {
+    margin-left: -${({ open }) => (open ? '' : WidthDrawer)};
+    transition: margin 0.2s ease;
+  }
 `;
 
 export const AvatarBox = styled(Box)`
