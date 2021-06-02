@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
@@ -69,3 +70,19 @@ function MemoizedCheckbox({
     />
   );
 }
+
+CheckBoxInput.defaultProps = {
+  handleFormikChange: () => {},
+};
+
+CheckBoxInput.propTypes = {
+  formikID: PropTypes.string.isRequired,
+  handleFormikChange: PropTypes.func,
+  handlePropsChange: PropTypes.shape({
+    handleUpdate: PropTypes.func,
+    key: PropTypes.string,
+    indexQuestion: PropTypes.number,
+    indexAnswer: PropTypes.number,
+  }).isRequired,
+  checked: PropTypes.bool.isRequired,
+};

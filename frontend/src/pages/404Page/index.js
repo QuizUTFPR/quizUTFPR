@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Typography, Grid } from '@material-ui/core';
 import Button from '@components/Button';
@@ -25,5 +26,13 @@ const NOTFOUND = ({ history }) => (
     </Grid>
   </StyledGridContainer>
 );
+
+NOTFOUND.defaultProps = {};
+
+NOTFOUND.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default NOTFOUND;

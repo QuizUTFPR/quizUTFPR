@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // ICONS
 import { Save, CheckCircle, Done, Warning, Create } from '@material-ui/icons/';
@@ -87,6 +88,23 @@ const Header = ({ handleGetOut, location, handleSave, isSaved, isTyping }) => {
       </Toolbar>
     </StyledAppBar>
   );
+};
+
+Header.defaultProps = {
+  isSaved: false,
+  isTyping: false,
+};
+
+Header.propTypes = {
+  handleGetOut: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      title: PropTypes.string,
+    }),
+  }).isRequired,
+  handleSave: PropTypes.func.isRequired,
+  isSaved: PropTypes.bool,
+  isTyping: PropTypes.bool,
 };
 
 export default Header;

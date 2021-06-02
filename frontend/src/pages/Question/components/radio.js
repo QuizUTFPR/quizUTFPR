@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
-export default function CheckBoxInput({
+export default function RadioInput({
   formikID,
   formikOtherID,
   handleFormikChange,
@@ -94,3 +95,21 @@ function MemoizedRadio({
     />
   );
 }
+
+RadioInput.defaultProps = {
+  handleFormikChange: () => {},
+};
+
+RadioInput.propTypes = {
+  formikID: PropTypes.string.isRequired,
+  value: PropTypes.bool.isRequired,
+  formikOtherID: PropTypes.string.isRequired,
+  handleFormikChange: PropTypes.func,
+  handlePropsChange: PropTypes.shape({
+    handleUpdate: PropTypes.func,
+    key: PropTypes.string,
+    indexQuestion: PropTypes.number,
+    indexAnswer: PropTypes.number,
+    indexOtherAnswer: PropTypes.number,
+  }).isRequired,
+};

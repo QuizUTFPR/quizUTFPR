@@ -15,14 +15,8 @@ import QuizPreferences from '@pages/EditQuizPreferences';
 import { CREATE_QUIZ } from '@routes';
 
 // MATERIAL-UI COMPONENTS
-import {
-  Grid,
-  Button,
-  IconButton,
-  Typography,
-  Divider,
-} from '@material-ui/core';
-
+import { Grid, IconButton, Typography, Divider } from '@material-ui/core';
+import Button from '@components/Button';
 // MATERIAL-UI ICONS
 import { Edit, Delete } from '@material-ui/icons';
 

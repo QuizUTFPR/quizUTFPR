@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 // ICONS
 import { Delete, Check } from '@material-ui/icons/';
 
@@ -169,4 +171,19 @@ const MiddleSide = ({
     </StyledGrid>
   </Grid>
 );
+
+MiddleSide.defaultProps = {};
+
+MiddleSide.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateQuestion: PropTypes.func.isRequired,
+  updateAnswer: PropTypes.func.isRequired,
+  handleClickOpenAlert: PropTypes.func.isRequired,
+  errors: PropTypes.shape({
+    title: PropTypes.bool,
+    is_correct: PropTypes.bool,
+    answer: PropTypes.bool,
+  }).isRequired,
+};
+
 export default MiddleSide;

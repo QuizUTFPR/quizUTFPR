@@ -19,10 +19,6 @@ api.interceptors.response.use(
     // Do something with response data
     response,
   (error) => {
-    // Do something with response error
-
-    // You can even test for a response code
-    // and try a new request before rejecting the promise
     if (error.response.status === 401) {
       localStorage.clear('@TOKEN');
       localStorage.clear('@TEACHER');

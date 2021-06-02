@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 
 // COMPONENTS
 import {
@@ -44,5 +45,19 @@ const ChangeQuestionType = forwardRef((props, ref) => {
     </Wrapper>
   );
 });
+
+ChangeQuestionType.defaultProps = {
+  handleClose: () => {},
+};
+
+ChangeQuestionType.propTypes = {
+  handleClose: PropTypes.func,
+  modalState: PropTypes.shape({
+    open: PropTypes.bool,
+    indexQuestion: PropTypes.number,
+    type: PropTypes.string,
+  }).isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 
 export default ChangeQuestionType;

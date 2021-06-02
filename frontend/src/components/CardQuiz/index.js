@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Typography, CardActionArea } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -32,5 +33,21 @@ const Card = ({ image, imageTitle, title, description, idQuiz, children }) => (
     <StyledCardActions>{children}</StyledCardActions>
   </StyledCard>
 );
+
+Card.defaultProps = {
+  imageTitle: 'Título da Image',
+  description: 'Descrição',
+  title: 'Título do Quiz',
+  children: <></>,
+};
+
+Card.propTypes = {
+  image: PropTypes.string.isRequired,
+  imageTitle: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  idQuiz: PropTypes.number.isRequired,
+  children: PropTypes.node,
+};
 
 export default Card;

@@ -9,5 +9,4 @@ const Checkbox = (children, ...props) => (
     {...props}
   />
 );
-
 export default Checkbox;

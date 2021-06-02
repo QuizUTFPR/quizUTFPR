@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
+import { Link } from 'react-router-dom';
 // ROUTES
 import { QUIZ } from '@routes';
 
@@ -43,5 +44,13 @@ const GetOutAlert = forwardRef((props, ref) => {
     </Wrapper>
   );
 });
+
+GetOutAlert.defaultProps = {
+  handleClose: () => {},
+};
+
+GetOutAlert.propTypes = {
+  handleClose: PropTypes.func,
+};
 
 export default GetOutAlert;

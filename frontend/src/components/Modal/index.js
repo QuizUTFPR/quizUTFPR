@@ -2,9 +2,13 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { StyledModal } from './style';
 
-const ModalWrapper = (props) => {
-  const { open, handleClose, modalTitle, modalDescription, children } = props;
-
+const ModalWrapper = ({
+  open,
+  handleClose,
+  modalTitle,
+  modalDescription,
+  children,
+}) => {
   const ref = useRef(null);
 
   return (
@@ -21,10 +25,18 @@ const ModalWrapper = (props) => {
 };
 
 ModalWrapper.defaultProps = {
+  open: false,
   handleClose: () => {},
+  modalTitle: 'Título do Modal',
+  modalDescription: 'Descrição do Modal',
+  children: <></>,
 };
 ModalWrapper.propTypes = {
+  open: PropTypes.bool,
   handleClose: PropTypes.func,
+  modalTitle: PropTypes.string,
+  modalDescription: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default ModalWrapper;

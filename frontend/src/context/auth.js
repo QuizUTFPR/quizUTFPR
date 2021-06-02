@@ -13,12 +13,10 @@ const Auth = ({ children }) => {
   const [teacherInfo, setTeacherInfo] = useState(initialValue);
 
   const login = async (email, password) => {
-    if (!email || !password) return 'Erro';
-
+    if (!email || !password) return 404;
     try {
       const response = await api.post('/login', { email, password });
       const { data } = response;
-
       setTeacherInfo({
         token: data.token,
         teacher: data.teacher,
@@ -29,7 +27,7 @@ const Auth = ({ children }) => {
 
       return response;
     } catch (err) {
-      return { ...err.response };
+      return err;
     }
   };
 

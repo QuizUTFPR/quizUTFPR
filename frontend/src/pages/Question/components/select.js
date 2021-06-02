@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
@@ -74,3 +75,26 @@ function MemoizedSelect({
     </TextField>
   );
 }
+
+SelectInput.defaultProps = {
+  handleFormikChange: () => {},
+  children: <></>,
+  handlePropsChange: {
+    handleUpdate: () => {},
+    key: '',
+    index: 0,
+    value: '',
+  },
+};
+
+SelectInput.propTypes = {
+  children: PropTypes.node,
+  formikID: PropTypes.string.isRequired,
+  handleFormikChange: PropTypes.func,
+  handlePropsChange: PropTypes.shape({
+    handleUpdate: PropTypes.func,
+    key: PropTypes.string,
+    index: PropTypes.number,
+    value: PropTypes.string,
+  }),
+};

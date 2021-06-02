@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { useFormik } from 'formik';
 import api from '@api';
 
@@ -154,6 +156,14 @@ const CriarQuiz = ({ history }) => {
       </Grid>
     </GridContainer>
   );
+};
+
+CriarQuiz.defaultProps = {};
+
+CriarQuiz.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default CriarQuiz;

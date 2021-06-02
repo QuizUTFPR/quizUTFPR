@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
+import PropTypes from 'prop-types';
 // ICONS
 import {
   AddCircle,
@@ -94,5 +95,18 @@ const LeftSide = ({
     </StyledLeftGrid>
   </Grid>
 );
+
+LeftSide.defaultProps = {};
+
+LeftSide.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  questionOnScreen: PropTypes.shape({
+    index: PropTypes.number,
+  }).isRequired,
+  handleOpenModalTypeQuestion: PropTypes.func.isRequired,
+  handleChangeQuestion: PropTypes.func.isRequired,
+  handleToDown: PropTypes.func.isRequired,
+  handleToUp: PropTypes.func.isRequired,
+};
 
 export default LeftSide;

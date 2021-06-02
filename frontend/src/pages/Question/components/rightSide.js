@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // ICONS
 import { FileCopy } from '@material-ui/icons/';
@@ -48,10 +49,6 @@ const RightSide = ({
                   formikTypeID: 'question.type',
                   formikAnswerID: 'question.answer',
                 });
-              }}
-              handlePropsChange={{
-                handleUpdate: () => {},
-                value: '',
               }}
               required
             >
@@ -166,5 +163,13 @@ const RightSide = ({
     </StyledRightGrid>
   </Grid>
 );
+
+RightSide.defaultProps = {};
+
+RightSide.propTypes = {
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleOpenChangeTypeQuestion: PropTypes.func.isRequired,
+  updateQuestion: PropTypes.func.isRequired,
+};
 
 export default RightSide;

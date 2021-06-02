@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
@@ -48,6 +49,20 @@ const DragImageInput = ({
   };
 
   return <DragZone handleChange={changeContextValue} {...props} />;
+};
+
+DragImageInput.defaultProps = {
+  handleFormikChange: () => {},
+};
+
+DragImageInput.propTypes = {
+  formikID: PropTypes.arrayOf(PropTypes.string).isRequired,
+  handleFormikChange: PropTypes.func,
+  handlePropsChange: PropTypes.shape({
+    handleUpdate: PropTypes.func,
+    key: PropTypes.arrayOf(PropTypes.string),
+    index: PropTypes.number,
+  }).isRequired,
 };
 
 export default DragImageInput;

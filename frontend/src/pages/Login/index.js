@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 // COMPONENTS
 import { Grid, InputAdornment, IconButton } from '@material-ui/core';
@@ -85,7 +86,7 @@ const LoginPage = ({ history }) => {
               if (response.status === 200) {
                 history.push(HOME);
               } else {
-                setError(response.data.error);
+                setError(response.response.data.error);
               }
             }}
           >
@@ -104,6 +105,7 @@ const LoginPage = ({ history }) => {
                 ),
               }}
               autoFocus
+              required
             />
 
             <StyledInput
@@ -131,6 +133,7 @@ const LoginPage = ({ history }) => {
                   </InputAdornment>
                 ),
               }}
+              required
             />
 
             {error && (
@@ -148,6 +151,14 @@ const LoginPage = ({ history }) => {
       </Grid>
     </StyledContainer>
   );
+};
+
+LoginPage.defaultProps = {};
+
+LoginPage.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default LoginPage;

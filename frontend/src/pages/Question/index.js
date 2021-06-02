@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import { useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 
@@ -227,6 +229,19 @@ const Question = ({ history, location }) => {
       </Modal>
     </>
   );
+};
+
+Question.defaultProps = {};
+
+Question.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      state: PropTypes.shape({
+        title: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
 };
 
 export default Question;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Typography, Grid } from '@material-ui/core';
 import Button from '@components/Button';
@@ -26,5 +27,13 @@ const ConfirmExpireOfToken = ({ history }) => (
     </Grid>
   </StyledGridContainer>
 );
+
+ConfirmExpireOfToken.defaultProps = {};
+
+ConfirmExpireOfToken.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default ConfirmExpireOfToken;
