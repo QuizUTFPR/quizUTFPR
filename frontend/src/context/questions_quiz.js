@@ -210,7 +210,7 @@ const QuestionQuiz = ({ children }) => {
       imageObj: yup.object().nullable(),
       imageUrl: yup.string(),
       timer: yup.number().required(),
-      difficultyLevel: yup.number(),
+      difficultyLevel: yup.string().required(),
       tags: yup.array().of(yup.string()).required(),
       answer: yup
         .array()
@@ -246,7 +246,7 @@ const QuestionQuiz = ({ children }) => {
     imageUrl: yup.string(),
     title: yup.string().min(1).required(),
     timer: yup.number().required(),
-    difficultyLevel: yup.number(),
+    difficultyLevel: yup.string().required(),
     tags: yup.array().of(yup.string()).required(),
     answer: yup
       .array()

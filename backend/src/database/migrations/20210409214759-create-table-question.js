@@ -30,7 +30,7 @@ module.exports = {
         defaultValue: 30
       },
       difficulty_level: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.ENUM('Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'),
         allowNull: false
       },
       id_image: {

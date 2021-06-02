@@ -10,7 +10,7 @@ class Question extends Model {
         available_on_questions_db: Sequelize.BOOLEAN,
         id_image: Sequelize.INTEGER,
         timer: Sequelize.INTEGER.UNSIGNED,
-        difficulty_level: Sequelize.INTEGER,
+        difficulty_level: Sequelize.ENUM('Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'),
         type: Sequelize.ENUM('multiple_choice', 'single_choice')
       },
       {

@@ -9,6 +9,7 @@ import {
   StyledRightGrid,
   GridItemStyledRight,
   CopiedQuestionMessage,
+  WrapperCheckBoxRight,
 } from '../style';
 import SelectInput from './select';
 import TagInput from './tagInput';
@@ -117,13 +118,15 @@ const RightSide = ({
               }}
               required
             >
-              <option value={1}>Fácil</option>
-              <option value={2}>Médio</option>
-              <option value={3}>Difícil</option>
+              <option value="Muito Fácil">Muito Fácil</option>
+              <option value="Fácil">Fácil</option>
+              <option value="Médio">Médio</option>
+              <option value="Difícil">Difícil</option>
+              <option value="Muito Difícil">Muito Difícil</option>
             </SelectInput>
           </GridItemStyledRight>
 
-          <GridItemStyledRight item style={{ alignSelf: 'start' }}>
+          <WrapperCheckBoxRight item>
             {!formik.values.question.copy ? (
               <FormControlLabel
                 control={
@@ -145,7 +148,7 @@ const RightSide = ({
                     }}
                   />
                 }
-                label="Disponível no Banco de Questão"
+                label="Disponível no Banco de Questões"
               />
             ) : (
               <CopiedQuestionMessage item xs={12}>
@@ -155,7 +158,7 @@ const RightSide = ({
                 </span>
               </CopiedQuestionMessage>
             )}
-          </GridItemStyledRight>
+          </WrapperCheckBoxRight>
         </>
       ) : (
         <p>Vazio!</p>

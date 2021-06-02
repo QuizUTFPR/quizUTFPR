@@ -22,7 +22,7 @@ class QuestionController {
           .max(300, "Máximo de caracteres atingidos.")
           .required(),
         timer: Yup.number().required(),
-        difficultyLevel: Yup.number().required(),
+        difficultyLevel: Yup.string().required(),
         quiz_id: Yup.number().required(),
         tags: Yup.array().of(Yup.string()).required("Informe as tags da questão!"),
         id_image: Yup.number().nullable(),
@@ -100,7 +100,7 @@ class QuestionController {
         const answerFounded = await Answer.findByPk(answerItem.id);
         if(!answerFounded){
           try{
-          const newAnser = await Answer.create({
+          await Answer.create({
               id_question: id_question,
               title: answerItem.title, 
               is_correct: answerItem.is_correct
