@@ -40,6 +40,8 @@ export const GridForm = styled(Grid)`
 export const StyledInput = styled(TextField)`
   width: 100%;
   margin-bottom: 20px;
+  background: white;
+  border-radius: 6px;
 `;
 
 export const StyledButton = styled(Button)`

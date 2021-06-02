@@ -92,7 +92,7 @@ const LoginPage = ({ history }) => {
           >
             <StyledInput
               color="primary"
-              variant="filled"
+              variant="outlined"
               id="email"
               label="E-mail"
               value={values.email}
@@ -110,7 +110,7 @@ const LoginPage = ({ history }) => {
 
             <StyledInput
               color="primary"
-              variant="filled"
+              variant="outlined"
               id="password"
               label="Senha"
               type={values.showPassword ? 'text' : 'password'}
