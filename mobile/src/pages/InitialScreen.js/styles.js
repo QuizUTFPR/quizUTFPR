@@ -14,6 +14,7 @@ export const Container = styled.SafeAreaView`
   padding-left: 5px;
   padding-right: 5px;
   flex: 1;
+
   align-items: center;
 `;
 
@@ -22,6 +23,8 @@ export const BloobsBackground = styled(Bloobs)`
   position: absolute;
 `;
 
-export const ImageView = styled.View``;
+export const ImageView = styled.View`
+  margin-top: 50px;
+`;
 
 export const StyledLoginIllustration = styled(LoginIllustration)``;
