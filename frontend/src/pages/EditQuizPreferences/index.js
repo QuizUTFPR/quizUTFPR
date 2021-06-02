@@ -110,7 +110,7 @@ const EditPreferences = forwardRef((props, ref) => {
             fullWidth
             label="Título"
             id="title"
-            variant="filled"
+            variant="outlined"
             value={formik.values.title}
             onChange={formik.handleChange}
             required
@@ -124,7 +124,7 @@ const EditPreferences = forwardRef((props, ref) => {
             label="Visibilidade"
             id="visibility"
             name="visibility"
-            variant="filled"
+            variant="outlined"
             value={formik.values.visibility}
             onChange={(event) =>
               formik.setFieldValue('visibility', event.target.value)
@@ -142,7 +142,7 @@ const EditPreferences = forwardRef((props, ref) => {
             fullWidth
             label="Descrição"
             id="description"
-            variant="filled"
+            variant="outlined"
             value={formik.values.description}
             onChange={formik.handleChange}
             required

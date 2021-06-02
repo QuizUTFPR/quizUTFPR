@@ -5,7 +5,13 @@ import { TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { ChipStyled } from './style';
 
-export default function ChipsArray({ value, onChange, suggestions, ...props }) {
+export default function ChipsArray({
+  value,
+  variant,
+  onChange,
+  suggestions,
+  ...props
+}) {
   return (
     <Autocomplete
       {...props}
@@ -18,7 +24,7 @@ export default function ChipsArray({ value, onChange, suggestions, ...props }) {
       renderTags={(valueTags, getTagProps) =>
         valueTags.map((option, index) => (
           <ChipStyled
-            variant="outlined"
+            variant={variant}
             label={option}
             {...getTagProps({ index })}
           />
@@ -27,7 +33,7 @@ export default function ChipsArray({ value, onChange, suggestions, ...props }) {
       renderInput={(params) => (
         <TextField
           {...params}
-          variant="filled"
+          variant="outlined"
           label="Tag's"
           placeholder="Digite aqui as tag's desejadas"
         />
@@ -38,10 +44,12 @@ export default function ChipsArray({ value, onChange, suggestions, ...props }) {
 
 ChipsArray.defaultProps = {
   onChange: () => {},
+  variant: 'outlined',
 };
 
 ChipsArray.propTypes = {
   value: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func,
   suggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  variant: PropTypes.string,
 };

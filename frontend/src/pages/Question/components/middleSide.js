@@ -33,23 +33,6 @@ const MiddleSide = ({
     <StyledGrid container justify="center" align="center">
       {questions.length ? (
         <>
-          <Grid item xs={12}>
-            ̣ <PreviewImage src={formik.values.question.imageUrl} />
-          </Grid>
-
-          <Grid item xs={12}>
-            <DragImageInput
-              formikID={['question.imageObj', 'question.imageUrl']}
-              name="Imagem de Capa"
-              handleFormikChange={formik.setFieldValue}
-              handlePropsChange={{
-                handleUpdate: updateQuestion,
-                key: ['imageObj', 'imageUrl'],
-                index: formik.values.index,
-              }}
-            />
-          </Grid>
-
           {errors.title && (
             <ErrorMessage>
               Por favor, informe o enunciado da questão.
@@ -70,6 +53,24 @@ const MiddleSide = ({
               autoFocus
             />
           </Grid>
+
+          <Grid item xs={12}>
+            ̣ <PreviewImage src={formik.values.question.imageUrl} />
+          </Grid>
+
+          <Grid item xs={12} style={{ marginBottom: '-80px' }}>
+            <DragImageInput
+              formikID={['question.imageObj', 'question.imageUrl']}
+              name="Imagem de Capa"
+              handleFormikChange={formik.setFieldValue}
+              handlePropsChange={{
+                handleUpdate: updateQuestion,
+                key: ['imageObj', 'imageUrl'],
+                index: formik.values.index,
+              }}
+            />
+          </Grid>
+
           <Grid item xs={12}>
             {errors.is_correct && (
               <ErrorMessage style={{ marginBottom: '10px' }}>

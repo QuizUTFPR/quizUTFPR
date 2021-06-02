@@ -24,20 +24,22 @@ const StyledDropzone = (props) => {
       : {file.path} - {file.size} bytes
     </span>
   ));
-
   return (
     <div className="container">
       <Container
         {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
       >
         <input {...getInputProps()} />
-        <p> Você pode arrastar e soltar arquivos aqui para adicioná-los.</p>
-        <aside>
-          <span>
-            <b>Files</b>
-          </span>
-          <>{files}</>
-        </aside>
+        <p> Você pode arrastar e soltar imagens aqui para adicioná-las.</p>
+
+        {acceptedFiles.length > 0 && (
+          <aside>
+            <span>
+              <b>Imagem</b>
+            </span>
+            <>{files}</>
+          </aside>
+        )}
       </Container>
     </div>
   );
