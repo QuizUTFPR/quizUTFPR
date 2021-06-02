@@ -1,36 +1,36 @@
 module.exports = {
   env: {
-    es6: true
+    es6: true,
   },
-  extends: ["airbnb", "prettier", "prettier/react"],
+  extends: ['airbnb', 'prettier'],
   globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-    __DEV__: "readonly"
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+    __DEV__: 'readonly',
   },
-  parser: "babel-eslint",
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: "module"
+    sourceType: 'module',
   },
-  plugins: ["react", "prettier"],
+  plugins: ['react', 'prettier'],
   rules: {
-    "prettier/prettier": "error",
-    "react/jsx-filename-extension": [
-      "warn",
+    'prettier/prettier': 'error',
+    'react/jsx-filename-extension': [
+      'warn',
       {
-        extensions: [".jsx", ".js"]
-      }
+        extensions: ['.jsx', '.js'],
+      },
     ],
-    "import/prefer-default-export": "off",
-    "react/state-in-constructor": "off",
-    "react/static-property-placement": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/prop-types": "off",
-    "no-param-reassign": "off",
-    "no-console": "off"
-  }
+    'import/prefer-default-export': 'off',
+    'react/state-in-constructor': 'off',
+    'react/static-property-placement': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 'off',
+    'no-param-reassign': 'off',
+    'no-console': 'off',
+  },
 };
