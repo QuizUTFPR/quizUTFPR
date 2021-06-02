@@ -27,7 +27,7 @@ export default function CheckBoxInput({
       }, 0)
     );
   };
-  // console.log(formikID);
+
   const myRadio = useMemo(
     () => (
       <MemoizedRadio

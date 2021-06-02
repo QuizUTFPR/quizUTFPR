@@ -27,7 +27,7 @@ const MiddleSide = ({
   handleClickOpenAlert,
   errors,
 }) => (
-  <Grid item xs={7}>
+  <Grid item xs={6}>
     <StyledGrid container justify="center" align="center">
       {questions.length ? (
         <>

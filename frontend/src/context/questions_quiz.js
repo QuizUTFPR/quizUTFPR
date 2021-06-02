@@ -4,8 +4,8 @@ import api from '@api';
 import * as yup from 'yup';
 
 import {
-  // TrueOrFalseAnswer,
-  // MultipleChoiceAnswer,
+  TrueOrFalseAnswer,
+  MultipleChoiceAnswer,
   MockupQuestionTrueOrFalse,
   MockupQuestionMultipleChoice,
   initialValue,
@@ -49,7 +49,7 @@ const QuestionQuiz = ({ children }) => {
         api.delete('/question/delete', { data: { id: removed.id } })
       );
 
-      questions.map(async (item) => {
+      questions.map(async (item, index) => {
         let responseFile = null;
         if (item.imageObj !== null) {
           const file = new FormData();
@@ -65,6 +65,7 @@ const QuestionQuiz = ({ children }) => {
         const response = await api.post('/question/create', {
           ...item,
           quiz_id: id_quiz,
+          index,
         });
         if (response.status !== 200) throw new Error('questao nao criada');
       });
@@ -138,6 +139,65 @@ const QuestionQuiz = ({ children }) => {
     );
     setSaved(false);
     setErrors(initialValueErrors);
+  };
+
+  const changeTypeQuestion = ({
+    indexQuestion,
+    type,
+    handleClose,
+    formikUpdate,
+    formikID,
+    formikAnswerID,
+  }) => {
+    const choosedType =
+      type === 'multiple_choice' ? MultipleChoiceAnswer : TrueOrFalseAnswer;
+
+    formikUpdate(formikID, type);
+    formikUpdate(formikAnswerID, choosedType);
+
+    setQuestions((prevState) =>
+      prevState.map((question, i) => {
+        if (i === indexQuestion) {
+          return {
+            ...question,
+            type,
+            answer: choosedType,
+          };
+        }
+        return question;
+      })
+    );
+
+    handleClose();
+    setSaved(false);
+    setErrors(initialValueErrors);
+  };
+
+  const questionToDown = (index, handleChangeQuestion) => {
+    const targetQuestion = questions[index];
+
+    setQuestions((prevState) => [
+      ...prevState.slice(0, index),
+      prevState[index + 1],
+      prevState[index],
+      ...prevState.slice(index + 2),
+    ]);
+    setSaved(false);
+    setErrors(initialValueErrors);
+    handleChangeQuestion(targetQuestion, index + 1)();
+  };
+  const questionToUp = (index, handleChangeQuestion) => {
+    const targetQuestion = questions[index];
+
+    setQuestions((prevState) => [
+      ...prevState.slice(0, index - 1),
+      prevState[index],
+      prevState[index - 1],
+      ...prevState.slice(index + 1),
+    ]);
+    setSaved(false);
+    setErrors(initialValueErrors);
+    handleChangeQuestion(targetQuestion, index - 1)();
   };
 
   const validationSchemeArrayQuestion = yup.array().of(
@@ -227,12 +287,15 @@ const QuestionQuiz = ({ children }) => {
         MockupQuestionMultipleChoice,
         updateQuestion,
         updateAnswer,
+        changeTypeQuestion,
         saveQuestionOnDatabase,
         validationSchemeQuestion,
         validationSchemeArrayQuestion,
         errors,
         setErrors,
         initialValueErrors,
+        questionToDown,
+        questionToUp,
       }}
     >
       {children}

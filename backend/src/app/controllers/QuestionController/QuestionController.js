@@ -13,6 +13,7 @@ class QuestionController {
     try{
       const schema = Yup.object().shape({
         quiz_id: Yup.number().required(),
+        index: Yup.number().required(),
         id: Yup.number().required(),
         copy: Yup.boolean().required(),
         availableOnQuestionsDB: Yup.boolean().required(),
@@ -36,7 +37,6 @@ class QuestionController {
           ).required("Informe as alternativas.")
       });
 
-      console.log("CRIANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO \n\n ")
       //Check body of requisiton
       if (!(await schema.isValid(req.body)))
         return res.status(400).json({ error: "Falha na validação!" });
@@ -53,6 +53,7 @@ class QuestionController {
         tags,
         type,
         id_image,
+        index
       } = req.body;
 
       const quiz = await Quiz.findByPk(quiz_id);
@@ -60,7 +61,6 @@ class QuestionController {
 
       let question = await Question.findByPk(id);
 
-      console.log("questao", req.body)
 
       if(!question){
         //CASO QUESTÃO NÃO EXISTIR CRIO A MESMA E AS ALTERNATIVAS
@@ -73,16 +73,17 @@ class QuestionController {
             difficulty_level: difficultyLevel, 
             quiz_id: quiz_id, 
             id_image: id_image,
-            type: type
+            type: type,
+            index: index
           }) 
 
-          console.log(question);
         } catch (error) {
           return res.status(500).json(error);
         }
       }else{
         // CASO QUESTÃO JÁ EXISTA REALIZO AS ALTERAÇÕES AQUI
         question.title = title;
+        question.index = index;
         question.timer = timer;
         question.difficulty_level = difficultyLevel;
         question.copy = copy;
@@ -149,7 +150,6 @@ class QuestionController {
       })
 
 
-      console.log("FINALIZOUUUUUUUUUUUUUUUUUUUUUUUUUU")
       return res.status(200).json(question);
     }catch(err){
       return res.status(500).json(err);
@@ -160,7 +160,7 @@ class QuestionController {
   async index(req, res) {
     try{
       const questions = await Question.findAll({
-        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
+        attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
         include: [
           {
             model: Answer,
@@ -243,7 +243,6 @@ class QuestionController {
   async delete(req, res) {
     try {
       const {id} = req.body;
-      console.log("id aqui", id)
 
       const question = await Question.findByPk(id);
       
@@ -260,7 +259,6 @@ class QuestionController {
       const tags = await question.getTags_question();
 
 
-      console.log(question);
       answers.map(item => item.destroy());
       tags.map(item =>  question.removeTags_question(item));
       question.destroy();

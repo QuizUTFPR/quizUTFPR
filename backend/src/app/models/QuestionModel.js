@@ -5,6 +5,7 @@ class Question extends Model {
     super.init(
       {
         title: Sequelize.STRING,
+        index: Sequelize.INTEGER.UNSIGNED,
         copy: Sequelize.BOOLEAN,
         available_on_questions_db: Sequelize.BOOLEAN,
         id_image: Sequelize.INTEGER,

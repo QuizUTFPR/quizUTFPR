@@ -17,6 +17,7 @@ import LeftSide from './components/leftSide';
 import MiddleSide from './components/middleSide';
 import RightSide from './components/rightSide';
 import AlertGetOut from './components/confirmGetOut';
+import ChangeQuestion from './components/confirmChangeTypeQuestion';
 
 // PAGES
 import TypeOfQuestion from '../TypeOfQuestion';
@@ -31,6 +32,7 @@ const Question = ({ history, location }) => {
     updateAnswer,
     removeQuestion,
     saveQuestionOnDatabase,
+    changeTypeQuestion,
     validationSchemeArrayQuestion,
     validationSchemeQuestion,
     isSaved,
@@ -38,7 +40,14 @@ const Question = ({ history, location }) => {
     errors,
     setErrors,
     initialValueErrors,
+    questionToDown,
+    questionToUp,
   } = useQuestionQuiz();
+  const [openChangeTypeQuestionModal, setTypeQuestionModal] = useState({
+    open: false,
+    indexQuestion: null,
+    type: null,
+  });
   const [openTypeOfQuestion, setOpenTypeOfQuestion] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [openGetOutAlert, setOpenGetOutAlert] = useState(false);
@@ -52,10 +61,20 @@ const Question = ({ history, location }) => {
     initialValues: onScreen,
   });
 
+  const handleOpenChangeTypeQuestion = (state) => setTypeQuestionModal(state);
+  const handleCloseChangeTypeQuestion = () =>
+    setTypeQuestionModal({
+      open: false,
+      indexQuestion: null,
+      type: null,
+    });
+
   const handleClickOpenAlert = () => setOpenAlert(true);
   const handleCloseAlert = () => setOpenAlert(false);
+
   const handleOpenModalTypeQuestion = () => setOpenTypeOfQuestion(true);
   const handleCloseModalTypeQuestion = () => setOpenTypeOfQuestion(false);
+
   const handleOpenGetOutAlert = () => setOpenGetOutAlert(true);
   const handleCloseGetOutAlert = () => setOpenGetOutAlert(false);
 
@@ -64,6 +83,7 @@ const Question = ({ history, location }) => {
     const firstQuestion = await getAllQuestionOfTheQuiz(id_quiz);
     setOnScreen({ index: 0, question: firstQuestion });
   };
+
   useEffect(() => {
     fetchQuestions();
   }, []);
@@ -144,6 +164,8 @@ const Question = ({ history, location }) => {
           questionOnScreen={onScreen}
           handleOpenModalTypeQuestion={handleOpenModalTypeQuestion}
           handleChangeQuestion={handleChangeQuestion}
+          handleToUp={questionToUp}
+          handleToDown={questionToDown}
         />
 
         {/* MIDDLE */}
@@ -161,6 +183,7 @@ const Question = ({ history, location }) => {
           formik={formik}
           updateQuestion={updateQuestion}
           questions={questions}
+          handleOpenChangeTypeQuestion={handleOpenChangeTypeQuestion}
         />
       </ContainerGrid>
 
@@ -190,6 +213,17 @@ const Question = ({ history, location }) => {
 
       <Modal open={openGetOutAlert} handleClose={handleCloseGetOutAlert}>
         <AlertGetOut handleClose={handleCloseGetOutAlert} />
+      </Modal>
+
+      <Modal
+        open={openChangeTypeQuestionModal.open}
+        handleClose={handleCloseChangeTypeQuestion}
+      >
+        <ChangeQuestion
+          modalState={openChangeTypeQuestionModal}
+          handleClose={handleCloseChangeTypeQuestion}
+          handleChange={changeTypeQuestion}
+        />
       </Modal>
     </>
   );

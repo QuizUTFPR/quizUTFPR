@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import MyBackgound from '@assets/background_login.svg';
+import MyBackgound from '@assets/background_login_copy.svg';
 
 import {
   Container,
@@ -15,7 +15,6 @@ export const StyledContainer = styled(Container)`
   min-height: 100vh;
   min-width: 100vw;
   display: flex;
-  padding: 0 200px;
   background-image: url(${MyBackgound});
   background-size: cover;
 `;

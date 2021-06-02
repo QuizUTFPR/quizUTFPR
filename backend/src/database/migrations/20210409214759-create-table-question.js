@@ -9,6 +9,10 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
+      index: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+      },
       copy: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
