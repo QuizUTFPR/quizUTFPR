@@ -7,8 +7,8 @@ module.exports = function (api) {
         'module-resolver',
         {
           alias: {
-            pages: './src/pages',
-            assets: './assets',
+            '@pages': './src/pages/',
+            '@assets': './assets/',
           },
         },
       ],

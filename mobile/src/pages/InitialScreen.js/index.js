@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-curly-brace-presence */
 import React from 'react';
 
 // STYLES
@@ -11,7 +10,7 @@ import {
 
 const InitialScreen = () => (
   <Container>
-    <BloobsBackground fill={'#fff'} />
+    <BloobsBackground fill={'white'} />
     <ImageView>
       <StyledLoginIllustration />
     </ImageView>

@@ -16,7 +16,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'prettier', 'module-resolver'],
   rules: {
     'prettier/prettier': 'error',
     'react/jsx-filename-extension': [
@@ -32,5 +32,6 @@ module.exports = {
     'react/prop-types': 'off',
     'no-param-reassign': 'off',
     'no-console': 'off',
+    'react/jsx-curly-brace-presence': 'off',
   },
 };
