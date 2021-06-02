@@ -13,6 +13,7 @@ class QuestionController {
     try{
       const schema = Yup.object().shape({
         quiz_id: Yup.number().required(),
+        index: Yup.number().required(),
         id: Yup.number().required(),
         copy: Yup.boolean().required(),
         availableOnQuestionsDB: Yup.boolean().required(),
@@ -53,6 +54,7 @@ class QuestionController {
         tags,
         type,
         id_image,
+        index
       } = req.body;
 
       const quiz = await Quiz.findByPk(quiz_id);
@@ -73,7 +75,8 @@ class QuestionController {
             difficulty_level: difficultyLevel, 
             quiz_id: quiz_id, 
             id_image: id_image,
-            type: type
+            type: type,
+            index: index
           }) 
 
           console.log(question);
@@ -83,6 +86,7 @@ class QuestionController {
       }else{
         // CASO QUESTÃO JÁ EXISTA REALIZO AS ALTERAÇÕES AQUI
         question.title = title;
+        question.index = index;
         question.timer = timer;
         question.difficulty_level = difficultyLevel;
         question.copy = copy;
@@ -160,7 +164,7 @@ class QuestionController {
   async index(req, res) {
     try{
       const questions = await Question.findAll({
-        attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
+        attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
         include: [
           {
             model: Answer,

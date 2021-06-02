@@ -110,7 +110,7 @@ class QuizController {
           {
             model: Question,
             as: "questions",
-            attributes: ['id', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
+            attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
             through: {
               attributes: []
             },

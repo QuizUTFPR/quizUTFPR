@@ -49,7 +49,7 @@ const QuestionQuiz = ({ children }) => {
         api.delete('/question/delete', { data: { id: removed.id } })
       );
 
-      questions.map(async (item) => {
+      questions.map(async (item, index) => {
         let responseFile = null;
         if (item.imageObj !== null) {
           const file = new FormData();
@@ -65,6 +65,7 @@ const QuestionQuiz = ({ children }) => {
         const response = await api.post('/question/create', {
           ...item,
           quiz_id: id_quiz,
+          index,
         });
         if (response.status !== 200) throw new Error('questao nao criada');
       });
