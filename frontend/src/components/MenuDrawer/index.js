@@ -82,7 +82,11 @@ const MenuDrawer = () => {
           onClick={handleDrawer}
           edge="start"
         >
-          {open ? <ArrowBackIos /> : <ArrowForwardIos />}
+          {open ? (
+            <ArrowBackIos color="primary" />
+          ) : (
+            <ArrowForwardIos color="primary" />
+          )}
         </StyledIconButton>
         <AvatarBox>
           <StyledBadge
