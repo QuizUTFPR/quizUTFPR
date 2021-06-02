@@ -134,6 +134,7 @@ const LoginPage = ({ history }) => {
                 ),
               }}
               required
+              autoComplete="on"
             />
 
             {error && (
