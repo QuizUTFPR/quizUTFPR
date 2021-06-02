@@ -37,7 +37,6 @@ class QuestionController {
           ).required("Informe as alternativas.")
       });
 
-      console.log("CRIANDOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO \n\n ")
       //Check body of requisiton
       if (!(await schema.isValid(req.body)))
         return res.status(400).json({ error: "Falha na validação!" });
@@ -62,7 +61,6 @@ class QuestionController {
 
       let question = await Question.findByPk(id);
 
-      console.log("questao", req.body)
 
       if(!question){
         //CASO QUESTÃO NÃO EXISTIR CRIO A MESMA E AS ALTERNATIVAS
@@ -79,7 +77,6 @@ class QuestionController {
             index: index
           }) 
 
-          console.log(question);
         } catch (error) {
           return res.status(500).json(error);
         }
@@ -153,7 +150,6 @@ class QuestionController {
       })
 
 
-      console.log("FINALIZOUUUUUUUUUUUUUUUUUUUUUUUUUU")
       return res.status(200).json(question);
     }catch(err){
       return res.status(500).json(err);
@@ -247,7 +243,6 @@ class QuestionController {
   async delete(req, res) {
     try {
       const {id} = req.body;
-      console.log("id aqui", id)
 
       const question = await Question.findByPk(id);
       
@@ -264,7 +259,6 @@ class QuestionController {
       const tags = await question.getTags_question();
 
 
-      console.log(question);
       answers.map(item => item.destroy());
       tags.map(item =>  question.removeTags_question(item));
       question.destroy();
