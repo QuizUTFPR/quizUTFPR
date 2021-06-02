@@ -10,12 +10,11 @@ const statusBarHeight =
   Platform.OS === 'android' ? Constants.statusBarHeight : 0;
 
 export const Container = styled.SafeAreaView`
+  align-items: center;
+  flex: 1;
   padding-top: ${`${statusBarHeight}px`};
   padding-left: 5px;
   padding-right: 5px;
-  flex: 1;
-
-  align-items: center;
 `;
 
 export const BloobsBackground = styled(Bloobs)`
