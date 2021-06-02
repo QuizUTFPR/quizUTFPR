@@ -3,7 +3,7 @@ import axios from 'axios';
 import { TOKENEXPIRED } from '@routes';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: 'http://192.168.15.9:3333',
 });
 
 api.interceptors.request.use((config) => {

@@ -146,13 +146,13 @@ const QuestionQuiz = ({ children }) => {
     type,
     handleClose,
     formikUpdate,
-    formikID,
+    formikTypeID,
     formikAnswerID,
   }) => {
     const choosedType =
       type === 'multiple_choice' ? MultipleChoiceAnswer : TrueOrFalseAnswer;
-
-    formikUpdate(formikID, type);
+    console.log(type);
+    formikUpdate(formikTypeID, type);
     formikUpdate(formikAnswerID, choosedType);
 
     setQuestions((prevState) =>
