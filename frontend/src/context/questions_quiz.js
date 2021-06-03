@@ -151,7 +151,6 @@ const QuestionQuiz = ({ children }) => {
   }) => {
     const choosedType =
       type === 'multiple_choice' ? MultipleChoiceAnswer : TrueOrFalseAnswer;
-    console.log(type);
     formikUpdate(formikTypeID, type);
     formikUpdate(formikAnswerID, choosedType);
 

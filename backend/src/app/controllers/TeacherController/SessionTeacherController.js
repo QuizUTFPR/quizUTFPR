@@ -16,7 +16,6 @@ class SessionController {
 
       //Check body of requisiton
       if(!(await schema.isValid(req.body))){
-        console.log("invalido")
         return res.status(400).json({error: 'Falha na validação!'});
       }
 
@@ -31,7 +30,6 @@ class SessionController {
 
 
       if (!(await teacher.checkPassword(password))){
-        console.log("senha errada")
         return res.status(403).json({ error: 'Senha Incorreta!' });
       }
 

@@ -82,7 +82,6 @@ const LoginPage = ({ history }) => {
             onSubmit={async (e) => {
               e.preventDefault();
               const response = await login(values.email, values.password);
-              console.log(response);
               if (response.status === 200) {
                 history.push(HOME);
               } else {

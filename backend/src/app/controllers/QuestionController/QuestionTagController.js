@@ -13,7 +13,6 @@ class QuestionTagController {
   async index(req, res) {
     try{
       const tags = req.body;
-      console.log('tags', tags)
       const questions = await Question.findAll({
         where: {
           available_on_questions_db: true,
@@ -45,7 +44,6 @@ class QuestionTagController {
           }
         ]
       });
-      console.log(questions)
       if(!questions.length)
         return res.status(204).json({error: "Não existe nenhuma questão cadastrada."});
 
