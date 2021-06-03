@@ -14,7 +14,7 @@ import {
 } from './styles';
 
 const InitialScreen = () => {
-  const { label } = useTheme();
+  const { label, colors } = useTheme();
 
   return (
     <Container>
@@ -23,7 +23,7 @@ const InitialScreen = () => {
         <StyledLoginIllustration />
 
         <StyledTitle color="primary" fontSize={label.fontSize}>
-          BEM VINDO
+          BEM VINDO!
         </StyledTitle>
         <StyledParagraph color="primary" fontSize={label.fontSize}>
           Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -33,14 +33,10 @@ const InitialScreen = () => {
         </StyledParagraph>
 
         <WrapperButton>
-          <Button mode="contained" uppercase>
-            Entrar
-          </Button>
+          <Button color={colors.primary}>ENTRAR</Button>
         </WrapperButton>
         <WrapperButton>
-          <Button mode="contained" uppercase>
-            Criar Conta
-          </Button>
+          <Button color={colors.primary}>CRIAR CONTA</Button>
         </WrapperButton>
       </ImageView>
     </Container>
