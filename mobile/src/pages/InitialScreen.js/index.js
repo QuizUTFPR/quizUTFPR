@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '@components/Button';
+import { useTheme } from 'react-native-paper';
 
 // STYLES
 import {
@@ -6,15 +8,43 @@ import {
   BloobsBackground,
   ImageView,
   StyledLoginIllustration,
+  WrapperButton,
+  StyledTitle,
+  StyledParagraph,
 } from './styles';
 
-const InitialScreen = () => (
-  <Container>
-    <BloobsBackground fill={'white'} />
-    <ImageView>
-      <StyledLoginIllustration />
-    </ImageView>
-  </Container>
-);
+const InitialScreen = () => {
+  const { label } = useTheme();
+
+  return (
+    <Container>
+      <BloobsBackground fill={'white'} />
+      <ImageView>
+        <StyledLoginIllustration />
+
+        <StyledTitle color="primary" fontSize={label.fontSize}>
+          BEM VINDO
+        </StyledTitle>
+        <StyledParagraph color="primary" fontSize={label.fontSize}>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.{' '}
+        </StyledParagraph>
+
+        <WrapperButton>
+          <Button mode="contained" uppercase>
+            Entrar
+          </Button>
+        </WrapperButton>
+        <WrapperButton>
+          <Button mode="contained" uppercase>
+            Criar Conta
+          </Button>
+        </WrapperButton>
+      </ImageView>
+    </Container>
+  );
+};
 
 export default InitialScreen;

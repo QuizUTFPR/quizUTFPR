@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
+import { Title, Paragraph } from 'react-native-paper';
 
 // SVG's AS REACT COMPONENTS
 import Bloobs from '@assets/bloobs.svg';
@@ -13,8 +14,8 @@ export const Container = styled.SafeAreaView`
   align-items: center;
   flex: 1;
   padding-top: ${`${statusBarHeight}px`};
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 30px;
+  padding-right: 30px;
 `;
 
 export const BloobsBackground = styled(Bloobs)`
@@ -26,4 +27,22 @@ export const ImageView = styled.View`
   margin-top: 50px;
 `;
 
-export const StyledLoginIllustration = styled(LoginIllustration)``;
+export const StyledLoginIllustration = styled(LoginIllustration)`
+  flex: 0.85;
+  align-self: center;
+`;
+
+export const WrapperButton = styled.SafeAreaView`
+  margin-top: 15px;
+`;
+
+export const StyledTitle = styled(Title)`
+  margin-top: 20px;
+  font-size: ${({ fontSize }) => fontSize + 12}px;
+  font-family: 'RobotoBlack';
+`;
+
+export const StyledParagraph = styled(Paragraph)`
+  font-family: 'RobotoRegular';
+  font-size: ${({ fontSize }) => fontSize}px;
+`;
