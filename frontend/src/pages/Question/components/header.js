@@ -15,7 +15,14 @@ import {
   StyledExitIcon,
 } from '../style';
 
-const Header = ({ handleGetOut, location, handleSave, isSaved, isTyping }) => {
+const Header = ({
+  handleGetOut,
+  location,
+  handleSave,
+  handleFinish,
+  isSaved,
+  isTyping,
+}) => {
   let statusOfQuestions;
 
   if (isSaved && !isTyping) {
@@ -78,6 +85,7 @@ const Header = ({ handleGetOut, location, handleSave, isSaved, isTyping }) => {
             <StyledButton
               color="primary"
               variant="contained"
+              onClick={handleFinish}
               startIcon={<CheckCircle />}
               size="large"
             >

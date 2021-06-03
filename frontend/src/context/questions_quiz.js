@@ -208,6 +208,7 @@ const QuestionQuiz = ({ children }) => {
       // eslint-disable-next-line react/forbid-prop-types
       imageObj: yup.object().nullable(),
       imageUrl: yup.string(),
+      title: yup.string().min(1).required(),
       timer: yup.number().required(),
       difficultyLevel: yup.string().required(),
       tags: yup.array().of(yup.string()).required(),

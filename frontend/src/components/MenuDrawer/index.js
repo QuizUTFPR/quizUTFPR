@@ -72,7 +72,6 @@ const MenuDrawer = () => {
       onClick: logout,
     },
   ];
-  console.log(open);
   return (
     <>
       <StyledDrawer open={open} variant="permanent" anchor="left">

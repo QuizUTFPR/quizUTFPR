@@ -88,6 +88,8 @@ const Question = ({ history, location }) => {
 
   useEffect(() => {
     fetchQuestions();
+
+    return () => console.log('unmounting question page');
   }, []);
 
   const handleChangeQuestion = (question, index) => () => {
@@ -117,11 +119,12 @@ const Question = ({ history, location }) => {
     if (isSaved) history.push(QUIZ);
     else handleOpenGetOutAlert();
   };
+
   const handleSave = async () => {
     // VERIFICO SE AS QUESTÃO ESTÃO VALIDAS
     if (await validationSchemeArrayQuestion.isValid(questions)) {
       saveQuestionOnDatabase(id_quiz);
-      return;
+      return true;
     }
 
     // PROCURO QUAL QUESTÃO É INVALIDA E QUAIS SEUS ERROS
@@ -147,6 +150,19 @@ const Question = ({ history, location }) => {
           }));
         });
     });
+    return false;
+  };
+
+  const handleFinish = () => {
+    if (!isSaved) {
+      handleSave().then((saved) => {
+        if (saved) {
+          history.push(QUIZ);
+        }
+      });
+    } else {
+      history.push(QUIZ);
+    }
   };
 
   return (
@@ -157,6 +173,7 @@ const Question = ({ history, location }) => {
         handleSave={handleSave}
         isSaved={isSaved}
         isTyping={isTyping}
+        handleFinish={handleFinish}
       />
 
       <ContainerGrid container>
