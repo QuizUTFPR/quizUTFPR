@@ -119,7 +119,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
             id="tag"
             stateValue={formik.values.tag}
             suggestions={formik.values.suggestions}
-            onChange={formik.handleChange}
+            onChange={formik.setFieldValue}
             variant="filled"
             label="Tag"
             placeholder="Digite a Tag de questões que você deseja pesquisar..."
@@ -152,8 +152,9 @@ const QuestionDatabase = forwardRef((props, ref) => {
           maxHeight: 'calc(100vh - 25px - 72px - 48px - 60px)',
         }}
       >
-        {formik.values.questions.map((question) => (
-          <Grid key={question.title} item xs={12}>
+        {formik.values.questions.map((question, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Grid key={index} item xs={12}>
             <Question
               question={question}
               id={question.title}

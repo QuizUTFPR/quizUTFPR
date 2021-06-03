@@ -18,7 +18,7 @@ const InputAutoComplete = ({
     freeSolo
     id={id}
     value={stateValue}
-    onChange={(e, value) => onChange(id)(value)}
+    onChange={(_e, value) => onChange(id, value)}
     renderInput={(params) => (
       <TextField
         required
@@ -40,11 +40,12 @@ InputAutoComplete.defaultProps = {
   label: 'Label',
   placeholder: 'Placeholder',
   suggestions: [''],
+  stateValue: '',
 };
 
 InputAutoComplete.propTypes = {
   id: PropTypes.string.isRequired,
-  stateValue: PropTypes.string.isRequired,
+  stateValue: PropTypes.string,
   onChange: PropTypes.func,
   variant: PropTypes.string,
   color: PropTypes.string,
