@@ -9,6 +9,7 @@ export default function ChipsArray({
   value,
   variant,
   onChange,
+  id,
   suggestions,
   ...props
 }) {
@@ -16,9 +17,10 @@ export default function ChipsArray({
     <Autocomplete
       {...props}
       multiple
-      id="tags-filled"
+      id={id}
       options={suggestions.map((item) => item)}
       value={value}
+      variant={variant}
       freeSolo
       onChange={onChange}
       renderTags={(valueTags, getTagProps) =>
@@ -33,7 +35,7 @@ export default function ChipsArray({
       renderInput={(params) => (
         <TextField
           {...params}
-          variant="outlined"
+          variant={variant}
           label="Tag's"
           placeholder="Digite aqui as tag's desejadas"
         />
@@ -45,9 +47,11 @@ export default function ChipsArray({
 ChipsArray.defaultProps = {
   onChange: () => {},
   variant: 'outlined',
+  id: 'tags-filled',
 };
 
 ChipsArray.propTypes = {
+  id: PropTypes.string,
   value: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func,
   suggestions: PropTypes.arrayOf(PropTypes.string).isRequired,

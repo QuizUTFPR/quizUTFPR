@@ -196,7 +196,7 @@ class QuestionController {
   async show(req, res) {
     try{
       const {tag} = req.params;
-
+      
       const questions = await Question.findAll({
         where: {
           available_on_questions_db: true,

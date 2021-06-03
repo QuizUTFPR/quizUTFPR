@@ -5,7 +5,7 @@ import api from '@api';
 
 // COMPONENTS
 import GridContainer from '@components/Container';
-import InputAutoComplete from '@components/AutoCompleteInput';
+import TagInput from '@components/ChipInput';
 import { IconButton, Grid, Typography, Divider } from '@material-ui/core';
 import { Close, Search } from '@material-ui/icons';
 import Question from './question';
@@ -31,12 +31,12 @@ const QuestionDatabase = forwardRef((props, ref) => {
 
   const formik = useFormik({
     initialValues: {
-      tag: '',
+      tag: [],
       questions: [],
       suggestions: [],
     },
     onSubmit: async ({ tag }) => {
-      const { data } = await api.get(`question/${tag}`);
+      const { data } = await api.post(`question/getFromTags`, tag);
       if (data) {
         const newQuestions = await Promise.all(
           data.map(
@@ -114,13 +114,13 @@ const QuestionDatabase = forwardRef((props, ref) => {
         spacing={2}
       >
         <Grid item xs={9}>
-          <InputAutoComplete
+          <TagInput
             fullWidth
             id="tag"
-            stateValue={formik.values.tag}
+            value={formik.values.tag}
             suggestions={formik.values.suggestions}
-            onChange={formik.setFieldValue}
-            variant="filled"
+            onChange={(e, value) => formik.setFieldValue('tag', value)}
+            variant="outlined"
             label="Tag"
             placeholder="Digite a Tag de questões que você deseja pesquisar..."
           />

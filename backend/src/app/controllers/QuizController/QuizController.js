@@ -215,7 +215,7 @@ class QuizController {
   async delete(req, res) {
     try{
       const {id_quiz} = req.body;
-
+      
       const numberOfRowsDeleted = await Quiz.destroy({
         where: { id: id_quiz }
       });
