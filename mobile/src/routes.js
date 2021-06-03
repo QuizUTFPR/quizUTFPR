@@ -3,7 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 // PAGES
-import InitialScreen from './pages/InitialScreen.js';
+import InitialScreen from '@pages/InitialScreen';
+import Login from '@pages/Login';
+import Register from '@pages/Register';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +16,8 @@ function Routes() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="InitialScreen" component={InitialScreen} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
       </Stack.Navigator>
     </NavigationContainer>
   );
