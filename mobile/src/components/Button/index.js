@@ -9,6 +9,7 @@ const StyledButton = styled(Button).attrs({
   },
   contentStyle: {
     height: 60,
+    iconSize: 60,
   },
 })``;
 

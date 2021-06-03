@@ -13,7 +13,7 @@ import {
   StyledParagraph,
 } from './styles';
 
-const InitialScreen = () => {
+const InitialScreen = ({ navigation }) => {
   const { label } = useTheme();
 
   return (
@@ -33,10 +33,20 @@ const InitialScreen = () => {
         </StyledParagraph>
 
         <WrapperButton>
-          <Button icon="login">ENTRAR</Button>
+          <Button
+            onPress={() => navigation.navigate('Login')}
+            icon="login-variant"
+          >
+            ENTRAR
+          </Button>
         </WrapperButton>
         <WrapperButton>
-          <Button icon="adduser">CRIAR CONTA</Button>
+          <Button
+            onPress={() => navigation.navigate('Register')}
+            icon="account-plus"
+          >
+            CRIAR CONTA
+          </Button>
         </WrapperButton>
       </ImageView>
     </Container>

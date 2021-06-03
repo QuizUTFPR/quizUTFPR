@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { useFonts } from 'expo-font';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Routes from './src/routes';
 import theme from './src/styles/theme';
 
@@ -23,7 +23,7 @@ export default function Main() {
   return (
     <PaperProvider
       settings={{
-        icon: (props) => <AntDesign {...props} />,
+        icon: (props) => <MaterialCommunityIcons {...props} size={23} />,
       }}
       theme={theme}
     >
