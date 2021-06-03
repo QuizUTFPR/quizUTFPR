@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import api from '@api';
 
 // ROTAS
-import { QUIZ } from '@routes';
+import { QUESTION } from '@routes';
 
 // COMPONENTS
 import GridContainer from '@components/Container';
@@ -53,9 +53,13 @@ const CriarQuiz = ({ history }) => {
       }
 
       const responseQuiz = await api.post('/quiz/create', quiz);
+      const { data } = responseQuiz;
 
       if (responseQuiz.status === 200) {
-        history.push(QUIZ);
+        history.push({
+          pathname: `${QUESTION}${data.quiz.id}`,
+          state: { title: data.quiz.title },
+        });
       }
     },
   });
