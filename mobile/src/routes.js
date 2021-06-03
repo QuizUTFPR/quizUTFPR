@@ -3,9 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 // PAGES
-import InitialScreen from '@pages/InitialScreen';
-import Login from '@pages/Login';
-import Register from '@pages/Register';
+const InitialScreen = React.lazy(() => import('@pages/InitialScreen'));
+const Login = React.lazy(() => import('@pages/Login'));
+const Register = React.lazy(() => import('@pages/Register'));
 
 const Stack = createStackNavigator();
 
@@ -14,11 +14,13 @@ const Stack = createStackNavigator();
 function Routes() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="InitialScreen" component={InitialScreen} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
-      </Stack.Navigator>
+      <React.Suspense fallback={null}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="InitialScreen" component={InitialScreen} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+        </Stack.Navigator>
+      </React.Suspense>
     </NavigationContainer>
   );
 }
