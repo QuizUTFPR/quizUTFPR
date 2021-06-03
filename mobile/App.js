@@ -2,6 +2,7 @@
 import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { useFonts } from 'expo-font';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import Routes from './src/routes';
 import theme from './src/styles/theme';
 
@@ -20,7 +21,12 @@ export default function Main() {
   }
 
   return (
-    <PaperProvider theme={theme}>
+    <PaperProvider
+      settings={{
+        icon: (props) => <AntDesign {...props} />,
+      }}
+      theme={theme}
+    >
       <Routes />
     </PaperProvider>
   );

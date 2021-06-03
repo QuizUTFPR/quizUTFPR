@@ -14,7 +14,7 @@ import {
 } from './styles';
 
 const InitialScreen = () => {
-  const { label, colors } = useTheme();
+  const { label } = useTheme();
 
   return (
     <Container>
@@ -33,10 +33,10 @@ const InitialScreen = () => {
         </StyledParagraph>
 
         <WrapperButton>
-          <Button color={colors.primary}>ENTRAR</Button>
+          <Button icon="login">ENTRAR</Button>
         </WrapperButton>
         <WrapperButton>
-          <Button color={colors.primary}>CRIAR CONTA</Button>
+          <Button icon="adduser">CRIAR CONTA</Button>
         </WrapperButton>
       </ImageView>
     </Container>
