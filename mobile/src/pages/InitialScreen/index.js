@@ -2,9 +2,11 @@ import React from 'react';
 import Button from '@components/Button';
 import { useTheme } from 'react-native-paper';
 
+// COMPONENTS
+import Container from '@components/Container';
+
 // STYLES
 import {
-  Container,
   BloobsBackground,
   ImageView,
   StyledLoginIllustration,

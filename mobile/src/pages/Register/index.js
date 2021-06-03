@@ -1,8 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
 
-// import { Container } from './styles';
+// COMPONENTS
+import Container from '@components/Container';
 
-const Register = () => <View />;
+const Register = () => (
+  <Container>
+    <Text>Login</Text>
+  </Container>
+);
 
 export default Register;

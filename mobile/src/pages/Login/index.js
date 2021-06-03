@@ -1,8 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Text } from 'react-native';
 
-// import { Container } from './styles';
+// COMPONENTS
+import Container from '@components/Container';
 
-const Login = () => <View />;
+const Login = () => (
+  <Container>
+    <Text>Login</Text>
+  </Container>
+);
 
 export default Login;
