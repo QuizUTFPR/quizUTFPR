@@ -28,7 +28,7 @@ export const ImageView = styled.View`
 `;
 
 export const StyledLoginIllustration = styled(LoginIllustration)`
-  flex: 0.85;
+  flex: 0.95;
   align-self: center;
 `;
 

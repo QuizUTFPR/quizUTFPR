@@ -25,7 +25,7 @@ const InitialScreen = ({ navigation }) => {
         <StyledLoginIllustration />
 
         <StyledTitle color="primary" fontSize={label.fontSize}>
-          BEM VINDO!
+          Bem-Vindo!
         </StyledTitle>
         <StyledParagraph color="primary" fontSize={label.fontSize}>
           Lorem Ipsum is simply dummy text of the printing and typesetting
