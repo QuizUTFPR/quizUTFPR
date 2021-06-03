@@ -1,11 +1,12 @@
-import * as React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import Loading from '@components/Loading';
 
 // PAGES
-const InitialScreen = React.lazy(() => import('@pages/InitialScreen'));
-const Login = React.lazy(() => import('@pages/Login'));
-const Register = React.lazy(() => import('@pages/Register'));
+const InitialScreen = lazy(() => import('@pages/InitialScreen'));
+const Login = lazy(() => import('@pages/Login'));
+const Register = lazy(() => import('@pages/Register'));
 
 const Stack = createStackNavigator();
 
@@ -13,15 +14,15 @@ const Stack = createStackNavigator();
 
 function Routes() {
   return (
-    <NavigationContainer>
-      <React.Suspense fallback={null}>
+    <Suspense fallback={<Loading />}>
+      <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="InitialScreen" component={InitialScreen} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
-      </React.Suspense>
-    </NavigationContainer>
+      </NavigationContainer>
+    </Suspense>
   );
 }
 
