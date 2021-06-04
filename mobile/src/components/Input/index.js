@@ -5,13 +5,17 @@ import { useTheme, TextInput } from 'react-native-paper';
 // STYLES
 import { InputWrapper, StyledLabel, StyledTextInput } from './styles';
 
-const Input = ({ textContentType, labelText, mode, icon }) => {
+const Input = ({ secureTextEntry, labelText, mode, icon }) => {
   const { label } = useTheme();
 
   return (
     <InputWrapper>
       <StyledLabel fontSize={label.fontSize}>{labelText}</StyledLabel>
-      <StyledTextInput mode={mode} left={<TextInput.Icon name={icon} />} />
+      <StyledTextInput
+        secureTextEntry={secureTextEntry}
+        mode={mode}
+        left={<TextInput.Icon name={icon} />}
+      />
     </InputWrapper>
   );
 };
@@ -21,6 +25,7 @@ StyledLabel.defaultProps = {
 };
 
 StyledTextInput.defaultProps = {
+  secureTextEntry: false,
   mode: 'outlined',
   icon: '',
 };
@@ -30,6 +35,7 @@ StyledLabel.propTypes = {
 };
 
 StyledTextInput.propTypes = {
+  secureTextEntry: PropTypes.bool,
   mode: PropTypes.string,
   icon: PropTypes.string,
 };

@@ -38,8 +38,13 @@ const Register = ({ navigation }) => {
 
       <InputWrapper>
         <Input labelText="Nome de Usuário" mode="outlined" icon="account" />
-        <Input labelText="Senha" mode="outlined" icon="lock" />
-        <Input labelText="Confirmar Senha" mode="outlined" icon="lock" />
+        <Input secureTextEntry labelText="Senha" mode="outlined" icon="lock" />
+        <Input
+          secureTextEntry
+          labelText="Confirmar Senha"
+          mode="outlined"
+          icon="lock"
+        />
       </InputWrapper>
 
       <WrapperButton>
