@@ -12,7 +12,8 @@ class QuestionTagController {
   // Lista todos os registros
   async index(req, res) {
     try{
-      const tags = req.body;
+      const aimedTagQuestions = req.body;
+            
       const questions = await Question.findAll({
         where: {
           available_on_questions_db: true,
@@ -33,21 +34,31 @@ class QuestionTagController {
             model: Tag,
             as: 'tags_question',
             attributes: ['name'],
-            where: {
-              name: {
-                [Op.in]: tags
-              }
-            },
+            require: true,
             through: {
               attributes: []
-            }
+            },
+            
           }
         ]
       });
-      if(!questions.length)
-        return res.status(204).json({error: "Não existe nenhuma questão cadastrada."});
 
-      return res.status(200).json(questions);
+
+      const filteredQuestionByTag = await Promise.all(questions.map(async (item) => {
+        const questionTags = (await item.getTags_question()).map(element => element.name);
+        const intersection = questionTags.filter(element => aimedTagQuestions.includes(element));
+        if(intersection.length === aimedTagQuestions.length){
+          return item;
+        }
+      }));
+
+      const filteredQuestionByTagWithoutUndefined = filteredQuestionByTag.filter(Boolean)
+
+      if(!filteredQuestionByTagWithoutUndefined.length)
+      return res.status(204).json({error: "Não existe nenhuma questão cadastrada."});
+      
+
+      return res.status(200).json(filteredQuestionByTagWithoutUndefined);
 
     }catch(err){
       return res.status(500).json(err);
