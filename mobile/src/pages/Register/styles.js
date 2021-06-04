@@ -12,7 +12,7 @@ export const BackgroundImage = styled(Waves)`
 `;
 
 export const StyledIconButton = styled(IconButton)`
-  margin-top: ${heightPercentageToDp('6%')};
+  margin-top: ${`${heightPercentageToDp('6%')}px`};
   align-self: flex-start;
   margin-left: -7px;
 `;
@@ -32,8 +32,8 @@ export const StyledText = styled(Text)`
 `;
 
 export const InputWrapper = styled.View`
-  padding-top: ${heightPercentageToDp('26%')};
-  width: ${widthPercentageToDp('85%')};
+  padding-top: ${`${heightPercentageToDp('26%')}px`};
+  width: ${`${widthPercentageToDp('85%')}px`};
 `;
 
 export const StyledTextButton = styled(Button)``;
