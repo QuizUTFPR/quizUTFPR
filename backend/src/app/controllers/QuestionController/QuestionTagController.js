@@ -52,8 +52,6 @@ class QuestionTagController {
         }
       }));
 
-      console.log(filteredQuestionByTag)
-
       const filteredQuestionByTagWithoutUndefined = filteredQuestionByTag.filter(Boolean)
 
       if(!filteredQuestionByTagWithoutUndefined.length)
