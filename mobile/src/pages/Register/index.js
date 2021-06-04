@@ -1,4 +1,5 @@
 import React from 'react';
+import { KeyboardAvoidingView } from 'react-native';
 import { useTheme } from 'react-native-paper';
 
 // COMPONENTS
@@ -37,23 +38,25 @@ const Register = ({ navigation }) => {
         Por favor, informe seus dados
       </StyledText>
 
-      <DismissKeyboard>
-        <InputWrapper>
-          <Input labelText="Nome de Usuário" mode="outlined" icon="account" />
-          <Input
-            secureTextEntry
-            labelText="Senha"
-            mode="outlined"
-            icon="lock"
-          />
-          <Input
-            secureTextEntry
-            labelText="Confirmar Senha"
-            mode="outlined"
-            icon="lock"
-          />
-        </InputWrapper>
-      </DismissKeyboard>
+      <KeyboardAvoidingView behavior="position" enabled>
+        <DismissKeyboard>
+          <InputWrapper>
+            <Input labelText="Nome de Usuário" mode="outlined" icon="account" />
+            <Input
+              secureTextEntry
+              labelText="Senha"
+              mode="outlined"
+              icon="lock"
+            />
+            <Input
+              secureTextEntry
+              labelText="Confirmar Senha"
+              mode="outlined"
+              icon="lock"
+            />
+          </InputWrapper>
+        </DismissKeyboard>
+      </KeyboardAvoidingView>
 
       <WrapperButton>
         <Button onPress={() => console.log('pressed')} icon="login-variant">

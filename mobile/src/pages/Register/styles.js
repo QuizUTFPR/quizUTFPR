@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import Constants from 'expo-constants';
 import { IconButton, Title, Text, Button } from 'react-native-paper';
 
 import Waves from '@assets/waves.svg';
@@ -31,7 +32,7 @@ export const StyledText = styled(Text)`
 `;
 
 export const InputWrapper = styled.View`
-  padding-top: ${heightPercentageToDp('23%')};
+  padding-top: ${heightPercentageToDp('26%')};
   width: ${widthPercentageToDp('85%')};
 `;
 
