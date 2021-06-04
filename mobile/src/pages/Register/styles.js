@@ -1,14 +1,18 @@
 import styled from 'styled-components/native';
+import Constants from 'expo-constants';
 import { IconButton, Title, Text, Button } from 'react-native-paper';
 
 import Waves from '@assets/waves.svg';
+
+// DIMENSION TRANSFORMERS
+import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
 export const BackgroundImage = styled(Waves)`
   position: absolute;
 `;
 
 export const StyledIconButton = styled(IconButton)`
-  margin-top: 50px;
+  margin-top: ${heightPercentageToDp('6%')};
   align-self: flex-start;
   margin-left: -7px;
 `;
@@ -28,8 +32,8 @@ export const StyledText = styled(Text)`
 `;
 
 export const InputWrapper = styled.View`
-  padding-top: 170px;
-  width: 100%;
+  padding-top: ${heightPercentageToDp('26%')};
+  width: ${widthPercentageToDp('85%')};
 `;
 
 export const StyledTextButton = styled(Button)``;
