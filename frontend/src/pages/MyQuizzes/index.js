@@ -33,7 +33,6 @@ const Quiz = () => {
   const getQuizzes = async () => {
     try {
       const response = await api.get('/quiz');
-
       if (response.status !== 200) setQuizzes(false);
       else setQuizzes(response.data);
     } catch (err) {

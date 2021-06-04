@@ -9,6 +9,8 @@ import Tag from "../../models/TagModel";
 import File from '../../models/FileModel';
 
 
+import getMethod from '../../utils/getMethodsOfAssociation'
+
 class QuizController {
   async store(req, res) {
     try{
@@ -216,13 +218,31 @@ class QuizController {
     try{
       const {id_quiz} = req.body;
       
-      const numberOfRowsDeleted = await Quiz.destroy({
-        where: { id: id_quiz }
-      });
+      const quiz = await Quiz.findByPk(id_quiz)
 
-      if(numberOfRowsDeleted < 1) return res.status(204).json({error: "Não existe nenhum quiz com o ID informado."});
+      if(!quiz) return res.status(204).json({error: "Não existe nenhum quiz com o ID informado."});
       
-      return res.status(200).json(numberOfRowsDeleted);
+      const questions = await quiz.getQuestions();
+
+      questions.map(async (QuestionItem) => {
+        if(!QuestionItem.available_on_questions_db){
+          const image = await QuestionItem.getImage_question();
+          const answers = await QuestionItem.getAnswer();
+
+          if(image) image.destroy();
+          answers.map((AnswerItem) => {
+            QuestionItem.removeAnswer(AnswerItem);
+            AnswerItem.destroy();
+          })
+          QuestionItem.destroy();
+        }
+      })
+
+      const image_quiz = await quiz.getImage_quiz()
+      if(image_quiz) image_quiz.destroy();
+      quiz.destroy();
+
+      return res.status(200).json();
     }catch(err){
       return res.status(500).json(err);
     }
