@@ -2,7 +2,7 @@
 import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { useFonts } from 'expo-font';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import Routes from './src/routes';
 import theme from './src/styles/theme';
 
