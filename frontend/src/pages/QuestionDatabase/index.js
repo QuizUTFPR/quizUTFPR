@@ -29,14 +29,17 @@ async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
 const QuestionDatabase = forwardRef((props, ref) => {
   const [checkboxes, setCheckboxes] = useState([]);
 
+  const initialState = {
+    tag: [],
+    questions: [],
+    suggestions: [],
+  };
+
   const formik = useFormik({
-    initialValues: {
-      tag: [],
-      questions: [],
-      suggestions: [],
-    },
+    initialValues: initialState,
     onSubmit: async ({ tag }) => {
       const { data } = await api.post(`question/getFromTags`, tag);
+      console.log(data);
       if (data) {
         const newQuestions = await Promise.all(
           data.map(
@@ -62,6 +65,8 @@ const QuestionDatabase = forwardRef((props, ref) => {
           )
         );
         formik.setFieldValue('questions', newQuestions);
+      } else {
+        formik.setFieldValue('questions', []);
       }
     },
   });
