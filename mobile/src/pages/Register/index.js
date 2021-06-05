@@ -6,6 +6,7 @@ import { useTheme } from 'react-native-paper';
 import Container from '@components/Container';
 import Input from '@components/Input';
 import Button from '@components/Button';
+import Header from '@components/Header';
 import DismissKeyboard from '@components/DismissKeyboard';
 
 // STYLES
@@ -25,18 +26,15 @@ const Register = ({ navigation }) => {
   return (
     <Container>
       <BackgroundImage fill="#333D54" />
-      <StyledIconButton
-        color="white"
-        icon="chevron-left"
+      <Header
+        buttonColor="white"
+        iconButton="chevron-left"
         size={20}
-        onPress={() => navigation.goBack()}
+        onPressButton={() => navigation.goBack()}
+        fontSize={label.fontSize}
+        titleContent="Cadastro"
+        textContent="Por favor, informe seus dados"
       />
-
-      <StyledTitle fontSize={label.fontSize}>Cadastro</StyledTitle>
-
-      <StyledText fontSize={label.fontSize}>
-        Por favor, informe seus dados
-      </StyledText>
 
       <KeyboardAvoidingView behavior="position" enabled>
         <DismissKeyboard>
@@ -59,7 +57,7 @@ const Register = ({ navigation }) => {
       </KeyboardAvoidingView>
 
       <WrapperButton>
-        <Button onPress={() => console.log('pressed')} icon="login-variant">
+        <Button onPress={() => {}} icon="login-variant">
           Cadastrar
         </Button>
       </WrapperButton>
