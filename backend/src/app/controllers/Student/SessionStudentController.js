@@ -3,9 +3,9 @@ import authConfig from '../../../config/auth'
 import jwt from 'jsonwebtoken'
 
 // MODELS
-import Teacher from "../../models/TeacherModel";
+import Student from "../../models/StudentModel";
 
-class SessionTeacherController {
+class SessionStudentController {
   // Cadastra um único registro
   async store(req, res) {
     try{
@@ -21,23 +21,22 @@ class SessionTeacherController {
 
       const {email, password} = req.body;
 
-
-      //REQUISIÇÂO LDAP
-
       //cadastro professor caso nao existir no sistema
-      let teacher = await Teacher.findOne({ where: { email } });
-      if (!teacher) teacher = await Teacher.create(req.body);
+      const student = await Student.findOne({ where: { email } });
+      if (!student){
+        return res.status(403).json({ error: 'E-mail Inválido!' });
+      }
 
 
-      if (!(await teacher.checkPassword(password))){
+      if (!(await student.checkPassword(password))){
         return res.status(403).json({ error: 'Senha Incorreta!' });
       }
 
 
-      const { id, name } = teacher;
+      const { id, name } = student;
 
       return res.json({
-        teacher: {
+        student: {
           name,
           email,
         },
@@ -52,4 +51,4 @@ class SessionTeacherController {
     }
 }
 
-export default new SessionTeacherController();
+export default new SessionStudentController();
