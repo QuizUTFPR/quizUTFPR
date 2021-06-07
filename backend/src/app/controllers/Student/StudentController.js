@@ -19,11 +19,7 @@ class StudentController {
       }
 
       const {email, password} = req.body;
-
-      //cadastro professor caso nao existir no sistema
       const student = await Student.create({ email: email, password: password });
-
-
       const { id, name } = student;
 
       return res.json({
