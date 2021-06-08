@@ -37,14 +37,9 @@ const Login = ({ navigation }) => {
       <KeyboardAvoidingView behavior="position" enabled>
         <DismissKeyboard>
           <InputWrapper>
-            <Input labelText="Nome de Usuário" mode="outlined" icon="account" />
+            <Input labelText="Nome de Usuário" mode="flat" icon="account" />
 
-            <Input
-              secureTextEntry
-              labelText="Senha"
-              mode="outlined"
-              icon="lock"
-            />
+            <Input secureTextEntry labelText="Senha" mode="flat" icon="lock" />
             <ForgotPasswordButton
               mode="text"
               compact
@@ -69,7 +64,7 @@ const Login = ({ navigation }) => {
         uppercase={false}
         onPress={() => navigation.navigate('Register')}
       >
-        Não possui uma conta? Cadastra-se
+        Não possui uma conta? Cadastre-se
       </StyledTextButton>
     </Container>
   );

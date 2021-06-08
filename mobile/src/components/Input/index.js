@@ -20,7 +20,7 @@ const Input = ({ secureTextEntry, labelText, mode, icon }) => {
 
 StyledTextInput.defaultProps = {
   secureTextEntry: false,
-  mode: 'outlined',
+  mode: 'flat',
   icon: '',
   labelText: '',
 };

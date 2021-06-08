@@ -39,17 +39,12 @@ const Register = ({ navigation }) => {
       <KeyboardAvoidingView behavior="position" enabled>
         <DismissKeyboard>
           <InputWrapper>
-            <Input labelText="Nome de Usuário" mode="outlined" icon="account" />
-            <Input
-              secureTextEntry
-              labelText="Senha"
-              mode="outlined"
-              icon="lock"
-            />
+            <Input labelText="Nome de Usuário" mode="flat" icon="account" />
+            <Input secureTextEntry labelText="Senha" mode="flat" icon="lock" />
             <Input
               secureTextEntry
               labelText="Confirmar Senha"
-              mode="outlined"
+              mode="flat"
               icon="lock"
             />
           </InputWrapper>
