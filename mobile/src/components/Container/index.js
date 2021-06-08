@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container } from './style';
+import { Container, Wrapper } from './style';
 
-const WrapperContainer = ({ children }) => <Container>{children}</Container>;
+const WrapperContainer = ({ children }) => (
+  <Container>
+    <Wrapper>{children}</Wrapper>
+  </Container>
+);
 
 WrapperContainer.propTypes = {
   children: PropTypes.node.isRequired,
