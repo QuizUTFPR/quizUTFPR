@@ -37,9 +37,9 @@ const Login = ({ navigation }) => {
       <KeyboardAvoidingView behavior="position" enabled>
         <DismissKeyboard>
           <InputWrapper>
-            <Input labelText="Nome de Usuário" mode="flat" icon="account" />
+            <Input labelText="Nome de Usuário" icon="account" />
 
-            <Input secureTextEntry labelText="Senha" mode="flat" icon="lock" />
+            <Input secureTextEntry labelText="Senha" icon="lock" />
             <ForgotPasswordButton
               mode="text"
               compact

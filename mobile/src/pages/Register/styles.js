@@ -8,6 +8,7 @@ import Waves from '@assets/waves.svg';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
 export const BackgroundImage = styled(Waves)`
+  margin-top: -80px;
   position: absolute;
 `;
 
@@ -32,15 +33,15 @@ export const StyledText = styled(Text)`
 `;
 
 export const InputWrapper = styled.View`
-  padding-top: ${`${heightPercentageToDp('26%')}px`};
+  padding-top: ${`${heightPercentageToDp('14%')}px`};
   width: ${`${widthPercentageToDp('85%')}px`};
 `;
 
 export const StyledTextButton = styled(Button)`
-  margin-top: ${`${heightPercentageToDp('1')}px`};
+  margin-top: ${`${heightPercentageToDp('0.5')}px`};
 `;
 
 export const WrapperButton = styled.View`
-  margin-top: ${`${heightPercentageToDp('6')}px`};
+  margin-top: ${`${heightPercentageToDp('1.5')}px`};
   width: ${`${widthPercentageToDp('60%')}px`};
 `;

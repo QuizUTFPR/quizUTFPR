@@ -7,11 +7,12 @@ import Waves from '@assets/waves.svg';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
 export const BackgroundImage = styled(Waves)`
+  margin-top: -80px;
   position: absolute;
 `;
 
 export const InputWrapper = styled.View`
-  padding-top: ${`${heightPercentageToDp('26%')}px`};
+  padding-top: ${`${heightPercentageToDp('20%')}px`};
   width: ${`${widthPercentageToDp('85%')}px`};
 `;
 
