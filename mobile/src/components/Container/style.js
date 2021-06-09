@@ -13,6 +13,7 @@ export const Container = styled.SafeAreaView`
 `;
 
 export const Wrapper = styled.View`
+  flex: 1;
   align-items: center;
   padding-top: ${`${statusBarHeight}px`};
   padding-left: 30px;

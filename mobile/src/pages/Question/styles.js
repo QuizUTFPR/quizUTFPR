@@ -8,7 +8,6 @@ import Button from '@components/Button';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
 export const Header = styled.View`
-  padding-top: ${`${heightPercentageToDp('2%')}px`};
   width: ${`${widthPercentageToDp('90%')}px`};
   flex-direction: row;
   justify-content: space-between;
@@ -16,12 +15,8 @@ export const Header = styled.View`
 `;
 
 export const ScrollWrapper = styled.ScrollView`
-  height: ${`${heightPercentageToDp('78%')}px`};
-`;
-
-export const Body = styled.View`
-  margin-top: ${`${heightPercentageToDp('5%')}px`};
-  margin-bottom: ${`${heightPercentageToDp('1%')}px`};
+  width: ${`${widthPercentageToDp('90%')}px`};
+  flex: 1;
 `;
 
 export const CurrentQuestion = styled(Headline)`
@@ -38,11 +33,12 @@ export const QuestionDescription = styled.View`
 export const QuestionImage = styled.Image`
   width: ${`${widthPercentageToDp('50%')}px`};
   height: ${`${heightPercentageToDp('25%')}px`};
-  margin-top: -25px;
+  margin-top: ${`${heightPercentageToDp('1.2%')}px`};
   border-radius: 10px;
 `;
 
 export const QuestionText = styled(Text)`
+  text-align: center;
   font-size: ${({ fontSize }) => fontSize + 5}px;
   font-family: 'RobotoRegular';
   padding-left: ${`${heightPercentageToDp('4%')}px`};
@@ -68,11 +64,9 @@ export const AnswerText = styled(Text)`
   font-family: 'RobotoRegular';
 `;
 
-export const Footer = styled.View`
-  position: absolute;
-  bottom: 0;
-`;
+export const Footer = styled.View``;
 
 export const StyledButton = styled(Button)`
   width: ${`${widthPercentageToDp('100%')}px`};
+  border-radius: 0;
 `;
