@@ -3,20 +3,33 @@ import { Text, Headline } from 'react-native-paper';
 
 // COMPONENTS
 import Button from '@components/Button';
-
+import { Container, Wrapper } from '@components/Container/style';
 // CUSTOM DIMENSIONS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
+
+export const QuestionContainer = styled(Container)`
+  background: blue;
+`;
+export const QuestionWrapper = styled(Wrapper)``;
 
 export const Header = styled.View`
   width: ${`${widthPercentageToDp('90%')}px`};
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background: blue;
+`;
+
+export const InformationsWrapper = styled.View`
+  flex: 0.95;
+  border-radius: 20px;
+  background: orange;
+  width: ${`${widthPercentageToDp('90%')}px`};
 `;
 
 export const ScrollWrapper = styled.ScrollView`
-  width: ${`${widthPercentageToDp('90%')}px`};
-  flex: 1;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 export const CurrentQuestion = styled(Headline)`
@@ -25,9 +38,8 @@ export const CurrentQuestion = styled(Headline)`
 `;
 
 export const QuestionDescription = styled.View`
-  background-color: lightgrey;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-bottom: ${`${heightPercentageToDp('2%')}px`};
 `;
 
@@ -35,26 +47,24 @@ export const QuestionImage = styled.Image`
   width: ${`${widthPercentageToDp('50%')}px`};
   height: ${`${heightPercentageToDp('25%')}px`};
   margin-top: ${`${heightPercentageToDp('1.2%')}px`};
-  border-radius: 10px;
+  border-radius: 5px;
 `;
 
 export const QuestionText = styled(Text)`
-  text-align: center;
   font-size: ${({ fontSize }) => fontSize + 5}px;
-  font-family: 'RobotoRegular';
-  padding: ${`${heightPercentageToDp('4%')}px`};
+  font-family: 'RobotoBold';
+  margin-top: ${`${heightPercentageToDp('2%')}px`};
 `;
 
 export const AnswerContainer = styled.TouchableOpacity`
+  background: red;
   flex-direction: row;
-  background: lightgrey;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  height: ${`${heightPercentageToDp('6%')}px`};
+  border-radius: 5px;
+  height: ${`${heightPercentageToDp('8%')}px`};
   margin-top: ${`${heightPercentageToDp('1.5%')}px`};
-  padding-left: ${`${widthPercentageToDp('4%')}px`};
-  padding-right: ${`${widthPercentageToDp('4%')}px`};
+  border: 2px solid lightgrey;
 `;
 
 export const AnswerText = styled(Text)`
@@ -62,9 +72,12 @@ export const AnswerText = styled(Text)`
   font-family: 'RobotoRegular';
 `;
 
-export const Footer = styled.View``;
+export const Footer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 export const StyledButton = styled(Button)`
-  width: ${`${widthPercentageToDp('100%')}px`};
   border-radius: 0;
+  border-top-left-radius: 20px;
 `;
