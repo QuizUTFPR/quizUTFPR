@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Text } from 'react-native-paper';
+import { Text, Headline } from 'react-native-paper';
 
 // COMPONENTS
 import Button from '@components/Button';
@@ -16,12 +16,17 @@ export const Header = styled.View`
 `;
 
 export const ScrollWrapper = styled.ScrollView`
-  height: ${`${heightPercentageToDp('80%')}px`};
+  height: ${`${heightPercentageToDp('78%')}px`};
 `;
 
 export const Body = styled.View`
   margin-top: ${`${heightPercentageToDp('5%')}px`};
   margin-bottom: ${`${heightPercentageToDp('1%')}px`};
+`;
+
+export const CurrentQuestion = styled(Headline)`
+  font-size: ${({ fontSize }) => fontSize + 2}px;
+  font-family: 'RobotoRegular';
 `;
 
 export const QuestionDescription = styled.View`
@@ -50,7 +55,7 @@ export const AnswerContainer = styled.View`
   flex-direction: row;
   background: lightgrey;
   border-radius: 10px;
-  height: ${`${heightPercentageToDp('7%')}px`};
+  height: ${`${heightPercentageToDp('6%')}px`};
   margin-top: ${`${heightPercentageToDp('2%')}px`};
   justify-content: space-between;
   align-items: center;
@@ -59,11 +64,14 @@ export const AnswerContainer = styled.View`
 `;
 
 export const AnswerText = styled(Text)`
-  font-size: ${({ fontSize }) => fontSize + 5}px;
+  font-size: ${({ fontSize }) => fontSize + 1}px;
   font-family: 'RobotoRegular';
 `;
 
-export const Footer = styled.View``;
+export const Footer = styled.View`
+  position: absolute;
+  bottom: 0;
+`;
 
 export const StyledButton = styled(Button)`
   width: ${`${widthPercentageToDp('100%')}px`};
