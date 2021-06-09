@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import Constants from 'expo-constants';
 import { IconButton, Title, Text, Button } from 'react-native-paper';
 
 import Waves from '@assets/waves.svg';
