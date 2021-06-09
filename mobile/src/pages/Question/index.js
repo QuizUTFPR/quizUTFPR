@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IconButton, Headline, Button, useTheme } from 'react-native-paper';
+import { IconButton, Button, useTheme } from 'react-native-paper';
 import CircleCheckBox from 'react-native-circle-checkbox';
 
 // COMPONENTS
