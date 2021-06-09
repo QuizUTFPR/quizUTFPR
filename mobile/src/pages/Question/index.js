@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { IconButton, Headline, Button, useTheme } from 'react-native-paper';
+import React from 'react';
+import { IconButton, Button, useTheme } from 'react-native-paper';
 import CircleCheckBox from 'react-native-circle-checkbox';
 
 // COMPONENTS
@@ -9,7 +9,6 @@ import Container from '@components/Container';
 import {
   Header,
   Footer,
-  Body,
   CurrentQuestion,
   QuestionDescription,
   QuestionImage,

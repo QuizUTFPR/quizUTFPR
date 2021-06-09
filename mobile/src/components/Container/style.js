@@ -2,9 +2,6 @@ import styled from 'styled-components/native';
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 
-// DIMENSION TRANSFORMERS
-import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
-
 const statusBarHeight =
   Platform.OS === 'android' ? Constants.statusBarHeight : 0;
 

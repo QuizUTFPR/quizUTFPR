@@ -28,6 +28,7 @@ export const QuestionDescription = styled.View`
   background-color: lightgrey;
   align-items: center;
   border-radius: 10px;
+  margin-bottom: ${`${heightPercentageToDp('2%')}px`};
 `;
 
 export const QuestionImage = styled.Image`
@@ -41,20 +42,17 @@ export const QuestionText = styled(Text)`
   text-align: center;
   font-size: ${({ fontSize }) => fontSize + 5}px;
   font-family: 'RobotoRegular';
-  padding-left: ${`${heightPercentageToDp('4%')}px`};
-  padding-right: ${`${heightPercentageToDp('4%')}px`};
-  padding-top: ${`${heightPercentageToDp('4%')}px`};
-  padding-bottom: ${`${heightPercentageToDp('5%')}px`};
+  padding: ${`${heightPercentageToDp('4%')}px`};
 `;
 
-export const AnswerContainer = styled.View`
+export const AnswerContainer = styled.TouchableOpacity`
   flex-direction: row;
   background: lightgrey;
-  border-radius: 10px;
-  height: ${`${heightPercentageToDp('6%')}px`};
-  margin-top: ${`${heightPercentageToDp('2%')}px`};
   justify-content: space-between;
   align-items: center;
+  border-radius: 10px;
+  height: ${`${heightPercentageToDp('6%')}px`};
+  margin-top: ${`${heightPercentageToDp('1.5%')}px`};
   padding-left: ${`${widthPercentageToDp('4%')}px`};
   padding-right: ${`${widthPercentageToDp('4%')}px`};
 `;
