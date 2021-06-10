@@ -32,54 +32,52 @@ const Question = () => {
   }, []);
 
   return (
-    <QuestionContainer>
+    <>
       <LottieView
         autoPlay
         loop
+        resizeMode="cover"
         ref={animation}
-        speed={0.2}
-        style={{
-          position: 'absolute',
-          aspectRatio: 300 / 614,
-        }}
+        speed={1}
         // eslint-disable-next-line global-require
         source={require('@assets/background_space.json')}
       />
+      <QuestionContainer>
+        <QuestionWrapper>
+          <Header>
+            <IconButton icon="close" onPress={() => {}} />
+            <CurrentQuestion fontSize={label.fontSize}>
+              Questão 01/20
+            </CurrentQuestion>
+            <IconButton icon="timer" onPress={() => {}} />
+          </Header>
 
-      <QuestionWrapper>
-        <Header>
-          <IconButton icon="close" onPress={() => {}} />
-          <CurrentQuestion fontSize={label.fontSize}>
-            Questão 01/20
-          </CurrentQuestion>
-          <IconButton icon="timer" onPress={() => {}} />
-        </Header>
+          <InformationsWrapper>
+            <ScrollWrapper>
+              <QuestionDescription>
+                {/* eslint-disable-next-line global-require */}
+                <QuestionImage source={require('@assets/icon.png')} />
+                <QuestionText fontSize={label.fontSize}>
+                  Qual a cor do líquido de Erlenmeyer?
+                </QuestionText>
+              </QuestionDescription>
 
-        <InformationsWrapper>
-          <ScrollWrapper>
-            <QuestionDescription>
-              {/* eslint-disable-next-line global-require */}
-              <QuestionImage source={require('@assets/icon.png')} />
-              <QuestionText fontSize={label.fontSize}>
-                Qual a cor do líquido de Erlenmeyer?
-              </QuestionText>
-            </QuestionDescription>
-
-            {fakeAnswers.map((answer) => (
-              <AnswerContainer key={answer}>
-                <AnswerText fontSize={label.fontSize}>{answer}</AnswerText>
-              </AnswerContainer>
-            ))}
-          </ScrollWrapper>
-          <Footer>
-            <StyledButton mode="text" onPress={() => {}}>
-              Pular
-            </StyledButton>
-            <StyledButton onPress={() => {}}>Confirmar</StyledButton>
-          </Footer>
-        </InformationsWrapper>
-      </QuestionWrapper>
-    </QuestionContainer>
+              {fakeAnswers.map((answer) => (
+                <AnswerContainer key={answer}>
+                  <AnswerText fontSize={label.fontSize}>{answer}</AnswerText>
+                </AnswerContainer>
+              ))}
+            </ScrollWrapper>
+            <Footer>
+              <StyledButton mode="text" onPress={() => {}}>
+                Pular
+              </StyledButton>
+              <StyledButton onPress={() => {}}>Confirmar</StyledButton>
+            </Footer>
+          </InformationsWrapper>
+        </QuestionWrapper>
+      </QuestionContainer>
+    </>
   );
 };
 
