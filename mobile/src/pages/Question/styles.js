@@ -74,15 +74,14 @@ export const AnswerContainer = styled.TouchableOpacity`
   height: ${`${heightPercentageToDp('8%')}px`};
   margin-top: ${`${heightPercentageToDp('1.5%')}px`};
   border-radius: 10px;
-  border: ${({ checked }) => (checked ? '3px' : '1.2px')} solid
-    ${({ checked }) => (checked ? '#A79EEA' : '#d6e0ed')};
-  /* #77a820 */
+  background: ${({ checked }) => (checked ? '#fba92e' : 'white')};
 `;
 
 export const AnswerText = styled(Text)`
   font-size: ${({ fontSize }) => fontSize + 1}px;
   font-family: 'RobotoBold';
-  color: #8da1bd;
+  color: ;
+  color: ${({ checked }) => (checked ? 'white' : '#8da1bd')};
 `;
 
 export const Footer = styled.View`

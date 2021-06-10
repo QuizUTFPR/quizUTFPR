@@ -30,24 +30,12 @@ import {
 const fakeAnswers = ['Amarelo', 'Roxo', 'Azul', 'Tijolo'];
 
 const Question = () => {
-  const { questions } = useQuestions();
-  const [request, setRequest] = useState({
-    idQuiz: 0,
-    idQuestion: 0,
-    checkedAnswer0: false,
-    checkedAnswer1: false,
-    checkedAnswer2: false,
-    checkedAnswer3: false,
-  });
-
-  const handleSetCheckedAnswer = (index) => {
-    setRequest((prevState) => ({
-      ...prevState,
-      [`checkedAnswer${index}`]: ![`checkedAnswer${index}`],
-    }));
-  };
-
-  console.log('questions', questions, request);
+  const {
+    questions,
+    requestQuestion,
+    handleSetCheckedAnswer,
+    handleSaveRequestQuestionOnDatabase,
+  } = useQuestions();
 
   const widthAnimation = useRef(
     new Animated.Value(Dimensions.get('screen').width)
@@ -107,17 +95,22 @@ const Question = () => {
             {fakeAnswers.map((answer, index) => (
               <AnswerContainer
                 key={answer}
-                checked={`request.checkedAnswer${index}`}
+                checked={requestQuestion.checkedAnswer[index]}
                 onPress={() => handleSetCheckedAnswer(index)}
               >
-                <AnswerText fontSize={label.fontSize}>{answer}</AnswerText>
+                <AnswerText
+                  checked={requestQuestion.checkedAnswer[index]}
+                  fontSize={label.fontSize}
+                >
+                  {answer}
+                </AnswerText>
               </AnswerContainer>
             ))}
           </ScrollWrapper>
           <Footer>
             <ConfirmButton
               fontSize={label.fontSize}
-              onPress={() => console.log('confirmou')}
+              onPress={handleSaveRequestQuestionOnDatabase}
             >
               Confirmar
             </ConfirmButton>
