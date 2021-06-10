@@ -107,7 +107,7 @@ export const WrapperProgress = styled.View``;
 export const Progress = styled.View`
   position: absolute;
   bottom: 0;
-  height: 30px;
+  height: 17px;
   justify-content: center;
   align-items: flex-end;
   background: #fba92e;
@@ -116,7 +116,7 @@ export const Progress = styled.View`
 export const ProgressBG = styled.View`
   position: absolute;
   bottom: 0;
-  height: 30px;
+  height: 17px;
   width: ${`${widthPercentageToDp('100%')}px`};
   justify-content: center;
   align-items: flex-end;
@@ -126,7 +126,7 @@ export const ProgressBG = styled.View`
 
 export const TextTimer = styled.Text`
   position: absolute;
-  bottom: 5px;
+  bottom: 0px;
   right: 5px;
   font-family: 'RobotoBold';
   color: black;
