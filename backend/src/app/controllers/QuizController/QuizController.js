@@ -222,22 +222,6 @@ class QuizController {
 
       if(!quiz) return res.status(204).json({error: "Não existe nenhum quiz com o ID informado."});
       
-      const questions = await quiz.getQuestions();
-
-      questions.map(async (QuestionItem) => {
-        if(!QuestionItem.available_on_questions_db){
-          const image = await QuestionItem.getImage_question();
-          const answers = await QuestionItem.getAnswer();
-
-          if(image) image.destroy();
-          answers.map((AnswerItem) => {
-            QuestionItem.removeAnswer(AnswerItem);
-            AnswerItem.destroy();
-          })
-          QuestionItem.destroy();
-        }
-      })
-
       const image_quiz = await quiz.getImage_quiz()
       if(image_quiz) image_quiz.destroy();
       quiz.destroy();
