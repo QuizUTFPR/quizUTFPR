@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Text, Headline, ProgressBar } from 'react-native-paper';
+import { Text, Headline } from 'react-native-paper';
 
 // COMPONENTS
 import Button, { StyledButton } from '@components/Button';
@@ -21,7 +21,6 @@ export const Header = styled.View`
 `;
 
 export const InformationsWrapper = styled.View`
-  flex: 0.95;
   background: white;
   border-radius: 20px;
   width: ${`${widthPercentageToDp('90%')}px`};
@@ -94,6 +93,7 @@ export const ConfirmButton = styled(Button)`
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   background: #fba92e;
+  width: ${`${widthPercentageToDp('60%')}px`};
 `;
 
 export const SkeepButton = styled(StyledButton).attrs({
