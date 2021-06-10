@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { IconButton, useTheme } from 'react-native-paper';
 import LottieView from 'lottie-react-native';
 
@@ -22,22 +22,31 @@ import {
 const fakeAnswers = ['Amarelo', 'Roxo', 'Azul', 'Tijolo'];
 
 const Question = () => {
-  const animation = React.useRef(false);
+  const actionAnimation = useRef(false);
   const { label } = useTheme();
 
   React.useEffect(() => {
-    if (animation) {
-      animation.current.play();
+    if (actionAnimation) {
+      console.log('montour');
     }
   }, []);
 
   return (
     <>
       <LottieView
+        ref={actionAnimation}
+        autoPlay
+        loop={false}
+        style={{ zIndex: 9999 }}
+        resizeMode="cover"
+        speed={1}
+        // eslint-disable-next-line global-require
+        source={require('@assets/countdown.json')}
+      />
+      <LottieView
         autoPlay
         loop
         resizeMode="cover"
-        ref={animation}
         speed={1}
         // eslint-disable-next-line global-require
         source={require('@assets/background_space.json')}
