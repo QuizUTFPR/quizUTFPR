@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components/native';
 import { Button } from 'react-native-paper';
 
-const StyledButton = styled(Button).attrs({
+export const StyledButton = styled(Button).attrs({
   labelStyle: {
     color: 'white',
   },
