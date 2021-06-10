@@ -86,7 +86,6 @@ const Question = () => {
           <Header>
             <IconButton color="white" icon="close" onPress={() => {}} />
             <CurrentQuestion fontSize={label.fontSize}>1/20</CurrentQuestion>
-            <IconButton color="white" icon="timer" onPress={() => {}} />
           </Header>
 
           <InformationsWrapper>
@@ -106,9 +105,6 @@ const Question = () => {
               ))}
             </ScrollWrapper>
             <Footer>
-              <SkeepButton mode="text" onPress={() => {}}>
-                Pular
-              </SkeepButton>
               <ConfirmButton onPress={() => console.log('confirmou')}>
                 Confirmar
               </ConfirmButton>

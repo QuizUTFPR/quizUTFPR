@@ -23,6 +23,7 @@ export const Header = styled.View`
 export const InformationsWrapper = styled.View`
   background: white;
   border-radius: 20px;
+  border-top-right-radius: 0;
   width: ${`${widthPercentageToDp('90%')}px`};
 `;
 
@@ -89,18 +90,12 @@ export const Footer = styled.View`
 `;
 
 export const ConfirmButton = styled(Button)`
-  border-radius: 0;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-radius: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
   background: #fba92e;
-  width: ${`${widthPercentageToDp('60%')}px`};
+  width: ${`${widthPercentageToDp('90%')}px`};
 `;
-
-export const SkeepButton = styled(StyledButton).attrs({
-  labelStyle: {
-    color: '#a9a9a9',
-  },
-})``;
 
 export const WrapperProgress = styled.View``;
 
