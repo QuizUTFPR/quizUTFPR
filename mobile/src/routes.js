@@ -3,6 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Loading from '@components/Loading';
 
+// CONTEXT
+import QuestionProvider from '@context/Question';
+
 // PAGES
 const InitialScreen = lazy(() => import('@pages/InitialScreen'));
 const Login = lazy(() => import('@pages/Login'));
@@ -23,7 +26,13 @@ function Routes() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} /> */}
           <Stack.Screen name="CountDown" component={CountDown} />
-          <Stack.Screen name="Question" component={Question} />
+          <Stack.Screen name="Question">
+            {(props) => (
+              <QuestionProvider>
+                <Question {...props} />
+              </QuestionProvider>
+            )}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </Suspense>

@@ -3,6 +3,9 @@ import { IconButton, useTheme } from 'react-native-paper';
 import LottieView from 'lottie-react-native';
 import { Animated, Dimensions } from 'react-native';
 
+// HOOKS
+import useQuestions from '@hook/useQuestion';
+
 // STYLES
 import {
   QuestionContainer,
@@ -17,7 +20,6 @@ import {
   AnswerContainer,
   AnswerText,
   ConfirmButton,
-  SkeepButton,
   ScrollWrapper,
   WrapperProgress,
   Progress,
@@ -28,6 +30,15 @@ import {
 const fakeAnswers = ['Amarelo', 'Roxo', 'Azul', 'Tijolo'];
 
 const Question = () => {
+  const { questions } = useQuestions();
+  const [request, setRequest] = useState({
+    idQuiz: 0,
+    idQuestion: 0,
+    checkedAnswer: 'X___',
+  });
+
+  console.log('questions', questions, request);
+
   const widthAnimation = useRef(
     new Animated.Value(Dimensions.get('screen').width)
   ).current;
@@ -83,21 +94,27 @@ const Question = () => {
               </QuestionText>
             </QuestionDescription>
 
-            {fakeAnswers.map((answer) => (
-              <AnswerContainer key={answer}>
+            {fakeAnswers.map((answer, index) => (
+              <AnswerContainer
+                key={answer}
+                checked={request.checkedAnswer[index] !== '_'}
+              >
                 <AnswerText fontSize={label.fontSize}>{answer}</AnswerText>
               </AnswerContainer>
             ))}
           </ScrollWrapper>
           <Footer>
-            <ConfirmButton onPress={() => console.log('confirmou')}>
+            <ConfirmButton
+              fontSize={label.fontSize}
+              onPress={() => console.log('confirmou')}
+            >
               Confirmar
             </ConfirmButton>
           </Footer>
         </InformationsWrapper>
       </QuestionWrapper>
       <WrapperProgress>
-        <TextTimer>{timer.seconds}</TextTimer>
+        <TextTimer fontSize={label.fontSize}>{timer.seconds}</TextTimer>
         <ProgressBG progress={1} color="red" />
         <Progress
           style={{

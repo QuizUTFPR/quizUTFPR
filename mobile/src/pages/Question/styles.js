@@ -75,6 +75,7 @@ export const AnswerContainer = styled.TouchableOpacity`
   margin-top: ${`${heightPercentageToDp('1.5%')}px`};
   border-radius: 10px;
   border: 1.2px solid #d6e0ed;
+  background: ${({ checked }) => (checked ? 'red' : 'white')};
 `;
 
 export const AnswerText = styled(Text)`
@@ -89,11 +90,14 @@ export const Footer = styled.View`
   margin-top: 5px;
 `;
 
-export const ConfirmButton = styled(Button)`
+export const ConfirmButton = styled(StyledButton).attrs(({ fontSize }) => ({
+  labelStyle: {
+    fontSize: fontSize + 3,
+    fontFamily: 'RobotoBold',
+  },
+}))`
   margin-top: 10px;
   border-radius: 20px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
   background: #fba92e;
   width: ${`${widthPercentageToDp('90%')}px`};
 `;
@@ -120,6 +124,7 @@ export const ProgressBG = styled.View`
 
 export const TextTimer = styled.Text`
   position: absolute;
+  font-size: ${({ fontSize }) => fontSize - 4}px;
   bottom: 0px;
   right: 5px;
   font-family: 'RobotoBold';
