@@ -15,7 +15,8 @@ import {
   QuestionText,
   AnswerContainer,
   AnswerText,
-  StyledButton,
+  ConfirmButton,
+  SkeepButton,
   ScrollWrapper,
 } from './styles';
 
@@ -69,10 +70,10 @@ const Question = () => {
               ))}
             </ScrollWrapper>
             <Footer>
-              <StyledButton mode="text" onPress={() => {}}>
+              <SkeepButton mode="text" onPress={() => {}}>
                 Pular
-              </StyledButton>
-              <StyledButton onPress={() => {}}>Confirmar</StyledButton>
+              </SkeepButton>
+              <ConfirmButton onPress={() => {}}>Confirmar</ConfirmButton>
             </Footer>
           </InformationsWrapper>
         </QuestionWrapper>

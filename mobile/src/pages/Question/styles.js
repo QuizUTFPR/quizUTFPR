@@ -3,6 +3,7 @@ import { Text, Headline } from 'react-native-paper';
 
 // COMPONENTS
 import Button from '@components/Button';
+import { StyledButton } from '@components/Button';
 import { Container, Wrapper } from '@components/Container/style';
 
 // CUSTOM DIMENSIONS
@@ -77,7 +78,13 @@ export const Footer = styled.View`
   justify-content: space-between;
 `;
 
-export const StyledButton = styled(Button)`
+export const ConfirmButton = styled(Button)`
   border-radius: 0;
   border-top-left-radius: 20px;
 `;
+
+export const SkeepButton = styled(StyledButton).attrs({
+  labelStyle: {
+    color: '#a9a9a9',
+  },
+})``;
