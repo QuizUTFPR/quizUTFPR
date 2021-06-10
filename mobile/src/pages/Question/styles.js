@@ -1,15 +1,18 @@
 import styled from 'styled-components/native';
 import { Text, Headline } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
 
 // COMPONENTS
-import Button, { StyledButton } from '@components/Button';
-import { Container, Wrapper } from '@components/Container/style';
+import ButtonGradient from '@components/ButtonGradient';
+import { Wrapper } from '@components/Container/style';
 
 // CUSTOM DIMENSIONS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
-export const QuestionContainer = styled(Container)`
-  background: #5026bd;
+export const QuestionContainer = styled(LinearGradient).attrs({
+  colors: ['#4B24B1', '#5929D3'],
+})`
+  flex: 1;
 `;
 export const QuestionWrapper = styled(Wrapper)``;
 
@@ -22,7 +25,7 @@ export const Header = styled.View`
 
 export const InformationsWrapper = styled.View`
   background: white;
-  border-radius: 20px;
+  border-radius: 40px;
   border-top-right-radius: 0;
   width: ${`${widthPercentageToDp('90%')}px`};
 `;
@@ -41,8 +44,8 @@ export const CurrentQuestion = styled(Headline)`
   width: 100px;
   text-align: center;
   margin-bottom: -22px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 `;
 
 export const QuestionDescription = styled.View`
@@ -73,15 +76,15 @@ export const AnswerContainer = styled.TouchableOpacity`
   align-items: center;
   height: ${`${heightPercentageToDp('8%')}px`};
   margin-top: ${`${heightPercentageToDp('1.5%')}px`};
-  border-radius: 10px;
-  background: ${({ checked }) => (checked ? '#fba92e' : 'white')};
+  border-radius: 30px;
+  background: ${({ checked }) => (checked ? '#4F26C0' : 'white')};
+  border: ${({ checked }) => (checked ? 'none' : '0.5px solid #171c26')};
 `;
 
 export const AnswerText = styled(Text)`
   font-size: ${({ fontSize }) => fontSize + 1}px;
   font-family: 'RobotoBold';
-  color: ;
-  color: ${({ checked }) => (checked ? 'white' : '#8da1bd')};
+  color: ${({ checked }) => (checked ? 'white' : '#171c26')};
 `;
 
 export const Footer = styled.View`
@@ -90,15 +93,12 @@ export const Footer = styled.View`
   margin-top: 5px;
 `;
 
-export const ConfirmButton = styled(StyledButton).attrs(({ fontSize }) => ({
-  labelStyle: {
-    fontSize: fontSize + 3,
-    fontFamily: 'RobotoBold',
-  },
-}))`
+export const ConfirmButton = styled(ButtonGradient).attrs({
+  colors: ['#FFC95C', '#FFC95C'],
+})`
   margin-top: 10px;
-  border-radius: 20px;
-  background: #fba92e;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
   width: ${`${widthPercentageToDp('90%')}px`};
 `;
 
@@ -111,6 +111,8 @@ export const Progress = styled.View`
   justify-content: center;
   align-items: flex-end;
   background: #fba92e;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
   z-index: 5;
 `;
 export const ProgressBG = styled.View`
@@ -118,7 +120,7 @@ export const ProgressBG = styled.View`
   bottom: 0;
   height: 17px;
   width: ${`${widthPercentageToDp('100%')}px`};
-  background: #fcd599;
+  background: #ebebeb;
   z-index: 4;
 `;
 

@@ -1,12 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { IconButton, useTheme } from 'react-native-paper';
+import { IconButton, useTheme, Button } from 'react-native-paper';
 import LottieView from 'lottie-react-native';
-import { Animated, Dimensions } from 'react-native';
+import { Animated, Dimensions, Text } from 'react-native';
 
 // HOOKS
 import useQuestions from '@hook/useQuestion';
 
 // STYLES
+import ButtonGradient from '@components/ButtonGradient';
 import {
   QuestionContainer,
   QuestionWrapper,
@@ -112,7 +113,7 @@ const Question = () => {
               fontSize={label.fontSize}
               onPress={handleSaveRequestQuestionOnDatabase}
             >
-              Confirmar
+              CONFIRMAR
             </ConfirmButton>
           </Footer>
         </InformationsWrapper>
