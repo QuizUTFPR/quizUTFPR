@@ -9,7 +9,7 @@ import { Container, Wrapper } from '@components/Container/style';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
 export const QuestionContainer = styled(Container)`
-  background: #333d54;
+  background: #171c26;
 `;
 export const QuestionWrapper = styled(Wrapper)``;
 
@@ -32,10 +32,17 @@ export const ScrollWrapper = styled.ScrollView`
   padding-right: 20px;
 `;
 
-export const CurrentQuestion = styled(Headline)`
+export const CurrentQuestion = styled(Text)`
   font-size: ${({ fontSize }) => fontSize + 2}px;
-  font-family: 'RobotoRegular';
-  color: white;
+  font-family: 'RobotoBold';
+  background: white;
+  color: #171c26;
+  padding: 5px;
+  width: 100px;
+  text-align: center;
+  margin-bottom: -22px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 `;
 
 export const QuestionDescription = styled.View`
@@ -54,7 +61,7 @@ export const QuestionImage = styled.Image`
 export const QuestionText = styled(Text)`
   font-size: ${({ fontSize }) => fontSize + 5}px;
   font-family: 'RobotoBold';
-  color: #2a4e79;
+  color: #171c26;
   text-align: center;
   margin-top: ${`${heightPercentageToDp('2%')}px`};
   margin-bottom: ${`${heightPercentageToDp('-2.5%')}px`};
@@ -64,16 +71,16 @@ export const AnswerContainer = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
   height: ${`${heightPercentageToDp('8%')}px`};
   margin-top: ${`${heightPercentageToDp('1.5%')}px`};
-  border: 2px solid #e9eef5;
+  border-radius: 10px;
+  border: 1.2px solid #d6e0ed;
 `;
 
 export const AnswerText = styled(Text)`
   font-size: ${({ fontSize }) => fontSize + 1}px;
-  font-family: 'RobotoRegular';
-  color: #a9a9a9;
+  font-family: 'RobotoBold';
+  color: #8da1bd;
 `;
 
 export const Footer = styled.View`
@@ -85,6 +92,8 @@ export const Footer = styled.View`
 export const ConfirmButton = styled(Button)`
   border-radius: 0;
   border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background: #fba92e;
 `;
 
 export const SkeepButton = styled(StyledButton).attrs({

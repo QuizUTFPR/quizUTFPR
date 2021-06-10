@@ -49,9 +49,7 @@ const Question = () => {
         <QuestionWrapper>
           <Header>
             <IconButton color="white" icon="close" onPress={() => {}} />
-            <CurrentQuestion fontSize={label.fontSize}>
-              Questão 01/20
-            </CurrentQuestion>
+            <CurrentQuestion fontSize={label.fontSize}>1/20</CurrentQuestion>
             <IconButton color="white" icon="timer" onPress={() => {}} />
           </Header>
 
