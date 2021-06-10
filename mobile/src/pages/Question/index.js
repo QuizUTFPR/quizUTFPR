@@ -1,11 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { IconButton, useTheme } from 'react-native-paper';
 import LottieView from 'lottie-react-native';
-import { Animated } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 
 // STYLES
-import { Dimensions } from 'react-native';
-
 import {
   QuestionContainer,
   QuestionWrapper,
@@ -21,21 +19,23 @@ import {
   ConfirmButton,
   SkeepButton,
   ScrollWrapper,
+  WrapperProgress,
   Progress,
   TextTimer,
+  ProgressBG,
 } from './styles';
 
 const fakeAnswers = ['Amarelo', 'Roxo', 'Azul', 'Tijolo'];
 
 const Question = () => {
   const widthAnimation = useRef(
-    new Animated.Value(Dimensions.get('window').width)
+    new Animated.Value(Dimensions.get('screen').width)
   ).current;
   const { label } = useTheme();
 
   const [timer, setTimer] = useState({
     canStart: false,
-    seconds: 10,
+    seconds: 30,
     secondImmutable: 10,
     interval: null,
   });
@@ -54,7 +54,7 @@ const Question = () => {
 
       Animated.timing(widthAnimation, {
         toValue: 0,
-        duration: 10000,
+        duration: timer.seconds * 1000,
         useNativeDriver: false,
       }).start();
     }
@@ -113,17 +113,20 @@ const Question = () => {
             </Footer>
           </InformationsWrapper>
         </QuestionWrapper>
-        <Progress
-          style={{
-            width: widthAnimation,
-          }}
-          as={Animated.View}
-          widthTimer={timer.widthTimer}
-          progress={1}
-          color="red"
-        >
+        <WrapperProgress>
           <TextTimer>{timer.seconds}</TextTimer>
-        </Progress>
+          <ProgressBG progress={1} color="red" />
+          <Progress
+            style={{
+              width: widthAnimation,
+            }}
+            as={Animated.View}
+            widthTimer={timer.widthTimer}
+            progress={1}
+            color="red"
+          />
+        </WrapperProgress>
+
         <LottieView
           autoPlay
           loop

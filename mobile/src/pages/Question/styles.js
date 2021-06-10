@@ -102,15 +102,33 @@ export const SkeepButton = styled(StyledButton).attrs({
   },
 })``;
 
+export const WrapperProgress = styled.View``;
+
 export const Progress = styled.View`
+  position: absolute;
+  bottom: 0;
   height: 30px;
   justify-content: center;
   align-items: flex-end;
   background: #fba92e;
+  z-index: 5;
+`;
+export const ProgressBG = styled.View`
+  position: absolute;
+  bottom: 0;
+  height: 30px;
+  width: ${`${widthPercentageToDp('100%')}px`};
+  justify-content: center;
+  align-items: flex-end;
+  background: white;
+  z-index: 4;
 `;
 
 export const TextTimer = styled.Text`
-  margin-right: 10px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
   font-family: 'RobotoBold';
-  color: white;
+  color: black;
+  z-index: 100;
 `;
