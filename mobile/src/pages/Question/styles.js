@@ -90,13 +90,12 @@ export const AnswerText = styled(Text)`
 export const Footer = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 5px;
+  margin-top: 10px;
 `;
 
 export const ConfirmButton = styled(ButtonGradient).attrs({
   colors: ['#FFC95C', '#FFC95C'],
 })`
-  margin-top: 10px;
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
   width: ${`${widthPercentageToDp('90%')}px`};
@@ -107,10 +106,10 @@ export const WrapperProgress = styled.View``;
 export const Progress = styled.View`
   position: absolute;
   bottom: 0;
-  height: 17px;
+  height: 20px;
   justify-content: center;
   align-items: flex-end;
-  background: #fba92e;
+  background: #ffc95c;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   z-index: 5;
@@ -120,7 +119,7 @@ export const ProgressBG = styled.View`
   bottom: 0;
   height: 20px;
   width: ${`${widthPercentageToDp('100%')}px`};
-  background: #ebebeb;
+  background: #451faa;
   z-index: 4;
 `;
 
@@ -130,6 +129,6 @@ export const TextTimer = styled.Text`
   bottom: 0px;
   right: 5px;
   font-family: 'RobotoBold';
-  color: #5026bd;
+  color: white;
   z-index: 100;
 `;

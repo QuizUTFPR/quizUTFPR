@@ -113,7 +113,7 @@ const Question = () => {
               fontSize={label.fontSize}
               onPress={handleSaveRequestQuestionOnDatabase}
             >
-              Confirmar
+              CONFIRMAR
             </ConfirmButton>
           </Footer>
         </InformationsWrapper>
