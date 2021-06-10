@@ -1,8 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { IconButton, useTheme } from 'react-native-paper';
 import LottieView from 'lottie-react-native';
+import { Animated } from 'react-native';
 
 // STYLES
+import { Dimensions } from 'react-native';
+
 import {
   QuestionContainer,
   QuestionWrapper,
@@ -25,36 +28,40 @@ import {
 const fakeAnswers = ['Amarelo', 'Roxo', 'Azul', 'Tijolo'];
 
 const Question = () => {
-  const actionAnimation = useRef(false);
+  const widthAnimation = useRef(
+    new Animated.Value(Dimensions.get('window').width)
+  ).current;
   const { label } = useTheme();
+
   const [timer, setTimer] = useState({
     canStart: false,
-    widthTimer: 100,
     seconds: 10,
     secondImmutable: 10,
     interval: null,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (timer.canStart) {
       setTimer((prev) => ({
         ...prev,
         interval: setInterval(() => {
           setTimer((prevState) => ({
             ...prevState,
-            widthTimer:
-              prevState.seconds > 0
-                ? prevState.widthTimer - 100 / prevState.secondImmutable
-                : 0,
             seconds: prevState.seconds > 0 ? prevState.seconds - 1 : 0,
           }));
         }, 1000),
       }));
+
+      Animated.timing(widthAnimation, {
+        toValue: 0,
+        duration: 10000,
+        useNativeDriver: false,
+      }).start();
     }
     return () => clearInterval(timer.interval);
   }, [timer.canStart]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (timer.seconds === 0) {
       clearInterval(timer.interval);
     }
@@ -63,7 +70,6 @@ const Question = () => {
   return (
     <>
       <LottieView
-        ref={actionAnimation}
         autoPlay
         loop={false}
         style={{ zIndex: 9999 }}
@@ -107,7 +113,15 @@ const Question = () => {
             </Footer>
           </InformationsWrapper>
         </QuestionWrapper>
-        <Progress widthTimer={timer.widthTimer} progress={1} color="red">
+        <Progress
+          style={{
+            width: widthAnimation,
+          }}
+          as={Animated.View}
+          widthTimer={timer.widthTimer}
+          progress={1}
+          color="red"
+        >
           <TextTimer>{timer.seconds}</TextTimer>
         </Progress>
         <LottieView

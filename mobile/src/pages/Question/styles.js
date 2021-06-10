@@ -104,7 +104,6 @@ export const SkeepButton = styled(StyledButton).attrs({
 
 export const Progress = styled.View`
   height: 30px;
-  width: ${({ widthTimer }) => `${widthPercentageToDp(`${widthTimer}`)}px`};
   justify-content: center;
   align-items: flex-end;
   background: #fba92e;
