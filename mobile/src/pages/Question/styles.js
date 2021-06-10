@@ -74,8 +74,9 @@ export const AnswerContainer = styled.TouchableOpacity`
   height: ${`${heightPercentageToDp('8%')}px`};
   margin-top: ${`${heightPercentageToDp('1.5%')}px`};
   border-radius: 10px;
-  border: 1.2px solid #d6e0ed;
-  background: ${({ checked }) => (checked ? 'red' : 'white')};
+  border: ${({ checked }) => (checked ? '3px' : '1.2px')} solid
+    ${({ checked }) => (checked ? '#A79EEA' : '#d6e0ed')};
+  /* #77a820 */
 `;
 
 export const AnswerText = styled(Text)`

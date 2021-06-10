@@ -34,8 +34,18 @@ const Question = () => {
   const [request, setRequest] = useState({
     idQuiz: 0,
     idQuestion: 0,
-    checkedAnswer: 'X___',
+    checkedAnswer0: false,
+    checkedAnswer1: false,
+    checkedAnswer2: false,
+    checkedAnswer3: false,
   });
+
+  const handleSetCheckedAnswer = (index) => {
+    setRequest((prevState) => ({
+      ...prevState,
+      [`checkedAnswer${index}`]: ![`checkedAnswer${index}`],
+    }));
+  };
 
   console.log('questions', questions, request);
 
@@ -97,7 +107,8 @@ const Question = () => {
             {fakeAnswers.map((answer, index) => (
               <AnswerContainer
                 key={answer}
-                checked={request.checkedAnswer[index] !== '_'}
+                checked={`request.checkedAnswer${index}`}
+                onPress={() => handleSetCheckedAnswer(index)}
               >
                 <AnswerText fontSize={label.fontSize}>{answer}</AnswerText>
               </AnswerContainer>
