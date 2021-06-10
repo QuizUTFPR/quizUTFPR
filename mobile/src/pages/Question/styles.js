@@ -2,14 +2,15 @@ import styled from 'styled-components/native';
 import { Text, Headline } from 'react-native-paper';
 
 // COMPONENTS
-import Button from '@components/Button';
-import { StyledButton } from '@components/Button';
+import Button, { StyledButton } from '@components/Button';
 import { Container, Wrapper } from '@components/Container/style';
 
 // CUSTOM DIMENSIONS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
-export const QuestionContainer = styled(Container)``;
+export const QuestionContainer = styled(Container)`
+  background: #333d54;
+`;
 export const QuestionWrapper = styled(Wrapper)``;
 
 export const Header = styled.View`
@@ -21,8 +22,8 @@ export const Header = styled.View`
 
 export const InformationsWrapper = styled.View`
   flex: 0.95;
+  background: white;
   border-radius: 20px;
-  background: rgba(17, 17, 51, 0.7);
   width: ${`${widthPercentageToDp('90%')}px`};
 `;
 
@@ -53,29 +54,32 @@ export const QuestionImage = styled.Image`
 export const QuestionText = styled(Text)`
   font-size: ${({ fontSize }) => fontSize + 5}px;
   font-family: 'RobotoBold';
-  color: white;
+  color: #2a4e79;
+  text-align: center;
   margin-top: ${`${heightPercentageToDp('2%')}px`};
+  margin-bottom: ${`${heightPercentageToDp('-2.5%')}px`};
 `;
 
 export const AnswerContainer = styled.TouchableOpacity`
-  background: red;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 10px;
   height: ${`${heightPercentageToDp('8%')}px`};
   margin-top: ${`${heightPercentageToDp('1.5%')}px`};
-  border: 2px solid lightgrey;
+  border: 2px solid #e9eef5;
 `;
 
 export const AnswerText = styled(Text)`
   font-size: ${({ fontSize }) => fontSize + 1}px;
   font-family: 'RobotoRegular';
+  color: #a9a9a9;
 `;
 
 export const Footer = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 5px;
 `;
 
 export const ConfirmButton = styled(Button)`

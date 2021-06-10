@@ -44,25 +44,18 @@ const Question = () => {
         // eslint-disable-next-line global-require
         source={require('@assets/countdown.json')}
       />
-      <LottieView
-        autoPlay
-        loop
-        resizeMode="cover"
-        speed={1}
-        // eslint-disable-next-line global-require
-        source={require('@assets/background_space.json')}
-      />
+
       <QuestionContainer>
         <QuestionWrapper>
-          <InformationsWrapper>
-            <Header>
-              <IconButton color="white" icon="close" onPress={() => {}} />
-              <CurrentQuestion fontSize={label.fontSize}>
-                Questão 01/20
-              </CurrentQuestion>
-              <IconButton color="white" icon="timer" onPress={() => {}} />
-            </Header>
+          <Header>
+            <IconButton color="white" icon="close" onPress={() => {}} />
+            <CurrentQuestion fontSize={label.fontSize}>
+              Questão 01/20
+            </CurrentQuestion>
+            <IconButton color="white" icon="timer" onPress={() => {}} />
+          </Header>
 
+          <InformationsWrapper>
             <ScrollWrapper>
               <QuestionDescription>
                 {/* eslint-disable-next-line global-require */}
@@ -86,6 +79,14 @@ const Question = () => {
             </Footer>
           </InformationsWrapper>
         </QuestionWrapper>
+        <LottieView
+          autoPlay
+          loop
+          speed={5}
+          style={{ zIndex: -1 }}
+          // eslint-disable-next-line global-require
+          source={require('@assets/bg2.json')}
+        />
       </QuestionContainer>
     </>
   );
