@@ -118,9 +118,7 @@ export const ProgressBG = styled.View`
   bottom: 0;
   height: 17px;
   width: ${`${widthPercentageToDp('100%')}px`};
-  justify-content: center;
-  align-items: flex-end;
-  background: white;
+  background: #fcd599;
   z-index: 4;
 `;
 
@@ -129,6 +127,6 @@ export const TextTimer = styled.Text`
   bottom: 0px;
   right: 5px;
   font-family: 'RobotoBold';
-  color: black;
+  color: #5026bd;
   z-index: 100;
 `;

@@ -109,7 +109,9 @@ const Question = () => {
               <SkeepButton mode="text" onPress={() => {}}>
                 Pular
               </SkeepButton>
-              <ConfirmButton onPress={() => {}}>Confirmar</ConfirmButton>
+              <ConfirmButton onPress={() => console.log('confirmou')}>
+                Confirmar
+              </ConfirmButton>
             </Footer>
           </InformationsWrapper>
         </QuestionWrapper>
