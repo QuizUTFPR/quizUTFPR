@@ -90,6 +90,7 @@ export const Footer = styled.View`
 `;
 
 export const ConfirmButton = styled(Button)`
+  margin-top: 10px;
   border-radius: 20px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;

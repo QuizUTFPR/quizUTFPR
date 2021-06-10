@@ -34,32 +34,30 @@ const Question = () => {
   const { label } = useTheme();
 
   const [timer, setTimer] = useState({
-    canStart: false,
     seconds: 30,
     secondImmutable: 10,
     interval: null,
   });
 
   useEffect(() => {
-    if (timer.canStart) {
-      setTimer((prev) => ({
-        ...prev,
-        interval: setInterval(() => {
-          setTimer((prevState) => ({
-            ...prevState,
-            seconds: prevState.seconds > 0 ? prevState.seconds - 1 : 0,
-          }));
-        }, 1000),
-      }));
+    setTimer((prev) => ({
+      ...prev,
+      interval: setInterval(() => {
+        setTimer((prevState) => ({
+          ...prevState,
+          seconds: prevState.seconds > 0 ? prevState.seconds - 1 : 0,
+        }));
+      }, 1000),
+    }));
 
-      Animated.timing(widthAnimation, {
-        toValue: 0,
-        duration: timer.seconds * 1000,
-        useNativeDriver: false,
-      }).start();
-    }
+    Animated.timing(widthAnimation, {
+      toValue: 0,
+      duration: timer.seconds * 1000,
+      useNativeDriver: false,
+    }).start();
+
     return () => clearInterval(timer.interval);
-  }, [timer.canStart]);
+  }, []);
 
   useEffect(() => {
     if (timer.seconds === 0) {
@@ -68,73 +66,59 @@ const Question = () => {
   }, [timer.seconds]);
 
   return (
-    <>
+    <QuestionContainer>
+      <QuestionWrapper>
+        <Header>
+          <IconButton color="white" icon="close" onPress={() => {}} />
+          <CurrentQuestion fontSize={label.fontSize}>1/20</CurrentQuestion>
+        </Header>
+
+        <InformationsWrapper>
+          <ScrollWrapper>
+            <QuestionDescription>
+              {/* eslint-disable-next-line global-require */}
+              <QuestionImage source={require('@assets/icon.png')} />
+              <QuestionText fontSize={label.fontSize}>
+                Qual a cor do líquido de Erlenmeyer?
+              </QuestionText>
+            </QuestionDescription>
+
+            {fakeAnswers.map((answer) => (
+              <AnswerContainer key={answer}>
+                <AnswerText fontSize={label.fontSize}>{answer}</AnswerText>
+              </AnswerContainer>
+            ))}
+          </ScrollWrapper>
+          <Footer>
+            <ConfirmButton onPress={() => console.log('confirmou')}>
+              Confirmar
+            </ConfirmButton>
+          </Footer>
+        </InformationsWrapper>
+      </QuestionWrapper>
+      <WrapperProgress>
+        <TextTimer>{timer.seconds}</TextTimer>
+        <ProgressBG progress={1} color="red" />
+        <Progress
+          style={{
+            width: widthAnimation,
+          }}
+          as={Animated.View}
+          widthTimer={timer.widthTimer}
+          progress={1}
+          color="red"
+        />
+      </WrapperProgress>
+
       <LottieView
         autoPlay
-        loop={false}
-        style={{ zIndex: 9999 }}
-        resizeMode="cover"
-        speed={1}
+        loop
+        speed={5}
+        style={{ zIndex: -1 }}
         // eslint-disable-next-line global-require
-        source={require('@assets/countdown.json')}
-        onAnimationFinish={() =>
-          setTimer((prevState) => ({ ...prevState, canStart: true }))
-        }
+        source={require('@assets/bg2.json')}
       />
-      <QuestionContainer>
-        <QuestionWrapper>
-          <Header>
-            <IconButton color="white" icon="close" onPress={() => {}} />
-            <CurrentQuestion fontSize={label.fontSize}>1/20</CurrentQuestion>
-          </Header>
-
-          <InformationsWrapper>
-            <ScrollWrapper>
-              <QuestionDescription>
-                {/* eslint-disable-next-line global-require */}
-                <QuestionImage source={require('@assets/icon.png')} />
-                <QuestionText fontSize={label.fontSize}>
-                  Qual a cor do líquido de Erlenmeyer?
-                </QuestionText>
-              </QuestionDescription>
-
-              {fakeAnswers.map((answer) => (
-                <AnswerContainer key={answer}>
-                  <AnswerText fontSize={label.fontSize}>{answer}</AnswerText>
-                </AnswerContainer>
-              ))}
-            </ScrollWrapper>
-            <Footer>
-              <ConfirmButton onPress={() => console.log('confirmou')}>
-                Confirmar
-              </ConfirmButton>
-            </Footer>
-          </InformationsWrapper>
-        </QuestionWrapper>
-        <WrapperProgress>
-          <TextTimer>{timer.seconds}</TextTimer>
-          <ProgressBG progress={1} color="red" />
-          <Progress
-            style={{
-              width: widthAnimation,
-            }}
-            as={Animated.View}
-            widthTimer={timer.widthTimer}
-            progress={1}
-            color="red"
-          />
-        </WrapperProgress>
-
-        <LottieView
-          autoPlay
-          loop
-          speed={5}
-          style={{ zIndex: -1 }}
-          // eslint-disable-next-line global-require
-          source={require('@assets/bg2.json')}
-        />
-      </QuestionContainer>
-    </>
+    </QuestionContainer>
   );
 };
 

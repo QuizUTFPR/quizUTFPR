@@ -7,6 +7,7 @@ import Loading from '@components/Loading';
 const InitialScreen = lazy(() => import('@pages/InitialScreen'));
 const Login = lazy(() => import('@pages/Login'));
 const Register = lazy(() => import('@pages/Register'));
+const CountDown = lazy(() => import('@pages/CountDown'));
 const Question = lazy(() => import('@pages/Question'));
 
 const Stack = createStackNavigator();
@@ -21,6 +22,7 @@ function Routes() {
           {/* <Stack.Screen name="InitialScreen" component={InitialScreen} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} /> */}
+          <Stack.Screen name="CountDown" component={CountDown} />
           <Stack.Screen name="Question" component={Question} />
         </Stack.Navigator>
       </NavigationContainer>
