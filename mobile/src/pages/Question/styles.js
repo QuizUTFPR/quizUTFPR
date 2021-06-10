@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Text, Headline } from 'react-native-paper';
+import { Text, Headline, ProgressBar } from 'react-native-paper';
 
 // COMPONENTS
 import Button, { StyledButton } from '@components/Button';
@@ -9,7 +9,7 @@ import { Container, Wrapper } from '@components/Container/style';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
 export const QuestionContainer = styled(Container)`
-  background: #171c26;
+  background: #5026bd;
 `;
 export const QuestionWrapper = styled(Wrapper)``;
 
@@ -32,7 +32,7 @@ export const ScrollWrapper = styled.ScrollView`
   padding-right: 20px;
 `;
 
-export const CurrentQuestion = styled(Text)`
+export const CurrentQuestion = styled(Headline)`
   font-size: ${({ fontSize }) => fontSize + 2}px;
   font-family: 'RobotoBold';
   background: white;
@@ -101,3 +101,17 @@ export const SkeepButton = styled(StyledButton).attrs({
     color: '#a9a9a9',
   },
 })``;
+
+export const Progress = styled.View`
+  height: 30px;
+  width: ${({ widthTimer }) => `${widthPercentageToDp(`${widthTimer}`)}px`};
+  justify-content: center;
+  align-items: flex-end;
+  background: #fba92e;
+`;
+
+export const TextTimer = styled.Text`
+  margin-right: 10px;
+  font-family: 'RobotoBold';
+  color: white;
+`;
