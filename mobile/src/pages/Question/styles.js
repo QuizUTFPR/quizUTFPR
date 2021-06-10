@@ -22,7 +22,8 @@ export const Header = styled.View`
 export const InformationsWrapper = styled.View`
   flex: 0.95;
   border-radius: 20px;
-  background: orange;
+  background: white;
+  opacity: 0.945;
   width: ${`${widthPercentageToDp('90%')}px`};
 `;
 
