@@ -113,7 +113,7 @@ const Question = () => {
               fontSize={label.fontSize}
               onPress={handleSaveRequestQuestionOnDatabase}
             >
-              CONFIRMAR
+              Confirmar
             </ConfirmButton>
           </Footer>
         </InformationsWrapper>
@@ -131,15 +131,6 @@ const Question = () => {
           color="red"
         />
       </WrapperProgress>
-
-      <LottieView
-        autoPlay
-        loop
-        speed={5}
-        style={{ zIndex: -1 }}
-        // eslint-disable-next-line global-require
-        source={require('@assets/bg2.json')}
-      />
     </QuestionContainer>
   );
 };

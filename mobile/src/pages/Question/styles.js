@@ -118,7 +118,7 @@ export const Progress = styled.View`
 export const ProgressBG = styled.View`
   position: absolute;
   bottom: 0;
-  height: 17px;
+  height: 20px;
   width: ${`${widthPercentageToDp('100%')}px`};
   background: #ebebeb;
   z-index: 4;
@@ -126,7 +126,7 @@ export const ProgressBG = styled.View`
 
 export const TextTimer = styled.Text`
   position: absolute;
-  font-size: ${({ fontSize }) => fontSize - 4}px;
+  font-size: ${({ fontSize }) => fontSize}px;
   bottom: 0px;
   right: 5px;
   font-family: 'RobotoBold';
