@@ -17,14 +17,12 @@ export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: blue;
 `;
 
 export const InformationsWrapper = styled.View`
   flex: 0.95;
   border-radius: 20px;
-  background: white;
-  opacity: 0.945;
+  background: rgba(17, 17, 51, 0.7);
   width: ${`${widthPercentageToDp('90%')}px`};
 `;
 
@@ -36,6 +34,7 @@ export const ScrollWrapper = styled.ScrollView`
 export const CurrentQuestion = styled(Headline)`
   font-size: ${({ fontSize }) => fontSize + 2}px;
   font-family: 'RobotoRegular';
+  color: white;
 `;
 
 export const QuestionDescription = styled.View`
@@ -54,6 +53,7 @@ export const QuestionImage = styled.Image`
 export const QuestionText = styled(Text)`
   font-size: ${({ fontSize }) => fontSize + 5}px;
   font-family: 'RobotoBold';
+  color: white;
   margin-top: ${`${heightPercentageToDp('2%')}px`};
 `;
 

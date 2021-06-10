@@ -54,15 +54,15 @@ const Question = () => {
       />
       <QuestionContainer>
         <QuestionWrapper>
-          <Header>
-            <IconButton icon="close" onPress={() => {}} />
-            <CurrentQuestion fontSize={label.fontSize}>
-              Questão 01/20
-            </CurrentQuestion>
-            <IconButton icon="timer" onPress={() => {}} />
-          </Header>
-
           <InformationsWrapper>
+            <Header>
+              <IconButton color="white" icon="close" onPress={() => {}} />
+              <CurrentQuestion fontSize={label.fontSize}>
+                Questão 01/20
+              </CurrentQuestion>
+              <IconButton color="white" icon="timer" onPress={() => {}} />
+            </Header>
+
             <ScrollWrapper>
               <QuestionDescription>
                 {/* eslint-disable-next-line global-require */}
