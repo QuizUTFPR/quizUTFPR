@@ -4,12 +4,11 @@ import { Text, Headline } from 'react-native-paper';
 // COMPONENTS
 import Button from '@components/Button';
 import { Container, Wrapper } from '@components/Container/style';
+
 // CUSTOM DIMENSIONS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
-export const QuestionContainer = styled(Container)`
-  background: blue;
-`;
+export const QuestionContainer = styled(Container)``;
 export const QuestionWrapper = styled(Wrapper)``;
 
 export const Header = styled.View`
