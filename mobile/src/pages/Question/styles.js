@@ -106,6 +106,7 @@ export const ConfirmButton = styled(ButtonGradient).attrs({
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
   width: ${`${widthPercentageToDp('90%')}px`};
+  overflow: hidden;
 `;
 
 export const WrapperProgress = styled.View``;
