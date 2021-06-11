@@ -41,9 +41,7 @@ export const ScrollWrapper = styled.ScrollView`
 
 export const CurrentQuestionView = styled.View.attrs({
   elevation: 15,
-})`
-  overflow: hidden;
-`;
+})``;
 
 export const CurrentQuestion = styled(Headline)`
   font-size: ${({ fontSize }) => fontSize + 2}px;
@@ -56,6 +54,7 @@ export const CurrentQuestion = styled(Headline)`
   margin-bottom: -22px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  overflow: hidden;
 `;
 
 export const QuestionDescription = styled.View`
