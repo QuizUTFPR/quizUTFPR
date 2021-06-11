@@ -13,6 +13,7 @@ import {
   InformationsWrapper,
   Header,
   Footer,
+  CurrentQuestionView,
   CurrentQuestion,
   QuestionDescription,
   QuestionImage,
@@ -88,7 +89,11 @@ const Question = () => {
           <QuestionWrapper>
             <Header>
               <IconButton color="white" icon="close" onPress={() => {}} />
-              <CurrentQuestion fontSize={label.fontSize}>1/20</CurrentQuestion>
+              <CurrentQuestionView>
+                <CurrentQuestion fontSize={label.fontSize}>
+                  1/20
+                </CurrentQuestion>
+              </CurrentQuestionView>
             </Header>
 
             <InformationsWrapper>

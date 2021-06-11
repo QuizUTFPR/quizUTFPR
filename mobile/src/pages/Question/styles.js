@@ -24,7 +24,9 @@ export const Header = styled.View`
   align-items: center;
 `;
 
-export const InformationsWrapper = styled.View`
+export const InformationsWrapper = styled.View.attrs({
+  elevation: 15,
+})`
   background: white;
   border-radius: 40px;
   border-top-right-radius: 0;
@@ -35,6 +37,10 @@ export const ScrollWrapper = styled.ScrollView`
   padding-left: 20px;
   padding-right: 20px;
 `;
+
+export const CurrentQuestionView = styled.View.attrs({
+  elevation: 15,
+})``;
 
 export const CurrentQuestion = styled(Headline)`
   font-size: ${({ fontSize }) => fontSize + 2}px;
