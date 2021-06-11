@@ -1,6 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { IconButton, useTheme } from 'react-native-paper';
-import { Animated, Dimensions, ImageBackground } from 'react-native';
+import {
+  Animated,
+  Dimensions,
+  ImageBackground,
+  SafeAreaView,
+} from 'react-native';
 
 // HOOKS
 import useQuestions from '@hook/useQuestion';
@@ -76,7 +81,7 @@ const Question = () => {
   }, [timer.seconds]);
 
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
       <QuestionContainer>
         <ImageBackground
           style={{
@@ -146,7 +151,7 @@ const Question = () => {
           </WrapperProgress>
         </ImageBackground>
       </QuestionContainer>
-    </>
+    </SafeAreaView>
   );
 };
 
