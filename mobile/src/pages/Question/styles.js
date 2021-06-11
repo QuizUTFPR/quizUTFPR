@@ -31,6 +31,7 @@ export const InformationsWrapper = styled.View.attrs({
   border-radius: 40px;
   border-top-right-radius: 0;
   width: ${`${widthPercentageToDp('90%')}px`};
+  overflow: hidden;
 `;
 
 export const ScrollWrapper = styled.ScrollView`
@@ -106,7 +107,6 @@ export const ConfirmButton = styled(ButtonGradient).attrs({
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
   width: ${`${widthPercentageToDp('90%')}px`};
-  overflow: hidden;
 `;
 
 export const WrapperProgress = styled.View``;
