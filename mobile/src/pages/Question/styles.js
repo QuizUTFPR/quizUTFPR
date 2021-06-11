@@ -41,20 +41,21 @@ export const ScrollWrapper = styled.ScrollView`
 
 export const CurrentQuestionView = styled.View.attrs({
   elevation: 15,
-})``;
+})`
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+  padding: 5px;
+  width: 100px;
+  margin-bottom: -22px;
+  background: white;
+`;
 
 export const CurrentQuestion = styled(Headline)`
   font-size: ${({ fontSize }) => fontSize + 2}px;
   font-family: 'RobotoBold';
-  background: white;
   color: #171c26;
-  padding: 5px;
-  width: 100px;
   text-align: center;
-  margin-bottom: -22px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  overflow: hidden;
 `;
 
 export const QuestionDescription = styled.View`
