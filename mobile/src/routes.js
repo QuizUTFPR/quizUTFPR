@@ -7,11 +7,12 @@ import Loading from '@components/Loading';
 import QuestionProvider from '@context/Question';
 
 // PAGES
+import CountDown from '@pages/CountDown';
+import Question from '@pages/Question';
+
 const InitialScreen = lazy(() => import('@pages/InitialScreen'));
 const Login = lazy(() => import('@pages/Login'));
 const Register = lazy(() => import('@pages/Register'));
-const CountDown = lazy(() => import('@pages/CountDown'));
-const Question = lazy(() => import('@pages/Question'));
 
 const Stack = createStackNavigator();
 

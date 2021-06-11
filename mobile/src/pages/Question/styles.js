@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { Text, Headline } from 'react-native-paper';
-import { LinearGradient } from 'expo-linear-gradient';
 
 // COMPONENTS
 import ButtonGradient from '@components/ButtonGradient';
@@ -9,12 +8,6 @@ import { Wrapper } from '@components/Container/style';
 // CUSTOM DIMENSIONS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
-export const QuestionContainer = styled(LinearGradient).attrs({
-  colors: ['#4B24B1', '#5929D3'],
-})`
-  flex: 1;
-  flex-direction: column;
-`;
 export const QuestionWrapper = styled(Wrapper)``;
 
 export const Header = styled.View`
@@ -25,7 +18,7 @@ export const Header = styled.View`
 `;
 
 export const InformationsWrapper = styled.View.attrs({ elevation: 15 })`
-  flex: 0.9;
+  flex: 0.95;
   background: white;
   border-radius: 40px;
   border-top-right-radius: 0;
@@ -108,37 +101,4 @@ export const ConfirmButton = styled(ButtonGradient).attrs({
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
   width: ${`${widthPercentageToDp('90%')}px`};
-`;
-
-export const WrapperProgress = styled.View``;
-
-export const Progress = styled.View`
-  position: absolute;
-  bottom: 0;
-  height: 20px;
-  justify-content: center;
-  align-items: flex-end;
-  background: #ffc95c;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  z-index: 5;
-`;
-export const ProgressBG = styled.View`
-  position: absolute;
-  bottom: 0;
-  height: 20px;
-  width: ${`${widthPercentageToDp('100%')}px`};
-  /* background: #451faa; */
-  background: rgba(0, 0, 0, 0.2);
-  z-index: 4;
-`;
-
-export const TextTimer = styled.Text`
-  position: absolute;
-  font-size: ${({ fontSize }) => fontSize - 2}px;
-  bottom: 0px;
-  right: 6px;
-  font-family: 'RobotoBold';
-  color: white;
-  z-index: 100;
 `;

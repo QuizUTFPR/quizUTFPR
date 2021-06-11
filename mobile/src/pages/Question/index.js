@@ -6,14 +6,19 @@ import {
   ImageBackground,
   SafeAreaView,
 } from 'react-native';
+import LottieView from 'lottie-react-native';
 
 // HOOKS
 import useQuestions from '@hook/useQuestion';
 
-// STYLES
+// COMPONENTS
 import image from '@assets/FUNDO.png';
+import LinearContainer from '@components/LinearContainer';
+import Dialog from '@components/Dialog';
+import Timer from './components/Timer';
+
+// STYLES
 import {
-  QuestionContainer,
   QuestionWrapper,
   InformationsWrapper,
   Header,
@@ -27,10 +32,6 @@ import {
   AnswerText,
   ConfirmButton,
   ScrollWrapper,
-  WrapperProgress,
-  Progress,
-  TextTimer,
-  ProgressBG,
 } from './styles';
 
 const Question = () => {
@@ -51,6 +52,12 @@ const Question = () => {
     secondImmutable: 10,
     interval: null,
   });
+
+  const [visible, setVisible] = useState(false);
+
+  const showDialog = () => setVisible(true);
+
+  const hideDialog = () => setVisible(false);
 
   useEffect(() => {
     setTimer((prev) => ({
@@ -80,12 +87,13 @@ const Question = () => {
   useEffect(() => {
     if (timer.seconds === 0) {
       clearInterval(timer.interval);
+      showDialog();
     }
   }, [timer.seconds]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <QuestionContainer>
+      <LinearContainer>
         <ImageBackground
           style={{
             flex: 1,
@@ -141,21 +149,33 @@ const Question = () => {
               </Footer>
             </InformationsWrapper>
           </QuestionWrapper>
-          <WrapperProgress>
-            <TextTimer fontSize={label.fontSize}>{timer.seconds}</TextTimer>
-            <ProgressBG progress={1} color="red" />
-            <Progress
-              style={{
-                width: widthAnimation,
-              }}
-              as={Animated.View}
-              widthTimer={timer.widthTimer}
-              progress={1}
-              color="red"
-            />
-          </WrapperProgress>
+
+          <Timer
+            fontSize={label.fontSize}
+            widthAnimation={widthAnimation}
+            timerState={timer}
+          />
         </ImageBackground>
-      </QuestionContainer>
+      </LinearContainer>
+      <Dialog
+        title="OOOPS!!!"
+        buttonLabel="TUDO BEM :("
+        visible={visible}
+        hideDialog={hideDialog}
+      >
+        <LottieView
+          autoPlay
+          loop
+          style={{ width: 150 }}
+          resizeMode="cover"
+          speed={1}
+          // eslint-disable-next-line global-require
+          source={require('@assets/sad_emote.json')}
+        />
+        <QuestionText fontSize={label.fontSize}>
+          Infelizmente o tempo de resposta esgotou...
+        </QuestionText>
+      </Dialog>
     </SafeAreaView>
   );
 };
