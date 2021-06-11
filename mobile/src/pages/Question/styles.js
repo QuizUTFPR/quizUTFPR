@@ -41,7 +41,9 @@ export const ScrollWrapper = styled.ScrollView`
 
 export const CurrentQuestionView = styled.View.attrs({
   elevation: 15,
-})``;
+})`
+  overflow: hidden;
+`;
 
 export const CurrentQuestion = styled(Headline)`
   font-size: ${({ fontSize }) => fontSize + 2}px;
