@@ -125,9 +125,9 @@ export const ProgressBG = styled.View`
 
 export const TextTimer = styled.Text`
   position: absolute;
-  font-size: ${({ fontSize }) => fontSize}px;
+  font-size: ${({ fontSize }) => fontSize - 2}px;
   bottom: 0px;
-  right: 5px;
+  right: 6px;
   font-family: 'RobotoBold';
   color: white;
   z-index: 100;
