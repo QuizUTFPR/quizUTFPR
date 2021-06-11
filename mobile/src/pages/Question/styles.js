@@ -13,6 +13,7 @@ export const QuestionContainer = styled(LinearGradient).attrs({
   colors: ['#4B24B1', '#5929D3'],
 })`
   flex: 1;
+  flex-direction: column;
 `;
 export const QuestionWrapper = styled(Wrapper)``;
 

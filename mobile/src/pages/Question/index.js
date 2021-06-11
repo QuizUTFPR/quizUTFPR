@@ -1,13 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { IconButton, useTheme, Button } from 'react-native-paper';
-import LottieView from 'lottie-react-native';
-import { Animated, Dimensions, Text } from 'react-native';
+import { IconButton, useTheme } from 'react-native-paper';
+import { Animated, Dimensions, ImageBackground } from 'react-native';
 
 // HOOKS
 import useQuestions from '@hook/useQuestion';
 
 // STYLES
-import ButtonGradient from '@components/ButtonGradient';
+import image from '@assets/FUNDO.png';
 import {
   QuestionContainer,
   QuestionWrapper,
@@ -76,62 +75,73 @@ const Question = () => {
   }, [timer.seconds]);
 
   return (
-    <QuestionContainer>
-      <QuestionWrapper>
-        <Header>
-          <IconButton color="white" icon="close" onPress={() => {}} />
-          <CurrentQuestion fontSize={label.fontSize}>1/20</CurrentQuestion>
-        </Header>
-
-        <InformationsWrapper>
-          <ScrollWrapper>
-            <QuestionDescription>
-              {/* eslint-disable-next-line global-require */}
-              <QuestionImage source={require('@assets/icon.png')} />
-              <QuestionText fontSize={label.fontSize}>
-                Qual a cor do líquido de Erlenmeyer?
-              </QuestionText>
-            </QuestionDescription>
-
-            {fakeAnswers.map((answer, index) => (
-              <AnswerContainer
-                key={answer}
-                checked={requestQuestion.checkedAnswer[index]}
-                onPress={() => handleSetCheckedAnswer(index)}
-              >
-                <AnswerText
-                  checked={requestQuestion.checkedAnswer[index]}
-                  fontSize={label.fontSize}
-                >
-                  {answer}
-                </AnswerText>
-              </AnswerContainer>
-            ))}
-          </ScrollWrapper>
-          <Footer>
-            <ConfirmButton
-              fontSize={label.fontSize}
-              onPress={handleSaveRequestQuestionOnDatabase}
-            >
-              CONFIRMAR
-            </ConfirmButton>
-          </Footer>
-        </InformationsWrapper>
-      </QuestionWrapper>
-      <WrapperProgress>
-        <TextTimer fontSize={label.fontSize}>{timer.seconds}</TextTimer>
-        <ProgressBG progress={1} color="red" />
-        <Progress
+    <>
+      <QuestionContainer>
+        <ImageBackground
           style={{
-            width: widthAnimation,
+            flex: 1,
+            resizeMode: 'cover',
+            justifyContent: 'center',
           }}
-          as={Animated.View}
-          widthTimer={timer.widthTimer}
-          progress={1}
-          color="red"
-        />
-      </WrapperProgress>
-    </QuestionContainer>
+          source={image}
+        >
+          <QuestionWrapper>
+            <Header>
+              <IconButton color="white" icon="close" onPress={() => {}} />
+              <CurrentQuestion fontSize={label.fontSize}>1/20</CurrentQuestion>
+            </Header>
+
+            <InformationsWrapper>
+              <ScrollWrapper>
+                <QuestionDescription>
+                  {/* eslint-disable-next-line global-require */}
+                  <QuestionImage source={require('@assets/icon.png')} />
+                  <QuestionText fontSize={label.fontSize}>
+                    Qual a cor do líquido de Erlenmeyer?
+                  </QuestionText>
+                </QuestionDescription>
+
+                {fakeAnswers.map((answer, index) => (
+                  <AnswerContainer
+                    key={answer}
+                    checked={requestQuestion.checkedAnswer[index]}
+                    onPress={() => handleSetCheckedAnswer(index)}
+                  >
+                    <AnswerText
+                      checked={requestQuestion.checkedAnswer[index]}
+                      fontSize={label.fontSize}
+                    >
+                      {answer}
+                    </AnswerText>
+                  </AnswerContainer>
+                ))}
+              </ScrollWrapper>
+              <Footer>
+                <ConfirmButton
+                  fontSize={label.fontSize}
+                  onPress={handleSaveRequestQuestionOnDatabase}
+                >
+                  CONFIRMAR
+                </ConfirmButton>
+              </Footer>
+            </InformationsWrapper>
+          </QuestionWrapper>
+          <WrapperProgress>
+            <TextTimer fontSize={label.fontSize}>{timer.seconds}</TextTimer>
+            <ProgressBG progress={1} color="red" />
+            <Progress
+              style={{
+                width: widthAnimation,
+              }}
+              as={Animated.View}
+              widthTimer={timer.widthTimer}
+              progress={1}
+              color="red"
+            />
+          </WrapperProgress>
+        </ImageBackground>
+      </QuestionContainer>
+    </>
   );
 };
 
