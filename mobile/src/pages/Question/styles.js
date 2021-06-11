@@ -120,7 +120,8 @@ export const ProgressBG = styled.View`
   bottom: 0;
   height: 20px;
   width: ${`${widthPercentageToDp('100%')}px`};
-  background: #451faa;
+  /* background: #451faa; */
+  background: rgba(0, 0, 0, 0.2);
   z-index: 4;
 `;
 
