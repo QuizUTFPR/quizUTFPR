@@ -24,9 +24,8 @@ export const Header = styled.View`
   align-items: center;
 `;
 
-export const InformationsWrapper = styled.View.attrs({
-  elevation: 15,
-})`
+export const InformationsWrapper = styled.View.attrs({ elevation: 15 })`
+  flex: 0.9;
   background: white;
   border-radius: 40px;
   border-top-right-radius: 0;
@@ -37,6 +36,8 @@ export const InformationsWrapper = styled.View.attrs({
 export const ScrollWrapper = styled.ScrollView`
   padding-left: 20px;
   padding-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 export const CurrentQuestionView = styled.View.attrs({
@@ -67,7 +68,6 @@ export const QuestionDescription = styled.View`
 export const QuestionImage = styled.Image`
   width: ${`${widthPercentageToDp('50%')}px`};
   height: ${`${heightPercentageToDp('25%')}px`};
-  margin-top: ${`${heightPercentageToDp('1.2%')}px`};
   border-radius: 5px;
 `;
 
@@ -97,10 +97,9 @@ export const AnswerText = styled(Text)`
   color: ${({ checked }) => (checked ? 'white' : '#171c26')};
 `;
 
-export const Footer = styled.View`
+export const Footer = styled.View.attrs({ elevation: 15 })`
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 10px;
 `;
 
 export const ConfirmButton = styled(ButtonGradient).attrs({
