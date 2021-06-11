@@ -27,8 +27,12 @@ const WrapperStyledButton = ({
   fontSize,
   ...props
 }) => (
-  <WrapperButton underlayColor={underlayColor} activeOpacity={activeOpacity}>
-    <StyledButton colors={colors} onPress={onPress} {...props}>
+  <WrapperButton
+    onPress={onPress}
+    underlayColor={underlayColor}
+    activeOpacity={activeOpacity}
+  >
+    <StyledButton colors={colors} {...props}>
       <StyledText fontSize={fontSize}>{children}</StyledText>
     </StyledButton>
   </WrapperButton>

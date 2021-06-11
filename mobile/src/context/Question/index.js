@@ -1,11 +1,12 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Array } from '../../pages/Question/question.js';
 
 export const QuestionContext = createContext();
 
 export const initialValue = {
-  questions: null,
-  indexOnScreen: null,
+  questions: Array,
+  indexOnScreen: 0,
 };
 
 export const initialRequestQuestion = {
@@ -15,7 +16,7 @@ export const initialRequestQuestion = {
 };
 
 const Question = ({ children }) => {
-  const [questions, setQuestions] = useState(initialValue);
+  const [quizData, setQuizData] = useState(initialValue);
   const [requestQuestion, setRequestQuestion] = useState(
     initialRequestQuestion
   );
@@ -32,15 +33,15 @@ const Question = ({ children }) => {
   };
 
   const handleSaveRequestQuestionOnDatabase = () => {
-    console.log(requestQuestion);
+    console.log('teste', requestQuestion);
     setRequestQuestion(initialRequestQuestion);
   };
 
   return (
     <QuestionContext.Provider
       value={{
-        questions,
-        setQuestions,
+        quizData,
+        setQuizData,
         requestQuestion,
         handleSetCheckedAnswer,
         handleSaveRequestQuestionOnDatabase,

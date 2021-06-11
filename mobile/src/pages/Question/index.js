@@ -33,11 +33,9 @@ import {
   ProgressBG,
 } from './styles';
 
-const fakeAnswers = ['Amarelo', 'Roxo', 'Azul', 'Tijolo'];
-
 const Question = () => {
   const {
-    questions,
+    quizData,
     requestQuestion,
     handleSetCheckedAnswer,
     handleSaveRequestQuestionOnDatabase,
@@ -71,6 +69,11 @@ const Question = () => {
       useNativeDriver: false,
     }).start();
 
+    console.log(
+      'questoes',
+      quizData.questions[quizData.indexOnScreen].image_question.url
+    );
+
     return () => clearInterval(timer.interval);
   }, []);
 
@@ -96,7 +99,7 @@ const Question = () => {
               <IconButton color="white" icon="close" onPress={() => {}} />
               <CurrentQuestionView>
                 <CurrentQuestion fontSize={label.fontSize}>
-                  1/20
+                  {quizData.indexOnScreen + 1}/{quizData.questions.length}
                 </CurrentQuestion>
               </CurrentQuestionView>
             </Header>
@@ -107,29 +110,31 @@ const Question = () => {
                   {/* eslint-disable-next-line global-require */}
                   <QuestionImage source={require('@assets/icon.png')} />
                   <QuestionText fontSize={label.fontSize}>
-                    Qual a cor do líquido de Erlenmeyer?
+                    {quizData.questions[quizData.indexOnScreen].title}
                   </QuestionText>
                 </QuestionDescription>
 
-                {fakeAnswers.map((answer, index) => (
-                  <AnswerContainer
-                    key={answer}
-                    checked={requestQuestion.checkedAnswer[index]}
-                    onPress={() => handleSetCheckedAnswer(index)}
-                  >
-                    <AnswerText
+                {quizData.questions[quizData.indexOnScreen].answer.map(
+                  (answer, index) => (
+                    <AnswerContainer
+                      key={answer.id}
                       checked={requestQuestion.checkedAnswer[index]}
-                      fontSize={label.fontSize}
+                      onPress={() => handleSetCheckedAnswer(index)}
                     >
-                      {answer}
-                    </AnswerText>
-                  </AnswerContainer>
-                ))}
+                      <AnswerText
+                        checked={requestQuestion.checkedAnswer[index]}
+                        fontSize={label.fontSize}
+                      >
+                        {answer.title}
+                      </AnswerText>
+                    </AnswerContainer>
+                  )
+                )}
               </ScrollWrapper>
               <Footer>
                 <ConfirmButton
                   fontSize={label.fontSize}
-                  onPress={handleSaveRequestQuestionOnDatabase}
+                  onPress={() => handleSaveRequestQuestionOnDatabase()}
                 >
                   CONFIRMAR
                 </ConfirmButton>

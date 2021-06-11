@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import Routes from './src/routes';
 import theme from './src/styles/theme';
 
-export default function Main() {
+const App = () => {
   const [loaded] = useFonts({
     RobotoBlack: require('./assets/fonts/Roboto-Black.ttf'),
     RobotoBold: require('./assets/fonts/Roboto-Bold.ttf'),
@@ -30,4 +30,6 @@ export default function Main() {
       <Routes />
     </PaperProvider>
   );
-}
+};
+
+export default App;

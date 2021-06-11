@@ -18,6 +18,5 @@ const theme = {
     accent: 'yellow',
   },
 };
-console.log(theme.label.fontSize);
 
 export default theme;
