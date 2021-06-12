@@ -2,8 +2,8 @@ export const Array = [
   {
     id: 1,
     index: 0,
-    title: 'Questa 1',
-    timer: 30,
+    title: 'Questao 1',
+    timer: 15,
     difficulty_level: 'Fácil',
     copy: false,
     available_on_questions_db: false,
