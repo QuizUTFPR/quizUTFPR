@@ -210,6 +210,7 @@ const Question = () => {
       >
         <LottieView
           autoPlay
+          loop={false}
           style={{ width: 150 }}
           resizeMode="cover"
           speed={1}
