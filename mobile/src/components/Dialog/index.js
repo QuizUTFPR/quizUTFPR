@@ -4,7 +4,15 @@ import { Dialog, Portal } from 'react-native-paper';
 
 import Button from '@components/Button';
 
-const MyComponent = ({ title, visible, hideDialog, buttonLabel, children }) => (
+const ConfirmExitDialog = ({
+  title,
+  visible,
+  hideDialog,
+  secondButtonOnPress,
+  firstButtonLabel,
+  secondButtonLabel,
+  children,
+}) => (
   <View>
     <Portal>
       <Dialog visible={visible} onDismiss={hideDialog}>
@@ -12,14 +20,21 @@ const MyComponent = ({ title, visible, hideDialog, buttonLabel, children }) => (
         <Dialog.Content style={{ alignItems: 'center' }}>
           {children}
         </Dialog.Content>
-        <Dialog.Actions>
-          <Button style={{ flex: 1 }} onPress={hideDialog}>
-            {buttonLabel}
-          </Button>
+        <Dialog.Actions style={{ justifyContent: 'space-between' }}>
+          {firstButtonLabel && (
+            <Button style={{ flex: 1 }} onPress={hideDialog}>
+              {firstButtonLabel}
+            </Button>
+          )}
+          {secondButtonLabel && (
+            <Button style={{ flex: 1 }} onPress={secondButtonOnPress}>
+              {secondButtonLabel}
+            </Button>
+          )}
         </Dialog.Actions>
       </Dialog>
     </Portal>
   </View>
 );
 
-export default MyComponent;
+export default ConfirmExitDialog;

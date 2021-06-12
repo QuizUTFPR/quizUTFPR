@@ -54,10 +54,15 @@ const Question = () => {
   });
 
   const [visible, setVisible] = useState(false);
+  const [isConfirmExitVisible, setIsConfirmExitVisible] = useState(false);
 
   const showDialog = () => setVisible(true);
 
   const hideDialog = () => setVisible(false);
+
+  const showConfirmExit = () => setIsConfirmExitVisible(true);
+  const hideConfirmExit = () => setIsConfirmExitVisible(false);
+  const handleConfirmExit = () => setIsConfirmExitVisible(false);
 
   useEffect(() => {
     setTimer((prev) => ({
@@ -104,7 +109,13 @@ const Question = () => {
         >
           <QuestionWrapper>
             <Header>
-              <IconButton color="white" icon="close" onPress={() => {}} />
+              <IconButton
+                color="white"
+                icon="close"
+                onPress={() => {
+                  showConfirmExit();
+                }}
+              />
               <CurrentQuestionView>
                 <CurrentQuestion fontSize={label.fontSize}>
                   {quizData.indexOnScreen + 1}/{quizData.questions.length}
@@ -159,7 +170,7 @@ const Question = () => {
       </LinearContainer>
       <Dialog
         title="OOOPS!!!"
-        buttonLabel="TUDO BEM :("
+        firstButtonLabel="TUDO BEM :("
         visible={visible}
         hideDialog={hideDialog}
       >
@@ -174,6 +185,28 @@ const Question = () => {
         />
         <QuestionText fontSize={label.fontSize}>
           Infelizmente o tempo de resposta esgotou...
+        </QuestionText>
+      </Dialog>
+
+      <Dialog
+        title="JÁ VAI? ESTÁ CEDO!"
+        visible={isConfirmExitVisible}
+        hideDialog={hideConfirmExit}
+        secondButtonOnPress={handleConfirmExit}
+        firstButtonLabel="CANCELAR"
+        secondButtonLabel="SAIR"
+      >
+        <LottieView
+          autoPlay
+          style={{ width: 150 }}
+          resizeMode="cover"
+          speed={1}
+          // eslint-disable-next-line global-require
+          source={require('@assets/close_animation.json')}
+        />
+        <QuestionText fontSize={label.fontSize}>
+          Tem certeza que quer sair? Seu progresso será salvo para que você
+          continue depois...
         </QuestionText>
       </Dialog>
     </SafeAreaView>
