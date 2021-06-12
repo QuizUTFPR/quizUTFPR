@@ -40,49 +40,58 @@ const Question = () => {
     requestQuestion,
     handleSetCheckedAnswer,
     handleSaveRequestQuestionOnDatabase,
+    changeToNextQuestion,
+    initialRequestQuestion,
   } = useQuestions();
 
-  const widthAnimation = useRef(
+  const [widthAnimation, setWidthAnimation] = useState(
     new Animated.Value(Dimensions.get('screen').width)
-  ).current;
+  );
+
   const { label } = useTheme();
 
   const [timer, setTimer] = useState({
-    seconds: 30,
-    secondImmutable: 10,
+    seconds: null,
     interval: null,
   });
 
   const [visible, setVisible] = useState(false);
-
   const showDialog = () => setVisible(true);
-
   const hideDialog = () => setVisible(false);
 
+  const handleGoToNextQuestionAndSave = async () => {
+    if (
+      JSON.stringify(initialRequestQuestion) === JSON.stringify(requestQuestion)
+    ) {
+      console.log('Avisar que o usuário deve escolher sua resposta!');
+    } else {
+      await handleSaveRequestQuestionOnDatabase();
+      changeToNextQuestion();
+      setWidthAnimation(new Animated.Value(Dimensions.get('screen').width));
+    }
+  };
+
   useEffect(() => {
-    setTimer((prev) => ({
-      ...prev,
+    console.log('atualizando', widthAnimation);
+    clearInterval(timer.interval);
+    setTimer({
+      seconds: quizData.questions[quizData.indexOnScreen].timer,
       interval: setInterval(() => {
         setTimer((prevState) => ({
           ...prevState,
           seconds: prevState.seconds > 0 ? prevState.seconds - 1 : 0,
         }));
       }, 1000),
-    }));
+    });
 
     Animated.timing(widthAnimation, {
       toValue: 0,
-      duration: timer.seconds * 1000,
+      duration: quizData.questions[quizData.indexOnScreen].timer * 1000,
       useNativeDriver: false,
     }).start();
 
-    console.log(
-      'questoes',
-      quizData.questions[quizData.indexOnScreen].image_question.url
-    );
-
     return () => clearInterval(timer.interval);
-  }, []);
+  }, [quizData, widthAnimation]);
 
   useEffect(() => {
     if (timer.seconds === 0) {
@@ -99,6 +108,8 @@ const Question = () => {
             flex: 1,
             resizeMode: 'cover',
             justifyContent: 'center',
+            width: '100%',
+            height: '100%',
           }}
           source={image}
         >
@@ -142,7 +153,7 @@ const Question = () => {
               <Footer>
                 <ConfirmButton
                   fontSize={label.fontSize}
-                  onPress={() => handleSaveRequestQuestionOnDatabase()}
+                  onPress={handleGoToNextQuestionAndSave}
                 >
                   CONFIRMAR
                 </ConfirmButton>
