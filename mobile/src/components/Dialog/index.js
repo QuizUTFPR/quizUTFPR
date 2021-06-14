@@ -30,17 +30,21 @@ const ConfirmExitDialog = ({
   >
     <BlurView intensity={100} tint="dark" style={StyleSheet.absoluteFill}>
       <Wrapper>
-        <StyledTitle>{title}</StyledTitle>
+        <StyledTitle variant="secondary">{title}</StyledTitle>
         <StyledWrapperChildren>
           {lottieAnimation}
           <StyledText>{children}</StyledText>
         </StyledWrapperChildren>
         <StyledWrapperButtons>
           {firstButtonLabel && (
-            <Button onPress={hideDialog}>{firstButtonLabel}</Button>
+            <Button variant="primary" onPress={hideDialog}>
+              {firstButtonLabel}
+            </Button>
           )}
           {secondButtonLabel && (
-            <Button onPress={secondButtonOnPress}>{secondButtonLabel}</Button>
+            <Button variant="primary" onPress={secondButtonOnPress}>
+              {secondButtonLabel}
+            </Button>
           )}
         </StyledWrapperButtons>
       </Wrapper>

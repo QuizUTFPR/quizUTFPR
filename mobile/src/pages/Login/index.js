@@ -35,7 +35,11 @@ const Login = ({ navigation }) => (
           <Input label="Nome de Usuário" />
 
           <Input label="Senha" secureTextEntry />
-          <ForgotPasswordButton onPress={() => {}}>
+          <ForgotPasswordButton
+            backgroundColor="white"
+            variant="secondary"
+            onPress={() => {}}
+          >
             Esqueceu sua senha?
           </ForgotPasswordButton>
         </InputWrapper>
@@ -43,12 +47,19 @@ const Login = ({ navigation }) => (
     </KeyboardAvoidingView>
 
     <WrapperButton>
-      <Button onPress={() => console.log('pressed')} icon="login-variant">
+      <Button
+        variant="primary"
+        onPress={() => console.log('pressed')}
+        icon="login-variant"
+      >
         Entrar
       </Button>
     </WrapperButton>
 
-    <StyledTextButton onPress={() => navigation.navigate('Register')}>
+    <StyledTextButton
+      variant="secondary"
+      onPress={() => navigation.navigate('Register')}
+    >
       Não possui uma conta? Cadastre-se
     </StyledTextButton>
   </Container>

@@ -40,10 +40,15 @@ const Register = ({ navigation }) => (
     </KeyboardAvoidingView>
 
     <WrapperButton>
-      <Button onPress={() => {}}>Cadastrar</Button>
+      <Button variant="primary" onPress={() => {}}>
+        Cadastrar
+      </Button>
     </WrapperButton>
 
-    <StyledTextButton onPress={() => navigation.navigate('Login')}>
+    <StyledTextButton
+      variant="secondary"
+      onPress={() => navigation.navigate('Login')}
+    >
       Já possui cadastro? Realize o Login
     </StyledTextButton>
   </Container>

@@ -30,6 +30,7 @@ const InitialScreen = ({ navigation }) => (
 
       <WrapperButton>
         <Button
+          variant="primary"
           onPress={() => navigation.navigate('Login')}
           icon="login-variant"
         >
@@ -38,6 +39,7 @@ const InitialScreen = ({ navigation }) => (
       </WrapperButton>
       <WrapperButton>
         <Button
+          variant="primary"
           onPress={() => navigation.navigate('Register')}
           icon="account-plus"
         >

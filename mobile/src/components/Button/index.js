@@ -12,18 +12,24 @@ export const StyledButton = styled.TouchableOpacity`
 export const StyledText = styled.Text`
   font-family: 'RobotoBold';
   font-size: ${({ theme }) => theme.fontSize}px;
-  color: white;
+  color: ${({ theme }) => theme.color.text};
   text-align: center; ;
 `;
 
 const WrapperStyledButton = ({
   children,
   onPress,
+  variant,
   activeOpacity,
   ...props
 }) => (
-  <StyledButton activeOpacity={activeOpacity} onPress={onPress} {...props}>
-    <StyledText>{children}</StyledText>
+  <StyledButton
+    variant={variant}
+    activeOpacity={activeOpacity}
+    onPress={onPress}
+    {...props}
+  >
+    <StyledText variant={variant}>{children}</StyledText>
   </StyledButton>
 );
 
