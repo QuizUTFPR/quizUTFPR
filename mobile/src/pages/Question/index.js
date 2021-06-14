@@ -52,7 +52,7 @@ const Question = () => {
     interval: null,
   });
 
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [isConfirmExitVisible, setIsConfirmExitVisible] = useState(false);
 
   const showDialog = () => setVisible(true);

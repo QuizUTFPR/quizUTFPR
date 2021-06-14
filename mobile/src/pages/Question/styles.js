@@ -11,8 +11,9 @@ export const QuestionWrapper = styled(Wrapper)``;
 
 export const Header = styled.View`
   width: ${`${widthPercentageToDp('90%')}px`};
+  height: ${`${heightPercentageToDp('8.5%')}px`};
+  justify-content: flex-end;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
 `;
 
