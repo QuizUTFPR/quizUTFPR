@@ -8,24 +8,21 @@ const Login = ({
   iconButton,
   buttonSize,
   onPressButton,
-  fontSize,
   titleContent,
   textContent,
-}) => {
-  return (
-    <>
-      <StyledIconButton
-        color={buttonColor}
-        icon={iconButton}
-        size={buttonSize}
-        onPress={onPressButton}
-      />
+}) => (
+  <>
+    {/* <StyledIconButton
+      color={buttonColor}
+      icon={iconButton}
+      size={buttonSize}
+      onPress={onPressButton}
+    /> */}
 
-      <StyledTitle fontSize={fontSize}>{titleContent}</StyledTitle>
+    <StyledTitle>{titleContent}</StyledTitle>
 
-      <StyledText fontSize={fontSize}>{textContent}</StyledText>
-    </>
-  );
-};
+    <StyledText>{textContent}</StyledText>
+  </>
+);
 
 export default Login;

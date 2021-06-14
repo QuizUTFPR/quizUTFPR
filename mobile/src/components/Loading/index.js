@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
+import { View, ActivityIndicator } from 'react-native';
+
 import styled from 'styled-components/native';
 
 const StyledView = styled(View)`
@@ -10,7 +10,7 @@ const StyledView = styled(View)`
 
 const Loading = () => (
   <StyledView>
-    <ActivityIndicator size={80} animating />
+    <ActivityIndicator size="large" />
   </StyledView>
 );
 

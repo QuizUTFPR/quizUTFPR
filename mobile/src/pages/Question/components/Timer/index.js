@@ -3,9 +3,9 @@ import { Animated } from 'react-native';
 
 import { WrapperProgress, TextTimer, ProgressBG, Progress } from './style';
 
-const Timer = ({ widthAnimation, fontSize, timerState }) => (
+const Timer = ({ widthAnimation, timerState }) => (
   <WrapperProgress>
-    <TextTimer fontSize={fontSize}>{timerState.seconds}</TextTimer>
+    <TextTimer>{timerState.seconds}</TextTimer>
     <ProgressBG progress={1} color="red" />
     <Progress
       style={{

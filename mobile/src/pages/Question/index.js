@@ -1,5 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { IconButton, useTheme } from 'react-native-paper';
+import React, { useState, useEffect } from 'react';
 import {
   Animated,
   Dimensions,
@@ -48,20 +47,18 @@ const Question = () => {
     new Animated.Value(Dimensions.get('screen').width)
   );
 
-  const { label } = useTheme();
-
   const [timer, setTimer] = useState({
     seconds: null,
     interval: null,
   });
 
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [isConfirmExitVisible, setIsConfirmExitVisible] = useState(false);
 
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
 
-  const showConfirmExit = () => setIsConfirmExitVisible(true);
+  // const showConfirmExit = () => setIsConfirmExitVisible(true);
   const hideConfirmExit = () => setIsConfirmExitVisible(false);
   const handleConfirmExit = () => setIsConfirmExitVisible(false);
 
@@ -78,7 +75,6 @@ const Question = () => {
   };
 
   useEffect(() => {
-    console.log('atualizando', widthAnimation);
     clearInterval(timer.interval);
     setTimer({
       seconds: quizData.questions[quizData.indexOnScreen].timer,
@@ -121,15 +117,15 @@ const Question = () => {
         >
           <QuestionWrapper>
             <Header>
-              <IconButton
+              {/* <IconButton
                 color="white"
                 icon="close"
                 onPress={() => {
                   showConfirmExit();
                 }}
-              />
+              /> */}
               <CurrentQuestionView>
-                <CurrentQuestion fontSize={label.fontSize}>
+                <CurrentQuestion>
                   {quizData.indexOnScreen + 1}/{quizData.questions.length}
                 </CurrentQuestion>
               </CurrentQuestionView>
@@ -140,7 +136,7 @@ const Question = () => {
                 <QuestionDescription>
                   {/* eslint-disable-next-line global-require */}
                   <QuestionImage source={require('@assets/icon.png')} />
-                  <QuestionText fontSize={label.fontSize}>
+                  <QuestionText>
                     {quizData.questions[quizData.indexOnScreen].title}
                   </QuestionText>
                 </QuestionDescription>
@@ -154,7 +150,6 @@ const Question = () => {
                     >
                       <AnswerText
                         checked={requestQuestion.checkedAnswer[index]}
-                        fontSize={label.fontSize}
                       >
                         {answer.title}
                       </AnswerText>
@@ -163,21 +158,14 @@ const Question = () => {
                 )}
               </ScrollWrapper>
               <Footer>
-                <ConfirmButton
-                  fontSize={label.fontSize}
-                  onPress={handleGoToNextQuestionAndSave}
-                >
+                <ConfirmButton onPress={handleGoToNextQuestionAndSave}>
                   CONFIRMAR
                 </ConfirmButton>
               </Footer>
             </InformationsWrapper>
           </QuestionWrapper>
 
-          <Timer
-            fontSize={label.fontSize}
-            widthAnimation={widthAnimation}
-            timerState={timer}
-          />
+          <Timer widthAnimation={widthAnimation} timerState={timer} />
         </ImageBackground>
       </LinearContainer>
       <Dialog
@@ -185,19 +173,19 @@ const Question = () => {
         firstButtonLabel="TUDO BEM :("
         visible={visible}
         hideDialog={hideDialog}
+        lottieAnimation={
+          <LottieView
+            autoPlay
+            loop
+            style={{ width: 150 }}
+            resizeMode="cover"
+            speed={1}
+            // eslint-disable-next-line global-require
+            source={require('@assets/sad_emote.json')}
+          />
+        }
       >
-        <LottieView
-          autoPlay
-          loop
-          style={{ width: 150 }}
-          resizeMode="cover"
-          speed={1}
-          // eslint-disable-next-line global-require
-          source={require('@assets/sad_emote.json')}
-        />
-        <QuestionText fontSize={label.fontSize}>
-          Infelizmente o tempo de resposta esgotou...
-        </QuestionText>
+        Infelizmente o tempo de resposta esgotou...
       </Dialog>
 
       <Dialog
@@ -207,20 +195,20 @@ const Question = () => {
         secondButtonOnPress={handleConfirmExit}
         firstButtonLabel="CANCELAR"
         secondButtonLabel="SAIR"
+        lottieAnimation={
+          <LottieView
+            autoPlay
+            loop={false}
+            style={{ width: 150 }}
+            resizeMode="cover"
+            speed={1}
+            // eslint-disable-next-line global-require
+            source={require('@assets/close_animation.json')}
+          />
+        }
       >
-        <LottieView
-          autoPlay
-          loop={false}
-          style={{ width: 150 }}
-          resizeMode="cover"
-          speed={1}
-          // eslint-disable-next-line global-require
-          source={require('@assets/close_animation.json')}
-        />
-        <QuestionText fontSize={label.fontSize}>
-          Tem certeza que quer sair? Seu progresso será salvo para que você
-          continue depois...
-        </QuestionText>
+        Tem certeza que quer sair? Seu progresso será salvo para que você
+        continue depois...
       </Dialog>
     </SafeAreaView>
   );

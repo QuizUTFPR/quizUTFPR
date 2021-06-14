@@ -1,8 +1,7 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { Provider as PaperProvider } from 'react-native-paper';
 import { useFonts } from 'expo-font';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
+import { ThemeProvider } from 'styled-components';
 import Routes from './src/routes';
 import theme from './src/styles/theme';
 
@@ -21,14 +20,9 @@ const App = () => {
   }
 
   return (
-    <PaperProvider
-      settings={{
-        icon: (props) => <MaterialCommunityIcons {...props} size={23} />,
-      }}
-      theme={theme}
-    >
+    <ThemeProvider theme={theme}>
       <Routes />
-    </PaperProvider>
+    </ThemeProvider>
   );
 };
 

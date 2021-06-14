@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TextInput } from 'react-native-paper';
+import { Text } from 'react-native';
 
 // STYLES
 import { InputWrapper, StyledTextInput } from './styles';
@@ -10,7 +10,7 @@ const Input = ({ secureTextEntry, labelText, mode, icon }) => (
     <StyledTextInput
       secureTextEntry={secureTextEntry}
       mode={mode}
-      left={<TextInput.Icon name={icon} />}
+      left={<Text.Icon name={icon} />}
       label={labelText}
     />
   </InputWrapper>

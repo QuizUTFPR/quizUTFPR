@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { TextInput } from 'react-native-paper';
+import { TextInput } from 'react-native';
 
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 

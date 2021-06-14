@@ -1,8 +1,16 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import { Dialog, Portal } from 'react-native-paper';
-
 import Button from '@components/Button';
+import { BlurView } from 'expo-blur';
+import { StyleSheet } from 'react-native';
+
+import {
+  Wrapper,
+  StyledWrapperButtons,
+  StyledModal,
+  StyledTitle,
+  StyledWrapperChildren,
+  StyledText,
+} from './style';
 
 const ConfirmExitDialog = ({
   title,
@@ -11,30 +19,33 @@ const ConfirmExitDialog = ({
   secondButtonOnPress,
   firstButtonLabel,
   secondButtonLabel,
+  lottieAnimation,
   children,
 }) => (
-  <View>
-    <Portal>
-      <Dialog visible={visible} onDismiss={hideDialog}>
-        <Dialog.Title>{title}</Dialog.Title>
-        <Dialog.Content style={{ alignItems: 'center' }}>
-          {children}
-        </Dialog.Content>
-        <Dialog.Actions style={{ justifyContent: 'space-between' }}>
+  <StyledModal
+    transparent
+    animationType="slide"
+    visible={visible}
+    onRequestClose={hideDialog}
+  >
+    <BlurView intensity={100} tint="dark" style={StyleSheet.absoluteFill}>
+      <Wrapper>
+        <StyledTitle>{title}</StyledTitle>
+        <StyledWrapperChildren>
+          {lottieAnimation}
+          <StyledText>{children}</StyledText>
+        </StyledWrapperChildren>
+        <StyledWrapperButtons>
           {firstButtonLabel && (
-            <Button style={{ flex: 1 }} onPress={hideDialog}>
-              {firstButtonLabel}
-            </Button>
+            <Button onPress={hideDialog}>{firstButtonLabel}</Button>
           )}
           {secondButtonLabel && (
-            <Button style={{ flex: 1 }} onPress={secondButtonOnPress}>
-              {secondButtonLabel}
-            </Button>
+            <Button onPress={secondButtonOnPress}>{secondButtonLabel}</Button>
           )}
-        </Dialog.Actions>
-      </Dialog>
-    </Portal>
-  </View>
+        </StyledWrapperButtons>
+      </Wrapper>
+    </BlurView>
+  </StyledModal>
 );
 
 export default ConfirmExitDialog;

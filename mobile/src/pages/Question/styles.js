@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { Text, Headline } from 'react-native-paper';
 
 // COMPONENTS
 import ButtonGradient from '@components/ButtonGradient';
@@ -45,8 +44,8 @@ export const CurrentQuestionView = styled.View.attrs({
   background: white;
 `;
 
-export const CurrentQuestion = styled(Headline)`
-  font-size: ${({ fontSize }) => fontSize + 2}px;
+export const CurrentQuestion = styled.Text`
+  font-size: ${({ theme }) => theme.fontSize + 2}px;
   font-family: 'RobotoBold';
   color: #171c26;
   text-align: center;
@@ -64,8 +63,8 @@ export const QuestionImage = styled.Image`
   border-radius: 5px;
 `;
 
-export const QuestionText = styled(Text)`
-  font-size: ${({ fontSize }) => fontSize + 5}px;
+export const QuestionText = styled.Text`
+  font-size: ${({ theme }) => theme.fontSize + 5}px;
   font-family: 'RobotoBold';
   color: #171c26;
   text-align: center;
@@ -84,8 +83,8 @@ export const AnswerContainer = styled.TouchableOpacity`
   border: ${({ checked }) => (checked ? 'none' : '0.5px solid #171c26')};
 `;
 
-export const AnswerText = styled(Text)`
-  font-size: ${({ fontSize }) => fontSize + 1}px;
+export const AnswerText = styled.Text`
+  font-size: ${({ theme }) => theme.fontSize + 1}px;
   font-family: 'RobotoBold';
   color: ${({ checked }) => (checked ? 'white' : '#171c26')};
 `;

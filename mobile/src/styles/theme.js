@@ -1,5 +1,4 @@
 import { PixelRatio } from 'react-native';
-import { DefaultTheme } from 'react-native-paper';
 
 let FONT_BACK_LABEL = 18;
 
@@ -8,15 +7,20 @@ if (PixelRatio.get() <= 2) {
 }
 
 const theme = {
-  ...DefaultTheme,
-  label: {
-    fontSize: FONT_BACK_LABEL,
-  },
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#333D54',
+  fontSize: FONT_BACK_LABEL,
+  text: {
+    primary: '#4B24B1',
     accent: 'yellow',
   },
+  color: {
+    background: '#4B24B1',
+  },
+  size: {
+    padding: 20,
+    margin: 20,
+  },
 };
+
+console.log('Font', FONT_BACK_LABEL);
 
 export default theme;

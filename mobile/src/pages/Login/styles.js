@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
-import { Button } from 'react-native-paper';
 
+import Button from '@components/Button';
 import Waves from '@assets/waves.svg';
 
 // DIMENSION TRANSFORMERS
