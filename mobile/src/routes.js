@@ -22,18 +22,13 @@ function Routes() {
   return (
     <Suspense fallback={<Loading />}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {/* <Stack.Screen name="InitialScreen" component={InitialScreen} />
+        <Stack.Navigator
+          initialRouteName="InitialScreen"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="InitialScreen" component={InitialScreen} />
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Register" component={Register} /> */}
-          <Stack.Screen name="CountDown" component={CountDown} />
-          <Stack.Screen name="Question">
-            {(props) => (
-              <QuestionProvider>
-                <Question {...props} />
-              </QuestionProvider>
-            )}
-          </Stack.Screen>
+          <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
       </NavigationContainer>
     </Suspense>

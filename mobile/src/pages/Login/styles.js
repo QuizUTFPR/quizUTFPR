@@ -17,7 +17,8 @@ export const InputWrapper = styled.View`
 `;
 
 export const StyledTextButton = styled(Button)`
-  margin-top: ${`${heightPercentageToDp('1')}px`};
+  background: transparent;
+  margin-top: ${`${heightPercentageToDp('1%')}px`};
 `;
 
 export const ForgotPasswordButton = styled(StyledTextButton)`
@@ -25,6 +26,6 @@ export const ForgotPasswordButton = styled(StyledTextButton)`
 `;
 
 export const WrapperButton = styled.View`
-  margin-top: ${`${heightPercentageToDp('10')}px`};
+  margin-top: ${`${heightPercentageToDp('10%')}px`};
   width: ${`${widthPercentageToDp('60%')}px`};
 `;

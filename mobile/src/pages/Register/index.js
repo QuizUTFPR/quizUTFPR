@@ -31,26 +31,19 @@ const Register = ({ navigation }) => (
     <KeyboardAvoidingView behavior="position" enabled>
       <DismissKeyboard>
         <InputWrapper>
-          <Input labelText="Nome de Usuário" icon="account" />
-          <Input labelText="E-mail" icon="email" />
-          <Input secureTextEntry labelText="Senha" icon="lock" />
-          <Input secureTextEntry labelText="Confirmar Senha" icon="lock" />
+          <Input label="Nome de Usuário" />
+          <Input label="E-mail" />
+          <Input label="Senha" secureTextEntry />
+          <Input label="Confirmar Senha" secureTextEntry />
         </InputWrapper>
       </DismissKeyboard>
     </KeyboardAvoidingView>
 
     <WrapperButton>
-      <Button onPress={() => {}} icon="login-variant">
-        Cadastrar
-      </Button>
+      <Button onPress={() => {}}>Cadastrar</Button>
     </WrapperButton>
 
-    <StyledTextButton
-      mode="text"
-      compact
-      uppercase={false}
-      onPress={() => navigation.navigate('Login')}
-    >
+    <StyledTextButton onPress={() => navigation.navigate('Login')}>
       Já possui cadastro? Realize o Login
     </StyledTextButton>
   </Container>

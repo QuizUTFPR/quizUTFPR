@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 // import { IconButton } from 'react-native-paper';
 
 // DIMENSION TRANSFORMERS
@@ -10,7 +10,7 @@ import { heightPercentageToDp } from '@styles/dimensions';
 //   margin-left: -7px;
 // `;
 
-export const StyledTitle = styled.Title`
+export const StyledTitle = styled.Text`
   align-self: flex-start;
   font-size: ${({ theme }) => theme.fontSize + 12}px;
   font-family: 'RobotoBlack';

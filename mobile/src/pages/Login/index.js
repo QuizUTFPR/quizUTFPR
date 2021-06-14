@@ -32,15 +32,10 @@ const Login = ({ navigation }) => (
     <KeyboardAvoidingView behavior="position" enabled>
       <DismissKeyboard>
         <InputWrapper>
-          <Input labelText="Nome de Usuário" icon="account" />
+          <Input label="Nome de Usuário" />
 
-          <Input secureTextEntry labelText="Senha" icon="lock" />
-          <ForgotPasswordButton
-            mode="text"
-            compact
-            uppercase={false}
-            onPress={() => {}}
-          >
+          <Input label="Senha" secureTextEntry />
+          <ForgotPasswordButton onPress={() => {}}>
             Esqueceu sua senha?
           </ForgotPasswordButton>
         </InputWrapper>
@@ -53,12 +48,7 @@ const Login = ({ navigation }) => (
       </Button>
     </WrapperButton>
 
-    <StyledTextButton
-      mode="text"
-      compact
-      uppercase={false}
-      onPress={() => navigation.navigate('Register')}
-    >
+    <StyledTextButton onPress={() => navigation.navigate('Register')}>
       Não possui uma conta? Cadastre-se
     </StyledTextButton>
   </Container>

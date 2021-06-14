@@ -24,7 +24,7 @@ const ConfirmExitDialog = ({
 }) => (
   <StyledModal
     transparent
-    animationType="slide"
+    animationType="fade"
     visible={visible}
     onRequestClose={hideDialog}
   >

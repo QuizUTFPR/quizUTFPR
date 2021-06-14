@@ -5,29 +5,20 @@ import { Text } from 'react-native';
 // STYLES
 import { InputWrapper, StyledTextInput } from './styles';
 
-const Input = ({ secureTextEntry, labelText, mode, icon }) => (
+const Input = ({ secureTextEntry, label, ...props }) => (
   <InputWrapper>
-    <StyledTextInput
-      secureTextEntry={secureTextEntry}
-      mode={mode}
-      left={<Text.Icon name={icon} />}
-      label={labelText}
-    />
+    <Text>{label}</Text>
+    <StyledTextInput secureTextEntry={secureTextEntry} {...props} />
   </InputWrapper>
 );
 
-StyledTextInput.defaultProps = {
+Input.defaultProps = {
   secureTextEntry: false,
-  mode: 'flat',
-  icon: '',
-  labelText: '',
 };
 
-StyledTextInput.propTypes = {
+Input.propTypes = {
   secureTextEntry: PropTypes.bool,
-  mode: PropTypes.string,
-  icon: PropTypes.string,
-  labelText: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default Input;

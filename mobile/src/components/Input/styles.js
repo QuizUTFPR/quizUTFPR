@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { TextInput } from 'react-native';
 
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
@@ -8,4 +7,4 @@ export const InputWrapper = styled.View`
   margin-top: ${`${heightPercentageToDp('2%')}px`};
 `;
 
-export const StyledTextInput = styled(TextInput)``;
+export const StyledTextInput = styled.TextInput``;

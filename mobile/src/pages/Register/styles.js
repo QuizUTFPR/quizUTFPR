@@ -31,10 +31,10 @@ export const InputWrapper = styled.View`
 `;
 
 export const StyledTextButton = styled(Button)`
-  margin-top: ${`${heightPercentageToDp('0.5')}px`};
+  margin-top: ${`${heightPercentageToDp('0.5%')}px`};
 `;
 
 export const WrapperButton = styled.View`
-  margin-top: ${`${heightPercentageToDp('1.5')}px`};
+  margin-top: ${`${heightPercentageToDp('1.5%')}px`};
   width: ${`${widthPercentageToDp('60%')}px`};
 `;
