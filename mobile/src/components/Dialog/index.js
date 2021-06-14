@@ -29,8 +29,8 @@ const ConfirmExitDialog = ({
     onRequestClose={hideDialog}
   >
     <BlurView intensity={100} tint="dark" style={StyleSheet.absoluteFill}>
-      <Wrapper>
-        <StyledTitle variant="secondary">{title}</StyledTitle>
+      <Wrapper fill="white">
+        <StyledTitle color="purple">{title}</StyledTitle>
         <StyledWrapperChildren>
           {lottieAnimation}
           <StyledText>{children}</StyledText>

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Wrapper = styled.View.attrs({ elevation: 15 })`
-  background: white;
+  background: ${({ theme }) => theme.color.fill};
   padding: ${({ theme }) => theme.size.padding}px;
   margin-left: ${({ theme }) => theme.size.margin + 10}px;
   margin-top: ${({ theme }) => theme.size.margin + 30}px;
@@ -29,7 +29,7 @@ export const StyledText = styled.Text`
 `;
 
 export const StyledTitle = styled.Text`
-  color: ${({ theme }) => theme.color.text};
+  color: ${({ theme }) => theme.color};
   font-family: 'RobotoBold';
   font-size: ${({ theme }) => theme.fontSize + 10}px;
   margin-bottom: ${({ theme }) => theme.size.margin + 10}px;

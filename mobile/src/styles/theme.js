@@ -3,14 +3,19 @@ import theming from 'styled-theming';
 
 let FONT_BACK_LABEL = 18;
 
-const backgroundColor = theming.variants('mode', 'variant', {
+const backgroundColorButton = theming.variants('mode', 'variant', {
   primary: { light: '#4B24B1' },
   secondary: { light: '#FFFFFF' },
 });
 
-const textColor = theming.variants('mode', 'variant', {
+const textColorButton = theming.variants('mode', 'variant', {
   primary: { light: '#FFFFFF' },
-  secondary: { light: '#4B24B1' },
+  secondary: { light: 'black' },
+});
+
+const fillColor = theming.variants('mode', 'fill', {
+  white: { light: '#FFFFFF' },
+  purple: { light: '#4B24B1' },
 });
 
 if (PixelRatio.get() <= 2) {
@@ -21,8 +26,9 @@ const theme = {
   mode: 'light',
   fontSize: FONT_BACK_LABEL,
   color: {
-    background: backgroundColor,
-    text: textColor,
+    fill: fillColor,
+    backgroundButton: backgroundColorButton,
+    textButton: textColorButton,
   },
   size: {
     padding: 20,

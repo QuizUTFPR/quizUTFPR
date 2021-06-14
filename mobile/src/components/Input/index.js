@@ -1,14 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native';
 
 // STYLES
-import { InputWrapper, StyledTextInput } from './styles';
+import {
+  InputWrapper,
+  StyledTextInput,
+  IconView,
+  LabelWrapper,
+  Label,
+} from './styles';
 
-const Input = ({ secureTextEntry, label, ...props }) => (
+const Input = ({
+  secureTextEntry,
+  label,
+  icon,
+
+  ...props
+}) => (
   <InputWrapper>
-    <Text>{label}</Text>
-    <StyledTextInput secureTextEntry={secureTextEntry} {...props} />
+    <IconView>{icon}</IconView>
+    <LabelWrapper>
+      <Label>{label}</Label>
+      <StyledTextInput secureTextEntry={secureTextEntry} {...props} />
+    </LabelWrapper>
   </InputWrapper>
 );
 

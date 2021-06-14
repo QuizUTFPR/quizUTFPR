@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 export const StyledButton = styled.TouchableOpacity`
   height: 60px;
-  background: ${({ theme }) => theme.color.background};
+  background: ${({ theme }) => theme.color.backgroundButton};
   justify-content: center;
   border-radius: 5px;
 `;
@@ -12,7 +12,7 @@ export const StyledButton = styled.TouchableOpacity`
 export const StyledText = styled.Text`
   font-family: 'RobotoBold';
   font-size: ${({ theme }) => theme.fontSize}px;
-  color: ${({ theme }) => theme.color.text};
+  color: ${({ theme }) => theme.color.textButton};
   text-align: center; ;
 `;
 

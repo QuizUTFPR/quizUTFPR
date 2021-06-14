@@ -1,6 +1,9 @@
 import React from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 
+// ICONS
+import { FontAwesome5 } from '@expo/vector-icons';
+
 // COMPONENTS
 import Container from '@components/Container';
 import Header from '@components/Header';
@@ -32,9 +35,18 @@ const Login = ({ navigation }) => (
     <KeyboardAvoidingView behavior="position" enabled>
       <DismissKeyboard>
         <InputWrapper>
-          <Input label="Nome de Usuário" />
+          <Input
+            placeholder="Digite seu nome de usuário"
+            icon={<FontAwesome5 name="user-alt" size={24} color="black" />}
+            label="Nome de Usuário"
+          />
 
-          <Input label="Senha" secureTextEntry />
+          <Input
+            placeholder="Digite sua senha"
+            icon={<FontAwesome5 name="lock" size={24} color="black" />}
+            label="Senha"
+            secureTextEntry
+          />
           <ForgotPasswordButton
             backgroundColor="white"
             variant="secondary"

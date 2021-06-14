@@ -9,12 +9,16 @@ import Header from '@components/Header';
 import DismissKeyboard from '@components/DismissKeyboard';
 
 // STYLES
+import { FontAwesome5, Zocial } from '@expo/vector-icons';
+
 import {
   BackgroundImage,
   InputWrapper,
   WrapperButton,
   StyledTextButton,
 } from './styles';
+
+// ICONS
 
 const Register = ({ navigation }) => (
   <Container>
@@ -31,10 +35,30 @@ const Register = ({ navigation }) => (
     <KeyboardAvoidingView behavior="position" enabled>
       <DismissKeyboard>
         <InputWrapper>
-          <Input label="Nome de Usuário" />
-          <Input label="E-mail" />
-          <Input label="Senha" secureTextEntry />
-          <Input label="Confirmar Senha" secureTextEntry />
+          <Input
+            placeholder="Digite seu nome de usuário"
+            icon={<FontAwesome5 name="user-alt" size={24} color="black" />}
+            label="Nome de Usuário"
+          />
+          <Input
+            autoCompleteType="email"
+            placeholder="Digite seu endereço eletrônico"
+            keyboardType="email-address"
+            icon={<Zocial name="email" size={24} color="black" />}
+            label="E-mail"
+          />
+          <Input
+            placeholder="Digite uma senha"
+            icon={<FontAwesome5 name="lock" size={24} color="black" />}
+            label="Senha"
+            secureTextEntry
+          />
+          <Input
+            placeholder="Confirme a senha digitada"
+            icon={<FontAwesome5 name="lock" size={24} color="black" />}
+            label="Confirmar Senha"
+            secureTextEntry
+          />
         </InputWrapper>
       </DismissKeyboard>
     </KeyboardAvoidingView>
