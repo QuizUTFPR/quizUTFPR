@@ -30,6 +30,7 @@ const CriarQuiz = ({ history }) => {
       imageObj: null,
       imageUrl: '',
       tags: ['UTFPR', 'QUIZ'],
+      published: false,
     },
     onSubmit: async (values) => {
       let responseFile = null;
@@ -46,6 +47,7 @@ const CriarQuiz = ({ history }) => {
         tags: values.tags,
         description: values.description,
         visibility: values.visibility,
+        published: values.published,
       };
 
       if (responseFile) {
