@@ -12,7 +12,7 @@ class StudentQuizFinishedAttempt extends Model {
       },
       {
         sequelize,
-        tableName: 'student_quiz_finished_attempt',
+        tableName: "student_quiz_finished_attempt"
       }
     );
 
@@ -20,17 +20,17 @@ class StudentQuizFinishedAttempt extends Model {
   }
 
   static associate(models) {
-    console.log("Associação question_choice")
+    console.log("Associação question_choice");
 
     this.belongsTo(models.Student, {
       foreignKey: "student_id",
-      as: 'student'
-    })
+      as: "student"
+    });
 
     this.belongsTo(models.Quiz, {
       foreignKey: "quiz_id",
-      as: 'quiz'
-    })
+      as: "quiz"
+    });
   }
 }
 

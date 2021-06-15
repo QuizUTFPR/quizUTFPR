@@ -30,32 +30,37 @@ class Quiz extends Model {
 
     this.belongsTo(models.File, {
       foreignKey: "id_image",
-      as: 'image_quiz'
-    })
+      as: "image_quiz"
+    });
 
     this.belongsToMany(models.Question, {
-      through: 'question_quiz',
+      through: "question_quiz",
       foreignKey: "quiz_id",
-      as: 'questions',
-      onDelete: 'CASCADE',
+      as: "questions",
+      onDelete: "CASCADE"
     });
 
     this.belongsToMany(models.Tag, {
-      through: 'quiz_tags',
+      through: "quiz_tags",
       foreignKey: "quiz_id",
-      as: 'tags_quiz',
-      onDelete: 'CASCADE',
-    })
-
-    this.belongsTo(models.File, { 
-      foreignKey: "id_image", 
-      as: "image" 
+      as: "tags_quiz",
+      onDelete: "CASCADE"
     });
-  
+
+    this.belongsTo(models.File, {
+      foreignKey: "id_image",
+      as: "image"
+    });
+
+    this.hasOne(models.StudentQuestionChoice, {
+      foreingKey: "quiz_id",
+      as: "quiz_student_choice"
+    });
+
     this.hasOne(models.StudentQuizFinishedAttempt, {
       foreignKey: "quiz_id",
-      as: 'quiz_student_finished'
-    })
+      as: "quiz_student_finished"
+    });
   }
 }
 

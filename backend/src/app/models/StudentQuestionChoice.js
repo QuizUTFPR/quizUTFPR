@@ -6,6 +6,7 @@ class StudentQuestionChoice extends Model {
       {
         student_id: Sequelize.INTEGER,
         question_id: Sequelize.INTEGER,
+        quiz_id: Sequelize.INTEGER,
         attempt: Sequelize.INTEGER,
         checked1: Sequelize.BOOLEAN,
         checked2: Sequelize.BOOLEAN,
@@ -22,17 +23,22 @@ class StudentQuestionChoice extends Model {
   }
 
   static associate(models) {
-    console.log("Associação question_choice")
+    console.log("Associação question_choice");
 
     this.belongsTo(models.Student, {
       foreignKey: "student_id",
-      as: 'student'
-    })
+      as: "student"
+    });
 
     this.belongsTo(models.Question, {
       foreignKey: "question_id",
-      as: 'question'
-    })
+      as: "question"
+    });
+
+    this.belongsTo(models.Quiz, {
+      foreignKey: "quiz_id",
+      as: "quiz"
+    });
   }
 }
 
