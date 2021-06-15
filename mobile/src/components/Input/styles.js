@@ -13,7 +13,7 @@ export const InputWrapper = styled.View`
   padding-right: 10px;
   border-radius: 8px;
   height: 60px;
-  border: 1.2px solid
+  border: 1.5px solid
     ${({ theme, error }) => (error ? 'red' : theme.color.fill)};
 `;
 
