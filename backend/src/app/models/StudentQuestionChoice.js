@@ -6,6 +6,7 @@ class StudentQuestionChoice extends Model {
       {
         student_id: Sequelize.INTEGER,
         question_id: Sequelize.INTEGER,
+        attempt: Sequelize.INTEGER,
         checked1: Sequelize.BOOLEAN,
         checked2: Sequelize.BOOLEAN,
         checked3: Sequelize.BOOLEAN,

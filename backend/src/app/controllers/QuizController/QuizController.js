@@ -25,7 +25,6 @@ class QuizController {
           .max(10),
         id_image: Yup.number(),
         tags: Yup.array().required("Informe as tags do quiz!"),
-        published: Yup.bool().required
       });
 
       //Check body of requisiton

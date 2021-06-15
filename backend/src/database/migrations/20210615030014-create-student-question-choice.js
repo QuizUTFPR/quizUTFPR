@@ -14,6 +14,10 @@ module.exports = {
       question_id: {
         type: Sequelize.INTEGER
       },
+      attempt: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       checked1: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

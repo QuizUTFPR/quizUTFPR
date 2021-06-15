@@ -3,6 +3,9 @@ import * as Yup from "yup";
 
 // MODELS
 import StudentQuestionChoice from "../../models/StudentQuestionChoice";
+import Student from '../../models/StudentModel'
+
+import getMethod from "../../utils/getMethodsOfAssociation";
 
 class StudentQuestionChoiceController {
   // Cadastra um único registro
@@ -23,8 +26,20 @@ class StudentQuestionChoiceController {
       const checked2 = arrayOfChecked[1];
       const checked3 = arrayOfChecked[2];
       const checked4 = arrayOfChecked[3];
+      const attempt = await StudentQuestionChoice.count({
+        where: {student_id: student_id, question_id: question_id}
+      });
 
-      const studentQuestionChoice = await StudentQuestionChoice.create({student_id, question_id, checked1, checked2, checked3, checked4})
+          
+      const studentQuestionChoice = await StudentQuestionChoice.create({
+        student_id, 
+        question_id, 
+        attempt,
+        checked1, 
+        checked2, 
+        checked3, 
+        checked4
+      })
 
       return res.status(200).json(studentQuestionChoice);
 
