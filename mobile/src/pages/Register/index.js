@@ -4,7 +4,7 @@ import { KeyboardAvoidingView } from 'react-native';
 // COMPONENTS
 import Container from '@components/Container';
 import Input from '@components/Input';
-import Button from '@components/Button';
+import ButtonGradient from '@components/ButtonGradient';
 import Header from '@components/Header';
 import DismissKeyboard from '@components/DismissKeyboard';
 
@@ -64,9 +64,9 @@ const Register = ({ navigation }) => (
     </KeyboardAvoidingView>
 
     <WrapperButton>
-      <Button variant="primary" onPress={() => {}}>
+      <ButtonGradient variant="primary" onPress={() => {}}>
         Cadastrar
-      </Button>
+      </ButtonGradient>
     </WrapperButton>
 
     <StyledTextButton

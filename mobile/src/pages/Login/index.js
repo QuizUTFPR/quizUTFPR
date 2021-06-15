@@ -9,7 +9,7 @@ import Container from '@components/Container';
 import Header from '@components/Header';
 import Input from '@components/Input';
 import DismissKeyboard from '@components/DismissKeyboard';
-import Button from '@components/Button';
+import ButtonGradient from '@components/ButtonGradient';
 
 // STYLES
 import {
@@ -59,13 +59,13 @@ const Login = ({ navigation }) => (
     </KeyboardAvoidingView>
 
     <WrapperButton>
-      <Button
+      <ButtonGradient
         variant="primary"
         onPress={() => console.log('pressed')}
         icon="login-variant"
       >
         Entrar
-      </Button>
+      </ButtonGradient>
     </WrapperButton>
 
     <StyledTextButton

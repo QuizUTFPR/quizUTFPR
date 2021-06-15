@@ -36,6 +36,4 @@ const theme = {
   },
 };
 
-console.log('Font', FONT_BACK_LABEL);
-
 export default theme;
