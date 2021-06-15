@@ -20,7 +20,7 @@ class StudentQuizFinishedAttempt extends Model {
   }
 
   static associate(models) {
-    console.log("Associação question_choice");
+    console.log("Associação question_choice!");
 
     this.belongsTo(models.Student, {
       foreignKey: "student_id",

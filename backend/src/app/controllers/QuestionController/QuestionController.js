@@ -79,7 +79,6 @@ class QuestionController {
           }) 
 
         } catch (error) {
-          console.log(error)
           return res.status(500).json(error);
         }
       }else{
@@ -97,7 +96,7 @@ class QuestionController {
 
       // ATUALIZANDO OU CRIANDO AS QUESTÕES
       const id_question = question.id;
-      console.log(answer)
+
       answer.map(async answerItem => {
         const answerFounded = await Answer.findByPk(answerItem.id);
         if(!answerFounded){

@@ -20,7 +20,7 @@ class Tag extends Model {
   }
 
   static associate(models) {
-    console.log("Associação tag");
+    console.log("Associação tag!");
     this.belongsToMany(models.Quiz, {
       through: "quiz_tags",
       foreignKey: "tag_name",
