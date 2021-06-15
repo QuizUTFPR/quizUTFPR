@@ -22,12 +22,12 @@ class QuestionQuizController {
 
       const questionOfQuiz = await quiz.getQuestions({
         attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
-        order: [['index', 'ASC']],
+        order: [['id', 'ASC']],
         include: [
           {
             model: Answer,
             as: 'answer',
-            attributes: ["id","title", "is_correct"]
+            attributes: ["id","title", "is_correct"],
           },
           {
             model: File,
@@ -42,7 +42,8 @@ class QuestionQuizController {
               attributes: []
             }
           }
-        ]
+        ],
+        order: [[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
       if(!questionOfQuiz.length)

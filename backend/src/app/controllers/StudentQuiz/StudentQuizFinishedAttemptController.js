@@ -1,8 +1,8 @@
 import * as Yup from "yup";
 
 // MODELS
-import StudentQuizFinishedAttempt from "../../models/StudentQuiz/StudentQuizFinishedAttempt";
-import StudentQuestionChoice from "../../models/StudentQuiz/StudentQuizFinishedAttempt";
+import StudentQuizFinishedAttempt from "../../models/StudentQuizFinishedAttempt";
+import StudentQuestionChoice from "../../models/StudentQuestionChoice";
 
 import getMethod from "../../utils/getMethodsOfAssociation";
 
@@ -24,32 +24,40 @@ class StudentQuizFinishedAttemptController {
       }
 
       const { student_id, quiz_id } = req.body;
+      let hit_amount = 0;
+      const score = 30;
       const attempt = await StudentQuizFinishedAttempt.count({
-        where: { student_id: student_id, question_id: question_id }
+        where: { student_id, quiz_id }
       });
 
-      // Get all choices of a specific choice
-      const choices = StudentQuestionChoice.findAll({
-        where: { attempt }
+
+      // Get all choices of a specific student attempt of answering the quiz
+      const choices = await StudentQuestionChoice.findAll({
+        where: { attempt, student_id, quiz_id }
       });
 
-      console.log("choices", choices);
-
-      choices.map(item => {
-        console.log(getMethod(item));
-      });
-
-      const StudentQuizFinishedAttempt = await StudentQuizFinishedAttempt.create(
-        {
+      
+      // Getting how many questions did the student checked right
+      await Promise.all(choices.map(async(item) => {
+        const checkedChoices = [item.checked1, item.checked2, item.checked3, item.checked4]
+        const question = await item.getQuestion();
+        const answer = await question.getAnswer()
+        answer.map((answerItem, i) => {
+          if(answerItem.is_correct && checkedChoices[i]){
+            hit_amount += 1;
+          }
+        })
+      })).then(async () => {
+        const finished = await StudentQuizFinishedAttempt.create({
           student_id,
           quiz_id,
           hit_amount,
           score,
           attempt
-        }
-      );
-
-      return res.status(200).json(studentQuestionChoice);
+        });
+        
+        return res.status(200).json(finished);
+      })
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);

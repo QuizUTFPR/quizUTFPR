@@ -24,6 +24,14 @@ module.exports = {
           key: "id"
         }
       },
+      quiz_id: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: "quiz",
+          key: "id"
+        }
+      },
       attempt: {
         type: Sequelize.INTEGER,
         allowNull: false,

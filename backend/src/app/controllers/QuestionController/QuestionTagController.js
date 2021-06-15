@@ -40,7 +40,8 @@ class QuestionTagController {
             },
             
           }
-        ]
+        ],
+        order: [[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
 

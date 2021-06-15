@@ -97,7 +97,7 @@ class QuestionController {
 
       // ATUALIZANDO OU CRIANDO AS QUESTÕES
       const id_question = question.id;
-
+      console.log(answer)
       answer.map(async answerItem => {
         const answerFounded = await Answer.findByPk(answerItem.id);
         if(!answerFounded){
@@ -167,7 +167,7 @@ class QuestionController {
           {
             model: Answer,
             as: 'answer',
-            attributes: ['id', 'title', 'is_correct']
+            attributes: ['id', 'title', 'is_correct'],
           },
           {
             model: File,
@@ -182,7 +182,8 @@ class QuestionController {
               attributes: []
             }
           }
-        ]
+        ],
+        order: [[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
       if(!questions.length) return res.status(204).json({error: "Não existe nenhuma questão cadastrada."});
@@ -208,7 +209,7 @@ class QuestionController {
           {
             model: Answer,
             as: 'answer',
-            attributes: ['id', 'title', 'is_correct']
+            attributes: ['id', 'title', 'is_correct'],
           },
           {
             model: File,
@@ -226,7 +227,8 @@ class QuestionController {
               attributes: []
             }
           }
-        ]
+        ],
+        order: [[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
       if(!questions.length)

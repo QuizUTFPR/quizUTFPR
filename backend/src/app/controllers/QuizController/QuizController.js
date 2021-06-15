@@ -142,7 +142,8 @@ class QuizController {
               attributes: []
             }
           }
-        ]
+        ],
+        order: [[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
       if(!quiz.length) return res.status(204).json({error: "Não existe nenhum quiz com a tag informada."});

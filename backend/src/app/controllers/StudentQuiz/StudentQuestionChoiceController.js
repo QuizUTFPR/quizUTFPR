@@ -18,9 +18,6 @@ class StudentQuestionChoiceController {
         quiz_id: Yup.number("id do quiz inválido!").required(
           "Por favor, informe o ID da questão"
         ),
-        attempt: Yup.number("A tentativa deve ser um número!").required(
-          "Por favor, informe o número da tentativa"
-        ),
         arrayOfChecked: Yup.array(
           Yup.bool("Os valores devem ser booleanos")
         ).required("Por favor, informe o array de checagem das questões!")
@@ -30,7 +27,7 @@ class StudentQuestionChoiceController {
         return res.status(400).json({ error: "Falha na validação!" });
       }
 
-      const { student_id, question_id, arrayOfChecked } = req.body;
+      const { student_id, question_id, arrayOfChecked, quiz_id } = req.body;
       const checked1 = arrayOfChecked[0];
       const checked2 = arrayOfChecked[1];
       const checked3 = arrayOfChecked[2];
@@ -40,6 +37,7 @@ class StudentQuestionChoiceController {
       });
 
       const studentQuestionChoice = await StudentQuestionChoice.create({
+        quiz_id,
         student_id,
         question_id,
         attempt,
