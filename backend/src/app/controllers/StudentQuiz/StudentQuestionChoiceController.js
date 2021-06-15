@@ -1,51 +1,60 @@
 import * as Yup from "yup";
 
-
 // MODELS
 import StudentQuestionChoice from "../../models/StudentQuestionChoice";
-import Student from '../../models/StudentModel'
+import Student from "../../models/StudentModel";
 
 class StudentQuestionChoiceController {
   // Cadastra um único registro
   async store(req, res) {
-    try{
+    try {
       const schema = Yup.object().shape({
-        student_id: Yup.number().required(),
-        question_id: Yup.number().required(),
-        arrayOfChecked: Yup.array(Yup.bool()).required()        
+        student_id: Yup.number("ID do estudante inválido!").required(
+          "Por favor, informe o ID do estudante"
+        ),
+        question_id: Yup.number("ID da questão inválido!").required(
+          "Por favor, informe o id da questão"
+        ),
+        quiz_id: Yup.number("id do quiz inválido!").required(
+          "Por favor, informe o ID da questão"
+        ),
+        attempt: Yup.number("A tentativa deve ser um número!").required(
+          "Por favor, informe o número da tentativa"
+        ),
+        arrayOfChecked: Yup.array(
+          Yup.bool("Os valores devem ser booleanos")
+        ).required("Por favor, informe o array de checagem das questões!")
       });
 
-      if(!(await schema.isValid(req.body))){
-        return res.status(400).json({error: 'Falha na validação!'});
+      if (!(await schema.isValid(req.body))) {
+        return res.status(400).json({ error: "Falha na validação!" });
       }
 
-      const {student_id, question_id, arrayOfChecked} = req.body;
+      const { student_id, question_id, arrayOfChecked } = req.body;
       const checked1 = arrayOfChecked[0];
       const checked2 = arrayOfChecked[1];
       const checked3 = arrayOfChecked[2];
       const checked4 = arrayOfChecked[3];
       const attempt = await StudentQuestionChoice.count({
-        where: {student_id: student_id, question_id: question_id}
+        where: { student_id: student_id, question_id: question_id }
       });
 
-          
       const studentQuestionChoice = await StudentQuestionChoice.create({
-        student_id, 
-        question_id, 
+        student_id,
+        question_id,
         attempt,
-        checked1, 
-        checked2, 
-        checked3, 
+        checked1,
+        checked2,
+        checked3,
         checked4
-      })
+      });
 
       return res.status(200).json(studentQuestionChoice);
-
-    }catch(err){
-      console.log(err)
-      return res.status(500).json(err)
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
     }
-    }
+  }
 }
 
 export default new StudentQuestionChoiceController();
