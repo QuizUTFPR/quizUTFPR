@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonGradient from '@components/ButtonGradient';
+import LottieView from 'lottie-react-native';
 
 // COMPONENTS
 import Container from '@components/Container';
@@ -8,7 +9,7 @@ import Container from '@components/Container';
 import {
   BloobsBackground,
   ImageView,
-  StyledLoginIllustration,
+  AnimationView,
   WrapperButton,
   StyledTitle,
   StyledParagraph,
@@ -18,7 +19,16 @@ const InitialScreen = ({ navigation }) => (
   <Container>
     <BloobsBackground fill={'#eaebff'} />
     <ImageView>
-      <StyledLoginIllustration />
+      <AnimationView>
+        <LottieView
+          autoPlay
+          loop
+          style={{ flex: 1 }}
+          speed={1}
+          // eslint-disable-next-line global-require
+          source={require('@assets/lottie/initialScreen.json')}
+        />
+      </AnimationView>
 
       <StyledTitle fill="black">Bem-Vindo!</StyledTitle>
       <StyledParagraph fill="black">

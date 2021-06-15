@@ -2,6 +2,9 @@ import styled from 'styled-components/native';
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 
+// DIMENSION TRANSFORMERS
+import { widthPercentageToDp } from '@styles/dimensions';
+
 // SVG's AS REACT COMPONENTS
 import Bloobs from '@assets/bloobs.svg';
 import LoginIllustration from '@assets/login_illustration.svg';
@@ -26,8 +29,9 @@ export const ImageView = styled.View`
   margin-top: 50px;
 `;
 
-export const StyledLoginIllustration = styled(LoginIllustration)`
+export const AnimationView = styled.View`
   flex: 0.95;
+  width: ${widthPercentageToDp('80%')}px;
   align-self: center;
 `;
 

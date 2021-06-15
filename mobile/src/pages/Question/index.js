@@ -181,7 +181,7 @@ const Question = () => {
             resizeMode="cover"
             speed={1}
             // eslint-disable-next-line global-require
-            source={require('@assets/sad_emote.json')}
+            source={require('@assets/lottie/sad_emote.json')}
           />
         }
       >
@@ -203,7 +203,7 @@ const Question = () => {
             resizeMode="cover"
             speed={1}
             // eslint-disable-next-line global-require
-            source={require('@assets/close_animation.json')}
+            source={require('@assets/lottie/close_animation.json')}
           />
         }
       >

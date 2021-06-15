@@ -23,7 +23,7 @@ const Question = ({ navigation }) => (
         resizeMode="cover"
         speed={1}
         // eslint-disable-next-line global-require
-        source={require('@assets/countdown.json')}
+        source={require('@assets/lottie/countdown.json')}
         onAnimationFinish={() => navigation.navigate('Question')}
       />
     </ImageBackground>
