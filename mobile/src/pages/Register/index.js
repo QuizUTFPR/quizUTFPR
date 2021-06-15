@@ -34,7 +34,7 @@ const Register = ({ navigation }) => {
       .email('Por favor, informe um e-mail válido')
       .required('Por favor, informe um e-mail'),
     password: Yup.string()
-      .min(8, ({ min }) => `A senha deve conter ao menos ${min} caracteres`)
+      .min(8, ({ min }) => `Mínimos ${min} caracteres`)
       .required('A senha é obrigatória'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'As senhas devem ser iguais')
