@@ -10,11 +10,22 @@ import {
   Label,
 } from './styles';
 
-const Input = ({ secureTextEntry, label, icon, fill, ...props }) => (
-  <InputWrapper fill={fill}>
+const Input = ({
+  secureTextEntry,
+  error,
+  errorMessage,
+  label,
+  icon,
+  fill,
+  ...props
+}) => (
+  <InputWrapper fill={fill} error={error}>
     <IconView>{icon}</IconView>
     <LabelWrapper>
-      <Label fill={fill}>{label}</Label>
+      <Label fill={fill} error={error}>
+        {label}
+        {error && ` (${errorMessage})`}
+      </Label>
       <StyledTextInput secureTextEntry={secureTextEntry} {...props} />
     </LabelWrapper>
   </InputWrapper>

@@ -13,7 +13,8 @@ export const InputWrapper = styled.View`
   padding-right: 10px;
   border-radius: 8px;
   height: 60px;
-  border: 1.2px solid ${({ theme }) => theme.color.fill};
+  border: 1.2px solid
+    ${({ theme, error }) => (error ? 'red' : theme.color.fill)};
 `;
 
 export const LabelWrapper = styled.View`
@@ -30,7 +31,7 @@ export const Label = styled.Text`
   background: white;
   padding-left: 2px;
   padding-right: 2px;
-  color: ${({ theme }) => theme.color.fill};
+  color: ${({ theme, error }) => (error ? 'red' : theme.color.fill)};
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 `;
