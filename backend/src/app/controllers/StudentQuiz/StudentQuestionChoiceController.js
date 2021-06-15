@@ -5,8 +5,6 @@ import * as Yup from "yup";
 import StudentQuestionChoice from "../../models/StudentQuestionChoice";
 import Student from '../../models/StudentModel'
 
-import getMethod from "../../utils/getMethodsOfAssociation";
-
 class StudentQuestionChoiceController {
   // Cadastra um único registro
   async store(req, res) {

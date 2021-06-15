@@ -47,7 +47,15 @@ class Quiz extends Model {
       onDelete: 'CASCADE',
     })
 
-    this.belongsTo(models.File, { foreignKey: "id_image", as: "image" });
+    this.belongsTo(models.File, { 
+      foreignKey: "id_image", 
+      as: "image" 
+    });
+  
+    this.hasOne(models.StudentQuizFinishedAttempt, {
+      foreignKey: "quiz_id",
+      as: 'quiz_student_finished'
+    })
   }
 }
 

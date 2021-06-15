@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('student_question_choice', {
+    await queryInterface.createTable('student_quiz_finished_attempt', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,39 +10,32 @@ module.exports = {
       },
       student_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         onDelete: 'CASCADE',
         references: {
           model: "student",
           key: "id"
         }
       },
-      question_id: {
+      quiz_id: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: "question",
+          model: "quiz",
           key: "id"
         }
+      },
+      hit_amount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      score: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       attempt: {
         type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      checked1: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
-      checked2: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
-      checked3: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-      },
-      checked4: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
       },
       created_at: {
         allowNull: false,
@@ -55,6 +48,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('student_question_choice');
+    await queryInterface.dropTable('student_quiz_finished_attempt');
   }
 };
