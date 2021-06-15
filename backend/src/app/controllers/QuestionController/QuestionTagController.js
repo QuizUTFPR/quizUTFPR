@@ -56,7 +56,7 @@ class QuestionTagController {
       const filteredQuestionByTagWithoutUndefined = filteredQuestionByTag.filter(Boolean)
 
       if(!filteredQuestionByTagWithoutUndefined.length)
-      return res.status(204).json({error: "Não existe nenhuma questão cadastrada."});
+      return res.status(404).json({error: "Não existe nenhuma questão cadastrada."});
       
 
       return res.status(200).json(filteredQuestionByTagWithoutUndefined);

@@ -18,11 +18,10 @@ class QuestionQuizController {
       const quiz = await Quiz.findByPk(id);
 
       if(!quiz)
-        return res.status(204).json({error: "Quiz não encontrado!"})
+        return res.status(404).json({error: "Quiz não encontrado!"})
 
       const questionOfQuiz = await quiz.getQuestions({
         attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
-        order: [['id', 'ASC']],
         include: [
           {
             model: Answer,
@@ -43,11 +42,11 @@ class QuestionQuizController {
             }
           }
         ],
-        order: [[{model: Answer, as: 'answer'}, 'id', 'ASC']],
+        order: [['id', 'ASC'],[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
       if(!questionOfQuiz.length)
-      return res.status(204).json({error: "Não existe nenhum quiz cadastrado."});
+      return res.status(404).json({error: "Não existe nenhum quiz cadastrado."});
 
 
       return res.status(200).json(questionOfQuiz);

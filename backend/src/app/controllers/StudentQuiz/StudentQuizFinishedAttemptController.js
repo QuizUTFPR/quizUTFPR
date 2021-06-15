@@ -3,6 +3,7 @@ import * as Yup from "yup";
 // MODELS
 import StudentQuizFinishedAttempt from "../../models/StudentQuizFinishedAttempt";
 import StudentQuestionChoice from "../../models/StudentQuestionChoice";
+import Quiz from "../../models/QuizModel"
 
 import getMethod from "../../utils/getMethodsOfAssociation";
 
@@ -24,6 +25,10 @@ class StudentQuizFinishedAttemptController {
       }
 
       const { student_id, quiz_id } = req.body;
+      
+      const qtd_quiz_questions = await (await Quiz.findByPk(quiz_id)).countQuestions();
+
+
       let hit_amount = 0;
       const score = 30;
       const attempt = await StudentQuizFinishedAttempt.count({
@@ -36,7 +41,13 @@ class StudentQuizFinishedAttemptController {
         where: { attempt, student_id, quiz_id }
       });
 
+      if(choices.length !== qtd_quiz_questions)
+      return res.status(404).json({
+        error: "É necessário responder todas as questões do quiz antes de finalizar a tentativa."
+    });
       
+
+
       // Getting how many questions did the student checked right
       await Promise.all(choices.map(async(item) => {
         const checkedChoices = [item.checked1, item.checked2, item.checked3, item.checked4]
@@ -58,6 +69,7 @@ class StudentQuizFinishedAttemptController {
         
         return res.status(200).json(finished);
       })
+      
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);

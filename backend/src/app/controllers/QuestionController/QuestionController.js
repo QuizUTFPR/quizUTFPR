@@ -58,7 +58,7 @@ class QuestionController {
       } = req.body;
 
       const quiz = await Quiz.findByPk(quiz_id);
-      if (!quiz) return res.status(204).json({ error: "Quiz não encontrado!" });
+      if (!quiz) return res.status(404).json({ error: "Quiz não encontrado!" });
 
       let question = await Question.findByPk(id);
 
@@ -186,7 +186,7 @@ class QuestionController {
         order: [[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
-      if(!questions.length) return res.status(204).json({error: "Não existe nenhuma questão cadastrada."});
+      if(!questions.length) return res.status(404).json({error: "Não existe nenhuma questão cadastrada."});
 
       return res.status(200).json(questions);
 
@@ -232,7 +232,7 @@ class QuestionController {
       });
 
       if(!questions.length)
-        return res.status(204).json({error: "Não existe nenhuma questão cadastrada."});
+        return res.status(404).json({error: "Não existe nenhuma questão cadastrada."});
 
       return res.status(200).json(questions);
 
@@ -251,7 +251,7 @@ class QuestionController {
       const question = await Question.findByPk(id);
       
       if(!question)
-        return res.status(204).json({error: "Questão não encontrada!"})
+        return res.status(404).json({error: "Questão não encontrada!"})
 
       const {id_image} = question; 
 

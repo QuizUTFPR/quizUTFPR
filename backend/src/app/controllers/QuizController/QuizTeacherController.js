@@ -40,7 +40,7 @@ class QuizTeacherController {
       });
 
       if(!quizzes.length)
-      return res.status(204).json({error: "Não existe nenhum quiz cadastrado."});
+        return res.status(404).json({error: "Não existe nenhum quiz cadastrado."});
 
 
       return res.status(200).json(quizzes);

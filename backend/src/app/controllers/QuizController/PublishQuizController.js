@@ -20,7 +20,7 @@ class PublishQuizController {
       }})
 
       if(!quizUpdated)
-      return res.status(204).json({error: "Nenhum quiz encontrado."});
+        return res.status(404).json({error: "Nenhum quiz encontrado."});
 
 
       return res.status(200).json(quizUpdated);

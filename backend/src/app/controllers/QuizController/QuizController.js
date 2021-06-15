@@ -88,7 +88,7 @@ class QuizController {
       });
 
       if(!quizzes.length)
-      return res.status(204).json({error: "Não existe nenhum quiz cadastrado."});
+        return res.status(404).json({error: "Não existe nenhum quiz cadastrado."});
 
 
       return res.status(200).json(quizzes);
@@ -146,7 +146,8 @@ class QuizController {
         order: [[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
-      if(!quiz.length) return res.status(204).json({error: "Não existe nenhum quiz com a tag informada."});
+      if(!quiz.length) 
+        return res.status(404).json({error: "Não existe nenhum quiz com a tag informada."});
 
       return res.status(200).json(quiz);
     }catch(err){
@@ -221,7 +222,8 @@ class QuizController {
       
       const quiz = await Quiz.findByPk(id_quiz)
 
-      if(!quiz) return res.status(204).json({error: "Não existe nenhum quiz com o ID informado."});
+      if(!quiz) 
+        return res.status(404).json({error: "Não existe nenhum quiz com o ID informado."});
       
       const image_quiz = await quiz.getImage_quiz()
       if(image_quiz) image_quiz.destroy();

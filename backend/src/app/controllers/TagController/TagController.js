@@ -12,7 +12,7 @@ class TagController {
       });
 
       if(!tags.length)
-      return res.status(204).json({error: "Não existe nenhuma tag cadastrada."});
+        return res.status(404).json({error: "Não existe nenhuma tag cadastrada."});
 
       return res.status(200).json(tags);
     }catch(err){
