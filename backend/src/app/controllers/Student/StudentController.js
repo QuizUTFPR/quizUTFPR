@@ -20,11 +20,11 @@ class StudentController {
 
       const {email, password} = req.body;
       const student = await Student.create({ email: email, password: password });
-      const { id, name } = student;
+      const { id } = student;
 
       return res.json({
         student: {
-          name,
+          id,
           email,
         },
         token: jwt.sign({id}, authConfig.secret, {

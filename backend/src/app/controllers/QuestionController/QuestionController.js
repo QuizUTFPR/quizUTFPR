@@ -53,6 +53,7 @@ class QuestionController {
         tags,
         type,
         id_image,
+        published,
         index
       } = req.body;
 
@@ -74,10 +75,11 @@ class QuestionController {
             quiz_id: quiz_id, 
             id_image: id_image,
             type: type,
-            index: index
+            index: index,
           }) 
 
         } catch (error) {
+          console.log(error)
           return res.status(500).json(error);
         }
       }else{

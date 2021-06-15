@@ -9,18 +9,20 @@ import File from "./file";
 import Quiz from "./quiz";
 import Question from './question'
 import Tag from './tag'
+import StudentQuiz from './student_quiz'
+import Student from './student'
 
 //MIDDLEWARES
 import verifyJWT from "../app/middlewares/jwtVerify";
 
 router.use("/", Teacher);
+router.use('/student', Student);
 
 //Todas as rotas abaixo que forem chamadas abaixo deveram ser autenticadas
-router.use(verifyJWT);
-
-router.use("/files", File);
-router.use("/quiz", Quiz);
-router.use("/question", Question);
-router.use("/tag", Tag);
+router.use('/studentQuiz', verifyJWT, StudentQuiz);
+router.use("/files", verifyJWT, File);
+router.use("/quiz", verifyJWT, Quiz);
+router.use("/question", verifyJWT, Question);
+router.use("/tag", verifyJWT, Tag);
 
 export default router;
