@@ -4,13 +4,13 @@ import { Router } from "express";
 const router = new Router();
 
 // ROUTES
-import Teacher from "./teacher";
-import File from "./file";
-import Quiz from "./quiz";
-import Question from './question'
-import Tag from './tag'
-import StudentQuiz from './student_quiz'
-import Student from './student'
+import Teacher from "./Teacher/teacher";
+import File from "./File/file";
+import Quiz from "./Quiz/quiz";
+import Question from './Question/question'
+import Tag from './Tag/tag'
+import StudentQuiz from './Student/student_quiz'
+import Student from './Student/student'
 
 //MIDDLEWARES
 import verifyJWT from "../app/middlewares/jwtVerify";
