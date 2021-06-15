@@ -1,0 +1,43 @@
+import Sequelize, { Model } from "sequelize";
+import bcrypt from "bcryptjs";
+
+class StudentQuestionChoice extends Model {
+  static init(sequelize) {
+    super.init(
+      {
+        student_id: Sequelize.INTEGER,
+        question_id: Sequelize.INTEGER,
+        checked1: Sequelize.BOOLEAN,
+        checked2: Sequelize.BOOLEAN,
+        checked3: Sequelize.BOOLEAN,
+        checked4: Sequelize.BOOLEAN
+      },
+      {
+        sequelize,
+        tableName: "student_question_choice"
+      }
+    );
+
+    return this;
+  }
+
+  static associate(models) {
+    console.log("Associação question_choice")
+
+    this.belongsTo(models.Student, {
+      foreignKey: "student_id",
+      as: 'student'
+    })
+
+    this.belongsTo(models.Question, {
+      foreignKey: "question_id",
+      as: 'question'
+    })
+  }
+
+  checkPassword(password) {
+    return bcrypt.compare(password, this.password_hash);
+  }
+}
+
+export default StudentQuestionChoice;

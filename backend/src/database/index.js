@@ -9,10 +9,10 @@ import Answer from '../app/models/AnswerModel'
 import Quiz from '../app/models/QuizModel';
 import Tag from '../app/models/TagModel'
 import Student from '../app/models/StudentModel'
-import StudentQuizFinished from '../app/models/StudentQuizFinishedModel'
+import StudentQuestionChoice from '../app/models/StudentQuestionChoice'
 
 //Buffer
-const models = [Teacher, File, Quiz, Question, Answer, Tag, Student, StudentQuizFinished];
+const models = [Teacher, File, Quiz, Question, Answer, Tag, Student, StudentQuestionChoice];
 
 class Database {
   constructor() {

@@ -48,6 +48,11 @@ class Question extends Model {
       as: "tags_question",
       onDelete: 'CASCADE',
     });
+
+    this.hasOne(models.StudentQuestionChoice, {
+      foreignKey: "question_id",
+      as: 'question_choice'
+    })
   }
 }
 

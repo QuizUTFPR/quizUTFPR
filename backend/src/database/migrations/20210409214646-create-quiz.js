@@ -27,6 +27,10 @@ module.exports = {
         type: Sequelize.STRING(10),
         allowNull: false
       },
+      published: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
       id_image: {
         type: Sequelize.INTEGER,
         foreignKey: true,

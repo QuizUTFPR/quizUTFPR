@@ -8,7 +8,8 @@ class Quiz extends Model {
         title: Sequelize.STRING,
         description: Sequelize.STRING,
         visibility: Sequelize.STRING,
-        id_image: Sequelize.INTEGER
+        id_image: Sequelize.INTEGER,
+        published: Sequelize.BOOLEAN
       },
       {
         sequelize,

@@ -31,7 +31,14 @@ class Student extends Model {
       foreignKey: "id_image",
       as: 'image_profile'
     })
+
+    this.hasOne(models.StudentQuestionChoice, {
+      foreignKey: "student_id",
+      as: 'student_choice'
+    })
   }
+
+  
 
   checkPassword(password) {
     return bcrypt.compare(password, this.password_hash);
