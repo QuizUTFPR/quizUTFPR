@@ -34,7 +34,7 @@ export const InputWrapper = styled.View`
 export const StyledTextButton = styled.Text`
   margin-top: ${`${heightPercentageToDp('0.5%')}px`};
   font-family: 'RobotoBold';
-  font-size: ${({ theme }) => theme.fontSize - 5}px;
+  font-size: ${({ theme }) => theme.fontSize - 3}px;
   padding: 10px;
 `;
 

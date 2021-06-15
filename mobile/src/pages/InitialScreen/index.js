@@ -20,8 +20,8 @@ const InitialScreen = ({ navigation }) => (
     <ImageView>
       <StyledLoginIllustration />
 
-      <StyledTitle color="primary">Bem-Vindo!</StyledTitle>
-      <StyledParagraph color="primary">
+      <StyledTitle fill="black">Bem-Vindo!</StyledTitle>
+      <StyledParagraph fill="black">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the standard dummy text ever since the
         1500s, when an unknown printer took a galley of type and scrambled it to

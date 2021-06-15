@@ -34,11 +34,13 @@ const Register = ({ navigation }) => (
       <DismissKeyboard>
         <InputWrapper>
           <Input
+            fill="black"
             placeholder="Digite seu nome de usuário"
             icon={<FontAwesome5 name="user-alt" size={24} color="black" />}
             label="Nome de Usuário"
           />
           <Input
+            fill="black"
             autoCompleteType="email"
             placeholder="Digite seu endereço eletrônico"
             keyboardType="email-address"
@@ -46,12 +48,14 @@ const Register = ({ navigation }) => (
             label="E-mail"
           />
           <Input
+            fill="black"
             placeholder="Digite uma senha"
             icon={<FontAwesome5 name="lock" size={24} color="black" />}
             label="Senha"
             secureTextEntry
           />
           <Input
+            fill="black"
             placeholder="Confirme a senha digitada"
             icon={<FontAwesome5 name="lock" size={24} color="black" />}
             label="Confirmar Senha"

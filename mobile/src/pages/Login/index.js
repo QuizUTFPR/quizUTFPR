@@ -34,12 +34,14 @@ const Login = ({ navigation }) => (
       <DismissKeyboard>
         <InputWrapper>
           <Input
+            fill="black"
             placeholder="Digite seu nome de usuário"
             icon={<FontAwesome5 name="user-alt" size={24} color="#222222" />}
             label="Nome de Usuário"
           />
 
           <Input
+            fill="black"
             placeholder="Digite sua senha"
             icon={<FontAwesome5 name="lock" size={24} color="#222222" />}
             label="Senha"
