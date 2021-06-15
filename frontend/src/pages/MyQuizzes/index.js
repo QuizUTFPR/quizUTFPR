@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import api from '@api';
 
@@ -15,10 +15,22 @@ import QuizPreferences from '@pages/EditQuizPreferences';
 import { CREATE_QUIZ } from '@routes';
 
 // MATERIAL-UI COMPONENTS
-import { Grid, IconButton, Typography, Divider } from '@material-ui/core';
+import {
+  Grid,
+  IconButton,
+  Typography,
+  Divider,
+  Tooltip,
+} from '@material-ui/core';
 import Button from '@components/Button';
 // MATERIAL-UI ICONS
-import { Edit, Delete } from '@material-ui/icons';
+import { Edit, Delete, Publish } from '@material-ui/icons';
+
+const IconWrapper = forwardRef((props, ref) => (
+  <IconButton ref={ref} onClick={props.onClick} {...props}>
+    {props.children}
+  </IconButton>
+));
 
 const Quiz = () => {
   const [quizzes, setQuizzes] = useState(false);
@@ -58,9 +70,19 @@ const Quiz = () => {
     getQuizzes();
   };
 
+  const publishQuiz = (quiz) => async () => {
+    const quizUpdated = {
+      id: quiz.id,
+      published: true,
+    };
+
+    const responseQuiz = await api.post('/quiz/publish', quizUpdated);
+    if (responseQuiz.status === 200) console.log('publicado');
+  };
+
   useEffect(() => {
     getQuizzes();
-  }, []);
+  }, [publishQuiz]);
 
   return (
     <>
@@ -97,13 +119,27 @@ const Quiz = () => {
               title={quiz.title}
               description={quiz.description}
               idQuiz={quiz.id}
+              published={quiz.published}
             >
-              <IconButton onClick={handleOpenModal(quiz)}>
-                <Edit />
-              </IconButton>
-              <IconButton onClick={() => handleClickOpenAlert(quiz.id)}>
-                <Delete />
-              </IconButton>
+              {!quiz.published && (
+                <Tooltip arrow aria-label="publicar" title="Publicar">
+                  <IconWrapper onClick={publishQuiz(quiz)}>
+                    <Publish />
+                  </IconWrapper>
+                </Tooltip>
+              )}
+              <Tooltip arrow aria-label="editar" title="Editar">
+                <IconWrapper onClick={handleOpenModal(quiz)}>
+                  <Edit />
+                </IconWrapper>
+              </Tooltip>
+              {!quiz.published && (
+                <Tooltip arrow aria-label="deletar" title="Deletar">
+                  <IconWrapper onClick={() => handleClickOpenAlert(quiz.id)}>
+                    <Delete />
+                  </IconWrapper>
+                </Tooltip>
+              )}
             </Card>
           ))
         )}

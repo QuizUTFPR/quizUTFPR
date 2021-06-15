@@ -78,11 +78,12 @@ const Header = ({
               onClick={handleSave}
               startIcon={<Save />}
               size="large"
-              disabled={isSaved || isTyping}
+              disabled={isSaved || isTyping || location.state.published}
             >
               Salvar
             </StyledButton>
             <StyledButton
+              disabled={location.state.published}
               color="primary"
               variant="contained"
               onClick={handleFinish}

@@ -28,6 +28,7 @@ const MiddleSide = ({
   updateAnswer,
   handleClickOpenAlert,
   errors,
+  location,
 }) => (
   <Grid item xs={6}>
     <StyledGrid container justify="center" align="center">
@@ -40,6 +41,7 @@ const MiddleSide = ({
           )}
           <Grid item xs={12}>
             <StyledTitleInput
+              disabled={location.state.published}
               placeholder="DIGITE O ENUNCIADO AQUI"
               formikID="question.title"
               handleFormikChange={formik.handleChange}
@@ -57,19 +59,20 @@ const MiddleSide = ({
           <Grid item xs={12}>
             ̣ <PreviewImage src={formik.values.question.imageUrl} />
           </Grid>
-
-          <Grid item xs={12} style={{ marginBottom: '-80px' }}>
-            <DragImageInput
-              formikID={['question.imageObj', 'question.imageUrl']}
-              name="Imagem de Capa"
-              handleFormikChange={formik.setFieldValue}
-              handlePropsChange={{
-                handleUpdate: updateQuestion,
-                key: ['imageObj', 'imageUrl'],
-                index: formik.values.index,
-              }}
-            />
-          </Grid>
+          {!location.state.published && (
+            <Grid item xs={12} style={{ marginBottom: '-80px' }}>
+              <DragImageInput
+                formikID={['question.imageObj', 'question.imageUrl']}
+                name="Imagem de Capa"
+                handleFormikChange={formik.setFieldValue}
+                handlePropsChange={{
+                  handleUpdate: updateQuestion,
+                  key: ['imageObj', 'imageUrl'],
+                  index: formik.values.index,
+                }}
+              />
+            </Grid>
+          )}
 
           <Grid item xs={12}>
             {errors.is_correct && (
@@ -99,11 +102,15 @@ const MiddleSide = ({
                 }}
               >
                 <>
-                  <ShowOption checked={Boolean(item.is_correct)}>
+                  <ShowOption
+                    disabled={location.state.published}
+                    checked={Boolean(item.is_correct)}
+                  >
                     <Check />
                   </ShowOption>
                   {formik.values.question.type === 'multiple_choice' ? (
                     <HiddenCheckBox
+                      disabled={location.state.published}
                       style={{ width: '50px', height: '50px' }}
                       checked={Boolean(item.is_correct)}
                       formikID={`question.answer[${index}].is_correct`}
@@ -117,6 +124,7 @@ const MiddleSide = ({
                     />
                   ) : (
                     <HiddenRadio
+                      disabled={location.state.published}
                       style={{ width: '50px', height: '50px' }}
                       value={item.is_correct}
                       formikID={`question.answer[${index}].is_correct`}
@@ -136,6 +144,7 @@ const MiddleSide = ({
                 </>
                 <StyledAnswerInput
                   type="text"
+                  disabled={location.state.published}
                   placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
                   formikID={`question.answer[${index}].title`}
                   value={item.title}
@@ -155,6 +164,7 @@ const MiddleSide = ({
           <GridRegisterQuestion item xs={6}>
             <StyledButton
               type="submit"
+              disabled={location.state.published}
               fullWidth
               color="secondary"
               variant="outlined"

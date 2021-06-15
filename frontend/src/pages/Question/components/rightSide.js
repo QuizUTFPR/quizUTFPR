@@ -21,6 +21,7 @@ const RightSide = ({
   updateQuestion,
   questions,
   handleOpenChangeTypeQuestion,
+  location,
 }) => (
   <Grid item xs={3}>
     <StyledRightGrid container align="center" direction="column">
@@ -39,6 +40,7 @@ const RightSide = ({
               name="type"
               variant="outlined"
               formikID=""
+              disabled={location.state.published}
               value={formik.values.question.type}
               handleFormikChange={() => (e) => {
                 handleOpenChangeTypeQuestion({
@@ -60,6 +62,7 @@ const RightSide = ({
           <GridItemStyledRight item>
             <SelectInput
               fullWidth
+              disabled={location.state.published}
               label="Tempo"
               name="time"
               variant="outlined"
@@ -88,6 +91,7 @@ const RightSide = ({
             <TagInput
               fullWidth
               suggestions={[]}
+              disabled={location.state.published}
               value={formik.values.question.tags}
               formikID="question.tags"
               handleFormikChange={formik.setFieldValue}
@@ -102,6 +106,7 @@ const RightSide = ({
           <GridItemStyledRight item>
             <SelectInput
               fullWidth
+              disabled={location.state.published}
               label="Nível de Dificuldade"
               name="difficultyLevel"
               variant="outlined"
@@ -129,7 +134,10 @@ const RightSide = ({
                 control={
                   <CheckBox
                     type="multiple_choice"
-                    disabled={Boolean(formik.values.question.copy)}
+                    disabled={
+                      Boolean(formik.values.question.copy) ||
+                      location.state.published
+                    }
                     style={{ width: '50px', height: '50px' }}
                     inputProps={{
                       'aria-label': 'primary checkbox',

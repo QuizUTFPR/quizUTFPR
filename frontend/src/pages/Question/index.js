@@ -179,6 +179,7 @@ const Question = ({ history, location }) => {
       <ContainerGrid container>
         {/* LEFT */}
         <LeftSide
+          location={location}
           questions={questions}
           questionOnScreen={onScreen}
           handleOpenModalTypeQuestion={handleOpenModalTypeQuestion}
@@ -189,6 +190,7 @@ const Question = ({ history, location }) => {
 
         {/* MIDDLE */}
         <MiddleSide
+          location={location}
           errors={errors}
           questions={questions}
           formik={formik}
@@ -199,6 +201,7 @@ const Question = ({ history, location }) => {
 
         {/* RIGHT */}
         <RightSide
+          location={location}
           formik={formik}
           updateQuestion={updateQuestion}
           questions={questions}

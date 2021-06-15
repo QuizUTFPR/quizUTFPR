@@ -25,6 +25,7 @@ const LeftSide = ({
   handleChangeQuestion,
   handleToDown,
   handleToUp,
+  location,
 }) => (
   <Grid item xs={3}>
     <StyledLeftGrid container align="center">
@@ -88,6 +89,7 @@ const LeftSide = ({
           color="secondary"
           startIcon={<AddCircle />}
           size="large"
+          disabled={location.state.published}
         >
           CRIAR
         </StyledButton>

@@ -11,14 +11,22 @@ import {
   StyledCardActions,
 } from './style';
 
-const Card = ({ image, imageTitle, title, description, idQuiz, children }) => (
+const Card = ({
+  image,
+  imageTitle,
+  title,
+  published,
+  description,
+  idQuiz,
+  children,
+}) => (
   <StyledCard>
     <StyledCardMedia component="img" image={image} title={imageTitle} />
     <CardActionArea
       component={Link}
       to={{
         pathname: `${QUESTION}${idQuiz}`,
-        state: { title },
+        state: { title, published },
       }}
     >
       <StyledCardContent>
