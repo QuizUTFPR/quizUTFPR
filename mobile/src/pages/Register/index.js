@@ -23,7 +23,7 @@ import {
 // ICONS
 
 const Register = ({ navigation }) => {
-  const loginValidationSchema = Yup.object().shape({
+  const registerValidationSchema = Yup.object().shape({
     username: Yup.string()
       .min(
         3,
@@ -58,7 +58,7 @@ const Register = ({ navigation }) => {
           password: '',
           confirmPassword: '',
         }}
-        validationSchema={loginValidationSchema}
+        validationSchema={registerValidationSchema}
         onSubmit={(values) => console.log(values)}
       >
         {({
