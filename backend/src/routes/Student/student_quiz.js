@@ -4,7 +4,7 @@ import { Router } from "express";
 const router = new Router();
 
 // CONTROLLERS
-import StudentQuestionChoiceController from "../app/controllers/StudentQuiz/StudentQuestionChoiceController";
+import StudentQuestionChoiceController from "../../app/controllers/StudentQuiz/StudentQuestionChoiceController";
 
 router.post("/createChoice", StudentQuestionChoiceController.store);
 

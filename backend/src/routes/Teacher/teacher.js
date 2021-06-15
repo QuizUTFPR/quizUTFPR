@@ -4,7 +4,7 @@ import { Router } from "express";
 const router = new Router();
 
 // CONTROLLERS
-import SessionTeacherController from '../app/controllers/TeacherController/SessionTeacherController';
+import SessionTeacherController from '../../app/controllers/TeacherController/SessionTeacherController';
 
 router.post("/login",  SessionTeacherController.store);
 

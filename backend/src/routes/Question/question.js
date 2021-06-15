@@ -4,9 +4,9 @@ import { Router } from "express";
 const router = new Router();
 
 // CONTROLLERS
-import Question from "../app/controllers/QuestionController/QuestionController";
-import QuestionQuiz from '../app/controllers/QuestionController/QuestionQuizController'
-import QuestionTag from '../app/controllers/QuestionController/QuestionTagController'
+import Question from "../../app/controllers/QuestionController/QuestionController";
+import QuestionQuiz from '../../app/controllers/QuestionController/QuestionQuizController'
+import QuestionTag from '../../app/controllers/QuestionController/QuestionTagController'
 
 router.post("/create", Question.store);
 router.get("/", Question.index);
