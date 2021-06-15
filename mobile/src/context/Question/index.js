@@ -22,7 +22,6 @@ const Question = ({ children }) => {
   );
 
   const getQuestionsOfQuizFromDatabase = (idQuiz) => {
-    console.log('id do quiz', idQuiz);
     setQuizData(initialValue);
   };
 
