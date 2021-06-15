@@ -9,7 +9,7 @@ import Header from '@components/Header';
 import DismissKeyboard from '@components/DismissKeyboard';
 
 // STYLES
-import { FontAwesome5, Zocial } from '@expo/vector-icons';
+import { FontAwesome5, Zocial, Ionicons } from '@expo/vector-icons';
 
 import {
   BackgroundImage,
@@ -22,11 +22,9 @@ import {
 
 const Register = ({ navigation }) => (
   <Container>
-    <BackgroundImage fill="#333D54" />
+    <BackgroundImage />
     <Header
-      buttonColor="white"
-      iconButton="chevron-left"
-      size={20}
+      iconButton={<Ionicons name="chevron-back" size={32} color="white" />}
       onPressButton={() => navigation.goBack()}
       titleContent="Cadastro"
       textContent="Por favor, informe seus dados"

@@ -4,7 +4,6 @@ import React from 'react';
 import { StyledIconButton, StyledTitle, StyledText } from './styles';
 
 const Login = ({
-  buttonColor,
   iconButton,
   buttonSize,
   onPressButton,
@@ -12,12 +11,9 @@ const Login = ({
   textContent,
 }) => (
   <>
-    {/* <StyledIconButton
-      color={buttonColor}
-      icon={iconButton}
-      size={buttonSize}
-      onPress={onPressButton}
-    /> */}
+    <StyledIconButton size={buttonSize} onPress={onPressButton}>
+      {iconButton}
+    </StyledIconButton>
 
     <StyledTitle>{titleContent}</StyledTitle>
 

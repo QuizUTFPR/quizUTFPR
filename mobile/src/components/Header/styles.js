@@ -1,14 +1,13 @@
 import styled from 'styled-components/native';
-// import { IconButton } from 'react-native-paper';
 
 // DIMENSION TRANSFORMERS
 import { heightPercentageToDp } from '@styles/dimensions';
 
-// export const StyledIconButton = styled(IconButton)`
-//   margin-top: ${`${heightPercentageToDp('6%')}px`};
-//   align-self: flex-start;
-//   margin-left: -7px;
-// `;
+export const StyledIconButton = styled.Text`
+  margin-top: ${`${heightPercentageToDp('6%')}px`};
+  align-self: flex-start;
+  margin-left: -7px;
+`;
 
 export const StyledTitle = styled.Text`
   align-self: flex-start;

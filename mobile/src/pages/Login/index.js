@@ -2,7 +2,7 @@ import React from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 
 // ICONS
-import { FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 // COMPONENTS
 import Container from '@components/Container';
@@ -22,11 +22,9 @@ import {
 
 const Login = ({ navigation }) => (
   <Container>
-    <BackgroundImage fill="#333D54" />
+    <BackgroundImage />
     <Header
-      buttonColor="white"
-      iconButton="chevron-left"
-      size={20}
+      iconButton={<Ionicons name="chevron-back" size={32} color="white" />}
       onPressButton={() => navigation.goBack()}
       titleContent="Login"
       textContent="Por favor, informe seus dados"
@@ -37,13 +35,13 @@ const Login = ({ navigation }) => (
         <InputWrapper>
           <Input
             placeholder="Digite seu nome de usuário"
-            icon={<FontAwesome5 name="user-alt" size={24} color="black" />}
+            icon={<FontAwesome5 name="user-alt" size={24} color="#222222" />}
             label="Nome de Usuário"
           />
 
           <Input
             placeholder="Digite sua senha"
-            icon={<FontAwesome5 name="lock" size={24} color="black" />}
+            icon={<FontAwesome5 name="lock" size={24} color="#222222" />}
             label="Senha"
             secureTextEntry
           />

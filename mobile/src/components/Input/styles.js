@@ -13,7 +13,7 @@ export const InputWrapper = styled.View`
   padding-right: 10px;
   border-radius: 8px;
   height: 60px;
-  border: 2px solid black;
+  border: 1.2px solid #222222;
 `;
 
 export const LabelWrapper = styled.View`
@@ -30,6 +30,7 @@ export const Label = styled.Text`
   background: white;
   padding-left: 2px;
   padding-right: 2px;
+  color: #222222;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 `;

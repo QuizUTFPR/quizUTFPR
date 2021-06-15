@@ -16,7 +16,7 @@ import {
 
 const InitialScreen = ({ navigation }) => (
   <Container>
-    <BloobsBackground fill={'white'} />
+    <BloobsBackground fill={'#eaebff'} />
     <ImageView>
       <StyledLoginIllustration />
 
