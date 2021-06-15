@@ -25,16 +25,13 @@ import {
 const Register = ({ navigation }) => {
   const registerValidationSchema = Yup.object().shape({
     username: Yup.string()
-      .min(
-        3,
-        ({ min }) => `O nome de usuário deve conter ao menos ${min} caracteres`
-      )
+      .min(3, ({ min }) => `O mínimo são ${min} caracteres`)
       .required('Por favor, informe um apelido'),
     email: Yup.string()
       .email('Por favor, informe um e-mail válido')
       .required('Por favor, informe um e-mail'),
     password: Yup.string()
-      .min(8, ({ min }) => `Mínimos ${min} caracteres`)
+      .min(8, ({ min }) => `O mínimo são ${min} caracteres`)
       .required('A senha é obrigatória'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'As senhas devem ser iguais')
