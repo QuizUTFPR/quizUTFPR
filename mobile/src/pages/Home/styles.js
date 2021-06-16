@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 // ASSETS
-import HeaderBackground from '@assets/patterns/sunburst.jpg';
+import HeaderBackground from '@assets/patterns/sunburst.png';
 
 // DIMENSION TRANSFORMERS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
