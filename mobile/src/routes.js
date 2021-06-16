@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Loading from '@components/Loading';
+import StudentHeader from '@components/StudentHeader';
 
 // CONTEXT
 import QuestionProvider from '@context/Question';
@@ -51,7 +52,14 @@ function Routes() {
               </QuestionProvider>
             )}
           </Stack.Screen>
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen
+            options={{
+              headerTitle: () => <StudentHeader />,
+              headerLeft: null,
+            }}
+            name="Home"
+            component={Home}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Suspense>
