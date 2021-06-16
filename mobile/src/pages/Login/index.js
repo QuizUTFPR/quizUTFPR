@@ -102,7 +102,8 @@ const Login = ({ navigation }) => {
             <WrapperButton>
               <ButtonGradient
                 variant="primary"
-                onPress={handleSubmit}
+                // onPress={handleSubmit}
+                onPress={() => navigation.navigate('Home')}
                 icon="login-variant"
               >
                 Entrar

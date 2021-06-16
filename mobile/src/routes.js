@@ -13,6 +13,7 @@ import Question from '@pages/Question';
 const InitialScreen = lazy(() => import('@pages/InitialScreen'));
 const Login = lazy(() => import('@pages/Login'));
 const Register = lazy(() => import('@pages/Register'));
+const Home = lazy(() => import('@pages/Home'));
 
 const Stack = createStackNavigator();
 
@@ -22,21 +23,35 @@ function Routes() {
   return (
     <Suspense fallback={<Loading />}>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="InitialScreen"
-          screenOptions={{ headerShown: false }}
-        >
-          <Stack.Screen name="InitialScreen" component={InitialScreen} />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="CountDown" component={CountDown} />
-          <Stack.Screen name="Question">
+        <Stack.Navigator initialRouteName="InitialScreen">
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="InitialScreen"
+            component={InitialScreen}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Login"
+            component={Login}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Register"
+            component={Register}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="CountDown"
+            component={CountDown}
+          />
+          <Stack.Screen options={{ headerShown: false }} name="Question">
             {(props) => (
               <QuestionProvider>
                 <Question {...props} />
               </QuestionProvider>
             )}
           </Stack.Screen>
+          <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
       </NavigationContainer>
     </Suspense>
