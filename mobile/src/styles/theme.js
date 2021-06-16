@@ -31,6 +31,7 @@ const theme = {
     backgroundButton: backgroundColorButton,
     textButton: textColorButton,
     purple: '#4B24B1',
+    white: '#fff',
   },
   size: {
     padding: 20,
