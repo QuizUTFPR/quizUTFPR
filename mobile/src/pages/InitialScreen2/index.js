@@ -36,6 +36,7 @@ const InitialScreen = ({ navigation }) => (
 
       <WrapperButton>
         <ButtonGradient
+          style={{ borderRadius: 50 }}
           variant="primary"
           colors={['#fdb646', '#f99f4c']}
           onPress={() => navigation.navigate('Login')}
@@ -46,6 +47,7 @@ const InitialScreen = ({ navigation }) => (
       </WrapperButton>
       <WrapperButton>
         <ButtonGradient
+          style={{ borderRadius: 50 }}
           variant="primary"
           colors={['#fdb646', '#f99f4c']}
           onPress={() => navigation.navigate('Register')}
