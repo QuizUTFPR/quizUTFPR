@@ -11,7 +11,7 @@ import QuestionProvider from '@context/Question';
 import CountDown from '@pages/CountDown';
 import Question from '@pages/Question';
 
-const InitialScreen = lazy(() => import('@pages/InitialScreen'));
+const InitialScreen = lazy(() => import('@pages/InitialScreen2'));
 const Login = lazy(() => import('@pages/Login'));
 const Register = lazy(() => import('@pages/Register'));
 const MenuDrawer = lazy(() => import('@components/MenuDrawer'));
