@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import theme from '@styles/theme';
 
 // STYLES
 import { StyledView, StyledTabButton, StyledText } from './styles';
@@ -50,7 +50,8 @@ const TabBar = ({ state, descriptors, navigation }) => {
             <options.Icon
               name={options.name}
               size={options.size}
-              color={isFocused ? 'white' : 'purple'}
+              fill="white"
+              color={isFocused ? theme.color.white : 'purple'}
             />
             <StyledText isFocused>{label}</StyledText>
           </StyledTabButton>
