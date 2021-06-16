@@ -5,7 +5,9 @@ import { heightPercentageToDp } from '@styles/dimensions';
 
 export const StyledView = styled.View`
   flex-direction: row;
-  height: ${`${heightPercentageToDp('12%')}px`};
+  height: ${`${heightPercentageToDp('9%')}px`};
+  justify-content: center;
+  align-items: center;
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
   padding-left: 20px;
@@ -16,4 +18,10 @@ export const StyledView = styled.View`
 export const StyledTabButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
+`;
+
+export const StyledText = styled.Text`
+  color: ${(isFocused) => (isFocused ? 'white' : 'purple')};
+  font-family: 'RobotoRegular';
+  font-size: 12px;
 `;
