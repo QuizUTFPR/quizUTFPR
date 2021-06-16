@@ -35,7 +35,7 @@ export const HeaderButton = styled.TouchableOpacity.attrs({
   activeOpacity: 0.7,
 })``;
 
-export const InputWrapper = styled.View`
+export const InputWrapper = styled.View.attrs({ elevation: 10 })`
   background: white;
   flex-direction: row;
   border-radius: 20px;
