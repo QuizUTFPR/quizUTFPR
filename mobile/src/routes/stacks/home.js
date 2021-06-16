@@ -14,7 +14,7 @@ const HomeStack = () => {
     <Suspense fallback={<Loading />}>
       <Stack.Navigator initialRouteName="InitialScreen">
         <Stack.Screen
-          options={{ headerTitle: () => <StudentHeader /> }}
+          options={{ headerLeft: null, headerTitle: () => <StudentHeader /> }}
           name="Home"
           component={Home}
         />
