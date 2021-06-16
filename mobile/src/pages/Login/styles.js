@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import Waves from '@assets/waves.svg';
+import Waves from '@assets/purpleWaves.svg';
 
 // DIMENSION TRANSFORMERS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
