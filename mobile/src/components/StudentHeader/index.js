@@ -1,21 +1,29 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-import { HeaderWrapper, MenuButton } from './styles';
+import { HeaderWrapper, IconButton, MiddleContent } from './styles';
 
 const StudentHeader = () => {
   const navigation = useNavigation();
   return (
     <HeaderWrapper>
-      <MenuButton onPress={() => navigation.openDrawer()}>
+      <IconButton onPress={() => navigation.openDrawer()}>
         <MaterialIcons name="menu" size={32} color="black" />
-      </MenuButton>
+      </IconButton>
 
-      <View>
-        <Text>Header Customizédi</Text>
-      </View>
+      <MiddleContent>
+        <Text>
+          Header
+          CustomizédiCustomizédiCustomizédiCustomizédiCustomizédiCustomizédiCustomizédiCustomizédiCustomizédiCustomizédiCustomizédi
+          CustomizédiCustomizédiCustomizédiCustomizédiCustomizédiCustomizédi
+        </Text>
+      </MiddleContent>
+
+      <IconButton onPress={() => console.log('settings')}>
+        <MaterialIcons name="settings" size={32} color="black" />
+      </IconButton>
     </HeaderWrapper>
   );
 };
