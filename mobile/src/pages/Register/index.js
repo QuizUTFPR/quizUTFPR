@@ -35,7 +35,7 @@ const Register = ({ navigation }) => {
       .required('A senha é obrigatória'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Deve ser igual a senha')
-      .required('A confirmação é obrigatória'),
+      .required('Confirmação obrigatória'),
   });
 
   return (
@@ -123,9 +123,6 @@ const Register = ({ navigation }) => {
                     onBlur={handleBlur('confirmPassword')}
                     value={values.confirmPassword}
                   />
-                  {errors.confirmPassword && touched.confirmPassword ? (
-                    <Text>{errors.confirmPassword}</Text>
-                  ) : null}
                 </InputWrapper>
               </DismissKeyboard>
             </KeyboardAvoidingView>
