@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Loading from '@components/Loading';
-import StudentHeader from '@components/StudentHeader';
+// import StudentHeader from '@components/StudentHeader';
 
 // CONTEXT
 import QuestionProvider from '@context/Question';
@@ -14,7 +14,7 @@ import Question from '@pages/Question';
 const InitialScreen = lazy(() => import('@pages/InitialScreen'));
 const Login = lazy(() => import('@pages/Login'));
 const Register = lazy(() => import('@pages/Register'));
-const TabNavigator = lazy(() => import('./TabNavigator'));
+const MenuDrawer = lazy(() => import('@components/MenuDrawer'));
 
 const Stack = createStackNavigator();
 
@@ -55,7 +55,7 @@ function Routes() {
           <Stack.Screen
             options={{ headerShown: false }}
             name="Home"
-            component={TabNavigator}
+            component={MenuDrawer}
           />
         </Stack.Navigator>
       </NavigationContainer>

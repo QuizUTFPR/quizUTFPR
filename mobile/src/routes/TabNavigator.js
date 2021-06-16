@@ -6,12 +6,10 @@ import HomeStack from './stacks/home';
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeStack} />
-    </Tab.Navigator>
-  );
-};
+const TabNavigator = () => (
+  <Tab.Navigator>
+    <Tab.Screen name="Home" component={HomeStack} />
+  </Tab.Navigator>
+);
 
 export default TabNavigator;
