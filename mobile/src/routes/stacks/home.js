@@ -1,10 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Loading from '@components/Loading';
-import StudentHeader from '@components/StudentHeader';
-
-// DIMENSION TRANSFORMERS
-import { heightPercentageToDp } from '@styles/dimensions';
 
 // PAGES
 const Home = lazy(() => import('@pages/Home'));
@@ -16,11 +12,7 @@ const HomeStack = () => (
   <Suspense fallback={<Loading />}>
     <Stack.Navigator initialRouteName="InitialScreen">
       <Stack.Screen
-        options={{
-          headerStyle: { height: heightPercentageToDp('20%') },
-          headerLeft: null,
-          headerTitle: () => <StudentHeader />,
-        }}
+        options={{ headerShown: false }}
         name="Home"
         component={Home}
       />
