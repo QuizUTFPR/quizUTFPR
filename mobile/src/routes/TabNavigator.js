@@ -4,18 +4,24 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // COMPONENTS
 import TabBar from '@components/TabBar';
 
+// ICONS
+import { Ionicons } from '@expo/vector-icons';
+
 // STACKS
 import HomeStack from './stacks/home';
-
-// ICONS
-import Ionicons from '@expo/vector-icons/Ionicons';
 
 // TAB CREATION
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => (
   <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
-    <Tab.Screen name="Home" component={HomeStack} />
+    <Tab.Screen
+      options={{
+        tabBarIcon: <Ionicons name="md-home" size={32} color="white" />,
+      }}
+      name="Home"
+      component={HomeStack}
+    />
   </Tab.Navigator>
 );
 
