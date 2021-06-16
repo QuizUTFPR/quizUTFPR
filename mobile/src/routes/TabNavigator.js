@@ -16,8 +16,14 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => (
   <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
     <Tab.Screen
+      // options={{
+      //   tabBarIcon: <Ionicons name="md-home" size={32} color="white" />,
+      // }}
+
       options={{
-        tabBarIcon: <Ionicons name="md-home" size={32} color="white" />,
+        Icon: Ionicons,
+        name: 'md-home',
+        size: 32,
       }}
       name="Home"
       component={HomeStack}
