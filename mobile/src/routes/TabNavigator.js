@@ -7,6 +7,10 @@ import TabBar from '@components/TabBar';
 // STACKS
 import HomeStack from './stacks/home';
 
+// ICONS
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+// TAB CREATION
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => (

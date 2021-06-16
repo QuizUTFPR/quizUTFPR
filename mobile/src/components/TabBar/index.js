@@ -1,10 +1,11 @@
-import * as React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
+
+// STYLES
+import { StyledView } from './styles';
 
 const TabBar = ({ state, descriptors, navigation }) => (
-  <View style={{ flexDirection: 'row' }}>
+  <StyledView>
     {state.routes.map((route, index) => {
       const { options } = descriptors[route.key];
       const label =
@@ -45,11 +46,11 @@ const TabBar = ({ state, descriptors, navigation }) => (
           style={{ flex: 1 }}
           key={index}
         >
-          <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>{label}</Text>
+          <Text style={{ color: isFocused ? '#fff' : '#000' }}>{label}</Text>
         </TouchableOpacity>
       );
     })}
-  </View>
+  </StyledView>
 );
 
 export default TabBar;
