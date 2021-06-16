@@ -14,7 +14,7 @@ import Question from '@pages/Question';
 const InitialScreen = lazy(() => import('@pages/InitialScreen'));
 const Login = lazy(() => import('@pages/Login'));
 const Register = lazy(() => import('@pages/Register'));
-const Home = lazy(() => import('@pages/Home'));
+const TabNavigator = lazy(() => import('./TabNavigator'));
 
 const Stack = createStackNavigator();
 
@@ -53,12 +53,9 @@ function Routes() {
             )}
           </Stack.Screen>
           <Stack.Screen
-            options={{
-              headerTitle: () => <StudentHeader />,
-              headerLeft: null,
-            }}
+            options={{ headerShown: false }}
             name="Home"
-            component={Home}
+            component={TabNavigator}
           />
         </Stack.Navigator>
       </NavigationContainer>
