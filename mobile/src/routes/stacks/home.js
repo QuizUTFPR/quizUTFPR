@@ -2,6 +2,8 @@ import React, { lazy, Suspense } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Loading from '@components/Loading';
 import StudentHeader from '@components/StudentHeader';
+// DIMENSION TRANSFORMERS
+import { heightPercentageToDp } from '@styles/dimensions';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +16,11 @@ const HomeStack = () => (
   <Suspense fallback={<Loading />}>
     <Stack.Navigator initialRouteName="InitialScreen">
       <Stack.Screen
-        options={{ headerLeft: null, headerTitle: () => <StudentHeader /> }}
+        options={{
+          headerStyle: { height: heightPercentageToDp('20%') },
+          headerLeft: null,
+          headerTitle: () => <StudentHeader />,
+        }}
         name="Home"
         component={Home}
       />
