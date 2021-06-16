@@ -42,9 +42,9 @@ class StudentQuizFinishedAttemptController {
       });
 
       if(choices.length !== qtd_quiz_questions)
-      return res.status(404).json({
-        error: "É necessário responder todas as questões do quiz antes de finalizar a tentativa."
-    });
+        return res.status(404).json({
+          error: "É necessário responder todas as questões do quiz antes de finalizar a tentativa."
+        });
       
 
 
