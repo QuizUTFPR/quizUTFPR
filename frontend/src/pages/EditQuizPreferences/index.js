@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import api from '@api';
 
 // COMPONENTS
-import GridContainer from '@components/Container';
 import Button from '@components/Button';
 import ChipInput from '@components/ChipInput';
 import DragImageInput from '@components/DragZone';
@@ -19,11 +18,15 @@ import {
 // ASSETS
 // import SaveIcon from '@material-ui/icons/Save';
 import { Close } from '@material-ui/icons';
-import { PreviewImage, FormWrapper } from './style';
+import { PreviewImage, FormWrapper, GridContainerModal } from './style';
 
 const Wrapper = forwardRef((props, ref) => (
-  <GridContainer
-    style={{ maxHeight: '90vh', flexWrap: 'nowrap', overflow: 'auto' }}
+  <GridContainerModal
+    style={{
+      maxHeight: '90vh',
+      flexWrap: 'nowrap',
+      overflow: 'auto',
+    }}
     ref={ref}
     {...props}
   />
@@ -89,8 +92,13 @@ const EditPreferences = forwardRef((props, ref) => {
         <Divider />
       </Grid>
 
-      <FormWrapper component="form" onSubmit={formik.handleSubmit} spacing={2}>
-        <Grid item xs={12}>
+      <FormWrapper
+        container
+        component="form"
+        onSubmit={formik.handleSubmit}
+        spacing={2}
+      >
+        <Grid item xs={6} style={{ display: 'flex' }}>
           <PreviewImage src={formik.values.imageUrl} />
         </Grid>
         <Grid item xs={12}>
