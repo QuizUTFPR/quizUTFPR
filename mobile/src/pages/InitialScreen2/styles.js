@@ -40,6 +40,6 @@ export const StyledTitle = styled.Text`
 
 export const StyledParagraph = styled.Text`
   font-family: 'PoppinsRegular';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize - 2}px;
   color: ${({ theme }) => theme.color.fill};
 `;
