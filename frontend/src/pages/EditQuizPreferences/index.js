@@ -19,10 +19,14 @@ import {
 // ASSETS
 // import SaveIcon from '@material-ui/icons/Save';
 import { Close } from '@material-ui/icons';
-import { PreviewImage } from './style';
+import { PreviewImage, FormWrapper } from './style';
 
 const Wrapper = forwardRef((props, ref) => (
-  <GridContainer ref={ref} {...props} />
+  <GridContainer
+    style={{ maxHeight: '90vh', flexWrap: 'nowrap', overflow: 'auto' }}
+    ref={ref}
+    {...props}
+  />
 ));
 
 // eslint-disable-next-line no-unused-vars
@@ -85,14 +89,7 @@ const EditPreferences = forwardRef((props, ref) => {
         <Divider />
       </Grid>
 
-      <Grid
-        container
-        component="form"
-        justify="center"
-        align="center"
-        onSubmit={formik.handleSubmit}
-        spacing={2}
-      >
+      <FormWrapper component="form" onSubmit={formik.handleSubmit} spacing={2}>
         <Grid item xs={12}>
           <PreviewImage src={formik.values.imageUrl} />
         </Grid>
@@ -166,7 +163,7 @@ const EditPreferences = forwardRef((props, ref) => {
             SALVAR ALTERAÇÔES
           </Button>
         </Grid>
-      </Grid>
+      </FormWrapper>
     </Wrapper>
   );
 });

@@ -7,6 +7,7 @@ import GridContainer from '@components/Container';
 import Card from '@components/CardQuiz';
 import Modal from '@components/Modal';
 import AlertRemoveMessage from '@components/ConfirmRemove';
+import PublishQuizMessage from '@components/ConfirmPublishQuiz';
 
 // PAGES
 import QuizPreferences from '@pages/EditQuizPreferences';
@@ -39,8 +40,14 @@ const Quiz = () => {
     quiz: null,
   });
   const [openAlert, setOpenAlert] = useState({ open: false, idQuiz: null });
+  const [openPublish, setOpenPublish] = useState({ open: false, idQuiz: null });
+
   const handleClickOpenAlert = (idQuiz) => setOpenAlert({ open: true, idQuiz });
   const handleCloseAlert = () => setOpenAlert({ open: false, idQuiz: null });
+  const handleClickOpenPublish = (idQuiz) =>
+    setOpenPublish({ open: true, idQuiz });
+  const handleClosePublish = () =>
+    setOpenPublish({ open: false, idQuiz: null });
 
   const getQuizzes = async () => {
     try {
@@ -70,9 +77,9 @@ const Quiz = () => {
     getQuizzes();
   };
 
-  const publishQuiz = (quiz) => async () => {
+  const publishQuiz = async () => {
     const quizUpdated = {
-      id: quiz.id,
+      id: openPublish.idQuiz,
       published: true,
     };
 
@@ -123,7 +130,7 @@ const Quiz = () => {
             >
               {!quiz.published && (
                 <Tooltip arrow aria-label="publicar" title="Publicar">
-                  <IconWrapper onClick={publishQuiz(quiz)}>
+                  <IconWrapper onClick={() => handleClickOpenPublish(quiz.id)}>
                     <Publish />
                   </IconWrapper>
                 </Tooltip>
@@ -165,6 +172,15 @@ const Quiz = () => {
           onClick={handleRemoveQuiz}
           title="Deseja mesmo excluir o Quiz?"
           description="O Quiz será excluido e todas suas questões também serão excluídas."
+        />
+      </Modal>
+
+      <Modal open={openPublish.open} handleClose={handleCloseAlert}>
+        <PublishQuizMessage
+          handleClose={handleClosePublish}
+          onClick={publishQuiz}
+          title="Deseja mesmo publicar o Quiz?"
+          description="Após a publicação do quiz você não poderá realizar mais nenhuma alterações nas questões do mesmo. Assim como, não poderá exclui-lo."
         />
       </Modal>
     </>
