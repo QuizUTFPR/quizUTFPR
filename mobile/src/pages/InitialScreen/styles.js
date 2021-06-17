@@ -7,7 +7,6 @@ import { widthPercentageToDp } from '@styles/dimensions';
 
 // SVG's AS REACT COMPONENTS
 import Bloobs from '@assets/bloobs.svg';
-import LoginIllustration from '@assets/login_illustration.svg';
 
 const statusBarHeight =
   Platform.OS === 'android' ? Constants.statusBarHeight : 0;
@@ -42,12 +41,12 @@ export const WrapperButton = styled.SafeAreaView`
 export const StyledTitle = styled.Text`
   margin-top: 20px;
   font-size: ${({ theme }) => theme.fontSize + 12}px;
-  font-family: 'RobotoBlack';
+  font-family: 'PoppinsBlack';
   color: ${({ theme }) => theme.color.fill};
 `;
 
 export const StyledParagraph = styled.Text`
-  font-family: 'RobotoRegular';
+  font-family: 'PoppinsRegular';
   font-size: ${({ theme }) => theme.fontSize}px;
   color: ${({ theme }) => theme.color.fill};
 `;

@@ -34,12 +34,12 @@ export const WrapperButton = styled.SafeAreaView`
 
 export const StyledTitle = styled.Text`
   font-size: ${({ theme }) => theme.fontSize + 12}px;
-  font-family: 'RobotoBlack';
+  font-family: 'PoppinsBlack';
   color: ${({ theme }) => theme.color.fill};
 `;
 
 export const StyledParagraph = styled.Text`
-  font-family: 'RobotoRegular';
+  font-family: 'PoppinsRegular';
   font-size: ${({ theme }) => theme.fontSize}px;
   color: ${({ theme }) => theme.color.fill};
 `;

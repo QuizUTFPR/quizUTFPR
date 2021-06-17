@@ -22,6 +22,6 @@ export const StyledTabButton = styled.TouchableOpacity`
 
 export const StyledText = styled.Text`
   color: ${(isFocused) => (isFocused ? 'white' : 'purple')};
-  font-family: 'RobotoRegular';
+  font-family: 'PoppinsRegular';
   font-size: 12px;
 `;

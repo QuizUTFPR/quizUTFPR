@@ -15,14 +15,14 @@ export const BackgroundImage = styled(Waves).attrs(({ theme }) => ({
 export const StyledTitle = styled.Text`
   align-self: flex-start;
   font-size: ${({ theme }) => theme.fontSize + 12}px;
-  font-family: 'RobotoBlack';
+  font-family: 'PoppinsBlack';
   color: white;
 `;
 
 export const StyledText = styled.Text`
   align-self: flex-start;
   font-size: ${({ theme }) => theme.fontSize - 4}px;
-  font-family: 'RobotoRegular';
+  font-family: 'PoppinsRegular';
   color: white;
 `;
 
@@ -33,12 +33,12 @@ export const InputWrapper = styled.View`
 
 export const StyledTextButton = styled.Text`
   margin-top: ${`${heightPercentageToDp('0.5%')}px`};
-  font-family: 'RobotoBold';
+  font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize - 3}px;
   padding: 10px;
 `;
 
 export const WrapperButton = styled.View`
   margin-top: ${`${heightPercentageToDp('1.5%')}px`};
-  width: ${`${widthPercentageToDp('60%')}px`};
+  width: ${`${widthPercentageToDp('85%')}px`};
 `;

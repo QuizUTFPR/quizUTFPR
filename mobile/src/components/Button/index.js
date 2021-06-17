@@ -10,7 +10,7 @@ export const StyledButton = styled.TouchableOpacity`
 `;
 
 export const StyledText = styled.Text`
-  font-family: 'RobotoBold';
+  font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize}px;
   color: ${({ theme }) => theme.color.textButton};
   text-align: center; ;

@@ -24,13 +24,13 @@ export const StyledModal = styled.Modal`
 
 export const StyledText = styled.Text`
   text-align: center;
-  font-family: 'RobotoBold';
+  font-family: 'PoppinsBlack';
   font-size: ${({ theme }) => theme.fontSize + 5}px;
 `;
 
 export const StyledTitle = styled.Text`
   color: ${({ theme }) => theme.color};
-  font-family: 'RobotoBold';
+  font-family: 'PoppinsBlack';
   font-size: ${({ theme }) => theme.fontSize + 10}px;
   margin-bottom: ${({ theme }) => theme.size.margin + 10}px;
 `;
