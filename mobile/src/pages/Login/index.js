@@ -102,7 +102,7 @@ const Login = ({ navigation }) => {
             <WrapperButton>
               <ButtonGradient
                 style={{ borderRadius: 50 }}
-                colors={['#fdb646', '#f99f4c']}
+                // colors={['#fdb646', '#f99f4c']}
                 variant="primary"
                 // onPress={handleSubmit}
                 onPress={() => navigation.navigate('Home')}
