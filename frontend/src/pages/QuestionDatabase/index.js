@@ -8,6 +8,7 @@ import GridContainer from '@components/Container';
 import TagInput from '@components/ChipInput';
 import { IconButton, Grid, Typography, Divider } from '@material-ui/core';
 import { Close, Search } from '@material-ui/icons';
+import SnackBar from '@components/SnackBar';
 import Question from './question';
 
 // ICONS
@@ -95,81 +96,115 @@ const QuestionDatabase = forwardRef((props, ref) => {
       props.handleRemoveQuestion(question);
     }
   };
-  return (
-    <Wrapper container spacing={3}>
-      <Grid container justify="center" alignItems="center">
-        <Grid item xs={3} md={1}>
-          <IconButton aria-label="closeModal" onClick={props.handleClose}>
-            <Close />
-          </IconButton>
-        </Grid>
-        <Grid item xs={9} md={11}>
-          <Typography variant="h5" color="primary">
-            Banco de Questões via Tag‘s
-          </Typography>
-        </Grid>
-      </Grid>
 
-      <Grid
-        component="form"
-        onSubmit={formik.handleSubmit}
-        container
-        justify="center"
-        alignItems="center"
-        spacing={2}
-      >
-        <Grid item xs={9}>
-          <TagInput
-            fullWidth
-            id="tag"
-            value={formik.values.tag}
-            suggestions={formik.values.suggestions}
-            onChange={(e, value) => formik.setFieldValue('tag', value)}
-            variant="outlined"
-            label="Tag"
-            placeholder="Digite a Tag de questões que você deseja pesquisar..."
-          />
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnackBar(false);
+  };
+
+  const handleClickSnackBar = (checked) => {
+    setOpenSnackBar(false);
+    if (!checked) {
+      setTimeout(() => {
+        setOpenSnackBar(true);
+      }, 250);
+    }
+  };
+
+  return (
+    <>
+      <Wrapper container spacing={3}>
+        <Grid container justify="center" alignItems="center">
+          <Grid item xs={3} md={1}>
+            <IconButton aria-label="closeModal" onClick={props.handleClose}>
+              <Close />
+            </IconButton>
+          </Grid>
+          <Grid item xs={9} md={11}>
+            <Typography variant="h5" color="primary">
+              Banco de Questões via Tag‘s
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item xs={3}>
-          <StyledSearchTagButton
-            startIcon={<Search />}
-            fullWidth
-            type="submit"
-            color="primary"
-            variant="contained"
-          >
-            Pesquisar
-          </StyledSearchTagButton>
-        </Grid>
-      </Grid>
-      {!!formik.values.questions.length && (
-        <Grid item>
-          <Divider />
-        </Grid>
-      )}
-      <Grid
-        container
-        spacing={3}
-        justify="center"
-        style={{
-          overflow: 'auto',
-          minHeight: '40px',
-          maxHeight: 'calc(100vh - 25px - 72px - 48px - 60px)',
-        }}
-      >
-        {formik.values.questions.map((question, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <Grid key={index} item xs={12}>
-            <Question
-              question={question}
-              id={question.title}
-              checked={checkboxes[question.title]}
-              onChange={() => handleQuestionChecked(question)}
+
+        <Grid
+          component="form"
+          onSubmit={formik.handleSubmit}
+          container
+          justify="center"
+          alignItems="center"
+          spacing={2}
+        >
+          <Grid item xs={9}>
+            <TagInput
+              fullWidth
+              id="tag"
+              value={formik.values.tag}
+              suggestions={formik.values.suggestions}
+              onChange={(e, value) => formik.setFieldValue('tag', value)}
+              variant="outlined"
+              label="Tag"
+              placeholder="Digite a Tag de questões que você deseja pesquisar..."
             />
           </Grid>
-        ))}
-      </Grid>
-    </Wrapper>
+          <Grid item xs={3}>
+            <StyledSearchTagButton
+              startIcon={<Search />}
+              fullWidth
+              type="submit"
+              color="primary"
+              variant="contained"
+            >
+              Pesquisar
+            </StyledSearchTagButton>
+          </Grid>
+        </Grid>
+        {!!formik.values.questions.length && (
+          <Grid item>
+            <Divider />
+          </Grid>
+        )}
+        <Grid
+          container
+          spacing={3}
+          justify="center"
+          style={{
+            overflow: 'auto',
+            minHeight: '40px',
+            maxHeight: 'calc(100vh - 25px - 72px - 48px - 60px)',
+          }}
+        >
+          {formik.values.questions.map((question, index) => (
+            <Grid
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
+              item
+              xs={12}
+              onClick={() => handleClickSnackBar(checkboxes[question.title])}
+            >
+              <Question
+                question={question}
+                id={question.title}
+                checked={checkboxes[question.title]}
+                onChange={() => handleQuestionChecked(question)}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Wrapper>
+
+      <SnackBar
+        openSnackBar={openSnackBar}
+        handleCloseSnackBar={handleCloseSnackBar}
+        autoHideDuration={1000}
+        text="Questão adicionada com sucesso!"
+      />
+    </>
   );
 });
 

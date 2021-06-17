@@ -20,7 +20,6 @@ import MiddleSide from './components/middleSide';
 import RightSide from './components/rightSide';
 import AlertGetOut from './components/confirmGetOut';
 import ChangeQuestion from './components/confirmChangeTypeQuestion';
-
 // PAGES
 import TypeOfQuestion from '../TypeOfQuestion';
 
@@ -126,7 +125,6 @@ const Question = ({ history, location }) => {
       saveQuestionOnDatabase(id_quiz);
       return true;
     }
-
     // PROCURO QUAL QUESTÃO É INVALIDA E QUAIS SEUS ERROS
     questions.forEach(async (question, index) => {
       await validationSchemeQuestion

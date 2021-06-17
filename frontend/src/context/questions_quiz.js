@@ -44,10 +44,13 @@ const QuestionQuiz = ({ children }) => {
 
   // eslint-disable-next-line camelcase
   const saveQuestionOnDatabase = (id_quiz) => {
+    console.log('save', id_quiz, questions);
     try {
-      questionToRemove.map((removed) =>
-        api.delete('/question/delete', { data: { id: removed.id } })
-      );
+      if (questionToRemove.length) {
+        questionToRemove.map((removed) =>
+          api.delete('/question/delete', { data: { id: removed.id } })
+        );
+      }
 
       questions.map(async (item, index) => {
         let responseFile = null;
