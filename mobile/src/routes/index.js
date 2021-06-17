@@ -11,6 +11,9 @@ import QuestionProvider from '@context/Question';
 import CountDown from '@pages/CountDown';
 import Question from '@pages/Question';
 
+// THEME
+import { navigationTheme } from '../styles/theme';
+
 const InitialScreen = lazy(() => import('@pages/InitialScreen2'));
 const Login = lazy(() => import('@pages/Login'));
 const Register = lazy(() => import('@pages/Register'));
@@ -23,7 +26,7 @@ const Stack = createStackNavigator();
 function Routes() {
   return (
     <Suspense fallback={<Loading />}>
-      <NavigationContainer>
+      <NavigationContainer theme={navigationTheme}>
         <Stack.Navigator initialRouteName="InitialScreen">
           <Stack.Screen
             options={{ headerShown: false }}

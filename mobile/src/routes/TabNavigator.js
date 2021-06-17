@@ -16,10 +16,6 @@ const Tab = createBottomTabNavigator();
 const TabNavigator = () => (
   <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
     <Tab.Screen
-      // options={{
-      //   tabBarIcon: <Ionicons name="md-home" size={32} color="white" />,
-      // }}
-
       options={{
         Icon: Ionicons,
         name: 'md-home',

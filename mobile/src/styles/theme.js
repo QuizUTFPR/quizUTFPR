@@ -1,3 +1,4 @@
+import { DefaultTheme } from '@react-navigation/native';
 import { PixelRatio } from 'react-native';
 import theming from 'styled-theming';
 
@@ -38,6 +39,18 @@ const theme = {
   size: {
     padding: 20,
     margin: 20,
+  },
+};
+
+export const navigationTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    black: '#222222',
+    orange: '#f99f4c',
+    purple: '#4B24B1',
+    white: '#fff',
+    background: '#eaeaf5',
   },
 };
 
