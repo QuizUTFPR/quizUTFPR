@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 // DIMENSIONS
 import { heightPercentageToDp } from '@styles/dimensions';
 
-export const StyledView = styled.View.attrs({ elevation: 50 })`
+export const StyledView = styled.View.attrs({ elevation: 100 })`
   flex-direction: row;
   height: ${`${heightPercentageToDp('9%')}px`};
   justify-content: center;
@@ -23,7 +23,7 @@ export const StyledTabButton = styled.TouchableOpacity`
 export const StyledText = styled.Text`
   color: ${({ theme }) =>
     (isFocused) =>
-      isFocused ? theme.color.purple : '#d3d3d3'};
-  font-family: 'RobotoRegular';
-  font-size: 12px;
+      isFocused ? theme.color.purple : theme.color.grey};
+  font-family: 'PoppinsRegular';
+  font-size: ${({ theme }) => theme.fontSize - 8}px;
 `;
