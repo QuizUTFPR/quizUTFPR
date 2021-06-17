@@ -19,7 +19,7 @@ import {
   InputWrapper,
   WrapperButton,
   StyledTextButton,
-  ForgotPasswordButton,
+  // ForgotPasswordButton,
 } from './styles';
 
 const Login = ({ navigation }) => {
@@ -88,13 +88,13 @@ const Login = ({ navigation }) => {
                     onBlur={handleBlur('password')}
                     value={values.password}
                   />
-                  <ForgotPasswordButton
+                  {/* <ForgotPasswordButton
                     backgroundColor="white"
                     variant="secondary"
                     onPress={() => {}}
                   >
                     Esqueceu sua senha?
-                  </ForgotPasswordButton>
+                  </ForgotPasswordButton> */}
                 </InputWrapper>
               </DismissKeyboard>
             </KeyboardAvoidingView>
