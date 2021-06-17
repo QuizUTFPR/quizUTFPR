@@ -26,16 +26,16 @@ const Register = ({ navigation }) => {
   const registerValidationSchema = Yup.object().shape({
     username: Yup.string()
       .min(3, ({ min }) => `O mínimo são ${min} caracteres`)
-      .required('Por favor, informe um apelido'),
+      .required('Informe um apelido'),
     email: Yup.string()
-      .email('Por favor, informe um e-mail válido')
-      .required('Por favor, informe um e-mail'),
+      .email('Informe um e-mail válido')
+      .required('Informe um e-mail'),
     password: Yup.string()
       .min(8, ({ min }) => `O mínimo são ${min} caracteres`)
       .required('A senha é obrigatória'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Deve ser igual a senha')
-      .required('Confirmação obrigatória'),
+      .required('Obrigatório'),
   });
 
   return (
