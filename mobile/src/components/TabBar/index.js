@@ -6,7 +6,7 @@ import { StyledView, StyledTabButton, StyledText } from './styles';
 
 const TabBar = ({ state, descriptors, navigation }) => {
   return (
-    <StyledView fill="purple">
+    <StyledView fill="white">
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -50,8 +50,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
             <options.Icon
               name={options.name}
               size={options.size}
-              fill="white"
-              color={isFocused ? theme.color.white : 'purple'}
+              color={isFocused ? theme.color.purple : '#d3d3d3'}
             />
             <StyledText isFocused>{label}</StyledText>
           </StyledTabButton>
