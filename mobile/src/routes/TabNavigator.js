@@ -21,7 +21,7 @@ const TabNavigator = () => (
         name: 'md-home',
         size: 32,
       }}
-      name="Home"
+      name="Inicio"
       component={HomeStack}
     />
   </Tab.Navigator>
