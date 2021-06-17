@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 // COMPONENTS
 import Container from '@components/Container';
-import { Text, Image, TouchableOpacity } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 // ICONS
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
@@ -19,6 +19,14 @@ import {
   SearchInput,
   InputWrapper,
   BackgroundHeader,
+  QuizCard,
+  Description,
+  StyledImage,
+  StyledText,
+  QuizTitle,
+  StyledIconButton,
+  StyledIcon,
+  StyledView,
 } from './styles';
 
 const fakeData = [
@@ -66,16 +74,23 @@ const Home = () => {
         </BackgroundHeader>
       </HeaderWrapper>
 
-      {fakeData.map((quiz) => (
-        <TouchableOpacity>
-          <Image
-            style={{ width: 50, height: 50 }}
-            source={require('@assets/icon.png')}
-          />
-          <Text>{quiz.name}</Text>
-          <Text>{quiz.teacher}</Text>
-        </TouchableOpacity>
-      ))}
+      <QuizTitle>Quizes</QuizTitle>
+      <ScrollView>
+        {fakeData.map((quiz, index) => (
+          <QuizCard key={index} onPress={() => {}}>
+            <StyledView>
+              <StyledImage source={require('@assets/icon.png')} />
+              <Description>
+                <StyledText>{quiz.name}</StyledText>
+                <StyledText>Criador: {quiz.teacher}</StyledText>
+              </Description>
+            </StyledView>
+            <StyledIconButton onPress={() => {}}>
+              <AntDesign name="play" size={50} color="black" />
+            </StyledIconButton>
+          </QuizCard>
+        ))}
+      </ScrollView>
     </Container>
   );
 };
