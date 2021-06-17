@@ -12,13 +12,13 @@ export const StyledIconButton = styled.Text`
 export const StyledTitle = styled.Text`
   align-self: flex-start;
   font-size: ${({ theme }) => theme.fontSize + 12}px;
-  font-family: 'RobotoBlack';
+  font-family: 'PoppinsBlack';
   color: white;
 `;
 
 export const StyledText = styled.Text`
   align-self: flex-start;
-  font-size: ${({ theme }) => theme.fontSize - 4}px;
-  font-family: 'RobotoRegular';
+  font-size: ${({ theme }) => theme.fontSize - 2}px;
+  font-family: 'PoppinsRegular';
   color: white;
 `;

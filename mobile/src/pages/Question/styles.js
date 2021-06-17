@@ -47,7 +47,7 @@ export const CurrentQuestionView = styled.View.attrs({
 
 export const CurrentQuestion = styled.Text`
   font-size: ${({ theme }) => theme.fontSize + 2}px;
-  font-family: 'RobotoBold';
+  font-family: 'PoppinsBlack';
   color: #171c26;
   text-align: center;
 `;
@@ -66,7 +66,7 @@ export const QuestionImage = styled.Image`
 
 export const QuestionText = styled.Text`
   font-size: ${({ theme }) => theme.fontSize + 5}px;
-  font-family: 'RobotoBold';
+  font-family: 'PoppinsBlack';
   color: #171c26;
   text-align: center;
   margin-top: ${`${heightPercentageToDp('2%')}px`};
@@ -86,7 +86,7 @@ export const AnswerContainer = styled.TouchableOpacity`
 
 export const AnswerText = styled.Text`
   font-size: ${({ theme }) => theme.fontSize + 1}px;
-  font-family: 'RobotoBold';
+  font-family: 'PoppinsBlack';
   color: ${({ checked }) => (checked ? 'white' : '#171c26')};
 `;
 

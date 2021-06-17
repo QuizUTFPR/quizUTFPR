@@ -54,17 +54,18 @@ export const SearchInput = styled.TextInput.attrs({})`
   border-radius: 10px;
   height: 40px;
   flex: 1;
-  font-family: 'RobotoRegular';
+  font-family: 'PoppinsRegular';
 `;
 
 export const StyledTitle = styled.Text`
   font-size: ${({ theme }) => theme.fontSize + 12}px;
-  font-family: 'RobotoBlack';
+  font-family: 'PoppinsBlack';
   color: ${({ theme }) => theme.color.fill};
 `;
 
 export const StyledParagraph = styled.Text`
-  font-family: 'RobotoRegular';
+  margin-top: -10px;
+  font-family: 'PoppinsRegular';
   font-size: ${({ theme }) => theme.fontSize}px;
   color: ${({ theme }) => theme.color.fill};
 `;

@@ -8,7 +8,7 @@ export const InputWrapper = styled.View`
   margin-top: ${`${heightPercentageToDp('2%')}px`};
   align-items: center;
   justify-content: center;
-  background: white;
+  background: #eaeaf5;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 8px;
@@ -24,11 +24,11 @@ export const LabelWrapper = styled.View`
 export const StyledTextInput = styled.TextInput``;
 
 export const Label = styled.Text`
-  font-family: 'RobotoBold';
+  font-family: 'PoppinsBold';
   position: absolute;
   margin-top: -25px;
   margin-left: -30px;
-  background: white;
+  background: #eaeaf5;
   padding-left: 2px;
   padding-right: 2px;
   color: ${({ theme, error }) => (error ? 'red' : theme.color.fill)};

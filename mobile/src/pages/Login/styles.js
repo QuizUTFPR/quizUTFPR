@@ -18,7 +18,7 @@ export const InputWrapper = styled.View`
 
 export const StyledTextButton = styled.Text`
   margin-top: ${`${heightPercentageToDp('0.5%')}px`};
-  font-family: 'RobotoBold';
+  font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize - 3}px;
   padding: 10px;
 `;
@@ -26,11 +26,11 @@ export const StyledTextButton = styled.Text`
 export const ForgotPasswordButton = styled.Text`
   align-self: flex-end;
   padding: 10px;
-  font-family: 'RobotoBold';
+  font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize - 3}px;
 `;
 
 export const WrapperButton = styled.View`
   margin-top: ${`${heightPercentageToDp('10%')}px`};
-  width: ${`${widthPercentageToDp('60%')}px`};
+  width: ${`${widthPercentageToDp('85%')}px`};
 `;
