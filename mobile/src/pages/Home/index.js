@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 // COMPONENTS
 import Container from '@components/Container';
-import { Text, ImageBackground } from 'react-native';
+import { Text, Image, TouchableOpacity } from 'react-native';
 
 // ICONS
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
@@ -21,8 +21,28 @@ import {
   BackgroundHeader,
 } from './styles';
 
+const fakeData = [
+  {
+    name: 'quiz 1',
+    teacher: 'Óclin',
+  },
+  {
+    name: 'quiz 1',
+    teacher: 'Óclin',
+  },
+  {
+    name: 'quiz 1',
+    teacher: 'Óclin',
+  },
+  {
+    name: 'quiz 1',
+    teacher: 'Óclin',
+  },
+];
+
 const Home = () => {
   const navigation = useNavigation();
+
   return (
     <Container>
       <HeaderWrapper>
@@ -45,7 +65,17 @@ const Home = () => {
           </InputWrapper>
         </BackgroundHeader>
       </HeaderWrapper>
-      <Text>Conteudis aqui!</Text>
+
+      {fakeData.map((quiz) => (
+        <TouchableOpacity>
+          <Image
+            style={{ width: 50, height: 50 }}
+            source={require('@assets/icon.png')}
+          />
+          <Text>{quiz.name}</Text>
+          <Text>{quiz.teacher}</Text>
+        </TouchableOpacity>
+      ))}
     </Container>
   );
 };
