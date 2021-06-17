@@ -128,6 +128,7 @@ const Register = ({ navigation }) => {
             </KeyboardAvoidingView>
             <WrapperButton>
               <ButtonGradient
+                colors={['#fdb646', '#f99f4c']}
                 style={{ borderRadius: 50 }}
                 title="Submit"
                 variant="primary"
