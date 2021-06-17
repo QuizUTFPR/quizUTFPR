@@ -12,7 +12,7 @@ export const BackgroundImage = styled(Waves).attrs(({ theme }) => ({
 `;
 
 export const InputWrapper = styled.View`
-  padding-top: ${`${heightPercentageToDp('20%')}px`};
+  padding-top: ${`${heightPercentageToDp('25%')}px`};
   width: ${`${widthPercentageToDp('85%')}px`};
 `;
 

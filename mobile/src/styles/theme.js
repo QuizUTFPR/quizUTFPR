@@ -17,6 +17,7 @@ const fillColor = theming.variants('mode', 'fill', {
   white: { light: '#FFFFFF' },
   purple: { light: '#4B24B1' },
   black: { light: '#222222' },
+  orange: { light: '#f99f4c' },
 });
 
 if (PixelRatio.get() <= 2) {
