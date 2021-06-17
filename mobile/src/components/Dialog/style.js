@@ -29,7 +29,7 @@ export const StyledText = styled.Text`
 `;
 
 export const StyledTitle = styled.Text`
-  color: ${({ theme }) => theme.color};
+  color: ${({ theme }) => theme.color.fill};
   font-family: 'PoppinsBlack';
   font-size: ${({ theme }) => theme.fontSize + 10}px;
   margin-bottom: ${({ theme }) => theme.size.margin + 10}px;

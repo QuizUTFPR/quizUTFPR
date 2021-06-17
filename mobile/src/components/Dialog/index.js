@@ -30,7 +30,7 @@ const ConfirmExitDialog = ({
   >
     <BlurView intensity={100} tint="dark" style={StyleSheet.absoluteFill}>
       <Wrapper fill="white">
-        <StyledTitle color="purple">{title}</StyledTitle>
+        <StyledTitle fill="purple">{title}</StyledTitle>
         <StyledWrapperChildren>
           {lottieAnimation}
           <StyledText>{children}</StyledText>

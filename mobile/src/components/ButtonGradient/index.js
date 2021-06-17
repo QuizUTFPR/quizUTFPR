@@ -14,7 +14,7 @@ export const StyledButton = styled(LinearGradient)`
 export const StyledText = styled.Text`
   font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize}px;
-  color: ${({ theme }) => theme.color.textButton};
+  color: ${({ theme }) => theme.color.fill};
   text-align: center;
 `;
 
@@ -34,7 +34,7 @@ const WrapperStyledButton = ({
     activeOpacity={activeOpacity}
   >
     <StyledButton colors={colors} {...props}>
-      <StyledText variant={variant}>{children}</StyledText>
+      <StyledText fill="white">{children}</StyledText>
     </StyledButton>
   </WrapperButton>
 );

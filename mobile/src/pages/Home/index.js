@@ -85,7 +85,7 @@ const Home = () => {
                 <StyledText>Criador: {quiz.teacher}</StyledText>
               </Description>
             </StyledView>
-            <StyledIconButton onPress={() => {}}>
+            <StyledIconButton onPress={() => navigation.navigate('CountDown')}>
               <AntDesign name="play" size={50} color="black" />
             </StyledIconButton>
           </QuizCard>
