@@ -3,9 +3,9 @@ import styled from 'styled-components/native';
 // DIMENSIONS
 import { heightPercentageToDp } from '@styles/dimensions';
 
-export const StyledView = styled.View.attrs({ elevation: 100 })`
+export const StyledView = styled.View.attrs({ elevation: 5 })`
   flex-direction: row;
-  height: ${`${heightPercentageToDp('9%')}px`};
+  height: ${`${heightPercentageToDp('10%')}px`};
   justify-content: center;
   align-items: center;
   border-top-left-radius: 40px;
@@ -24,6 +24,6 @@ export const StyledText = styled.Text`
   color: ${({ theme }) =>
     (isFocused) =>
       isFocused ? theme.color.purple : theme.color.grey};
-  font-family: 'PoppinsRegular';
-  font-size: ${({ theme }) => theme.fontSize - 8}px;
+  font-family: 'PoppinsBold';
+  font-size: ${({ theme }) => theme.fontSize - 4}px;
 `;
