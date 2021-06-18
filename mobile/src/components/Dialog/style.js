@@ -1,21 +1,23 @@
 import styled from 'styled-components/native';
+import { heightPercentageToDp } from '@styles/dimensions';
 
 export const Wrapper = styled.View.attrs({ elevation: 15 })`
   background: ${({ theme }) => theme.color.fill};
   padding: ${({ theme }) => theme.size.padding}px;
   margin-left: ${({ theme }) => theme.size.margin + 10}px;
-  margin-top: ${({ theme }) => theme.size.margin + 30}px;
+  /* margin-top: ${({ theme }) => theme.size.margin + 30}px; */
+  margin-top: ${heightPercentageToDp('25%')}px;
   margin-right: ${({ theme }) => theme.size.margin + 10}px;
-  flex: 0.8;
-  border-radius: 20px;
-  justify-content: center;
+  border-radius: 30px;
+  justify-content: space-between;
 `;
 
-export const StyledWrapperButtons = styled.View``;
+export const StyledWrapperButtons = styled.View`
+  margin-top: ${({ theme }) => theme.size.margin + 10}px;
+`;
 
 export const StyledWrapperChildren = styled.View`
   align-items: center;
-  flex: 1;
 `;
 
 export const StyledModal = styled.Modal`

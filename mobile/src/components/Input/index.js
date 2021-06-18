@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 // STYLES
 import {
+  Wrapper,
   InputWrapper,
   StyledTextInput,
   IconView,
-  LabelWrapper,
   Label,
 } from './styles';
 
@@ -19,16 +19,16 @@ const Input = ({
   fill,
   ...props
 }) => (
-  <InputWrapper fill={fill} error={error}>
-    <IconView>{icon}</IconView>
-    <LabelWrapper>
-      <Label fill={fill} error={error}>
-        {label}
-        {error && ` (${errorMessage})`}
-      </Label>
+  <Wrapper>
+    <Label fill={fill} error={error}>
+      {label}
+      {error && ` (${errorMessage})`}
+    </Label>
+    <InputWrapper fill={fill} error={error}>
+      <IconView>{icon}</IconView>
       <StyledTextInput secureTextEntry={secureTextEntry} {...props} />
-    </LabelWrapper>
-  </InputWrapper>
+    </InputWrapper>
+  </Wrapper>
 );
 
 Input.defaultProps = {

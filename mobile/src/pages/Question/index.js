@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Animated,
-  Dimensions,
-  ImageBackground,
-  SafeAreaView,
-} from 'react-native';
+import { Animated, Dimensions, ImageBackground } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 // HOOKS
@@ -20,6 +15,7 @@ import Timer from './components/Timer';
 
 // STYLES
 import {
+  Container,
   QuestionWrapper,
   InformationsWrapper,
   Header,
@@ -105,7 +101,7 @@ const Question = () => {
   }, [timer.seconds]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <Container>
       <LinearContainer>
         <ImageBackground
           style={{
@@ -170,6 +166,7 @@ const Question = () => {
           <Timer widthAnimation={widthAnimation} timerState={timer} />
         </ImageBackground>
       </LinearContainer>
+
       <Dialog
         title="OOOPS!!!"
         firstButtonLabel="TUDO BEM :("
@@ -212,7 +209,7 @@ const Question = () => {
         Tem certeza que quer sair? Seu progresso será salvo para que você
         continue depois...
       </Dialog>
-    </SafeAreaView>
+    </Container>
   );
 };
 

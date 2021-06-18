@@ -6,7 +6,7 @@ import { widthPercentageToDp } from '@styles/dimensions';
 // SVG's AS REACT COMPONENTS
 import Pattern from '@assets/patterns/halftone.png';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.View`
   align-items: center;
   flex: 1;
   background: ${({ theme }) => theme.color.fill};

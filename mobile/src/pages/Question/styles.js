@@ -7,31 +7,33 @@ import { Wrapper } from '@components/Container/style';
 // CUSTOM DIMENSIONS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
-export const QuestionWrapper = styled(Wrapper)``;
+export const Container = styled.View`
+  flex: 1;
+`;
+
+export const QuestionWrapper = styled(Wrapper)`
+  margin-top: ${heightPercentageToDp('5%')}px;
+`;
 
 export const Header = styled.View`
   width: ${`${widthPercentageToDp('90%')}px`};
-  height: ${`${heightPercentageToDp('8.5%')}px`};
   justify-content: flex-end;
   flex-direction: row;
   align-items: center;
 `;
 
 export const InformationsWrapper = styled.View.attrs({ elevation: 15 })`
-  flex: 0.95;
+  flex: 0.9;
   background: white;
   border-radius: 40px;
   border-top-right-radius: 0;
   width: ${`${widthPercentageToDp('90%')}px`};
   overflow: hidden;
-  margin-top: 15px;
 `;
 
 export const ScrollWrapper = styled.ScrollView`
   padding-left: 20px;
   padding-right: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
 `;
 
 export const CurrentQuestionView = styled.View.attrs({
@@ -41,14 +43,13 @@ export const CurrentQuestionView = styled.View.attrs({
   border-top-right-radius: 20px;
   overflow: hidden;
   width: 100px;
-  margin-bottom: -22px;
   background: white;
-  margin-top: 35px;
 `;
 
 export const CurrentQuestion = styled.Text`
   font-size: ${({ theme }) => theme.fontSize}px;
-  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   font-family: 'PoppinsBold';
   color: #171c26;
   text-align: center;
@@ -100,7 +101,7 @@ export const Footer = styled.View.attrs({ elevation: 15 })`
 export const ConfirmButton = styled(ButtonGradient).attrs({
   colors: ['#fdb646', '#f99f4c'],
 })`
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
   width: ${`${widthPercentageToDp('90%')}px`};
 `;

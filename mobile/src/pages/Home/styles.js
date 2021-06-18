@@ -6,7 +6,7 @@ import HeaderBackground from '@assets/patterns/sunburst.png';
 // DIMENSION TRANSFORMERS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
-export const HeaderWrapper = styled.SafeAreaView``;
+export const HeaderWrapper = styled.View``;
 
 export const BackgroundHeader = styled.ImageBackground.attrs({
   source: HeaderBackground,
@@ -21,7 +21,7 @@ export const BackgroundHeader = styled.ImageBackground.attrs({
   height: ${heightPercentageToDp('30%')}px;
 `;
 
-export const HeaderInformations = styled.SafeAreaView`
+export const HeaderInformations = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;

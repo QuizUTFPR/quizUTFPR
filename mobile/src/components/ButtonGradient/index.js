@@ -8,7 +8,7 @@ export const WrapperButton = styled.TouchableOpacity``;
 export const StyledButton = styled(LinearGradient)`
   height: 60px;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 30px;
 `;
 
 export const StyledText = styled.Text`
