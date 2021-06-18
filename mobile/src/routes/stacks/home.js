@@ -4,6 +4,7 @@ import Loading from '@components/Loading';
 
 // PAGES
 const Home = lazy(() => import('@pages/Home'));
+const QuizDescription = lazy(() => import('@pages/QuizDescription'));
 
 // STACK
 const Stack = createStackNavigator();
@@ -15,6 +16,11 @@ const HomeStack = () => (
         options={{ headerShown: false }}
         name="Home"
         component={Home}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Descrição do Quiz"
+        component={QuizDescription}
       />
     </Stack.Navigator>
   </Suspense>

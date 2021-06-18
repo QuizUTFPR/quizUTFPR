@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 
 // COMPONENTS
 import Container from '@components/Container';
-import { ScrollView, View } from 'react-native';
 
 // ICONS
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
