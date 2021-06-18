@@ -25,8 +25,9 @@ import {
   StyledText,
   QuizTitle,
   StyledIconButton,
-  StyledIcon,
   StyledView,
+  StyledScrollView,
+  QuizContainer,
 } from './styles';
 
 const fakeData = [
@@ -74,23 +75,27 @@ const Home = () => {
         </BackgroundHeader>
       </HeaderWrapper>
 
-      <QuizTitle>Quizes</QuizTitle>
-      <ScrollView>
-        {fakeData.map((quiz, index) => (
-          <QuizCard key={index} onPress={() => {}}>
-            <StyledView>
-              <StyledImage source={require('@assets/icon.png')} />
-              <Description>
-                <StyledText>{quiz.name}</StyledText>
-                <StyledText>Criador: {quiz.teacher}</StyledText>
-              </Description>
-            </StyledView>
-            <StyledIconButton onPress={() => navigation.navigate('CountDown')}>
-              <AntDesign name="play" size={50} color="black" />
-            </StyledIconButton>
-          </QuizCard>
-        ))}
-      </ScrollView>
+      <StyledScrollView>
+        <QuizContainer>
+          <QuizTitle>Quizes</QuizTitle>
+          {fakeData.map((quiz, index) => (
+            <QuizCard key={index} onPress={() => {}}>
+              <StyledView>
+                <StyledImage source={require('@assets/icon.png')} />
+                <Description>
+                  <StyledText>{quiz.name}</StyledText>
+                  <StyledText>Criador: {quiz.teacher}</StyledText>
+                </Description>
+              </StyledView>
+              <StyledIconButton
+                onPress={() => navigation.navigate('CountDown')}
+              >
+                <AntDesign name="play" size={50} color="black" />
+              </StyledIconButton>
+            </QuizCard>
+          ))}
+        </QuizContainer>
+      </StyledScrollView>
     </Container>
   );
 };
