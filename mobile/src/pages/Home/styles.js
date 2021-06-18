@@ -26,6 +26,7 @@ export const HeaderInformations = styled.SafeAreaView`
   align-items: center;
   justify-content: space-around;
 `;
+
 export const HeaderWelcomeTextView = styled.View`
   justify-content: center;
   align-items: center;
@@ -72,7 +73,7 @@ export const StyledParagraph = styled.Text`
 
 export const QuizTitle = styled.Text`
   align-self: flex-start;
-  margin-top: ${heightPercentageToDp('4%')}px;
+  margin-top: ${heightPercentageToDp('2%')}px;
   color: ${({ theme }) => theme.color.purple};
   font-size: ${({ theme }) => theme.fontSize + 12}px;
   font-family: 'PoppinsBold';
@@ -87,7 +88,7 @@ export const QuizCard = styled.TouchableOpacity`
   height: ${heightPercentageToDp('12%')}px;
   border-radius: 10px;
   padding: 12px;
-  margin-top: ${heightPercentageToDp('1.5%')}px;
+  margin-bottom: ${heightPercentageToDp('2%')}px;
   background: ${({ theme }) => theme.color.white};
 `;
 
@@ -114,4 +115,13 @@ export const StyledView = styled.View`
   height: 100%;
   flex-direction: row;
   align-items: center;
+`;
+
+export const StyledScrollView = styled.ScrollView`
+  width: ${widthPercentageToDp('100%')}px;
+`;
+
+export const QuizContainer = styled.View`
+  width: 100%;
+  padding-left: ${heightPercentageToDp('4%')}px;
 `;
