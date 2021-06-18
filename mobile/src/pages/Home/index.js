@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
@@ -78,6 +79,7 @@ const Home = () => {
         <QuizContainer>
           <QuizTitle>Quizes</QuizTitle>
           {fakeData.map((quiz, index) => (
+            // eslint-disable-next-line react/no-array-index-key
             <QuizCard key={index} onPress={() => {}}>
               <StyledView>
                 <StyledImage source={require('@assets/icon.png')} />

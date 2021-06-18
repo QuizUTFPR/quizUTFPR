@@ -6,6 +6,9 @@ import { useTheme } from '@react-navigation/native';
 // ICONS
 import { Ionicons } from '@expo/vector-icons';
 
+// COMPONENT
+import MyDrawer from './myDrawer';
+
 const Drawer = createDrawerNavigator();
 
 // PAGES
@@ -19,13 +22,12 @@ const DrawerComponent = () => {
       <Drawer.Navigator
         drawerContentOptions={{
           activeTintColor: colors.purple,
-          itemStyle: {
-            marginVertical: 5,
-          },
+          itemStyle: {},
           labelStyle: {
             fontFamily: 'PoppinsSemiBold',
           },
         }}
+        drawerContent={(props) => <MyDrawer {...props} />}
         initialRouteName="Home"
       >
         <Drawer.Screen
