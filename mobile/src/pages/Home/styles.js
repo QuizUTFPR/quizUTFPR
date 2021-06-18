@@ -75,7 +75,7 @@ export const QuizTitle = styled.Text`
   align-self: flex-start;
   margin-top: ${heightPercentageToDp('2%')}px;
   color: ${({ theme }) => theme.color.purple};
-  font-size: ${({ theme }) => theme.fontSize + 12}px;
+  font-size: ${({ theme }) => theme.fontSize + 3}px;
   font-family: 'PoppinsBold';
 `;
 

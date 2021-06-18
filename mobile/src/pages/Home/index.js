@@ -1,9 +1,9 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 // COMPONENTS
 import Container from '@components/Container';
-import { ScrollView, View } from 'react-native';
 
 // ICONS
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
@@ -79,6 +79,7 @@ const Home = () => {
         <QuizContainer>
           <QuizTitle>Quizes</QuizTitle>
           {fakeData.map((quiz, index) => (
+            // eslint-disable-next-line react/no-array-index-key
             <QuizCard key={index} onPress={() => {}}>
               <StyledView>
                 <StyledImage source={require('@assets/icon.png')} />
