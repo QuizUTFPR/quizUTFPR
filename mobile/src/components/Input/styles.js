@@ -28,7 +28,7 @@ export const Label = styled.Text`
   background: #eaeaf5;
   padding-left: 2px;
   padding-right: 2px;
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize - 4}px;
   color: ${({ theme, error }) => (error ? 'red' : theme.color.fill)};
 
   position: absolute;
