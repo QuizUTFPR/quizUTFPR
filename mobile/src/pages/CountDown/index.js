@@ -2,7 +2,8 @@ import React from 'react';
 import LottieView from 'lottie-react-native';
 import { ImageBackground } from 'react-native';
 import LinearContainer from '@components/LinearContainer';
-import image from '@assets/FUNDO.png';
+// import image from '@assets/FUNDO.png';
+import image2 from '@assets/patterns/halftone.png';
 
 const Question = ({ navigation }) => (
   <LinearContainer>
@@ -14,7 +15,7 @@ const Question = ({ navigation }) => (
         width: '100%',
         height: '100%',
       }}
-      source={image}
+      source={image2}
     >
       <LottieView
         autoPlay

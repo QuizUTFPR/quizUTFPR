@@ -11,7 +11,9 @@ import LottieView from 'lottie-react-native';
 import useQuestions from '@hook/useQuestion';
 
 // COMPONENTS
-import image from '@assets/FUNDO.png';
+// import image from '@assets/FUNDO.png';
+import image2 from '@assets/patterns/halftone.png';
+
 import LinearContainer from '@components/LinearContainer';
 import Dialog from '@components/Dialog';
 import Timer from './components/Timer';
@@ -113,7 +115,7 @@ const Question = () => {
             width: '100%',
             height: '100%',
           }}
-          source={image}
+          source={image2}
         >
           <QuestionWrapper>
             <Header>

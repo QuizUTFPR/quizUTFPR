@@ -23,8 +23,9 @@ export const StyledModal = styled.Modal`
 `;
 
 export const StyledText = styled.Text`
+  margin-top: 20px;
   text-align: center;
-  font-family: 'PoppinsBlack';
+  font-family: 'PoppinsSemiBold';
   font-size: ${({ theme }) => theme.fontSize + 5}px;
 `;
 

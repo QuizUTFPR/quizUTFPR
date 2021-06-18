@@ -11,7 +11,7 @@ export const Progress = styled.View`
   height: 20px;
   justify-content: center;
   align-items: flex-end;
-  background: #ffc95c;
+  background: #f99f4c;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   z-index: 5;
@@ -28,10 +28,10 @@ export const ProgressBG = styled.View`
 
 export const TextTimer = styled.Text`
   position: absolute;
-  font-size: ${({ theme }) => theme.fontSize - 2}px;
-  bottom: 0px;
+  font-size: ${({ theme }) => theme.fontSize}px;
+  bottom: -5px;
   right: 6px;
-  font-family: 'PoppinsBlack';
+  font-family: 'PoppinsBold';
   color: white;
   z-index: 100;
 `;

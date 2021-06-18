@@ -24,6 +24,7 @@ export const InformationsWrapper = styled.View.attrs({ elevation: 15 })`
   border-top-right-radius: 0;
   width: ${`${widthPercentageToDp('90%')}px`};
   overflow: hidden;
+  margin-top: 15px;
 `;
 
 export const ScrollWrapper = styled.ScrollView`
@@ -39,15 +40,16 @@ export const CurrentQuestionView = styled.View.attrs({
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
-  padding: 5px;
   width: 100px;
   margin-bottom: -22px;
   background: white;
+  margin-top: 35px;
 `;
 
 export const CurrentQuestion = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize + 2}px;
-  font-family: 'PoppinsBlack';
+  font-size: ${({ theme }) => theme.fontSize}px;
+  margin-top: 10px;
+  font-family: 'PoppinsBold';
   color: #171c26;
   text-align: center;
 `;
@@ -86,7 +88,7 @@ export const AnswerContainer = styled.TouchableOpacity`
 
 export const AnswerText = styled.Text`
   font-size: ${({ theme }) => theme.fontSize + 1}px;
-  font-family: 'PoppinsBlack';
+  font-family: 'PoppinsSemiBold';
   color: ${({ checked }) => (checked ? 'white' : '#171c26')};
 `;
 
@@ -96,7 +98,7 @@ export const Footer = styled.View.attrs({ elevation: 15 })`
 `;
 
 export const ConfirmButton = styled(ButtonGradient).attrs({
-  colors: ['#FFC95C', '#FFC95C'],
+  colors: ['#fdb646', '#f99f4c'],
 })`
   border-bottom-left-radius: 40px;
   border-bottom-right-radius: 40px;
