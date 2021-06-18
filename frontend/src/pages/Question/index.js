@@ -56,7 +56,6 @@ const Question = ({ history, location }) => {
     index: 0,
     question: questions[0],
   });
-
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: onScreen,

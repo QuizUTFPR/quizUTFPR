@@ -70,6 +70,7 @@ const QuestionQuiz = ({ children }) => {
           quiz_id: id_quiz,
           index,
         });
+
         if (response.status !== 200) throw new Error('questao nao criada');
       });
     } catch (error) {

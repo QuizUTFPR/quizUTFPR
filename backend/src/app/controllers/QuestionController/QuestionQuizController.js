@@ -42,7 +42,7 @@ class QuestionQuizController {
             }
           }
         ],
-        order: [['id', 'ASC'],[{model: Answer, as: 'answer'}, 'id', 'ASC']],
+        order: [['index', 'ASC'],[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
       if(!questionOfQuiz.length)

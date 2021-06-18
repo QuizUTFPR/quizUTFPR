@@ -101,7 +101,7 @@ class QuestionController {
         const answerFounded = await Answer.findByPk(answerItem.id);
         if(!answerFounded){
           try{
-          await Answer.create({
+            await Answer.create({
               id_question: id_question,
               title: answerItem.title, 
               is_correct: answerItem.is_correct
