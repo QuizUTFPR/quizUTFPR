@@ -7,7 +7,7 @@ export const Avatar = styled.Image.attrs({
 })`
   width: 100%;
   height: 20%;
-  border-radius: 100;
+  border-radius: 100px;
   align-self: center;
   margin-top: 40px;
 `;
