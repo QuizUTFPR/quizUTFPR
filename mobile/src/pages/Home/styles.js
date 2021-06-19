@@ -79,7 +79,7 @@ export const QuizTitle = styled.Text`
   font-family: 'PoppinsBold';
 `;
 
-export const QuizCard = styled.TouchableOpacity`
+export const QuizCard = styled.View`
   flex-direction: row;
   align-self: flex-start;
   align-items: center;

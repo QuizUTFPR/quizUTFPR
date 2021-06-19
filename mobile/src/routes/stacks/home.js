@@ -19,7 +19,7 @@ const HomeStack = () => (
       />
       <Stack.Screen
         options={{ headerShown: false }}
-        name="Descrição do Quiz"
+        name="Descricao"
         component={QuizDescription}
       />
     </Stack.Navigator>

@@ -82,7 +82,8 @@ const Home = () => {
             // eslint-disable-next-line react/no-array-index-key
             <QuizCard
               key={index}
-              onPress={() => navigation.navigate('CountDown')}
+              // onPress={() => navigation.navigate('CountDown')}
+              onPress={() => navigation.navigate('Descricao')}
             >
               <StyledView>
                 <StyledImage source={require('@assets/icon.png')} />
@@ -92,9 +93,10 @@ const Home = () => {
                 </Description>
               </StyledView>
               <StyledIconButton
-                onPress={() => navigation.navigate('CountDown')}
+                // onPress={() => navigation.navigate('CountDown')}
+                onPress={() => navigation.navigate('Descricao')}
               >
-                <AntDesign name="play" size={50} color="black" />
+                <AntDesign name="rightcircle" size={45} color="black" />
               </StyledIconButton>
             </QuizCard>
           ))}
