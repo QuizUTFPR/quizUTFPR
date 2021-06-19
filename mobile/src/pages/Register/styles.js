@@ -27,7 +27,7 @@ export const StyledText = styled.Text`
 `;
 
 export const InputWrapper = styled.View`
-  padding-top: ${`${heightPercentageToDp('20%')}px`};
+  padding-top: ${`${heightPercentageToDp('18%')}px`};
   width: ${`${widthPercentageToDp('85%')}px`};
 `;
 
