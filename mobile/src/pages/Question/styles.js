@@ -64,6 +64,7 @@ export const QuestionDescription = styled.View`
 export const QuestionImage = styled.Image`
   width: ${`${widthPercentageToDp('50%')}px`};
   height: ${`${heightPercentageToDp('25%')}px`};
+  margin-top: ${`${heightPercentageToDp('2%')}px`};
   border-radius: 5px;
 `;
 

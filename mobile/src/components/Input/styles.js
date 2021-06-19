@@ -30,6 +30,7 @@ export const Label = styled.Text`
   padding-right: 2px;
   font-size: ${({ theme }) => theme.fontSize - 4}px;
   color: ${({ theme, error }) => (error ? 'red' : theme.color.fill)};
+  border-radius: 8px;
 
   position: absolute;
   left: 10px;

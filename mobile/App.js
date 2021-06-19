@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 import React from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { ThemeProvider } from 'styled-components';
 import Routes from './src/routes';
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <StatusBar style="light" />
       <Routes />
     </ThemeProvider>
   );
