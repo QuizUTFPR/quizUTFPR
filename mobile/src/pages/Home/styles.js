@@ -58,7 +58,7 @@ export const SearchInput = styled.TextInput.attrs({})`
   font-family: 'PoppinsRegular';
 `;
 
-export const StyledTitle = styled.Text`
+export const StyledWelcome = styled.Text`
   font-size: ${({ theme }) => theme.fontSize + 12}px;
   font-family: 'PoppinsBlack';
   color: ${({ theme }) => theme.color.fill};
@@ -80,6 +80,7 @@ export const QuizTitle = styled.Text`
 `;
 
 export const QuizCard = styled.View`
+  position: relative;
   flex-direction: row;
   align-self: flex-start;
   align-items: center;
@@ -87,20 +88,34 @@ export const QuizCard = styled.View`
   width: ${widthPercentageToDp('85%')}px;
   height: ${heightPercentageToDp('12%')}px;
   border-radius: 10px;
-  padding: 12px;
   margin-bottom: ${heightPercentageToDp('2%')}px;
   background: ${({ theme }) => theme.color.white};
 `;
 
 export const Description = styled.View`
   height: 90%;
-  justify-content: space-between;
+`;
+
+export const StyledView = styled.View`
+  height: 100%;
+  width: 80%;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 10px;
 `;
 
 export const StyledImage = styled.Image`
-  width: ${widthPercentageToDp('18%')}px;
-  height: ${heightPercentageToDp('9%')}px;
+  width: 30%;
+  height: 100%;
   border-radius: 5px;
+`;
+
+export const StyledTitle = styled.Text`
+  font-size: ${({ theme }) => theme.fontSize - 2}px;
+  color: ${({ theme }) => theme.color.fill};
+  font-family: 'PoppinsBold';
+  margin-left: 10px;
+  margin-top: 5px;
 `;
 
 export const StyledText = styled.Text`
@@ -109,12 +124,8 @@ export const StyledText = styled.Text`
   margin-left: 10px;
 `;
 
-export const StyledIconButton = styled.Text``;
-
-export const StyledView = styled.View`
-  height: 100%;
-  flex-direction: row;
-  align-items: center;
+export const StyledIconButton = styled.Text`
+  margin-right: ${({ theme }) => theme.size.padding}px;
 `;
 
 export const StyledScrollView = styled.ScrollView`

@@ -21,8 +21,9 @@ import {
   BackgroundHeader,
   QuizCard,
   Description,
+  StyledWelcome,
   StyledImage,
-  StyledText,
+  // StyledText,
   QuizTitle,
   StyledIconButton,
   StyledView,
@@ -32,19 +33,19 @@ import {
 
 const fakeData = [
   {
-    name: 'quiz 1',
+    name: 'Quiz 1',
     teacher: 'Óclin',
   },
   {
-    name: 'quiz 1',
+    name: 'Quiz 1',
     teacher: 'Óclin',
   },
   {
-    name: 'quiz 1',
+    name: 'Quiz 1',
     teacher: 'Óclin',
   },
   {
-    name: 'quiz 1',
+    name: 'Quiz 1',
     teacher: 'Óclin',
   },
 ];
@@ -61,7 +62,7 @@ const Home = () => {
               <AntDesign name="menu-fold" size={32} color="white" />
             </HeaderButton>
             <HeaderWelcomeTextView>
-              <StyledTitle fill="white">Seja bem-vindo,</StyledTitle>
+              <StyledWelcome fill="white">Seja bem-vindo,</StyledWelcome>
               <StyledParagraph fill="white">
                 Escolha um quiz e divirta-se!
               </StyledParagraph>
@@ -88,15 +89,15 @@ const Home = () => {
               <StyledView>
                 <StyledImage source={require('@assets/icon.png')} />
                 <Description>
-                  <StyledText>{quiz.name}</StyledText>
-                  <StyledText>Criador: {quiz.teacher}</StyledText>
+                  <StyledTitle fill="black">{quiz.name}</StyledTitle>
+                  {/* <StyledText>Criador: {quiz.teacher}</StyledText> */}
                 </Description>
               </StyledView>
               <StyledIconButton
                 // onPress={() => navigation.navigate('CountDown')}
                 onPress={() => navigation.navigate('Descricao')}
               >
-                <AntDesign name="rightcircle" size={45} color="black" />
+                <AntDesign name="arrowright" size={24} color="#4B24B1" />
               </StyledIconButton>
             </QuizCard>
           ))}
