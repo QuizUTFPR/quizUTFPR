@@ -8,6 +8,8 @@ import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 export const BackgroundImage = styled(Waves).attrs(({ theme }) => ({
   fill: theme.color.purple,
 }))`
+  margin-left: -32px;
+
   margin-top: -80px;
   position: absolute;
 `;
@@ -36,6 +38,7 @@ export const StyledTextButton = styled.Text`
   font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize - 3}px;
   padding: 10px;
+  text-align: center;
 `;
 
 export const WrapperButton = styled.View`

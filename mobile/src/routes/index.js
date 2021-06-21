@@ -18,7 +18,7 @@ const InitialScreen = lazy(() => import('@pages/InitialScreen2'));
 const Login = lazy(() => import('@pages/Login'));
 const Register = lazy(() => import('@pages/Register'));
 const MenuDrawer = lazy(() => import('@components/MenuDrawer'));
-const TabNavigator = lazy(() => import('./TabNavigator'));
+const QuizDescription = lazy(() => import('@pages/QuizDescription'));
 
 const Stack = createStackNavigator();
 
@@ -60,6 +60,11 @@ function Routes() {
             options={{ headerShown: false }}
             name="Home"
             component={MenuDrawer}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Descricao"
+            component={QuizDescription}
           />
         </Stack.Navigator>
       </NavigationContainer>
