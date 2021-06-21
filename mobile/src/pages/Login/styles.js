@@ -7,6 +7,7 @@ import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 export const BackgroundImage = styled(Waves).attrs(({ theme }) => ({
   fill: theme.color.purple,
 }))`
+  margin-left: -32px;
   margin-top: -80px;
   position: absolute;
 `;

@@ -33,86 +33,94 @@ const Login = ({ navigation }) => {
   });
   return (
     <Container>
-      <BackgroundImage />
-      <Header
-        iconButton={<Ionicons name="chevron-back" size={32} color="white" />}
-        onPressButton={() => navigation.goBack()}
-        titleContent="Login"
-        textContent="Por favor, informe seus dados"
-      />
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
-        validationSchema={loginValidationSchema}
-        onSubmit={(values) => console.log(values)}
-      >
-        {({
-          handleChange,
-          handleBlur,
-          // handleSubmit,
-          values,
-          errors,
-          touched,
-        }) => (
+      <KeyboardAvoidingView behavior="position" enabled>
+        <BackgroundImage />
+        <DismissKeyboard>
           <>
-            <KeyboardAvoidingView behavior="position" enabled>
-              <DismissKeyboard>
-                <InputWrapper>
-                  <Input
-                    error={errors.email && touched.email}
-                    errorMessage={errors.email}
-                    fill="black"
-                    placeholder="Digite seu e-mail"
-                    icon={
-                      <FontAwesome5 name="user-alt" size={24} color="#222222" />
-                    }
-                    label="E-mail"
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    value={values.email}
-                  />
+            <Header
+              iconButton={
+                <Ionicons name="chevron-back" size={32} color="white" />
+              }
+              onPressButton={() => navigation.goBack()}
+              titleContent="Login"
+              textContent="Por favor, informe seus dados"
+            />
+            <Formik
+              initialValues={{
+                email: '',
+                password: '',
+              }}
+              validationSchema={loginValidationSchema}
+              onSubmit={(values) => console.log(values)}
+            >
+              {({
+                handleChange,
+                handleBlur,
+                // handleSubmit,
+                values,
+                errors,
+                touched,
+              }) => (
+                <>
+                  <InputWrapper>
+                    <Input
+                      error={errors.email && touched.email}
+                      errorMessage={errors.email}
+                      fill="black"
+                      placeholder="Digite seu e-mail"
+                      icon={
+                        <FontAwesome5
+                          name="user-alt"
+                          size={24}
+                          color="#222222"
+                        />
+                      }
+                      label="E-mail"
+                      onChangeText={handleChange('email')}
+                      onBlur={handleBlur('email')}
+                      value={values.email}
+                    />
 
-                  <Input
-                    error={errors.password && touched.password}
-                    errorMessage={errors.password}
-                    fill="black"
-                    placeholder="Digite sua senha"
-                    icon={
-                      <FontAwesome5 name="lock" size={24} color="#222222" />
-                    }
-                    label="Senha"
-                    secureTextEntry
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    value={values.password}
-                  />
-                  {/* <ForgotPasswordButton
+                    <Input
+                      error={errors.password && touched.password}
+                      errorMessage={errors.password}
+                      fill="black"
+                      placeholder="Digite sua senha"
+                      icon={
+                        <FontAwesome5 name="lock" size={24} color="#222222" />
+                      }
+                      label="Senha"
+                      secureTextEntry
+                      onChangeText={handleChange('password')}
+                      onBlur={handleBlur('password')}
+                      value={values.password}
+                    />
+                    {/* <ForgotPasswordButton
                     backgroundColor="white"
                     variant="secondary"
                     onPress={() => {}}
                   >
                     Esqueceu sua senha?
                   </ForgotPasswordButton> */}
-                </InputWrapper>
-              </DismissKeyboard>
-            </KeyboardAvoidingView>
+                  </InputWrapper>
 
-            <WrapperButton>
-              <ButtonGradient
-                // colors={['#fdb646', '#f99f4c']}
-                variant="primary"
-                // onPress={handleSubmit}
-                onPress={() => navigation.navigate('Home')}
-                icon="login-variant"
-              >
-                ENTRAR
-              </ButtonGradient>
-            </WrapperButton>
+                  <WrapperButton>
+                    <ButtonGradient
+                      // colors={['#fdb646', '#f99f4c']}
+                      variant="primary"
+                      // onPress={handleSubmit}
+                      onPress={() => navigation.navigate('Home')}
+                      icon="login-variant"
+                    >
+                      ENTRAR
+                    </ButtonGradient>
+                  </WrapperButton>
+                </>
+              )}
+            </Formik>
           </>
-        )}
-      </Formik>
+        </DismissKeyboard>
+      </KeyboardAvoidingView>
 
       <StyledTextButton
         variant="secondary"
