@@ -33,7 +33,7 @@ import {
 
 const fakeData = [
   {
-    name: 'Quiz 1',
+    name: 'Quiz 1dawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
     teacher: 'Óclin',
   },
   {

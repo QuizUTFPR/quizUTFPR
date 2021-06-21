@@ -94,6 +94,7 @@ export const QuizCard = styled.View`
 
 export const Description = styled.View`
   height: 90%;
+  flex: 1;
 `;
 
 export const StyledView = styled.View`
@@ -110,7 +111,10 @@ export const StyledImage = styled.Image`
   border-radius: 5px;
 `;
 
-export const StyledTitle = styled.Text`
+export const StyledTitle = styled.Text.attrs({
+  ellipsizeMode: 'tail',
+  numberOfLines: 1,
+})`
   font-size: ${({ theme }) => theme.fontSize - 2}px;
   color: ${({ theme }) => theme.color.fill};
   font-family: 'PoppinsBold';
