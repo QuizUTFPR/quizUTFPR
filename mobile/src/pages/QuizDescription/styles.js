@@ -16,8 +16,9 @@ export const GoBackButtonWrapper = styled.View`
   flex-direction: row;
   align-items: center;
   align-content: center;
-  width: ${widthPercentageToDp('45%')}px;
-  height: ${heightPercentageToDp('6%')}px;
+  justify-content: center;
+  width: ${widthPercentageToDp('12%')}px;
+  height: ${heightPercentageToDp('7%')}px;
   margin-top: ${heightPercentageToDp('5%')}px;
   margin-left: ${heightPercentageToDp('2%')}px;
   border-radius: 5px;
@@ -32,15 +33,14 @@ export const StyledText = styled.Text`
 `;
 
 export const PlayButtonWrapper = styled.View`
-  position: relative;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   align-self: flex-end;
   width: ${widthPercentageToDp('33%')}px;
-  height: ${heightPercentageToDp('6%')}px;
-  margin-top: ${widthPercentageToDp('33%')}px;
-  margin-right: ${widthPercentageToDp('2%')}px;
+  height: ${heightPercentageToDp('7%')}px;
+  margin-top: ${widthPercentageToDp('28%')}px;
+  margin-right: ${widthPercentageToDp('4%')}px;
   border-radius: 5px;
   background: ${({ theme }) => theme.color.white};
 `;

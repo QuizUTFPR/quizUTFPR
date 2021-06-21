@@ -108,7 +108,8 @@ export const StyledView = styled.View`
 export const StyledImage = styled.Image`
   width: 30%;
   height: 100%;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 `;
 
 export const StyledTitle = styled.Text.attrs({

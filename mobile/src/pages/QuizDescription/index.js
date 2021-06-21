@@ -37,11 +37,8 @@ const QuizDescription = ({ navigation }) => {
         <StyledImageBackground source={require('@assets/icon.png')}>
           <GoBackButtonWrapper>
             <StyledIconButton onPress={() => navigation.goBack()}>
-              <Ionicons name="chevron-back" size={32} color="black" />
+              <Ionicons name="chevron-back" size={40} color="black" />
             </StyledIconButton>
-            <StyledText onPress={() => navigation.goBack()}>
-              Título do Quiz
-            </StyledText>
           </GoBackButtonWrapper>
           <PlayButtonWrapper>
             <StyledIconButton onPress={() => {}}>
@@ -54,7 +51,7 @@ const QuizDescription = ({ navigation }) => {
 
       <StyledScrollView>
         <BodyDescription>
-          <StyledTitle>DESCRIÇÃO</StyledTitle>
+          <StyledTitle>Título do Quiz</StyledTitle>
           <StyledDescriptionText>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
             beatae asperiores maiores, deleniti molestias expedita! Iste ipsum
