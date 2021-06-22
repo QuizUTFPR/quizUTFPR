@@ -42,6 +42,14 @@ export const StyledText = styled.Text`
   margin-left: 5px;
 `;
 
+export const ButtonStyled = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})`
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+`;
+
 export const PlayButtonWrapper = styled(StyledButton).attrs({
   // colors: ['#fdb646', '#f99f4c'],
   colors: ['#4B24B1', '#3b1b96'],
@@ -49,9 +57,6 @@ export const PlayButtonWrapper = styled(StyledButton).attrs({
   flex-direction: row;
   align-items: center;
   width: ${widthPercentageToDp('33%')}px;
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
 `;
 
 export const StyledScrollView = styled.ScrollView`

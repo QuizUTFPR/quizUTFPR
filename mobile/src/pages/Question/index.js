@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Animated, Dimensions, ImageBackground } from 'react-native';
 import LottieView from 'lottie-react-native';
+import {
+  useNavigation,
+  StackActions,
+  CommonActions,
+} from '@react-navigation/native';
 
 // HOOKS
 import useQuestions from '@hook/useQuestion';
@@ -41,6 +46,8 @@ const Question = () => {
     initialRequestQuestion,
   } = useQuestions();
 
+  const navigation = useNavigation();
+
   const [widthAnimation, setWidthAnimation] = useState(
     new Animated.Value(Dimensions.get('screen').width)
   );
@@ -56,9 +63,8 @@ const Question = () => {
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
 
-  // const showConfirmExit = () => setIsConfirmExitVisible(true);
+  const showConfirmExit = () => setIsConfirmExitVisible(true);
   const hideConfirmExit = () => setIsConfirmExitVisible(false);
-  const handleConfirmExit = () => setIsConfirmExitVisible(false);
 
   const handleGoToNextQuestionAndSave = async () => {
     if (
@@ -98,7 +104,26 @@ const Question = () => {
       clearInterval(timer.interval);
       showDialog();
     }
+
+    return () => clearInterval(timer.interval);
   }, [timer.seconds]);
+
+  useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e) => {
+        // Prevent default behavior of leaving the screen
+        if (e.data.action.type === 'POP') {
+          hideConfirmExit();
+          navigation.dispatch(e.data.action);
+        } else {
+          e.preventDefault();
+          showConfirmExit();
+        }
+
+        return () => clearInterval(timer.interval);
+      }),
+    [navigation]
+  );
 
   return (
     <Container>
@@ -191,7 +216,16 @@ const Question = () => {
         title="JÁ VAI? ESTÁ CEDO!"
         visible={isConfirmExitVisible}
         hideDialog={hideConfirmExit}
-        secondButtonOnPress={handleConfirmExit}
+        secondButtonOnPress={() => {
+          console.log('saindo');
+          // navigation.dispatch(
+          //   CommonActions.reset({
+          //     index: 0,
+          //     routes: [{ name: 'Home' }],
+          //   })
+          // );
+          navigation.dispatch(StackActions.pop(2));
+        }}
         firstButtonLabel="CANCELAR"
         secondButtonLabel="SAIR"
         lottieAnimation={
