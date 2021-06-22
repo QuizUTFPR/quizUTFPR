@@ -6,6 +6,7 @@ import {
   StackActions,
   CommonActions,
 } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
 
 // HOOKS
 import useQuestions from '@hook/useQuestion';
@@ -34,6 +35,8 @@ import {
   AnswerText,
   ConfirmButton,
   ScrollWrapper,
+  ExitButtonWrapper,
+  StyledIconButton,
 } from './styles';
 
 const Question = () => {
@@ -140,13 +143,12 @@ const Question = () => {
         >
           <QuestionWrapper>
             <Header>
-              {/* <IconButton
-                color="white"
-                icon="close"
-                onPress={() => {
-                  showConfirmExit();
-                }}
-              /> */}
+              <ExitButtonWrapper>
+                <StyledIconButton onPress={() => showConfirmExit()}>
+                  <AntDesign name="close" size={24} color="white" />
+                </StyledIconButton>
+              </ExitButtonWrapper>
+
               <CurrentQuestionView>
                 <CurrentQuestion>
                   {quizData.indexOnScreen + 1}/{quizData.questions.length}

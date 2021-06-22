@@ -17,7 +17,7 @@ export const QuestionWrapper = styled(Wrapper)`
 
 export const Header = styled.View`
   width: ${`${widthPercentageToDp('90%')}px`};
-  justify-content: flex-end;
+  justify-content: space-between;
   flex-direction: row;
   align-items: center;
 `;
@@ -44,6 +44,7 @@ export const CurrentQuestionView = styled.View.attrs({
   overflow: hidden;
   width: 100px;
   background: white;
+  margin-bottom: -27px;
 `;
 
 export const CurrentQuestion = styled.Text`
@@ -106,3 +107,12 @@ export const ConfirmButton = styled(ButtonGradient).attrs({
   border-bottom-right-radius: 30px;
   width: ${`${widthPercentageToDp('90%')}px`};
 `;
+
+export const ExitButtonWrapper = styled.TouchableOpacity`
+  width: 40px;
+  height: 40px;
+  margin-top: ${heightPercentageToDp('5%')}px;
+  margin-left: ${heightPercentageToDp('2%')}px;
+`;
+
+export const StyledIconButton = styled.Text``;
