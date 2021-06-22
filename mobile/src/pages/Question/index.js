@@ -71,7 +71,9 @@ const Question = () => {
 
   const handleGoToNextQuestionAndSave = async () => {
     if (
-      JSON.stringify(initialRequestQuestion) === JSON.stringify(requestQuestion)
+      JSON.stringify(initialRequestQuestion) ===
+        JSON.stringify(requestQuestion) &&
+      timer.seconds > 0
     ) {
       console.log('Avisar que o usuário deve escolher sua resposta!');
     } else {
@@ -79,6 +81,11 @@ const Question = () => {
       changeToNextQuestion();
       setWidthAnimation(new Animated.Value(Dimensions.get('screen').width));
     }
+  };
+
+  const handleGoNextQuestion = () => {
+    hideDialog();
+    handleGoToNextQuestionAndSave();
   };
 
   useEffect(() => {
@@ -107,8 +114,6 @@ const Question = () => {
       clearInterval(timer.interval);
       showDialog();
     }
-
-    return () => clearInterval(timer.interval);
   }, [timer.seconds]);
 
   useEffect(
@@ -198,7 +203,8 @@ const Question = () => {
         title="OOOPS!!!"
         firstButtonLabel="TUDO BEM :("
         visible={visible}
-        hideDialog={hideDialog}
+        firstButtonOnPress={handleGoNextQuestion}
+        hideDialog={() => {}}
         lottieAnimation={
           <LottieView
             autoPlay
@@ -218,17 +224,11 @@ const Question = () => {
         title="JÁ VAI? ESTÁ CEDO!"
         visible={isConfirmExitVisible}
         hideDialog={hideConfirmExit}
+        firstButtonOnPress={hideConfirmExit}
         secondButtonOnPress={() => {
-          console.log('saindo');
-          // navigation.dispatch(
-          //   CommonActions.reset({
-          //     index: 0,
-          //     routes: [{ name: 'Home' }],
-          //   })
-          // );
           navigation.dispatch(StackActions.pop(2));
         }}
-        firstButtonLabel="CANCELAR"
+        firstButtonLabel="VOLTAR"
         secondButtonLabel="SAIR"
         lottieAnimation={
           <LottieView
@@ -236,7 +236,7 @@ const Question = () => {
             loop={false}
             style={{ width: 150 }}
             resizeMode="cover"
-            speed={1}
+            speed={0.5}
             // eslint-disable-next-line global-require
             source={require('@assets/lottie/close_animation.json')}
           />

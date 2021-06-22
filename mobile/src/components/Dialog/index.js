@@ -10,16 +10,20 @@ import {
   StyledTitle,
   StyledWrapperChildren,
   StyledText,
+  FirstButton,
+  SecondButton,
+  SecondButtonText,
 } from './style';
 
 const ConfirmExitDialog = ({
   title,
   visible,
-  hideDialog,
+  firstButtonOnPress,
   secondButtonOnPress,
   firstButtonLabel,
   secondButtonLabel,
   lottieAnimation,
+  hideDialog,
   children,
 }) => (
   <StyledModal
@@ -37,14 +41,16 @@ const ConfirmExitDialog = ({
         </StyledWrapperChildren>
         <StyledWrapperButtons>
           {firstButtonLabel && (
-            <Button variant="primary" onPress={hideDialog}>
+            <FirstButton onPress={firstButtonOnPress}>
               {firstButtonLabel}
-            </Button>
+            </FirstButton>
           )}
           {secondButtonLabel && (
-            <Button variant="primary" onPress={secondButtonOnPress}>
-              {secondButtonLabel}
-            </Button>
+            <SecondButton>
+              <SecondButtonText onPress={secondButtonOnPress} fill="black">
+                {secondButtonLabel}
+              </SecondButtonText>
+            </SecondButton>
           )}
         </StyledWrapperButtons>
       </Wrapper>

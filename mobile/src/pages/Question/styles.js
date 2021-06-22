@@ -20,10 +20,11 @@ export const Header = styled.View`
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  margin-top: 5px;
 `;
 
 export const InformationsWrapper = styled.View.attrs({ elevation: 15 })`
-  flex: 0.9;
+  flex: 0.95;
   background: white;
   border-radius: 40px;
   border-top-right-radius: 0;
@@ -36,6 +37,11 @@ export const ScrollWrapper = styled.ScrollView`
   padding-right: 20px;
 `;
 
+export const ExitButtonWrapper = styled.TouchableOpacity`
+  margin-left: 20px;
+  margin-bottom: 10px;
+`;
+
 export const CurrentQuestionView = styled.View.attrs({
   elevation: 15,
 })`
@@ -44,13 +50,13 @@ export const CurrentQuestionView = styled.View.attrs({
   overflow: hidden;
   width: 100px;
   background: white;
-  margin-bottom: -27px;
+  align-items: center;
 `;
 
 export const CurrentQuestion = styled.Text`
   font-size: ${({ theme }) => theme.fontSize}px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  margin-bottom: 5px;
+  margin-top: 10px;
   font-family: 'PoppinsBold';
   color: #171c26;
   text-align: center;
@@ -106,13 +112,6 @@ export const ConfirmButton = styled(ButtonGradient).attrs({
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
   width: ${`${widthPercentageToDp('90%')}px`};
-`;
-
-export const ExitButtonWrapper = styled.TouchableOpacity`
-  width: 40px;
-  height: 40px;
-  margin-top: ${heightPercentageToDp('5%')}px;
-  margin-left: ${heightPercentageToDp('2%')}px;
 `;
 
 export const StyledIconButton = styled.Text``;
