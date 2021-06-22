@@ -106,7 +106,7 @@ export const StyledView = styled.View`
 `;
 
 export const StyledImage = styled.Image`
-  width: 30%;
+  width: 35%;
   height: 100%;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -129,7 +129,10 @@ export const StyledText = styled.Text`
   margin-left: 10px;
 `;
 
-export const StyledIconButton = styled.Text`
+export const StyledIconButton = styled.TouchableOpacity.attrs({
+  hitSlop: { top: 20, bottom: 20, left: 50, right: 50 },
+  activeOpacity: 0.7,
+})`
   margin-right: ${({ theme }) => theme.size.padding}px;
 `;
 

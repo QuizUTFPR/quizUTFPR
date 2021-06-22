@@ -87,7 +87,7 @@ const Home = () => {
               onPress={() => navigation.navigate('Descricao')}
             >
               <StyledView>
-                <StyledImage source={require('@assets/icon.png')} />
+                <StyledImage source={require('@assets/teste.jpg')} />
                 <Description>
                   <StyledTitle fill="black">{quiz.name}</StyledTitle>
                   {/* <StyledText>Criador: {quiz.teacher}</StyledText> */}

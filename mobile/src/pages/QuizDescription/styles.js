@@ -1,28 +1,36 @@
 import styled from 'styled-components/native';
-import { ImageBackground } from 'react-native';
-
+import { StyledButton } from '@components/ButtonGradient';
+// COMPONENTS
+import { Container } from '@components/Container/style';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
+
+export const DetailsContainer = styled(Container)`
+  background: ${({ theme }) => theme.color.fill};
+`;
 
 export const QuizDescriptionHeader = styled.View`
   width: ${widthPercentageToDp('100%')}px;
   height: ${heightPercentageToDp('35%')}px;
 `;
 
-export const StyledImageBackground = styled.ImageBackground`
+export const StyledImageBackground = styled.ImageBackground.attrs({
+  imageStyle: {
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+  },
+})`
   flex: 1;
 `;
 
-export const GoBackButtonWrapper = styled.View`
-  flex-direction: row;
+export const GoBackButtonWrapper = styled(StyledButton).attrs({
+  // colors: ['#fdb646', '#f99f4c'],
+  colors: ['#4B24B1', '#3b1b96'],
+})`
   align-items: center;
-  align-content: center;
-  justify-content: center;
-  width: ${widthPercentageToDp('12%')}px;
-  height: ${heightPercentageToDp('7%')}px;
+  width: 40px;
+  height: 40px;
   margin-top: ${heightPercentageToDp('5%')}px;
   margin-left: ${heightPercentageToDp('2%')}px;
-  border-radius: 5px;
-  background: ${({ theme }) => theme.color.white};
 `;
 
 export const StyledIconButton = styled.Text``;
@@ -30,19 +38,20 @@ export const StyledIconButton = styled.Text``;
 export const StyledText = styled.Text`
   font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize + 1}px;
+  color: ${({ theme }) => theme.color.fill};
+  margin-left: 5px;
 `;
 
-export const PlayButtonWrapper = styled.View`
+export const PlayButtonWrapper = styled(StyledButton).attrs({
+  // colors: ['#fdb646', '#f99f4c'],
+  colors: ['#4B24B1', '#3b1b96'],
+})`
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  align-self: flex-end;
   width: ${widthPercentageToDp('33%')}px;
-  height: ${heightPercentageToDp('7%')}px;
-  margin-top: ${widthPercentageToDp('28%')}px;
-  margin-right: ${widthPercentageToDp('4%')}px;
-  border-radius: 5px;
-  background: ${({ theme }) => theme.color.white};
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 `;
 
 export const StyledScrollView = styled.ScrollView`
