@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 // COMPONENTS
@@ -52,6 +52,7 @@ const fakeData = [
 
 const Home = () => {
   const navigation = useNavigation();
+  const [pin, setPin] = useState();
 
   return (
     <Container>
@@ -71,7 +72,12 @@ const Home = () => {
 
           <InputWrapper>
             <FontAwesome name="search" size={25} color="#4B24B1" />
-            <SearchInput placeholder="Digite o PIN" />
+            <SearchInput
+              defaultValue={pin}
+              onSubmitEditing={() => console.log('pin', pin)}
+              onChangeText={(pinText) => setPin(pinText)}
+              placeholder="Digite o PIN"
+            />
           </InputWrapper>
         </BackgroundHeader>
       </HeaderWrapper>
