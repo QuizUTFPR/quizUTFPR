@@ -17,30 +17,30 @@ const Stack = createStackNavigator();
 
 const TokenStack = () => (
   <Suspense fallback={<Loading />}>
-    <Stack.Navigator initialRouteName="InitialScreen">
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Home"
-        component={MenuDrawer}
-      />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Descricao"
-        component={QuizDescription}
-      />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="CountDown"
-        component={CountDown}
-      />
-      <Stack.Screen options={{ headerShown: false }} name="Question">
-        {(props) => (
-          <QuestionProvider>
-            <Question {...props} />
-          </QuestionProvider>
-        )}
-      </Stack.Screen>
-    </Stack.Navigator>
+    <QuestionProvider>
+      <Stack.Navigator initialRouteName="InitialScreen">
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Home"
+          component={MenuDrawer}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Descricao"
+          component={QuizDescription}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="CountDown"
+          component={CountDown}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Question"
+          component={Question}
+        />
+      </Stack.Navigator>
+    </QuestionProvider>
   </Suspense>
 );
 

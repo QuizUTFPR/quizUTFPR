@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Animated, Dimensions, ImageBackground } from 'react-native';
 import LottieView from 'lottie-react-native';
-import {
-  useNavigation,
-  StackActions,
-  CommonActions,
-} from '@react-navigation/native';
+import { useNavigation, StackActions } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 
 // HOOKS
@@ -90,15 +86,18 @@ const Question = () => {
 
   useEffect(() => {
     clearInterval(timer.interval);
-    setTimer({
-      seconds: quizData.questions[quizData.indexOnScreen].timer,
-      interval: setInterval(() => {
-        setTimer((prevState) => ({
-          ...prevState,
-          seconds: prevState.seconds > 0 ? prevState.seconds - 1 : 0,
-        }));
-      }, 1000),
-    });
+    setTimer(
+      {
+        seconds: quizData.questions[quizData.indexOnScreen].timer,
+        interval: setInterval(() => {
+          setTimer((prevState) => ({
+            ...prevState,
+            seconds: prevState.seconds > 0 ? prevState.seconds - 1 : 0,
+          }));
+        }, 1000),
+      },
+      [quizData]
+    );
 
     Animated.timing(widthAnimation, {
       toValue: 0,

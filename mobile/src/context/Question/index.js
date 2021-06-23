@@ -1,7 +1,8 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import api from '@api';
 import { Array } from '../../pages/Question/question';
-
+// API
 export const QuestionContext = createContext();
 
 const Question = ({ children }) => {
@@ -21,8 +22,12 @@ const Question = ({ children }) => {
     initialRequestQuestion
   );
 
-  const getQuestionsOfQuizFromDatabase = (idQuiz) => {
-    setQuizData(initialValue);
+  const getQuestionsOfQuizFromDatabase = async (id) => {
+    const { data } = await api.get(`/publishedQuiz/getQuestionQuiz/${id}`);
+    setQuizData((prevState) => ({
+      ...prevState,
+      questions: data,
+    }));
   };
 
   const changeToNextQuestion = () => {

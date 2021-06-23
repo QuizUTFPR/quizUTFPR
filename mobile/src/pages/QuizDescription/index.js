@@ -2,6 +2,9 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
+// HOOKS
+import useQuestions from '@hook/useQuestion';
+
 // STYLES
 import {
   DetailsContainer,
@@ -23,6 +26,13 @@ import {
 const QuizDescription = ({ route }) => {
   const navigation = useNavigation();
   const { id, description, title, image, tags } = route.params;
+  const { getQuestionsOfQuizFromDatabase } = useQuestions();
+
+  const getQuestionFromQuizAndPlay = async () => {
+    await getQuestionsOfQuizFromDatabase(id);
+    navigation.navigate('CountDown');
+  };
+
   return (
     <DetailsContainer fill="white">
       <QuizDescriptionHeader>
@@ -32,7 +42,7 @@ const QuizDescription = ({ route }) => {
               <Ionicons name="chevron-back" size={32} color="white" />
             </StyledIconButton>
           </GoBackButtonWrapper>
-          <ButtonStyled onPress={() => navigation.navigate('CountDown')}>
+          <ButtonStyled onPress={getQuestionFromQuizAndPlay}>
             <PlayButtonWrapper>
               <StyledIconButton>
                 <Ionicons name="ios-play-circle" size={32} color="white" />

@@ -32,25 +32,6 @@ import {
   QuizContainer,
 } from './styles';
 
-const fakeData = [
-  {
-    name: 'Quiz 1dawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
-    teacher: 'Óclin',
-  },
-  {
-    name: 'Quiz 1',
-    teacher: 'Óclin',
-  },
-  {
-    name: 'Quiz 1',
-    teacher: 'Óclin',
-  },
-  {
-    name: 'Quiz 1',
-    teacher: 'Óclin',
-  },
-];
-
 const Home = () => {
   const navigation = useNavigation();
   const [allQuizzes, setAllQuizzes] = useState([]);
