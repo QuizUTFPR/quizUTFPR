@@ -96,8 +96,7 @@ const Home = () => {
       <StyledScrollView>
         <QuizContainer>
           <QuizTitle>Quizes</QuizTitle>
-          {allQuizzes.map((quiz, index) => (
-            // eslint-disable-next-line react/no-array-index-key
+          {allQuizzes.map((quiz) => (
             <QuizCard key={quiz.id}>
               <StyledView>
                 <StyledImage source={require('@assets/teste.jpg')} />
