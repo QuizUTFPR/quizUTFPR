@@ -10,6 +10,7 @@ class StudentController {
   async store(req, res) {
     try{
       const schema = Yup.object().shape({
+        name: Yup.string().required(),
         email: Yup.string().email().required(),
         password: Yup.string().required()
       });
@@ -18,14 +19,14 @@ class StudentController {
         return res.status(400).json({error: 'Falha na validação!'});
       }
 
-      const {email, password} = req.body;
-      const student = await Student.create({ email: email, password: password });
+      const {email, password, name} = req.body;
+      const student = await Student.create({ name: name, email: email, password: password });
       const { id } = student;
 
       return res.json({
         student: {
-          id,
           email,
+          name,
         },
         token: jwt.sign({id}, authConfig.secret, {
           expiresIn: authConfig.expireIn

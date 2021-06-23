@@ -20,19 +20,9 @@ import {
   ButtonStyled,
 } from './styles';
 
-const fakeTags = [
-  'tag',
-  'tagtagtagtag',
-  'tagtagtag',
-  'tag',
-  'tag',
-  'tagtag',
-  'tag',
-];
-
-const QuizDescription = () => {
+const QuizDescription = ({ route }) => {
   const navigation = useNavigation();
-
+  const { id, description, title, image, tags } = route.params;
   return (
     <DetailsContainer fill="white">
       <QuizDescriptionHeader>
@@ -55,17 +45,13 @@ const QuizDescription = () => {
 
       <StyledScrollView>
         <BodyDescription>
-          <StyledTitle>Título do Quiz</StyledTitle>
-          <StyledDescriptionText>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-            beatae asperiores maiores, deleniti molestias expedita! Iste ipsum
-            magni quaerat, tenetur dignissimos aliquam asperiores error sed
-            eaque ipsam, voluptate ab quia?
-          </StyledDescriptionText>
+          <StyledTitle>{title}</StyledTitle>
+          <StyledDescriptionText>{description}</StyledDescriptionText>
 
           <StyledTitle>TAGS</StyledTitle>
           <TagsContainer>
-            {fakeTags.map((tag, index) => (
+            {tags.map((tag, index) => (
+              // eslint-disable-next-line react/no-array-index-key
               <StyledTag key={index}>{tag}</StyledTag>
             ))}
           </TagsContainer>

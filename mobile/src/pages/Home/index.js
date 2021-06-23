@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import api from '@api';
 
 // COMPONENTS
 import Container from '@components/Container';
@@ -52,7 +53,17 @@ const fakeData = [
 
 const Home = () => {
   const navigation = useNavigation();
+  const [allQuizzes, setAllQuizzes] = useState([]);
   const [pin, setPin] = useState();
+
+  useEffect(() => {
+    const getAllPublishedQuizzes = async () => {
+      const { data } = await api.get('/publishedQuiz/getAll');
+      setAllQuizzes(data);
+    };
+
+    getAllPublishedQuizzes();
+  }, []);
 
   return (
     <Container>
@@ -85,23 +96,26 @@ const Home = () => {
       <StyledScrollView>
         <QuizContainer>
           <QuizTitle>Quizes</QuizTitle>
-          {fakeData.map((quiz, index) => (
+          {allQuizzes.map((quiz, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <QuizCard
-              key={index}
-              // onPress={() => navigation.navigate('CountDown')}
-              onPress={() => navigation.navigate('Descricao')}
-            >
+            <QuizCard key={quiz.id}>
               <StyledView>
                 <StyledImage source={require('@assets/teste.jpg')} />
                 <Description>
-                  <StyledTitle fill="black">{quiz.name}</StyledTitle>
+                  <StyledTitle fill="black">{quiz.title}</StyledTitle>
                   {/* <StyledText>Criador: {quiz.teacher}</StyledText> */}
                 </Description>
               </StyledView>
               <StyledIconButton
-                // onPress={() => navigation.navigate('CountDown')}
-                onPress={() => navigation.navigate('Descricao')}
+                onPress={() =>
+                  navigation.navigate('Descricao', {
+                    id: quiz.id,
+                    title: quiz.title,
+                    description: quiz.description,
+                    image: quiz.image_quiz.url,
+                    tags: quiz.tags_quiz.map((tag) => tag.name),
+                  })
+                }
               >
                 <AntDesign name="arrowright" size={24} color="#4B24B1" />
               </StyledIconButton>
