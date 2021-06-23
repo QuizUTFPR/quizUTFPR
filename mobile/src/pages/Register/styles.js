@@ -29,7 +29,7 @@ export const StyledText = styled.Text`
 `;
 
 export const InputWrapper = styled.View`
-  padding-top: ${`${heightPercentageToDp('18%')}px`};
+  padding-top: 110px;
   width: ${`${widthPercentageToDp('85%')}px`};
 `;
 
@@ -37,11 +37,9 @@ export const StyledTextButton = styled.Text`
   margin-top: ${`${heightPercentageToDp('0.5%')}px`};
   font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize - 3}px;
-  padding: 10px;
   text-align: center;
 `;
 
 export const WrapperButton = styled.View`
-  margin-top: ${`${heightPercentageToDp('1.5%')}px`};
   width: ${`${widthPercentageToDp('85%')}px`};
 `;

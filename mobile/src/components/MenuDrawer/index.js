@@ -27,7 +27,7 @@ const DrawerComponent = () => {
             fontFamily: 'PoppinsSemiBold',
           },
         }}
-        drawerContent={(props) => <MyDrawer {...props} />}
+        drawerContent={(props) => <MyDrawer colors={colors} {...props} />}
         initialRouteName="Home"
       >
         <Drawer.Screen

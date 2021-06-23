@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -13,6 +13,9 @@ import DismissKeyboard from '@components/DismissKeyboard';
 // STYLES
 import { FontAwesome5, Zocial, Ionicons } from '@expo/vector-icons';
 
+// HOOKS
+import useStudentAuth from '@hook/useStudentAuth';
+
 import {
   BackgroundImage,
   InputWrapper,
@@ -24,7 +27,7 @@ import {
 
 const Register = ({ navigation }) => {
   const registerValidationSchema = Yup.object().shape({
-    username: Yup.string()
+    name: Yup.string()
       .min(3, ({ min }) => `O mínimo são ${min} caracteres`)
       .required('Informe um apelido'),
     email: Yup.string()
@@ -38,53 +41,57 @@ const Register = ({ navigation }) => {
       .required('Obrigatório'),
   });
 
+  const { register } = useStudentAuth();
+
   return (
     <Container>
-      <KeyboardAvoidingView behavior="position" enabled>
-        <DismissKeyboard>
+      <Formik
+        initialValues={{
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        }}
+        validationSchema={registerValidationSchema}
+        onSubmit={(values) => register(values)}
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
           <>
-            <BackgroundImage />
-            <Header
-              iconButton={
-                <Ionicons name="chevron-back" size={32} color="white" />
-              }
-              onPressButton={() => navigation.goBack()}
-              titleContent="Cadastro"
-              textContent="Por favor, informe seus dados"
-            />
-
-            <Formik
-              initialValues={{
-                username: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-              }}
-              validationSchema={registerValidationSchema}
-              onSubmit={(values) => console.log(values)}
+            <KeyboardAvoidingView
+              behavior={Platform.OS === 'ios' ? 'padding' : 'position'}
             >
-              {({
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                values,
-                errors,
-                touched,
-              }) => (
+              <DismissKeyboard>
                 <>
+                  <BackgroundImage />
+                  <Header
+                    iconButton={
+                      <Ionicons name="chevron-back" size={32} color="white" />
+                    }
+                    onPressButton={() => navigation.goBack()}
+                    titleContent="Cadastro"
+                    textContent="Por favor, informe seus dados"
+                  />
+
                   <InputWrapper>
                     <Input
-                      error={errors.username && touched.username}
-                      errorMessage={errors.username}
+                      error={errors.name && touched.name}
+                      errorMessage={errors.name}
                       fill="black"
                       placeholder="Digite seu apelido"
                       icon={
                         <FontAwesome5 name="user-alt" size={24} color="black" />
                       }
                       label="Apelido"
-                      onChangeText={handleChange('username')}
-                      onBlur={handleBlur('username')}
-                      value={values.username}
+                      onChangeText={handleChange('name')}
+                      onBlur={handleBlur('name')}
+                      value={values.name}
                     />
 
                     <Input
@@ -131,29 +138,29 @@ const Register = ({ navigation }) => {
                       value={values.confirmPassword}
                     />
                   </InputWrapper>
-                  <WrapperButton>
-                    <ButtonGradient
-                      // colors={['#fdb646', '#f99f4c']}
-                      title="Submit"
-                      variant="primary"
-                      onPress={handleSubmit}
-                    >
-                      CADASTRAR
-                    </ButtonGradient>
-                  </WrapperButton>
-
-                  <StyledTextButton
-                    variant="secondary"
-                    onPress={() => navigation.navigate('Login')}
-                  >
-                    Já possui cadastro? Realize o Login
-                  </StyledTextButton>
                 </>
-              )}
-            </Formik>
+              </DismissKeyboard>
+            </KeyboardAvoidingView>
+            <WrapperButton>
+              <ButtonGradient
+                // colors={['#fdb646', '#f99f4c']}
+                title="Submit"
+                variant="primary"
+                onPress={handleSubmit}
+              >
+                CADASTRAR
+              </ButtonGradient>
+            </WrapperButton>
+
+            <StyledTextButton
+              variant="secondary"
+              onPress={() => navigation.navigate('Login')}
+            >
+              Já possui cadastro? Realize o Login
+            </StyledTextButton>
           </>
-        </DismissKeyboard>
-      </KeyboardAvoidingView>
+        )}
+      </Formik>
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -12,6 +12,9 @@ import Header from '@components/Header';
 import Input from '@components/Input';
 import DismissKeyboard from '@components/DismissKeyboard';
 import ButtonGradient from '@components/ButtonGradient';
+
+// HOOKS
+import useStudentAuth from '@hook/useStudentAuth';
 
 // STYLES
 import {
@@ -31,37 +34,41 @@ const Login = ({ navigation }) => {
       .min(8, ({ min }) => `O mínimo são ${min} caracteres`)
       .required('A senha é obrigatória'),
   });
+
+  const { login } = useStudentAuth();
   return (
     <Container>
-      <KeyboardAvoidingView behavior="position" enabled>
-        <BackgroundImage />
-        <DismissKeyboard>
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+        }}
+        validationSchema={loginValidationSchema}
+        onSubmit={(values) => login(values)}
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
           <>
-            <Header
-              iconButton={
-                <Ionicons name="chevron-back" size={32} color="white" />
-              }
-              onPressButton={() => navigation.goBack()}
-              titleContent="Login"
-              textContent="Por favor, informe seus dados"
-            />
-            <Formik
-              initialValues={{
-                email: '',
-                password: '',
-              }}
-              validationSchema={loginValidationSchema}
-              onSubmit={(values) => console.log(values)}
+            <KeyboardAvoidingView
+              behavior={Platform.OS === 'ios' ? 'padding' : 'position'}
             >
-              {({
-                handleChange,
-                handleBlur,
-                // handleSubmit,
-                values,
-                errors,
-                touched,
-              }) => (
+              <BackgroundImage />
+              <DismissKeyboard>
                 <>
+                  <Header
+                    iconButton={
+                      <Ionicons name="chevron-back" size={32} color="white" />
+                    }
+                    onPressButton={() => navigation.goBack()}
+                    titleContent="Login"
+                    textContent="Por favor, informe seus dados"
+                  />
                   <InputWrapper>
                     <Input
                       error={errors.email && touched.email}
@@ -103,31 +110,29 @@ const Login = ({ navigation }) => {
                     Esqueceu sua senha?
                   </ForgotPasswordButton> */}
                   </InputWrapper>
-
-                  <WrapperButton>
-                    <ButtonGradient
-                      // colors={['#fdb646', '#f99f4c']}
-                      variant="primary"
-                      // onPress={handleSubmit}
-                      onPress={() => navigation.navigate('Home')}
-                      icon="login-variant"
-                    >
-                      ENTRAR
-                    </ButtonGradient>
-                  </WrapperButton>
                 </>
-              )}
-            </Formik>
-          </>
-        </DismissKeyboard>
-      </KeyboardAvoidingView>
+              </DismissKeyboard>
+            </KeyboardAvoidingView>
 
-      <StyledTextButton
-        variant="secondary"
-        onPress={() => navigation.navigate('Register')}
-      >
-        Não possui uma conta? Cadastre-se
-      </StyledTextButton>
+            <WrapperButton>
+              <ButtonGradient
+                // colors={['#fdb646', '#f99f4c']}
+                variant="primary"
+                onPress={handleSubmit}
+                icon="login-variant"
+              >
+                ENTRAR
+              </ButtonGradient>
+            </WrapperButton>
+            <StyledTextButton
+              variant="secondary"
+              onPress={() => navigation.navigate('Register')}
+            >
+              Não possui uma conta? Cadastre-se
+            </StyledTextButton>
+          </>
+        )}
+      </Formik>
     </Container>
   );
 };

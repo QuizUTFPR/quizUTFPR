@@ -1,8 +1,10 @@
+/* eslint-disable react/style-prop-object */
 /* eslint-disable global-require */
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
 import { ThemeProvider } from 'styled-components';
+import StudentAuthProvider from '@context/Student/auth';
 import Routes from './src/routes';
 import theme from './src/styles/theme';
 
@@ -32,7 +34,9 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style="light" />
-      <Routes />
+      <StudentAuthProvider>
+        <Routes />
+      </StudentAuthProvider>
     </ThemeProvider>
   );
 };

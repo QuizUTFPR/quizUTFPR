@@ -2,25 +2,49 @@ import React from 'react';
 import {
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerItem,
 } from '@react-navigation/drawer';
+
+// ICONS
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+// HOOKS
+import useStudentAuth from '@hook/useStudentAuth';
 
 // STYLES
 import { WrapperMyDrawer, Avatar, StudentName, Divider } from './styles';
 
-const CustomSidebarMenu = (props) => (
-  <WrapperMyDrawer style={{ flex: 1 }}>
-    <Avatar
-      source={{
-        uri: 'https://image.flaticon.com/icons/png/512/147/147144.png',
-      }}
-    />
-    <StudentName fill="purple">Nome aluno</StudentName>
+const CustomSidebarMenu = ({ colors, ...props }) => {
+  const { studentInfo, logout } = useStudentAuth();
 
-    <Divider fill="purple" />
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-    </DrawerContentScrollView>
-  </WrapperMyDrawer>
-);
+  return (
+    <WrapperMyDrawer style={{ flex: 1 }}>
+      <Avatar
+        source={{
+          uri: 'https://image.flaticon.com/icons/png/512/147/147144.png',
+        }}
+      />
+      <StudentName fill="purple">
+        {studentInfo.student && studentInfo.student.name}
+      </StudentName>
+
+      <Divider fill="purple" />
+      <DrawerContentScrollView {...props}>
+        <DrawerItemList {...props} />
+        <DrawerItem
+          icon={({ focused, size }) => (
+            <MaterialCommunityIcons
+              name="logout-variant"
+              size={size}
+              color={focused ? colors.purple : 'grey'}
+            />
+          )}
+          label="Sair"
+          onPress={() => logout()}
+        />
+      </DrawerContentScrollView>
+    </WrapperMyDrawer>
+  );
+};
 
 export default CustomSidebarMenu;
