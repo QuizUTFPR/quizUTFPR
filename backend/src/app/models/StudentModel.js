@@ -37,9 +37,9 @@ class Student extends Model {
       as: 'student_choice'
     })
 
-    this.hasOne(models.StudentQuiz, {
+    this.hasMany(models.StudentQuiz, {
       foreignKey: "student_id",
-      as: 'student_quiz_finished'
+      as: 'student_quiz'
     })
   }
 

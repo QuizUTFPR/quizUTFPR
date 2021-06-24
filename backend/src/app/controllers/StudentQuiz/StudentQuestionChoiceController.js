@@ -5,11 +5,15 @@ import StudentQuestionChoice from "../../models/StudentQuestionChoice";
 import StudentQuiz from "../../models/StudentQuiz";
 import Student from "../../models/StudentModel";
 
+import getMethod from '../../utils/getMethodsOfAssociation'
 class StudentQuestionChoiceController {
   // Cadastra um único registro
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
+        student_quiz_id: Yup.number("ID da tentativa inválido!").required(
+          "Por favor, informe o ID da tentativa!"
+        ),
         student_id: Yup.number("ID do estudante inválido!").required(
           "Por favor, informe o ID do estudante"
         ),
@@ -28,20 +32,17 @@ class StudentQuestionChoiceController {
         return res.status(400).json({ error: "Falha na validação!" });
       }
 
-      const { student_id, question_id, arrayOfChecked, quiz_id } = req.body;
+      const { student_id, question_id, student_quiz_id, arrayOfChecked, quiz_id } = req.body;
       const checked1 = arrayOfChecked[0];
       const checked2 = arrayOfChecked[1];
       const checked3 = arrayOfChecked[2];
       const checked4 = arrayOfChecked[3];
-      const attempt = await StudentQuestionChoice.count({
-        where: { student_id: student_id, question_id: question_id }
-      });
 
       const studentQuestionChoice = await StudentQuestionChoice.create({
         quiz_id,
         student_id,
         question_id,
-        attempt,
+        student_quiz_id,
         checked1,
         checked2,
         checked3,
@@ -58,17 +59,13 @@ class StudentQuestionChoiceController {
     try {
       const student_id = req.userId;
       const { quiz_id } = req.body;
-      const attempt = await StudentQuiz.count({
+      const StudentQuiz = await StudentQuiz.count({
         where: { student_id, quiz_id }
       });
 
-      const AllQuestionFromAttempt = await StudentQuestionChoice.findAll({
-        where: {
-          student_id, quiz_id, attempt
-        }
-      })
+      console.log(getMethod(StudentQuiz))
 
-      return res.status(200).json(AllQuestionFromAttempt);
+      return res.status(200).json();
     } catch (err) {
       return res.status(500).json(err);
 

@@ -46,22 +46,6 @@ class QuestionQuizPublishedController {
         order: [['index', 'ASC'],[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
-      // const attempt = await StudentQuiz.count({
-      //   where: { student_id, quiz_id: id }
-      // });
-
-      // const AllQuestionFromAttempt = (await StudentQuestionChoice.findAll({
-      //   where: {
-      //     student_id, quiz_id: id, attempt
-      //   },
-      //   attributes: ['question_id']
-      // })).map(item => item.question_id)
-
-      
-      // const returnedQuestions = questionOfQuiz.map(question => {
-      //   if(AllQuestionFromAttempt.indexOf(question.id)) return question;
-      // }).filter(Boolean)
-
 
       if(!questionOfQuiz.length)
       return res.status(404).json({error: "Não existe nenhuma questão cadastrada para este quiz."});

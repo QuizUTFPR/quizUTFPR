@@ -26,49 +26,16 @@ class StudentQuizController {
 
       const { student_id, quiz_id } = req.body;
       
-      const qtd_quiz_questions = await (await Quiz.findByPk(quiz_id)).countQuestions();
 
-
-      let hit_amount = 0;
-      const score = 30;
-      const attempt = await StudentQuiz.count({
-        where: { student_id, quiz_id }
+      const finished = await StudentQuiz.create({
+        student_id,
+        quiz_id,
+        hit_amount: 0,
+        score: 0,
+        is_finished: false,
       });
-
-
-      // Get all choices of a specific student attempt of answering the quiz
-      const choices = await StudentQuestionChoice.findAll({
-        where: { attempt, student_id, quiz_id }
-      });
-
-      if(choices.length !== qtd_quiz_questions)
-        return res.status(404).json({
-          error: "É necessário responder todas as questões do quiz antes de finalizar a tentativa."
-        });
       
-
-
-      // Getting how many questions did the student checked right
-      await Promise.all(choices.map(async(item) => {
-        const checkedChoices = [item.checked1, item.checked2, item.checked3, item.checked4]
-        const question = await item.getQuestion();
-        const answer = await question.getAnswer()
-        answer.map((answerItem, i) => {
-          if(answerItem.is_correct && checkedChoices[i]){
-            hit_amount += 1;
-          }
-        })
-      })).then(async () => {
-        const finished = await StudentQuiz.create({
-          student_id,
-          quiz_id,
-          hit_amount,
-          score,
-          attempt
-        });
-        
-        return res.status(200).json(finished);
-      })
+      return res.status(200).json(finished);
       
     } catch (err) {
       return res.status(500).json(err);

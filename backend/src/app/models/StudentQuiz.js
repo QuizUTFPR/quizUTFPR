@@ -32,7 +32,7 @@ class StudentQuiz extends Model {
       as: "quiz"
     });
 
-    this.hasOne(models.StudentQuestionChoice, {
+    this.hasMany(models.StudentQuestionChoice, {
       foreignKey: "student_quiz_id",
       as: "quiz_question_choice"
     })

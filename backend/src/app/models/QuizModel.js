@@ -59,7 +59,7 @@ class Quiz extends Model {
 
     this.hasOne(models.StudentQuiz, {
       foreignKey: "quiz_id",
-      as: "quiz_student_finished"
+      as: "quiz_student"
     });
   }
 }
