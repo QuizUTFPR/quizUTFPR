@@ -5,7 +5,7 @@ import Quiz from "../../models/QuizModel";
 import Answer from "../../models/AnswerModel";
 import Tag from "../../models/TagModel";
 import File from '../../models/FileModel';
-import StudentQuizFinishedAttempt from "../../models/StudentQuizFinishedAttempt";
+import StudentQuiz from "../../models/StudentQuiz";
 import StudentQuestionChoice from "../../models/StudentQuestionChoice";
 
 
@@ -46,28 +46,28 @@ class QuestionQuizPublishedController {
         order: [['index', 'ASC'],[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
-      const attempt = await StudentQuizFinishedAttempt.count({
-        where: { student_id, quiz_id: id }
-      });
+      // const attempt = await StudentQuiz.count({
+      //   where: { student_id, quiz_id: id }
+      // });
 
-      const AllQuestionFromAttempt = (await StudentQuestionChoice.findAll({
-        where: {
-          student_id, quiz_id: id, attempt
-        },
-        attributes: ['question_id']
-      })).map(item => item.question_id)
+      // const AllQuestionFromAttempt = (await StudentQuestionChoice.findAll({
+      //   where: {
+      //     student_id, quiz_id: id, attempt
+      //   },
+      //   attributes: ['question_id']
+      // })).map(item => item.question_id)
 
       
-      const returnedQuestions = questionOfQuiz.map(question => {
-        if(AllQuestionFromAttempt.indexOf(question.id)) return question;
-      }).filter(Boolean)
+      // const returnedQuestions = questionOfQuiz.map(question => {
+      //   if(AllQuestionFromAttempt.indexOf(question.id)) return question;
+      // }).filter(Boolean)
 
 
-      if(!returnedQuestions.length)
+      if(!questionOfQuiz.length)
       return res.status(404).json({error: "Não existe nenhuma questão cadastrada para este quiz."});
 
 
-      return res.status(200).json(returnedQuestions);
+      return res.status(200).json(questionOfQuiz);
     }catch(err){
       return res.status(500).json(err);
     }

@@ -7,10 +7,12 @@ const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
   const data = await AsyncStorage.getItem('@student');
-  const parsedData = data != null ? JSON.parse(data) : null;
-  config.headers.common.Authorization = parsedData.token
-    ? `Bearer ${parsedData.token}`
-    : '';
+  if (data) {
+    const parsedData = data != null ? JSON.parse(data) : null;
+    config.headers.common.Authorization = parsedData.token
+      ? `Bearer ${parsedData.token}`
+      : '';
+  }
   return config;
 });
 

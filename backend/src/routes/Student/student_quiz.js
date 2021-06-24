@@ -5,11 +5,11 @@ const router = new Router();
 
 // CONTROLLERS
 import StudentQuestionChoiceController from "../../app/controllers/StudentQuiz/StudentQuestionChoiceController";
-import StudentQuizFinishedAttemptController from "../../app/controllers/StudentQuiz/StudentQuizFinishedAttemptController";
+import StudentQuizController from "../../app/controllers/StudentQuiz/StudentQuizController";
 import StudentQuizInProgressController from '../../app/controllers/StudentQuiz/StudentQuizInProgressController'
 
 router.post("/createChoice", StudentQuestionChoiceController.store);
-router.post("/saveAttemptResult", StudentQuizFinishedAttemptController.store);
+router.post("/saveAttemptResult", StudentQuizController.store);
 router.get("/getAllChoicesFromQuiz", StudentQuestionChoiceController.index);
 router.get("/getQuizInProgress", StudentQuizInProgressController.index)
 

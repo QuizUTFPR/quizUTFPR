@@ -1,13 +1,13 @@
 import * as Yup from "yup";
 
 // MODELS
-import StudentQuizFinishedAttempt from "../../models/StudentQuizFinishedAttempt";
+import StudentQuiz from "../../models/StudentQuiz";
 import StudentQuestionChoice from "../../models/StudentQuestionChoice";
 import Quiz from "../../models/QuizModel"
 
 import getMethod from "../../utils/getMethodsOfAssociation";
 
-class StudentQuizFinishedAttemptController {
+class StudentQuizController {
   // Cadastra um único registro
   async store(req, res) {
     try {
@@ -31,7 +31,7 @@ class StudentQuizFinishedAttemptController {
 
       let hit_amount = 0;
       const score = 30;
-      const attempt = await StudentQuizFinishedAttempt.count({
+      const attempt = await StudentQuiz.count({
         where: { student_id, quiz_id }
       });
 
@@ -59,7 +59,7 @@ class StudentQuizFinishedAttemptController {
           }
         })
       })).then(async () => {
-        const finished = await StudentQuizFinishedAttempt.create({
+        const finished = await StudentQuiz.create({
           student_id,
           quiz_id,
           hit_amount,
@@ -76,4 +76,4 @@ class StudentQuizFinishedAttemptController {
   }
 }
 
-export default new StudentQuizFinishedAttemptController();
+export default new StudentQuizController();

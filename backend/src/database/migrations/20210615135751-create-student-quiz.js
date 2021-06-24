@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('student_quiz_finished_attempt', {
+    await queryInterface.createTable('student_quiz', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -24,6 +24,10 @@ module.exports = {
           model: "quiz",
           key: "id"
         }
+      },
+      is_finished: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       hit_amount: {
         type: Sequelize.INTEGER,
@@ -48,6 +52,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('student_quiz_finished_attempt');
+    await queryInterface.dropTable('student_quiz');
   }
 };

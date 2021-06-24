@@ -57,7 +57,7 @@ class Quiz extends Model {
       as: "quiz_student_choice"
     });
 
-    this.hasOne(models.StudentQuizFinishedAttempt, {
+    this.hasOne(models.StudentQuiz, {
       foreignKey: "quiz_id",
       as: "quiz_student_finished"
     });

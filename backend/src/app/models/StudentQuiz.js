@@ -1,6 +1,6 @@
 import Sequelize, { Model } from "sequelize";
 
-class StudentQuizFinishedAttempt extends Model {
+class StudentQuiz extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -8,11 +8,12 @@ class StudentQuizFinishedAttempt extends Model {
         quiz_id: Sequelize.INTEGER,
         hit_amount: Sequelize.INTEGER,
         score: Sequelize.INTEGER,
-        attempt: Sequelize.INTEGER
+        attempt: Sequelize.INTEGER,
+        is_finished: Sequelize.BOOLEAN,
       },
       {
         sequelize,
-        tableName: "student_quiz_finished_attempt"
+        tableName: "student_quiz"
       }
     );
 
@@ -34,4 +35,4 @@ class StudentQuizFinishedAttempt extends Model {
   }
 }
 
-export default StudentQuizFinishedAttempt;
+export default StudentQuiz;

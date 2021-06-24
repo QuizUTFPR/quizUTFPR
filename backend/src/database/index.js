@@ -10,7 +10,7 @@ import Quiz from '../app/models/QuizModel';
 import Tag from '../app/models/TagModel'
 import Student from '../app/models/StudentModel'
 import StudentQuestionChoice from '../app/models/StudentQuestionChoice'
-import StudentQuizFinishedAttempt from '../app/models/StudentQuizFinishedAttempt'
+import StudentQuiz from '../app/models/StudentQuiz'
 
 
 //Buffer
@@ -23,7 +23,7 @@ const models = [
   Tag, 
   Student, 
   StudentQuestionChoice, 
-  StudentQuizFinishedAttempt
+  StudentQuiz
 ];
 
 class Database {

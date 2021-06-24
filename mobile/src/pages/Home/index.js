@@ -92,7 +92,7 @@ const Home = () => {
                     id: quiz.id,
                     title: quiz.title,
                     description: quiz.description,
-                    image: quiz.image_quiz.url,
+                    // image: quiz.image_quiz.url,
                     tags: quiz.tags_quiz.map((tag) => tag.name),
                   })
                 }

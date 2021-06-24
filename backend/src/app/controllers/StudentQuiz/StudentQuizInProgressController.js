@@ -6,7 +6,7 @@ import Quiz from "../../models/QuizModel";
 import Teacher from "../../models/TeacherModel";
 import Tag from "../../models/TagModel";
 import File from '../../models/FileModel';
-import StudentQuizFinishedAttempt from "../../models/StudentQuizFinishedAttempt";
+import StudentQuiz from "../../models/StudentQuiz";
 import StudentQuestionChoice from "../../models/StudentQuestionChoice";
 
 

@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 // MODELS
 import StudentQuestionChoice from "../../models/StudentQuestionChoice";
-import StudentQuizFinishedAttempt from "../../models/StudentQuizFinishedAttempt";
+import StudentQuiz from "../../models/StudentQuiz";
 import Student from "../../models/StudentModel";
 
 class StudentQuestionChoiceController {
@@ -58,7 +58,7 @@ class StudentQuestionChoiceController {
     try {
       const student_id = req.userId;
       const { quiz_id } = req.body;
-      const attempt = await StudentQuizFinishedAttempt.count({
+      const attempt = await StudentQuiz.count({
         where: { student_id, quiz_id }
       });
 
