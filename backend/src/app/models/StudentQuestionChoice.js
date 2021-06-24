@@ -7,7 +7,7 @@ class StudentQuestionChoice extends Model {
         student_id: Sequelize.INTEGER,
         question_id: Sequelize.INTEGER,
         quiz_id: Sequelize.INTEGER,
-        attempt: Sequelize.INTEGER,
+        student_quiz_id: Sequelize.INTEGER,
         checked1: Sequelize.BOOLEAN,
         checked2: Sequelize.BOOLEAN,
         checked3: Sequelize.BOOLEAN,
@@ -39,6 +39,11 @@ class StudentQuestionChoice extends Model {
       foreignKey: "quiz_id",
       as: "quiz"
     });
+
+    this.belongsTo(models.StudentQuiz, {
+      foreignKey: "student_quiz_id",
+      as: "quiz_question_attempt"
+    })
   }
 }
 

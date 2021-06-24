@@ -32,9 +32,13 @@ module.exports = {
           key: "id"
         }
       },
-      attempt: {
+      student_quiz_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        onDelete: 'CASCADE',
+        references: {
+          model: "student_quiz",
+          key: "id"
+        }
       },
       checked1: {
         type: Sequelize.BOOLEAN,
