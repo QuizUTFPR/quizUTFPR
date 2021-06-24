@@ -2,6 +2,7 @@ import * as Yup from "yup";
 
 // MODELS
 import StudentQuestionChoice from "../../models/StudentQuestionChoice";
+import StudentQuizFinishedAttempt from "../../models/StudentQuizFinishedAttempt";
 import Student from "../../models/StudentModel";
 
 class StudentQuestionChoiceController {
@@ -50,6 +51,27 @@ class StudentQuestionChoiceController {
       return res.status(200).json(studentQuestionChoice);
     } catch (err) {
       return res.status(500).json(err);
+    }
+  }
+
+  async index(req, res) {
+    try {
+      const student_id = req.userId;
+      const { quiz_id } = req.body;
+      const attempt = await StudentQuizFinishedAttempt.count({
+        where: { student_id, quiz_id }
+      });
+
+      const AllQuestionFromAttempt = await StudentQuestionChoice.findAll({
+        where: {
+          student_id, quiz_id, attempt
+        }
+      })
+
+      return res.status(200).json(AllQuestionFromAttempt);
+    } catch (err) {
+      return res.status(500).json(err);
+
     }
   }
 }
