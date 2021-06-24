@@ -42,7 +42,7 @@ class StudentQuestionChoice extends Model {
 
     this.belongsTo(models.StudentQuiz, {
       foreignKey: "student_quiz_id",
-      as: "quiz_question_attempt"
+      as: "quiz_question_choice"
     })
   }
 }

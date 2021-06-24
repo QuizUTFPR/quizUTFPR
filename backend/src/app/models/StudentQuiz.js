@@ -8,7 +8,6 @@ class StudentQuiz extends Model {
         quiz_id: Sequelize.INTEGER,
         hit_amount: Sequelize.INTEGER,
         score: Sequelize.INTEGER,
-        attempt: Sequelize.INTEGER,
         is_finished: Sequelize.BOOLEAN,
       },
       {
@@ -35,7 +34,7 @@ class StudentQuiz extends Model {
 
     this.hasOne(models.StudentQuestionChoice, {
       foreignKey: "student_quiz_id",
-      as: "quiz_question_attempt"
+      as: "quiz_question_choice"
     })
   }
 }
