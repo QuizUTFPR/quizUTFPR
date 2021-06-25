@@ -29,6 +29,9 @@ const Question = ({ children }) => {
       quiz_id,
       id_student_quiz,
     });
+
+    // console.log(data);
+
     setQuizID(quiz_id);
     setStudentQuizID(id_student_quiz);
     setQuizData((prevState) => ({
@@ -60,7 +63,7 @@ const Question = ({ children }) => {
     });
   };
 
-  const handleSaveRequestQuestionOnDatabase = (timeLeft) => {
+  const handleSaveRequestQuestionOnDatabase = async (timeLeft) => {
     const requestData = {
       time_left: timeLeft,
       student_quiz_id: StudentQuizID,
@@ -69,6 +72,13 @@ const Question = ({ children }) => {
       arrayOfChecked: requestQuestion.checkedAnswer,
     };
     console.log('salvou', requestData);
+
+    const { data } = await api.post('/studentQuiz/createChoice', {
+      ...requestData,
+    });
+
+    console.log(data);
+
     setRequestQuestion(initialRequestQuestion);
   };
 

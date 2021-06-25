@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
-import React, { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useCallback } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import api from '@api';
 
 // COMPONENTS
@@ -70,10 +70,13 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    getAllPublishedQuizzes();
-    getAllQuizzesInProgress();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      console.log('focou');
+      getAllPublishedQuizzes();
+      getAllQuizzesInProgress();
+    }, [])
+  );
 
   return (
     <Container>

@@ -14,9 +14,6 @@ class StudentQuestionChoiceController {
         student_quiz_id: Yup.number("ID da tentativa inválido!").required(
           "Por favor, informe o ID da tentativa!"
         ),
-        student_id: Yup.number("ID do estudante inválido!").required(
-          "Por favor, informe o ID do estudante"
-        ),
         question_id: Yup.number("ID da questão inválido!").required(
           "Por favor, informe o id da questão"
         ),
@@ -35,8 +32,8 @@ class StudentQuestionChoiceController {
         return res.status(400).json({ error: "Falha na validação!" });
       }
 
+      const student_id = req.userId;
       const { 
-        student_id, 
         question_id, 
         student_quiz_id, 
         arrayOfChecked, 
