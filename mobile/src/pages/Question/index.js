@@ -226,7 +226,7 @@ const Question = () => {
         hideDialog={hideConfirmExit}
         firstButtonOnPress={hideConfirmExit}
         secondButtonOnPress={() => {
-          navigation.dispatch(StackActions.pop(2));
+          navigation.dispatch(StackActions.pop(3));
         }}
         firstButtonLabel="VOLTAR"
         secondButtonLabel="SAIR"
