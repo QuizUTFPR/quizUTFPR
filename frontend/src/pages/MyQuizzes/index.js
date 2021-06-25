@@ -8,6 +8,7 @@ import Card from '@components/CardQuiz';
 import Modal from '@components/Modal';
 import AlertRemoveMessage from '@components/ConfirmRemove';
 import PublishQuizMessage from '@components/ConfirmPublishQuiz';
+import Tooltip from '@components/ToolTip';
 
 // PAGES
 import QuizPreferences from '@pages/EditQuizPreferences';
@@ -21,7 +22,7 @@ import {
   IconButton,
   Typography,
   Divider,
-  Tooltip,
+  // Tooltip,
 } from '@material-ui/core';
 import Button from '@components/Button';
 
@@ -35,6 +36,12 @@ const IconWrapper = forwardRef((props, ref) => (
   <IconButton ref={ref} onClick={props.onClick} {...props}>
     {props.children}
   </IconButton>
+));
+
+const TextPINReffed = forwardRef((props, ref) => (
+  <TextPIN ref={ref} {...props}>
+    {props.children}
+  </TextPIN>
 ));
 
 const Quiz = () => {
@@ -138,7 +145,7 @@ const Quiz = () => {
               published={quiz.published}
             >
               {!quiz.published && (
-                <Tooltip arrow aria-label="publicar" title="Publicar">
+                <Tooltip arrow ariaLabel="publicar" title="Publicar">
                   <IconWrapper onClick={() => handleClickOpenPublish(quiz.id)}>
                     <Publish />
                   </IconWrapper>
@@ -146,21 +153,17 @@ const Quiz = () => {
               )}
 
               {quiz.published && (
-                <Tooltip
-                  arrow
-                  aria-label="pin"
-                  title="PIN utilizado pelo aluno"
-                >
-                  <TextPIN>{quiz.pin}</TextPIN>
+                <Tooltip arrow ariaLabel="pin" title="PIN utilizado pelo aluno">
+                  <TextPINReffed>{quiz.pin}</TextPINReffed>
                 </Tooltip>
               )}
-              <Tooltip arrow aria-label="editar" title="Editar">
+              <Tooltip arrow ariaLabel="editar" title="Editar">
                 <IconWrapper onClick={handleOpenModal(quiz)}>
                   <Edit />
                 </IconWrapper>
               </Tooltip>
               {!quiz.published && (
-                <Tooltip arrow aria-label="deletar" title="Deletar">
+                <Tooltip arrow ariaLabel="deletar" title="Deletar">
                   <IconWrapper onClick={() => handleClickOpenAlert(quiz.id)}>
                     <Delete />
                   </IconWrapper>
