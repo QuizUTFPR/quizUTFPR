@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import crc32 from 'fast-crc32c';
 
 // MODELS
 import Teacher from "../../models/TeacherModel";
@@ -11,9 +12,11 @@ class PublishQuizController {
   async store(req, res) {
     try{
       const {id, published} = req.body;
+      var pin = crc32.calculate(toString(id), id);
 
       const quizUpdated = await Quiz.update({
-        published
+        published,
+        pin
       },{ 
       where:{
         id: id
@@ -23,9 +26,10 @@ class PublishQuizController {
         return res.status(404).json({error: "Nenhum quiz encontrado."});
 
 
-      return res.status(200).json(quizUpdated);
+      return res.status(200).json();
 
     }catch(err){
+      console.log(err)
       return res.status(500).json(err);
     }
   }

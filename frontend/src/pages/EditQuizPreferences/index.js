@@ -138,7 +138,7 @@ const EditPreferences = forwardRef((props, ref) => {
             select
           >
             <MenuItem value="public">Público</MenuItem>
-            <MenuItem value="other">Outros</MenuItem>
+            <MenuItem value="private">Privado</MenuItem>
           </TextField>
         </Grid>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import api from '@api';
 
@@ -24,8 +24,12 @@ import {
   Tooltip,
 } from '@material-ui/core';
 import Button from '@components/Button';
+
 // MATERIAL-UI ICONS
 import { Edit, Delete, Publish } from '@material-ui/icons';
+
+// STYLE
+import { TextPIN } from './style';
 
 const IconWrapper = forwardRef((props, ref) => (
   <IconButton ref={ref} onClick={props.onClick} {...props}>
@@ -50,6 +54,7 @@ const Quiz = () => {
     setOpenPublish({ open: false, idQuiz: null });
 
   const getQuizzes = async () => {
+    console.log('obtendo');
     try {
       const response = await api.get('/quiz');
       if (response.status !== 200) setQuizzes(false);
@@ -58,6 +63,7 @@ const Quiz = () => {
       //
     }
   };
+  console.log(quizzes);
 
   const handleOpenModal = (quiz) => () => {
     setModalOpen({
@@ -71,13 +77,15 @@ const Quiz = () => {
   };
 
   const handleRemoveQuiz = async () => {
+    console.log('removendo');
     await api.delete('/quiz/delete', {
       data: { id_quiz: openAlert.idQuiz },
     });
     getQuizzes();
   };
 
-  const publishQuiz = async () => {
+  const publishQuiz = useCallback(async () => {
+    console.log('publicando');
     const quizUpdated = {
       id: openPublish.idQuiz,
       published: true,
@@ -85,7 +93,8 @@ const Quiz = () => {
 
     const responseQuiz = await api.post('/quiz/publish', quizUpdated);
     if (responseQuiz.status === 200) console.log('publicado');
-  };
+    else console.log(responseQuiz);
+  }, [openPublish]);
 
   useEffect(() => {
     getQuizzes();
@@ -133,6 +142,16 @@ const Quiz = () => {
                   <IconWrapper onClick={() => handleClickOpenPublish(quiz.id)}>
                     <Publish />
                   </IconWrapper>
+                </Tooltip>
+              )}
+
+              {quiz.published && (
+                <Tooltip
+                  arrow
+                  aria-label="pin"
+                  title="PIN utilizado pelo aluno"
+                >
+                  <TextPIN>{quiz.pin}</TextPIN>
                 </Tooltip>
               )}
               <Tooltip arrow aria-label="editar" title="Editar">

@@ -32,7 +32,7 @@ class StudentQuizInProgressController {
         include: [{
           model: Quiz,
           as: "quiz",
-          attributes: ["id","title", "description"],
+          attributes: ["id","title", "description", "pin"],
           include: [
             {
               model: Teacher,

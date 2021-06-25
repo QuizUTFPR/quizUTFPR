@@ -39,6 +39,11 @@ module.exports = {
         onDelete: "SET NULL",
         allowNull: true
       },
+      pin: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: true
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false

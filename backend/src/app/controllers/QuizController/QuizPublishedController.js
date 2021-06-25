@@ -21,7 +21,7 @@ class QuizPublishedController {
 
       const quizzes = await Quiz.findAll({
         where: {  published: true },
-        attributes: ["id", "title", "description", "visibility", "id_image"],
+        attributes: ["id", "title", "description", "visibility", "id_image", "pin"],
         include: [
           {
             model: Teacher,
@@ -62,7 +62,7 @@ class QuizPublishedController {
       const {tag} = req.params;
 
       const quiz = await Quiz.findAll({
-        attributes: ["id", "title", "description", "visibility", "id_image"],
+        attributes: ["id", "title", "description", "visibility", "id_image", "pin"],
         include: [
           {
             model: Teacher,

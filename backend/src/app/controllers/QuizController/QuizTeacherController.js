@@ -16,7 +16,7 @@ class QuizTeacherController {
         where: {
           id_teacher: id_teacher
         },
-        attributes: ["id", "title", "description", "visibility", "id_image", "published"],
+        attributes: ["id", "title", "description", "visibility", "id_image", "published", "pin"],
         include: [
           {
             model: Teacher,

@@ -56,6 +56,7 @@ class QuizController {
         quiz
       });
     }catch(err){
+      console.log(err)
       return res.status(500).json(err);
     }
   }
@@ -64,7 +65,7 @@ class QuizController {
   async index(req, res) {
     try{
       const quizzes = await Quiz.findAll({
-        attributes: ["id", "title", "description", "visibility", "id_image"],
+        attributes: ["id", "title", "description", "visibility", "id_image", "pin"],
         include: [
           {
             model: Teacher,
@@ -102,7 +103,7 @@ class QuizController {
       const {tag} = req.params;
 
       const quiz = await Quiz.findAll({
-        attributes: ["id", "title", "description", "visibility", "id_image"],
+        attributes: ["id", "title", "description", "visibility", "id_image", "pin"],
         include: [
           {
             model: Teacher,
