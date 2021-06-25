@@ -1,6 +1,10 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+
+// API
+import api from '@api';
 
 // HOOKS
 import useQuestions from '@hook/useQuestion';
@@ -21,15 +25,29 @@ import {
   TagsContainer,
   StyledTag,
   ButtonStyled,
+  ResumeButtonWrapper,
+  StyledPIN,
 } from './styles';
 
 const QuizDescription = ({ route }) => {
-  const navigation = useNavigation();
-  const { id, description, title, image, tags } = route.params;
   const { getQuestionsOfQuizFromDatabase } = useQuestions();
+  const navigation = useNavigation();
 
-  const getQuestionFromQuizAndPlay = async () => {
-    await getQuestionsOfQuizFromDatabase(id);
+  const { idStudentQuiz, questionAmount, studentChoicesAmount, quiz } =
+    route.params;
+  const { title, description, tags, id, pin } = quiz;
+
+  console.log(idStudentQuiz, questionAmount, studentChoicesAmount);
+
+  const startQuizAndGetAllQuestions = async () => {
+    const { data } = await api.post('/studentQuiz/startQuiz', { quiz_id: id });
+
+    await getQuestionsOfQuizFromDatabase(id, data.id);
+    navigation.navigate('CountDown');
+  };
+
+  const continueQuizAndGetAllQuestions = async () => {
+    await getQuestionsOfQuizFromDatabase(id, idStudentQuiz);
     navigation.navigate('CountDown');
   };
 
@@ -42,19 +60,33 @@ const QuizDescription = ({ route }) => {
               <Ionicons name="chevron-back" size={32} color="white" />
             </StyledIconButton>
           </GoBackButtonWrapper>
-          <ButtonStyled onPress={getQuestionFromQuizAndPlay}>
-            <PlayButtonWrapper>
-              <StyledIconButton>
-                <Ionicons name="ios-play-circle" size={32} color="white" />
-              </StyledIconButton>
-              <StyledText fill="white">JOGAR</StyledText>
-            </PlayButtonWrapper>
-          </ButtonStyled>
+          {idStudentQuiz ? (
+            <ButtonStyled onPress={continueQuizAndGetAllQuestions}>
+              <ResumeButtonWrapper>
+                <StyledIconButton>
+                  <Ionicons name="ios-play-circle" size={32} color="white" />
+                </StyledIconButton>
+                <StyledText fill="white">CONTINUAR</StyledText>
+              </ResumeButtonWrapper>
+            </ButtonStyled>
+          ) : (
+            <ButtonStyled onPress={startQuizAndGetAllQuestions}>
+              <PlayButtonWrapper>
+                <StyledIconButton>
+                  <Ionicons name="ios-play-circle" size={32} color="white" />
+                </StyledIconButton>
+                <StyledText fill="white">JOGAR</StyledText>
+              </PlayButtonWrapper>
+            </ButtonStyled>
+          )}
         </StyledImageBackground>
       </QuizDescriptionHeader>
 
       <StyledScrollView>
         <BodyDescription>
+          <StyledTitle>PIN</StyledTitle>
+          <StyledPIN>{pin}</StyledPIN>
+
           <StyledTitle>{title}</StyledTitle>
           <StyledDescriptionText>{description}</StyledDescriptionText>
 

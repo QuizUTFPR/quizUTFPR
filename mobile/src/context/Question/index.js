@@ -1,29 +1,39 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import api from '@api';
-import { Array } from '../../pages/Question/question';
+
 // API
+import api from '@api';
+
 export const QuestionContext = createContext();
 
 const Question = ({ children }) => {
   const initialValue = {
-    questions: Array,
+    questions: [],
     indexOnScreen: 0,
   };
 
   const initialRequestQuestion = {
-    idQuiz: -1,
-    idQuestion: -1,
     checkedAnswer: [false, false, false, false],
   };
 
   const [quizData, setQuizData] = useState(initialValue);
+  const [quizID, setQuizID] = useState(-1);
+  const [StudentQuizID, setStudentQuizID] = useState(-1);
   const [requestQuestion, setRequestQuestion] = useState(
     initialRequestQuestion
   );
 
-  const getQuestionsOfQuizFromDatabase = async (id) => {
-    const { data } = await api.get(`/publishedQuiz/getQuestionQuiz/${id}`);
+  // eslint-disable-next-line camelcase
+  const getQuestionsOfQuizFromDatabase = async (quiz_id, id_student_quiz) => {
+    const { data } = await api.post('/studentQuiz/getQuestionQuiz', {
+      quiz_id,
+      id_student_quiz,
+    });
+
+    // console.log(data);
+
+    setQuizID(quiz_id);
+    setStudentQuizID(id_student_quiz);
     setQuizData((prevState) => ({
       ...prevState,
       questions: data,
@@ -53,8 +63,22 @@ const Question = ({ children }) => {
     });
   };
 
-  const handleSaveRequestQuestionOnDatabase = () => {
-    console.log('salvou');
+  const handleSaveRequestQuestionOnDatabase = async (timeLeft) => {
+    const requestData = {
+      time_left: timeLeft,
+      student_quiz_id: StudentQuizID,
+      quiz_id: quizID,
+      question_id: quizData.questions[quizData.indexOnScreen].id,
+      arrayOfChecked: requestQuestion.checkedAnswer,
+    };
+    console.log('salvou', requestData);
+
+    const { data } = await api.post('/studentQuiz/createChoice', {
+      ...requestData,
+    });
+
+    console.log(data);
+
     setRequestQuestion(initialRequestQuestion);
   };
 
@@ -69,6 +93,7 @@ const Question = ({ children }) => {
         handleSetCheckedAnswer,
         handleSaveRequestQuestionOnDatabase,
         initialRequestQuestion,
+        StudentQuizID,
       }}
     >
       {children}

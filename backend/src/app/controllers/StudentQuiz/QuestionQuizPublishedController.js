@@ -25,7 +25,8 @@ class QuestionQuizPublishedController {
 
       const studentQuiz = await StudentQuiz.findOne({
         where: {
-          id: id_student_quiz
+          id: id_student_quiz,
+          is_finished: false
         }
       })
 

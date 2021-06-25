@@ -12,9 +12,6 @@ class StudentQuizController {
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
-        student_id: Yup.number("ID do estudante inválido!").required(
-          "Por favor, informe o ID do estudante"
-        ),
         quiz_id: Yup.number("ID do quiz inválido!").required(
           "Por favor, informe o id do quiz"
         )
@@ -24,8 +21,11 @@ class StudentQuizController {
         return res.status(400).json({ error: "Falha na validação!" });
       }
 
-      const { student_id, quiz_id } = req.body;
+      const student_id = req.userId;
+
+      const { quiz_id } = req.body;
       
+      console.log(quiz_id, student_id)
 
       const finished = await StudentQuiz.create({
         student_id,
@@ -34,6 +34,8 @@ class StudentQuizController {
         score: 0,
         is_finished: false,
       });
+
+      console.log(finished)
       
       return res.status(200).json(finished);
       
@@ -57,7 +59,9 @@ class StudentQuizController {
         return res.status(400).json({ error: "Falha na validação!" });
       }
 
-      const { student_id, quiz_id, id_student_quiz } = req.body;
+      const student_id = req.userId;
+
+      const { quiz_id, id_student_quiz } = req.body;
 
       const quiz = await Quiz.findByPk(quiz_id);
       const questionQuiz = await quiz.getQuestions();
