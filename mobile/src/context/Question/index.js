@@ -1,13 +1,14 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import api from '@api';
-import { Array } from '../../pages/Question/question';
+
 // API
+import api from '@api';
+
 export const QuestionContext = createContext();
 
 const Question = ({ children }) => {
   const initialValue = {
-    questions: Array,
+    questions: [],
     indexOnScreen: 0,
   };
 
@@ -18,12 +19,18 @@ const Question = ({ children }) => {
   };
 
   const [quizData, setQuizData] = useState(initialValue);
+  const [StudentQuizID, setStudentQuizID] = useState(-1);
   const [requestQuestion, setRequestQuestion] = useState(
     initialRequestQuestion
   );
 
-  const getQuestionsOfQuizFromDatabase = async (id) => {
-    const { data } = await api.get(`/publishedQuiz/getQuestionQuiz/${id}`);
+  // eslint-disable-next-line camelcase
+  const getQuestionsOfQuizFromDatabase = async (quiz_id, id_student_quiz) => {
+    const { data } = await api.post('/studentQuiz/getQuestionQuiz', {
+      quiz_id,
+      id_student_quiz,
+    });
+    setStudentQuizID(id_student_quiz);
     setQuizData((prevState) => ({
       ...prevState,
       questions: data,
@@ -69,6 +76,7 @@ const Question = ({ children }) => {
         handleSetCheckedAnswer,
         handleSaveRequestQuestionOnDatabase,
         initialRequestQuestion,
+        StudentQuizID,
       }}
     >
       {children}

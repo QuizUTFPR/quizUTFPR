@@ -56,15 +56,15 @@ export const PlayButtonWrapper = styled(StyledButton).attrs({
 })`
   flex-direction: row;
   align-items: center;
-  width: ${widthPercentageToDp('33%')}px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
-export const StyledScrollView = styled.ScrollView`
-  width: ${widthPercentageToDp('100%')}px;
-`;
+export const ResumeButtonWrapper = styled(PlayButtonWrapper).attrs({})``;
+
+export const StyledScrollView = styled.ScrollView``;
 
 export const BodyDescription = styled.View`
-  width: 100%;
   padding-left: ${widthPercentageToDp('8%')}px;
   padding-right: ${widthPercentageToDp('8%')}px;
 `;
@@ -73,7 +73,13 @@ export const StyledTitle = styled.Text`
   font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize + 5}px;
   margin-top: ${heightPercentageToDp('2%')}px;
+`;
+
+export const StyledPIN = styled(StyledTitle)`
+  font-family: 'PoppinsRegular';
+  font-size: ${({ theme }) => theme.fontSize}px;
   align-self: flex-start;
+  margin-top: 0px;
 `;
 
 export const StyledDescriptionText = styled.Text`

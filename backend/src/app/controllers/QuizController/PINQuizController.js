@@ -48,6 +48,8 @@ class PINQuizController {
           ],
       });
 
+      if(!quiz) return res.status(404).json({error: "PIN inválido!"})
+
       const questionAmount = await quiz.countQuestions();
       const quizStudent = await quiz.getQuiz_student({
         where: {

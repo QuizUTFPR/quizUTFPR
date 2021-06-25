@@ -136,11 +136,12 @@ export const StyledIconButton = styled.TouchableOpacity.attrs({
   margin-right: ${({ theme }) => theme.size.padding}px;
 `;
 
-export const StyledScrollView = styled.ScrollView`
+export const StyledScrollView = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    alignItems: 'center',
+  },
+})`
   width: ${widthPercentageToDp('100%')}px;
 `;
 
-export const QuizContainer = styled.View`
-  width: 100%;
-  padding-left: ${heightPercentageToDp('4%')}px;
-`;
+export const QuizContainer = styled.View``;

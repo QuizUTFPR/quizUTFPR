@@ -43,6 +43,7 @@ const Question = () => {
     handleSaveRequestQuestionOnDatabase,
     changeToNextQuestion,
     initialRequestQuestion,
+    // StudentQuizID
   } = useQuestions();
 
   const navigation = useNavigation();
