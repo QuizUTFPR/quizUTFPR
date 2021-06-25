@@ -13,12 +13,11 @@ const Question = ({ children }) => {
   };
 
   const initialRequestQuestion = {
-    idQuiz: -1,
-    idQuestion: -1,
     checkedAnswer: [false, false, false, false],
   };
 
   const [quizData, setQuizData] = useState(initialValue);
+  const [quizID, setQuizID] = useState(-1);
   const [StudentQuizID, setStudentQuizID] = useState(-1);
   const [requestQuestion, setRequestQuestion] = useState(
     initialRequestQuestion
@@ -30,6 +29,7 @@ const Question = ({ children }) => {
       quiz_id,
       id_student_quiz,
     });
+    setQuizID(quiz_id);
     setStudentQuizID(id_student_quiz);
     setQuizData((prevState) => ({
       ...prevState,
@@ -60,8 +60,15 @@ const Question = ({ children }) => {
     });
   };
 
-  const handleSaveRequestQuestionOnDatabase = () => {
-    console.log('salvou');
+  const handleSaveRequestQuestionOnDatabase = (timeLeft) => {
+    const requestData = {
+      time_left: timeLeft,
+      student_quiz_id: StudentQuizID,
+      quiz_id: quizID,
+      question_id: quizData.questions[quizData.indexOnScreen].id,
+      arrayOfChecked: requestQuestion.checkedAnswer,
+    };
+    console.log('salvou', requestData);
     setRequestQuestion(initialRequestQuestion);
   };
 

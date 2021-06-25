@@ -43,7 +43,6 @@ const Question = () => {
     handleSaveRequestQuestionOnDatabase,
     changeToNextQuestion,
     initialRequestQuestion,
-    // StudentQuizID
   } = useQuestions();
 
   const navigation = useNavigation();
@@ -74,14 +73,15 @@ const Question = () => {
     ) {
       console.log('Avisar que o usuário deve escolher sua resposta!');
     } else {
-      await handleSaveRequestQuestionOnDatabase();
+      await handleSaveRequestQuestionOnDatabase(timer.seconds);
       changeToNextQuestion();
       setWidthAnimation(new Animated.Value(Dimensions.get('screen').width));
     }
   };
 
-  const handleGoNextQuestion = () => {
+  const handleGoNextQuestion = async () => {
     hideDialog();
+    await handleSaveRequestQuestionOnDatabase(timer.seconds);
     handleGoToNextQuestionAndSave();
   };
 
