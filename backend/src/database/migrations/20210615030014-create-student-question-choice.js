@@ -40,6 +40,10 @@ module.exports = {
           key: "id"
         }
       },
+      time_left: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        defaultValue: 0,
+      },
       checked1: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

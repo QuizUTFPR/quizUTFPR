@@ -21,7 +21,7 @@ class QuestionQuizController {
         return res.status(404).json({error: "Quiz não encontrado!"})
 
       const questionOfQuiz = await quiz.getQuestions({
-        attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
+        attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'score', 'copy', 'available_on_questions_db', 'type'],
         include: [
           {
             model: Answer,

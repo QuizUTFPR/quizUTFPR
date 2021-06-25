@@ -10,6 +10,7 @@ class Question extends Model {
         available_on_questions_db: Sequelize.BOOLEAN,
         id_image: Sequelize.INTEGER,
         timer: Sequelize.INTEGER.UNSIGNED,
+        score: Sequelize.INTEGER.UNSIGNED,
         difficulty_level: Sequelize.ENUM('Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'),
         type: Sequelize.ENUM('multiple_choice', 'single_choice')
       },
@@ -49,7 +50,7 @@ class Question extends Model {
       onDelete: 'CASCADE',
     });
 
-    this.hasOne(models.StudentQuestionChoice, {
+    this.hasMany(models.StudentQuestionChoice, {
       foreignKey: "question_id",
       as: 'question_choice'
     })

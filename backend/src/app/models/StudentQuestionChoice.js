@@ -8,6 +8,7 @@ class StudentQuestionChoice extends Model {
         question_id: Sequelize.INTEGER,
         quiz_id: Sequelize.INTEGER,
         student_quiz_id: Sequelize.INTEGER,
+        time_left: Sequelize.INTEGER.UNSIGNED,
         checked1: Sequelize.BOOLEAN,
         checked2: Sequelize.BOOLEAN,
         checked3: Sequelize.BOOLEAN,

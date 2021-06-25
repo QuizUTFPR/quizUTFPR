@@ -7,10 +7,13 @@ const router = new Router();
 import StudentQuestionChoiceController from "../../app/controllers/StudentQuiz/StudentQuestionChoiceController";
 import StudentQuizController from "../../app/controllers/StudentQuiz/StudentQuizController";
 import StudentQuizInProgressController from '../../app/controllers/StudentQuiz/StudentQuizInProgressController'
+import QuestionQuizPublishedController from '../../app/controllers/StudentQuiz/QuestionQuizPublishedController'
+
 
 router.post("/createChoice", StudentQuestionChoiceController.store);
-router.post("/saveAttemptResult", StudentQuizController.store);
-router.get("/getAllChoicesFromQuiz", StudentQuestionChoiceController.index);
+router.post("/startQuiz", StudentQuizController.store);
+router.put("/finishQuiz", StudentQuizController.update);
 router.get("/getQuizInProgress", StudentQuizInProgressController.index)
+router.post("/getQuestionQuiz/", QuestionQuizPublishedController.index);
 
 export default router;

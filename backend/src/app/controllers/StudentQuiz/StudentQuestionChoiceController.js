@@ -23,6 +23,9 @@ class StudentQuestionChoiceController {
         quiz_id: Yup.number("id do quiz inválido!").required(
           "Por favor, informe o ID da questão"
         ),
+        time_left: Yup.number("O tempo restão é invalido!").required(
+          "Por favor, informe um tempo restante"
+        ),
         arrayOfChecked: Yup.array(
           Yup.bool("Os valores devem ser booleanos")
         ).required("Por favor, informe o array de checagem das questões!")
@@ -32,7 +35,15 @@ class StudentQuestionChoiceController {
         return res.status(400).json({ error: "Falha na validação!" });
       }
 
-      const { student_id, question_id, student_quiz_id, arrayOfChecked, quiz_id } = req.body;
+      const { 
+        student_id, 
+        question_id, 
+        student_quiz_id, 
+        arrayOfChecked, 
+        quiz_id, 
+        time_left 
+      } = req.body;
+      
       const checked1 = arrayOfChecked[0];
       const checked2 = arrayOfChecked[1];
       const checked3 = arrayOfChecked[2];
@@ -43,6 +54,7 @@ class StudentQuestionChoiceController {
         student_id,
         question_id,
         student_quiz_id,
+        time_left,
         checked1,
         checked2,
         checked3,
@@ -52,23 +64,6 @@ class StudentQuestionChoiceController {
       return res.status(200).json(studentQuestionChoice);
     } catch (err) {
       return res.status(500).json(err);
-    }
-  }
-
-  async index(req, res) {
-    try {
-      const student_id = req.userId;
-      const { quiz_id } = req.body;
-      const StudentQuiz = await StudentQuiz.count({
-        where: { student_id, quiz_id }
-      });
-
-      console.log(getMethod(StudentQuiz))
-
-      return res.status(200).json();
-    } catch (err) {
-      return res.status(500).json(err);
-
     }
   }
 }

@@ -29,6 +29,10 @@ module.exports = {
         type: Sequelize.INTEGER.UNSIGNED,
         defaultValue: 30
       },
+      score: {
+        type: Sequelize.INTEGER.UNSIGNED,
+        defaultValue: 0
+      },
       difficulty_level: {
         type: Sequelize.ENUM('Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'),
         allowNull: false

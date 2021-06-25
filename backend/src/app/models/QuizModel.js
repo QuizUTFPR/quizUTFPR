@@ -52,12 +52,12 @@ class Quiz extends Model {
       as: "image"
     });
 
-    this.hasOne(models.StudentQuestionChoice, {
+    this.hasMany(models.StudentQuestionChoice, {
       foreignKey: "quiz_id",
       as: "quiz_student_choice"
     });
 
-    this.hasOne(models.StudentQuiz, {
+    this.hasMany(models.StudentQuiz, {
       foreignKey: "quiz_id",
       as: "quiz_student"
     });

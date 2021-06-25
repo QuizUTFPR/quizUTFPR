@@ -32,7 +32,7 @@ class Student extends Model {
       as: 'image_profile'
     })
 
-    this.hasOne(models.StudentQuestionChoice, {
+    this.hasMany(models.StudentQuestionChoice, {
       foreignKey: "student_id",
       as: 'student_choice'
     })

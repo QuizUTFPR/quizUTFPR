@@ -18,7 +18,7 @@ class QuestionTagController {
         where: {
           available_on_questions_db: true,
         },
-        attributes: ['id', 'title', 'timer', 'difficulty_level', 'type'],
+        attributes: ['id', 'title', 'timer', 'difficulty_level', 'score', 'type'],
         include: [
           {
             model: Answer,

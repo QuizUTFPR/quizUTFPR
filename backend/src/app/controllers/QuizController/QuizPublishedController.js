@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 
 // MODELS
+import Student from "../../models/StudentModel";
 import Quiz from "../../models/QuizModel";
 import Teacher from "../../models/TeacherModel";
 import Question from "../../models/QuestionModel";
@@ -9,12 +10,15 @@ import Tag from "../../models/TagModel";
 import File from '../../models/FileModel';
 
 
-// import getMethod from '../../utils/getMethodsOfAssociation';
+import getMethod from '../../utils/getMethodsOfAssociation';
 
 class QuizPublishedController {
   // Lista todos os registros
   async index(req, res) {
     try{
+
+      const student_id = req.userId;
+
       const quizzes = await Quiz.findAll({
         where: {  published: true },
         attributes: ["id", "title", "description", "visibility", "id_image"],
@@ -40,11 +44,14 @@ class QuizPublishedController {
         ]
       });
 
-      if(!quizzes.length)
-        return res.status(404).json({error: "Não existe nenhum quiz cadastrado."});
+      const quizzesInProgress = (await (await Student.findByPk(student_id)).getStudent_quiz()).map(item => item.quiz_id);
+      const returnedQuizzes = quizzes.filter(quiz => !quizzesInProgress.includes(quiz.id) )
+        
+      // if(!quizzes.length)
+      //   return res.status(404).json({error: "Não existe nenhum quiz cadastrado."});
 
 
-      return res.status(200).json(quizzes);
+      return res.status(200).json(returnedQuizzes);
     }catch(err){
       return res.status(500).json(err);
     }
@@ -65,7 +72,7 @@ class QuizPublishedController {
           {
             model: Question,
             as: "questions",
-            attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
+            attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'score','copy', 'available_on_questions_db', 'type'],
             through: {
               attributes: []
             },

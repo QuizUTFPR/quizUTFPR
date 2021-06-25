@@ -7,6 +7,23 @@ import Quiz from "../../models/QuizModel";
 import Tag from "../../models/TagModel";
 import File from '../../models/FileModel';
 
+async function getScoreBasedOnDifficulty(difficulty){
+  switch (difficulty) {
+    case 'Muito Fácil':
+      return 5;
+    case 'Fácil':
+      return 10;
+    case 'Médio':
+      return 15;
+    case 'Difícil':
+      return 30;
+    case 'Muito Difícil':
+      return 40;
+    default:
+      return 0;
+
+  }
+}
 
 class QuestionController {
   async store(req, res) {
@@ -53,7 +70,6 @@ class QuestionController {
         tags,
         type,
         id_image,
-        published,
         index
       } = req.body;
 
@@ -61,7 +77,7 @@ class QuestionController {
       if (!quiz) return res.status(404).json({ error: "Quiz não encontrado!" });
 
       let question = await Question.findByPk(id);
-
+      const score = await getScoreBasedOnDifficulty(difficultyLevel);
 
       if(!question){
         //CASO QUESTÃO NÃO EXISTIR CRIO A MESMA E AS ALTERNATIVAS
@@ -76,6 +92,7 @@ class QuestionController {
             id_image: id_image,
             type: type,
             index: index,
+            score
           }) 
 
         } catch (error) {
@@ -89,6 +106,7 @@ class QuestionController {
         question.difficulty_level = difficultyLevel;
         question.copy = copy;
         question.type = type;
+        question.score = score;
         question.available_on_questions_db = availableOnQuestionsDB;
         if(id_image)  question.id_image = id_image;
         question.save();
@@ -161,7 +179,7 @@ class QuestionController {
   async index(req, res) {
     try{
       const questions = await Question.findAll({
-        attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type'],
+        attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'copy', 'available_on_questions_db', 'type', 'score'],
         include: [
           {
             model: Answer,
@@ -203,7 +221,7 @@ class QuestionController {
         where: {
           available_on_questions_db: true,
         },
-        attributes: ['id', 'title', 'timer', 'difficulty_level', 'type'],
+        attributes: ['id', 'title', 'timer', 'difficulty_level', 'type', 'score'],
         include: [
           {
             model: Answer,
