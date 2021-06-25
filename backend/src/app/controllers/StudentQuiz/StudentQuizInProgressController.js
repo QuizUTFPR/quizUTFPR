@@ -56,11 +56,14 @@ class StudentQuizInProgressController {
         }]
       });
 
+      console.log(QuizzesInProgress)
+
       const studentQuizInProgress = await Promise.all(QuizzesInProgress.map(async (item) => {
         const questionAmount = await item.quiz.countQuestions();
         const studentChoicesAmount = (await item.countQuiz_question_choice());
 
         return {
+          id_student_quiz: item.id,
           studentChoicesAmount,
           questionAmount,
           quiz: item.quiz
