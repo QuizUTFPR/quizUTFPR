@@ -43,6 +43,8 @@ const Question = () => {
     handleSaveRequestQuestionOnDatabase,
     changeToNextQuestion,
     initialRequestQuestion,
+    amountOfQuestion,
+    amountAlreadyAnswered,
   } = useQuestions();
 
   const navigation = useNavigation();
@@ -74,7 +76,11 @@ const Question = () => {
       console.log('Avisar que o usuário deve escolher sua resposta!');
     } else {
       await handleSaveRequestQuestionOnDatabase(timer.seconds);
-      changeToNextQuestion();
+      const responseFinished = await changeToNextQuestion();
+
+      if (responseFinished) {
+        navigation.navigate('Statistics', responseFinished);
+      }
       setWidthAnimation(new Animated.Value(Dimensions.get('screen').width));
     }
   };
@@ -120,7 +126,7 @@ const Question = () => {
     () =>
       navigation.addListener('beforeRemove', (e) => {
         // Prevent default behavior of leaving the screen
-        if (e.data.action.type === 'POP') {
+        if (e.data.action.type === 'POP' || e.data.action.type === 'RESET') {
           hideConfirmExit();
           navigation.dispatch(e.data.action);
         } else {
@@ -156,7 +162,7 @@ const Question = () => {
 
               <CurrentQuestionView>
                 <CurrentQuestion>
-                  {quizData.indexOnScreen + 1}/{quizData.questions.length}
+                  {amountAlreadyAnswered + 1}/{amountOfQuestion}
                 </CurrentQuestion>
               </CurrentQuestionView>
             </Header>

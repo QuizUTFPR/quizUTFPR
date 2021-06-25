@@ -8,6 +8,7 @@ import QuestionProvider from '@context/Question';
 // PAGES
 import CountDown from '@pages/CountDown';
 import Question from '@pages/Question';
+import Statistics from '@pages/Statistics';
 
 const MenuDrawer = lazy(() => import('@components/MenuDrawer'));
 const QuizDescription = lazy(() => import('@pages/QuizDescription'));
@@ -38,6 +39,11 @@ const TokenStack = () => (
           options={{ headerShown: false }}
           name="Question"
           component={Question}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Statistics"
+          component={Statistics}
         />
       </Stack.Navigator>
     </QuestionProvider>

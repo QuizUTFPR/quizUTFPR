@@ -18,6 +18,8 @@ const Question = ({ children }) => {
 
   const [quizData, setQuizData] = useState(initialValue);
   const [quizID, setQuizID] = useState(-1);
+  const [amountOfQuestion, setAmountOfQuestion] = useState(0);
+  const [amountAlreadyAnswered, setAlreadyAnswered] = useState(0);
   const [StudentQuizID, setStudentQuizID] = useState(-1);
   const [requestQuestion, setRequestQuestion] = useState(
     initialRequestQuestion
@@ -28,7 +30,9 @@ const Question = ({ children }) => {
       id_student_quiz: StudentQuizID,
       quiz_id: quizID,
     });
-    console.log(data);
+
+    console.log('salvou score no banco');
+    return data;
   };
 
   const handleSaveRequestQuestionOnDatabase = async (timeLeft) => {
@@ -40,11 +44,11 @@ const Question = ({ children }) => {
       arrayOfChecked: requestQuestion.checkedAnswer,
     };
 
-    const { data } = await api.post('/studentQuiz/createChoice', {
+    await api.post('/studentQuiz/createChoice', {
       ...requestData,
     });
 
-    console.log(data);
+    console.log('respondeu no banco');
 
     setRequestQuestion(initialRequestQuestion);
   };
@@ -55,24 +59,28 @@ const Question = ({ children }) => {
       quiz_id,
       id_student_quiz,
     });
-
+    console.log(data);
+    setAlreadyAnswered(data.amountStudentChoice);
     setQuizID(quiz_id);
     setStudentQuizID(id_student_quiz);
-    setQuizData((prevState) => ({
-      ...prevState,
-      questions: data,
-    }));
+    setAmountOfQuestion(data.amountOfQuestion);
+    setQuizData({
+      indexOnScreen: 0,
+      questions: data.questions,
+    });
   };
 
   const changeToNextQuestion = async () => {
     if (quizData.indexOnScreen === quizData.questions.length - 1) {
-      await handleFinishQuizAnswering();
-    } else {
-      setQuizData((prevState) => ({
-        ...prevState,
-        indexOnScreen: prevState.indexOnScreen + 1,
-      }));
+      return handleFinishQuizAnswering();
     }
+    setQuizData((prevState) => ({
+      ...prevState,
+      indexOnScreen: prevState.indexOnScreen + 1,
+    }));
+
+    setAlreadyAnswered((prevState) => prevState + 1);
+    return false;
   };
 
   const handleSetCheckedAnswer = (index) => {
@@ -99,6 +107,8 @@ const Question = ({ children }) => {
         handleSaveRequestQuestionOnDatabase,
         initialRequestQuestion,
         StudentQuizID,
+        amountOfQuestion,
+        amountAlreadyAnswered,
       }}
     >
       {children}

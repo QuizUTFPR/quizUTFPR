@@ -33,11 +33,10 @@ const QuizDescription = ({ route }) => {
   const { getQuestionsOfQuizFromDatabase } = useQuestions();
   const navigation = useNavigation();
 
+  // eslint-disable-next-line no-unused-vars
   const { idStudentQuiz, questionAmount, studentChoicesAmount, quiz } =
     route.params;
   const { title, description, tags, id, pin } = quiz;
-
-  console.log(idStudentQuiz, questionAmount, studentChoicesAmount);
 
   const startQuizAndGetAllQuestions = async () => {
     const { data } = await api.post('/studentQuiz/startQuiz', { quiz_id: id });

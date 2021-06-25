@@ -1,5 +1,9 @@
 import React from 'react';
 import LottieView from 'lottie-react-native';
+import { CommonActions } from '@react-navigation/native';
+
+// HOOKS
+import useQuestions from '@hook/useQuestion';
 
 // COMPONENTS
 import ButtonGradient from '@components/ButtonGradient';
@@ -17,12 +21,6 @@ import {
   RedoButton,
   RedoButtonText,
 } from './styles';
-
-const fakeData = {
-  amountOfQuestions: 25,
-  hits: 15,
-  points: 100,
-};
 
 const informationsBasedOnHits = {
   amazing: {
@@ -45,8 +43,11 @@ const informationsBasedOnHits = {
   },
 };
 
-const Statistics = () => {
-  const hitsPercentage = (fakeData.hits * 100) / fakeData.amountOfQuestions;
+const Statistics = ({ route, navigation }) => {
+  const { amountOfQuestion } = useQuestions();
+  const { hit_amount: hitAmount, score } = route.params;
+
+  const hitsPercentage = (hitAmount * 100) / amountOfQuestion;
 
   const correctInformations = () => {
     if (hitsPercentage >= 80) return informationsBasedOnHits.amazing;
@@ -71,15 +72,26 @@ const Statistics = () => {
               />
             </AnimationView>
             <StyledText>
-              Questões corretas: {fakeData.hits}/{fakeData.amountOfQuestions}
+              Questões corretas: {hitAmount}/{amountOfQuestion}
             </StyledText>
-            <StyledText>Pontuação: {fakeData.points}</StyledText>
+            <StyledText>Pontuação: {score}</StyledText>
           </Body>
           <Footer>
             <RedoButton>
               <RedoButtonText fill="black">REFAZER</RedoButtonText>
             </RedoButton>
-            <ButtonGradient variant="primary" colors={['#fdb646', '#f99f4c']}>
+            <ButtonGradient
+              variant="primary"
+              onPress={() =>
+                navigation.dispatch(
+                  CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: 'Home' }],
+                  })
+                )
+              }
+              colors={['#fdb646', '#f99f4c']}
+            >
               CONCLUIR
             </ButtonGradient>
           </Footer>

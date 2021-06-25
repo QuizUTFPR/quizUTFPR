@@ -16,6 +16,7 @@ class QuestionQuizPublishedController {
   // Lista todos os registros
   async index(req, res) {
     try{
+      const student_id = req.userId;
       const {quiz_id, id_student_quiz} = req.body;
 
       const quiz = await Quiz.findByPk(quiz_id);
@@ -63,14 +64,29 @@ class QuestionQuizPublishedController {
         order: [['index', 'ASC'],[{model: Answer, as: 'answer'}, 'id', 'ASC']],
       });
 
+      const amountOfQuestion = await quiz.countQuestions();
+      const amountStudentChoice = await quiz.countQuiz_student_choice({
+        where: {
+          quiz_id: quiz.id,
+          student_quiz_id: id_student_quiz,
+          student_id
+        }
+      });
+
       
-      const returnedQuestion = questionOfQuiz.filter(question => !arrayIDStudentQuizChoices.includes(question.id));
+      const returnedQuestion = questionOfQuiz.filter(
+        question => !arrayIDStudentQuizChoices.includes(question.id)
+      );
 
       // if(!questionOfQuiz.length)
       // return res.status(404).json({error: "Não existe nenhuma questão cadastrada para este quiz."});
 
 
-      return res.status(200).json(returnedQuestion);
+      return res.status(200).json({
+        amountOfQuestion, 
+        amountStudentChoice,
+        questions: returnedQuestion
+      });
     }catch(err){
       return res.status(500).json(err);
     }
