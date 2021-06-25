@@ -76,7 +76,7 @@ export const QuestionImage = styled.Image`
 `;
 
 export const QuestionText = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize + 5}px;
+  font-size: ${({ theme }) => theme.fontSize}px;
   font-family: 'PoppinsBlack';
   color: #171c26;
   text-align: center;
@@ -96,7 +96,8 @@ export const AnswerContainer = styled.TouchableOpacity`
 `;
 
 export const AnswerText = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize + 1}px;
+  margin-left: 10px;
+  font-size: ${({ theme }) => theme.fontSize - 4}px;
   font-family: 'PoppinsSemiBold';
   color: ${({ checked }) => (checked ? 'white' : '#171c26')};
 `;
