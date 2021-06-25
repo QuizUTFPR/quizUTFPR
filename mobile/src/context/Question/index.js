@@ -23,14 +23,38 @@ const Question = ({ children }) => {
     initialRequestQuestion
   );
 
+  const handleFinishQuizAnswering = async () => {
+    const { data } = await api.put('/studentQuiz/finishQuiz', {
+      id_student_quiz: StudentQuizID,
+      quiz_id: quizID,
+    });
+    console.log(data);
+  };
+
+  const handleSaveRequestQuestionOnDatabase = async (timeLeft) => {
+    const requestData = {
+      time_left: timeLeft,
+      student_quiz_id: StudentQuizID,
+      quiz_id: quizID,
+      question_id: quizData.questions[quizData.indexOnScreen].id,
+      arrayOfChecked: requestQuestion.checkedAnswer,
+    };
+
+    const { data } = await api.post('/studentQuiz/createChoice', {
+      ...requestData,
+    });
+
+    console.log(data);
+
+    setRequestQuestion(initialRequestQuestion);
+  };
+
   // eslint-disable-next-line camelcase
   const getQuestionsOfQuizFromDatabase = async (quiz_id, id_student_quiz) => {
     const { data } = await api.post('/studentQuiz/getQuestionQuiz', {
       quiz_id,
       id_student_quiz,
     });
-
-    // console.log(data);
 
     setQuizID(quiz_id);
     setStudentQuizID(id_student_quiz);
@@ -40,9 +64,9 @@ const Question = ({ children }) => {
     }));
   };
 
-  const changeToNextQuestion = () => {
+  const changeToNextQuestion = async () => {
     if (quizData.indexOnScreen === quizData.questions.length - 1) {
-      console.log('Chegou no limite!');
+      await handleFinishQuizAnswering();
     } else {
       setQuizData((prevState) => ({
         ...prevState,
@@ -61,25 +85,6 @@ const Question = ({ children }) => {
         checkedAnswer: newCheckedAnswer,
       };
     });
-  };
-
-  const handleSaveRequestQuestionOnDatabase = async (timeLeft) => {
-    const requestData = {
-      time_left: timeLeft,
-      student_quiz_id: StudentQuizID,
-      quiz_id: quizID,
-      question_id: quizData.questions[quizData.indexOnScreen].id,
-      arrayOfChecked: requestQuestion.checkedAnswer,
-    };
-    console.log('salvou', requestData);
-
-    const { data } = await api.post('/studentQuiz/createChoice', {
-      ...requestData,
-    });
-
-    console.log(data);
-
-    setRequestQuestion(initialRequestQuestion);
   };
 
   return (

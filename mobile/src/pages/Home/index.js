@@ -37,7 +37,6 @@ const Home = () => {
   const [allQuizzes, setAllQuizzes] = useState([]);
   const [allQuizzesInProgress, setQuizzesInProgress] = useState([]);
   const [pin, setPin] = useState();
-
   const getAllPublishedQuizzes = async () => {
     const { data } = await api.get('/publishedQuiz/getAll');
     setAllQuizzes(data);

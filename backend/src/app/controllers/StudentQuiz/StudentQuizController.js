@@ -47,8 +47,8 @@ class StudentQuizController {
   async update(req, res){
     try {
       const schema = Yup.object().shape({
-        student_id: Yup.number("ID do estudante inválido!").required(
-          "Por favor, informe o ID do estudante"
+        id_student_quiz: Yup.number("ID da tentativa inválido!").required(
+          "Por favor, informe o ID da tentativa de resposta do aluno ao quiz!"
         ),
         quiz_id: Yup.number("ID do quiz inválido!").required(
           "Por favor, informe o id do quiz"

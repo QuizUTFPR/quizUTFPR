@@ -44,9 +44,15 @@ class QuizPublishedController {
         ]
       });
 
-      const quizzesInProgress = (await (await Student.findByPk(student_id)).getStudent_quiz()).map(item => item.quiz_id);
+      
+      const quizzesInProgress = (await (await Student.findByPk(student_id)).getStudent_quiz({
+        where: {
+          is_finished: false
+        }
+      })).map(item => item.quiz_id);
+      
       const returnedQuizzes = quizzes.filter(quiz => !quizzesInProgress.includes(quiz.id) )
-        
+      
       // if(!quizzes.length)
       //   return res.status(404).json({error: "Não existe nenhum quiz cadastrado."});
 
