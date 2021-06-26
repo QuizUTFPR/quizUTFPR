@@ -27,19 +27,19 @@ const informationsBasedOnHits = {
     title: 'ESPETACULAR!',
     subtitle: 'Você foi muito bem.',
     // eslint-disable-next-line global-require
-    animation: require('@assets/lottie/initialScreen.json'),
+    animation: require('@assets/lottie/congratulations.json'),
   },
   notBad: {
     title: 'NADA MAL!',
     subtitle: 'Você foi bem.',
     // eslint-disable-next-line global-require
-    animation: require('@assets/lottie/initialScreen.json'),
+    animation: require('@assets/lottie/not_bad.json'),
   },
   youCanDoItBetter: {
     title: 'NÃO FOI DESSA VEZ!',
     subtitle: 'Tente novamente, você consegue.',
     // eslint-disable-next-line global-require
-    animation: require('@assets/lottie/initialScreen.json'),
+    animation: require('@assets/lottie/try_again.json'),
   },
 };
 
