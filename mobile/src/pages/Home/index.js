@@ -116,7 +116,24 @@ const Home = () => {
             <QuizContainer>
               <QuizTitle>Em Progresso</QuizTitle>
               {allQuizzesInProgress.map((item) => (
-                <QuizCard key={item.quiz.id}>
+                <QuizCard
+                  key={item.quiz.id}
+                  onPress={() =>
+                    navigation.navigate('Descricao', {
+                      idStudentQuiz: item.id_student_quiz,
+                      questionAmount: item.questionAmount,
+                      studentChoicesAmount: item.studentChoicesAmount,
+                      quiz: {
+                        id: item.quiz.id,
+                        title: item.quiz.title,
+                        description: item.quiz.description,
+                        pin: item.quiz.pin,
+                        // image: quiz.image_quiz.url,
+                        tags: item.quiz.tags_quiz.map((tag) => tag.name),
+                      },
+                    })
+                  }
+                >
                   <StyledImage source={require('@assets/teste.jpg')} />
                   <StyledView>
                     <Description>
@@ -124,27 +141,22 @@ const Home = () => {
                       {/* <StyledText>Criador: {quiz.teacher}</StyledText> */}
                     </Description>
                     <QuizProgressBarBackground fill="lightGrey">
-                      <QuizProgressBar fill="purple" />
+                      <QuizProgressBar
+                        porcentage={
+                          (item.studentChoicesAmount * 100) /
+                          item.questionAmount
+                        }
+                        fill="purple"
+                      />
                     </QuizProgressBarBackground>
                   </StyledView>
-                  <QuizProgressText fill="purple">10%</QuizProgressText>
-                  <StyledIconButton
-                    onPress={() =>
-                      navigation.navigate('Descricao', {
-                        idStudentQuiz: item.id_student_quiz,
-                        questionAmount: item.questionAmount,
-                        studentChoicesAmount: item.studentChoicesAmount,
-                        quiz: {
-                          id: item.quiz.id,
-                          title: item.quiz.title,
-                          description: item.quiz.description,
-                          pin: item.quiz.pin,
-                          // image: quiz.image_quiz.url,
-                          tags: item.quiz.tags_quiz.map((tag) => tag.name),
-                        },
-                      })
-                    }
-                  >
+                  <QuizProgressText fill="purple">
+                    {Math.round(
+                      (item.studentChoicesAmount * 100) / item.questionAmount
+                    )}
+                    %
+                  </QuizProgressText>
+                  <StyledIconButton>
                     <AntDesign name="arrowright" size={24} color="#4B24B1" />
                   </StyledIconButton>
                 </QuizCard>
@@ -155,28 +167,29 @@ const Home = () => {
             <QuizContainer>
               <QuizTitle>Quizes</QuizTitle>
               {allQuizzes.map((quiz) => (
-                <QuizCard key={quiz.id}>
+                <QuizCard
+                  key={quiz.id}
+                  onPress={() =>
+                    navigation.navigate('Descricao', {
+                      quiz: {
+                        id: quiz.id,
+                        title: quiz.title,
+                        description: quiz.description,
+                        pin: quiz.pin,
+                        // image: quiz.image_quiz.url,
+                        tags: quiz.tags_quiz.map((tag) => tag.name),
+                      },
+                    })
+                  }
+                >
+                  <StyledImage source={require('@assets/teste.jpg')} />
                   <StyledView>
-                    <StyledImage source={require('@assets/teste.jpg')} />
                     <Description>
                       <StyledTitle fill="black">{quiz.title}</StyledTitle>
                       {/* <StyledText>Criador: {quiz.teacher}</StyledText> */}
                     </Description>
                   </StyledView>
-                  <StyledIconButton
-                    onPress={() =>
-                      navigation.navigate('Descricao', {
-                        quiz: {
-                          id: quiz.id,
-                          title: quiz.title,
-                          description: quiz.description,
-                          pin: quiz.pin,
-                          // image: quiz.image_quiz.url,
-                          tags: quiz.tags_quiz.map((tag) => tag.name),
-                        },
-                      })
-                    }
-                  >
+                  <StyledIconButton>
                     <AntDesign name="arrowright" size={24} color="#4B24B1" />
                   </StyledIconButton>
                 </QuizCard>

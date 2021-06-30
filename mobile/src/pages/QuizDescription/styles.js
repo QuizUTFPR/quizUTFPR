@@ -10,7 +10,7 @@ export const DetailsContainer = styled(Container)`
 
 export const QuizDescriptionHeader = styled.View`
   width: ${widthPercentageToDp('100%')}px;
-  height: ${heightPercentageToDp('35%')}px;
+  height: ${heightPercentageToDp('40%')}px;
 `;
 
 export const StyledImageBackground = styled.ImageBackground.attrs({
@@ -42,13 +42,15 @@ export const StyledText = styled.Text`
   margin-left: 5px;
 `;
 
-export const ButtonStyled = styled.TouchableOpacity.attrs({
-  activeOpacity: 0.8,
-})`
+export const ButtonWrapper = styled.View`
   position: absolute;
   bottom: 15px;
   right: 15px;
 `;
+
+export const ButtonStyled = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})``;
 
 export const PlayButtonWrapper = styled(StyledButton).attrs({
   // colors: ['#fdb646', '#f99f4c'],
@@ -61,6 +63,12 @@ export const PlayButtonWrapper = styled(StyledButton).attrs({
 `;
 
 export const ResumeButtonWrapper = styled(PlayButtonWrapper).attrs({})``;
+
+export const GiveUPButtonWraper = styled(PlayButtonWrapper).attrs({
+  colors: ['#fdb646', '#f99f4c'],
+})`
+  margin-bottom: 5px;
+`;
 
 export const StyledScrollView = styled.ScrollView``;
 

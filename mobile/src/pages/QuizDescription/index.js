@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import React from 'react';
+import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -26,6 +26,8 @@ import {
   StyledTag,
   ButtonStyled,
   ResumeButtonWrapper,
+  GiveUPButtonWraper,
+  ButtonWrapper,
   StyledPIN,
 } from './styles';
 
@@ -38,6 +40,10 @@ const QuizDescription = ({ route }) => {
     route.params;
   const { title, description, tags, id, pin } = quiz;
 
+  const [studentQuizID, setStudentQuizID] = useState(idStudentQuiz);
+
+  console.log(studentQuizID, questionAmount, studentChoicesAmount, quiz);
+
   const startQuizAndGetAllQuestions = async () => {
     const { data } = await api.post('/studentQuiz/startQuiz', { quiz_id: id });
 
@@ -46,8 +52,12 @@ const QuizDescription = ({ route }) => {
   };
 
   const continueQuizAndGetAllQuestions = async () => {
-    await getQuestionsOfQuizFromDatabase(id, idStudentQuiz);
+    await getQuestionsOfQuizFromDatabase(id, studentQuizID);
     navigation.navigate('CountDown');
+  };
+
+  const giveUPQuiz = () => {
+    setStudentQuizID(null);
   };
 
   return (
@@ -59,24 +69,33 @@ const QuizDescription = ({ route }) => {
               <Ionicons name="chevron-back" size={32} color="white" />
             </StyledIconButton>
           </GoBackButtonWrapper>
-          {idStudentQuiz ? (
-            <ButtonStyled onPress={continueQuizAndGetAllQuestions}>
-              <ResumeButtonWrapper>
-                <StyledIconButton>
-                  <Ionicons name="ios-play-circle" size={32} color="white" />
-                </StyledIconButton>
-                <StyledText fill="white">CONTINUAR</StyledText>
-              </ResumeButtonWrapper>
-            </ButtonStyled>
+          {studentQuizID ? (
+            <ButtonWrapper>
+              <ButtonStyled onPress={giveUPQuiz}>
+                <GiveUPButtonWraper>
+                  <StyledText fill="white">DESISTIR</StyledText>
+                </GiveUPButtonWraper>
+              </ButtonStyled>
+              <ButtonStyled onPress={continueQuizAndGetAllQuestions}>
+                <ResumeButtonWrapper>
+                  <StyledIconButton>
+                    <Ionicons name="ios-play-circle" size={32} color="white" />
+                  </StyledIconButton>
+                  <StyledText fill="white">CONTINUAR</StyledText>
+                </ResumeButtonWrapper>
+              </ButtonStyled>
+            </ButtonWrapper>
           ) : (
-            <ButtonStyled onPress={startQuizAndGetAllQuestions}>
-              <PlayButtonWrapper>
-                <StyledIconButton>
-                  <Ionicons name="ios-play-circle" size={32} color="white" />
-                </StyledIconButton>
-                <StyledText fill="white">JOGAR</StyledText>
-              </PlayButtonWrapper>
-            </ButtonStyled>
+            <ButtonWrapper>
+              <ButtonStyled onPress={startQuizAndGetAllQuestions}>
+                <PlayButtonWrapper>
+                  <StyledIconButton>
+                    <Ionicons name="ios-play-circle" size={32} color="white" />
+                  </StyledIconButton>
+                  <StyledText fill="white">JOGAR</StyledText>
+                </PlayButtonWrapper>
+              </ButtonStyled>
+            </ButtonWrapper>
           )}
         </StyledImageBackground>
       </QuizDescriptionHeader>
@@ -85,10 +104,8 @@ const QuizDescription = ({ route }) => {
         <BodyDescription>
           <StyledTitle>PIN</StyledTitle>
           <StyledPIN>{pin}</StyledPIN>
-
           <StyledTitle>{title}</StyledTitle>
           <StyledDescriptionText>{description}</StyledDescriptionText>
-
           <StyledTitle>TAGS</StyledTitle>
           <TagsContainer>
             {tags.map((tag, index) => (

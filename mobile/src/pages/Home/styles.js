@@ -79,7 +79,7 @@ export const QuizTitle = styled.Text`
   font-family: 'PoppinsBold';
 `;
 
-export const QuizCard = styled.View`
+export const QuizCard = styled.TouchableOpacity.attrs({ activeOpacity: 0.8 })`
   flex-direction: row;
   align-self: flex-start;
   align-items: center;
@@ -152,7 +152,7 @@ export const QuizProgressBarBackground = styled.View`
 
 export const QuizProgressBar = styled.View`
   background: ${({ theme }) => theme.color.fill};
-  width: 50%;
+  width: ${({ porcentage }) => porcentage}%;
   height: 100%;
   border-radius: 30px;
 `;
