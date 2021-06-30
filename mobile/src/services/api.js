@@ -1,8 +1,10 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const ip = '10.0.2.2';
+
 const api = axios.create({
-  baseURL: 'http://10.0.2.2:3333',
+  baseURL: `http://${ip}:3333`,
 });
 
 api.interceptors.request.use(async (config) => {
@@ -20,9 +22,13 @@ axios.interceptors.response.use(
   (response) =>
     // Do something with response data
     response,
-  (error) =>
+  (error) => {
     // Do something with response error
-    Promise.reject(error)
+    Promise.reject(error);
+    if (error.response.status === 401) {
+      AsyncStorage.clear('@student');
+    }
+  }
 );
 
 export default api;

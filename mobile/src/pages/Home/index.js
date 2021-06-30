@@ -151,7 +151,7 @@ const Home = () => {
                     </QuizProgressBarBackground>
                   </StyledView>
                   <QuizProgressText fill="purple">
-                    {Math.round(
+                    {Math.floor(
                       (item.studentChoicesAmount * 100) / item.questionAmount
                     )}
                     %

@@ -87,7 +87,6 @@ const Question = () => {
 
   const handleGoNextQuestion = async () => {
     hideDialog();
-    await handleSaveRequestQuestionOnDatabase(timer.seconds);
     handleGoToNextQuestionAndSave();
   };
 
@@ -106,6 +105,10 @@ const Question = () => {
       [quizData]
     );
 
+    return () => clearInterval(timer.interval);
+  }, [quizData]);
+
+  useEffect(() => {
     Animated.timing(widthAnimation, {
       toValue: 0,
       duration: quizData.questions[quizData.indexOnScreen].timer * 1000,
@@ -113,13 +116,15 @@ const Question = () => {
     }).start();
 
     return () => clearInterval(timer.interval);
-  }, [quizData, widthAnimation]);
+  }, [widthAnimation]);
 
   useEffect(() => {
     if (timer.seconds === 0) {
       clearInterval(timer.interval);
       showDialog();
     }
+
+    // return () => clearInterval(timer.interval);
   }, [timer.seconds]);
 
   useEffect(

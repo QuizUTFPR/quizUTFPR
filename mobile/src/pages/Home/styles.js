@@ -124,10 +124,7 @@ export const StyledText = styled.Text`
   margin-left: 10px;
 `;
 
-export const StyledIconButton = styled.TouchableOpacity.attrs({
-  hitSlop: { top: 20, bottom: 20, left: 50, right: 50 },
-  activeOpacity: 0.7,
-})`
+export const StyledIconButton = styled.View`
   margin-right: ${({ theme }) => theme.size.padding}px;
 `;
 
@@ -161,7 +158,7 @@ export const QuizProgressText = styled.Text`
   position: absolute;
   right: 5px;
   bottom: 0;
-  color : ${({ theme }) => theme.color.fill}
+  color: ${({ theme }) => theme.color.fill};
   font-size: ${({ theme }) => theme.fontSize - 5}px;
   font-family: 'PoppinsBold';
 `;
