@@ -12,8 +12,8 @@ export const BackgroundHeader = styled.ImageBackground.attrs({
   source: HeaderBackground,
   resizeMode: 'cover',
   imageStyle: {
-    borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
 })`
   justify-content: center;
@@ -80,7 +80,6 @@ export const QuizTitle = styled.Text`
 `;
 
 export const QuizCard = styled.View`
-  position: relative;
   flex-direction: row;
   align-self: flex-start;
   align-items: center;
@@ -93,16 +92,12 @@ export const QuizCard = styled.View`
 `;
 
 export const Description = styled.View`
-  height: 90%;
   flex: 1;
 `;
 
 export const StyledView = styled.View`
   height: 100%;
-  width: 80%;
-  flex-direction: row;
-  align-items: center;
-  border-radius: 10px;
+  flex: 1;
 `;
 
 export const StyledImage = styled.Image`
@@ -145,3 +140,28 @@ export const StyledScrollView = styled.ScrollView.attrs({
 `;
 
 export const QuizContainer = styled.View``;
+
+export const QuizProgressBarBackground = styled.View`
+  width: 100%;
+  height: 15px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  background: ${({ theme }) => theme.color.fill};
+  border-radius: 30px;
+`;
+
+export const QuizProgressBar = styled.View`
+  background: ${({ theme }) => theme.color.fill};
+  width: 50%;
+  height: 100%;
+  border-radius: 30px;
+`;
+
+export const QuizProgressText = styled.Text`
+  position: absolute;
+  right: 5px;
+  bottom: 0;
+  color : ${({ theme }) => theme.color.fill}
+  font-size: ${({ theme }) => theme.fontSize - 5}px;
+  font-family: 'PoppinsBold';
+`;

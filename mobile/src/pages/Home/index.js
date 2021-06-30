@@ -30,6 +30,9 @@ import {
   StyledView,
   StyledScrollView,
   QuizContainer,
+  QuizProgressBar,
+  QuizProgressBarBackground,
+  QuizProgressText,
 } from './styles';
 
 const Home = () => {
@@ -37,6 +40,7 @@ const Home = () => {
   const [allQuizzes, setAllQuizzes] = useState([]);
   const [allQuizzesInProgress, setQuizzesInProgress] = useState([]);
   const [pin, setPin] = useState();
+
   const getAllPublishedQuizzes = async () => {
     const { data } = await api.get('/publishedQuiz/getAll');
     setAllQuizzes(data);
@@ -44,6 +48,7 @@ const Home = () => {
 
   const getAllQuizzesInProgress = async () => {
     const { data } = await api.get('/studentQuiz/getQuizInProgress');
+    console.log(data);
     setQuizzesInProgress(data);
   };
 
@@ -112,14 +117,17 @@ const Home = () => {
               <QuizTitle>Em Progresso</QuizTitle>
               {allQuizzesInProgress.map((item) => (
                 <QuizCard key={item.quiz.id}>
+                  <StyledImage source={require('@assets/teste.jpg')} />
                   <StyledView>
-                    <StyledImage source={require('@assets/teste.jpg')} />
                     <Description>
                       <StyledTitle fill="black">{item.quiz.title}</StyledTitle>
                       {/* <StyledText>Criador: {quiz.teacher}</StyledText> */}
                     </Description>
+                    <QuizProgressBarBackground fill="lightGrey">
+                      <QuizProgressBar fill="purple" />
+                    </QuizProgressBarBackground>
                   </StyledView>
-
+                  <QuizProgressText fill="purple">10%</QuizProgressText>
                   <StyledIconButton
                     onPress={() =>
                       navigation.navigate('Descricao', {
