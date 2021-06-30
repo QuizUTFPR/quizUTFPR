@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { StyledButton } from '@components/ButtonGradient';
+
 // COMPONENTS
 import { Container } from '@components/Container/style';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
@@ -20,6 +21,9 @@ export const StyledImageBackground = styled.ImageBackground.attrs({
   },
 })`
   flex: 1;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
 `;
 
 export const GoBackButtonWrapper = styled(StyledButton).attrs({
@@ -43,9 +47,10 @@ export const StyledText = styled.Text`
 `;
 
 export const ButtonWrapper = styled.View`
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: ${({ resume }) => (resume ? 'space-between' : 'flex-end')};
 `;
 
 export const ButtonStyled = styled.TouchableOpacity.attrs({
@@ -66,11 +71,11 @@ export const ResumeButtonWrapper = styled(PlayButtonWrapper).attrs({})``;
 
 export const GiveUPButtonWraper = styled(PlayButtonWrapper).attrs({
   colors: ['#fdb646', '#f99f4c'],
-})`
-  margin-bottom: 5px;
-`;
+})``;
 
-export const StyledScrollView = styled.ScrollView``;
+export const StyledScrollView = styled.ScrollView`
+  flex: 1;
+`;
 
 export const BodyDescription = styled.View`
   padding-left: ${widthPercentageToDp('8%')}px;
@@ -111,4 +116,24 @@ export const StyledTag = styled.Text`
   border-radius: 20px;
   background: ${({ theme }) => theme.color.purple};
   color: ${({ theme }) => theme.color.white};
+`;
+
+export const QuizProgress = styled.View`
+  background: ${({ theme }) => theme.color.fill};
+  flex: 0.1;
+  flex-direction: row;
+  align-items: center;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+  justify-content: center;
+`;
+
+export const StyledTitleProgress = styled.Text`
+  font-family: 'PoppinsBold';
+  color: white;
+`;
+
+export const StyledTextProgress = styled.Text`
+  font-family: 'PoppinsSemiBold';
+  color: white;
 `;

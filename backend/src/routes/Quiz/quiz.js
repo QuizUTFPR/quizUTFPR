@@ -14,6 +14,6 @@ router.post("/create", QuizController.store);
 router.put("/update", QuizController.update);
 router.delete("/delete", QuizController.delete);
 router.get("/:tag", QuizController.show);
-router.post('/publish', PublishQuizController.store);
+router.post('/publish', PublishQuizController.update);
 router.post("/getByPIN", PINQuizController.index);
 export default router;

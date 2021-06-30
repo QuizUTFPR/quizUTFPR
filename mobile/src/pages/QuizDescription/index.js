@@ -29,18 +29,20 @@ import {
   GiveUPButtonWraper,
   ButtonWrapper,
   StyledPIN,
+  QuizProgress,
+  StyledTitleProgress,
+  StyledTextProgress,
 } from './styles';
 
 const QuizDescription = ({ route }) => {
-  const { getQuestionsOfQuizFromDatabase } = useQuestions();
-  const navigation = useNavigation();
-
   // eslint-disable-next-line no-unused-vars
   const { idStudentQuiz, questionAmount, studentChoicesAmount, quiz } =
     route.params;
   const { title, description, tags, id, pin } = quiz;
 
   const [studentQuizID, setStudentQuizID] = useState(idStudentQuiz);
+  const { getQuestionsOfQuizFromDatabase } = useQuestions();
+  const navigation = useNavigation();
 
   console.log(studentQuizID, questionAmount, studentChoicesAmount, quiz);
 
@@ -56,7 +58,12 @@ const QuizDescription = ({ route }) => {
     navigation.navigate('CountDown');
   };
 
-  const giveUPQuiz = () => {
+  const giveUPQuiz = async () => {
+    const { data } = await api.put('/studentQuiz/finishQuiz', {
+      quiz_id: id,
+      id_student_quiz: studentQuizID,
+    });
+
     setStudentQuizID(null);
   };
 
@@ -70,7 +77,7 @@ const QuizDescription = ({ route }) => {
             </StyledIconButton>
           </GoBackButtonWrapper>
           {studentQuizID ? (
-            <ButtonWrapper>
+            <ButtonWrapper resume>
               <ButtonStyled onPress={giveUPQuiz}>
                 <GiveUPButtonWraper>
                   <StyledText fill="white">DESISTIR</StyledText>
@@ -86,7 +93,7 @@ const QuizDescription = ({ route }) => {
               </ButtonStyled>
             </ButtonWrapper>
           ) : (
-            <ButtonWrapper>
+            <ButtonWrapper resume={false}>
               <ButtonStyled onPress={startQuizAndGetAllQuestions}>
                 <PlayButtonWrapper>
                   <StyledIconButton>
@@ -115,6 +122,12 @@ const QuizDescription = ({ route }) => {
           </TagsContainer>
         </BodyDescription>
       </StyledScrollView>
+      {studentQuizID && (
+        <QuizProgress fill="purple">
+          <StyledTitleProgress>Questões repondidas: </StyledTitleProgress>
+          <StyledTextProgress>01/07</StyledTextProgress>
+        </QuizProgress>
+      )}
     </DetailsContainer>
   );
 };

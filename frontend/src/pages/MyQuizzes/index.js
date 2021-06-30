@@ -9,6 +9,7 @@ import Modal from '@components/Modal';
 import AlertRemoveMessage from '@components/ConfirmRemove';
 import PublishQuizMessage from '@components/ConfirmPublishQuiz';
 import Tooltip from '@components/ToolTip';
+import SnackBar from '@components/SnackBar';
 
 // PAGES
 import QuizPreferences from '@pages/EditQuizPreferences';
@@ -52,6 +53,23 @@ const Quiz = () => {
   });
   const [openAlert, setOpenAlert] = useState({ open: false, idQuiz: null });
   const [openPublish, setOpenPublish] = useState({ open: false, idQuiz: null });
+  const [stateSnackBar, setStateSnackBar] = useState({
+    open: false,
+    text: '',
+    severity: '',
+  });
+
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setStateSnackBar((prevState) => ({ ...prevState, open: false }));
+  };
+
+  const handleClickSnackBar = (text, severity) => {
+    setStateSnackBar({ text, open: true, severity });
+  };
 
   const handleClickOpenAlert = (idQuiz) => setOpenAlert({ open: true, idQuiz });
   const handleCloseAlert = () => setOpenAlert({ open: false, idQuiz: null });
@@ -61,7 +79,6 @@ const Quiz = () => {
     setOpenPublish({ open: false, idQuiz: null });
 
   const getQuizzes = async () => {
-    console.log('obtendo');
     try {
       const response = await api.get('/quiz');
       if (response.status !== 200) setQuizzes(false);
@@ -70,7 +87,6 @@ const Quiz = () => {
       //
     }
   };
-  console.log(quizzes);
 
   const handleOpenModal = (quiz) => () => {
     setModalOpen({
@@ -85,22 +101,30 @@ const Quiz = () => {
 
   const handleRemoveQuiz = async () => {
     console.log('removendo');
-    await api.delete('/quiz/delete', {
-      data: { id_quiz: openAlert.idQuiz },
-    });
-    getQuizzes();
+    try {
+      await api.delete('/quiz/delete', {
+        data: { id_quiz: openAlert.idQuiz },
+      });
+      handleClickSnackBar('Quiz removido com sucesso!', 'success');
+
+      getQuizzes();
+    } catch (error) {
+      handleClickSnackBar(error.response.data.error, 'error');
+    }
   };
 
   const publishQuiz = useCallback(async () => {
-    console.log('publicando');
-    const quizUpdated = {
-      id: openPublish.idQuiz,
-      published: true,
-    };
+    try {
+      const quizUpdated = {
+        id: openPublish.idQuiz,
+        published: true,
+      };
 
-    const responseQuiz = await api.post('/quiz/publish', quizUpdated);
-    if (responseQuiz.status === 200) console.log('publicado');
-    else console.log(responseQuiz);
+      await api.post('/quiz/publish', quizUpdated);
+      handleClickSnackBar('Quiz publicado com sucesso!', 'success');
+    } catch (error) {
+      handleClickSnackBar(error.response.data.error, 'error');
+    }
   }, [openPublish]);
 
   useEffect(() => {
@@ -205,6 +229,14 @@ const Quiz = () => {
           description="Após a publicação do quiz você não poderá realizar mais nenhuma alterações nas questões do mesmo. Assim como, não poderá exclui-lo."
         />
       </Modal>
+
+      <SnackBar
+        openSnackBar={stateSnackBar.open}
+        handleCloseSnackBar={handleCloseSnackBar}
+        autoHideDuration={1000}
+        text={stateSnackBar.text}
+        severity={stateSnackBar.severity}
+      />
     </>
   );
 };
