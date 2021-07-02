@@ -1,6 +1,4 @@
 import * as Yup from "yup";
-// import * as Sequelize from 'sequelize';
-const { fn, col, literal } = require("sequelize");
 
 // MODELS
 import Quiz from "../../models/QuizModel";
@@ -21,7 +19,8 @@ class StatisticsQuizController {
   // Lista todos os registros
   async show(req, res) {
     try{
-      const {quiz_id} = req.body;      
+      const {quiz_id} = req.body;
+          
       const quiz = await Quiz.findByPk(quiz_id, {
         attributes: ['id', 'title', 'description', 'visibility', 'id_image', 'pin']
       });
@@ -39,7 +38,11 @@ class StatisticsQuizController {
           attributes: ['id', 'title', 'is_correct'],
         }],
         attributes: ['id', 'title', 'index', 'timer', 'score', 'difficulty_level', 'type'],
-        order: [['index', 'ASC'], [{model: Answer, as: 'answer'}, 'id', 'ASC']]
+        order: [['index', 'ASC'], [
+          {
+            model: Answer, as: 'answer'
+          }, 'id', 'ASC'
+        ]]
       });
 
 
@@ -100,7 +103,6 @@ class StatisticsQuizController {
                 attributes: ['name', 'email']
               }
             ]
-            
           });
           
           

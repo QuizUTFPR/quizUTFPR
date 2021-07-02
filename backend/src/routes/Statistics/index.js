@@ -4,8 +4,11 @@ import { Router } from "express";
 const router = new Router();
 
 // CONTROLLERS
-import StatisticsQuizController from "../../app/controllers/StatisticsController/StatisticsQuizController";
+import StatisticsQuestionQuizController from "../../app/controllers/StatisticsController/StatisticsQuestionQuizController";
+import StatisticsStudentQuizController from "../../app/controllers/StatisticsController/StatisticsStudentQuizController";
 
-router.post("/getQuizStatistics", StatisticsQuizController.show);
+
+router.post("/getQuestionQuizStatistics", StatisticsQuestionQuizController.show);
+router.post("/getStudentQuizStatistics", StatisticsStudentQuizController.show);
 
 export default router;
