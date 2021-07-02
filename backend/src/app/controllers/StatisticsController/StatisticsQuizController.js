@@ -59,12 +59,12 @@ class StatisticsQuizController {
         group: ["student_id"],
       });
       
-
-      //  GETTING THE ATTEMPT FROM EACH STUDENT CONSIDERING THE HIGHEST SCORE
-      const formatedStudentQuizAttempt = await Promise.all(
+      
+      // GETTING THE ATTEMPT FROM EACH STUDENT CONSIDERING THE HIGHEST SCORE
+      // AND RETURN AN ID ARRAY OF THE ATTEMPT
+      const ArrayOfIDAboutBestScoreAttemptQuiz = await Promise.all(
         studentQuizAttempt.map(async (choice) => {
           const student = await choice.getStudent({
-            attributes: ['id', 'name', 'email'],
             include: [
               {
                 model: StudentQuiz,
@@ -73,7 +73,7 @@ class StatisticsQuizController {
                   quiz_id,
                   is_finished: true
                 },
-                attributes: ['id', 'hit_amount', 'score']
+                attributes: ['id', 'score']
               }
             ],
             order: [[
@@ -84,17 +84,14 @@ class StatisticsQuizController {
               ]],
             });
 
-          return {
-              ...student.dataValues,
-              student_quiz: student.student_quiz[0]
-          }
+          return student.student_quiz[0].id
         }));
               
-        //GETTING THE ID_STUDENT_QUIZ OF THE BEST TRY OF EACH STUDENT
-        const ArrayOfIDAboutBestScoreAttemptQuiz = formatedStudentQuizAttempt.map(item => item.student_quiz.id);
+       
 
         // INCLUDING IN THE QUESTION ALL THE CHOICES OF THE STUDENT
         // WE ONLY CONSIDER THE CHOICE ABOUT THE BEST SCORE
+        
         const newQuestions = await Promise.all(questions.map(async item => {
           console.log(getMethod(item));
           const question_choice = await item.getQuestion_choice({
@@ -120,13 +117,7 @@ class StatisticsQuizController {
     
         
 
-      const returnedValue = {
-        // ArrayOfIDAboutBestScoreAttemptQuiz,
-        newQuestions,
-        attemptsOfTheHighestScore: formatedStudentQuizAttempt
-      }
-
-      return res.status(200).json(returnedValue);
+      return res.status(200).json(newQuestions);
     }catch(err){
       console.log(err)
       return res.status(500).json(err);
