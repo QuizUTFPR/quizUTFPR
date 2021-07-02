@@ -57,7 +57,7 @@ class StatisticsQuizController {
         where: {
           is_finished: true
         },
-        attributes: ['id', 'student_id', 'quiz_id'],
+        attributes: ['student_id', 'quiz_id'],
         group: ["student_id"],
       });
       
