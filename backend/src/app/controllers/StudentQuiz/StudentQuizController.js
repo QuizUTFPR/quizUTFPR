@@ -65,9 +65,16 @@ class StudentQuizController {
 
       const quiz = await Quiz.findByPk(quiz_id);
       const questionQuiz = await quiz.getQuestions();
-      const idQuestionsAnswered = (await quiz.getQuiz_student_choice()).map(item => item.question_id);
+      const idQuestionsAnswered = (await quiz.getQuiz_student_choice({
+        where: {
+          student_quiz_id: id_student_quiz
+        }
+      })).map(item => item.question_id);
       const questionNotAnswered = questionQuiz.filter(question => !idQuestionsAnswered.includes(question.id));
       
+
+      console.log("não respondidas", questionNotAnswered)
+
       // CASO EXISTA QUESTÕES NÃO RESPONDIDAS, EU CADASTO AS MESMAS SEM MARCAR NENHUM ALTERNATIVA
       await Promise.all(questionNotAnswered.map(async question => {
         await StudentQuestionChoice.create({
@@ -81,15 +88,16 @@ class StudentQuizController {
       const studentQuiz = await StudentQuiz.findByPk(id_student_quiz);
       const studentChoices = await studentQuiz.getQuiz_question_choice();
 
+  
       //CALCULANDO SCORE
       let score = 0;
-      let correctAnswerAmount = 0;
+      let correctAnswerAmount = 1;
       let studentAnswerCorrect = 0;
       await Promise.all(studentChoices.map(async item => {
         const studentAnswers = [item.checked1, item.checked2, item.checked3, item.checked4];
-        console.log(studentAnswers)
+        // console.log(studentAnswers)
         const question = (questionQuiz.find(element => element.id === item.question_id));
-        const answers = await question.getAnswer();
+        const answers = await question.getAnswer({order: [['id', 'ASC']]});
         
         answers.map((item, index) => {
           if(item.is_correct){
