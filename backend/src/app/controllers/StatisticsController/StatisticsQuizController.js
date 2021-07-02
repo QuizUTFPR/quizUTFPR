@@ -89,9 +89,8 @@ class StatisticsQuizController {
         // INCLUDING IN THE QUESTION ALL THE CHOICES OF THE STUDENT
         // WE ONLY CONSIDER THE CHOICE ABOUT THE BEST SCORE
         
-        const newQuestions = await Promise.all(questions.map(async item => {
-          console.log(getMethod(item));
-          const question_choice = await item.getQuestion_choice({
+        const newQuestions = await Promise.all(questions.map(async question => {
+          const question_choice = await question.getQuestion_choice({
             where: {
               student_quiz_id: ArrayOfIDAboutBestScoreAttemptQuiz
             },
@@ -105,8 +104,41 @@ class StatisticsQuizController {
             
           });
           
+          // CALCULATING THE AVG OF TIME THAT WAS SPENT TO ANSWER THE QUESTION
+          let sumOfTimeSpentToAnswer = 0;
+          question_choice.map(questionChoice => {
+            sumOfTimeSpentToAnswer += (question.timer - questionChoice.time_left)
+          });
+          const avgOfTimeSpentToAnswer = sumOfTimeSpentToAnswer / question_choice.length;
+
+          // CALCULATING HOW MANY TIMES EACH ANSWER HAD BEEN CHOOSED
+          let {answer} = question;
+          if (answer[0]) answer[0].dataValues.numberOfChoices = 0;
+          if (answer[1]) answer[1].dataValues.numberOfChoices = 0;
+          if (answer[2]) answer[2].dataValues.numberOfChoices = 0;
+          if (answer[3]) answer[3].dataValues.numberOfChoices = 0;
+
+          question_choice.map(choice => {
+            const { checked1, checked2, checked3, checked4 } = choice;
+            if(checked1){
+              answer[0].dataValues.numberOfChoices += 1;
+            }
+            if(checked2){
+              answer[1].dataValues.numberOfChoices += 1;
+            }
+            if(checked3){
+              answer[2].dataValues.numberOfChoices += 1;
+            }
+            if(checked4){
+              answer[3].dataValues.numberOfChoices += 1;
+            }
+          })
+          
+          
           return {
-            ...item.dataValues, 
+            avgOfTimeSpentToAnswer,
+            ...question.dataValues,
+            answer,
             question_choice
           };
         }))
