@@ -88,8 +88,7 @@ class StatisticsQuizController {
 
         // INCLUDING IN THE QUESTION ALL THE CHOICES OF THE STUDENT
         // WE ONLY CONSIDER THE CHOICE ABOUT THE BEST SCORE
-        
-        const newQuestions = await Promise.all(questions.map(async question => {
+        const returnedQuestions = await Promise.all(questions.map(async question => {
           const question_choice = await question.getQuestion_choice({
             where: {
               student_quiz_id: ArrayOfIDAboutBestScoreAttemptQuiz
@@ -104,8 +103,9 @@ class StatisticsQuizController {
             
           });
           
-          // CALCULATING THE AVG OF TIME THAT WAS SPENT TO ANSWER THE QUESTION
-          let sumOfTimeSpentToAnswer = 0;
+          
+          let sumOfTimeSpentToAnswer = 0; // AVG OF TIME THAT WAS SPENT TO ANSWER THE QUESTION
+         
           question_choice.map(questionChoice => {
             sumOfTimeSpentToAnswer += (question.timer - questionChoice.time_left)
           });
@@ -118,25 +118,34 @@ class StatisticsQuizController {
           if (answer[2]) answer[2].dataValues.numberOfChoices = 0;
           if (answer[3]) answer[3].dataValues.numberOfChoices = 0;
 
+          let hitAmount = 0;// SUM OF HIT (CORRECT ANSWER)
           question_choice.map(choice => {
             const { checked1, checked2, checked3, checked4 } = choice;
             if(checked1){
               answer[0].dataValues.numberOfChoices += 1;
+              if(checked1 && answer[0].dataValues.is_correct)
+                hitAmount += 1;
             }
             if(checked2){
               answer[1].dataValues.numberOfChoices += 1;
+              if(checked2 && answer[1].dataValues.is_correct)
+                hitAmount += 1;
             }
             if(checked3){
               answer[2].dataValues.numberOfChoices += 1;
+              if(checked3 && answer[2].dataValues.is_correct)
+                hitAmount += 1;
             }
             if(checked4){
               answer[3].dataValues.numberOfChoices += 1;
+              if(checked4 && answer[3].dataValues.is_correct)
+                hitAmount += 1;
             }
           })
           
-          
           return {
-            avgOfTimeSpentToAnswer,
+            avgOfTimeSpentToAnswer: avgOfTimeSpentToAnswer.toFixed(2),
+            percentageOfHit: ((hitAmount * 100) / question_choice.length).toFixed(2),
             ...question.dataValues,
             answer,
             question_choice
@@ -145,7 +154,7 @@ class StatisticsQuizController {
     
         
 
-      return res.status(200).json(newQuestions);
+      return res.status(200).json(returnedQuestions);
     }catch(err){
       console.log(err)
       return res.status(500).json(err);
