@@ -32,86 +32,101 @@ class StatisticsQuizController {
         });
 
       
-         const questions = await quiz.getQuestions({     
-           joinTableAttributes: [],
-           include: [{
+        const questions = await quiz.getQuestions({     
+          joinTableAttributes: [],
+          include: [{
             model: Answer,
             as: 'answer',
             attributes: ['id', 'title', 'is_correct'],
           }],
           attributes: ['id', 'title', 'index', 'timer', 'score', 'difficulty_level', 'type'],
           order: [['index', 'ASC']]
-         });
+        });
 
 
-        if(!questions) 
-          return res.status(404).json({
-            error: "Quiz não possui questões cadastradas!"
-          });
+      if(!questions) 
+        return res.status(404).json({
+          error: "Quiz não possui questões cadastradas!"
+        });
 
 
-        //  GETTING THE HIGHEST SCORE FROM EACH STUDENT
-
-          const studentQuizAttempt = await quiz.getQuiz_student({
-            where: {
-              is_finished: true
-            },
-            attributes: ['id', 'student_id', 'quiz_id'],
-            group: ["student_id"],
-          });
+      //  GETTING THE STUDENT WHO ANSWERED THE QUIZ
+      const studentQuizAttempt = await quiz.getQuiz_student({
+        where: {
+          is_finished: true
+        },
+        attributes: ['id', 'student_id', 'quiz_id'],
+        group: ["student_id"],
+      });
       
 
-        //  GETTING THE ATTEMPT FROM EACH STUDENT CONSIDERING THE HIGHEST SCORE
-         const formatedStudentQuizAttempt = await Promise.all(
-           studentQuizAttempt.map(async (choice, index) => {
-
-             const student = await choice.getStudent({
-               attributes: ['id', 'name', 'email'],
-               include: [
-                 {
-                   model: StudentQuiz,
-                   as: 'student_quiz',
-                   where: {
-                     quiz_id,
-                     is_finished: true
-                   },
-                   attributes: ['id', 'hit_amount', 'score']
-                  }
-                ],
-                order: [[
-                  {
-                    model: StudentQuiz,
-                    as: 'student_quiz',
-                  }, 'score', 'DESC'
-                ]],
-             });
-
-             return {
-              ...student.dataValues, 
-              student_quiz: {
-                ...student.student_quiz[0].dataValues,
-                choices: await student.student_quiz[0].getQuiz_question_choice({
-                  attributes: ['id', 'student_quiz_id','question_id', 'time_left', 'checked1', 'checked2', 'checked3', 'checked4']
-
-                })
+      //  GETTING THE ATTEMPT FROM EACH STUDENT CONSIDERING THE HIGHEST SCORE
+      const formatedStudentQuizAttempt = await Promise.all(
+        studentQuizAttempt.map(async (choice) => {
+          const student = await choice.getStudent({
+            attributes: ['id', 'name', 'email'],
+            include: [
+              {
+                model: StudentQuiz,
+                as: 'student_quiz',
+                where: {
+                  quiz_id,
+                  is_finished: true
+                },
+                attributes: ['id', 'hit_amount', 'score']
               }
+            ],
+            order: [[
+              {
+                model: StudentQuiz,
+                as: 'student_quiz',
+              }, 'score', 'DESC'
+              ]],
+            });
+
+          return {
+              ...student.dataValues,
+              student_quiz: student.student_quiz[0]
+          }
+        }));
+              
+        //GETTING THE ID_STUDENT_QUIZ OF THE BEST TRY OF EACH STUDENT
+        const ArrayOfIDAboutBestScoreAttemptQuiz = formatedStudentQuizAttempt.map(item => item.student_quiz.id);
+
+        // INCLUDING IN THE QUESTION ALL THE CHOICES OF THE STUDENT
+        // WE ONLY CONSIDER THE CHOICE ABOUT THE BEST SCORE
+        const newQuestions = await Promise.all(questions.map(async item => {
+          console.log(getMethod(item));
+          const question_choice = await item.getQuestion_choice({
+            where: {
+              student_quiz_id: ArrayOfIDAboutBestScoreAttemptQuiz
+            },
+            attributes: ['student_quiz_id', 'student_id','time_left', 'checked1', 'checked2', 'checked3', 'checked4'],
+            include: [
+              {
+                model: Student,
+                as: 'student',
+                attributes: ['name', 'email']
               }
-           }));
+            ]
+            
+          });
+          
+          return {
+            ...item.dataValues, 
+            question_choice
+          };
+        }))
     
         
-        // const student_choices = formatedStudentQuizAttempt.map(async item => await item.student_quiz.getQuiz_question_choice());
 
-       const returnedValue = {
-        //  avgTotalTimeAnswering: SumTotalTimeAnswering/formatedStudentQuizAttempt.length,
-         questions,
-         formatedStudentQuizAttempt
-       }
+      const returnedValue = {
+        // ArrayOfIDAboutBestScoreAttemptQuiz,
+        newQuestions,
+        attemptsOfTheHighestScore: formatedStudentQuizAttempt
+      }
 
-      
-
-
-    return res.status(200).json(returnedValue);
-
+      return res.status(200).json(returnedValue);
     }catch(err){
       console.log(err)
       return res.status(500).json(err);
