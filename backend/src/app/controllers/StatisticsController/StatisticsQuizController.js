@@ -32,16 +32,15 @@ class StatisticsQuizController {
         });
 
       
-        const questions = await quiz.getQuestions({     
-          joinTableAttributes: [],
-          include: [{
-            model: Answer,
-            as: 'answer',
-            attributes: ['id', 'title', 'is_correct'],
-          }],
-          attributes: ['id', 'title', 'index', 'timer', 'score', 'difficulty_level', 'type'],
-          order: [['index', 'ASC']]
-        });
+      const questions = await quiz.getQuestions({     
+        joinTableAttributes: [],
+        include: [{
+          model: Answer, as: 'answer',
+          attributes: ['id', 'title', 'is_correct'],
+        }],
+        attributes: ['id', 'title', 'index', 'timer', 'score', 'difficulty_level', 'type'],
+        order: [['index', 'ASC']]
+      });
 
 
       if(!questions) 
@@ -50,7 +49,7 @@ class StatisticsQuizController {
         });
 
 
-      //  GETTING THE STUDENT WHO ANSWERED THE QUIZ
+      //  GETTING ALL THE STUDENT THAT ANSWERED THE QUIZ
       const studentQuizAttempt = await quiz.getQuiz_student({
         where: {
           is_finished: true
@@ -61,14 +60,13 @@ class StatisticsQuizController {
       
       
       // GETTING THE ATTEMPT FROM EACH STUDENT CONSIDERING THE HIGHEST SCORE
-      // AND RETURN AN ID ARRAY OF THE ATTEMPT
+      // AND RETURN AN ARRAY OF ID ABOUT THE BEST ATTEMPT
       const ArrayOfIDAboutBestScoreAttemptQuiz = await Promise.all(
         studentQuizAttempt.map(async (choice) => {
           const student = await choice.getStudent({
             include: [
               {
-                model: StudentQuiz,
-                as: 'student_quiz',
+                model: StudentQuiz, as: 'student_quiz',
                 where: {
                   quiz_id,
                   is_finished: true
@@ -78,8 +76,7 @@ class StatisticsQuizController {
             ],
             order: [[
               {
-                model: StudentQuiz,
-                as: 'student_quiz',
+                model: StudentQuiz, as: 'student_quiz',
               }, 'score', 'DESC'
               ]],
             });
@@ -101,8 +98,7 @@ class StatisticsQuizController {
             attributes: ['student_quiz_id', 'student_id','time_left', 'checked1', 'checked2', 'checked3', 'checked4'],
             include: [
               {
-                model: Student,
-                as: 'student',
+                model: Student, as: 'student',
                 attributes: ['name', 'email']
               }
             ]
