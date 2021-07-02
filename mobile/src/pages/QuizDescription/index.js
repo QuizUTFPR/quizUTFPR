@@ -140,7 +140,9 @@ const QuizDescription = ({ route }) => {
         {studentQuizID && (
           <QuizProgress fill="purple">
             <StyledTitleProgress>Questões repondidas: </StyledTitleProgress>
-            <StyledTextProgress>01/07</StyledTextProgress>
+            <StyledTextProgress>
+              {studentChoicesAmount}/{questionAmount}
+            </StyledTextProgress>
           </QuizProgress>
         )}
       </DetailsContainer>
