@@ -39,7 +39,7 @@ class StatisticsQuizController {
           attributes: ['id', 'title', 'is_correct'],
         }],
         attributes: ['id', 'title', 'index', 'timer', 'score', 'difficulty_level', 'type'],
-        order: [['index', 'ASC']]
+        order: [['index', 'ASC'], [{model: Answer, as: 'answer'}, 'id', 'ASC']]
       });
 
 
