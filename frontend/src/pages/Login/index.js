@@ -13,7 +13,7 @@ import {
 } from '@material-ui/icons';
 
 // ASSETS
-import { ReactComponent as Illustration } from '@assets/login_illustration.svg';
+// import { ReactComponent as Illustration } from '@assets/login_illustration.svg';
 
 // HOOKS
 import useAuth from '@hooks/Auth';
@@ -27,6 +27,7 @@ import {
   GridForm,
   StyledInput,
   StyledButton,
+  LogoUTFPR,
 } from './style';
 
 // ROTAS
@@ -61,17 +62,17 @@ const LoginPage = ({ history }) => {
           md={12}
           lg={6}
         >
-          <Illustration />
+          <LogoUTFPR />
         </Grid>
 
         <Grid item xs={12} sm={12} md={12} lg={6}>
           <DescriptionsGrid item xs={12}>
-            <Title variant="h4" color="primary">
+            <Title variant="h4" color="black">
               Login
             </Title>
-            <Subtitle color="primary">
+            <Subtitle color="black">
               Seja bem-vindo novamente! <br />
-              Por favor entre em sua conta logo abaixo.
+              Por favor entre em sua conta utilizando seu login institucional.
             </Subtitle>
           </DescriptionsGrid>
 
@@ -90,10 +91,10 @@ const LoginPage = ({ history }) => {
             }}
           >
             <StyledInput
-              color="primary"
+              color="black"
               variant="outlined"
               id="email"
-              label="E-mail"
+              label="Nome de Usuário"
               value={values.email}
               onChange={handleChange('email')}
               InputProps={{
@@ -108,7 +109,7 @@ const LoginPage = ({ history }) => {
             />
 
             <StyledInput
-              color="primary"
+              color="black"
               variant="outlined"
               id="password"
               label="Senha"

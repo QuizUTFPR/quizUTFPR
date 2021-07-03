@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import MyBackgound from '@assets/background_login_copy.svg';
+// import MyBackgound from '@assets/background_login_copy.svg';
+import { ReactComponent as UTFPR } from '@assets/marcaUTFPR/logoUTFPR.svg';
 
 import {
   Container,
@@ -15,8 +16,7 @@ export const StyledContainer = styled(Container)`
   min-height: 100vh;
   min-width: 100vw;
   display: flex;
-  background-image: url(${MyBackgound});
-  background-size: cover;
+  background: #f4f5f9;
 `;
 
 export const DescriptionsGrid = styled(Grid)`
@@ -42,6 +42,7 @@ export const StyledInput = styled(TextField)`
   margin-bottom: 20px;
   background: white;
   border-radius: 6px;
+  background: transparent;
 `;
 
 export const StyledButton = styled(Button)`
@@ -51,4 +52,9 @@ export const StyledButton = styled(Button)`
     font-weight: bolder;
     font-size: 1.3em;
   }
+`;
+
+export const LogoUTFPR = styled(UTFPR)`
+  width: 450px;
+  height: 100%;
 `;
