@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+const {col} = require("sequelize")
 
 // MODELS
 import Quiz from "../../models/QuizModel";
@@ -63,9 +64,10 @@ class StatisticsQuizController {
       
       
       
-      const teste = await Promise.all(
+      const studentQuiz = await Promise.all(
         studentQuizAttempt.map(async (choice) => {
           const student = await choice.getStudent({
+            attributes: ['id', 'name', 'email'],
             include: [
               {
                 model: StudentQuiz, as: 'student_quiz',
@@ -73,13 +75,21 @@ class StatisticsQuizController {
                   quiz_id,
                   is_finished: true
                 },
-                attributes: ['id', 'score', 'student_id']
+                attributes: ['id', 'score', 'student_id'],
+                include: [{
+                  model: StudentQuestionChoice, as: 'quiz_question_choice',
+                  attributes: ['id', 'time_left', 'question_id', 'checked1', 'checked2', 'checked3','checked4']
+                }]
               }
             ],
             order: [[
-              {
-                model: StudentQuiz, as: 'student_quiz',
-              }, 'score', 'DESC'
+                {model: StudentQuiz, as: 'student_quiz'},
+                'score', 'DESC'
+              ],
+              [
+                {model: StudentQuiz, as: 'student_quiz',},
+                {model: StudentQuestionChoice, as: 'quiz_question_choice'}, 
+                'id', 'ASC'
               ]],
             });
 
@@ -91,7 +101,7 @@ class StatisticsQuizController {
         }));
                       
 
-      return res.status(200).json(teste);
+      return res.status(200).json({questions, studentQuiz});
     }catch(err){
       console.log(err)
       return res.status(500).json(err);

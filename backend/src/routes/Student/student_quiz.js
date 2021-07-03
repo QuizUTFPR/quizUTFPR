@@ -8,12 +8,14 @@ import StudentQuestionChoiceController from "../../app/controllers/StudentQuiz/S
 import StudentQuizController from "../../app/controllers/StudentQuiz/StudentQuizController";
 import StudentQuizInProgressController from '../../app/controllers/StudentQuiz/StudentQuizInProgressController'
 import QuestionQuizPublishedController from '../../app/controllers/StudentQuiz/QuestionQuizPublishedController'
+import StudentQuizFinishedController from '../../app/controllers/StudentQuiz/StudentQuizFinishedController'
 
 
 router.post("/createChoice", StudentQuestionChoiceController.store);
 router.post("/startQuiz", StudentQuizController.store);
 router.put("/finishQuiz", StudentQuizController.update);
 router.get("/getQuizInProgress", StudentQuizInProgressController.index)
+router.get("/getAllFinishedQuizzes", StudentQuizFinishedController.index);
 router.post("/getQuestionQuiz/", QuestionQuizPublishedController.index);
 
 export default router;

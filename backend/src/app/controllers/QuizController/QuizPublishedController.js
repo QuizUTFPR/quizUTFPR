@@ -16,11 +16,13 @@ class QuizPublishedController {
   // Lista todos os registros
   async index(req, res) {
     try{
-
       const student_id = req.userId;
 
       const quizzes = await Quiz.findAll({
-        where: {  published: true },
+        where: {  
+          published: true, 
+          visibility: 'public' 
+        },
         attributes: ["id", "title", "description", "visibility", "id_image", "pin"],
         include: [
           {
@@ -58,64 +60,6 @@ class QuizPublishedController {
 
 
       return res.status(200).json(returnedQuizzes);
-    }catch(err){
-      return res.status(500).json(err);
-    }
-  }
-  // Exibe um único registro
-  async show(req, res) {
-    try{
-      const {tag} = req.params;
-
-      const quiz = await Quiz.findAll({
-        attributes: ["id", "title", "description", "visibility", "id_image", "pin"],
-        include: [
-          {
-            model: Teacher,
-            as: "teacher",
-            attributes: ["name", "email"]
-          },
-          {
-            model: Question,
-            as: "questions",
-            attributes: ['id','index', 'title', 'timer', 'difficulty_level', 'score','copy', 'available_on_questions_db', 'type'],
-            through: {
-              attributes: []
-            },
-            include: [
-              {
-                model: Answer,
-                as: "answer",
-                attributes: ["title", "is_correct"]
-              },{
-                model: Tag,
-                as: "tags_question",
-                attributes: ["name"],
-                through: {
-                  attributes: []
-                }
-              }
-            ]
-          },
-          {
-            model: Tag,
-            as: "tags_quiz",
-            attributes: ["name"],
-            where: {
-              name: tag
-            },
-            through: {
-              attributes: []
-            }
-          }
-        ],
-        order: [[{model: Answer, as: 'answer'}, 'id', 'ASC']],
-      });
-
-      if(!quiz.length) 
-        return res.status(404).json({error: "Não existe nenhum quiz com a tag informada."});
-
-      return res.status(200).json(quiz);
     }catch(err){
       return res.status(500).json(err);
     }
