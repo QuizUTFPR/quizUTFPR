@@ -4,12 +4,13 @@ module.exports = {
     node: true,
   },
   extends: [
-    'airbnb-base',
+    'airbnb-base', 'prettier'
   ],
   parserOptions: {
     ecmaVersion: 12,
     sourceType: 'module',
   },
   rules: {
+    'prettier/prettier': 'error',
   },
 };
