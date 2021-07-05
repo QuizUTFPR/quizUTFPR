@@ -1,4 +1,4 @@
-import Sequelize, { Model } from "sequelize";
+import Sequelize, { Model } from 'sequelize';
 
 class StudentQuestionChoice extends Model {
   static init(sequelize) {
@@ -12,39 +12,39 @@ class StudentQuestionChoice extends Model {
         checked1: Sequelize.BOOLEAN,
         checked2: Sequelize.BOOLEAN,
         checked3: Sequelize.BOOLEAN,
-        checked4: Sequelize.BOOLEAN
+        checked4: Sequelize.BOOLEAN,
       },
       {
         sequelize,
-        tableName: "student_question_choice"
-      }
+        tableName: 'student_question_choice',
+      },
     );
 
     return this;
   }
 
   static associate(models) {
-    console.log("Associação question_choice!");
+    console.log('Associação question_choice!');
 
     this.belongsTo(models.Student, {
-      foreignKey: "student_id",
-      as: "student"
+      foreignKey: 'student_id',
+      as: 'student',
     });
 
     this.belongsTo(models.Question, {
-      foreignKey: "question_id",
-      as: "question"
+      foreignKey: 'question_id',
+      as: 'question',
     });
 
     this.belongsTo(models.Quiz, {
-      foreignKey: "quiz_id",
-      as: "quiz"
+      foreignKey: 'quiz_id',
+      as: 'quiz',
     });
 
     this.belongsTo(models.StudentQuiz, {
-      foreignKey: "student_quiz_id",
-      as: "quiz_question_choice"
-    })
+      foreignKey: 'student_quiz_id',
+      as: 'quiz_question_choice',
+    });
   }
 }
 

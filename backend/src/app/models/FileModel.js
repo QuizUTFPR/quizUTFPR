@@ -1,4 +1,4 @@
-import Sequelize, { Model } from "sequelize";
+import Sequelize, { Model } from 'sequelize';
 
 class File extends Model {
   static init(sequelize) {
@@ -15,15 +15,15 @@ class File extends Model {
       },
       {
         sequelize,
-        tableName: "file"
-      }
+        tableName: 'file',
+      },
     );
 
     return this;
   }
 
-  static associate(models) {
-    console.log("Associação File!");
+  static associate() {
+    console.log('Associação File!');
   }
 }
 

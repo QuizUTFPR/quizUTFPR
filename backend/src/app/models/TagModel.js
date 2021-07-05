@@ -1,4 +1,4 @@
-import Sequelize, { Model } from "sequelize";
+import Sequelize, { Model } from 'sequelize';
 
 class Tag extends Model {
   static init(sequelize) {
@@ -7,31 +7,31 @@ class Tag extends Model {
         name: {
           type: Sequelize.STRING,
           primaryKey: true,
-          unique: true
-        }
+          unique: true,
+        },
       },
       {
         sequelize,
-        tableName: "tag"
-      }
+        tableName: 'tag',
+      },
     );
 
     return this;
   }
 
   static associate(models) {
-    console.log("Associação tag!");
+    console.log('Associação tag!');
     this.belongsToMany(models.Quiz, {
-      through: "quiz_tags",
-      foreignKey: "tag_name",
-      as: "quizzes",
+      through: 'quiz_tags',
+      foreignKey: 'tag_name',
+      as: 'quizzes',
       onDelete: 'CASCADE',
     });
 
     this.belongsToMany(models.Question, {
-      through: "question_tags",
-      foreignKey: "tag_name",
-      as: "questions",
+      through: 'question_tags',
+      foreignKey: 'tag_name',
+      as: 'questions',
       onDelete: 'CASCADE',
     });
   }

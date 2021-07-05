@@ -1,4 +1,4 @@
-import Sequelize, { Model } from "sequelize";
+import Sequelize, { Model } from 'sequelize';
 
 class Question extends Model {
   static init(sequelize) {
@@ -12,48 +12,48 @@ class Question extends Model {
         timer: Sequelize.INTEGER.UNSIGNED,
         score: Sequelize.INTEGER.UNSIGNED,
         difficulty_level: Sequelize.ENUM('Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'),
-        type: Sequelize.ENUM('multiple_choice', 'single_choice')
+        type: Sequelize.ENUM('multiple_choice', 'single_choice'),
       },
       {
         sequelize,
-        tableName: "question"
-      }
+        tableName: 'question',
+      },
     );
 
     return this;
   }
 
   static associate(models) {
-    console.log("Associação question!");
+    console.log('Associação question!');
     this.belongsToMany(models.Quiz, {
-      through: "question_quiz",
-      foreignKey: "question_id",
-      as: "quizzes",
+      through: 'question_quiz',
+      foreignKey: 'question_id',
+      as: 'quizzes',
       onDelete: 'CASCADE',
     });
 
     this.belongsTo(models.File, {
-      foreignKey: "id_image",
-      as: 'image_question'
-    })
+      foreignKey: 'id_image',
+      as: 'image_question',
+    });
 
     this.hasMany(models.Answer, {
-      foreignKey: "id_question",
-      as: "answer",
+      foreignKey: 'id_question',
+      as: 'answer',
       onDelete: 'CASCADE',
     });
 
     this.belongsToMany(models.Tag, {
-      through: "question_tags",
-      foreignKey: "question_id",
-      as: "tags_question",
+      through: 'question_tags',
+      foreignKey: 'question_id',
+      as: 'tags_question',
       onDelete: 'CASCADE',
     });
 
     this.hasMany(models.StudentQuestionChoice, {
-      foreignKey: "question_id",
-      as: 'question_choice'
-    })
+      foreignKey: 'question_id',
+      as: 'question_choice',
+    });
   }
 }
 

@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config();
 
 module.exports = {
   username: process.env.DB_USER,
@@ -10,6 +10,6 @@ module.exports = {
     timestamps: true,
     underscored: true,
     underscoredAll: true,
-    freezeTableName: true
-  }
+    freezeTableName: true,
+  },
 };

@@ -1,4 +1,4 @@
-import Sequelize, { Model } from "sequelize";
+import Sequelize, { Model } from 'sequelize';
 
 // import Question from './QuestionModel'
 
@@ -8,23 +8,23 @@ class Answer extends Model {
       {
         id_question: Sequelize.INTEGER,
         title: Sequelize.STRING,
-        is_correct: Sequelize.BOOLEAN
+        is_correct: Sequelize.BOOLEAN,
       },
       {
         sequelize,
-        tableName: "answer"
-      }
+        tableName: 'answer',
+      },
     );
 
     return this;
   }
 
   static associate(models) {
-    console.log("Associação answer!");
+    console.log('Associação answer!');
 
     this.belongsTo(models.Question, {
-      foreignKey: "id_question",
-      as: "question"
+      foreignKey: 'id_question',
+      as: 'question',
     });
   }
 }

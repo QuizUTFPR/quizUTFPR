@@ -1,4 +1,4 @@
-import Sequelize, { Model } from "sequelize";
+import Sequelize, { Model } from 'sequelize';
 
 class StudentQuiz extends Model {
   static init(sequelize) {
@@ -12,30 +12,30 @@ class StudentQuiz extends Model {
       },
       {
         sequelize,
-        tableName: "student_quiz"
-      }
+        tableName: 'student_quiz',
+      },
     );
 
     return this;
   }
 
   static associate(models) {
-    console.log("Associação question_choice!");
+    console.log('Associação question_choice!');
 
     this.belongsTo(models.Student, {
-      foreignKey: "student_id",
-      as: "student"
+      foreignKey: 'student_id',
+      as: 'student',
     });
 
     this.belongsTo(models.Quiz, {
-      foreignKey: "quiz_id",
-      as: "quiz"
+      foreignKey: 'quiz_id',
+      as: 'quiz',
     });
 
     this.hasMany(models.StudentQuestionChoice, {
-      foreignKey: "student_quiz_id",
-      as: "quiz_question_choice"
-    })
+      foreignKey: 'student_quiz_id',
+      as: 'quiz_question_choice',
+    });
   }
 }
 

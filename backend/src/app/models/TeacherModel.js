@@ -1,5 +1,5 @@
-import Sequelize, { Model } from "sequelize";
-import bcrypt from "bcryptjs";
+import Sequelize, { Model } from 'sequelize';
+import bcrypt from 'bcryptjs';
 
 class Teacher extends Model {
   static init(sequelize) {
@@ -9,15 +9,15 @@ class Teacher extends Model {
         email: Sequelize.STRING,
         // O campo 'virtual' nao existe no db, apenas na execução
         password: Sequelize.VIRTUAL,
-        password_hash: Sequelize.STRING
+        password_hash: Sequelize.STRING,
       },
       {
         sequelize,
-        tableName: "teacher"
-      }
+        tableName: 'teacher',
+      },
     );
 
-    this.addHook("beforeSave", async teacher => {
+    this.addHook('beforeSave', async (teacher) => {
       if (teacher.password) {
         teacher.password_hash = await bcrypt.hash(teacher.password, 8);
       }
@@ -26,7 +26,7 @@ class Teacher extends Model {
     return this;
   }
 
-  static associate(models) {}
+  static associate() {}
 
   checkPassword(password) {
     return bcrypt.compare(password, this.password_hash);
