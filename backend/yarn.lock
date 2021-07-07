@@ -668,10 +668,10 @@ dot-prop@^5.2.0:
   dependencies:
     is-obj "^2.0.0"
 
-dotenv@^8.2.0:
-  version "8.6.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.6.0.tgz#061af664d19f7f4d8fc6e4ff9b584ce237adcb8b"
-  integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
+dotenv@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+  integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
 dottie@^2.0.0:
   version "2.0.2"
@@ -2589,10 +2589,10 @@ sequelize-pool@^6.0.0:
   resolved "https://registry.yarnpkg.com/sequelize-pool/-/sequelize-pool-6.1.0.tgz#caaa0c1e324d3c2c3a399fed2c7998970925d668"
   integrity sha512-4YwEw3ZgK/tY/so+GfnSgXkdwIJJ1I32uZJztIEgZeAO6HMgj64OzySbWLgxj+tXhZCJnzRfkY9gINw8Ft8ZMg==
 
-sequelize@^6.6.2:
-  version "6.6.4"
-  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-6.6.4.tgz#616072aa5e7226db1050cc485942ee2fd04d475f"
-  integrity sha512-SOSu3tclOjHJfvuIITUlAsh2Q642gFxjpNN+IM1quFZ7jU5Pep7FIAwBK8UWgTpNc9TK9rUr1cyLB/G25CGicA==
+sequelize@^6.6.5:
+  version "6.6.5"
+  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-6.6.5.tgz#6f618e99f3df1fc81f28709e8a3139cec3ef1f0c"
+  integrity sha512-QyRrJrDRiwuiILqTMHUA1yWOPIL12KlfmgZ3hnzQwbMvp2vJ6fzu9bYJQB+qPMosck4mBUggY4Cjoc6Et8FBIQ==
   dependencies:
     debug "^4.1.1"
     dottie "^2.0.0"
@@ -2605,7 +2605,7 @@ sequelize@^6.6.2:
     sequelize-pool "^6.0.0"
     toposort-class "^1.0.1"
     uuid "^8.1.0"
-    validator "^10.11.0"
+    validator "^13.6.0"
     wkx "^0.5.0"
 
 serve-static@1.14.1:
@@ -2789,9 +2789,9 @@ strip-json-comments@~2.0.1:
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
 sucrase@^3.17.1:
-  version "3.19.0"
-  resolved "https://registry.yarnpkg.com/sucrase/-/sucrase-3.19.0.tgz#cc9a60f731e7497766a7b710d3362260a8f9ced5"
-  integrity sha512-FeMelydANPRMiOo/lxbf7NxN8bQmMVBQmKOa69BifwVhteMJzRoJNHaVBoCYmE/kpnx6VPg9ckaLumwtuAzmEA==
+  version "3.20.0"
+  resolved "https://registry.yarnpkg.com/sucrase/-/sucrase-3.20.0.tgz#a80e865830e27d66a912c938491d474164b06205"
+  integrity sha512-Rsp+BX7DRuCleJvBAHN7gQ3ddk7U0rJev19XlIBF6dAq9vX4Tr5mHk4E7+ig/I7BM3DLYotCmm20lfBElT2XtQ==
   dependencies:
     commander "^4.0.0"
     glob "7.1.6"
@@ -3056,10 +3056,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-validator@^10.11.0:
-  version "10.11.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-10.11.0.tgz#003108ea6e9a9874d31ccc9e5006856ccd76b228"
-  integrity sha512-X/p3UZerAIsbBfN/IwahhYaBbY68EN/UQBWHtsbXGT5bfrH/p4NQzUCG1kF/rtKaNpnJ7jAu6NGTdSNtyNIXMw==
+validator@^13.6.0:
+  version "13.6.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.6.0.tgz#1e71899c14cdc7b2068463cb24c1cc16f6ec7059"
+  integrity sha512-gVgKbdbHgtxpRyR8K0O6oFZPhhB5tT1jeEHZR0Znr9Svg03U0+r9DXWMrnRAB+HtCStDQKlaIZm42tVsVjqtjg==
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"
