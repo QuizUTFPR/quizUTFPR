@@ -14,12 +14,15 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Accordion from './AccordionQuizStatistics';
 
+// API FAKE
+import QuizStatistics from './questionStatistics';
+
 const Statistics = () => {
   const TabLabels = [
     {
       icon: <PhoneIcon />,
       label: '1',
-      component: <Accordion />,
+      component: <Accordion quizData={QuizStatistics} />,
     },
     {
       icon: <FavoriteIcon />,

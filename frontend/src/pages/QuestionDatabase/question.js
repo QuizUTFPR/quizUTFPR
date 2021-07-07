@@ -53,7 +53,7 @@ const Questions = ({ id, checked, onChange, question }) => (
         <Grid container justifyContent="space-between">
           <Grid item>
             <Typography color="textSecondary" gutterBottom>
-              Multípla Escolha
+              Múltipla Escolha
             </Typography>
           </Grid>
           <Grid item>
