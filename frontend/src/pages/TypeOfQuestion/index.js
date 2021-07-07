@@ -43,7 +43,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
         spacing={3}
         isVisible={isModalQuestionDatabaseOpen}
       >
-        <Grid container justify="center" alignItems="center">
+        <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={3} md={1}>
             <IconButton aria-label="closeModal" onClick={props.handleClose}>
               <Close />
@@ -61,7 +61,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
           <Divider />
         </Grid>
 
-        <Grid container spacing={3} justify="center" align="center">
+        <Grid container spacing={3} justifyContent="center" align="center">
           <Grid item xs={12}>
             <Button
               fullWidth

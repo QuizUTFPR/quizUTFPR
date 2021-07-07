@@ -31,7 +31,7 @@ const MiddleSide = ({
   location,
 }) => (
   <Grid item xs={6}>
-    <StyledGrid container justify="center" align="center">
+    <StyledGrid container justifyContent="center" align="center">
       {questions.length ? (
         <>
           {errors.title && (
@@ -87,7 +87,7 @@ const MiddleSide = ({
               </ErrorMessage>
             )}
           </Grid>
-          <Grid container align="center" justify="center" spacing={2}>
+          <Grid container align="center" justifyContent="center" spacing={2}>
             {formik.values.question.answer.map((item, index) => (
               <Grid
                 item

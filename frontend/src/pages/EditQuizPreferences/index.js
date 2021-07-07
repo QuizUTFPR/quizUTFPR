@@ -74,7 +74,7 @@ const EditPreferences = forwardRef((props, ref) => {
   });
   return (
     <Wrapper container spacing={3}>
-      <Grid container justify="center" alignItems="center">
+      <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={3} md={1}>
           <IconButton aria-label="closeModal" onClick={props.handleClose}>
             <Close />
@@ -152,8 +152,8 @@ const EditPreferences = forwardRef((props, ref) => {
             onChange={formik.handleChange}
             required
             multiline
-            rows={5}
-            rowsMax={5}
+            minRows={5}
+            maxRows={5}
           />
         </Grid>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
-import { ThemeProvider } from 'styled-components';
+import { CssBaseline, ThemeProvider } from '@material-ui/core';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import AuthProvider from '@context/auth';
 
 import App from './App';
@@ -13,8 +13,8 @@ import theme from './theme/theme';
 
 function Root() {
   return (
-    <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <StyledThemeProvider theme={theme}>
         <CssBaseline />
         <GlobalStyle />
         <AuthProvider>
@@ -24,8 +24,8 @@ function Root() {
             </Switch>
           </BrowserRouter>
         </AuthProvider>
-      </ThemeProvider>
-    </MuiThemeProvider>
+      </StyledThemeProvider>
+    </ThemeProvider>
   );
 }
 

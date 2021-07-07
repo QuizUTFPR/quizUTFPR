@@ -68,7 +68,7 @@ const CriarQuiz = ({ history }) => {
 
   return (
     <GridContainer container spacing={3}>
-      <Grid container align="center" justify="center">
+      <Grid container align="center" justifyContent="center">
         <Typography color="primary" component="h4" variant="h4">
           Informações do Quiz
         </Typography>
@@ -81,7 +81,7 @@ const CriarQuiz = ({ history }) => {
       <Grid
         container
         component="form"
-        justify="center"
+        justifyContent="center"
         align="center"
         onSubmit={formik.handleSubmit}
         spacing={2}
@@ -140,8 +140,8 @@ const CriarQuiz = ({ history }) => {
             onChange={formik.handleChange}
             required
             multiline
-            rows={5}
-            rowsMax={5}
+            minRows={5}
+            maxRows={5}
           />
         </Grid>
 

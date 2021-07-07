@@ -35,7 +35,12 @@ const LeftSide = ({
         </Typography>
       </Grid>
 
-      <GridQuestions container spacing={2} justify="center" align="center">
+      <GridQuestions
+        container
+        spacing={2}
+        justifyContent="center"
+        align="center"
+      >
         {questions.map((item, index) => (
           <Grid item key={index} xs={12} style={{ display: 'flex' }}>
             <Grid

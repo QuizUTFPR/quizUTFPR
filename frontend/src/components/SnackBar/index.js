@@ -2,7 +2,7 @@ import React, { forwardRef, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import MuiAlert from '@material-ui/core/Alert';
 import Slide from '@material-ui/core/Slide';
 
 const Alert = forwardRef((props, ref) => (

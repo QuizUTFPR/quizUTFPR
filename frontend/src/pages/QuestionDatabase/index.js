@@ -119,7 +119,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
   return (
     <>
       <Wrapper container spacing={3}>
-        <Grid container justify="center" alignItems="center">
+        <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={3} md={1}>
             <IconButton aria-label="closeModal" onClick={props.handleClose}>
               <Close />
@@ -136,7 +136,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
           component="form"
           onSubmit={formik.handleSubmit}
           container
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           spacing={2}
         >
@@ -172,7 +172,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
         <Grid
           container
           spacing={3}
-          justify="center"
+          justifyContent="center"
           style={{
             overflow: 'auto',
             minHeight: '40px',

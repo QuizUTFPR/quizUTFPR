@@ -50,7 +50,7 @@ const Questions = ({ id, checked, onChange, question }) => (
     <CardActionArea component="label">
       <CardContent>
         <CheckBox checked={Boolean(checked)} onChange={onChange(id)} />
-        <Grid container justify="space-between">
+        <Grid container justifyContent="space-between">
           <Grid item>
             <Typography color="textSecondary" gutterBottom>
               Multípla Escolha

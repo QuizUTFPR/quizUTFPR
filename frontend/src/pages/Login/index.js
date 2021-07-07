@@ -53,7 +53,7 @@ const LoginPage = ({ history }) => {
 
   return (
     <StyledContainer>
-      <Grid container justify="center" alignItems="center">
+      <Grid container justifyContent="center" alignItems="center">
         <Grid
           style={{ display: 'flex', justifyContent: 'center' }}
           item
@@ -91,8 +91,6 @@ const LoginPage = ({ history }) => {
             }}
           >
             <StyledInput
-              color="black"
-              variant="outlined"
               id="email"
               label="Nome de Usuário"
               value={values.email}
@@ -109,8 +107,7 @@ const LoginPage = ({ history }) => {
             />
 
             <StyledInput
-              color="black"
-              variant="outlined"
+              color="primary"
               id="password"
               label="Senha"
               type={values.showPassword ? 'text' : 'password'}

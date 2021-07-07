@@ -50,7 +50,7 @@ const Header = ({
   return (
     <StyledAppBar position="static" color="transparent">
       <Toolbar>
-        <Grid container justify="space-between" alignItems="center">
+        <Grid container justifyContent="space-between" alignItems="center">
           <Grid item>
             <StyledButton
               color="secondary"

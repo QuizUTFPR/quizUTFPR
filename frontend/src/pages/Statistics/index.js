@@ -2,24 +2,30 @@ import React from 'react';
 
 // COMPONENTS
 import GridContainer from '@components/Container';
+import Accordion from '@components/Accordion';
 
 // MATERIAL-UI COMPONENTS
-import { Grid, Typography, Divider } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  Divider,
+  // Tooltip,
+} from '@material-ui/core';
 
-// MATERIAL-UI ICONS
-
-const Classes = () => (
+const Statistics = () => (
   <GridContainer container spacing={3}>
-    <Grid container align="center" justifyContent="center">
+    <Grid container align="center" justifyContent="space-between">
       <Typography color="primary" component="h4" variant="h4">
-        Minhas Turmas
+        Estatisticas
       </Typography>
     </Grid>
-
     <Grid item>
       <Divider />
+    </Grid>
+    <Grid item>
+      <Accordion />
     </Grid>
   </GridContainer>
 );
 
-export default Classes;
+export default Statistics;

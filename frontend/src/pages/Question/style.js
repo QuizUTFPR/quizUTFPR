@@ -16,18 +16,16 @@ export const CardSelectQuestion = styled(Button)`
     isonscreen === 'true' ? theme.palette.primary.main : ''};
   color: ${({ isonscreen }) => (isonscreen === 'true' ? 'white' : '')};
 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+
   &&:hover {
     background: ${({ isonscreen, theme }) =>
       isonscreen === 'true' ? '' : theme.palette.primary.main};
     color: ${({ isonscreen, theme }) =>
       isonscreen === 'true' ? theme.palette.primary.main : 'white'};
-  }
-  && span {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
   }
 `;
 

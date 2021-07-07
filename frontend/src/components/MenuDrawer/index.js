@@ -89,7 +89,7 @@ const MenuDrawer = () => {
         </StyledIconButton>
         <AvatarBox>
           <StyledBadge
-            overlap="circle"
+            overlap="circular"
             variant="dot"
             anchorOrigin={{
               vertical: 'bottom',

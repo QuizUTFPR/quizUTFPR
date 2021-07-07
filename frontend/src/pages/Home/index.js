@@ -19,7 +19,7 @@ const StyledHomeGrid = styled(GridContainer)`
 `;
 
 const Home = () => (
-  <StyledHomeGrid container justify="center" align="center">
+  <StyledHomeGrid container justifyContent="center" align="center">
     <Grid item xs={12}>
       <LogoUTFPR />
     </Grid>

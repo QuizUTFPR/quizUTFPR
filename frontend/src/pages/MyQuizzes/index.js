@@ -134,7 +134,7 @@ const Quiz = () => {
   return (
     <>
       <GridContainer container spacing={3}>
-        <Grid container align="center" justify="space-between">
+        <Grid container align="center" justifyContent="space-between">
           <Typography color="primary" component="h4" variant="h4">
             Quizzes Cadastrados
           </Typography>

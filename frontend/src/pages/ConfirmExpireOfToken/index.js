@@ -8,7 +8,12 @@ import ErrorIcon from '@material-ui/icons/Error';
 import { StyledGridContainer } from './style';
 
 const ConfirmExpireOfToken = ({ history }) => (
-  <StyledGridContainer spacing={3} container justify="center" align="center">
+  <StyledGridContainer
+    spacing={3}
+    container
+    justifyContent="center"
+    align="center"
+  >
     <Grid item xs={12}>
       <ErrorIcon style={{ fontSize: 50 }} color="primary" />
       <Typography variant="h5" color="primary" component="h5">
