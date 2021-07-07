@@ -56,6 +56,7 @@ const LeftSide = ({
                 <IconButton
                   onClick={() => handleToUp(index, handleChangeQuestion)}
                   size="small"
+                  disabled={location.state.published}
                   style={{ padding: '0' }}
                 >
                   <KeyboardArrowUp />
@@ -63,6 +64,7 @@ const LeftSide = ({
               )}
               {index !== questions.length - 1 && (
                 <IconButton
+                  disabled={location.state.published}
                   onClick={() => handleToDown(index, handleChangeQuestion)}
                   size="small"
                   style={{ padding: '0' }}
