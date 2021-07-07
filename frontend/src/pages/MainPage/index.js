@@ -31,7 +31,7 @@ const MainPage = () => (
         <Route path={QUIZ} component={Quiz} exact />
         <Route path={CREATE_QUIZ} component={CreateQuiz} exact />
         <Route path={CLASSES} component={Classes} exact />
-        <Route path={STATISTICS_QUIZ} component={Statistics} exact />
+        <Route path={`${STATISTICS_QUIZ}/:id`} component={Statistics} exact />
       </Switch>
     </Div>
   </Suspense>

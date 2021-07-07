@@ -15,7 +15,7 @@ import SnackBar from '@components/SnackBar';
 import QuizPreferences from '@pages/EditQuizPreferences';
 
 // ROUTES
-import { CREATE_QUIZ } from '@routes';
+import { CREATE_QUIZ, STATISTICS_QUIZ } from '@routes';
 
 // MATERIAL-UI COMPONENTS
 import {
@@ -28,7 +28,7 @@ import {
 import Button from '@components/Button';
 
 // MATERIAL-UI ICONS
-import { Edit, Delete, Publish } from '@material-ui/icons';
+import { Edit, Delete, Publish, BarChart } from '@material-ui/icons';
 
 // STYLE
 import { TextPIN } from './style';
@@ -45,7 +45,7 @@ const TextPINReffed = forwardRef((props, ref) => (
   </TextPIN>
 ));
 
-const Quiz = () => {
+const Quiz = ({ history }) => {
   const [quizzes, setQuizzes] = useState(false);
   const [isModalOpen, setModalOpen] = useState({
     open: false,
@@ -177,9 +177,28 @@ const Quiz = () => {
               )}
 
               {quiz.published && (
-                <Tooltip arrow ariaLabel="pin" title="PIN utilizado pelo aluno">
-                  <TextPINReffed>{quiz.pin}</TextPINReffed>
-                </Tooltip>
+                <>
+                  <Tooltip
+                    arrow
+                    ariaLabel="pin"
+                    title="PIN utilizado pelo aluno"
+                  >
+                    <TextPINReffed>{quiz.pin}</TextPINReffed>
+                  </Tooltip>
+                  <Tooltip
+                    arrow
+                    ariaLabel="statistics"
+                    title="Visualizar estatisticas"
+                  >
+                    <IconWrapper
+                      onClick={() =>
+                        history.push(`${STATISTICS_QUIZ}/${quiz.id}`)
+                      }
+                    >
+                      <BarChart />
+                    </IconWrapper>
+                  </Tooltip>
+                </>
               )}
               <Tooltip arrow ariaLabel="editar" title="Editar">
                 <IconWrapper onClick={handleOpenModal(quiz)}>
