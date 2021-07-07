@@ -4,13 +4,11 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  // Collapse,
   Typography,
 } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 
 const AccordionWrapper = () => {
-  // const accordionRef = useRef(null);
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
