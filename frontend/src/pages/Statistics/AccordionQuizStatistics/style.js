@@ -21,30 +21,47 @@ export const AnswerItem = styled(Answer)`
 export const AnswerTitle = styled(Typography)``;
 export const AnswerNumberOfChoices = styled(Typography)``;
 
-export const StudentWrapper = styled(Grid)`
-  margin-top: 20px;
-  padding: 10px;
-  background: blue;
+export const WrapperResumeOfQuestion = styled(Grid)`
+  margin: 30px 0;
 `;
 
-export const HeaderStudentWrapper = styled(Typography)`
+export const WrapperResumeQuestion = styled(Grid)`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+export const TextTitleResumeOfQuestion = styled(Typography)``;
+export const TextValueResumeOfQuestion = styled(Typography)``;
+
+export const StudentWrapper = styled(Grid)`
+  padding: 10px;
+`;
+
+export const HeaderTitle = styled(Typography)`
   font-weight: bolder;
   font-size: 1.2em;
   text-align: center;
-  background: red;
 `;
 
 export const StudentInformation = styled(Grid)`
-  background: green;
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
   align-content: center;
-  padding: 10px;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
 `;
 
 export const BoxStudent = styled.div``;
-export const NameStudent = styled(Typography)``;
+
+export const NameStudent = styled(Typography)`
+  font-weight: 500;
+`;
+
 export const ChoiceStudent = styled(Typography)``;
 
-export const IsStudentChoiceCorrect = styled(Typography)``;
+export const IsStudentChoiceCorrect = styled(Typography)`
+  align-self: center;
+`;

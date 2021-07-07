@@ -12,7 +12,7 @@ import TabMenu from '@components/TabMenu';
 
 import PhoneIcon from '@material-ui/icons/Phone';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import Accordion from './AccordionQuizStatistics';
+import AccordionQuizStatistics from './AccordionQuizStatistics';
 
 // API FAKE
 import QuizStatistics from './questionStatistics';
@@ -22,7 +22,7 @@ const Statistics = () => {
     {
       icon: <PhoneIcon />,
       label: '1',
-      component: <Accordion quizData={QuizStatistics} />,
+      component: <AccordionQuizStatistics quizData={QuizStatistics} />,
     },
     {
       icon: <FavoriteIcon />,

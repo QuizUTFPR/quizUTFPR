@@ -1,11 +1,15 @@
 import React from 'react';
 
+// COMPONENTS
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Typography,
 } from '@material-ui/core';
+import CircularProgressWithLabel from '@components/CircularProgressWithLabel';
+
+// ICONS
 import { ExpandMore } from '@material-ui/icons';
 
 // STYLES
@@ -13,7 +17,7 @@ import {
   AnswerItem,
   AnswerWrapper,
   StudentWrapper,
-  HeaderStudentWrapper,
+  HeaderTitle,
   StudentInformation,
   AnswerTitle,
   AnswerNumberOfChoices,
@@ -21,6 +25,10 @@ import {
   ChoiceStudent,
   IsStudentChoiceCorrect,
   BoxStudent,
+  WrapperResumeOfQuestion,
+  WrapperResumeQuestion,
+  TextTitleResumeOfQuestion,
+  TextValueResumeOfQuestion,
 } from './style';
 
 const getStudentChoice = (choice) => {
@@ -78,14 +86,35 @@ const AccordionWrapper = ({ quizData }) => (
             ))}
           </AnswerWrapper>
 
+          <WrapperResumeOfQuestion>
+            <HeaderTitle>Resumo</HeaderTitle>
+
+            <WrapperResumeQuestion>
+              <TextTitleResumeOfQuestion>
+                Percentual de acerto:
+              </TextTitleResumeOfQuestion>
+              <CircularProgressWithLabel
+                value={parseInt(question.percentageOfHit, 10)}
+              />
+            </WrapperResumeQuestion>
+            <WrapperResumeQuestion>
+              <TextTitleResumeOfQuestion>
+                Tempo médio de resposta:
+              </TextTitleResumeOfQuestion>
+              <TextValueResumeOfQuestion>
+                {question.avgOfTimeSpentToAnswer} segundos
+              </TextValueResumeOfQuestion>
+            </WrapperResumeQuestion>
+          </WrapperResumeOfQuestion>
+
           <StudentWrapper>
-            <HeaderStudentWrapper>ESTUDANTES</HeaderStudentWrapper>
+            <HeaderTitle>Respostas</HeaderTitle>
             {question.question_choice.map((choice) => (
               <StudentInformation key={choice.student_quiz_id}>
                 <BoxStudent>
                   <NameStudent>{choice.student.name}</NameStudent>
                   <ChoiceStudent>
-                    {getStudentChoice(choice).map((item) => item)}
+                    Escolhas: {getStudentChoice(choice).map((item) => item)}
                   </ChoiceStudent>
                 </BoxStudent>
                 <IsStudentChoiceCorrect>
