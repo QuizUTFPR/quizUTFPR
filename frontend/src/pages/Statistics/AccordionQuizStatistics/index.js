@@ -29,6 +29,7 @@ import {
   BoxStudent,
   QuizPercentageHit,
   QuizPercentageHitDescription,
+  BarQuestion,
 } from './style';
 
 import {
@@ -117,9 +118,15 @@ const AccordionWrapper = ({ quizData }) => {
             aria-controls={`panel${index}bh-content`}
             id={`panel${index}bh-header`}
           >
-            <Typography>
-              {index + 1}.{`  ${question.title}`}
-            </Typography>
+            <BarQuestion>
+              <Typography>
+                {index + 1}.{`  ${question.title}`}
+              </Typography>
+              <CircularProgressWithLabel
+                color="yellow"
+                value={parseInt(question.percentageOfHit, 10)}
+              />
+            </BarQuestion>
           </StyledAccordionSummary>
           <AccordionDetails>
             <AnswerWrapper>

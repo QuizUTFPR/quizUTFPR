@@ -54,7 +54,7 @@ class QuestionController {
           ).required("Informe as alternativas.")
       });
 
-      //Check body of requisiton
+      // Check body of requisiton
       if (!(await schema.isValid(req.body)))
         return res.status(400).json({ error: "Falha na validação!" });
 
@@ -80,18 +80,18 @@ class QuestionController {
       const score = await getScoreBasedOnDifficulty(difficultyLevel);
 
       if(!question){
-        //CASO QUESTÃO NÃO EXISTIR CRIO A MESMA E AS ALTERNATIVAS
+        // CASO QUESTÃO NÃO EXISTIR CRIO A MESMA E AS ALTERNATIVAS
         try {
           question = await Question.create({
-            copy: copy,
+            copy,
             available_on_questions_db: availableOnQuestionsDB,
-            title: title, 
-            timer: timer, 
+            title, 
+            timer, 
             difficulty_level: difficultyLevel, 
-            quiz_id: quiz_id, 
-            id_image: id_image,
-            type: type,
-            index: index,
+            quiz_id, 
+            id_image,
+            type,
+            index,
             score
           }) 
 
@@ -120,7 +120,7 @@ class QuestionController {
         if(!answerFounded){
           try{
             await Answer.create({
-              id_question: id_question,
+              id_question,
               title: answerItem.title, 
               is_correct: answerItem.is_correct
             });
@@ -161,7 +161,7 @@ class QuestionController {
         }
       });
 
-      //REMOVENDO TAGS QUE FORAM RETIRADAS DA QUESTÃO
+      // REMOVENDO TAGS QUE FORAM RETIRADAS DA QUESTÃO
       tagsAlreadyInQuestion.map(tagInQuestion => {
         if(!tags.find(element => element == tagInQuestion.name)){
           tagInQuestion.removeQuestion(question);
@@ -260,6 +260,7 @@ class QuestionController {
 
   // Altera um único registro
   update() {}
+
   // Remove um único registro
   async delete(req, res) {
     try {

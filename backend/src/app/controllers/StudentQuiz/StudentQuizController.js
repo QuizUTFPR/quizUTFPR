@@ -73,8 +73,6 @@ class StudentQuizController {
       const questionNotAnswered = questionQuiz.filter(question => !idQuestionsAnswered.includes(question.id));
       
 
-      console.log("não respondidas", questionNotAnswered)
-
       // CASO EXISTA QUESTÕES NÃO RESPONDIDAS, EU CADASTO AS MESMAS SEM MARCAR NENHUM ALTERNATIVA
       await Promise.all(questionNotAnswered.map(async question => {
         await StudentQuestionChoice.create({
@@ -89,23 +87,29 @@ class StudentQuizController {
       const studentChoices = await studentQuiz.getQuiz_question_choice();
 
   
-      //CALCULANDO SCORE
+      // CALCULANDO SCORE
       let score = 0;
       let correctAnswerAmount = 1;
       let studentAnswerCorrect = 0;
+      let final = 0;
       await Promise.all(studentChoices.map(async item => {
         const studentAnswers = [item.checked1, item.checked2, item.checked3, item.checked4];
-        // console.log(studentAnswers)
         const question = (questionQuiz.find(element => element.id === item.question_id));
         const answers = await question.getAnswer({order: [['id', 'ASC']]});
-        
-        answers.map((item, index) => {
-          if(item.is_correct){
-            correctAnswerAmount++;
+
+        let hasWrongChoice = false;
+        answers.map((itemAnswers, index) => {
+          if(itemAnswers.is_correct){
+            correctAnswerAmount += 1;
           }
 
-          if(item.is_correct && studentAnswers[index]){
-            studentAnswerCorrect++
+          if(!itemAnswers.is_correct && studentAnswers[index]){
+            hasWrongChoice = true;
+            studentAnswerCorrect = 0;
+          }
+
+          if(itemAnswers.is_correct && studentAnswers[index] && !hasWrongChoice){
+            studentAnswerCorrect += 1;
           }
         });
 
@@ -115,13 +119,9 @@ class StudentQuizController {
         
         const bonus = (timeLeft/timeOfQuestion) * (50/100)
         score += questionScore + questionScore * bonus;
+        final += (1/correctAnswerAmount) * studentAnswerCorrect * score;
       }))
-
-      console.log(1/correctAnswerAmount, studentAnswerCorrect, score)
-      const final = (1/correctAnswerAmount) * studentAnswerCorrect * score;
       
-      console.log(final)
-
       const studentQuizUpdated = await StudentQuiz.findByPk(id_student_quiz)
 
       if(!studentQuizUpdated)
