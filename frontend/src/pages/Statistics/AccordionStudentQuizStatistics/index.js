@@ -86,7 +86,7 @@ const AccordionWrapper = ({ quizData }) => {
                         Tempo
                       </TextTitleResumeOfQuestion>
                       <TextValueResumeOfQuestion>
-                        {question.timer}
+                        {question.timer} segundos
                       </TextValueResumeOfQuestion>
                     </WrapperResumeQuestion>
                     <Divider />
