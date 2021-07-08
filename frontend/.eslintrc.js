@@ -45,6 +45,7 @@ module.exports = {
           ['@context', './src/context/'],
           ['@api', './src/services/api.js'],
           ['@pages', './src/pages/'],
+          ['@utils', './src/utils/'],
         ],
       },
       extensions: ['.js', '.less', '.json', '.vue'],

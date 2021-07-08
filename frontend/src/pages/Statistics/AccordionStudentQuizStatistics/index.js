@@ -5,7 +5,7 @@ import {
   Accordion,
   AccordionDetails,
   Typography,
-  // Divider,
+  Divider,
 } from '@material-ui/core';
 // import Tooltip from '@components/ToolTip';
 // import CircularProgressWithLabel from '@components/CircularProgressWithLabel';
@@ -18,6 +18,9 @@ import {
   // SentimentSatisfied,
 } from '@material-ui/icons';
 
+// UTILS
+import getStringTypeOfQuestion from '@utils/getStringTypeOfQuestion';
+
 // STYLES
 import { StudentBar } from './style';
 import {
@@ -25,7 +28,11 @@ import {
   AnswerItem,
   AnswerWrapper,
   AnswerTitle,
-  // HeaderTitle,
+  HeaderTitle,
+  WrapperResumeOfQuestion,
+  WrapperResumeQuestion,
+  TextTitleResumeOfQuestion,
+  TextValueResumeOfQuestion,
 } from '../style';
 
 const AccordionWrapper = ({ quizData }) => {
@@ -62,6 +69,50 @@ const AccordionWrapper = ({ quizData }) => {
                   </Typography>
                 </StyledAccordionSummary>
                 <AccordionDetails>
+                  <WrapperResumeOfQuestion>
+                    <HeaderTitle>Resumo</HeaderTitle>
+
+                    <WrapperResumeQuestion>
+                      <TextTitleResumeOfQuestion>
+                        Dificuldade
+                      </TextTitleResumeOfQuestion>
+                      <TextValueResumeOfQuestion>
+                        {question.difficulty_level}
+                      </TextValueResumeOfQuestion>
+                    </WrapperResumeQuestion>
+                    <Divider />
+                    <WrapperResumeQuestion>
+                      <TextTitleResumeOfQuestion>
+                        Tempo
+                      </TextTitleResumeOfQuestion>
+                      <TextValueResumeOfQuestion>
+                        {question.timer}
+                      </TextValueResumeOfQuestion>
+                    </WrapperResumeQuestion>
+                    <Divider />
+                    <WrapperResumeQuestion>
+                      <TextTitleResumeOfQuestion>
+                        Tipo da Questão
+                      </TextTitleResumeOfQuestion>
+                      <TextValueResumeOfQuestion>
+                        {getStringTypeOfQuestion(question.type)}
+                      </TextValueResumeOfQuestion>
+                    </WrapperResumeQuestion>
+                  </WrapperResumeOfQuestion>
+                  {/* <TextWrapper>
+                    <TextTitle>Dificuldade:</TextTitle>
+                    <TextValue>{question.difficulty_level}</TextValue>
+                  </TextWrapper>
+                  <TextWrapper>
+                    <TextTitle>Tempo:</TextTitle>
+                    <TextValue>{question.timer} segundos</TextValue>
+                  </TextWrapper>
+                  <TextWrapper>
+                    <TextTitle>Tipo da Questão:</TextTitle>
+                    <TextValue>
+                      {getStringTypeOfQuestion(question.type)}
+                    </TextValue> */}
+                  {/* </TextWrapper> */}
                   <AnswerWrapper>
                     {question.answer.map((answer, i) => (
                       <AnswerItem

@@ -21,21 +21,6 @@ export const QuizPercentageHitDescription = styled(Typography)`
 
 export const AnswerNumberOfChoices = styled(Typography)``;
 
-export const WrapperResumeOfQuestion = styled(Grid)`
-  margin: 30px 0;
-`;
-
-export const WrapperResumeQuestion = styled(Grid)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 10px 0;
-  padding: 0 20px;
-`;
-
-export const TextTitleResumeOfQuestion = styled(Typography)``;
-export const TextValueResumeOfQuestion = styled(Typography)``;
-
 export const StudentWrapper = styled(Grid)`
   padding: 10px;
 `;

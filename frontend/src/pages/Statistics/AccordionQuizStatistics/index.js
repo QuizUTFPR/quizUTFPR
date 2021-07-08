@@ -27,10 +27,6 @@ import {
   ChoiceStudent,
   IsStudentChoiceCorrect,
   BoxStudent,
-  WrapperResumeOfQuestion,
-  WrapperResumeQuestion,
-  TextTitleResumeOfQuestion,
-  TextValueResumeOfQuestion,
   QuizPercentageHit,
   QuizPercentageHitDescription,
 } from './style';
@@ -41,6 +37,10 @@ import {
   AnswerWrapper,
   AnswerTitle,
   HeaderTitle,
+  WrapperResumeOfQuestion,
+  WrapperResumeQuestion,
+  TextTitleResumeOfQuestion,
+  TextValueResumeOfQuestion,
 } from '../style';
 
 const getStudentChoice = (choice) => {
