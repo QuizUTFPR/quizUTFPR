@@ -8,6 +8,9 @@ const theme = createTheme({
     primary: {
       main: '#2C2E35',
     },
+    yellow: {
+      main: '#FFC935',
+    },
     background: {
       bgWebSite: '#F4F5F9',
       bgContainer: 'white',

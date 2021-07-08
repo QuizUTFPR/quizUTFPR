@@ -4,29 +4,31 @@ import React from 'react';
 import GridContainer from '@components/Container';
 import {
   Grid,
-  Typography,
-  // Divider,
   // Tooltip,
 } from '@material-ui/core';
 import TabMenu from '@components/TabMenu';
+import { Face, LibraryBooks } from '@material-ui/icons';
 
-import PhoneIcon from '@material-ui/icons/Phone';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import AccordionQuizStatistics from './AccordionQuizStatistics';
+
+// STYLES
+import { TitlePage } from './style';
 
 // API FAKE
 import QuizStatistics from './questionStatistics';
 
 const Statistics = () => {
+  const { quiz } = QuizStatistics;
+
   const TabLabels = [
     {
-      icon: <PhoneIcon />,
-      label: '1',
+      icon: <LibraryBooks />,
+      label: 'ANÁLISE POR QUESTÕES',
       component: <AccordionQuizStatistics quizData={QuizStatistics} />,
     },
     {
-      icon: <FavoriteIcon />,
-      label: '2',
+      icon: <Face />,
+      label: 'ANÁLISE POR ALUNOS',
       component: 'componente 2',
     },
   ];
@@ -34,9 +36,9 @@ const Statistics = () => {
   return (
     <GridContainer container spacing={3}>
       <Grid container align="center" justifyContent="center">
-        <Typography color="primary" component="h4" variant="h4">
-          Estatisticas
-        </Typography>
+        <TitlePage color="primary" component="p" variant="h4">
+          Estatisticas - {quiz.title}
+        </TitlePage>
       </Grid>
       <Grid item>
         <TabMenu TabLabels={TabLabels} />

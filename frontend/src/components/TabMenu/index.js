@@ -21,6 +21,7 @@ const BasicTabs = ({ TabLabels }) => {
           value={value}
           onChange={handleChange}
           aria-label="tabs statistics quiz"
+          centered
         >
           {TabLabels.map((item, index) => (
             <Tab

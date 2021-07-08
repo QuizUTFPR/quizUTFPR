@@ -14,4 +14,5 @@ export const LabelWrapper = styled.span`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 `;

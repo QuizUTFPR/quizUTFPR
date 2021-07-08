@@ -1,6 +1,23 @@
 import styled from 'styled-components';
 
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Paper } from '@material-ui/core';
+
+export const QuizPercentageHit = styled(Paper).attrs({
+  elevation: 3,
+})`
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-direction: column;
+`;
+
+export const QuizPercentageHitDescription = styled(Typography)`
+  margin-top: 20px;
+  font-weight: 400;
+  text-align: center;
+`;
 
 export const AnswerWrapper = styled(Grid)``;
 
@@ -28,7 +45,9 @@ export const WrapperResumeOfQuestion = styled(Grid)`
 export const WrapperResumeQuestion = styled(Grid)`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 0 20px;
 `;
 
 export const TextTitleResumeOfQuestion = styled(Typography)``;

@@ -22,7 +22,7 @@ class StatisticsQuizController {
       const {quiz_id} = req.body;
           
       const quiz = await Quiz.findByPk(quiz_id, {
-        attributes: ['id', 'title', 'description', 'visibility', 'id_image', 'pin']
+        attributes: ['id', 'title', 'pin']
       });
 
       if(!quiz) 
@@ -88,6 +88,7 @@ class StatisticsQuizController {
         }));
               
        
+        let percentageOfQuizHit = 0; // % OF CORRECT ANSWERS CHOICES OF THE STUDENT
 
         // INCLUDING IN THE QUESTION ALL THE CHOICES OF THE STUDENT
         // WE ONLY CONSIDER THE CHOICE ABOUT THE BEST SCORE
@@ -107,14 +108,13 @@ class StatisticsQuizController {
           
           
           let sumOfTimeSpentToAnswer = 0; // AVG OF TIME THAT WAS SPENT TO ANSWER THE QUESTION
-         
           question_choice.map(questionChoice => {
             sumOfTimeSpentToAnswer += (question.timer - questionChoice.time_left)
           });
           const avgOfTimeSpentToAnswer = sumOfTimeSpentToAnswer / question_choice.length;
 
           // CALCULATING HOW MANY TIMES EACH ANSWER HAD BEEN CHOOSED
-          let {answer} = question;
+          const {answer} = question;
           if (answer[0]) answer[0].dataValues.numberOfChoices = 0;
           if (answer[1]) answer[1].dataValues.numberOfChoices = 0;
           if (answer[2]) answer[2].dataValues.numberOfChoices = 0;
@@ -143,20 +143,28 @@ class StatisticsQuizController {
               if(checked4 && answer[3].dataValues.is_correct)
                 hitAmount += 1;
             }
+
+            return true;
           })
-          
+
+          const percentageOfHit = ((hitAmount * 100) / question_choice.length);
+          percentageOfQuizHit += percentageOfHit;
           return {
             avgOfTimeSpentToAnswer: avgOfTimeSpentToAnswer.toFixed(2),
-            percentageOfHit: ((hitAmount * 100) / question_choice.length).toFixed(2),
+            percentageOfHit: percentageOfHit.toFixed(2),
             ...question.dataValues,
             answer,
             question_choice
           };
         }))
     
-        
+        percentageOfQuizHit /= questions.length;
 
-      return res.status(200).json(returnedQuestions);
+      return res.status(200).json({
+        quiz,
+        percentageOfQuizHit,
+        questions: returnedQuestions
+      });
     }catch(err){
       console.log(err)
       return res.status(500).json(err);
