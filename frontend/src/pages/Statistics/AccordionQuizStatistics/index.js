@@ -137,7 +137,7 @@ const AccordionWrapper = ({ quizData }) => {
 
               <WrapperResumeQuestion>
                 <TextTitleResumeOfQuestion>
-                  Percentual de acerto:
+                  Percentual de acerto
                 </TextTitleResumeOfQuestion>
                 <CircularProgressWithLabel
                   color="yellow"
@@ -147,7 +147,7 @@ const AccordionWrapper = ({ quizData }) => {
               <Divider />
               <WrapperResumeQuestion>
                 <TextTitleResumeOfQuestion>
-                  Tempo médio de resposta:
+                  Tempo médio de resposta
                 </TextTitleResumeOfQuestion>
                 <TextValueResumeOfQuestion>
                   {question.avgOfTimeSpentToAnswer} segundos
@@ -156,7 +156,7 @@ const AccordionWrapper = ({ quizData }) => {
               <Divider />
               <WrapperResumeQuestion>
                 <TextTitleResumeOfQuestion>
-                  Quantidade de jogadores:
+                  Quantidade de jogadores
                 </TextTitleResumeOfQuestion>
                 <TextValueResumeOfQuestion>
                   {question.question_choice.length}
