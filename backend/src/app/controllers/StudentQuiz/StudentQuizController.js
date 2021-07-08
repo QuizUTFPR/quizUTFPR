@@ -91,6 +91,7 @@ class StudentQuizController {
       let score = 0;
       let correctAnswerAmount = 1;
       let studentAnswerCorrect = 0;
+      let studentAmountQuestionCorrect = 0;
       let final = 0;
       await Promise.all(studentChoices.map(async item => {
         const studentAnswers = [item.checked1, item.checked2, item.checked3, item.checked4];
@@ -113,11 +114,15 @@ class StudentQuizController {
           }
         });
 
+        if(studentAnswerCorrect > 0){
+          studentAmountQuestionCorrect += 1;
+        }
+
         const questionScore = question.score;
         const timeOfQuestion = question.timer;
         const timeLeft = item.time_left;
-        
         const bonus = (timeLeft/timeOfQuestion) * (50/100)
+
         score += questionScore + questionScore * bonus;
         final += (1/correctAnswerAmount) * studentAnswerCorrect * score;
       }))
@@ -128,7 +133,7 @@ class StudentQuizController {
         return res.status(404).json({error: "Nenhuma tentativa de resposta de quiz encontrado."});
 
       studentQuizUpdated.score= final;
-      studentQuizUpdated.hit_amount= studentAnswerCorrect;
+      studentQuizUpdated.hit_amount= studentAmountQuestionCorrect;
       studentQuizUpdated.is_finished= true;
       studentQuizUpdated.save();
 

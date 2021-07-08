@@ -123,28 +123,39 @@ class StatisticsQuizController {
           let hitAmount = 0;// SUM OF HIT (CORRECT ANSWER)
           question_choice.map(choice => {
             const { checked1, checked2, checked3, checked4 } = choice;
+            let hasWrongChoice = false;
+            let hitAmountChoice = 0;
+
             if(checked1){
               answer[0].dataValues.numberOfChoices += 1;
-              if(checked1 && answer[0].dataValues.is_correct)
-                hitAmount += 1;
+              if(checked1 && answer[0].dataValues.is_correct && !hasWrongChoice)
+                hitAmountChoice += 1;
+              else 
+                hasWrongChoice = true;
             }
             if(checked2){
               answer[1].dataValues.numberOfChoices += 1;
-              if(checked2 && answer[1].dataValues.is_correct)
-                hitAmount += 1;
+              if(checked2 && answer[1].dataValues.is_correct && !hasWrongChoice)
+                hitAmountChoice += 1;
+              else 
+                hasWrongChoice = true;
             }
             if(checked3){
               answer[2].dataValues.numberOfChoices += 1;
-              if(checked3 && answer[2].dataValues.is_correct)
-                hitAmount += 1;
+              if(checked3 && answer[2].dataValues.is_correct && !hasWrongChoice)
+                hitAmountChoice += 1;
+              else 
+                hasWrongChoice = true;
             }
             if(checked4){
               answer[3].dataValues.numberOfChoices += 1;
-              if(checked4 && answer[3].dataValues.is_correct)
-                hitAmount += 1;
+              if(checked4 && answer[3].dataValues.is_correct && !hasWrongChoice)
+                hitAmountChoice += 1;
+              else 
+                hasWrongChoice = true;
             }
 
-            return true;
+            if(!hasWrongChoice) hitAmount += hitAmountChoice;
           })
 
           const percentageOfHit = ((hitAmount * 100) / question_choice.length);

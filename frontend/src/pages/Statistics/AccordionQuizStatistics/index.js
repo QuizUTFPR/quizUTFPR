@@ -15,7 +15,7 @@ import {
   ExpandMore,
   CheckCircle,
   Cancel,
-  SentimentSatisfied,
+  // SentimentSatisfied,
 } from '@material-ui/icons';
 
 // STYLES
@@ -72,23 +72,23 @@ const checkStudentChoice = (answer, choices) => {
     (item) => !correctAnswer.includes(item)
   );
 
-  if (wrongStudentChoices.length === studentChoice.length)
-    return (
-      <Tooltip arrow ariaLabel="errada" title="Questão errada">
-        <Cancel color="error" fontSize="large" />
-      </Tooltip>
-    );
   if (wrongStudentChoices.length === 0)
     return (
       <Tooltip arrow ariaLabel="correto" title="Questão correta">
         <CheckCircle style={{ color: 'green' }} fontSize="large" />
       </Tooltip>
     );
+
   return (
-    <Tooltip arrow ariaLabel="parcial" title="Parcialmente Correta">
-      <SentimentSatisfied style={{ color: 'green' }} fontSize="large" />
+    <Tooltip arrow ariaLabel="errada" title="Questão errada">
+      <Cancel color="error" fontSize="large" />
     </Tooltip>
   );
+  // return (
+  //   <Tooltip arrow ariaLabel="parcial" title="Parcialmente Correta">
+  //     <SentimentSatisfied style={{ color: 'green' }} fontSize="large" />
+  //   </Tooltip>
+  // );
 };
 
 const AccordionWrapper = ({ quizData }) => {
@@ -182,7 +182,7 @@ const AccordionWrapper = ({ quizData }) => {
                     <NameStudent>{choice.student.name}</NameStudent>
                     <ChoiceStudent>
                       Alternativas escolhidas:{' '}
-                      {getStudentChoice(choice).map((item) => item)}
+                      {getStudentChoice(choice).map((item) => `${item}   `)}
                     </ChoiceStudent>
                   </BoxStudent>
                   <IsStudentChoiceCorrect>
