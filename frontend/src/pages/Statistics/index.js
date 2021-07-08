@@ -10,12 +10,14 @@ import TabMenu from '@components/TabMenu';
 import { Face, LibraryBooks } from '@material-ui/icons';
 
 import AccordionQuizStatistics from './AccordionQuizStatistics';
+import AccordionStudentQuizStatistics from './AccordionStudentQuizStatistics';
 
 // STYLES
 import { TitlePage } from './style';
 
 // API FAKE
 import QuizStatistics from './questionStatistics';
+import StudentQuizStatistics from './studentStatistics';
 
 const Statistics = () => {
   const { quiz } = QuizStatistics;
@@ -29,7 +31,9 @@ const Statistics = () => {
     {
       icon: <Face />,
       label: 'ANÁLISE POR ALUNOS',
-      component: 'componente 2',
+      component: (
+        <AccordionStudentQuizStatistics quizData={StudentQuizStatistics} />
+      ),
     },
   ];
 

@@ -4,7 +4,6 @@ import React from 'react';
 import {
   Accordion,
   AccordionDetails,
-  AccordionSummary,
   Typography,
   Divider,
 } from '@material-ui/core';
@@ -39,6 +38,7 @@ import {
   QuizPercentageHit,
   QuizPercentageHitDescription,
 } from './style';
+import { StyledAccordionSummary } from '../style';
 
 const getStudentChoice = (choice) => {
   const studentChoice = [];
@@ -109,7 +109,7 @@ const AccordionWrapper = ({ quizData }) => {
       </QuizPercentageHit>
       {questions.map((question, index) => (
         <Accordion key={question.id} TransitionProps={{ unmountOnExit: true }}>
-          <AccordionSummary
+          <StyledAccordionSummary
             expandIcon={<ExpandMore />}
             aria-controls={`panel${index}bh-content`}
             id={`panel${index}bh-header`}
@@ -117,7 +117,7 @@ const AccordionWrapper = ({ quizData }) => {
             <Typography>
               {index + 1}.{`  ${question.title}`}
             </Typography>
-          </AccordionSummary>
+          </StyledAccordionSummary>
           <AccordionDetails>
             <AnswerWrapper>
               {question.answer.map((answer, i) => (
