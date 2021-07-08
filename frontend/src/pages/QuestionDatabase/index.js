@@ -65,6 +65,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
             })
           )
         );
+        console.log(newQuestions);
         formik.setFieldValue('questions', newQuestions);
       } else {
         formik.setFieldValue('questions', []);

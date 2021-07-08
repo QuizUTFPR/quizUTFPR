@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// UTILS
+import getStringTypeOfQuestion from '@utils/getStringTypeOfQuestion';
+
 import {
   Card,
   CardContent,
@@ -53,7 +56,7 @@ const Questions = ({ id, checked, onChange, question }) => (
         <Grid container justifyContent="space-between">
           <Grid item>
             <Typography color="textSecondary" gutterBottom>
-              Múltipla Escolha
+              {getStringTypeOfQuestion(question.type)}
             </Typography>
           </Grid>
           <Grid item>
