@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Typography, AccordionSummary } from '@material-ui/core';
+import { Typography, AccordionSummary, Grid } from '@material-ui/core';
 
 export const TitlePage = styled(Typography)`
   overflow: hidden;
@@ -9,4 +9,34 @@ export const TitlePage = styled(Typography)`
 export const StyledAccordionSummary = styled(AccordionSummary)`
   background: rgba(0, 0, 0, 0.03);
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+`;
+
+export const AnswerWrapper = styled(Grid)``;
+
+const Answer = styled.div`
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  margin-top: 10px;
+`;
+
+export const AnswerItem = styled(Answer)`
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  border-left: 10px solid ${({ correct }) => (correct ? 'green' : 'red')};
+  background: ${({ studentChecked, theme }) =>
+    studentChecked ? theme.palette.yellow.main : ''};
+`;
+
+export const AnswerTitle = styled.p`
+  margin: 0;
+  color: ${({ studentChecked }) => (studentChecked ? 'white' : '')};
+  font-weight: ${({ studentChecked }) => (studentChecked ? 'bolder' : 400)};
+`;
+
+export const HeaderTitle = styled(Typography)`
+  font-weight: bolder;
+  font-size: 1.2em;
+  text-align: center;
 `;

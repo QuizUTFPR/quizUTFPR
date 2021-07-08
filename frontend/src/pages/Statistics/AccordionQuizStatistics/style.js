@@ -19,23 +19,6 @@ export const QuizPercentageHitDescription = styled(Typography)`
   text-align: center;
 `;
 
-export const AnswerWrapper = styled(Grid)``;
-
-const Answer = styled.div`
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  margin-top: 10px;
-`;
-
-export const AnswerItem = styled(Answer)`
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
-  border-left: 10px solid ${({ correct }) => (correct ? 'green' : 'red')};
-`;
-
-export const AnswerTitle = styled(Typography)``;
 export const AnswerNumberOfChoices = styled(Typography)``;
 
 export const WrapperResumeOfQuestion = styled(Grid)`
@@ -55,12 +38,6 @@ export const TextValueResumeOfQuestion = styled(Typography)``;
 
 export const StudentWrapper = styled(Grid)`
   padding: 10px;
-`;
-
-export const HeaderTitle = styled(Typography)`
-  font-weight: bolder;
-  font-size: 1.2em;
-  text-align: center;
 `;
 
 export const StudentInformation = styled(Grid)`

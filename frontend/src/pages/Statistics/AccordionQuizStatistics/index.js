@@ -20,12 +20,8 @@ import {
 
 // STYLES
 import {
-  AnswerItem,
-  AnswerWrapper,
   StudentWrapper,
-  HeaderTitle,
   StudentInformation,
-  AnswerTitle,
   AnswerNumberOfChoices,
   NameStudent,
   ChoiceStudent,
@@ -38,7 +34,14 @@ import {
   QuizPercentageHit,
   QuizPercentageHitDescription,
 } from './style';
-import { StyledAccordionSummary } from '../style';
+
+import {
+  StyledAccordionSummary,
+  AnswerItem,
+  AnswerWrapper,
+  AnswerTitle,
+  HeaderTitle,
+} from '../style';
 
 const getStudentChoice = (choice) => {
   const studentChoice = [];

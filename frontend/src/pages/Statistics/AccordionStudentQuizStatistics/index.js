@@ -19,8 +19,14 @@ import {
 } from '@material-ui/icons';
 
 // STYLES
-import { AnswerItem, AnswerWrapper, AnswerTitle, StudentBar } from './style';
-import { StyledAccordionSummary } from '../style';
+import { StudentBar } from './style';
+import {
+  StyledAccordionSummary,
+  AnswerItem,
+  AnswerWrapper,
+  AnswerTitle,
+  // HeaderTitle,
+} from '../style';
 
 const AccordionWrapper = ({ quizData }) => {
   const { questions, studentQuiz } = quizData;
