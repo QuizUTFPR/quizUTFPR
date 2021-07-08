@@ -99,20 +99,7 @@ const AccordionWrapper = ({ quizData }) => {
                       </TextValueResumeOfQuestion>
                     </WrapperResumeQuestion>
                   </WrapperResumeOfQuestion>
-                  {/* <TextWrapper>
-                    <TextTitle>Dificuldade:</TextTitle>
-                    <TextValue>{question.difficulty_level}</TextValue>
-                  </TextWrapper>
-                  <TextWrapper>
-                    <TextTitle>Tempo:</TextTitle>
-                    <TextValue>{question.timer} segundos</TextValue>
-                  </TextWrapper>
-                  <TextWrapper>
-                    <TextTitle>Tipo da Questão:</TextTitle>
-                    <TextValue>
-                      {getStringTypeOfQuestion(question.type)}
-                    </TextValue> */}
-                  {/* </TextWrapper> */}
+
                   <AnswerWrapper>
                     {question.answer.map((answer, i) => (
                       <AnswerItem
