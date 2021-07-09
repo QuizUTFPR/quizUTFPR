@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 const TokenStack = () => (
   <Suspense fallback={<Loading />}>
     <QuestionProvider>
-      <Stack.Navigator initialRouteName="InitialScreen">
+      <Stack.Navigator>
         <Stack.Screen
           options={{ headerShown: false }}
           name="Home"

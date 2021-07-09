@@ -13,6 +13,8 @@ const Drawer = createDrawerNavigator();
 
 // PAGES
 const TabNavigator = lazy(() => import('@routes/TabNavigator'));
+const AnsweredQuizzes = lazy(() => import('@pages/AnsweredQuizzes'));
+// const HomeStack = lazy(() => import('@routes/stacks/home'));
 
 const DrawerComponent = () => {
   const { colors } = useTheme();
@@ -28,7 +30,6 @@ const DrawerComponent = () => {
           },
         }}
         drawerContent={(props) => <MyDrawer colors={colors} {...props} />}
-        initialRouteName="Home"
       >
         <Drawer.Screen
           name="Home"
@@ -43,6 +44,20 @@ const DrawerComponent = () => {
             ),
           }}
           component={TabNavigator}
+        />
+        <Drawer.Screen
+          name="AnsweredQuizzes"
+          options={{
+            drawerLabel: 'Quizzes Respondidos',
+            drawerIcon: ({ focused, size }) => (
+              <Ionicons
+                name="md-home"
+                size={size}
+                color={focused ? colors.purple : 'grey'}
+              />
+            ),
+          }}
+          component={AnsweredQuizzes}
         />
       </Drawer.Navigator>
     </Suspense>
