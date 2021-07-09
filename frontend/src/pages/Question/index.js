@@ -20,6 +20,8 @@ import MiddleSide from './components/middleSide';
 import RightSide from './components/rightSide';
 import AlertGetOut from './components/confirmGetOut';
 import ChangeQuestion from './components/confirmChangeTypeQuestion';
+import PreviewLatex from './components/PreviewLatex';
+
 // PAGES
 import TypeOfQuestion from '../TypeOfQuestion';
 
@@ -52,6 +54,7 @@ const Question = ({ history, location }) => {
   const [openTypeOfQuestion, setOpenTypeOfQuestion] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [openGetOutAlert, setOpenGetOutAlert] = useState(false);
+  const [previewQuestion, setPreviewQuestion] = useState(false);
   const [onScreen, setOnScreen] = useState({
     index: 0,
     question: questions[0],
@@ -68,6 +71,9 @@ const Question = ({ history, location }) => {
       indexQuestion: null,
       type: null,
     });
+
+  const handleOpenPreviewQuestion = () => setPreviewQuestion(true);
+  const handleClosePreviewQuestion = () => setPreviewQuestion(false);
 
   const handleClickOpenAlert = () => setOpenAlert(true);
   const handleCloseAlert = () => setOpenAlert(false);
@@ -161,7 +167,6 @@ const Question = ({ history, location }) => {
       history.push(QUIZ);
     }
   };
-
   return (
     <>
       <Header
@@ -172,7 +177,6 @@ const Question = ({ history, location }) => {
         isTyping={isTyping}
         handleFinish={handleFinish}
       />
-
       <ContainerGrid container>
         {/* LEFT */}
         <LeftSide
@@ -194,6 +198,7 @@ const Question = ({ history, location }) => {
           updateQuestion={updateQuestion}
           updateAnswer={updateAnswer}
           handleClickOpenAlert={handleClickOpenAlert}
+          handleOpenPreviewQuestion={handleOpenPreviewQuestion}
         />
 
         {/* RIGHT */}
@@ -205,7 +210,6 @@ const Question = ({ history, location }) => {
           handleOpenChangeTypeQuestion={handleOpenChangeTypeQuestion}
         />
       </ContainerGrid>
-
       {/* MODALS */}
       <Modal
         open={openTypeOfQuestion}
@@ -219,7 +223,6 @@ const Question = ({ history, location }) => {
           handleClose={handleCloseModalTypeQuestion}
         />
       </Modal>
-
       <Modal open={openAlert} handleClose={handleCloseAlert}>
         <AlertRemoveMessage
           handleClose={handleCloseAlert}
@@ -229,11 +232,16 @@ const Question = ({ history, location }) => {
           persistida a exclusão pressionar o botão de salvar alterações."
         />
       </Modal>
-
       <Modal open={openGetOutAlert} handleClose={handleCloseGetOutAlert}>
         <AlertGetOut handleClose={handleCloseGetOutAlert} />
       </Modal>
 
+      <Modal open={previewQuestion} handleClose={handleClosePreviewQuestion}>
+        <PreviewLatex
+          questionData={formik.values.question}
+          handleClose={handleClosePreviewQuestion}
+        />
+      </Modal>
       <Modal
         open={openChangeTypeQuestionModal.open}
         handleClose={handleCloseChangeTypeQuestion}

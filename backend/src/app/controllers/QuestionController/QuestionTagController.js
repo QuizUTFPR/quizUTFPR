@@ -47,6 +47,7 @@ class QuestionTagController {
       });
 
       const filteredQuestionByTag = await Promise.all(
+        // eslint-disable-next-line consistent-return
         questions.map(async (item) => {
           const questionTags = (await item.getTags_question()).map(
             (element) => element.name

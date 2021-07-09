@@ -280,9 +280,6 @@ class QuestionController {
     }
   }
 
-  // Altera um único registro
-  update() {}
-
   // Remove um único registro
   async delete(req, res) {
     try {

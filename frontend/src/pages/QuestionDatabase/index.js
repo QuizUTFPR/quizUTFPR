@@ -6,7 +6,13 @@ import api from '@api';
 // COMPONENTS
 import GridContainer from '@components/Container';
 import TagInput from '@components/ChipInput';
-import { IconButton, Grid, Typography, Divider } from '@material-ui/core';
+import {
+  IconButton,
+  Grid,
+  Typography,
+  Divider,
+  CircularProgress,
+} from '@material-ui/core';
 import { Close, Search } from '@material-ui/icons';
 import SnackBar from '@components/SnackBar';
 import Question from './question';
@@ -28,6 +34,7 @@ async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
 
 // eslint-disable-next-line no-unused-vars
 const QuestionDatabase = forwardRef((props, ref) => {
+  const [isLoading, setLoading] = useState(false);
   const [checkboxes, setCheckboxes] = useState([]);
 
   const initialState = {
@@ -39,37 +46,44 @@ const QuestionDatabase = forwardRef((props, ref) => {
   const formik = useFormik({
     initialValues: initialState,
     onSubmit: async ({ tag }) => {
-      const { data } = await api.post(`question/getFromTags`, tag);
-      console.log(data);
-      if (data) {
-        const newQuestions = await Promise.all(
-          data.map(
-            async ({
-              tags_question,
-              image_question,
-              difficulty_level,
-              answer,
-              ...rest
-            }) => ({
-              ...rest,
-              copy: true,
-              id: -1,
-              difficultyLevel: difficulty_level,
-              availableOnQuestionsDB: false,
-              imageObj:
-                image_question &&
-                (await getFileFromUrl(image_question.url, image_question.name)),
-              imageUrl: image_question ? image_question.url : '',
-              tags: tags_question.map((item) => item.name),
-              answer: answer.map((item) => ({ ...item, id: -1 })),
-            })
-          )
-        );
-        console.log(newQuestions);
-        formik.setFieldValue('questions', newQuestions);
-      } else {
-        formik.setFieldValue('questions', []);
+      try {
+        setLoading(true);
+        const { data } = await api.post(`question/getFromTags`, tag);
+        if (data) {
+          const newQuestions = await Promise.all(
+            data.map(
+              async ({
+                tags_question,
+                image_question,
+                difficulty_level,
+                answer,
+                ...rest
+              }) => ({
+                ...rest,
+                copy: true,
+                id: -1,
+                difficultyLevel: difficulty_level,
+                availableOnQuestionsDB: false,
+                imageObj:
+                  image_question &&
+                  (await getFileFromUrl(
+                    image_question.url,
+                    image_question.name
+                  )),
+                imageUrl: image_question ? image_question.url : '',
+                tags: tags_question.map((item) => item.name),
+                answer: answer.map((item) => ({ ...item, id: -1 })),
+              })
+            )
+          );
+          formik.setFieldValue('questions', newQuestions);
+        } else {
+          formik.setFieldValue('questions', []);
+        }
+      } catch (error) {
+        console.log(error);
       }
+      setLoading(false);
     },
   });
 
@@ -170,6 +184,13 @@ const QuestionDatabase = forwardRef((props, ref) => {
             <Divider />
           </Grid>
         )}
+
+        {isLoading && (
+          <Grid item style={{ alignSelf: 'center' }}>
+            <CircularProgress disableShrink />
+          </Grid>
+        )}
+
         <Grid
           container
           spacing={3}

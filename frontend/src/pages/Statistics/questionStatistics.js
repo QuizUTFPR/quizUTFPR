@@ -4,10 +4,10 @@ const teste = {
     title: 'Quiz Diverso',
     pin: '592905121',
   },
-  percentageOfQuizHit: 50,
+  percentageOfQuizHit: 47.61904761904761,
   questions: [
     {
-      avgOfTimeSpentToAnswer: '16.33',
+      avgOfTimeSpentToAnswer: '16.00',
       percentageOfHit: '66.67',
       id: 1,
       title:
@@ -110,9 +110,9 @@ const teste = {
           },
         },
         {
-          student_quiz_id: 44,
+          student_quiz_id: 46,
           student_id: 3,
-          time_left: 26,
+          time_left: 28,
           checked1: false,
           checked2: true,
           checked3: false,
@@ -125,7 +125,7 @@ const teste = {
       ],
     },
     {
-      avgOfTimeSpentToAnswer: '15.17',
+      avgOfTimeSpentToAnswer: '15.67',
       percentageOfHit: '33.33',
       id: 5,
       title: 'De quem é a famosa frase “Penso, logo existo”?',
@@ -227,9 +227,9 @@ const teste = {
           },
         },
         {
-          student_quiz_id: 44,
+          student_quiz_id: 46,
           student_id: 3,
-          time_left: 29,
+          time_left: 26,
           checked1: false,
           checked2: false,
           checked3: true,
@@ -344,7 +344,7 @@ const teste = {
           },
         },
         {
-          student_quiz_id: 44,
+          student_quiz_id: 46,
           student_id: 3,
           time_left: 29,
           checked1: false,
@@ -461,7 +461,7 @@ const teste = {
           },
         },
         {
-          student_quiz_id: 44,
+          student_quiz_id: 46,
           student_id: 3,
           time_left: 29,
           checked1: false,
@@ -476,7 +476,7 @@ const teste = {
       ],
     },
     {
-      avgOfTimeSpentToAnswer: '15.17',
+      avgOfTimeSpentToAnswer: '14.00',
       percentageOfHit: '50.00',
       id: 3,
       title:
@@ -579,9 +579,9 @@ const teste = {
           },
         },
         {
-          student_quiz_id: 44,
+          student_quiz_id: 46,
           student_id: 3,
-          time_left: 22,
+          time_left: 29,
           checked1: false,
           checked2: false,
           checked3: false,
@@ -595,7 +595,7 @@ const teste = {
     },
     {
       avgOfTimeSpentToAnswer: '18.50',
-      percentageOfHit: '50.00',
+      percentageOfHit: '33.33',
       id: 7,
       title: 'Qual o número mínimo de jogadores numa partida de futebol?',
       index: 5,
@@ -626,7 +626,7 @@ const teste = {
           id: 28,
           title: '10',
           is_correct: false,
-          numberOfChoices: 0,
+          numberOfChoices: 1,
         },
       ],
       question_choice: [
@@ -696,13 +696,13 @@ const teste = {
           },
         },
         {
-          student_quiz_id: 44,
+          student_quiz_id: 46,
           student_id: 3,
           time_left: 28,
           checked1: false,
           checked2: false,
           checked3: true,
-          checked4: false,
+          checked4: true,
           student: {
             name: 'Jhonatan',
             email: '123@gmail.com',
@@ -711,7 +711,7 @@ const teste = {
       ],
     },
     {
-      avgOfTimeSpentToAnswer: '18.00',
+      avgOfTimeSpentToAnswer: '18.17',
       percentageOfHit: '50.00',
       id: 4,
       title:
@@ -814,9 +814,9 @@ const teste = {
           },
         },
         {
-          student_quiz_id: 44,
+          student_quiz_id: 46,
           student_id: 3,
-          time_left: 28,
+          time_left: 27,
           checked1: false,
           checked2: false,
           checked3: true,

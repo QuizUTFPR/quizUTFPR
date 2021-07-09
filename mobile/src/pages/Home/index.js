@@ -8,6 +8,7 @@ import Container from '@components/Container';
 
 // ICONS
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
+// import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 
 // STYLES
 import {
@@ -112,6 +113,9 @@ const Home = () => {
 
       <StyledScrollView>
         <>
+          {/* <MathJaxSvg fontSize={18} color="#000000" fontCache>
+            {`<p  style="font-family: PoppinsBold;">teste</p>`}
+          </MathJaxSvg> */}
           {allQuizzesInProgress.length > 0 && (
             <QuizContainer>
               <QuizTitle>Em Progresso</QuizTitle>
@@ -163,6 +167,7 @@ const Home = () => {
               ))}
             </QuizContainer>
           )}
+
           {allQuizzes.length > 0 && (
             <QuizContainer>
               <QuizTitle>Quizes</QuizTitle>

@@ -69,7 +69,7 @@ export const StyledButtonsContainer = styled(Grid)`
   margin-top: 5px;
 `;
 
-export const GridRegisterQuestion = styled(Grid)`
+export const GridButton = styled(Grid)`
   align-self: flex-end;
 `;
 export const StyledAnswerInput = styled(QuestionInput)`

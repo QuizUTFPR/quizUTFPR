@@ -219,6 +219,7 @@ class QuizController {
         }
       });
 
+      // eslint-disable-next-line array-callback-return
       tagsAlreadyInQuiz.map((tagInQuiz) => {
         if (!tags.find((element) => element === tagInQuiz.name)) {
           tagInQuiz.removeQuiz(quiz);

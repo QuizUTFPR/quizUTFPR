@@ -65,7 +65,6 @@ export const CurrentQuestion = styled.Text`
 export const QuestionDescription = styled.View`
   align-items: center;
   border-radius: 5px;
-  margin-bottom: ${`${heightPercentageToDp('2%')}px`};
 `;
 
 export const QuestionImage = styled.Image`
@@ -73,15 +72,6 @@ export const QuestionImage = styled.Image`
   height: ${`${heightPercentageToDp('25%')}px`};
   margin-top: ${`${heightPercentageToDp('2%')}px`};
   border-radius: 5px;
-`;
-
-export const QuestionText = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize}px;
-  font-family: 'PoppinsBlack';
-  color: #171c26;
-  text-align: center;
-  margin-top: ${`${heightPercentageToDp('2%')}px`};
-  margin-bottom: ${`${heightPercentageToDp('-2.5%')}px`};
 `;
 
 export const AnswerContainer = styled.TouchableOpacity`
@@ -93,13 +83,6 @@ export const AnswerContainer = styled.TouchableOpacity`
   border-radius: 30px;
   background: ${({ checked }) => (checked ? '#4F26C0' : 'white')};
   border: ${({ checked }) => (checked ? 'none' : '0.5px solid #171c26')};
-`;
-
-export const AnswerText = styled.Text`
-  margin-left: 10px;
-  font-size: ${({ theme }) => theme.fontSize - 4}px;
-  font-family: 'PoppinsSemiBold';
-  color: ${({ checked }) => (checked ? 'white' : '#171c26')};
 `;
 
 export const Footer = styled.View.attrs({ elevation: 15 })`

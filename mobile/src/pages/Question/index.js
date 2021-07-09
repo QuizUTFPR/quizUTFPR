@@ -8,12 +8,15 @@ import { AntDesign } from '@expo/vector-icons';
 import useQuestions from '@hook/useQuestion';
 
 // COMPONENTS
-// import image from '@assets/FUNDO.png';
+import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 import image2 from '@assets/patterns/halftone.png';
 
 import LinearContainer from '@components/LinearContainer';
 import Dialog from '@components/Dialog';
 import Timer from './components/Timer';
+
+// THEME
+import theme from '../../styles/theme';
 
 // STYLES
 import {
@@ -26,9 +29,7 @@ import {
   CurrentQuestion,
   QuestionDescription,
   QuestionImage,
-  QuestionText,
   AnswerContainer,
-  AnswerText,
   ConfirmButton,
   ScrollWrapper,
   ExitButtonWrapper,
@@ -177,9 +178,20 @@ const Question = () => {
                 <QuestionDescription>
                   {/* eslint-disable-next-line global-require */}
                   <QuestionImage source={require('@assets/icon.png')} />
-                  <QuestionText>
-                    {quizData.questions[quizData.indexOnScreen].title}
-                  </QuestionText>
+                  <MathJaxSvg
+                    fontSize={theme.fontSize}
+                    color="#000000"
+                    fontCache
+                    style={{
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {`<p style="
+                      font-family: PoppinsBold;
+                      text-align: center;
+                      margin-top: 20px;
+                    ">${quizData.questions[quizData.indexOnScreen].title}</p>`}
+                  </MathJaxSvg>
                 </QuestionDescription>
 
                 {quizData.questions[quizData.indexOnScreen].answer.map(
@@ -189,11 +201,24 @@ const Question = () => {
                       checked={requestQuestion.checkedAnswer[index]}
                       onPress={() => handleSetCheckedAnswer(index)}
                     >
-                      <AnswerText
-                        checked={requestQuestion.checkedAnswer[index]}
+                      <MathJaxSvg
+                        fontSize={theme.fontSize - 3}
+                        color={
+                          requestQuestion.checkedAnswer[index]
+                            ? 'white'
+                            : '#171c26'
+                        }
+                        fontCache
+                        style={{
+                          justifyContent: 'center',
+                        }}
                       >
-                        {answer.title}
-                      </AnswerText>
+                        {`<p  style="
+                          font-family: PoppinsSemiBold;
+                          text-align: center;
+                          padding: 5px 0;
+                        ">${`${answer.title}`}</p>`}
+                      </MathJaxSvg>
                     </AnswerContainer>
                   )
                 )}
@@ -237,6 +262,7 @@ const Question = () => {
         hideDialog={hideConfirmExit}
         firstButtonOnPress={hideConfirmExit}
         secondButtonOnPress={() => {
+          clearInterval(timer.interval);
           navigation.dispatch(StackActions.pop(3));
         }}
         firstButtonLabel="VOLTAR"

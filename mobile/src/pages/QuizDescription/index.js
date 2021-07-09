@@ -50,8 +50,6 @@ const QuizDescription = ({ route }) => {
   const { getQuestionsOfQuizFromDatabase } = useQuestions();
   const navigation = useNavigation();
 
-  console.log(studentQuizID, questionAmount, studentChoicesAmount, quiz);
-
   const startQuizAndGetAllQuestions = async () => {
     const { data } = await api.post('/studentQuiz/startQuiz', { quiz_id: id });
 

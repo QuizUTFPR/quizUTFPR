@@ -1,14 +1,15 @@
 /* eslint-disable react/style-prop-object */
 /* eslint-disable global-require */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { useFonts } from 'expo-font';
+import * as Font from 'expo-font';
 import { ThemeProvider } from 'styled-components';
 import StudentAuthProvider from '@context/Student/auth';
 import Routes from './src/routes';
 import theme from './src/styles/theme';
 
 const App = () => {
+  const [loaded, setLoaded] = useState(false);
   // const [loaded] = useFonts({
   //   RobotoBlack: require('./assets/fonts/Roboto-Black.ttf'),
   //   RobotoBold: require('./assets/fonts/Roboto-Bold.ttf'),
@@ -18,14 +19,21 @@ const App = () => {
   //   RobotoThin: require('./assets/fonts/Roboto-Thin.ttf'),
   // });
 
-  const [loaded] = useFonts({
-    PoppinsBlack: require('./assets/fonts/Poppins/Poppins-Black.ttf'),
-    PoppinsBold: require('./assets/fonts/Poppins/Poppins-Bold.ttf'),
-    PoppinsExtraBold: require('./assets/fonts/Poppins/Poppins-ExtraBold.ttf'),
-    PoppinsMedium: require('./assets/fonts/Poppins/Poppins-Medium.ttf'),
-    PoppinsRegular: require('./assets/fonts/Poppins/Poppins-Regular.ttf'),
-    PoppinsSemiBold: require('./assets/fonts/Poppins/Poppins-SemiBold.ttf'),
-  });
+  useEffect(() => {
+    const loadFonts = async () => {
+      await Font.loadAsync({
+        PoppinsBlack: require('./assets/fonts/Poppins/Poppins-Black.ttf'),
+        PoppinsBold: require('./assets/fonts/Poppins/Poppins-Bold.ttf'),
+        PoppinsExtraBold: require('./assets/fonts/Poppins/Poppins-ExtraBold.ttf'),
+        PoppinsMedium: require('./assets/fonts/Poppins/Poppins-Medium.ttf'),
+        PoppinsRegular: require('./assets/fonts/Poppins/Poppins-Regular.ttf'),
+        PoppinsSemiBold: require('./assets/fonts/Poppins/Poppins-SemiBold.ttf'),
+      });
+      setLoaded(true);
+    };
+
+    loadFonts();
+  }, []);
 
   if (!loaded) {
     return null;
