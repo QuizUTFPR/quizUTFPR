@@ -182,6 +182,9 @@ const Question = () => {
                     fontSize={theme.fontSize}
                     color="#000000"
                     fontCache
+                    style={{
+                      justifyContent: 'center',
+                    }}
                   >
                     {`<p style="
                       font-family: PoppinsBold;
@@ -206,6 +209,9 @@ const Question = () => {
                             : '#171c26'
                         }
                         fontCache
+                        style={{
+                          justifyContent: 'center',
+                        }}
                       >
                         {`<p  style="
                           font-family: PoppinsSemiBold;

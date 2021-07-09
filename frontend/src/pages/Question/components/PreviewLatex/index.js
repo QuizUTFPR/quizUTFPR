@@ -1,11 +1,22 @@
 /* eslint-disable camelcase */
 import React, { forwardRef } from 'react';
-import { MathJax, MathJaxContext } from 'better-react-mathjax';
+import { MathJaxContext } from 'better-react-mathjax';
 
 // COMPONENTS
 import GridContainer from '@components/Container';
-import { IconButton, Grid, Typography } from '@material-ui/core';
+import { IconButton, Grid, Typography, Divider } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
+
+import {
+  GridInputSimulator,
+  DemoContainer,
+  GridImage,
+  DemoPreviewImage,
+  GridContainerDemoAnswer,
+  GridContainerDemoTitle,
+  TitleQuestionMathJax,
+  AnswerQuestionMathJax,
+} from './style';
 
 const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
@@ -27,12 +38,14 @@ const config = {
 };
 
 // eslint-disable-next-line no-unused-vars
-const QuestionDatabase = forwardRef((props, ref) => (
-  <>
+const QuestionDatabase = forwardRef((props, ref) => {
+  const question = props.questionData;
+  const { handleClose } = props;
+  return (
     <Wrapper container spacing={3}>
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={3} md={1}>
-          <IconButton aria-label="closeModal" onClick={props.handleClose}>
+          <IconButton aria-label="closeModal" onClick={handleClose}>
             <Close />
           </IconButton>
         </Grid>
@@ -42,16 +55,37 @@ const QuestionDatabase = forwardRef((props, ref) => (
           </Typography>
         </Grid>
       </Grid>
-
-      <Grid container justifyContent="center" alignItems="center" spacing={2}>
-        <MathJaxContext version={3} config={config}>
-          <MathJax dynamic hideUntilTypeset="first">
-            {'$lim_{x \\to infty}$ daddddddddddwdwa $exp(-x) = 0$ dawdwa'}
-          </MathJax>
-        </MathJaxContext>
+      <Grid item>
+        <Divider />
       </Grid>
+
+      <DemoContainer spacing={1}>
+        <MathJaxContext version={3} config={config}>
+          <GridContainerDemoTitle>
+            <GridImage>
+              <DemoPreviewImage src={question.imageUrl} />
+            </GridImage>
+
+            <GridInputSimulator>
+              <TitleQuestionMathJax dynamic hideUntilTypeset="first">
+                {`${question.title}`}
+              </TitleQuestionMathJax>
+            </GridInputSimulator>
+          </GridContainerDemoTitle>
+
+          <GridContainerDemoAnswer>
+            {question.answer.map((item) => (
+              <GridInputSimulator key={item.title + item.id}>
+                <AnswerQuestionMathJax dynamic hideUntilTypeset="first">
+                  {`${item.title}`}
+                </AnswerQuestionMathJax>
+              </GridInputSimulator>
+            ))}
+          </GridContainerDemoAnswer>
+        </MathJaxContext>
+      </DemoContainer>
     </Wrapper>
-  </>
-));
+  );
+});
 
 export default QuestionDatabase;
