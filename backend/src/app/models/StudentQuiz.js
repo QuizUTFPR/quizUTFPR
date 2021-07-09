@@ -13,7 +13,7 @@ class StudentQuiz extends Model {
       {
         sequelize,
         tableName: 'student_quiz',
-      },
+      }
     );
 
     return this;

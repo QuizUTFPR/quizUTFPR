@@ -1,51 +1,57 @@
-import * as Yup from "yup";
-
 // MODELS
-import Teacher from "../../models/TeacherModel";
-import Quiz from "../../models/QuizModel";
-import Tag from "../../models/TagModel";
+import Teacher from '../../models/TeacherModel';
+import Quiz from '../../models/QuizModel';
+import Tag from '../../models/TagModel';
 import File from '../../models/FileModel';
 
 class QuizTeacherController {
   // Lista todos os registros
   async index(req, res) {
-    try{
+    try {
       const id_teacher = req.userId;
 
       const quizzes = await Quiz.findAll({
         where: {
-          id_teacher: id_teacher
+          id_teacher,
         },
-        attributes: ["id", "title", "description", "visibility", "id_image", "published", "pin"],
+        attributes: [
+          'id',
+          'title',
+          'description',
+          'visibility',
+          'id_image',
+          'published',
+          'pin',
+        ],
         include: [
           {
             model: Teacher,
-            as: "teacher",
-            attributes: ["name", "email"]
+            as: 'teacher',
+            attributes: ['name', 'email'],
           },
           {
             model: File,
-            as: "image_quiz",
-            attributes: ["url","path", "name"]       
+            as: 'image_quiz',
+            attributes: ['url', 'path', 'name'],
           },
           {
             model: Tag,
-            as: "tags_quiz",
-            attributes: ["name"],
+            as: 'tags_quiz',
+            attributes: ['name'],
             through: {
-              attributes: []
-            }
-          }
-        ]
+              attributes: [],
+            },
+          },
+        ],
       });
 
-      if(!quizzes.length)
-        return res.status(404).json({error: "Não existe nenhum quiz cadastrado."});
-
+      if (!quizzes.length)
+        return res
+          .status(404)
+          .json({ error: 'Não existe nenhum quiz cadastrado.' });
 
       return res.status(200).json(quizzes);
-
-    }catch(err){
+    } catch (err) {
       return res.status(500).json(err);
     }
   }

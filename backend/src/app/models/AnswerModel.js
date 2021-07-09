@@ -13,7 +13,7 @@ class Answer extends Model {
       {
         sequelize,
         tableName: 'answer',
-      },
+      }
     );
 
     return this;

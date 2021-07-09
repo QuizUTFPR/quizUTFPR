@@ -17,7 +17,7 @@ class StudentQuestionChoice extends Model {
       {
         sequelize,
         tableName: 'student_question_choice',
-      },
+      }
     );
 
     return this;

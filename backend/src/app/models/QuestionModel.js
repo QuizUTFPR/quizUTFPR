@@ -11,13 +11,19 @@ class Question extends Model {
         id_image: Sequelize.INTEGER,
         timer: Sequelize.INTEGER.UNSIGNED,
         score: Sequelize.INTEGER.UNSIGNED,
-        difficulty_level: Sequelize.ENUM('Muito Fácil', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'),
+        difficulty_level: Sequelize.ENUM(
+          'Muito Fácil',
+          'Fácil',
+          'Médio',
+          'Difícil',
+          'Muito Difícil'
+        ),
         type: Sequelize.ENUM('multiple_choice', 'single_choice'),
       },
       {
         sequelize,
         tableName: 'question',
-      },
+      }
     );
 
     return this;
