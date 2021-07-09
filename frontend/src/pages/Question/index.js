@@ -20,6 +20,8 @@ import MiddleSide from './components/middleSide';
 import RightSide from './components/rightSide';
 import AlertGetOut from './components/confirmGetOut';
 import ChangeQuestion from './components/confirmChangeTypeQuestion';
+import PreviewLatex from './components/PreviewLatex';
+
 // PAGES
 import TypeOfQuestion from '../TypeOfQuestion';
 
@@ -52,6 +54,7 @@ const Question = ({ history, location }) => {
   const [openTypeOfQuestion, setOpenTypeOfQuestion] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [openGetOutAlert, setOpenGetOutAlert] = useState(false);
+  const [previewQuestion, setPreviewQuestion] = useState(false);
   const [onScreen, setOnScreen] = useState({
     index: 0,
     question: questions[0],
@@ -68,6 +71,9 @@ const Question = ({ history, location }) => {
       indexQuestion: null,
       type: null,
     });
+
+  const handleOpenPreviewQuestion = () => setPreviewQuestion(true);
+  const handleClosePreviewQuestion = () => setPreviewQuestion(false);
 
   const handleClickOpenAlert = () => setOpenAlert(true);
   const handleCloseAlert = () => setOpenAlert(false);
@@ -194,6 +200,7 @@ const Question = ({ history, location }) => {
           updateQuestion={updateQuestion}
           updateAnswer={updateAnswer}
           handleClickOpenAlert={handleClickOpenAlert}
+          handleOpenPreviewQuestion={handleOpenPreviewQuestion}
         />
 
         {/* RIGHT */}
@@ -232,6 +239,10 @@ const Question = ({ history, location }) => {
 
       <Modal open={openGetOutAlert} handleClose={handleCloseGetOutAlert}>
         <AlertGetOut handleClose={handleCloseGetOutAlert} />
+      </Modal>
+
+      <Modal open={previewQuestion} handleClose={handleClosePreviewQuestion}>
+        <PreviewLatex handleClose={handleClosePreviewQuestion} />
       </Modal>
 
       <Modal

@@ -14,7 +14,7 @@ import {
   StyledAnswerInput,
   StyledTitleInput,
   StyledGrid,
-  GridRegisterQuestion,
+  GridButton,
   PreviewImage,
   HiddenCheckBox,
   ShowOption,
@@ -27,6 +27,7 @@ const MiddleSide = ({
   updateQuestion,
   updateAnswer,
   handleClickOpenAlert,
+  handleOpenPreviewQuestion,
   errors,
   location,
 }) => (
@@ -161,11 +162,23 @@ const MiddleSide = ({
             ))}
           </Grid>
 
-          <GridRegisterQuestion item xs={6}>
+          <GridButton item xs={6}>
+            <StyledButton
+              style={{ width: '80%' }}
+              color="secondary"
+              variant="outlined"
+              onClick={handleOpenPreviewQuestion}
+              startIcon={<Delete />}
+              size="large"
+            >
+              Visualizar
+            </StyledButton>
+          </GridButton>
+          <GridButton item xs={6}>
             <StyledButton
               type="submit"
               disabled={location.state.published}
-              fullWidth
+              style={{ width: '80%' }}
               color="secondary"
               variant="outlined"
               onClick={handleClickOpenAlert}
@@ -174,7 +187,7 @@ const MiddleSide = ({
             >
               Excluir Questão
             </StyledButton>
-          </GridRegisterQuestion>
+          </GridButton>
         </>
       ) : (
         <p>Vazio!</p>
