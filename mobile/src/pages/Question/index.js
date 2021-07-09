@@ -262,6 +262,7 @@ const Question = () => {
         hideDialog={hideConfirmExit}
         firstButtonOnPress={hideConfirmExit}
         secondButtonOnPress={() => {
+          clearInterval(timer.interval);
           navigation.dispatch(StackActions.pop(3));
         }}
         firstButtonLabel="VOLTAR"
