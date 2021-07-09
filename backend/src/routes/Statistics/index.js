@@ -8,7 +8,10 @@ import StatisticsStudentQuizController from '../../app/controllers/StatisticsCon
 // Crio uma instância do método Router;
 const router = new Router();
 
-router.post('/getQuestionQuizStatistics', StatisticsQuestionQuizController.show);
+router.post(
+  '/getQuestionQuizStatistics',
+  StatisticsQuestionQuizController.show
+);
 router.post('/getStudentQuizStatistics', StatisticsStudentQuizController.show);
 
 export default router;

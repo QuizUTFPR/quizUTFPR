@@ -13,7 +13,7 @@ class Tag extends Model {
       {
         sequelize,
         tableName: 'tag',
-      },
+      }
     );
 
     return this;

@@ -15,7 +15,7 @@ class Quiz extends Model {
       {
         sequelize,
         tableName: 'quiz',
-      },
+      }
     );
 
     return this;

@@ -14,11 +14,12 @@ class Student extends Model {
       {
         sequelize,
         tableName: 'student',
-      },
+      }
     );
 
     this.addHook('beforeSave', async (student) => {
       if (student.password) {
+        // eslint-disable-next-line no-param-reassign
         student.password_hash = await bcrypt.hash(student.password, 8);
       }
     });

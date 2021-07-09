@@ -1,14 +1,14 @@
 function getAllMethods(obj) {
   const result = [];
-  for (const id in obj) {
+  obj.foreach((item, id) => {
     try {
-      if (typeof (obj[id]) === 'function') {
-        result.push(`${id}: ${obj[id].toString()}`);
+      if (typeof item === 'function') {
+        result.push(`${id}: ${item.toString()}`);
       }
     } catch (err) {
       result.push(`${id}: inaccessible`);
     }
-  }
+  });
   return result;
 }
 
