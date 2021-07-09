@@ -18,24 +18,11 @@ import {
   AnswerQuestionMathJax,
 } from './style';
 
+import configMathJax from '../../../../config/mathJax';
+
 const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
 ));
-
-const config = {
-  loader: { load: ['[tex]/html'] },
-  tex: {
-    packages: { '[+]': ['html'] },
-    inlineMath: [
-      ['$', '$'],
-      ['\\(', '\\)'],
-    ],
-    displayMath: [
-      ['$$', '$$'],
-      ['\\[', '\\]'],
-    ],
-  },
-};
 
 // eslint-disable-next-line no-unused-vars
 const QuestionDatabase = forwardRef((props, ref) => {
@@ -60,7 +47,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
       </Grid>
 
       <DemoContainer spacing={1}>
-        <MathJaxContext version={3} config={config}>
+        <MathJaxContext version={3} config={configMathJax}>
           <GridContainerDemoTitle>
             <GridImage>
               <DemoPreviewImage src={question.imageUrl} />
