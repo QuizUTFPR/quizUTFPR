@@ -12,6 +12,7 @@ import Statistics from '@pages/Statistics';
 
 const MenuDrawer = lazy(() => import('@components/MenuDrawer'));
 const QuizDescription = lazy(() => import('@pages/QuizDescription'));
+const Attempt = lazy(() => import('@pages/AttemptsOfQuiz'));
 
 // STACK
 const Stack = createStackNavigator();
@@ -24,6 +25,11 @@ const TokenStack = () => (
           options={{ headerShown: false }}
           name="Home"
           component={MenuDrawer}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="AttempsOfQuiz"
+          component={Attempt}
         />
         <Stack.Screen
           options={{ headerShown: false }}

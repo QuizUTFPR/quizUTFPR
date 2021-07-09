@@ -6,7 +6,7 @@
   "author": "jhonatancunha <jhonatancunha@alunos.utfpr.edu.br>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server",
+    "start": "nodemon src/server",
     "dev:debug": "nodemon --inspect src/server"
   },
   "dependencies": {

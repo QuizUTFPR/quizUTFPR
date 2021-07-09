@@ -1,46 +1,23 @@
 import styled from 'styled-components/native';
-
-// ASSETS
-import HeaderBackground from '@assets/patterns/sunburst.png';
+import Constants from 'expo-constants';
+import { StyledButton } from '@components/ButtonGradient';
 
 // DIMENSION TRANSFORMERS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
-export const HeaderWrapper = styled.View``;
-
-export const BackgroundHeader = styled.ImageBackground.attrs({
-  source: HeaderBackground,
-  resizeMode: 'cover',
-  imageStyle: {
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
-  },
+export const GoBackButtonWrapper = styled(StyledButton).attrs({
+  colors: ['#4B24B1', '#3b1b96'],
 })`
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: flex-end;
-  padding-bottom: 20px;
-  width: ${widthPercentageToDp('100%')}px;
-  height: ${heightPercentageToDp('15%')}px;
-`;
-
-export const HeaderInformations = styled.View`
-  flex-direction: row;
+  align-self: flex-start;
+  margin-left: 25px;
   align-items: center;
-  justify-content: space-around;
+  width: 40px;
+  height: 40px;
+  margin-top: ${Constants.statusBarHeight + 10}px;
 `;
 
-export const HeaderWelcomeTextView = styled.View`
-  justify-content: center;
-  align-items: center;
-`;
-
-export const HeaderButton = styled.TouchableOpacity.attrs({
-  activeOpacity: 0.7,
-})``;
-
-export const HeaderTitle = styled.Text`
-  color: ${({ theme }) => theme.color.white};
+export const TitleText = styled.Text`
+  color: ${({ theme }) => theme.color.purple};
   font-size: ${({ theme }) => theme.fontSize + 3}px;
   font-family: 'PoppinsBold';
 `;
@@ -84,9 +61,7 @@ export const QuizTitle = styled.Text.attrs({
   margin-top: 5px;
 `;
 
-export const StyledIconButton = styled.View`
-  margin-right: ${({ theme }) => theme.size.padding}px;
-`;
+export const StyledIconButton = styled.Text``;
 
 export const StyledScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {

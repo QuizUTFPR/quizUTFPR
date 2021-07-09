@@ -4,7 +4,7 @@ import Loading from '@components/Loading';
 import { useTheme } from '@react-navigation/native';
 
 // ICONS
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
 // COMPONENT
 import MyDrawer from './myDrawer';
@@ -50,8 +50,8 @@ const DrawerComponent = () => {
           options={{
             drawerLabel: 'Quizzes Respondidos',
             drawerIcon: ({ focused, size }) => (
-              <Ionicons
-                name="md-home"
+              <FontAwesome5
+                name="book"
                 size={size}
                 color={focused ? colors.purple : 'grey'}
               />

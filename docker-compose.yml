@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: 'mysql'
+    image: mysql:8.0.25
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - '3308:3306'
+    expose:
+      - "3308"
+    volumes:
+      - .:/usr/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mortadela1
+      - MYSQL_DATABASE=db_quiz
+
+  backend:
+    container_name: 'back_end'
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/app
+    ports:
+      - '3333:3333'
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3308
+      - DB_USER=root
+      - DB_PASS=mortadela1
+      - DB_NAME=db_quiz
+      - DB_DIALECT=mysql
+      - WAIT_HOSTS=db:3308
+  
+  

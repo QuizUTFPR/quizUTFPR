@@ -7,18 +7,18 @@ import { useNavigation } from '@react-navigation/native';
 import Container from '@components/Container';
 
 // ICONS
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
+// import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 
 // STYLES
 import {
   QuizTitle,
-  HeaderButton,
-  BackgroundHeader,
   QuizCard,
   Description,
   StyledImage,
-  HeaderTitle,
+  TitleText,
   StyledIconButton,
+  GoBackButtonWrapper,
   StyledView,
   StyledScrollView,
   QuizContainer,
@@ -30,14 +30,14 @@ const Home = () => {
   return (
     <Container>
       <StyledScrollView>
-        <BackgroundHeader>
-          <HeaderButton onPress={() => navigation.openDrawer()}>
-            <AntDesign name="menu-fold" size={32} color="white" />
-          </HeaderButton>
-          <HeaderTitle>Quizzes Respondidos</HeaderTitle>
-        </BackgroundHeader>
+        <GoBackButtonWrapper>
+          <StyledIconButton onPress={() => navigation.goBack()}>
+            <Ionicons name="chevron-back" size={32} color="white" />
+          </StyledIconButton>
+        </GoBackButtonWrapper>
         <QuizContainer>
-          <QuizCard onPress={() => navigation.navigate('AttempsOfQuiz')}>
+          <TitleText>Minhas Tentativas</TitleText>
+          <QuizCard>
             <StyledImage source={require('@assets/teste.jpg')} />
             <StyledView>
               <Description>
