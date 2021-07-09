@@ -59,6 +59,7 @@ export const QuizCard = styled.TouchableOpacity.attrs({ activeOpacity: 0.8 })`
 
 export const Description = styled.View`
   flex: 1;
+  justify-content: space-around;
 `;
 
 export const StyledView = styled.View`

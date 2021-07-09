@@ -28,7 +28,6 @@ export const QuizCard = styled.TouchableOpacity.attrs({ activeOpacity: 0.8 })`
   align-items: center;
   justify-content: space-between;
   width: ${widthPercentageToDp('85%')}px;
-  height: ${heightPercentageToDp('12%')}px;
   border-radius: 10px;
   margin-bottom: ${heightPercentageToDp('2%')}px;
   background: ${({ theme }) => theme.color.white};

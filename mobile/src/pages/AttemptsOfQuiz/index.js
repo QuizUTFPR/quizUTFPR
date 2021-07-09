@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import Container from '@components/Container';
 
 // ICONS
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 // import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 
 // STYLES
@@ -15,7 +15,7 @@ import {
   QuizTitle,
   QuizCard,
   Description,
-  StyledImage,
+  // StyledImage,
   TitleText,
   StyledIconButton,
   GoBackButtonWrapper,
@@ -24,9 +24,11 @@ import {
   QuizContainer,
 } from './styles';
 
-const Home = () => {
+const Home = ({ route }) => {
   const navigation = useNavigation();
+  const { attempts, teacher } = route.params;
 
+  console.log(attempts);
   return (
     <Container>
       <StyledScrollView>
@@ -35,21 +37,23 @@ const Home = () => {
             <Ionicons name="chevron-back" size={32} color="white" />
           </StyledIconButton>
         </GoBackButtonWrapper>
+
         <QuizContainer>
           <TitleText>Minhas Tentativas</TitleText>
-          <QuizCard>
-            <StyledImage source={require('@assets/teste.jpg')} />
-            <StyledView>
-              <Description>
-                <QuizTitle fill="black">Título</QuizTitle>
-                {/* <StyledText>Criador: {quiz.teacher}</StyledText> */}
-              </Description>
-            </StyledView>
-
-            <StyledIconButton>
-              <AntDesign name="arrowright" size={24} color="#4B24B1" />
-            </StyledIconButton>
-          </QuizCard>
+          {attempts.map((item, index) => (
+            <QuizCard>
+              <StyledView>
+                <Description>
+                  <QuizTitle fill="black">{`Tentativa: ${
+                    index + 1
+                  }`}</QuizTitle>
+                  <QuizTitle fill="black">{`Score: ${item.score}`}</QuizTitle>
+                  <QuizTitle fill="black">{`Acertos: ${item.hit_amount}`}</QuizTitle>
+                  <QuizTitle fill="black">{`Professor: ${teacher.name}`}</QuizTitle>
+                </Description>
+              </StyledView>
+            </QuizCard>
+          ))}
         </QuizContainer>
       </StyledScrollView>
     </Container>
