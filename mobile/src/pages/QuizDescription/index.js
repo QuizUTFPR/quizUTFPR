@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
+import * as Clipboard from 'expo-clipboard';
 
 // API
 import api from '@api';
@@ -71,6 +72,10 @@ const QuizDescription = ({ route }) => {
     setStudentQuizID(null);
   };
 
+  const copyToClipboard = () => {
+    Clipboard.setString(pin);
+  };
+
   return (
     <>
       <DetailsContainer fill="white">
@@ -123,7 +128,7 @@ const QuizDescription = ({ route }) => {
         <StyledScrollView>
           <BodyDescription>
             <StyledTitle>PIN</StyledTitle>
-            <StyledPIN>{pin}</StyledPIN>
+            <StyledPIN onPress={copyToClipboard}>{pin}</StyledPIN>
             <StyledTitle>{title}</StyledTitle>
             <StyledDescriptionText>{description}</StyledDescriptionText>
             <StyledTitle>TAGS</StyledTitle>
