@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 import React, { useState, useCallback } from 'react';
+import { RefreshControl } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import api from '@api';
 
@@ -8,7 +9,6 @@ import Container from '@components/Container';
 
 // ICONS
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
-// import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 
 // STYLES
 import {
@@ -38,6 +38,7 @@ import {
 
 const Home = () => {
   const navigation = useNavigation();
+  const [isRefreshing, setRefreshing] = useState(false);
   const [allQuizzes, setAllQuizzes] = useState([]);
   const [allQuizzesInProgress, setQuizzesInProgress] = useState([]);
   const [pin, setPin] = useState();
@@ -51,6 +52,13 @@ const Home = () => {
     const { data } = await api.get('/studentQuiz/getQuizInProgress');
     setQuizzesInProgress(data);
   };
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await getAllPublishedQuizzes();
+    await getAllQuizzesInProgress();
+    setRefreshing(false);
+  });
 
   const getQuizByPIN = async () => {
     try {
@@ -110,7 +118,11 @@ const Home = () => {
         </BackgroundHeader>
       </HeaderWrapper>
 
-      <StyledScrollView>
+      <StyledScrollView
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+        }
+      >
         <>
           {/* <MathJaxSvg fontSize={18} color="#000000" fontCache>
             {`<p  style="font-family: PoppinsBold;">teste</p>`}
@@ -137,7 +149,7 @@ const Home = () => {
                     })
                   }
                 >
-                  <StyledImage source={require('@assets/teste.jpg')} />
+                  <StyledImage />
                   <StyledView>
                     <Description>
                       <StyledTitle fill="black">{item.quiz.title}</StyledTitle>
@@ -186,7 +198,7 @@ const Home = () => {
                     })
                   }
                 >
-                  <StyledImage source={require('@assets/teste.jpg')} />
+                  <StyledImage />
                   <StyledView>
                     <Description>
                       <StyledTitle fill="black">{quiz.title}</StyledTitle>

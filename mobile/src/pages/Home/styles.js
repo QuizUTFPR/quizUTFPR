@@ -100,7 +100,8 @@ export const StyledView = styled.View`
   flex: 1;
 `;
 
-export const StyledImage = styled.Image`
+export const StyledImage = styled.View`
+  background: #4b24b1;
   width: 35%;
   height: 100%;
   border-top-left-radius: 5px;

@@ -52,5 +52,4 @@ export const SecondButtonText = styled.Text`
   font-size: ${({ theme }) => theme.fontSize}px;
   color: ${({ theme }) => theme.color.fill};
   text-align: center;
-  opacity: 0.2;
 `;

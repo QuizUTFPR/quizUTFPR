@@ -8,7 +8,6 @@ import Container from '@components/Container';
 
 // ICONS
 import { Ionicons } from '@expo/vector-icons';
-// import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 
 // STYLES
 import {

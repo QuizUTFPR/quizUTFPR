@@ -75,7 +75,7 @@ const QuizDescription = ({ route }) => {
     <>
       <DetailsContainer fill="white">
         <QuizDescriptionHeader>
-          <StyledImageBackground source={require('@assets/teste.jpg')}>
+          <StyledImageBackground>
             <GoBackButtonWrapper>
               <StyledIconButton onPress={() => navigation.goBack()}>
                 <Ionicons name="chevron-back" size={32} color="white" />
@@ -153,7 +153,7 @@ const QuizDescription = ({ route }) => {
           giveUPQuiz();
           setVisibleGivUPModal(false);
         }}
-        firstButtonLabel="CANCELAR"
+        firstButtonLabel="NÂO"
         secondButtonLabel="SIM"
         lottieAnimation={
           <LottieView

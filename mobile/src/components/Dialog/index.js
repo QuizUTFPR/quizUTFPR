@@ -47,7 +47,7 @@ const ConfirmExitDialog = ({
           )}
           {secondButtonLabel && (
             <SecondButton>
-              <SecondButtonText onPress={secondButtonOnPress} fill="black">
+              <SecondButtonText onPress={secondButtonOnPress} fill="purple">
                 {secondButtonLabel}
               </SecondButtonText>
             </SecondButton>

@@ -60,7 +60,7 @@ const Home = () => {
                 })
               }
             >
-              <StyledImage source={require('@assets/teste.jpg')} />
+              <StyledImage />
               <StyledView>
                 <Description>
                   <QuizTitle fill="black">{quiz.title}</QuizTitle>
