@@ -40,6 +40,7 @@ class PINQuizController {
       if (!quiz) return res.status(404).json({ error: 'PIN inválido!' });
 
       const questionAmount = await quiz.countQuestions();
+
       const quizStudent = await quiz.getQuiz_student({
         where: {
           quiz_id: quiz.id,
@@ -47,18 +48,23 @@ class PINQuizController {
           is_finished: false,
         },
       });
-      const studentChoicesAmount = await quiz.countQuiz_student_choice({
-        where: {
-          student_id,
-          quiz_id: quiz.id,
-        },
-      });
+
+      let studentChoicesAmount = null;
+      if (quizStudent.length > 0) {
+        studentChoicesAmount = await quiz.countQuiz_student_choice({
+          where: {
+            student_id,
+            quiz_id: quiz.id,
+            student_quiz_id: quizStudent[0].id,
+          },
+        });
+      }
 
       return res.status(200).json({
         quiz,
         questionAmount,
         studentChoicesAmount,
-        id_student_quiz: quizStudent[0].id,
+        id_student_quiz: quizStudent.length > 0 ? quizStudent[0].id : null,
       });
     } catch (err) {
       console.log(err);
