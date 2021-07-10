@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import api from '@api';
 
 // COMPONENTS
 import GridContainer from '@components/Container';
@@ -15,25 +17,49 @@ import AccordionStudentQuizStatistics from './AccordionStudentQuizStatistics';
 // STYLES
 import { TitlePage } from './style';
 
-// API FAKE
-import QuizStatistics from './questionStatistics';
-import StudentQuizStatistics from './studentStatistics';
-
 const Statistics = () => {
-  const { quiz } = QuizStatistics;
+  const [questionQuiz, setQuestionQuiz] = useState(false);
+  const [studentQuiz, setStudentQuiz] = useState(false);
+  const { id } = useParams();
+
+  const fetchData = async () => {
+    try {
+      const { data: studentQuizStatistics } = await api.post(
+        '/statistics/getStudentQuizStatistics',
+        {
+          quiz_id: id,
+        }
+      );
+      setStudentQuiz(studentQuizStatistics);
+
+      const { data: questionQuizStatistics } = await api.post(
+        '/statistics/getQuestionQuizStatistics',
+        {
+          quiz_id: id,
+        }
+      );
+
+      setQuestionQuiz(questionQuizStatistics);
+      // setQuestionQuiz(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const TabLabels = [
     {
       icon: <LibraryBooks />,
       label: 'ANÁLISE POR QUESTÕES',
-      component: <AccordionQuizStatistics quizData={QuizStatistics} />,
+      component: <AccordionQuizStatistics quizData={questionQuiz} />,
     },
     {
       icon: <Face />,
       label: 'ANÁLISE POR ALUNOS',
-      component: (
-        <AccordionStudentQuizStatistics quizData={StudentQuizStatistics} />
-      ),
+      component: <AccordionStudentQuizStatistics quizData={studentQuiz} />,
     },
   ];
 
@@ -41,11 +67,11 @@ const Statistics = () => {
     <GridContainer container spacing={3}>
       <Grid container align="center" justifyContent="center">
         <TitlePage color="primary" component="p" variant="h4">
-          Estatisticas - {quiz.title}
+          Estatisticas - {questionQuiz && questionQuiz.quiz.title}
         </TitlePage>
       </Grid>
       <Grid item>
-        <TabMenu TabLabels={TabLabels} />
+        {questionQuiz && studentQuiz && <TabMenu TabLabels={TabLabels} />}
       </Grid>
     </GridContainer>
   );
