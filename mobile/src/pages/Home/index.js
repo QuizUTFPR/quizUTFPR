@@ -49,7 +49,6 @@ const Home = () => {
 
   const getAllQuizzesInProgress = async () => {
     const { data } = await api.get('/studentQuiz/getQuizInProgress');
-    console.log(data);
     setQuizzesInProgress(data);
   };
 

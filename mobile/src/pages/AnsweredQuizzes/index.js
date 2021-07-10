@@ -1,16 +1,13 @@
 /* eslint-disable global-require */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-// import api from '@api';
+import api from '@api';
 
 // COMPONENTS
 import Container from '@components/Container';
 
 // ICONS
 import { AntDesign } from '@expo/vector-icons';
-
-// API FAKE
-import data from './data.json';
 
 // STYLES
 import {
@@ -29,6 +26,20 @@ import {
 
 const Home = () => {
   const navigation = useNavigation();
+  const [quizzes, setQuizzes] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await api.get('/studentQuiz/getAllFinishedQuizzes');
+        setQuizzes(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Container>
@@ -39,7 +50,7 @@ const Home = () => {
           </HeaderButton>
           <HeaderTitle>Quizzes Respondidos</HeaderTitle>
         </BackgroundHeader>
-        {data.map((quiz) => (
+        {quizzes.map((quiz) => (
           <QuizContainer key={quiz.id}>
             <QuizCard
               onPress={() =>

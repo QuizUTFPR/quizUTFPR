@@ -20,6 +20,7 @@ export const BackgroundHeader = styled.ImageBackground.attrs({
   justify-content: space-around;
   align-items: flex-end;
   padding-bottom: 20px;
+  margin-bottom: 20px;
   width: ${widthPercentageToDp('100%')}px;
   height: ${heightPercentageToDp('15%')}px;
 `;
@@ -97,6 +98,4 @@ export const StyledScrollView = styled.ScrollView.attrs({
   width: ${widthPercentageToDp('100%')}px;
 `;
 
-export const QuizContainer = styled.View`
-  margin-top: 20px;
-`;
+export const QuizContainer = styled.View``;

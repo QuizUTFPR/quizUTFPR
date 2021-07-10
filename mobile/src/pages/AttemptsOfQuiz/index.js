@@ -28,7 +28,6 @@ const Home = ({ route }) => {
   const navigation = useNavigation();
   const { attempts, teacher } = route.params;
 
-  console.log(attempts);
   return (
     <Container>
       <StyledScrollView>
@@ -41,7 +40,7 @@ const Home = ({ route }) => {
         <QuizContainer>
           <TitleText>Minhas Tentativas</TitleText>
           {attempts.map((item, index) => (
-            <QuizCard>
+            <QuizCard key={item.id}>
               <StyledView>
                 <Description>
                   <QuizTitle fill="black">{`Tentativa: ${
