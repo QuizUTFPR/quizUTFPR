@@ -15,15 +15,14 @@ services:
     volumes:
       - ./.docker/dbdata:/var/ib/mysql
     environment:
+      - MYSQL_ROOT_PASSWORD=quizutfpr
+      - MYSQL_PASSWORD=quizutfpr
       - MYSQL_DATABASE=db_quiz
-      - MYSQL_ROOT_PASSWORD=mortadela1
     networks:
       - app-tier 
 
   backend:
     container_name: 'back_end'
-    command: yarn sequelize db:migrate
-    command: yarn start
     build: 
       context: ./backend
       dockerfile: Dockerfile
@@ -33,11 +32,12 @@ services:
       - '3333:3333'
     depends_on:
       - db
+    restart: on-failure
     environment:
       - DB_HOST=db
       - DB_PORT=3307
       - DB_USER=root
-      - DB_PASS=mortadela1
+      - DB_PASS=quizutfpr
       - DB_NAME=db_quiz
       - DB_DIALECT=mysql
     networks:
