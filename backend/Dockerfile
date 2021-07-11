@@ -7,6 +7,7 @@ WORKDIR /home/node/api
 COPY ./package*.json .
 
 RUN apk update && apk add python3 make g++
+
 RUN yarn
 
 USER node
@@ -14,3 +15,5 @@ USER node
 COPY --chown=node:node . .
 
 EXPOSE 3333
+
+CMD yarn sequelize db:migrate && yarn start

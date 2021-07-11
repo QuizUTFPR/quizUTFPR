@@ -22,8 +22,6 @@ services:
 
   backend:
     container_name: 'back_end'
-    command: yarn sequelize db:migrate
-    command: yarn start
     build: 
       context: ./backend
       dockerfile: Dockerfile
