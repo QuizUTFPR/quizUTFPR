@@ -1,5 +1,5 @@
 FROM node:lts-alpine as builder
-RUN mkdir -p /home/node/react && chown -R node:node /home/node/react
+RUN mkdir -p /home/node/react/node_modules && chown -R node:node /home/node/react
 WORKDIR /home/node/react
 ENV PATH /home/node/react/node_modules/.bin:$PATH
 COPY ./package*.json ./
