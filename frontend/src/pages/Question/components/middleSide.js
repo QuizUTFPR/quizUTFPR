@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // ICONS
-import { Delete, Check } from '@material-ui/icons/';
+import { Delete, Check, Visibility } from '@material-ui/icons/';
 
 // COMPONENTS
 import StyledButton from '@components/Button';
@@ -168,7 +168,7 @@ const MiddleSide = ({
               color="secondary"
               variant="outlined"
               onClick={handleOpenPreviewQuestion}
-              startIcon={<Delete />}
+              startIcon={<Visibility />}
               size="large"
             >
               Visualizar

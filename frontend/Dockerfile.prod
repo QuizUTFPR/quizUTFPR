@@ -3,9 +3,12 @@ RUN mkdir -p /home/node/react/node_modules && chown -R node:node /home/node/reac
 WORKDIR /home/node/react
 ENV PATH /home/node/react/node_modules/.bin:$PATH
 COPY ./package*.json ./
-RUN yarn
+RUN yarn --production=true
 USER node
 COPY --chown=node:node . .
+
+ENV NODE_ENV production
+
 CMD yarn start
 
 FROM nginx:alpine

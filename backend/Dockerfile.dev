@@ -14,6 +14,8 @@ USER node
 
 COPY --chown=node:node . .
 
+ENV NODE_ENV development
+
 EXPOSE 3333
 
-CMD yarn sequelize db:migrate && yarn start
+CMD yarn sequelize db:migrate && yarn start:dev

@@ -28,12 +28,6 @@ const Home = () => (
         Seja Bem-Vindo ao Painel de Controle
       </Typography>
     </Grid>
-    <Grid item xs={12}>
-      <Typography color="primary">
-        dawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwafwfawf
-        dawdawdawdawdwadwadwaddawwwwwwwwwwwwwwwwwwwwwwdd
-      </Typography>
-    </Grid>
   </StyledHomeGrid>
 );
 

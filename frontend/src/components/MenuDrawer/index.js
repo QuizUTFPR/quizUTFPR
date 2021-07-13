@@ -6,7 +6,7 @@ import { List, Divider, Avatar } from '@material-ui/core';
 import {
   Help,
   Home,
-  Class,
+  // Class,
   LibraryBooks,
   ExitToApp,
   ArrowBackIos,
@@ -17,7 +17,7 @@ import {
 import useAuth from '@hooks/Auth';
 
 // ROTAS
-import { QUIZ, HOME, CLASSES } from '@routes';
+import { QUIZ, HOME } from '@routes';
 
 // STYLES
 import {
@@ -48,11 +48,11 @@ const MenuDrawer = () => {
       icon: <Home />,
       to: HOME,
     },
-    {
-      text: 'Minhas Turmas',
-      icon: <Class />,
-      to: CLASSES,
-    },
+    // {
+    //   text: 'Minhas Turmas',
+    //   icon: <Class />,
+    //   to: CLASSES,
+    // },
     {
       text: 'Meus Quizzes',
       icon: <LibraryBooks />,

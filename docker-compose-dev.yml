@@ -13,7 +13,7 @@ services:
     ports:
       - '3307:3306'
     volumes:
-      - ~/mysql:/var/lib/mysql
+      - ./mysql_dev:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=quizutfpr
       - MYSQL_PASSWORD=quizutfpr
@@ -25,7 +25,7 @@ services:
     container_name: 'back_end'
     build: 
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     volumes:
       - ./backend:/home/node/api
       - /home/node/api/node_modules
@@ -41,6 +41,9 @@ services:
       - DB_PASS=quizutfpr
       - DB_NAME=db_dev
       - DB_DIALECT=mysql
+      - APP_URL=http://localhost:3333
+      - SECRET=teste
+      - EXPIRE_IN=2d
     networks:
       - app-tier
 
