@@ -44,7 +44,6 @@ const QuestionQuiz = ({ children }) => {
 
   // eslint-disable-next-line camelcase
   const saveQuestionOnDatabase = (id_quiz) => {
-    console.log('save', id_quiz, questions);
     try {
       if (questionToRemove.length) {
         questionToRemove.map((removed) =>

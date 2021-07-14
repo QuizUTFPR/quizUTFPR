@@ -100,7 +100,6 @@ const Quiz = ({ history }) => {
   };
 
   const handleRemoveQuiz = async () => {
-    console.log('removendo');
     try {
       await api.delete('/quiz/delete', {
         data: { id_quiz: openAlert.idQuiz },
