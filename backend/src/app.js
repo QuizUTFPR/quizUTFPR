@@ -12,6 +12,7 @@ import path from 'path';
 import routes from './routes';
 import './database';
 
+
 class App {
   // O construtor irá invocar minha instância e os middlewares;
   constructor() {
