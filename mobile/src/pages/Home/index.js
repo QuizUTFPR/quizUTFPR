@@ -78,13 +78,12 @@ const Home = () => {
         },
       });
     } catch (err) {
-      console.log('error', err.response.data.error);
+      console.log(err);
     }
   };
 
   useFocusEffect(
     useCallback(() => {
-      console.log('focou');
       getAllPublishedQuizzes();
       getAllQuizzesInProgress();
     }, [])

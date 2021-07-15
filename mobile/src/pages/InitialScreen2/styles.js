@@ -5,6 +5,7 @@ import { widthPercentageToDp } from '@styles/dimensions';
 
 // SVG's AS REACT COMPONENTS
 import Pattern from '@assets/patterns/halftone.png';
+import LogoUTFPR from '@assets/utfpr/utfpr-transparente-branco.png';
 
 export const Container = styled.View`
   align-items: center;
@@ -22,8 +23,11 @@ export const ImageView = styled.ImageBackground.attrs({
   flex: 1;
 `;
 
-export const AnimationView = styled.View`
-  flex: 0.7;
+export const Logo = styled.Image.attrs({
+  source: LogoUTFPR,
+  resizeMode: 'contain',
+})`
+  flex: 0.5;
   width: ${widthPercentageToDp('80%')}px;
   align-self: center;
 `;

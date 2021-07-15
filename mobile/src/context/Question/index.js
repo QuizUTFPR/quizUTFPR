@@ -31,7 +31,6 @@ const Question = ({ children }) => {
       quiz_id: quizID,
     });
 
-    console.log('salvou score no banco');
     return data;
   };
 
@@ -47,8 +46,6 @@ const Question = ({ children }) => {
     await api.post('/studentQuiz/createChoice', {
       ...requestData,
     });
-
-    console.log('respondeu no banco');
 
     setRequestQuestion(initialRequestQuestion);
   };
