@@ -5,13 +5,13 @@ networks:
     driver: bridge
 
 services:
-  db:
-    container_name: 'db'
+  db_prod:
+    container_name: 'db_prod'
     image: mysql:8.0.25
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
-      - '3307:3306'
+      - '3308:3308'
     volumes:
       - ./mysql_prod:/var/lib/mysql
     environment:
@@ -21,41 +21,49 @@ services:
     networks:
       - app-tier 
 
-  backend:
-    container_name: 'back_end'
+  backend_prod:
+    container_name: 'backend_prod'
     build: 
       context: ./backend
       dockerfile: Dockerfile.prod
     volumes:
-      - ./backend:/home/node/api
-      - /home/node/api/node_modules
+      - ./backend:/home/node/api_prod
+      - /home/node/api_prod/node_modules
     ports:
-      - '3333:3333'
+      - '3334:3334'
     depends_on:
-      - db
+      - db_prod
     restart: on-failure
     environment:
-      - DB_HOST=db
-      - DB_PORT=3306
+      - DB_HOST=db_prod
+      - DB_PORT=3308
       - DB_USER=root
       - DB_PASS=quizutfpr
       - DB_NAME=db_prod
       - DB_DIALECT=mysql
-      - APP_URL=http://localhost:3333
+      - APP_URL=http://localhost:3334
+      - PORT=3334
       - SECRET=teste
       - EXPIRE_IN=2d
     networks:
       - app-tier
 
-  frontend:
-    container_name: 'front_end'
+  frontend_prod:
+    container_name: 'frontend_prod'
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
+      args: 
+        BASE_URL: http://localhost:3334
+    volumes:
+      - ./frontend:/home/node/react_prod
+      - /home/node/react_prod/node_modules
+    environment:
+      - REACT_APP_BASE_URL=http://localhost:3334
     ports:
       - '80:80'
     depends_on:
-      - backend
+      - backend_prod
     restart: on-failure
     networks:
       - app-tier

@@ -80,6 +80,7 @@ const Question = () => {
       const responseFinished = await changeToNextQuestion();
 
       if (responseFinished) {
+        clearInterval(timer.interval);
         navigation.navigate('Statistics', responseFinished);
       }
       setWidthAnimation(new Animated.Value(Dimensions.get('screen').width));

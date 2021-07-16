@@ -42,6 +42,7 @@ services:
       - DB_NAME=db_dev
       - DB_DIALECT=mysql
       - APP_URL=http://localhost:3333
+      - PORT=3333
       - SECRET=teste
       - EXPIRE_IN=2d
     networks:
@@ -53,6 +54,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
+    environment:
+        - REACT_APP_BASE_URL=http://localhost:3333
     volumes:
       - ./frontend:/home/node/react
       - /home/node/react/node_modules

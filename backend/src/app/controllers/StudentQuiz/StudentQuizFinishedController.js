@@ -31,7 +31,6 @@ class StudentQuizFinishedController {
 
       return res.status(200).json(QuizzesFinished);
     } catch (err) {
-      console.log(err);
       return res.status(500).json(err);
     }
   }

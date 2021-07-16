@@ -211,7 +211,6 @@ class StatisticsQuizController {
         questions: returnedQuestions,
       });
     } catch (err) {
-      console.log(err);
       return res.status(500).json(err);
     }
   }

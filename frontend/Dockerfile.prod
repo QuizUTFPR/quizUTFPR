@@ -1,19 +1,23 @@
 FROM node:lts-alpine as builder
-RUN mkdir -p /home/node/react/node_modules && chown -R node:node /home/node/react
-WORKDIR /home/node/react
-ENV PATH /home/node/react/node_modules/.bin:$PATH
+RUN mkdir -p /home/node/react_prod/node_modules && chown -R node:node /home/node/react_prod
+
+WORKDIR /home/node/react_prod
+ENV PATH /home/node/react_prod/node_modules/.bin:$PATH
 COPY ./package*.json ./
-RUN yarn --production=true
+RUN yarn install --production=true
 USER node
 COPY --chown=node:node . .
 
 ENV NODE_ENV production
 
-CMD yarn start
+RUN yarn build
 
 FROM nginx:alpine
+
+ENV REACT_APP_BASE_URL $BASE_URL
+
 WORKDIR /usr/share/nginx/html
-COPY --from=builder /home/node/react/build .
+COPY --from=builder /home/node/react_prod/build .
 COPY ./nginx.conf /opt/bitnami/nginx/conf/nginx.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

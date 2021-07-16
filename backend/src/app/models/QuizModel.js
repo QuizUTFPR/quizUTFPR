@@ -22,8 +22,6 @@ class Quiz extends Model {
   }
 
   static associate(models) {
-    console.log('associação quiz!');
-
     this.belongsTo(models.Teacher, {
       foreignKey: 'id_teacher',
       as: 'teacher',

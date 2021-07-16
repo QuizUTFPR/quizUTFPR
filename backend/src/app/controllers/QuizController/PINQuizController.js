@@ -67,7 +67,6 @@ class PINQuizController {
         id_student_quiz: quizStudent.length > 0 ? quizStudent[0].id : null,
       });
     } catch (err) {
-      console.log(err);
       return res.status(500).json(err);
     }
   }

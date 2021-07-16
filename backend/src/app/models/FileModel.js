@@ -23,7 +23,6 @@ class File extends Model {
   }
 
   static associate() {
-    console.log('Associação File!');
   }
 }
 

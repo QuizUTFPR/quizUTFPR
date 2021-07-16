@@ -34,15 +34,12 @@ class Database {
     // Inicializa conexao
     this.connection = new Sequelize(DatabaseConfig);
 
-    console.log('Iniciando relacionamentos!');
     // Percorre o vetor e acessa o método inicializador e associações
     models
       .map((model) => model.init(this.connection))
       .map(
         (model) => model.associate && model.associate(this.connection.models)
       );
-
-    console.log('Finalizou!');
   }
 }
 

@@ -20,8 +20,6 @@ class Answer extends Model {
   }
 
   static associate(models) {
-    console.log('Associação answer!');
-
     this.belongsTo(models.Question, {
       foreignKey: 'id_question',
       as: 'question',

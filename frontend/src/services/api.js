@@ -2,8 +2,12 @@ import axios from 'axios';
 
 import { TOKENEXPIRED } from '@routes';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+console.log(BASE_URL);
+
 const api = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: BASE_URL,
 });
 
 api.interceptors.request.use((config) => {
@@ -11,8 +15,6 @@ api.interceptors.request.use((config) => {
   config.headers.common.Authorization = token ? `Bearer ${token}` : '';
   return config;
 });
-
-export default api;
 
 api.interceptors.response.use(
   (response) =>
@@ -27,3 +29,5 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export default api;

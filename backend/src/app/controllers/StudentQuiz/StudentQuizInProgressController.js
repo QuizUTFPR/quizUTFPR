@@ -48,7 +48,6 @@ class StudentQuizInProgressController {
         ],
       });
 
-      console.log(QuizzesInProgress);
 
       const studentQuizInProgress = await Promise.all(
         QuizzesInProgress.map(async (item) => {
@@ -66,7 +65,6 @@ class StudentQuizInProgressController {
 
       return res.status(200).json(studentQuizInProgress);
     } catch (err) {
-      console.log(err);
       return res.status(500).json(err);
     }
   }

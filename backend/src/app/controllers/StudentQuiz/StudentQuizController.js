@@ -23,8 +23,6 @@ class StudentQuizController {
 
       const { quiz_id } = req.body;
 
-      console.log(quiz_id, student_id);
-
       const finished = await StudentQuiz.create({
         student_id,
         quiz_id,
@@ -33,7 +31,6 @@ class StudentQuizController {
         is_finished: false,
       });
 
-      console.log(finished);
 
       return res.status(200).json(finished);
     } catch (err) {
@@ -73,7 +70,6 @@ class StudentQuizController {
         (question) => !idQuestionsAnswered.includes(question.id)
       );
 
-      console.log('não respondidas', questionNotAnswered);
 
       // CASO EXISTA QUESTÕES NÃO RESPONDIDAS, EU CADASTO AS MESMAS SEM MARCAR NENHUM ALTERNATIVA
       await Promise.all(

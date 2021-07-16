@@ -12,18 +12,18 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import useStudentAuth from '@hook/useStudentAuth';
 
 // STYLES
-import { WrapperMyDrawer, Avatar, StudentName, Divider } from './styles';
+import { WrapperMyDrawer, StudentName, Divider } from './styles';
 
 const CustomSidebarMenu = ({ colors, ...props }) => {
   const { studentInfo, logout } = useStudentAuth();
 
   return (
     <WrapperMyDrawer style={{ flex: 1 }}>
-      <Avatar
+      {/* <Avatar
         source={{
           uri: 'https://image.flaticon.com/icons/png/512/147/147144.png',
         }}
-      />
+      /> */}
       <StudentName fill="purple">
         {studentInfo.student && studentInfo.student.name}
       </StudentName>

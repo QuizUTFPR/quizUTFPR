@@ -30,7 +30,6 @@ class Question extends Model {
   }
 
   static associate(models) {
-    console.log('Associação question!');
     this.belongsToMany(models.Quiz, {
       through: 'question_quiz',
       foreignKey: 'question_id',

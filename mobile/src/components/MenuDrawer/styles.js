@@ -18,6 +18,7 @@ export const StudentName = styled.Text`
   font-size: ${({ theme }) => theme.fontSize}px;
   color: ${({ theme }) => theme.color.fill};
   margin-bottom: 10px;
+  margin-top: 100px;
 `;
 
 export const Divider = styled.View`

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LottieView from 'lottie-react-native';
-import { CommonActions } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 
 // HOOKS
 import useQuestions from '@hook/useQuestion';
@@ -43,7 +43,9 @@ const informationsBasedOnHits = {
   },
 };
 
-const Statistics = ({ route, navigation }) => {
+const Statistics = ({ route }) => {
+  const navigation = useNavigation();
+
   const { amountOfQuestion } = useQuestions();
   const { hit_amount: hitAmount, score } = route.params;
 
@@ -54,6 +56,18 @@ const Statistics = ({ route, navigation }) => {
     if (hitsPercentage >= 50) return informationsBasedOnHits.notBad;
     return informationsBasedOnHits.youCanDoItBetter;
   };
+
+  useEffect(
+    () =>
+      navigation.addListener('beforeRemove', (e) => {
+        if (e.data.action.type === 'POP' || e.data.action.type === 'RESET') {
+          navigation.dispatch(e.data.action);
+        } else {
+          e.preventDefault();
+        }
+      }),
+    [navigation]
+  );
 
   return (
     <Container fill="purple">
@@ -74,7 +88,7 @@ const Statistics = ({ route, navigation }) => {
             <StyledText>
               Questões corretas: {hitAmount}/{amountOfQuestion}
             </StyledText>
-            <StyledText>Pontuação: {score}</StyledText>
+            <StyledText>Pontuação: {score.toFixed(2)}</StyledText>
           </Body>
           <Footer>
             <RedoButton>
