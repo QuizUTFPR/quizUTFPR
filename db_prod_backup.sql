@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.25, for Linux (x86_64)
 --
--- Host: localhost    Database: db_dev
+-- Host: localhost    Database: db_prod
 -- ------------------------------------------------------
 -- Server version	8.0.25
 
@@ -16,12 +16,12 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `db_dev`
+-- Current Database: `db_prod`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `db_dev` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `db_prod` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
-USE `db_dev`;
+USE `db_prod`;
 
 --
 -- Table structure for table `SequelizeMeta`
@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS `SequelizeMeta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `SequelizeMeta` (
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`name`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
@@ -64,7 +64,7 @@ CREATE TABLE `answer` (
   PRIMARY KEY (`id`),
   KEY `id_question` (`id_question`),
   CONSTRAINT `answer_ibfk_1` FOREIGN KEY (`id_question`) REFERENCES `question` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `answer` (
 
 LOCK TABLES `answer` WRITE;
 /*!40000 ALTER TABLE `answer` DISABLE KEYS */;
-INSERT INTO `answer` VALUES (1,1,'$1$',0,'2021-07-13 18:47:17','2021-07-13 18:47:17'),(2,1,'$2$',0,'2021-07-13 18:47:17','2021-07-13 18:47:17'),(3,1,'$3$',0,'2021-07-13 18:47:17','2021-07-13 18:47:17'),(4,1,'$4$',1,'2021-07-13 18:47:17','2021-07-13 18:47:17');
+INSERT INTO `answer` VALUES (1,1,'teste',0,'2021-07-16 12:32:53','2021-07-16 12:32:53'),(2,1,'a',1,'2021-07-16 12:32:53','2021-07-16 12:32:53'),(3,1,'a',0,'2021-07-16 12:32:53','2021-07-16 12:32:53'),(4,1,'a',0,'2021-07-16 12:32:53','2021-07-16 12:32:53'),(5,2,'Verdadeiro',1,'2021-07-16 12:33:47','2021-07-16 12:33:47'),(6,2,'Falso',0,'2021-07-16 12:33:47','2021-07-16 12:33:47');
 /*!40000 ALTER TABLE `answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +127,7 @@ CREATE TABLE `question` (
   PRIMARY KEY (`id`),
   KEY `id_image` (`id_image`),
   CONSTRAINT `question_ibfk_1` FOREIGN KEY (`id_image`) REFERENCES `file` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +136,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (1,0,0,1,'$2 \\times 2$',30,10,'Fácil',NULL,'multiple_choice','2021-07-13 18:47:17','2021-07-13 18:47:17');
+INSERT INTO `question` VALUES (1,0,0,1,'Questão 1 - Atualizada 4',30,10,'Fácil',NULL,'multiple_choice','2021-07-16 12:32:53','2021-07-16 12:33:54'),(2,1,0,1,'$\\sum_{i=0}^n = i^2$',30,15,'Médio',NULL,'single_choice','2021-07-16 12:33:47','2021-07-16 12:33:54');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +165,7 @@ CREATE TABLE `question_quiz` (
 
 LOCK TABLES `question_quiz` WRITE;
 /*!40000 ALTER TABLE `question_quiz` DISABLE KEYS */;
-INSERT INTO `question_quiz` VALUES (1,1,'2021-07-13 18:47:17','2021-07-13 18:47:17');
+INSERT INTO `question_quiz` VALUES (1,1,'2021-07-16 12:32:53','2021-07-16 12:32:53'),(2,1,'2021-07-16 12:33:47','2021-07-16 12:33:47');
 /*!40000 ALTER TABLE `question_quiz` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,7 +194,7 @@ CREATE TABLE `question_tags` (
 
 LOCK TABLES `question_tags` WRITE;
 /*!40000 ALTER TABLE `question_tags` DISABLE KEYS */;
-INSERT INTO `question_tags` VALUES ('latex',1,'2021-07-13 18:47:17','2021-07-13 18:47:17');
+INSERT INTO `question_tags` VALUES ('teste',1,'2021-07-16 12:32:53','2021-07-16 12:32:53'),('teste',2,'2021-07-16 12:33:47','2021-07-16 12:33:47');
 /*!40000 ALTER TABLE `question_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +222,7 @@ CREATE TABLE `quiz` (
   KEY `id_image` (`id_image`),
   CONSTRAINT `quiz_ibfk_1` FOREIGN KEY (`id_teacher`) REFERENCES `teacher` (`id`),
   CONSTRAINT `quiz_ibfk_2` FOREIGN KEY (`id_image`) REFERENCES `file` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +231,7 @@ CREATE TABLE `quiz` (
 
 LOCK TABLES `quiz` WRITE;
 /*!40000 ALTER TABLE `quiz` DISABLE KEYS */;
-INSERT INTO `quiz` VALUES (1,1,'Quiz Teste','dawdaw','public',1,NULL,'592905121','2021-07-13 18:42:52','2021-07-13 18:49:10'),(2,1,'Quiz do Jessé 2','daw','public',0,NULL,NULL,'2021-07-16 12:34:09','2021-07-16 12:34:09');
+INSERT INTO `quiz` VALUES (1,1,'Quiz do Jhonatan','teste','public',0,NULL,NULL,'2021-07-16 12:32:40','2021-07-16 12:32:40');
 /*!40000 ALTER TABLE `quiz` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,7 +260,7 @@ CREATE TABLE `quiz_tags` (
 
 LOCK TABLES `quiz_tags` WRITE;
 /*!40000 ALTER TABLE `quiz_tags` DISABLE KEYS */;
-INSERT INTO `quiz_tags` VALUES ('QUIZ',1,'2021-07-13 18:42:52','2021-07-13 18:42:52'),('QUIZ',2,'2021-07-16 12:34:10','2021-07-16 12:34:10'),('UTFPR',1,'2021-07-13 18:42:52','2021-07-13 18:42:52'),('UTFPR',2,'2021-07-16 12:34:10','2021-07-16 12:34:10');
+INSERT INTO `quiz_tags` VALUES ('QUIZ',1,'2021-07-16 12:32:40','2021-07-16 12:32:40'),('UTFPR',1,'2021-07-16 12:32:40','2021-07-16 12:32:40');
 /*!40000 ALTER TABLE `quiz_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,7 +283,7 @@ CREATE TABLE `student` (
   UNIQUE KEY `email` (`email`),
   KEY `id_image` (`id_image`),
   CONSTRAINT `student_ibfk_1` FOREIGN KEY (`id_image`) REFERENCES `file` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -292,7 +292,6 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'Aluno','jhocunha1@gmail.com','$2a$08$BPQ4rR/FvZEzWfM5LQkB1OIcWMct8Bprhp/uTYAFWVC1Dbj6MiGBC',NULL,'2021-07-13 19:30:15','2021-07-13 19:30:15');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,7 +324,7 @@ CREATE TABLE `student_question_choice` (
   CONSTRAINT `student_question_choice_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `question` (`id`) ON DELETE CASCADE,
   CONSTRAINT `student_question_choice_ibfk_3` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`) ON DELETE CASCADE,
   CONSTRAINT `student_question_choice_ibfk_4` FOREIGN KEY (`student_quiz_id`) REFERENCES `student_quiz` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,7 +333,6 @@ CREATE TABLE `student_question_choice` (
 
 LOCK TABLES `student_question_choice` WRITE;
 /*!40000 ALTER TABLE `student_question_choice` DISABLE KEYS */;
-INSERT INTO `student_question_choice` VALUES (1,1,1,1,1,20,0,0,0,1,'2021-07-13 19:30:37','2021-07-13 19:30:37'),(2,1,1,1,2,27,0,0,0,1,'2021-07-16 02:03:01','2021-07-16 02:03:01'),(3,1,1,1,3,29,0,0,0,1,'2021-07-16 02:03:55','2021-07-16 02:03:55'),(4,1,1,1,3,0,0,0,0,0,'2021-07-16 02:04:26','2021-07-16 02:04:26'),(5,1,1,1,4,27,0,0,0,1,'2021-07-16 02:04:56','2021-07-16 02:04:56'),(6,1,1,1,4,0,0,0,0,0,'2021-07-16 02:05:30','2021-07-16 02:05:30'),(7,1,1,1,5,28,0,0,0,1,'2021-07-16 02:06:35','2021-07-16 02:06:35'),(8,1,1,1,6,27,0,0,0,1,'2021-07-16 02:13:01','2021-07-16 02:13:01'),(9,1,1,1,6,0,0,0,0,0,'2021-07-16 02:13:28','2021-07-16 02:13:28'),(10,1,1,1,7,27,0,0,0,1,'2021-07-16 02:13:51','2021-07-16 02:13:51'),(11,1,1,1,8,29,0,0,0,1,'2021-07-16 02:16:16','2021-07-16 02:16:16'),(12,1,1,1,9,10,0,0,0,1,'2021-07-16 02:17:03','2021-07-16 02:17:03');
 /*!40000 ALTER TABLE `student_question_choice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,7 +357,7 @@ CREATE TABLE `student_quiz` (
   KEY `quiz_id` (`quiz_id`),
   CONSTRAINT `student_quiz_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE CASCADE,
   CONSTRAINT `student_quiz_ibfk_2` FOREIGN KEY (`quiz_id`) REFERENCES `quiz` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -368,7 +366,6 @@ CREATE TABLE `student_quiz` (
 
 LOCK TABLES `student_quiz` WRITE;
 /*!40000 ALTER TABLE `student_quiz` DISABLE KEYS */;
-INSERT INTO `student_quiz` VALUES (1,1,1,1,1,7,'2021-07-13 19:30:23','2021-07-13 19:30:37'),(2,1,1,1,1,7,'2021-07-16 02:02:54','2021-07-16 02:03:01'),(3,1,1,1,1,16,'2021-07-16 02:03:51','2021-07-16 02:04:26'),(4,1,1,1,1,15,'2021-07-16 02:04:49','2021-07-16 02:05:31'),(5,1,1,1,1,7,'2021-07-16 02:06:29','2021-07-16 02:06:36'),(6,1,1,1,1,15,'2021-07-16 02:12:54','2021-07-16 02:13:28'),(7,1,1,1,1,7,'2021-07-16 02:13:45','2021-07-16 02:13:51'),(8,1,1,1,1,7,'2021-07-16 02:16:12','2021-07-16 02:16:17'),(9,1,1,1,1,6,'2021-07-16 02:16:41','2021-07-16 02:17:04');
 /*!40000 ALTER TABLE `student_quiz` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,7 +391,7 @@ CREATE TABLE `tag` (
 
 LOCK TABLES `tag` WRITE;
 /*!40000 ALTER TABLE `tag` DISABLE KEYS */;
-INSERT INTO `tag` VALUES ('latex','2021-07-13 18:47:17','2021-07-13 18:47:17'),('QUIZ','2021-07-13 18:42:52','2021-07-13 18:42:52'),('UTFPR','2021-07-13 18:42:52','2021-07-13 18:42:52');
+INSERT INTO `tag` VALUES ('QUIZ','2021-07-16 12:32:40','2021-07-16 12:32:40'),('teste','2021-07-16 12:32:53','2021-07-16 12:32:53'),('UTFPR','2021-07-16 12:32:40','2021-07-16 12:32:40');
 /*!40000 ALTER TABLE `tag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,7 +420,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,'Sem Nome','123@email.com','$2a$08$yacrW7iI93yl0mRoIXHZ6unDsqMioDRcqa8Ycskc/0Xff19DpYwtK','2021-07-13 18:41:33','2021-07-13 18:41:33');
+INSERT INTO `teacher` VALUES (1,'Sem Nome','123@email.com','$2a$08$8MdR8sI/iXFkDUIGy6pDcOZHUKMcqoNoIZBAjYqZrjyG25jD5ZtK6','2021-07-16 01:54:07','2021-07-16 01:54:07');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -436,4 +433,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-16 14:36:11
+-- Dump completed on 2021-07-16 14:34:03
