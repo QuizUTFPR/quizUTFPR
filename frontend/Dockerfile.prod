@@ -9,15 +9,15 @@ USER node
 COPY --chown=node:node . .
 
 ENV NODE_ENV production
+ARG API_URL
+ENV REACT_APP_BASE_URL $API_URL
 
 RUN yarn build
 
-FROM nginx:alpine
-
-ENV REACT_APP_BASE_URL $BASE_URL
-
+FROM nginx
 WORKDIR /usr/share/nginx/html
 COPY --from=builder /home/node/react_prod/build .
-COPY ./nginx.conf /opt/bitnami/nginx/conf/nginx.conf
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

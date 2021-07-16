@@ -53,13 +53,11 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
-      args: 
-        BASE_URL: http://localhost:3334
+      args:
+        - API_URL=http://localhost:3334
     volumes:
       - ./frontend:/home/node/react_prod
       - /home/node/react_prod/node_modules
-    environment:
-      - REACT_APP_BASE_URL=http://localhost:3334
     ports:
       - '80:80'
     depends_on:
