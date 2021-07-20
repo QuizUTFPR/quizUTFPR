@@ -58,17 +58,17 @@ const MiddleSide = ({
           </Grid>
 
           <Grid item xs={12}>
-            ̣ <PreviewImage src={formik.values.question.imageUrl} />
+            ̣ <PreviewImage src={formik.values.question.imageBase64} />
           </Grid>
           {!location.state.published && (
             <Grid item xs={12} style={{ marginBottom: '-80px' }}>
               <DragImageInput
-                formikID={['question.imageObj', 'question.imageUrl']}
+                formikID={['question.imageObj', 'question.imageBase64']}
                 name="Imagem de Capa"
                 handleFormikChange={formik.setFieldValue}
                 handlePropsChange={{
                   handleUpdate: updateQuestion,
-                  key: ['imageObj', 'imageUrl'],
+                  key: ['imageObj', 'imageBase64'],
                   index: formik.values.index,
                 }}
               />

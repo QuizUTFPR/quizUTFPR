@@ -7,6 +7,9 @@ import api from '@api';
 // ROTAS
 import { QUESTION } from '@routes';
 
+// UTILS
+import getBase64 from '@utils/getBase64OfImage';
+
 // COMPONENTS
 import GridContainer from '@components/Container';
 import ChipInput from '@components/ChipInput';
@@ -33,13 +36,14 @@ const CriarQuiz = ({ history }) => {
       published: false,
     },
     onSubmit: async (values) => {
-      let responseFile = null;
-
+      // const responseFile = null;
+      let base64 = null;
       if (values.imageObj !== null) {
-        const file = new FormData();
-        file.append('file', values.imageObj);
+        base64 = await getBase64(values.imageObj);
+        // const file = new FormData();
+        // file.append('file', values.imageObj);
 
-        responseFile = await api.post('/files', file);
+        // responseFile = await api.post('/files', file);
       }
 
       const quiz = {
@@ -48,14 +52,16 @@ const CriarQuiz = ({ history }) => {
         description: values.description,
         visibility: values.visibility,
         published: values.published,
+        imageBase64: base64,
       };
 
-      if (responseFile) {
-        quiz.id_image = responseFile.data.id;
-      }
+      // if (responseFile) {
+      //   quiz.id_image = responseFile.data.id;
+      // }
 
       const responseQuiz = await api.post('/quiz/create', quiz);
       const { data } = responseQuiz;
+      console.log('criando', data);
 
       if (responseQuiz.status === 200) {
         history.push({

@@ -6,7 +6,7 @@ import Teacher from '../../models/TeacherModel';
 import Question from '../../models/QuestionModel';
 import Answer from '../../models/AnswerModel';
 import Tag from '../../models/TagModel';
-import File from '../../models/FileModel';
+// import File from '../../models/FileModel';
 
 class QuizController {
   async store(req, res) {
@@ -27,14 +27,17 @@ class QuizController {
         return res.status(400).json({ error: 'Falha na validação!' });
 
       const id_teacher = req.userId;
+      const { imageBase64 } = req.body;
 
-      const quiz = await Quiz.create({ ...req.body, id_teacher });
+      const quiz = await Quiz.create({
+        id_teacher,
+        image_base64: imageBase64,
+        ...req.body,
+      });
 
       const { tags } = req.body;
 
       tags.map(async (tagObject) => {
-        // tag =  TAG FOUND OR CREATE
-        // Created = flag to inform if some tag was created
         const [tag] = await Tag.findOrCreate({
           where: {
             name: tagObject,
@@ -43,11 +46,11 @@ class QuizController {
 
         tag.addQuiz(quiz);
       });
-
       return res.status(200).json({
         quiz,
       });
     } catch (err) {
+      // console.log(err);
       return res.status(500).json(err);
     }
   }
@@ -63,6 +66,7 @@ class QuizController {
           'visibility',
           'id_image',
           'pin',
+          'image_base64',
         ],
         include: [
           {
@@ -70,11 +74,11 @@ class QuizController {
             as: 'teacher',
             attributes: ['name', 'email'],
           },
-          {
-            model: File,
-            as: 'image_quiz',
-            attributes: ['url', 'path', 'name'],
-          },
+          // {
+          //   model: File,
+          //   as: 'image_quiz',
+          //   attributes: ['url', 'path', 'name'],
+          // },
           {
             model: Tag,
             as: 'tags_quiz',
@@ -93,6 +97,7 @@ class QuizController {
 
       return res.status(200).json(quizzes);
     } catch (err) {
+      console.log(err);
       return res.status(500).json(err);
     }
   }
@@ -110,6 +115,7 @@ class QuizController {
           'visibility',
           'id_image',
           'pin',
+          'image_base64',
         ],
         include: [
           {
@@ -195,12 +201,22 @@ class QuizController {
       if (!(await schema.isValid(req.body)))
         return res.status(400).json({ error: 'Falha na validação!' });
 
-      const { id, tags, title, description, visibility, id_image } = req.body;
+      const {
+        id,
+        tags,
+        title,
+        description,
+        visibility,
+        // id_image,
+        imageBase64,
+      } = req.body;
+
       const quiz = await Quiz.findByPk(id);
       quiz.title = title;
       quiz.description = description;
       quiz.visibility = visibility;
-      if (id_image) quiz.id_image = id_image;
+      quiz.image_base64 = imageBase64;
+      // if (id_image) quiz.id_image = id_image;
       quiz.save();
 
       const tagsAlreadyInQuiz = await quiz.getTags_quiz();

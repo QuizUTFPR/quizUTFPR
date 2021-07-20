@@ -12,7 +12,6 @@ import path from 'path';
 import routes from './routes';
 import './database';
 
-
 class App {
   // O construtor irá invocar minha instância e os middlewares;
   constructor() {
@@ -28,13 +27,13 @@ class App {
     * */
     this.server.use(compression());
     this.server.use(helmet());
-    this.server.use(express.json());
+    this.server.use(express.json({ limit: '50mb' }));
+    // this.server.use(express.urlencoded({ limit: '50mb' }));
     this.server.use(cors());
     this.server.use(
       '/files',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
     );
-    
   }
 
   routes() {

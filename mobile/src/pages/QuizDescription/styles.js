@@ -14,14 +14,14 @@ export const QuizDescriptionHeader = styled.View`
   height: ${heightPercentageToDp('40%')}px;
 `;
 
-export const StyledImageBackground = styled.View`
+export const StyledImageBackground = styled.ImageBackground.attrs({
+  borderBottomLeftRadius: 30,
+  borderBottomRightRadius: 30,
+})`
   flex: 1;
   justify-content: space-between;
   padding-left: 15px;
   padding-right: 15px;
-  background: #fdb646;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
 `;
 
 export const GoBackButtonWrapper = styled(StyledButton).attrs({

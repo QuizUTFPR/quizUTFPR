@@ -2,7 +2,7 @@
 import Tag from '../../models/TagModel';
 import Question from '../../models/QuestionModel';
 import Answer from '../../models/AnswerModel';
-import File from '../../models/FileModel';
+// import File from '../../models/FileModel';
 
 class QuestionTagController {
   // Lista todos os registros
@@ -21,6 +21,7 @@ class QuestionTagController {
           'difficulty_level',
           'score',
           'type',
+          'image_base64',
         ],
         include: [
           {
@@ -28,11 +29,11 @@ class QuestionTagController {
             as: 'answer',
             attributes: ['id', 'title', 'is_correct'],
           },
-          {
-            model: File,
-            as: 'image_question',
-            attributes: ['url', 'path', 'name'],
-          },
+          // {
+          //   model: File,
+          //   as: 'image_question',
+          //   attributes: ['url', 'path', 'name'],
+          // },
           {
             model: Tag,
             as: 'tags_question',

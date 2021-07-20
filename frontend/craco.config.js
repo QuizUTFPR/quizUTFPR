@@ -17,7 +17,7 @@ module.exports = {
           '@context': './context/',
           '@api': './services/api.js',
           '@pages': './pages/',
-          '@utils': './utils',
+          '@utils': './utils/',
         },
       },
     },

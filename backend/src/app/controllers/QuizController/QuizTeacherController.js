@@ -2,7 +2,7 @@
 import Teacher from '../../models/TeacherModel';
 import Quiz from '../../models/QuizModel';
 import Tag from '../../models/TagModel';
-import File from '../../models/FileModel';
+// import File from '../../models/FileModel';
 
 class QuizTeacherController {
   // Lista todos os registros
@@ -22,6 +22,7 @@ class QuizTeacherController {
           'id_image',
           'published',
           'pin',
+          'image_base64',
         ],
         include: [
           {
@@ -29,11 +30,11 @@ class QuizTeacherController {
             as: 'teacher',
             attributes: ['name', 'email'],
           },
-          {
-            model: File,
-            as: 'image_quiz',
-            attributes: ['url', 'path', 'name'],
-          },
+          // {
+          //   model: File,
+          //   as: 'image_quiz',
+          //   attributes: ['url', 'path', 'name'],
+          // },
           {
             model: Tag,
             as: 'tags_quiz',

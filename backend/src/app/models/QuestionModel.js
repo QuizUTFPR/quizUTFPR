@@ -19,6 +19,7 @@ class Question extends Model {
           'Muito Difícil'
         ),
         type: Sequelize.ENUM('multiple_choice', 'single_choice'),
+        image_base64: Sequelize.TEXT('medium'),
       },
       {
         sequelize,

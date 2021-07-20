@@ -11,6 +11,7 @@ class Quiz extends Model {
         id_image: Sequelize.INTEGER,
         published: Sequelize.BOOLEAN,
         pin: Sequelize.STRING,
+        image_base64: Sequelize.TEXT('medium'),
       },
       {
         sequelize,

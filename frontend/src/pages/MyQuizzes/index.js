@@ -81,6 +81,7 @@ const Quiz = ({ history }) => {
   const getQuizzes = async () => {
     try {
       const response = await api.get('/quiz');
+      console.log(response.data);
       if (response.status !== 200) setQuizzes(false);
       else setQuizzes(response.data);
     } catch (err) {
@@ -157,8 +158,8 @@ const Quiz = ({ history }) => {
             <Card
               key={quiz.id}
               image={
-                quiz.image_quiz != null
-                  ? quiz.image_quiz.url
+                quiz.image_base64 != null
+                  ? quiz.image_base64
                   : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png'
               }
               imageTitle={quiz.title}

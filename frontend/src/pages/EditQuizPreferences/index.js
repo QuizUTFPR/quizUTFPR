@@ -2,6 +2,9 @@ import React, { forwardRef } from 'react';
 import { useFormik } from 'formik';
 import api from '@api';
 
+// UTILS
+import getBase64 from '@utils/getBase64OfImage';
+
 // COMPONENTS
 import Button from '@components/Button';
 import ChipInput from '@components/ChipInput';
@@ -35,6 +38,7 @@ const Wrapper = forwardRef((props, ref) => (
 // eslint-disable-next-line no-unused-vars
 const EditPreferences = forwardRef((props, ref) => {
   const { quiz } = props;
+  console.log(quiz);
 
   const formik = useFormik({
     initialValues: {
@@ -42,18 +46,21 @@ const EditPreferences = forwardRef((props, ref) => {
       title: quiz.title,
       description: quiz.description,
       visibility: quiz.visibility,
+      // imageUrl: quiz.image_quiz ? quiz.image_quiz.url : '',
       imageObj: null,
-      imageUrl: quiz.image_quiz ? quiz.image_quiz.url : '',
+      imageBase64: quiz.image_base64,
       tags: quiz.tags_quiz.map((tag) => tag.name),
     },
     onSubmit: async (values) => {
-      let responseFile = null;
+      // const responseFile = null;
+      let base64 = null;
 
       if (values.imageObj !== null) {
-        const file = new FormData();
-        file.append('file', values.imageObj);
+        base64 = await getBase64(values.imageObj);
 
-        responseFile = await api.post('/files', file);
+        // const file = new FormData();
+        // file.append('file', values.imageObj);
+        // responseFile = await api.post('/files', file);
       }
 
       const quizUpdated = {
@@ -62,11 +69,12 @@ const EditPreferences = forwardRef((props, ref) => {
         tags: values.tags,
         description: values.description,
         visibility: values.visibility,
+        imageBase64: base64,
       };
 
-      if (responseFile) {
-        quizUpdated.id_image = responseFile.data.id;
-      }
+      // if (responseFile) {
+      //   quizUpdated.id_image = responseFile.data.id;
+      // }
 
       const responseQuiz = await api.put('/quiz/update', quizUpdated);
       if (responseQuiz.status === 200) props.handleClose();
@@ -99,13 +107,16 @@ const EditPreferences = forwardRef((props, ref) => {
         spacing={2}
       >
         <Grid item xs={6} style={{ display: 'flex' }}>
-          <PreviewImage src={formik.values.imageUrl} />
+          <PreviewImage src={formik.values.imageBase64} />
         </Grid>
         <Grid item xs={12}>
           <DragImageInput
             handleChange={(files) => {
               formik.setFieldValue('imageObj', files[0]);
-              formik.setFieldValue('imageUrl', URL.createObjectURL(files[0]));
+              formik.setFieldValue(
+                'imageBase64',
+                URL.createObjectURL(files[0])
+              );
             }}
           />
         </Grid>

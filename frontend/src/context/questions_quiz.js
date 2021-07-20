@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import api from '@api';
 import * as yup from 'yup';
 
+// UTILS
+import getBase64 from '@utils/getBase64OfImage';
+
 import {
   TrueOrFalseAnswer,
   MultipleChoiceAnswer,
@@ -23,7 +26,6 @@ const QuestionQuiz = ({ children }) => {
 
   const getAllQuestionOfTheQuiz = async (id) => {
     const response = await api.get(`/question/quiz/${id}`);
-
     if (response.status !== 200) return initialValue[0];
     const initialQuestions = response.data.map((question) => ({
       id: question.id,
@@ -31,7 +33,8 @@ const QuestionQuiz = ({ children }) => {
       copy: question.copy,
       availableOnQuestionsDB: question.available_on_questions_db,
       imageObj: null,
-      imageUrl: question.image_question ? question.image_question.url : '',
+      imageBase64: question.image_base64,
+      // imageUrl: question.image_question ? question.image_question.url : '',
       title: question.title,
       timer: question.timer,
       difficultyLevel: question.difficulty_level,
@@ -52,22 +55,26 @@ const QuestionQuiz = ({ children }) => {
       }
 
       questions.map(async (item, index) => {
-        let responseFile = null;
+        // let responseFile = null;
+        let base64 = item.imageBase64;
+
         if (item.imageObj !== null) {
-          const file = new FormData();
-          file.append('file', item.imageObj);
+          base64 = await getBase64(item.imageObj);
 
-          responseFile = await api.post('/files', file);
+          // const file = new FormData();
+          // file.append('file', item.imageObj);
+          // responseFile = await api.post('/files', file);
         }
 
-        if (responseFile) {
-          item.id_image = responseFile.data.id;
-        }
+        // if (responseFile) {
+        //   item.id_image = responseFile.data.id;
+        // }
 
         const response = await api.post('/question/create', {
           ...item,
           quiz_id: id_quiz,
           index,
+          imageBase64: base64,
         });
 
         if (response.status !== 200) throw new Error('questao nao criada');
@@ -210,7 +217,8 @@ const QuestionQuiz = ({ children }) => {
       availableOnQuestionsDB: yup.boolean().required(),
       // eslint-disable-next-line react/forbid-prop-types
       imageObj: yup.object().nullable(),
-      imageUrl: yup.string(),
+      // imageUrl: yup.string(),
+      imageBase64: yup.string(),
       title: yup.string().min(1).required(),
       timer: yup.number().required(),
       difficultyLevel: yup.string().required(),
@@ -246,7 +254,8 @@ const QuestionQuiz = ({ children }) => {
     availableOnQuestionsDB: yup.boolean().required(),
     // eslint-disable-next-line react/forbid-prop-types
     imageObj: yup.object().nullable(),
-    imageUrl: yup.string(),
+    // imageUrl: yup.string(),
+    imageBase64: yup.string(),
     title: yup.string().min(1).required(),
     timer: yup.number().required(),
     difficultyLevel: yup.string().required(),

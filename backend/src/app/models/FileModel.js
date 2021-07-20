@@ -22,8 +22,7 @@ class File extends Model {
     return this;
   }
 
-  static associate() {
-  }
+  static associate() {}
 }
 
 export default File;

@@ -24,13 +24,13 @@ const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
 ));
 
-async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
-  const response = await fetch(url);
-  const data = await response.blob();
-  return new File([data], name, {
-    type: response.headers.get('content-type') || defaultType,
-  });
-}
+// async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
+//   const response = await fetch(url);
+//   const data = await response.blob();
+//   return new File([data], name, {
+//     type: response.headers.get('content-type') || defaultType,
+//   });
+// }
 
 // eslint-disable-next-line no-unused-vars
 const QuestionDatabase = forwardRef((props, ref) => {
@@ -49,6 +49,8 @@ const QuestionDatabase = forwardRef((props, ref) => {
       try {
         setLoading(true);
         const { data } = await api.post(`question/getFromTags`, tag);
+
+        console.log(data);
         if (data) {
           const newQuestions = await Promise.all(
             data.map(
@@ -57,6 +59,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
                 image_question,
                 difficulty_level,
                 answer,
+                image_base64,
                 ...rest
               }) => ({
                 ...rest,
@@ -64,13 +67,15 @@ const QuestionDatabase = forwardRef((props, ref) => {
                 id: -1,
                 difficultyLevel: difficulty_level,
                 availableOnQuestionsDB: false,
-                imageObj:
-                  image_question &&
-                  (await getFileFromUrl(
-                    image_question.url,
-                    image_question.name
-                  )),
-                imageUrl: image_question ? image_question.url : '',
+                imageObj: null,
+                // imageObj:
+                //   image_question &&
+                //   (await getFileFromUrl(
+                //     image_question.url,
+                //     image_question.name
+                //   )),
+                // imageUrl: image_question ? image_question.url : '',
+                imageBase64: image_base64,
                 tags: tags_question.map((item) => item.name),
                 answer: answer.map((item) => ({ ...item, id: -1 })),
               })

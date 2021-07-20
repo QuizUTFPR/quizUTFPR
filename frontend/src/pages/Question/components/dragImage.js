@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
+// COMPONENTS
 import DragZone from '@components/DragZone';
+
+// UTILS
+import getBase64 from '@utils/getBase64OfImage';
+// import getBlob from '@utils/getBlobOfImage';
 
 const DragImageInput = ({
   formikID,
@@ -31,9 +36,13 @@ const DragImageInput = ({
   };
 
   const changeContextValue = async (files) => {
+    const imageBase64 = await getBase64(files[0]);
+
     setTyping(true);
     handleFormikChange(formikID[0], files[0]);
-    handleFormikChange(formikID[1], URL.createObjectURL(files[0]));
+    // handleFormikChange(formikID[1], URL.createObjectURL(files[0]));
+    handleFormikChange(formikID[1], imageBase64);
+
     handleUpdateContext({
       value: files[0],
       key: handlePropsChange.key[0],
@@ -41,7 +50,7 @@ const DragImageInput = ({
       handleUpdate: handlePropsChange.handleUpdate,
     });
     handleUpdateContext({
-      value: URL.createObjectURL(files[0]),
+      value: imageBase64,
       key: handlePropsChange.key[1],
       index: handlePropsChange.index,
       handleUpdate: handlePropsChange.handleUpdate,

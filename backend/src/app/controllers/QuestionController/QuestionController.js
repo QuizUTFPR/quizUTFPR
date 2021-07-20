@@ -5,7 +5,7 @@ import Question from '../../models/QuestionModel';
 import Answer from '../../models/AnswerModel';
 import Quiz from '../../models/QuizModel';
 import Tag from '../../models/TagModel';
-import File from '../../models/FileModel';
+// import File from '../../models/FileModel';
 
 async function getScoreBasedOnDifficulty(difficulty) {
   switch (difficulty) {
@@ -72,6 +72,7 @@ class QuestionController {
         type,
         id_image,
         index,
+        imageBase64,
       } = req.body;
 
       const quiz = await Quiz.findByPk(quiz_id);
@@ -94,6 +95,7 @@ class QuestionController {
             type,
             index,
             score,
+            image_base64: imageBase64,
           });
         } catch (error) {
           return res.status(500).json(error);
@@ -107,6 +109,7 @@ class QuestionController {
         question.copy = copy;
         question.type = type;
         question.score = score;
+        question.image_base64 = imageBase64;
         question.available_on_questions_db = availableOnQuestionsDB;
         if (id_image) question.id_image = id_image;
         question.save();
@@ -191,6 +194,7 @@ class QuestionController {
           'available_on_questions_db',
           'type',
           'score',
+          'image_base64',
         ],
         include: [
           {
@@ -198,11 +202,11 @@ class QuestionController {
             as: 'answer',
             attributes: ['id', 'title', 'is_correct'],
           },
-          {
-            model: File,
-            as: 'image_question',
-            attributes: ['url', 'path', 'name'],
-          },
+          // {
+          //   model: File,
+          //   as: 'image_question',
+          //   attributes: ['url', 'path', 'name'],
+          // },
           {
             model: Tag,
             as: 'tags_question',
@@ -242,6 +246,7 @@ class QuestionController {
           'difficulty_level',
           'type',
           'score',
+          'image_base64',
         ],
         include: [
           {
@@ -249,11 +254,11 @@ class QuestionController {
             as: 'answer',
             attributes: ['id', 'title', 'is_correct'],
           },
-          {
-            model: File,
-            as: 'image_question',
-            attributes: ['url', 'path', 'name'],
-          },
+          // {
+          //   model: File,
+          //   as: 'image_question',
+          //   attributes: ['url', 'path', 'name'],
+          // },
           {
             model: Tag,
             as: 'tags_question',
@@ -290,11 +295,11 @@ class QuestionController {
       if (!question)
         return res.status(404).json({ error: 'Questão não encontrada!' });
 
-      const { id_image } = question;
+      // const { id_image } = question;
 
-      const file = await File.findByPk(id_image);
+      // const file = await File.findByPk(id_image);
 
-      if (file) file.destroy();
+      // if (file) file.destroy();
 
       const answers = await question.getAnswer();
       const tags = await question.getTags_question();
