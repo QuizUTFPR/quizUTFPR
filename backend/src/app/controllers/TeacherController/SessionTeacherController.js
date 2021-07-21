@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as Yup from 'yup';
 import jwt from 'jsonwebtoken';
 import authConfig from '../../../config/auth';
@@ -10,7 +11,7 @@ class SessionTeacherController {
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
-        email: Yup.string().email().required(),
+        email: Yup.string().required(),
         password: Yup.string().required(),
       });
 
@@ -21,15 +22,60 @@ class SessionTeacherController {
 
       const { email, password } = req.body;
 
-      // REQUISIÇÂO LDAP
+      // OBTENDO TOKEN PARA CONSEGUIR UTILIZAR API DO LDAP
+      const responseLDAP = await axios.post(`${process.env.LDAP_URL}/login`, {
+        username: process.env.LDAP_USERNAME,
+        password: process.env.LDAP_PASSWORD,
+      });
+      const ldapToken = responseLDAP.data.token;
 
-      // cadastro professor caso nao existir no sistema
-      let teacher = await Teacher.findOne({ where: { email } });
-      if (!teacher) teacher = await Teacher.create(req.body);
+      // VERIFICANDO SE DADOS ESTÃO CORRETOS DE ACORDO COM O LDAP
+      const responseLoginLDAP = await axios.post(
+        `${process.env.LDAP_URL}/ldap/doLogin`,
+        {
+          username: email,
+          password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${ldapToken}`,
+          },
+        }
+      );
 
-      if (!(await teacher.checkPassword(password))) {
-        return res.status(403).json({ error: 'Senha Incorreta!' });
-      }
+      const {
+        email: teacherEmail,
+        name: teacherName,
+        // dn: personCategory,
+      } = responseLoginLDAP.data;
+
+      // IMPEDIR ALUNOS DE SE CONECTAR NO PAINEL DE CONTROLE
+      // if (personCategory.indexOf('alunos'))
+      //   return res
+      //     .status(403)
+      //     .json({ error: 'Painel de Controle não permitido para alunos.' });
+
+      // PROCURO SE JÁ EXISTE CADASTRO DO PROFESSOR NO BANCO
+      let teacher = await Teacher.findOne({
+        where: { email: teacherEmail },
+      });
+
+      // FORMATANDO NOME DO PROFESSOR
+      const splittedName = teacherName.split(' ');
+      const formatedName = `${splittedName[0]} ${
+        splittedName[splittedName.length - 1]
+      }`;
+
+      // CASO NÃO EXISTA CRIO UMA CONTA NO BANCO PARA O MESMO
+      if (!teacher)
+        teacher = await Teacher.create({
+          name: formatedName,
+          email: teacherEmail,
+        });
+
+      // if (!(await teacher.checkPassword(password))) {
+      //   return res.status(403).json({ error: 'Senha Incorreta!' });
+      // }
 
       const { id, name } = teacher;
 
@@ -43,6 +89,11 @@ class SessionTeacherController {
         }),
       });
     } catch (err) {
+      if (err.response.status === 401) {
+        return res
+          .status(403)
+          .json({ error: 'Dados de usuário ou senha incorretos' });
+      }
       return res.status(500).json(err);
     }
   }
