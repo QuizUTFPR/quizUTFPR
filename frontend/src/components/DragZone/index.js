@@ -56,7 +56,6 @@ const StyledDropzone = (props) => {
     },
   });
 
-  // console.log(fileRejections);
   const files = acceptedFiles.map((file) => (
     <span key={file.path}>
       : {file.path} - {file.size} bytes

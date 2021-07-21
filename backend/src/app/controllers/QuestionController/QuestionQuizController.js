@@ -55,8 +55,8 @@ class QuestionQuizController {
 
       if (!questionOfQuiz.length)
         return res
-          .status(404)
-          .json({ error: 'Não existe nenhum quiz cadastrado.' });
+          .status(204)
+          .json({ error: 'Não existe nenhuma questão cadastrada.' });
 
       return res.status(200).json(questionOfQuiz);
     } catch (err) {

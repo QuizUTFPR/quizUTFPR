@@ -50,7 +50,6 @@ const QuestionDatabase = forwardRef((props, ref) => {
         setLoading(true);
         const { data } = await api.post(`question/getFromTags`, tag);
 
-        console.log(data);
         if (data) {
           const newQuestions = await Promise.all(
             data.map(

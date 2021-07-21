@@ -61,7 +61,6 @@ const CriarQuiz = ({ history }) => {
 
       const responseQuiz = await api.post('/quiz/create', quiz);
       const { data } = responseQuiz;
-      console.log('criando', data);
 
       if (responseQuiz.status === 200) {
         history.push({

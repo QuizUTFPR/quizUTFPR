@@ -61,8 +61,9 @@ const QuestionDatabase = forwardRef((props, ref) => {
           </GridContainerDemoTitle>
 
           <GridContainerDemoAnswer>
-            {question.answer.map((item) => (
-              <GridInputSimulator key={item.title + item.id}>
+            {question.answer.map((item, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <GridInputSimulator key={index}>
                 <AnswerQuestionMathJax dynamic hideUntilTypeset="first">
                   {`${item.title}`}
                 </AnswerQuestionMathJax>

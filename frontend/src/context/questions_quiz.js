@@ -25,24 +25,27 @@ const QuestionQuiz = ({ children }) => {
   const [questionToRemove, setQuestionToRemove] = useState([]);
 
   const getAllQuestionOfTheQuiz = async (id) => {
-    const response = await api.get(`/question/quiz/${id}`);
-    if (response.status !== 200) return initialValue[0];
-    const initialQuestions = response.data.map((question) => ({
-      id: question.id,
-      type: question.type,
-      copy: question.copy,
-      availableOnQuestionsDB: question.available_on_questions_db,
-      imageObj: null,
-      imageBase64: question.image_base64,
-      // imageUrl: question.image_question ? question.image_question.url : '',
-      title: question.title,
-      timer: question.timer,
-      difficultyLevel: question.difficulty_level,
-      tags: question.tags_question.map((tag) => tag.name),
-      answer: question.answer,
-    }));
-    setQuestions(initialQuestions);
-    return initialQuestions[0];
+    try {
+      const response = await api.get(`/question/quiz/${id}`);
+      const initialQuestions = response.data.map((question) => ({
+        id: question.id,
+        type: question.type,
+        copy: question.copy,
+        availableOnQuestionsDB: question.available_on_questions_db,
+        imageObj: null,
+        imageBase64: question.image_base64,
+        // imageUrl: question.image_question ? question.image_question.url : '',
+        title: question.title,
+        timer: question.timer,
+        difficultyLevel: question.difficulty_level,
+        tags: question.tags_question.map((tag) => tag.name),
+        answer: question.answer,
+      }));
+      setQuestions(initialQuestions);
+      return initialQuestions[0];
+    } catch (error) {
+      return initialValue[0];
+    }
   };
 
   // eslint-disable-next-line camelcase
@@ -79,13 +82,11 @@ const QuestionQuiz = ({ children }) => {
 
         if (response.status !== 200) throw new Error('questao nao criada');
       });
+      setTimeout(() => getAllQuestionOfTheQuiz(id_quiz), 1000);
+      setSaved(true);
     } catch (error) {
-      console.log(error);
-      return false;
+      setSaved(false);
     }
-    setTimeout(() => getAllQuestionOfTheQuiz(id_quiz), 1000);
-    setSaved(true);
-    return true;
   };
 
   const addQuestion = (item) => {
