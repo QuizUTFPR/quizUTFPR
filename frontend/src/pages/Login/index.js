@@ -36,7 +36,7 @@ const LoginPage = ({ history }) => {
   const { login } = useAuth();
 
   const [values, setValues] = useState({
-    email: '',
+    username: '',
     password: '',
     showPassword: false,
   });
@@ -82,7 +82,7 @@ const LoginPage = ({ history }) => {
             component="form"
             onSubmit={async (e) => {
               e.preventDefault();
-              const response = await login(values.email, values.password);
+              const response = await login(values.username, values.password);
               if (response.status === 200) {
                 history.push(HOME);
               } else {
@@ -91,10 +91,10 @@ const LoginPage = ({ history }) => {
             }}
           >
             <StyledInput
-              id="email"
+              id="username"
               label="Nome de Usuário"
-              value={values.email}
-              onChange={handleChange('email')}
+              value={values.username}
+              onChange={handleChange('username')}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">

@@ -11,7 +11,7 @@ class SessionTeacherController {
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
-        email: Yup.string().required(),
+        username: Yup.string().required(),
         password: Yup.string().required(),
       });
 
@@ -20,7 +20,7 @@ class SessionTeacherController {
         return res.status(400).json({ error: 'Falha na validação!' });
       }
 
-      const { email, password } = req.body;
+      const { username, password } = req.body;
 
       // OBTENDO TOKEN PARA CONSEGUIR UTILIZAR API DO LDAP
       const responseLDAP = await axios.post(`${process.env.LDAP_URL}/login`, {
@@ -33,7 +33,7 @@ class SessionTeacherController {
       const responseLoginLDAP = await axios.post(
         `${process.env.LDAP_URL}/ldap/doLogin`,
         {
-          username: email,
+          username,
           password,
         },
         {
@@ -57,7 +57,7 @@ class SessionTeacherController {
 
       // PROCURO SE JÁ EXISTE CADASTRO DO PROFESSOR NO BANCO
       let teacher = await Teacher.findOne({
-        where: { email: teacherEmail },
+        where: { uid: username },
       });
 
       // FORMATANDO NOME DO PROFESSOR
@@ -69,6 +69,7 @@ class SessionTeacherController {
       // CASO NÃO EXISTA CRIO UMA CONTA NO BANCO PARA O MESMO
       if (!teacher)
         teacher = await Teacher.create({
+          uid: username,
           name: formatedName,
           email: teacherEmail,
         });
@@ -77,12 +78,13 @@ class SessionTeacherController {
       //   return res.status(403).json({ error: 'Senha Incorreta!' });
       // }
 
-      const { id, name } = teacher;
+      const { id, name, uid } = teacher;
 
       return res.json({
         teacher: {
           name,
-          email,
+          teacherEmail,
+          uid,
         },
         token: jwt.sign({ id }, authConfig.secret, {
           expiresIn: authConfig.expireIn,

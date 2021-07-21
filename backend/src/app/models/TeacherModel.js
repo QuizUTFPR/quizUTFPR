@@ -7,6 +7,7 @@ class Teacher extends Model {
       {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
+        uid: Sequelize.STRING,
         // O campo 'virtual' nao existe no db, apenas na execução
         // password: Sequelize.VIRTUAL,
         // password_hash: Sequelize.STRING,
