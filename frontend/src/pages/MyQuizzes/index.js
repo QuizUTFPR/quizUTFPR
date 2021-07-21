@@ -157,11 +157,7 @@ const Quiz = ({ history }) => {
           quizzes.map((quiz) => (
             <Card
               key={quiz.id}
-              image={
-                quiz.image_base64 != null
-                  ? quiz.image_base64
-                  : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/800px-Image_created_with_a_mobile_phone.png'
-              }
+              image={quiz.image_base64}
               imageTitle={quiz.title}
               title={quiz.title}
               description={quiz.description}

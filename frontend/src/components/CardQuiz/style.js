@@ -12,6 +12,12 @@ export const StyledCardMedia = styled(CardMedia)`
   width: 200px;
 `;
 
+export const EmptyImage = styled.div`
+  width: 390px;
+  height: 150px;
+  background: ${({ theme }) => theme.palette.primary.main};
+`;
+
 export const StyledCardContent = styled(CardContent)`
   display: flex;
   flex-basis: 0;

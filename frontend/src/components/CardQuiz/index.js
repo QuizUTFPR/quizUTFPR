@@ -9,6 +9,7 @@ import {
   StyledCardMedia,
   StyledCardContent,
   StyledCardActions,
+  EmptyImage,
 } from './style';
 
 const Card = ({
@@ -21,7 +22,11 @@ const Card = ({
   children,
 }) => (
   <StyledCard>
-    <StyledCardMedia component="img" image={image} title={imageTitle} />
+    {image ? (
+      <StyledCardMedia component="img" image={image} title={imageTitle} />
+    ) : (
+      <EmptyImage />
+    )}
     <CardActionArea
       component={Link}
       to={{
@@ -46,11 +51,12 @@ Card.defaultProps = {
   imageTitle: 'Título da Image',
   description: 'Descrição',
   title: 'Título do Quiz',
+  image: '',
   children: <></>,
 };
 
 Card.propTypes = {
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   imageTitle: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
