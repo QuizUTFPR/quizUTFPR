@@ -178,7 +178,12 @@ const Question = () => {
               <ScrollWrapper>
                 <QuestionDescription>
                   {/* eslint-disable-next-line global-require */}
-                  <QuestionImage source={require('@assets/icon.png')} />
+                  <QuestionImage
+                    source={{
+                      uri: quizData.questions[quizData.indexOnScreen]
+                        .image_base64,
+                    }}
+                  />
                   <MathJaxSvg
                     fontSize={theme.fontSize}
                     color="#000000"

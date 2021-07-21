@@ -23,6 +23,7 @@ class QuizPublishedController {
           'visibility',
           'id_image',
           'pin',
+          'image_base64',
         ],
         include: [
           {

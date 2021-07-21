@@ -60,7 +60,7 @@ const Home = () => {
                 })
               }
             >
-              <StyledImage />
+              <StyledImage source={{ uri: quiz.image_base64 }} />
               <StyledView>
                 <Description>
                   <QuizTitle fill="black">{quiz.title}</QuizTitle>

@@ -68,12 +68,11 @@ export const StyledView = styled.View`
   flex: 1;
 `;
 
-export const StyledImage = styled.View`
+export const StyledImage = styled.Image`
   width: 35%;
   height: 100%;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-  background: #4b24b1;
 `;
 
 export const QuizTitle = styled.Text.attrs({

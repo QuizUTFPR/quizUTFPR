@@ -56,6 +56,9 @@ const Question = ({ children }) => {
       quiz_id,
       id_student_quiz,
     });
+
+    console.log(data.questions);
+
     setAlreadyAnswered(data.amountStudentChoice);
     setQuizID(quiz_id);
     setStudentQuizID(id_student_quiz);

@@ -11,7 +11,7 @@ class StudentQuizFinishedController {
 
       const QuizzesFinished = await Quiz.findAll({
         where: { published: true },
-        attributes: ['id', 'title', 'description', 'pin'],
+        attributes: ['id', 'title', 'description', 'pin', 'image_base64'],
         include: [
           {
             model: StudentQuiz,

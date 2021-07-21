@@ -17,6 +17,7 @@ export const QuizDescriptionHeader = styled.View`
 export const StyledImageBackground = styled.ImageBackground.attrs({
   borderBottomLeftRadius: 30,
   borderBottomRightRadius: 30,
+  resizeMode: 'contain',
 })`
   flex: 1;
   justify-content: space-between;

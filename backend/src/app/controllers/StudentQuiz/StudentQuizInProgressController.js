@@ -2,7 +2,7 @@
 import Quiz from '../../models/QuizModel';
 import Teacher from '../../models/TeacherModel';
 import Tag from '../../models/TagModel';
-import File from '../../models/FileModel';
+// import File from '../../models/FileModel';
 import Student from '../../models/StudentModel';
 
 class StudentQuizInProgressController {
@@ -23,18 +23,18 @@ class StudentQuizInProgressController {
           {
             model: Quiz,
             as: 'quiz',
-            attributes: ['id', 'title', 'description', 'pin'],
+            attributes: ['id', 'title', 'description', 'pin', 'image_base64'],
             include: [
               {
                 model: Teacher,
                 as: 'teacher',
                 attributes: ['name', 'email'],
               },
-              {
-                model: File,
-                as: 'image_quiz',
-                attributes: ['url', 'path', 'name'],
-              },
+              // {
+              //   model: File,
+              //   as: 'image_quiz',
+              //   attributes: ['url', 'path', 'name'],
+              // },
               {
                 model: Tag,
                 as: 'tags_quiz',
@@ -47,7 +47,6 @@ class StudentQuizInProgressController {
           },
         ],
       });
-
 
       const studentQuizInProgress = await Promise.all(
         QuizzesInProgress.map(async (item) => {

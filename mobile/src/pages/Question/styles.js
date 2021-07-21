@@ -67,8 +67,10 @@ export const QuestionDescription = styled.View`
   border-radius: 5px;
 `;
 
-export const QuestionImage = styled.Image`
-  width: ${`${widthPercentageToDp('50%')}px`};
+export const QuestionImage = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  width: ${`${widthPercentageToDp('100%')}px`};
   height: ${`${heightPercentageToDp('25%')}px`};
   margin-top: ${`${heightPercentageToDp('2%')}px`};
   border-radius: 5px;

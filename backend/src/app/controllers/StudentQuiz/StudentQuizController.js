@@ -31,7 +31,6 @@ class StudentQuizController {
         is_finished: false,
       });
 
-
       return res.status(200).json(finished);
     } catch (err) {
       return res.status(500).json(err);
@@ -66,10 +65,10 @@ class StudentQuizController {
           },
         })
       ).map((item) => item.question_id);
+
       const questionNotAnswered = questionQuiz.filter(
         (question) => !idQuestionsAnswered.includes(question.id)
       );
-
 
       // CASO EXISTA QUESTÕES NÃO RESPONDIDAS, EU CADASTO AS MESMAS SEM MARCAR NENHUM ALTERNATIVA
       await Promise.all(
