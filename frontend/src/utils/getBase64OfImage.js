@@ -8,7 +8,7 @@ export default (file) =>
       compress
         .compress([file], {
           size: 1, // the max size in MB, defaults to 2MB
-          quality: 1, // the quality of the image, max is 1,
+          quality: 0.7, // the quality of the image, max is 1,
           maxWidth: 800, // the max width of the output image, defaults to 600px
           maxHeight: 600, // the max height of the output image, defaults to 1920px
           resize: true, // defaults to true, set false if you do not want to resize the image width and height
