@@ -27,8 +27,7 @@ class App {
     * */
     this.server.use(compression());
     this.server.use(helmet());
-    this.server.use(express.json({ limit: '50mb' }));
-    // this.server.use(express.urlencoded({ limit: '50mb' }));
+    this.server.use(express.json({ limit: '5mb' }));
     this.server.use(cors());
     this.server.use(
       '/files',

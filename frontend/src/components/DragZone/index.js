@@ -1,24 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
+import SnackBar from '@components/SnackBar';
 import { Container } from './style';
 
+const maxSize = 734003;
+
 const StyledDropzone = (props) => {
+  const [openSnackBar, setOpenSnackBar] = useState({
+    message: '',
+    open: false,
+  });
+
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSnackBar({
+      message: '',
+      open: false,
+    });
+  };
+
+  const handleOpenErrorSnackBar = (message) => {
+    setOpenSnackBar({
+      message: '',
+      open: false,
+    });
+    setTimeout(() => {
+      setOpenSnackBar({
+        message,
+        open: true,
+      });
+    }, 250);
+  };
+
   const {
     getRootProps,
     getInputProps,
     isDragActive,
     isDragAccept,
     acceptedFiles,
+    // fileRejections,
     isDragReject,
   } = useDropzone({
     accept: 'image/*',
     maxFiles: 1,
-    onDrop: (files) => {
+    maxSize,
+    onDropAccepted: (files) => {
       props.handleChange(files);
+    },
+    onDropRejected: () => {
+      handleOpenErrorSnackBar('Imagem Inválida');
     },
   });
 
+  // console.log(fileRejections);
   const files = acceptedFiles.map((file) => (
     <span key={file.path}>
       : {file.path} - {file.size} bytes
@@ -31,6 +69,9 @@ const StyledDropzone = (props) => {
       >
         <input {...getInputProps()} />
         <p> Você pode arrastar e soltar imagens aqui para adicioná-las.</p>
+        <p style={{ marginTop: '-10px' }}>
+          Tamanho máximo: {maxSize / 1000000} MB
+        </p>
 
         {acceptedFiles.length > 0 && (
           <aside>
@@ -41,6 +82,14 @@ const StyledDropzone = (props) => {
           </aside>
         )}
       </Container>
+
+      <SnackBar
+        openSnackBar={openSnackBar.open}
+        handleCloseSnackBar={handleCloseSnackBar}
+        autoHideDuration={1000}
+        text={openSnackBar.message}
+        severity="error"
+      />
     </div>
   );
 };

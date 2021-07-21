@@ -9,7 +9,6 @@ import DragZone from '@components/DragZone';
 
 // UTILS
 import getBase64 from '@utils/getBase64OfImage';
-// import getBlob from '@utils/getBlobOfImage';
 
 const DragImageInput = ({
   formikID,
