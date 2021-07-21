@@ -13,8 +13,8 @@ export const StyledCardMedia = styled(CardMedia)`
 `;
 
 export const EmptyImage = styled.div`
-  width: 390px;
-  height: 150px;
+  flex-shrink: 0;
+  width: 200px;
   background: ${({ theme }) => theme.palette.primary.main};
 `;
 
