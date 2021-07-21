@@ -3776,6 +3776,11 @@ compose-function@3.0.3:
   dependencies:
     arity-n "^1.0.4"
 
+compress.js@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/compress.js/-/compress.js-1.1.2.tgz#2c19528a017b7d500673f2df69e66b04074d1464"
+  integrity sha512-92bBngXANtmZpyBqO7E5nQMt6TOJtso8FO5fEx85WeF2t/CDAxs8K+KSu8EuLGMZWWMOdxvFf/bsXG7rOPmAyw==
+
 compressible@~2.0.16:
   version "2.0.18"
   resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.18.tgz#af53cca6b070d4c3c0750fbd77286a6d7cc46fba"

@@ -22,12 +22,12 @@ class App {
 
   middleware() {
     /**
-    Em this.server.use(express.json()), estou dizendo à aplicação
-    para entender quando meu corpo de requisição for um JSON;
-    * */
-    this.server.use(compression());
+     Em this.server.use(express.json()), estou dizendo à aplicação
+     para entender quando meu corpo de requisição for um JSON;
+     * */
+    this.server.use(compression({ threshold: 0 }));
     this.server.use(helmet());
-    this.server.use(express.json({ limit: '5mb' }));
+    this.server.use(express.json({ limit: '50mb' }));
     this.server.use(cors());
     this.server.use(
       '/files',
