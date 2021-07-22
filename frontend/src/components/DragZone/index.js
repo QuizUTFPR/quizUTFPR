@@ -41,7 +41,7 @@ const StyledDropzone = (props) => {
     getInputProps,
     isDragActive,
     isDragAccept,
-    acceptedFiles,
+    // acceptedFiles,
     // fileRejections,
     isDragReject,
   } = useDropzone({
@@ -56,11 +56,11 @@ const StyledDropzone = (props) => {
     },
   });
 
-  const files = acceptedFiles.map((file) => (
-    <span key={file.path}>
-      : {file.path} - {file.size} bytes
-    </span>
-  ));
+  // const files = acceptedFiles.map((file) => (
+  //   <span key={file.path}>
+  //     : {file.path} - {file.size} bytes
+  //   </span>
+  // ));
   return (
     <div className="container">
       <Container
@@ -72,14 +72,14 @@ const StyledDropzone = (props) => {
           Tamanho máximo: {maxSize / 1000000} MB
         </p>
 
-        {acceptedFiles.length > 0 && (
+        {/* {acceptedFiles.length > 0 && (
           <aside>
             <span>
               <b>Imagem</b>
             </span>
             <>{files}</>
           </aside>
-        )}
+        )} */}
       </Container>
 
       <SnackBar

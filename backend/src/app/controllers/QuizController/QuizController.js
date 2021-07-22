@@ -20,6 +20,7 @@ class QuizController {
         visibility: Yup.string().required().max(10),
         id_image: Yup.number(),
         tags: Yup.array().required('Informe as tags do quiz!'),
+        imageBase64: Yup.string(),
       });
 
       // Check body of requisiton
@@ -195,6 +196,7 @@ class QuizController {
         visibility: Yup.string().required().max(10),
         id_image: Yup.number(),
         tags: Yup.array().required('Informe as tags do quiz!'),
+        imageBase64: Yup.string(),
       });
 
       // Check body of requisiton

@@ -53,6 +53,7 @@ class QuestionController {
             })
           )
           .required('Informe as alternativas.'),
+        imageBase64: Yup.string(),
       });
 
       // Check body of requisiton
