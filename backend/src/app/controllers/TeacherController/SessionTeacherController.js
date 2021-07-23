@@ -20,7 +20,6 @@ class SessionTeacherController {
         return res.status(400).json({ error: 'Falha na validação!' });
       }
 
-      console.log(process.env)
 
       const { username, password } = req.body;
 
@@ -93,7 +92,6 @@ class SessionTeacherController {
         }),
       });
     } catch (err) {
-      console.log(err, err.response)
       if (err.response.status === 401) {
         return res
           .status(403)
