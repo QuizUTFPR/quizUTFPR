@@ -1,12 +1,12 @@
 FROM node:lts-alpine
 
-RUN sudo mkdir -p /home/node/api_prod/node_modules &&  sudo chown -R node:node /home/node/api_prod
+RUN mkdir -p /home/node/api_prod/node_modules && chown -R node:node /home/node/api_prod
 
 WORKDIR /home/node/api_prod
 
 COPY ./package*.json .
 
-RUN sudo apk update && sudo apk add python3 make g++
+RUN apk update && apk add python3 make g++
 
 RUN yarn install --production=true
 

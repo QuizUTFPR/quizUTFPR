@@ -1,5 +1,5 @@
 FROM node:lts-alpine as builder
-RUN sudo mkdir -p /home/node/react_prod/node_modules && sudo chown -R node:node /home/node/react_prod
+RUN mkdir -p /home/node/react_prod/node_modules && chown -R node:node /home/node/react_prod
 
 WORKDIR /home/node/react_prod
 ENV PATH /home/node/react_prod/node_modules/.bin:$PATH
