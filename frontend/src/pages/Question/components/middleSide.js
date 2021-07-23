@@ -103,7 +103,7 @@ const MiddleSide = ({
             </ContainerImage>
           )}
           {!location.state.published && !formik.values.question.imageBase64 && (
-            <Grid item xs={12} style={{ marginBottom: '-80px' }}>
+            <Grid item xs={12}>
               <StyledButton
                 style={{ width: '50%' }}
                 color="secondary"
@@ -131,6 +131,7 @@ const MiddleSide = ({
               </ErrorMessage>
             )}
           </Grid>
+
           <Grid container align="center" justifyContent="center" spacing={2}>
             {formik.values.question.answer.map((item, index) => (
               <Grid
