@@ -21,6 +21,7 @@ import RightSide from './components/rightSide';
 import AlertGetOut from './components/confirmGetOut';
 import ChangeQuestion from './components/confirmChangeTypeQuestion';
 import PreviewLatex from './components/PreviewLatex';
+import DragImageContainer from './components/dragImageContainer';
 
 // PAGES
 import TypeOfQuestion from '../TypeOfQuestion';
@@ -55,6 +56,7 @@ const Question = ({ history, location }) => {
   const [openAlert, setOpenAlert] = useState(false);
   const [openGetOutAlert, setOpenGetOutAlert] = useState(false);
   const [previewQuestion, setPreviewQuestion] = useState(false);
+  const [openDragImage, setOpenDragImage] = useState(false);
   const [onScreen, setOnScreen] = useState({
     index: 0,
     question: questions[0],
@@ -71,6 +73,9 @@ const Question = ({ history, location }) => {
       indexQuestion: null,
       type: null,
     });
+
+  const handleOpenDragImage = () => setOpenDragImage(true);
+  const handleCloseDragImage = () => setOpenDragImage(false);
 
   const handleOpenPreviewQuestion = () => setPreviewQuestion(true);
   const handleClosePreviewQuestion = () => setPreviewQuestion(false);
@@ -167,6 +172,7 @@ const Question = ({ history, location }) => {
       history.push(QUIZ);
     }
   };
+
   return (
     <>
       <Header
@@ -199,6 +205,7 @@ const Question = ({ history, location }) => {
           updateAnswer={updateAnswer}
           handleClickOpenAlert={handleClickOpenAlert}
           handleOpenPreviewQuestion={handleOpenPreviewQuestion}
+          handleOpenDragImage={handleOpenDragImage}
         />
 
         {/* RIGHT */}
@@ -250,6 +257,14 @@ const Question = ({ history, location }) => {
           modalState={openChangeTypeQuestionModal}
           handleClose={handleCloseChangeTypeQuestion}
           handleChange={changeTypeQuestion}
+        />
+      </Modal>
+
+      <Modal open={openDragImage} handleClose={handleCloseDragImage}>
+        <DragImageContainer
+          updateQuestion={updateQuestion}
+          formik={formik}
+          handleClose={handleCloseDragImage}
         />
       </Modal>
     </>

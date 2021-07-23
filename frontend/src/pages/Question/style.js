@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
-import { Grid, AppBar, Button, Box } from '@material-ui/core';
+import {
+  Grid,
+  AppBar,
+  Button,
+  Box,
+  Stack,
+  IconButton,
+} from '@material-ui/core';
 import { ExitToApp } from '@material-ui/icons/';
 import QuestionInput from './components/input';
 import CheckBox from './components/checkbox';
@@ -8,6 +15,7 @@ import MyRadio from './components/radio';
 
 export const StyledAppBar = styled(AppBar)`
   background: white;
+  z-index: 2;
 `;
 
 export const CardSelectQuestion = styled(Button)`
@@ -102,8 +110,34 @@ export const GridButtonNewQuestion = styled(Grid)`
   }
 `;
 
+export const ContainerImage = styled(Grid)`
+  position: relative;
+`;
+
+export const StackImageButton = styled(Stack).attrs({
+  direction: 'row',
+  alignItems: 'center',
+  spacing: 2,
+})`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+`;
+
+export const PreviewImageButton = styled(IconButton).attrs({
+  color: 'primary',
+})`
+  background: ${({ theme }) => theme.palette.secondary.main};
+  color: white;
+
+  &:hover {
+    background: #00000073;
+  }
+`;
+
 export const PreviewImage = styled.img`
-  max-width: 400px;
+  max-height: 400px;
+  max-width: 600px;
   margin-bottom: -40px;
 `;
 

@@ -2,11 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // ICONS
-import {
-  AddCircle,
-  KeyboardArrowDown,
-  KeyboardArrowUp,
-} from '@material-ui/icons/';
+import { AddCircle, ArrowUpward, ArrowDownward } from '@material-ui/icons/';
 
 // COMPONENTS
 import { Grid, Typography, IconButton } from '@material-ui/core';
@@ -57,9 +53,8 @@ const LeftSide = ({
                   onClick={() => handleToUp(index, handleChangeQuestion)}
                   size="small"
                   disabled={location.state.published}
-                  style={{ padding: '0' }}
                 >
-                  <KeyboardArrowUp />
+                  <ArrowUpward />
                 </IconButton>
               )}
               {index !== questions.length - 1 && (
@@ -67,9 +62,8 @@ const LeftSide = ({
                   disabled={location.state.published}
                   onClick={() => handleToDown(index, handleChangeQuestion)}
                   size="small"
-                  style={{ padding: '0' }}
                 >
-                  <KeyboardArrowDown />
+                  <ArrowDownward />
                 </IconButton>
               )}
             </Grid>

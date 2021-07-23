@@ -23,7 +23,7 @@ const ChangeQuestionType = forwardRef((props, ref) => {
   return (
     <Wrapper>
       <DialogTitle id="id-dialog-title">
-        Deseja mesmo alterar o tipo da Questão?
+        Deseja mesmo alterar o tipo da questão?
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="id-dialog-description">

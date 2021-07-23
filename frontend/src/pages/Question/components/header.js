@@ -43,7 +43,7 @@ const Header = ({
     statusOfQuestions = (
       <WrapperMessage>
         <Warning />
-        <StyledMessage>Não Salvo</StyledMessage>
+        <StyledMessage>Há alterações que não foram salvas</StyledMessage>
       </WrapperMessage>
     );
   }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import Button from '@components/Button';
 
 import SnackBar from '@components/SnackBar';
 import { Container } from './style';
@@ -71,6 +72,13 @@ const StyledDropzone = (props) => {
         <p style={{ marginTop: '-10px' }}>
           Tamanho máximo: {maxSize / 1000000} MB
         </p>
+        <Button
+          style={{ marginTop: '-10px' }}
+          color="secondary"
+          variant="outlined"
+        >
+          BROWSE
+        </Button>
 
         {/* {acceptedFiles.length > 0 && (
           <aside>

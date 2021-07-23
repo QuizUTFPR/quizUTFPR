@@ -14,6 +14,7 @@ const DragImageInput = ({
   formikID,
   handleFormikChange,
   handlePropsChange,
+  handleCloseModal,
   ...props
 }) => {
   const [timer, setTimer] = useState(null);
@@ -54,6 +55,8 @@ const DragImageInput = ({
       index: handlePropsChange.index,
       handleUpdate: handlePropsChange.handleUpdate,
     });
+
+    handleCloseModal();
   };
 
   return <DragZone handleChange={changeContextValue} {...props} />;
@@ -61,6 +64,7 @@ const DragImageInput = ({
 
 DragImageInput.defaultProps = {
   handleFormikChange: () => {},
+  handleCloseModal: () => {},
 };
 
 DragImageInput.propTypes = {
@@ -71,6 +75,7 @@ DragImageInput.propTypes = {
     key: PropTypes.arrayOf(PropTypes.string),
     index: PropTypes.number,
   }).isRequired,
+  handleCloseModal: PropTypes.func,
 };
 
 export default DragImageInput;

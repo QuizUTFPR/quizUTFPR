@@ -2,13 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // ICONS
-import { Delete, Check, Visibility } from '@material-ui/icons/';
+import {
+  Delete,
+  Check,
+  Visibility,
+  AttachFile,
+  Edit,
+} from '@material-ui/icons/';
 
 // COMPONENTS
 import StyledButton from '@components/Button';
 import { Grid } from '@material-ui/core';
 import ErrorMessage from '@components/Messages/error';
-import DragImageInput from './dragImage';
+import Tooltip from '@components/ToolTip';
+
+// import DragImageInput from './dragImage';
 
 import {
   StyledAnswerInput,
@@ -19,6 +27,9 @@ import {
   HiddenCheckBox,
   ShowOption,
   HiddenRadio,
+  ContainerImage,
+  StackImageButton,
+  PreviewImageButton,
 } from '../style';
 
 const MiddleSide = ({
@@ -28,6 +39,7 @@ const MiddleSide = ({
   updateAnswer,
   handleClickOpenAlert,
   handleOpenPreviewQuestion,
+  handleOpenDragImage,
   errors,
   location,
 }) => (
@@ -57,21 +69,52 @@ const MiddleSide = ({
             />
           </Grid>
 
-          <Grid item xs={12}>
-            ̣ <PreviewImage src={formik.values.question.imageBase64} />
-          </Grid>
-          {!location.state.published && (
+          {formik.values.question.imageBase64 && (
+            <ContainerImage>
+              <StackImageButton>
+                <Tooltip arrow ariaLabel="editar" title="Editar">
+                  <PreviewImageButton
+                    disabled={location.state.published}
+                    size="small"
+                    onClick={handleOpenDragImage}
+                  >
+                    <Edit />
+                  </PreviewImageButton>
+                </Tooltip>
+
+                <Tooltip arrow ariaLabel="excluir" title="Excluir">
+                  <PreviewImageButton
+                    disabled={location.state.published}
+                    size="small"
+                    onClick={() => {
+                      formik.setFieldValue('question.imageBase64', '');
+                      updateQuestion({
+                        value: '',
+                        key: 'imageBase64',
+                        index: formik.values.index,
+                      });
+                    }}
+                  >
+                    <Delete />
+                  </PreviewImageButton>
+                </Tooltip>
+              </StackImageButton>
+              <PreviewImage src={formik.values.question.imageBase64} />
+            </ContainerImage>
+          )}
+          {!location.state.published && !formik.values.question.imageBase64 && (
             <Grid item xs={12} style={{ marginBottom: '-80px' }}>
-              <DragImageInput
-                formikID={['question.imageObj', 'question.imageBase64']}
-                name="Imagem de Capa"
-                handleFormikChange={formik.setFieldValue}
-                handlePropsChange={{
-                  handleUpdate: updateQuestion,
-                  key: ['imageObj', 'imageBase64'],
-                  index: formik.values.index,
-                }}
-              />
+              <StyledButton
+                style={{ width: '50%' }}
+                color="secondary"
+                variant="outlined"
+                onClick={handleOpenDragImage}
+                disabled={location.state.published}
+                startIcon={<AttachFile />}
+                size="large"
+              >
+                Adicionar Imagem
+              </StyledButton>
             </Grid>
           )}
 

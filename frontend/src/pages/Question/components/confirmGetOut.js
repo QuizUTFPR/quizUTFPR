@@ -26,7 +26,7 @@ const GetOutAlert = forwardRef((props, ref) => {
 
   return (
     <Wrapper>
-      <DialogTitle id="id-dialog-title">Deseja mesmo Sair?</DialogTitle>
+      <DialogTitle id="id-dialog-title">Deseja mesmo sair?</DialogTitle>
       <DialogContent>
         <DialogContentText id="id-dialog-description">
           Há alterações que não foram salvas. Se você sair agora, perderá todas
@@ -37,7 +37,13 @@ const GetOutAlert = forwardRef((props, ref) => {
         <Button onClick={handleClose} color="primary" variant="outlined">
           Cancelar
         </Button>
-        <Button component={Link} to={QUIZ} color="primary" variant="contained">
+        <Button
+          style={{ marginLeft: '10px' }}
+          component={Link}
+          to={QUIZ}
+          color="primary"
+          variant="contained"
+        >
           Sair mesmo assim
         </Button>
       </DialogActions>
