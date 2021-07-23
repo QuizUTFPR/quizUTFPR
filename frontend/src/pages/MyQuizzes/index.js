@@ -122,6 +122,7 @@ const Quiz = ({ history }) => {
 
       await api.post('/quiz/publish', quizUpdated);
       handleClickSnackBar('Quiz publicado com sucesso!', 'success');
+      getQuizzes();
     } catch (error) {
       handleClickSnackBar(error.response.data.error, 'error');
     }
@@ -129,7 +130,7 @@ const Quiz = ({ history }) => {
 
   useEffect(() => {
     getQuizzes();
-  }, [publishQuiz]);
+  }, []);
 
   return (
     <>

@@ -37,7 +37,7 @@ const CriarQuiz = ({ history }) => {
     },
     onSubmit: async (values) => {
       // const responseFile = null;
-      let base64 = null;
+      let base64 = '';
       if (values.imageObj !== null) {
         base64 = await getBase64(values.imageObj);
         // const file = new FormData();
