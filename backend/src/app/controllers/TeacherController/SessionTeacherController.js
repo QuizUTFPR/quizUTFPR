@@ -20,6 +20,8 @@ class SessionTeacherController {
         return res.status(400).json({ error: 'Falha na validação!' });
       }
 
+      console.log(process.env)
+
       const { username, password } = req.body;
 
       // OBTENDO TOKEN PARA CONSEGUIR UTILIZAR API DO LDAP
