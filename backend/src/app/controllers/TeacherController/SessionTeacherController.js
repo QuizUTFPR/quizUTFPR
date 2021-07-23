@@ -93,6 +93,7 @@ class SessionTeacherController {
         }),
       });
     } catch (err) {
+      console.log(err, err.response)
       if (err.response.status === 401) {
         return res
           .status(403)
