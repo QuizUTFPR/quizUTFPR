@@ -1,12 +1,12 @@
 FROM node:lts-alpine
 
-RUN mkdir -p /home/node/api_prod/node_modules && chown -R node:node /home/node/api_prod
+RUN sudo mkdir -p /home/node/api_prod/node_modules &&  sudo chown -R node:node /home/node/api_prod
 
 WORKDIR /home/node/api_prod
 
 COPY ./package*.json .
 
-RUN apk update && apk add python3 make g++
+RUN sudo apk update && sudo apk add python3 make g++
 
 RUN yarn install --production=true
 
@@ -15,7 +15,5 @@ USER node
 COPY --chown=node:node . .
 
 ENV NODE_ENV production
-
-EXPOSE 3333
 
 CMD yarn sequelize db:migrate && yarn start:prod
