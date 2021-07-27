@@ -2,10 +2,10 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // const ip = '192.168.15.7'; // Jhonatan
-const ip = '10.0.0.109'; // Jessé
+const ip = 'dacom.cm.utfpr.edu.br:17088/'; // Jessé
 
 const api = axios.create({
-  baseURL: `http://${ip}:3333`,
+  baseURL: `http://${ip}`,
 });
 
 api.interceptors.request.use(async (config) => {
