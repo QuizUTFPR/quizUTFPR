@@ -43,6 +43,36 @@ const QuestionDatabase = forwardRef((props, ref) => {
     suggestions: [],
   };
 
+  const [stateSnackBar, setStateSnackBar] = useState({
+    open: false,
+    text: '',
+    severity: '',
+    autoHideDuration: 1000,
+  });
+
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setStateSnackBar((prevState) => ({ ...prevState, open: false }));
+  };
+
+  const handleClickSnackBar = (
+    text,
+    severity,
+    checked = false,
+    autoHideDuration = 1000
+  ) => {
+    if (!checked) {
+      setTimeout(() => {
+        setStateSnackBar({ text, open: true, severity, autoHideDuration });
+      }, 250);
+    } else {
+      setStateSnackBar({ text, open: true, severity, autoHideDuration });
+    }
+  };
+
   const formik = useFormik({
     initialValues: initialState,
     onSubmit: async ({ tag }) => {
@@ -85,7 +115,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
           formik.setFieldValue('questions', []);
         }
       } catch (error) {
-        console.log(error);
+        handleClickSnackBar(error.response.data.error, 'error');
       }
       setLoading(false);
     },
@@ -93,10 +123,21 @@ const QuestionDatabase = forwardRef((props, ref) => {
 
   useEffect(() => {
     const getTags = async () => {
-      const { data } = await api.get('/tag/question');
-      if (data) {
-        const newSuggestions = data.map((tag) => tag.name);
-        formik.setFieldValue('suggestions', newSuggestions);
+      try {
+        const response = await api.get('/tag/question');
+        if (response.data) {
+          const newSuggestions = response.data.map((tag) => tag.name);
+          formik.setFieldValue('suggestions', newSuggestions);
+        } else {
+          handleClickSnackBar(
+            'Não existe nenhuma tag com questões cadastrada.',
+            'warning',
+            false,
+            2000
+          );
+        }
+      } catch (error) {
+        handleClickSnackBar(error.response.data.error, 'error');
       }
     };
 
@@ -113,25 +154,6 @@ const QuestionDatabase = forwardRef((props, ref) => {
       props.handleaddQuestion(question);
     } else {
       props.handleRemoveQuestion(question);
-    }
-  };
-
-  const [openSnackBar, setOpenSnackBar] = useState(false);
-
-  const handleCloseSnackBar = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpenSnackBar(false);
-  };
-
-  const handleClickSnackBar = (checked) => {
-    setOpenSnackBar(false);
-    if (!checked) {
-      setTimeout(() => {
-        setOpenSnackBar(true);
-      }, 250);
     }
   };
 
@@ -211,7 +233,13 @@ const QuestionDatabase = forwardRef((props, ref) => {
               key={index}
               item
               xs={12}
-              onClick={() => handleClickSnackBar(checkboxes[question.title])}
+              onClick={() =>
+                handleClickSnackBar(
+                  'Questão adicionada com sucesso!',
+                  'success',
+                  checkboxes[question.title]
+                )
+              }
             >
               <Question
                 question={question}
@@ -225,10 +253,11 @@ const QuestionDatabase = forwardRef((props, ref) => {
       </Wrapper>
 
       <SnackBar
-        openSnackBar={openSnackBar}
+        openSnackBar={stateSnackBar.open}
         handleCloseSnackBar={handleCloseSnackBar}
-        autoHideDuration={1000}
-        text="Questão adicionada com sucesso!"
+        autoHideDuration={stateSnackBar.autoHideDuration}
+        text={stateSnackBar.text}
+        severity={stateSnackBar.severity}
       />
     </>
   );

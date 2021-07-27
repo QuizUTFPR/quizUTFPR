@@ -4,8 +4,8 @@ import React from 'react';
 import {
   Accordion,
   AccordionDetails,
-  Typography,
   Divider,
+  Typography,
 } from '@material-ui/core';
 // import Tooltip from '@components/ToolTip';
 // import CircularProgressWithLabel from '@components/CircularProgressWithLabel';
@@ -22,7 +22,7 @@ import {
 import getStringTypeOfQuestion from '@utils/getStringTypeOfQuestion';
 
 // STYLES
-import { StudentBar } from './style';
+import { StudentBar, StyledTypography } from './style';
 import {
   StyledAccordionSummary,
   AnswerItem,
@@ -35,10 +35,17 @@ import {
   TextValueResumeOfQuestion,
 } from '../style';
 
-const AccordionWrapper = ({ quizData }) => {
+const AccordionWrapper = ({ quizData, pin }) => {
   const { questions, studentQuiz } = quizData;
+
   return (
     <>
+      {!studentQuiz.length && (
+        <StyledTypography>
+          Seu Quiz não foi respondido por nenhum aluno até o momento. <br />
+          Compartilhe seu Quiz utilizando o seguinte PIN {pin}
+        </StyledTypography>
+      )}
       {studentQuiz.map((student, studentIndex) => (
         <Accordion key={student.id} TransitionProps={{ unmountOnExit: true }}>
           <StyledAccordionSummary

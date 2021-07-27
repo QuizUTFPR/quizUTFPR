@@ -20,6 +20,7 @@ import { TitlePage } from './style';
 const Statistics = () => {
   const [questionQuiz, setQuestionQuiz] = useState(false);
   const [studentQuiz, setStudentQuiz] = useState(false);
+  const [quizPin, setQuizPin] = useState();
   const { id } = useParams();
 
   const fetchData = async () => {
@@ -40,7 +41,7 @@ const Statistics = () => {
       );
 
       setQuestionQuiz(questionQuizStatistics);
-      // setQuestionQuiz(data);
+      setQuizPin(questionQuizStatistics.quiz.pin);
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +50,6 @@ const Statistics = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
   const TabLabels = [
     {
       icon: <LibraryBooks />,
@@ -59,7 +59,9 @@ const Statistics = () => {
     {
       icon: <Face />,
       label: 'ANÁLISE POR ALUNOS',
-      component: <AccordionStudentQuizStatistics quizData={studentQuiz} />,
+      component: (
+        <AccordionStudentQuizStatistics quizData={studentQuiz} pin={quizPin} />
+      ),
     },
   ];
 

@@ -71,34 +71,34 @@ const MiddleSide = ({
 
           {formik.values.question.imageBase64 && (
             <ContainerImage>
-              <StackImageButton>
-                <Tooltip arrow ariaLabel="editar" title="Editar">
-                  <PreviewImageButton
-                    disabled={location.state.published}
-                    size="small"
-                    onClick={handleOpenDragImage}
-                  >
-                    <Edit />
-                  </PreviewImageButton>
-                </Tooltip>
+              {!location.state.published && (
+                <StackImageButton>
+                  <Tooltip arrow ariaLabel="editar" title="Editar">
+                    <PreviewImageButton
+                      size="small"
+                      onClick={handleOpenDragImage}
+                    >
+                      <Edit />
+                    </PreviewImageButton>
+                  </Tooltip>
 
-                <Tooltip arrow ariaLabel="excluir" title="Excluir">
-                  <PreviewImageButton
-                    disabled={location.state.published}
-                    size="small"
-                    onClick={() => {
-                      formik.setFieldValue('question.imageBase64', '');
-                      updateQuestion({
-                        value: '',
-                        key: 'imageBase64',
-                        index: formik.values.index,
-                      });
-                    }}
-                  >
-                    <Delete />
-                  </PreviewImageButton>
-                </Tooltip>
-              </StackImageButton>
+                  <Tooltip arrow ariaLabel="excluir" title="Excluir">
+                    <PreviewImageButton
+                      size="small"
+                      onClick={() => {
+                        formik.setFieldValue('question.imageBase64', '');
+                        updateQuestion({
+                          value: '',
+                          key: 'imageBase64',
+                          index: formik.values.index,
+                        });
+                      }}
+                    >
+                      <Delete />
+                    </PreviewImageButton>
+                  </Tooltip>
+                </StackImageButton>
+              )}
               <PreviewImage src={formik.values.question.imageBase64} />
             </ContainerImage>
           )}

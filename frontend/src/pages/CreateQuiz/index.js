@@ -13,10 +13,11 @@ import getBase64 from '@utils/getBase64OfImage';
 // COMPONENTS
 import GridContainer from '@components/Container';
 import ChipInput from '@components/ChipInput';
+import Button from '@components/Button';
+
 import DragImageInput from '@components/DragZone';
 import {
   Grid,
-  Button,
   Typography,
   Divider,
   MenuItem,
@@ -161,7 +162,7 @@ const CriarQuiz = ({ history }) => {
 
         <Grid item xs={6}>
           <Button fullWidth variant="contained" color="primary" type="submit">
-            CRIAR
+            CRIAR QUIZ
           </Button>
         </Grid>
       </Grid>

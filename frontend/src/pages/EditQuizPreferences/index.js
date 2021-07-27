@@ -38,7 +38,6 @@ const Wrapper = forwardRef((props, ref) => (
 // eslint-disable-next-line no-unused-vars
 const EditPreferences = forwardRef((props, ref) => {
   const { quiz } = props;
-  console.log(quiz);
 
   const formik = useFormik({
     initialValues: {
@@ -96,7 +95,7 @@ const EditPreferences = forwardRef((props, ref) => {
         </Grid>
       </Grid>
 
-      <Grid item>
+      <Grid item style={{ marginBottom: '10px' }}>
         <Divider />
       </Grid>
 
@@ -106,9 +105,11 @@ const EditPreferences = forwardRef((props, ref) => {
         onSubmit={formik.handleSubmit}
         spacing={2}
       >
-        <Grid item xs={6} style={{ display: 'flex' }}>
-          <PreviewImage src={formik.values.imageBase64} />
-        </Grid>
+        {formik.values.imageBase64 && (
+          <Grid item xs={6} style={{ display: 'flex' }}>
+            <PreviewImage src={formik.values.imageBase64} />
+          </Grid>
+        )}
         <Grid item xs={12}>
           <DragImageInput
             handleChange={(files) => {

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 
 export const StudentBar = styled(Grid).attrs({
   item: true,
@@ -9,4 +9,10 @@ export const StudentBar = styled(Grid).attrs({
   justify-content: space-between;
   width: 100%;
   padding: 0 20px;
+`;
+
+export const StyledTypography = styled(Typography)`
+  margin-top: 20px;
+  font-weight: 400;
+  text-align: center;
 `;
