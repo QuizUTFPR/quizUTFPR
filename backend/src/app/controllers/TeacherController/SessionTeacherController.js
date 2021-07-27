@@ -47,7 +47,7 @@ class SessionTeacherController {
       const {
         email: teacherEmail,
         name: teacherName,
-        // dn: personCategory,
+        dn: personCategory,
       } = responseLoginLDAP.data;
 
       // IMPEDIR ALUNOS DE SE CONECTAR NO PAINEL DE CONTROLE
