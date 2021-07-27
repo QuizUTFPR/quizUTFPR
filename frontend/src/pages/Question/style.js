@@ -137,7 +137,7 @@ export const PreviewImageButton = styled(IconButton).attrs({
 
 export const PreviewImage = styled.img`
   max-height: 400px;
-  max-width: 600px;
+  max-width: 100%;
   margin-bottom: -40px;
 `;
 
