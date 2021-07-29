@@ -38,7 +38,17 @@ const Login = ({ navigation }) => {
 
   const { login } = useStudentAuth();
 
-  const [showToast, setShowToast] = useState({ open: false, message: '' });
+  const [showToast, setShowToast] = useState({
+    open: false,
+    message: '',
+  });
+
+  const handleCloseToast = () => {
+    setShowToast({
+      open: false,
+      message: '',
+    });
+  };
 
   return (
     <Container>
@@ -49,22 +59,13 @@ const Login = ({ navigation }) => {
         }}
         validationSchema={loginValidationSchema}
         onSubmit={async (values) => {
-          const response = await login(values);
+          const loginResponse = await login(values);
 
-          if (response.status !== 200) {
+          if (loginResponse.response.status !== 200) {
             setShowToast({
               open: true,
-              message: 'Algo deu errado. Tente novamente',
+              message: loginResponse.response.data.error,
             });
-
-            setTimeout(
-              () =>
-                setShowToast({
-                  open: false,
-                  message: '',
-                }),
-              1500
-            );
           }
         }}
       >
@@ -155,7 +156,14 @@ const Login = ({ navigation }) => {
           </>
         )}
       </Formik>
-      {showToast.open && <Toast type="error">{showToast.message}</Toast>}
+      <Toast
+        type="error"
+        handleClose={handleCloseToast}
+        open={showToast.open}
+        timeToErase={1000}
+      >
+        {showToast.message}
+      </Toast>
     </Container>
   );
 };

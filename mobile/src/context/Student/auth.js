@@ -20,7 +20,7 @@ const StudentAuth = ({ children }) => {
       return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (error) {
       console.warn(error);
-      return null;
+      return error;
     }
   };
 
@@ -30,6 +30,7 @@ const StudentAuth = ({ children }) => {
       await AsyncStorage.setItem(localStorageItem, jsonValue);
     } catch (error) {
       console.warn(error);
+      return error;
     }
   };
 
@@ -50,7 +51,8 @@ const StudentAuth = ({ children }) => {
       setStudentInfo(studentValues);
       saveOnLocalStorage(studentValues);
     } catch (error) {
-      console.warn(error);
+      console.warn({ ...error });
+      return error;
     }
   };
 
