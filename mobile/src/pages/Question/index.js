@@ -142,8 +142,6 @@ const Question = () => {
       clearInterval(timer.interval);
       showDialog();
     }
-
-    return () => clearInterval(timer.interval);
   }, [timer.seconds]);
 
   useEffect(
