@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -12,6 +12,7 @@ import Header from '@components/Header';
 import Input from '@components/Input';
 import DismissKeyboard from '@components/DismissKeyboard';
 import ButtonGradient from '@components/ButtonGradient';
+import Toast from '@components/Toast';
 
 // HOOKS
 import useStudentAuth from '@hook/useStudentAuth';
@@ -36,6 +37,9 @@ const Login = ({ navigation }) => {
   });
 
   const { login } = useStudentAuth();
+
+  const [showToast, setShowToast] = useState({ open: false, message: '' });
+
   return (
     <Container>
       <Formik
@@ -44,7 +48,25 @@ const Login = ({ navigation }) => {
           password: '',
         }}
         validationSchema={loginValidationSchema}
-        onSubmit={(values) => login(values)}
+        onSubmit={async (values) => {
+          const response = await login(values);
+
+          if (response.status !== 200) {
+            setShowToast({
+              open: true,
+              message: 'Algo deu errado. Tente novamente',
+            });
+
+            setTimeout(
+              () =>
+                setShowToast({
+                  open: false,
+                  message: '',
+                }),
+              1500
+            );
+          }
+        }}
       >
         {({
           handleChange,
@@ -133,7 +155,9 @@ const Login = ({ navigation }) => {
           </>
         )}
       </Formik>
+      {showToast.open && <Toast type="error">{showToast.message}</Toast>}
     </Container>
   );
 };
+
 export default Login;

@@ -67,7 +67,7 @@ const StudentAuth = ({ children }) => {
       setStudentInfo(studentValues);
       saveOnLocalStorage(studentValues);
     } catch (error) {
-      console.warn(error);
+      return error;
     }
   };
 

@@ -36,6 +36,9 @@ const theme = {
     purple: '#4B24B1',
     white: '#fff',
     grey: '#d3d3d3',
+    red: '#FF6347',
+    green: '#3CB371',
+    blue: '#1e90FF',
   },
   size: {
     padding: 20,
