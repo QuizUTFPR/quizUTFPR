@@ -49,9 +49,9 @@ class SessionTeacherController {
         name: teacherName,
         dn: personCategory,
       } = responseLoginLDAP.data;
-
+      console.log(personCategory.indexOf('alunos') !== -1)
       // IMPEDIR ALUNOS DE SE CONECTAR NO PAINEL DE CONTROLE
-      if (personCategory.indexOf('alunos') !== -1){
+      if ((personCategory.indexOf('alunos') !== -1)){
         console.log(personCategory)
         console.log(personCategory.indexOf('alunos'))
         return res
