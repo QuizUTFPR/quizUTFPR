@@ -51,25 +51,33 @@ const StudentAuth = ({ children }) => {
       setStudentInfo(studentValues);
       saveOnLocalStorage(studentValues);
     } catch (error) {
-      console.warn({ ...error });
-      return error;
+      console.log(error.response);
+      return {
+        status: error.response.status,
+        message: error.response.data.error,
+      };
     }
   };
 
   const login = async (values) => {
     try {
       const { email, password } = values;
-      const { data } = await api.post('/student/login', { email, password });
+      const response = await api.post('/student/login', { email, password });
 
       const studentValues = {
-        token: data.token,
-        student: data.student,
+        token: response.data.token,
+        student: response.data.student,
       };
 
       setStudentInfo(studentValues);
       saveOnLocalStorage(studentValues);
+
+      return response;
     } catch (error) {
-      return error;
+      return {
+        status: error.response.status,
+        message: error.response.data.error,
+      };
     }
   };
 
