@@ -51,111 +51,113 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <Container>
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
-        validationSchema={loginValidationSchema}
-        onSubmit={async (values) => {
-          const response = await login(values);
+    <>
+      <Container>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          validationSchema={loginValidationSchema}
+          onSubmit={async (values) => {
+            const response = await login(values);
 
-          if (response.status !== 200) {
-            setShowToast({
-              open: true,
-              message: response.message,
-            });
-          }
-        }}
-      >
-        {({
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          values,
-          errors,
-          touched,
-        }) => (
-          <>
-            <KeyboardAvoidingView
-              behavior={Platform.OS === 'ios' ? 'padding' : 'position'}
-            >
-              <BackgroundImage />
-              <DismissKeyboard>
-                <>
-                  <Header
-                    iconButton={
-                      <Ionicons name="chevron-back" size={32} color="white" />
-                    }
-                    onPressButton={() => navigation.goBack()}
-                    titleContent="Login"
-                    textContent="Por favor, informe seus dados"
-                  />
-                  <InputWrapper>
-                    <Input
-                      error={errors.email && touched.email}
-                      errorMessage={errors.email}
-                      fill="black"
-                      placeholder="Digite seu e-mail"
-                      icon={
-                        <FontAwesome5
-                          name="user-alt"
-                          size={24}
-                          color="#222222"
-                        />
+            if (response.status !== 200) {
+              setShowToast({
+                open: true,
+                message: response.message,
+              });
+            }
+          }}
+        >
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+          }) => (
+            <>
+              <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'position'}
+              >
+                <BackgroundImage />
+                <DismissKeyboard>
+                  <>
+                    <Header
+                      iconButton={
+                        <Ionicons name="chevron-back" size={32} color="white" />
                       }
-                      label="E-mail"
-                      onChangeText={handleChange('email')}
-                      onBlur={handleBlur('email')}
-                      value={values.email}
+                      onPressButton={() => navigation.goBack()}
+                      titleContent="Login"
+                      textContent="Por favor, informe seus dados"
                     />
+                    <InputWrapper>
+                      <Input
+                        error={errors.email && touched.email}
+                        errorMessage={errors.email}
+                        fill="black"
+                        placeholder="Digite seu e-mail"
+                        icon={
+                          <FontAwesome5
+                            name="user-alt"
+                            size={24}
+                            color="#222222"
+                          />
+                        }
+                        label="E-mail"
+                        onChangeText={handleChange('email')}
+                        onBlur={handleBlur('email')}
+                        value={values.email}
+                      />
 
-                    <Input
-                      error={errors.password && touched.password}
-                      errorMessage={errors.password}
-                      fill="black"
-                      placeholder="Digite sua senha"
-                      icon={
-                        <FontAwesome5 name="lock" size={24} color="#222222" />
-                      }
-                      label="Senha"
-                      secureTextEntry
-                      onChangeText={handleChange('password')}
-                      onBlur={handleBlur('password')}
-                      value={values.password}
-                    />
-                    {/* <ForgotPasswordButton
+                      <Input
+                        error={errors.password && touched.password}
+                        errorMessage={errors.password}
+                        fill="black"
+                        placeholder="Digite sua senha"
+                        icon={
+                          <FontAwesome5 name="lock" size={24} color="#222222" />
+                        }
+                        label="Senha"
+                        secureTextEntry
+                        onChangeText={handleChange('password')}
+                        onBlur={handleBlur('password')}
+                        value={values.password}
+                      />
+                      {/* <ForgotPasswordButton
                     backgroundColor="white"
                     variant="secondary"
                     onPress={() => {}}
                   >
                     Esqueceu sua senha?
                   </ForgotPasswordButton> */}
-                  </InputWrapper>
-                </>
-              </DismissKeyboard>
-            </KeyboardAvoidingView>
+                    </InputWrapper>
+                  </>
+                </DismissKeyboard>
+              </KeyboardAvoidingView>
 
-            <WrapperButton>
-              <ButtonGradient
-                // colors={['#fdb646', '#f99f4c']}
-                variant="primary"
-                onPress={handleSubmit}
-                icon="login-variant"
+              <WrapperButton>
+                <ButtonGradient
+                  // colors={['#fdb646', '#f99f4c']}
+                  variant="primary"
+                  onPress={handleSubmit}
+                  icon="login-variant"
+                >
+                  ENTRAR
+                </ButtonGradient>
+              </WrapperButton>
+              <StyledTextButton
+                variant="secondary"
+                onPress={() => navigation.navigate('Register')}
               >
-                ENTRAR
-              </ButtonGradient>
-            </WrapperButton>
-            <StyledTextButton
-              variant="secondary"
-              onPress={() => navigation.navigate('Register')}
-            >
-              Não possui uma conta? Cadastre-se
-            </StyledTextButton>
-          </>
-        )}
-      </Formik>
+                Não possui uma conta? Cadastre-se
+              </StyledTextButton>
+            </>
+          )}
+        </Formik>
+      </Container>
       <Toast
         type="error"
         handleClose={handleCloseToast}
@@ -164,7 +166,7 @@ const Login = ({ navigation }) => {
       >
         {showToast.message}
       </Toast>
-    </Container>
+    </>
   );
 };
 

@@ -10,6 +10,7 @@ import useQuestions from '@hook/useQuestion';
 // COMPONENTS
 import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 import image2 from '@assets/patterns/halftone.png';
+import Toast from '@components/Toast';
 
 import LinearContainer from '@components/LinearContainer';
 import Dialog from '@components/Dialog';
@@ -59,6 +60,18 @@ const Question = () => {
     interval: null,
   });
 
+  const [showToast, setShowToast] = useState({
+    open: false,
+    message: '',
+  });
+
+  const handleCloseToast = () => {
+    setShowToast({
+      open: false,
+      message: '',
+    });
+  };
+
   const [visible, setVisible] = useState(false);
   const [isConfirmExitVisible, setIsConfirmExitVisible] = useState(false);
 
@@ -74,7 +87,11 @@ const Question = () => {
         JSON.stringify(requestQuestion) &&
       timer.seconds > 0
     ) {
-      console.log('Avisar que o usuário deve escolher sua resposta!');
+      // console.log('Avisar que o usuário deve escolher sua resposta!');
+      setShowToast({
+        open: true,
+        message: 'Marque ao menos uma alternativa!',
+      });
     } else {
       await handleSaveRequestQuestionOnDatabase(timer.seconds);
       const responseFinished = await changeToNextQuestion();
@@ -126,7 +143,7 @@ const Question = () => {
       showDialog();
     }
 
-    // return () => clearInterval(timer.interval);
+    return () => clearInterval(timer.interval);
   }, [timer.seconds]);
 
   useEffect(
@@ -293,6 +310,15 @@ const Question = () => {
         Tem certeza que quer sair? Seu progresso será salvo para que você
         continue depois...
       </Dialog>
+
+      <Toast
+        type="warning"
+        handleClose={handleCloseToast}
+        open={showToast.open}
+        timeToErase={1000}
+      >
+        {showToast.message}
+      </Toast>
     </Container>
   );
 };

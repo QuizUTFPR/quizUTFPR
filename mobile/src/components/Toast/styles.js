@@ -10,6 +10,10 @@ const correctColor = (toastType, theme) => {
   return theme.color.blue;
 };
 
+export const Wrapper = styled.View`
+  align-items: center;
+`;
+
 export const StyledView = styled(Animated.View)`
   position: absolute;
   bottom: 10px;

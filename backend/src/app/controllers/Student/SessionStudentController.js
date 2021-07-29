@@ -33,7 +33,7 @@ class SessionStudentController {
 
       const { id, name } = student;
 
-      return res.json({
+      return res.status(200).json({
         student: {
           name,
           email,

@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Animated } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 // STYLES
 import theme from '@styles/theme';
-import { StyledView, StyledText } from './styles';
+import { StyledView, StyledText, Wrapper } from './styles';
 
 const Toast = ({ type, children, open, timeToErase, handleClose }) => {
   const correctIconName = () => {
@@ -21,6 +21,8 @@ const Toast = ({ type, children, open, timeToErase, handleClose }) => {
     return theme.color.blue;
   };
 
+  // eslint-disable-next-line no-unused-vars
+  const [_, setTime] = useState(null);
   const opacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const Toast = ({ type, children, open, timeToErase, handleClose }) => {
           duration: 350,
           useNativeDriver: true,
         }),
-        Animated.delay(1500),
+        Animated.delay(timeToErase),
         Animated.timing(opacity, {
           toValue: 0,
           duration: 350,
@@ -39,38 +41,44 @@ const Toast = ({ type, children, open, timeToErase, handleClose }) => {
         }),
       ]).start();
     }
+
+    return () => setTime(null);
   }, [open]);
 
   useEffect(() => {
     if (open) {
-      setTimeout(() => handleClose(), timeToErase);
+      setTime(setTimeout(() => handleClose(), timeToErase));
     }
+
+    return () => setTime(null);
   }, [open]);
 
   return (
     <>
       {open && (
-        <StyledView
-          type={type}
-          style={{
-            opacity,
-            transform: [
-              {
-                translateY: opacity.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0, -10],
-                }),
-              },
-            ],
-          }}
-        >
-          <MaterialIcons
-            name={correctIconName()}
-            size={35}
-            color={correctIconColor()}
-          />
-          <StyledText type={type}>{children}</StyledText>
-        </StyledView>
+        <Wrapper>
+          <StyledView
+            type={type}
+            style={{
+              opacity,
+              transform: [
+                {
+                  translateY: opacity.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, -10],
+                  }),
+                },
+              ],
+            }}
+          >
+            <MaterialIcons
+              name={correctIconName()}
+              size={35}
+              color={correctIconColor()}
+            />
+            <StyledText type={type}>{children}</StyledText>
+          </StyledView>
+        </Wrapper>
       )}
     </>
   );
