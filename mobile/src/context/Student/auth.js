@@ -37,21 +37,21 @@ const StudentAuth = ({ children }) => {
   const register = async (values) => {
     try {
       const { name, email, password } = values;
-      const { data } = await api.post('/student/register', {
+      const response = await api.post('/student/register', {
         name,
         email,
         password,
       });
 
       const studentValues = {
-        token: data.token,
-        student: data.student,
+        token: response.data.token,
+        student: response.data.student,
       };
 
       setStudentInfo(studentValues);
       saveOnLocalStorage(studentValues);
+      return response;
     } catch (error) {
-      console.log(error.response);
       return {
         status: error.response.status,
         message: error.response.data.error,
