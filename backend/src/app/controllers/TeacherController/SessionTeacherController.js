@@ -50,12 +50,14 @@ class SessionTeacherController {
         dn: personCategory,
       } = responseLoginLDAP.data;
 
-      console.log(personCategory)
       // IMPEDIR ALUNOS DE SE CONECTAR NO PAINEL DE CONTROLE
-      if (personCategory.indexOf('alunos'))
+      if (personCategory.indexOf('alunos')){
+        console.log(personCategory)
+        console.log(personCategory.indexOf('alunos'))
         return res
           .status(403)
           .json({ error: 'Painel de Controle não permitido para alunos.' });
+      }
 
       // PROCURO SE JÁ EXISTE CADASTRO DO PROFESSOR NO BANCO
       let teacher = await Teacher.findOne({
