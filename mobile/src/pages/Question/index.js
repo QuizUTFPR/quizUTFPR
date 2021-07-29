@@ -179,10 +179,15 @@ const Question = () => {
                 <QuestionDescription>
                   {/* eslint-disable-next-line global-require */}
                   <QuestionImage
-                    source={{
-                      uri: quizData.questions[quizData.indexOnScreen]
-                        .image_base64,
-                    }}
+                    source={
+                      quizData.questions[quizData.indexOnScreen].image_base64
+                        .length
+                        ? {
+                            uri: quizData.questions[quizData.indexOnScreen]
+                              .image_base64,
+                          }
+                        : null
+                    }
                   />
                   <MathJaxSvg
                     fontSize={theme.fontSize}

@@ -81,9 +81,13 @@ const QuizDescription = ({ route }) => {
       <DetailsContainer fill="white">
         <QuizDescriptionHeader>
           <StyledImageBackground
-            source={{
-              uri: image,
-            }}
+            source={
+              image.length
+                ? {
+                    uri: image,
+                  }
+                : null
+            }
           >
             <GoBackButtonWrapper>
               <StyledIconButton onPress={() => navigation.goBack()}>

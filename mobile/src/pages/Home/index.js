@@ -149,9 +149,13 @@ const Home = () => {
                   }
                 >
                   <StyledImage
-                    source={{
-                      uri: item.quiz.image_base64,
-                    }}
+                    source={
+                      item.quiz.image_base64.length
+                        ? {
+                            uri: item.quiz.image_base64,
+                          }
+                        : null
+                    }
                   />
                   <StyledView>
                     <Description>
@@ -202,9 +206,13 @@ const Home = () => {
                   }
                 >
                   <StyledImage
-                    source={{
-                      uri: quiz.image_base64,
-                    }}
+                    source={
+                      quiz.image_base64.length
+                        ? {
+                            uri: quiz.image_base64,
+                          }
+                        : null
+                    }
                   />
                   <StyledView>
                     <Description>
