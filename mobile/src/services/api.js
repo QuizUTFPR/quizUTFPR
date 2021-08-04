@@ -1,8 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// const ip = '192.168.15.7'; // Jhonatan
-const ip = '192.168.15.8:3333/'; // Jessé
+const ip = 'dacom.cm.utfpr.edu.br:17088';
 
 const api = axios.create({
   baseURL: `http://${ip}`,
@@ -16,6 +15,7 @@ api.interceptors.request.use(async (config) => {
       ? `Bearer ${parsedData.token}`
       : '';
   }
+
   return config;
 });
 

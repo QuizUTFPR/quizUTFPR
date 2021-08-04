@@ -29,6 +29,7 @@ No campo expire_in, informe quanto tempo o token será válido, exemplos:
  expiresIn: "120s" // expira em 120s
 ```
 ```bash
+# CONFIGURAÇÃO CASO NÃO USAR O DOCKER
  DB_HOST=
  DB_PORT=
  DB_USER=
@@ -38,6 +39,11 @@ No campo expire_in, informe quanto tempo o token será válido, exemplos:
 
  SECRET=
  EXPIRE_IN=
+
+ # LDAP CONFIG
+LDAP_URL="URL_LDAP_AQUI"
+LDAP_USERNAME="USUARIO_LDAP"
+LDAP_PASSWORD="SENHA_LDAP"
 ```
 
 

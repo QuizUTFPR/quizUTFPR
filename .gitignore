@@ -1,3 +1,6 @@
 mysql_dev
 mysql_prod
 backend/tmp/
+
+docker-compose-prod.yml
+docker-compose-dev.yml
