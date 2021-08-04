@@ -4,3 +4,5 @@ backend/tmp/
 
 docker-compose-prod.yml
 docker-compose-dev.yml
+
+backend/src/app/controllers/TeacherController/SessionTeacherController.js

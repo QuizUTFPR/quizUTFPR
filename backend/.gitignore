@@ -118,3 +118,6 @@ dist
 
 
 *./tmp
+
+
+src/app/controllers/TeacherController/SessionTeacherController.js

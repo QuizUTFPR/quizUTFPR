@@ -51,11 +51,11 @@ class SessionTeacherController {
       } = responseLoginLDAP.data;
 
       // IMPEDIR ALUNOS DE SE CONECTAR NO 1 DE CONTROLE
-      if ((personCategory.indexOf('alunos') !== -1)){
-        return res
-          .status(403)
-          .json({ error: 'Painel de Controle não permitido para alunos.' });
-      }
+      // if ((personCategory.indexOf('alunos') !== -1)){
+      //   return res
+      //     .status(403)
+      //     .json({ error: 'Painel de Controle não permitido para alunos.' });
+      // }
 
       // PROCURO SE JÁ EXISTE CADASTRO DO PROFESSOR NO BANCO
       let teacher = await Teacher.findOne({

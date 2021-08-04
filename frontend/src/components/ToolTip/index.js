@@ -1,14 +1,9 @@
 import React from 'react';
 
-import { Tooltip, Collapse } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 
-const ToolTipComponent = ({ title, ariaLabel, children }) => (
-  <Tooltip
-    arrow
-    aria-label={ariaLabel}
-    title={title}
-    TransitionComponent={Collapse}
-  >
+const ToolTipComponent = ({ title, ariaLabel, children, ...props }) => (
+  <Tooltip arrow aria-label={ariaLabel} title={title} {...props}>
     {children}
   </Tooltip>
 );
