@@ -10,6 +10,7 @@ import api from '@api';
 
 // COMPONENTS
 import Dialog from '@components/Dialog';
+import Toast from '@components/Toast';
 
 // HOOKS
 import useQuestions from '@hook/useQuestion';
@@ -72,8 +73,25 @@ const QuizDescription = ({ route }) => {
     setStudentQuizID(null);
   };
 
-  const copyToClipboard = () => {
+  const [showToast, setShowToast] = useState({
+    open: false,
+    message: '',
+  });
+
+  const handleCloseToast = () => {
+    setShowToast({
+      open: false,
+      message: '',
+    });
+  };
+
+  const copyToClipboardAndShowToast = () => {
     Clipboard.setString(pin);
+
+    setShowToast({
+      open: true,
+      message: 'PIN copiado!',
+    });
   };
 
   return (
@@ -136,7 +154,7 @@ const QuizDescription = ({ route }) => {
         <StyledScrollView>
           <BodyDescription>
             <StyledTitle>PIN</StyledTitle>
-            <StyledPIN onPress={copyToClipboard}>{pin}</StyledPIN>
+            <StyledPIN onPress={copyToClipboardAndShowToast}>{pin}</StyledPIN>
             <StyledTitle>{title}</StyledTitle>
             <StyledDescriptionText>{description}</StyledDescriptionText>
             <StyledTitle>TAGS</StyledTitle>
@@ -183,6 +201,10 @@ const QuizDescription = ({ route }) => {
         Seu score será calculado parcialmente de acordo com as questões já
         respondidas!
       </Dialog>
+
+      <Toast handleClose={handleCloseToast} open={showToast.open}>
+        {showToast.message}
+      </Toast>
     </>
   );
 };
