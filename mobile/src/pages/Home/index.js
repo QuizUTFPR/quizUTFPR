@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { RefreshControl } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import api from '@api';
@@ -85,10 +85,17 @@ const Home = () => {
 
   useFocusEffect(
     useCallback(() => {
-      getAllPublishedQuizzes();
-      getAllQuizzesInProgress();
+      onRefresh();
     }, [])
   );
+
+  useEffect(() => {
+    const unsubscribeListenTabPress = navigation.addListener('tabPress', () => {
+      onRefresh();
+    });
+
+    return unsubscribeListenTabPress;
+  }, [navigation]);
 
   return (
     <Container>
@@ -124,9 +131,6 @@ const Home = () => {
         }
       >
         <>
-          {/* <MathJaxSvg fontSize={18} color="#000000" fontCache>
-            {`<p  style="font-family: PoppinsBold;">teste</p>`}
-          </MathJaxSvg> */}
           {allQuizzesInProgress.length > 0 && (
             <QuizContainer>
               <QuizTitle>Em Progresso</QuizTitle>

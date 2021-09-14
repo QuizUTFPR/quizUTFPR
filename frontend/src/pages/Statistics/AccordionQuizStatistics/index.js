@@ -113,7 +113,7 @@ const AccordionWrapper = ({ quizData }) => {
             color="yellow"
             value={parseInt(percentageOfQuizHit, 10)}
           />
-          )
+
           <QuizPercentageHitDescription>
             Esta porcentagem é relacionada a quantidade de acertos que os
             estudantes obterem em sua tentativa de maior score. <br />
