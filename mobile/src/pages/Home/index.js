@@ -45,6 +45,7 @@ const Home = () => {
 
   const getAllPublishedQuizzes = async () => {
     const { data } = await api.get('/publishedQuiz/getAll');
+
     setAllQuizzes(data);
   };
 
@@ -73,7 +74,7 @@ const Home = () => {
           title: data.quiz.title,
           description: data.quiz.description,
           pin: data.quiz.pin,
-          // image: data.quiz.image_quiz.url,
+          image: data.quiz.image_base64,
           tags: data.quiz.tags_quiz.map((tag) => tag.name),
         },
       });
