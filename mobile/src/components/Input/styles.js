@@ -50,6 +50,8 @@ export const InputView = styled.View`
   height: 100%;
 `;
 
-export const ShowPasswordView = styled.TouchableOpacity`
+export const ShowPasswordView = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.5,
+})`
   padding: 10px;
 `;
