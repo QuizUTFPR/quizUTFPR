@@ -1,28 +1,28 @@
 import styled from 'styled-components/native';
-
 import { widthPercentageToDp } from '@styles/dimensions';
 
 export const Wrapper = styled.View`
   position: relative;
+  margin-bottom: 25px;
 `;
 
 export const InputWrapper = styled.View`
   flex-direction: row;
-  width: ${`${widthPercentageToDp('85%')}px`};
   align-items: center;
+  justify-content: space-between;
+  width: ${`${widthPercentageToDp('85%')}px`};
   background: #eaeaf5;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 5px;
   border-radius: 8px;
   height: 60px;
   border: 1.5px solid
     ${({ theme, error }) => (error ? 'red' : theme.color.fill)};
-  margin-bottom: 20px;
 `;
 
 export const StyledTextInput = styled.TextInput`
-  width: 100%;
   height: 100%;
+  flex: 1;
 `;
 
 export const Label = styled.Text`
@@ -42,4 +42,11 @@ export const Label = styled.Text`
 
 export const IconView = styled.View`
   margin-right: 10px;
+`;
+
+export const InputView = styled.View`
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+  height: 100%;
 `;

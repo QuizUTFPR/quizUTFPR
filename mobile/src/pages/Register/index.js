@@ -86,7 +86,7 @@ const Register = ({ navigation }) => {
                       fill="black"
                       placeholder="Digite seu apelido"
                       icon={
-                        <FontAwesome5 name="user-alt" size={24} color="black" />
+                        <FontAwesome5 name="user-alt" size={18} color="black" />
                       }
                       label="Apelido"
                       onChangeText={handleChange('name')}
@@ -101,7 +101,7 @@ const Register = ({ navigation }) => {
                       autoCompleteType="email"
                       placeholder="Digite seu endereço eletrônico"
                       keyboardType="email-address"
-                      icon={<Zocial name="email" size={24} color="black" />}
+                      icon={<Zocial name="email" size={18} color="black" />}
                       label="E-mail"
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
@@ -114,7 +114,7 @@ const Register = ({ navigation }) => {
                       fill="black"
                       placeholder="Digite uma senha"
                       icon={
-                        <FontAwesome5 name="lock" size={24} color="black" />
+                        <FontAwesome5 name="lock" size={18} color="black" />
                       }
                       label="Senha"
                       secureTextEntry
@@ -129,7 +129,7 @@ const Register = ({ navigation }) => {
                       fill="black"
                       placeholder="Confirme a senha digitada"
                       icon={
-                        <FontAwesome5 name="lock" size={24} color="black" />
+                        <FontAwesome5 name="lock" size={18} color="black" />
                       }
                       label="Confirmar Senha"
                       secureTextEntry

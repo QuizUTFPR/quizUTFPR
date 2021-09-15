@@ -102,7 +102,7 @@ const Login = ({ navigation }) => {
                         icon={
                           <FontAwesome5
                             name="user-alt"
-                            size={24}
+                            size={18}
                             color="#222222"
                           />
                         }
@@ -118,7 +118,7 @@ const Login = ({ navigation }) => {
                         fill="black"
                         placeholder="Digite sua senha"
                         icon={
-                          <FontAwesome5 name="lock" size={24} color="#222222" />
+                          <FontAwesome5 name="lock" size={18} color="#222222" />
                         }
                         label="Senha"
                         secureTextEntry
