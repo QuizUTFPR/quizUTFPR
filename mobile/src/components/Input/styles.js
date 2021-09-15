@@ -13,9 +13,8 @@ export const InputWrapper = styled.View`
   width: ${`${widthPercentageToDp('85%')}px`};
   background: #eaeaf5;
   padding-left: 10px;
-  padding-right: 5px;
   border-radius: 8px;
-  height: 60px;
+  height: 55px;
   border: 1.5px solid
     ${({ theme, error }) => (error ? 'red' : theme.color.fill)};
 `;
@@ -49,4 +48,8 @@ export const InputView = styled.View`
   align-items: center;
   flex: 1;
   height: 100%;
+`;
+
+export const ShowPasswordView = styled.TouchableOpacity`
+  padding: 10px;
 `;

@@ -10,6 +10,7 @@ import {
   IconView,
   Label,
   InputView,
+  ShowPasswordView,
 } from './styles';
 
 const Input = ({
@@ -42,12 +43,13 @@ const Input = ({
           />
         </InputView>
         {secureTextEntry && (
-          <Ionicons
-            name={isChecked ? 'eye-sharp' : 'eye-off-sharp'}
-            size={24}
-            color="black"
-            onPress={handleShowPassword}
-          />
+          <ShowPasswordView onPress={handleShowPassword}>
+            <Ionicons
+              name={isChecked ? 'eye-sharp' : 'eye-off-sharp'}
+              size={25}
+              color="black"
+            />
+          </ShowPasswordView>
         )}
       </InputWrapper>
     </Wrapper>
