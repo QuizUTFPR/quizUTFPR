@@ -42,8 +42,6 @@ const StyledDropzone = (props) => {
     getInputProps,
     isDragActive,
     isDragAccept,
-    // acceptedFiles,
-    // fileRejections,
     isDragReject,
   } = useDropzone({
     accept: 'image/*',
@@ -57,11 +55,6 @@ const StyledDropzone = (props) => {
     },
   });
 
-  // const files = acceptedFiles.map((file) => (
-  //   <span key={file.path}>
-  //     : {file.path} - {file.size} bytes
-  //   </span>
-  // ));
   return (
     <div className="container">
       <Container
@@ -79,15 +72,6 @@ const StyledDropzone = (props) => {
         >
           BROWSE
         </Button>
-
-        {/* {acceptedFiles.length > 0 && (
-          <aside>
-            <span>
-              <b>Imagem</b>
-            </span>
-            <>{files}</>
-          </aside>
-        )} */}
       </Container>
 
       <SnackBar
