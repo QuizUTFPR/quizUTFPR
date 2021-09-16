@@ -77,6 +77,7 @@ const MenuDrawer = () => {
     <>
       <StyledDrawer open={open} variant="permanent" anchor="left">
         <StyledIconButton
+          open={open}
           color="inherit"
           aria-label="open drawer"
           onClick={handleDrawer}
@@ -88,26 +89,35 @@ const MenuDrawer = () => {
             <ArrowForwardIos color="primary" />
           )}
         </StyledIconButton>
-        <AvatarBox>
-          <StyledBadge
-            overlap="circular"
-            variant="dot"
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-          >
-            <Avatar
-              alt="Remy Sharp"
-              src="https://image.flaticon.com/icons/png/512/147/147144.png"
-            />
-          </StyledBadge>
 
-          <TextBox>
-            <AdminName color="primary">{teacherInfo.teacher.name}</AdminName>
-            <AdminDescription color="primary">UTFPR</AdminDescription>
-          </TextBox>
-        </AvatarBox>
+        <Divider />
+
+        {open && (
+          <AvatarBox>
+            <>
+              <StyledBadge
+                overlap="circular"
+                variant="dot"
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+              >
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://image.flaticon.com/icons/png/512/147/147144.png"
+                />
+              </StyledBadge>
+
+              <TextBox>
+                <AdminName color="primary">
+                  {teacherInfo.teacher.name}
+                </AdminName>
+                <AdminDescription color="primary">UTFPR</AdminDescription>
+              </TextBox>
+            </>
+          </AvatarBox>
+        )}
 
         {open && <Divider />}
         <List>
@@ -124,7 +134,7 @@ const MenuDrawer = () => {
             </Link>
           ))}
         </List>
-        {open && <Divider />}
+        <Divider />
         <List>
           {SecondMenu.map((option) => (
             <StyledListItem button key={option.text} onClick={option.onClick}>

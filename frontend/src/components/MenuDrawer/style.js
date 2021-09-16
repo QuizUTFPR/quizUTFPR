@@ -13,16 +13,19 @@ import {
 
 const WidthDrawer = '210px';
 const WidthIcon = '50px;';
+
 export const StyledIconButton = styled(IconButton)`
-  margin-left: ${WidthDrawer};
+  margin-left: ${({ open }) => (open ? WidthDrawer : '5px')};
   width: ${WidthIcon};
 `;
 
 export const StyledDrawer = styled(Drawer)`
   width: ${({ open }) =>
     open ? `calc(${WidthDrawer} + 50px)` : `${WidthIcon}`};
+  overflow-x: hidden;
+
   && div {
-    margin-left: -${({ open }) => (open ? '' : WidthDrawer)};
+    width: ${({ open }) => !open && '55px'};
     transition: margin 0.2s ease;
   }
 `;
