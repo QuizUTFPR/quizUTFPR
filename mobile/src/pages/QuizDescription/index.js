@@ -175,6 +175,7 @@ const QuizDescription = ({ route }) => {
           </QuizProgress>
         )}
       </DetailsContainer>
+
       <Dialog
         title="Deseja realmente desistir?"
         visible={visibleGiveUPModal}

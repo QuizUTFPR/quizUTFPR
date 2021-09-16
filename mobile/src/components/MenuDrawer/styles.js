@@ -18,7 +18,7 @@ export const StudentName = styled.Text`
   font-size: ${({ theme }) => theme.fontSize}px;
   color: ${({ theme }) => theme.color.fill};
   margin-bottom: 10px;
-  margin-top: 100px;
+  margin-top: 10px;
 `;
 
 export const Divider = styled.View`
@@ -29,4 +29,11 @@ export const Divider = styled.View`
   border-radius: 10px;
   opacity: 0.1;
   margin-bottom: -20px;
+`;
+
+export const DrawerLabelStyled = styled.Text.attrs({
+  adjustsFontSizeToFit: true,
+})`
+  color: ${({ color }) => color};
+  font-weight: bold;
 `;

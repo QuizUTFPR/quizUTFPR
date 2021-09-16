@@ -78,12 +78,18 @@ export const StyledImage = styled.Image`
 export const QuizTitle = styled.Text.attrs({
   ellipsizeMode: 'tail',
   numberOfLines: 1,
+  adjustsFontSizeToFit: true,
 })`
   font-size: ${({ theme }) => theme.fontSize - 2}px;
   color: ${({ theme }) => theme.color.fill};
   font-family: 'PoppinsBold';
   margin-left: 10px;
   margin-top: 5px;
+`;
+
+export const TeacherName = styled(QuizTitle)`
+  font-size: ${({ theme }) => theme.fontSize - 5}px;
+  font-family: 'PoppinsSemiBold';
 `;
 
 export const StyledIconButton = styled.View`

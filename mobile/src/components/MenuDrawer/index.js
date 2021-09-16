@@ -6,6 +6,9 @@ import { useTheme } from '@react-navigation/native';
 // ICONS
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
+// STYLES
+import { DrawerLabelStyled } from './styles';
+
 // COMPONENT
 import MyDrawer from './myDrawer';
 
@@ -34,7 +37,9 @@ const DrawerComponent = () => {
         <Drawer.Screen
           name="Home"
           options={{
-            drawerLabel: 'Inicio',
+            drawerLabel: ({ color }) => (
+              <DrawerLabelStyled color={color}>Inicio</DrawerLabelStyled>
+            ),
             drawerIcon: ({ focused, size }) => (
               <Ionicons
                 name="md-home"
@@ -48,7 +53,11 @@ const DrawerComponent = () => {
         <Drawer.Screen
           name="AnsweredQuizzes"
           options={{
-            drawerLabel: 'Quizzes Respondidos',
+            drawerLabel: ({ color }) => (
+              <DrawerLabelStyled color={color}>
+                Quizzes Respondidos
+              </DrawerLabelStyled>
+            ),
             drawerIcon: ({ focused, size }) => (
               <FontAwesome5
                 name="book"

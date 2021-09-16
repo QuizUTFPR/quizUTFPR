@@ -42,5 +42,4 @@ export const StyledTextButton = styled.Text`
 
 export const WrapperButton = styled.View`
   width: ${`${widthPercentageToDp('85%')}px`};
-  margin-top: ${`${heightPercentageToDp('10%')}px`};
 `;

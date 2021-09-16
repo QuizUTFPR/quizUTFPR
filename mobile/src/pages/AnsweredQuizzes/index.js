@@ -22,6 +22,7 @@ import {
   StyledView,
   StyledScrollView,
   QuizContainer,
+  TeacherName,
 } from './styles';
 
 const Home = () => {
@@ -68,7 +69,9 @@ const Home = () => {
               <StyledView>
                 <Description>
                   <QuizTitle fill="black">{quiz.title}</QuizTitle>
-                  <QuizTitle fill="black">Prof.: {quiz.teacher.name}</QuizTitle>
+                  <TeacherName fill="black">
+                    Prof.: {quiz.teacher.name}
+                  </TeacherName>
                 </Description>
               </StyledView>
 
