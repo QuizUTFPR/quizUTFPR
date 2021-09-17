@@ -74,6 +74,8 @@ const Question = ({ history, location }) => {
       type: null,
     });
 
+
+  // CONTROLE DE MODALS
   const handleOpenDragImage = () => setOpenDragImage(true);
   const handleCloseDragImage = () => setOpenDragImage(false);
 

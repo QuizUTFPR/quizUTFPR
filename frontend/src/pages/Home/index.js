@@ -1,22 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
 
-// LOGO UTFPR
-import { ReactComponent as UTFPR } from '@assets/marcaUTFPR/logoUTFPR.svg';
-
-import { Typography, Grid } from '@material-ui/core';
 
 // COMPONENTS
-import GridContainer from '@components/Container';
+import { Typography, Grid } from '@material-ui/core';
 
-const LogoUTFPR = styled(UTFPR)`
-  width: 450px;
-  height: 100%;
-`;
 
-const StyledHomeGrid = styled(GridContainer)`
-  flex-direction: row;
-`;
+// STYLE
+import {LogoUTFPR, StyledHomeGrid} from './style'
 
 const Home = () => (
   <StyledHomeGrid container justifyContent="center" align="center">
