@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Button from '@components/Button';
 import { BlurView } from 'expo-blur';
 import { StyleSheet } from 'react-native';
 

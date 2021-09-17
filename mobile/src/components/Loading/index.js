@@ -1,12 +1,7 @@
 import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
-import styled from 'styled-components/native';
-
-const StyledView = styled(View)`
-  flex: 1;
-  justify-content: center;
-`;
+import { StyledView } from './style';
 
 const Loading = () => (
   <StyledView>
