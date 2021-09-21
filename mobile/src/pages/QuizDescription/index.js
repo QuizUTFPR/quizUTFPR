@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React, { useState } from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import * as Clipboard from 'expo-clipboard';
@@ -38,6 +38,7 @@ import {
   QuizProgress,
   StyledTitleProgress,
   StyledTextProgress,
+  PinWrapper,
 } from './styles';
 
 const QuizDescription = ({ route }) => {
@@ -154,10 +155,18 @@ const QuizDescription = ({ route }) => {
         <StyledScrollView>
           <BodyDescription>
             <StyledTitle>PIN</StyledTitle>
-            <StyledPIN onPress={copyToClipboardAndShowToast}>{pin}</StyledPIN>
+
+            <PinWrapper onPress={copyToClipboardAndShowToast}>
+              <StyledPIN>{pin}</StyledPIN>
+              <Feather name="copy" size={25} color="black" />
+            </PinWrapper>
+
             <StyledTitle>{title}</StyledTitle>
+
             <StyledDescriptionText>{description}</StyledDescriptionText>
+
             <StyledTitle>TAGS</StyledTitle>
+
             <TagsContainer>
               {tags.map((tag, index) => (
                 // eslint-disable-next-line react/no-array-index-key
