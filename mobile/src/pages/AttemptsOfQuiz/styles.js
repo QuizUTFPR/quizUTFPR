@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import Constants from 'expo-constants';
-import { StyledButton } from '@components/ButtonGradient';
+import { StyledButton } from '@components/ButtonGradient/style';
 
 // DIMENSION TRANSFORMERS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { StyledButton } from '@components/ButtonGradient';
+import { StyledButton } from '@components/ButtonGradient/style';
 
 // COMPONENTS
 import { Container } from '@components/Container/style';
@@ -92,6 +92,7 @@ export const StyledPIN = styled(StyledTitle)`
   font-size: ${({ theme }) => theme.fontSize}px;
   align-self: flex-start;
   margin-top: 0px;
+  padding-right: 10px;
 `;
 
 export const StyledDescriptionText = styled.Text`
@@ -135,4 +136,11 @@ export const StyledTitleProgress = styled.Text`
 export const StyledTextProgress = styled.Text`
   font-family: 'PoppinsSemiBold';
   color: white;
+`;
+
+export const PinWrapper = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})`
+  flex-direction: row;
+  align-items: center;
 `;
