@@ -1,12 +1,10 @@
 import React from 'react';
 
-
 // COMPONENTS
 import { Typography, Grid } from '@material-ui/core';
 
-
 // STYLE
-import {LogoUTFPR, StyledHomeGrid} from './style'
+import { LogoUTFPR, StyledHomeGrid } from './style';
 
 const Home = () => (
   <StyledHomeGrid container justifyContent="center" align="center">
