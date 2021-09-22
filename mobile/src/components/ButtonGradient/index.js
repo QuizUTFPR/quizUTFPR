@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 import { WrapperButton, StyledButton, StyledText } from './style';
 
+// THEME
+import theme from '../../styles/theme';
+
 const WrapperStyledButton = ({
   children,
   onPress,
@@ -27,8 +30,8 @@ const WrapperStyledButton = ({
 WrapperStyledButton.defaultProps = {
   onPress: () => {},
   activeOpacity: 0.7,
-  underlayColor: '#DDDDDD',
-  colors: ['#4B24B1', '#3b1b96'],
+  underlayColor: theme.color.whiteGrey,
+  colors: theme.color.gradients.purple,
 };
 
 WrapperStyledButton.propTypes = {

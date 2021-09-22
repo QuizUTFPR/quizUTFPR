@@ -36,9 +36,17 @@ const theme = {
     purple: '#4B24B1',
     white: '#fff',
     grey: '#d3d3d3',
+    whiteGrey: '#DDDDDD',
+    lightBlueGrey: '#eaeaf5',
+    darkGrey: '#222222',
+    blackRussian: '#171c26',
     red: '#FF6347',
     green: '#3CB371',
     blue: '#1e90FF',
+    gradients: {
+      orange: ['#fdb646', '#f99f4c'],
+      purple: ['#4B24B1', '#3b1b96'],
+    },
   },
   size: {
     padding: 20,

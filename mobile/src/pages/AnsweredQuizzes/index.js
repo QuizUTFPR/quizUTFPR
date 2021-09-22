@@ -9,6 +9,9 @@ import Container from '@components/Container';
 // ICONS
 import { AntDesign } from '@expo/vector-icons';
 
+// THEME
+import theme from '../../styles/theme';
+
 // STYLES
 import {
   QuizTitle,
@@ -76,7 +79,11 @@ const Home = () => {
               </StyledView>
 
               <StyledIconButton>
-                <AntDesign name="arrowright" size={24} color="#4B24B1" />
+                <AntDesign
+                  name="arrowright"
+                  size={24}
+                  color={theme.color.purple}
+                />
               </StyledIconButton>
             </QuizCard>
           </QuizContainer>

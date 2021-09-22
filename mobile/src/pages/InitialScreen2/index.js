@@ -1,6 +1,9 @@
 import React from 'react';
 import ButtonGradient from '@components/ButtonGradient';
 
+// THEME
+import theme from '../../styles/theme';
+
 // STYLES
 import {
   Container,
@@ -24,7 +27,7 @@ const InitialScreen = ({ navigation }) => (
       <WrapperButton>
         <ButtonGradient
           variant="primary"
-          colors={['#fdb646', '#f99f4c']}
+          colors={theme.color.gradients.orange}
           onPress={() => navigation.navigate('Login')}
           icon="login-variant"
         >
@@ -33,9 +36,8 @@ const InitialScreen = ({ navigation }) => (
       </WrapperButton>
       <WrapperButton>
         <ButtonGradient
-          // style={{ borderRadius: 30 }}
           variant="primary"
-          colors={['#fdb646', '#f99f4c']}
+          colors={theme.color.gradients.orange}
           onPress={() => navigation.navigate('Register')}
           icon="account-plus"
         >

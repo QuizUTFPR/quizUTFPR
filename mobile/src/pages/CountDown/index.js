@@ -2,14 +2,16 @@ import React, { useEffect } from 'react';
 import LottieView from 'lottie-react-native';
 import { ImageBackground } from 'react-native';
 import LinearContainer from '@components/LinearContainer';
-// import image from '@assets/FUNDO.png';
-import image2 from '@assets/patterns/halftone.png';
+
+import PatternBackground from '@assets/patterns/halftone.png';
+
+// LOTTIE
+import CountDownLottie from '@assets/lottie/countdown.json';
 
 const Question = ({ navigation }) => {
   useEffect(
     () =>
       navigation.addListener('beforeRemove', (e) => {
-        // Prevent default behavior of leaving the screen
         e.preventDefault();
       }),
     [navigation]
@@ -24,7 +26,7 @@ const Question = ({ navigation }) => {
           width: '100%',
           height: '100%',
         }}
-        source={image2}
+        source={PatternBackground}
       >
         <LottieView
           autoPlay
@@ -33,7 +35,7 @@ const Question = ({ navigation }) => {
           resizeMode="cover"
           speed={1}
           // eslint-disable-next-line global-require
-          source={require('@assets/lottie/countdown.json')}
+          source={CountDownLottie}
           onAnimationFinish={() => navigation.navigate('Question')}
         />
       </ImageBackground>

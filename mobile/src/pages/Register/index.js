@@ -143,7 +143,6 @@ const Register = ({ navigation }) => {
             </KeyboardAvoidingView>
             <WrapperButton>
               <ButtonGradient
-                // colors={['#fdb646', '#f99f4c']}
                 title="Submit"
                 variant="primary"
                 onPress={handleSubmit}

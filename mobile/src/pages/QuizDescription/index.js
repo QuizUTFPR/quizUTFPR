@@ -12,6 +12,9 @@ import api from '@api';
 import Dialog from '@components/Dialog';
 import Toast from '@components/Toast';
 
+// LOTTIE
+import SadAnimation from '@assets/lottie/sad_emote.json';
+
 // HOOKS
 import useQuestions from '@hook/useQuestion';
 
@@ -168,9 +171,8 @@ const QuizDescription = ({ route }) => {
             <StyledTitle>TAGS</StyledTitle>
 
             <TagsContainer>
-              {tags.map((tag, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <StyledTag key={index}>{tag}</StyledTag>
+              {tags.map((tag) => (
+                <StyledTag key={tag}>{tag}</StyledTag>
               ))}
             </TagsContainer>
           </BodyDescription>
@@ -203,8 +205,7 @@ const QuizDescription = ({ route }) => {
             style={{ width: 100 }}
             resizeMode="cover"
             speed={1}
-            // eslint-disable-next-line global-require
-            source={require('@assets/lottie/sad_emote.json')}
+            source={SadAnimation}
           />
         }
       >

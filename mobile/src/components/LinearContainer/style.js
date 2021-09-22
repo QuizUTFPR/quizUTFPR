@@ -2,8 +2,11 @@ import styled from 'styled-components/native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
+// THEME
+import theme from '../../styles/theme';
+
 export const QuestionContainer = styled(LinearGradient).attrs({
-  colors: ['#4B24B1', '#5929D3'],
+  colors: theme.color.gradients.purple,
 })`
   flex: 1;
   flex-direction: column;

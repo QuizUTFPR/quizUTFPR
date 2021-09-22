@@ -7,11 +7,14 @@ import { AntDesign } from '@expo/vector-icons';
 // HOOKS
 import useQuestions from '@hook/useQuestion';
 
+// LOTTIE
+import SadEmote from '@assets/lottie/sad_emote.json';
+import CloseAnimation from '@assets/lottie/close_animation.json';
+
 // COMPONENTS
+import Toast from '@components/Toast';
 import { MathJaxSvg } from 'react-native-mathjax-html-to-svg';
 import image2 from '@assets/patterns/halftone.png';
-import Toast from '@components/Toast';
-
 import LinearContainer from '@components/LinearContainer';
 import Dialog from '@components/Dialog';
 import Timer from './components/Timer';
@@ -87,7 +90,6 @@ const Question = () => {
         JSON.stringify(requestQuestion) &&
       timer.seconds > 0
     ) {
-      // console.log('Avisar que o usuário deve escolher sua resposta!');
       setShowToast({
         open: true,
         message: 'Marque ao menos uma alternativa!',
@@ -147,7 +149,6 @@ const Question = () => {
   useEffect(
     () =>
       navigation.addListener('beforeRemove', (e) => {
-        // Prevent default behavior of leaving the screen
         if (e.data.action.type === 'POP' || e.data.action.type === 'RESET') {
           hideConfirmExit();
           navigation.dispatch(e.data.action);
@@ -192,7 +193,6 @@ const Question = () => {
             <InformationsWrapper>
               <ScrollWrapper>
                 <QuestionDescription>
-                  {/* eslint-disable-next-line global-require */}
                   <QuestionImage
                     source={
                       quizData.questions[quizData.indexOnScreen].image_base64
@@ -206,7 +206,7 @@ const Question = () => {
                   />
                   <MathJaxSvg
                     fontSize={theme.fontSize}
-                    color="#000000"
+                    color="black"
                     fontCache
                     style={{
                       justifyContent: 'center',
@@ -232,7 +232,7 @@ const Question = () => {
                         color={
                           requestQuestion.checkedAnswer[index]
                             ? 'white'
-                            : '#171c26'
+                            : theme.color.blackRussian
                         }
                         fontCache
                         style={{
@@ -274,8 +274,7 @@ const Question = () => {
             style={{ width: 150 }}
             resizeMode="cover"
             speed={1}
-            // eslint-disable-next-line global-require
-            source={require('@assets/lottie/sad_emote.json')}
+            source={SadEmote}
           />
         }
       >
@@ -300,8 +299,7 @@ const Question = () => {
             style={{ width: 150 }}
             resizeMode="cover"
             speed={0.5}
-            // eslint-disable-next-line global-require
-            source={require('@assets/lottie/close_animation.json')}
+            source={CloseAnimation}
           />
         }
       >

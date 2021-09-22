@@ -1,7 +1,6 @@
 /* eslint-disable global-require */
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-// import api from '@api';
 
 // COMPONENTS
 import Container from '@components/Container';
@@ -14,7 +13,6 @@ import {
   QuizTitle,
   QuizCard,
   Description,
-  // StyledImage,
   TitleText,
   StyledIconButton,
   GoBackButtonWrapper,

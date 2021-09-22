@@ -3,6 +3,8 @@ import { KeyboardAvoidingView, Platform } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+// THEME
+
 // ICONS
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 
@@ -16,6 +18,7 @@ import Toast from '@components/Toast';
 
 // HOOKS
 import useStudentAuth from '@hook/useStudentAuth';
+import theme from '../../styles/theme';
 
 // STYLES
 import {
@@ -23,7 +26,6 @@ import {
   InputWrapper,
   WrapperButton,
   StyledTextButton,
-  // ForgotPasswordButton,
 } from './styles';
 
 const Login = ({ navigation }) => {
@@ -103,7 +105,7 @@ const Login = ({ navigation }) => {
                           <FontAwesome5
                             name="user-alt"
                             size={18}
-                            color="#222222"
+                            color={theme.color.darkGrey}
                           />
                         }
                         label="E-mail"
@@ -118,7 +120,11 @@ const Login = ({ navigation }) => {
                         fill="black"
                         placeholder="Digite sua senha"
                         icon={
-                          <FontAwesome5 name="lock" size={18} color="#222222" />
+                          <FontAwesome5
+                            name="lock"
+                            size={18}
+                            color={theme.color.darkGrey}
+                          />
                         }
                         label="Senha"
                         secureTextEntry
@@ -126,13 +132,6 @@ const Login = ({ navigation }) => {
                         onBlur={handleBlur('password')}
                         value={values.password}
                       />
-                      {/* <ForgotPasswordButton
-                    backgroundColor="white"
-                    variant="secondary"
-                    onPress={() => {}}
-                  >
-                    Esqueceu sua senha?
-                  </ForgotPasswordButton> */}
                     </InputWrapper>
                   </>
                 </DismissKeyboard>
@@ -140,7 +139,6 @@ const Login = ({ navigation }) => {
 
               <WrapperButton>
                 <ButtonGradient
-                  // colors={['#fdb646', '#f99f4c']}
                   variant="primary"
                   onPress={handleSubmit}
                   icon="login-variant"

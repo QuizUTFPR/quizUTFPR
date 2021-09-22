@@ -11,7 +11,7 @@ export const InputWrapper = styled.View`
   align-items: center;
   justify-content: space-between;
   width: ${`${widthPercentageToDp('85%')}px`};
-  background: #eaeaf5;
+  background: ${({ theme }) => theme.color.lightBlueGrey};
   padding-left: 10px;
   border-radius: 8px;
   height: 55px;
@@ -27,7 +27,7 @@ export const StyledTextInput = styled.TextInput`
 export const Label = styled.Text`
   z-index: 10;
   font-family: 'PoppinsSemiBold';
-  background: #eaeaf5;
+  background: ${({ theme }) => theme.color.lightBlueGrey};
   padding-left: 2px;
   padding-right: 2px;
   font-size: ${({ theme }) => theme.fontSize - 4}px;

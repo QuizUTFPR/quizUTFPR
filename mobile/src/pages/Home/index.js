@@ -10,6 +10,9 @@ import Container from '@components/Container';
 // ICONS
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 
+// THEME
+import theme from '../../styles/theme';
+
 // STYLES
 import {
   HeaderWrapper,
@@ -25,7 +28,6 @@ import {
   Description,
   StyledWelcome,
   StyledImage,
-  // StyledText,
   QuizTitle,
   StyledIconButton,
   StyledView,
@@ -114,7 +116,7 @@ const Home = () => {
           </HeaderInformations>
 
           <InputWrapper>
-            <FontAwesome name="search" size={25} color="#4B24B1" />
+            <FontAwesome name="search" size={25} color={theme.color.purple} />
             <SearchInput
               defaultValue={pin}
               onSubmitEditing={getQuizByPIN}
@@ -165,7 +167,6 @@ const Home = () => {
                   <StyledView>
                     <Description>
                       <StyledTitle fill="black">{item.quiz.title}</StyledTitle>
-                      {/* <StyledText>Criador: {quiz.teacher}</StyledText> */}
                     </Description>
                     <QuizProgressBarBackground fill="lightGrey">
                       <QuizProgressBar
@@ -184,7 +185,11 @@ const Home = () => {
                     %
                   </QuizProgressText>
                   <StyledIconButton>
-                    <AntDesign name="arrowright" size={24} color="#4B24B1" />
+                    <AntDesign
+                      name="arrowright"
+                      size={24}
+                      color={theme.color.purple}
+                    />
                   </StyledIconButton>
                 </QuizCard>
               ))}
@@ -222,11 +227,14 @@ const Home = () => {
                   <StyledView>
                     <Description>
                       <StyledTitle fill="black">{quiz.title}</StyledTitle>
-                      {/* <StyledText>Criador: {quiz.teacher}</StyledText> */}
                     </Description>
                   </StyledView>
                   <StyledIconButton>
-                    <AntDesign name="arrowright" size={24} color="#4B24B1" />
+                    <AntDesign
+                      name="arrowright"
+                      size={24}
+                      color={theme.color.purple}
+                    />
                   </StyledIconButton>
                 </QuizCard>
               ))}

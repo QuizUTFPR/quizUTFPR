@@ -24,13 +24,6 @@ export const StyledTextButton = styled.Text`
   padding: 10px;
 `;
 
-export const ForgotPasswordButton = styled.Text`
-  align-self: flex-end;
-  padding: 10px;
-  font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize - 3}px;
-`;
-
 export const WrapperButton = styled.View`
   margin-top: ${`${heightPercentageToDp('10%')}px`};
   width: ${`${widthPercentageToDp('85%')}px`};

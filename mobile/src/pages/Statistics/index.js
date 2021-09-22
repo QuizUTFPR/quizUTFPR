@@ -8,6 +8,14 @@ import useQuestions from '@hook/useQuestion';
 // COMPONENTS
 import ButtonGradient from '@components/ButtonGradient';
 
+// LOTTIE
+import Congratulations from '@assets/lottie/congratulations.json';
+import NotBad from '@assets/lottie/not_bad.json';
+import TryAgain from '@assets/lottie/try_again.json';
+
+// THEME
+import theme from '../../styles/theme';
+
 // STYLES
 import {
   Container,
@@ -26,20 +34,17 @@ const informationsBasedOnHits = {
   amazing: {
     title: 'ESPETACULAR!',
     subtitle: 'Você foi muito bem.',
-    // eslint-disable-next-line global-require
-    animation: require('@assets/lottie/congratulations.json'),
+    animation: Congratulations,
   },
   notBad: {
     title: 'NADA MAL!',
     subtitle: 'Você foi bem.',
-    // eslint-disable-next-line global-require
-    animation: require('@assets/lottie/not_bad.json'),
+    animation: NotBad,
   },
   youCanDoItBetter: {
     title: 'NÃO FOI DESSA VEZ!',
     subtitle: 'Tente novamente, você consegue.',
-    // eslint-disable-next-line global-require
-    animation: require('@assets/lottie/try_again.json'),
+    animation: TryAgain,
   },
 };
 
@@ -104,7 +109,7 @@ const Statistics = ({ route }) => {
                   })
                 )
               }
-              colors={['#fdb646', '#f99f4c']}
+              colors={theme.color.gradients.orange}
             >
               CONCLUIR
             </ButtonGradient>
