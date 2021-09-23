@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import MathJaxLatex from './latexContent';
+import LatexContent from './latexContent';
 
 const InputOrLatexContent = ({ inputComponent, latexComponent }) => {
-  const [seeInput, setInput] = useState(true);
+  const [seeInput, setInput] = useState(false);
   const { component: InputComponent, propsInput } = inputComponent;
   const { value } = propsInput;
   const { component: LatexComponent, propsLatex } = latexComponent;
@@ -16,7 +16,8 @@ const InputOrLatexContent = ({ inputComponent, latexComponent }) => {
           onBlur={() => setInput(false)}
         />
       ) : (
-        <MathJaxLatex
+        <LatexContent
+          onTypeset={(e) => console.log(e)}
           component={LatexComponent}
           propsLatex={propsLatex}
           onClick={() => setInput(true)}
