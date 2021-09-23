@@ -20,7 +20,6 @@ import MiddleSide from './components/middleSide';
 import RightSide from './components/rightSide';
 import AlertGetOut from './components/confirmGetOut';
 import ChangeQuestion from './components/confirmChangeTypeQuestion';
-import PreviewLatex from './components/PreviewLatex';
 import DragImageContainer from './components/dragImageContainer';
 
 // PAGES
@@ -55,7 +54,6 @@ const Question = ({ history, location }) => {
   const [openTypeOfQuestion, setOpenTypeOfQuestion] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
   const [openGetOutAlert, setOpenGetOutAlert] = useState(false);
-  const [previewQuestion, setPreviewQuestion] = useState(false);
   const [openDragImage, setOpenDragImage] = useState(false);
   const [onScreen, setOnScreen] = useState({
     index: 0,
@@ -77,9 +75,6 @@ const Question = ({ history, location }) => {
   // CONTROLE DE MODALS
   const handleOpenDragImage = () => setOpenDragImage(true);
   const handleCloseDragImage = () => setOpenDragImage(false);
-
-  const handleOpenPreviewQuestion = () => setPreviewQuestion(true);
-  const handleClosePreviewQuestion = () => setPreviewQuestion(false);
 
   const handleClickOpenAlert = () => setOpenAlert(true);
   const handleCloseAlert = () => setOpenAlert(false);
@@ -205,7 +200,6 @@ const Question = ({ history, location }) => {
           updateQuestion={updateQuestion}
           updateAnswer={updateAnswer}
           handleClickOpenAlert={handleClickOpenAlert}
-          handleOpenPreviewQuestion={handleOpenPreviewQuestion}
           handleOpenDragImage={handleOpenDragImage}
         />
 
@@ -244,12 +238,6 @@ const Question = ({ history, location }) => {
         <AlertGetOut handleClose={handleCloseGetOutAlert} />
       </Modal>
 
-      <Modal open={previewQuestion} handleClose={handleClosePreviewQuestion}>
-        <PreviewLatex
-          questionData={formik.values.question}
-          handleClose={handleClosePreviewQuestion}
-        />
-      </Modal>
       <Modal
         open={openChangeTypeQuestionModal.open}
         handleClose={handleCloseChangeTypeQuestion}

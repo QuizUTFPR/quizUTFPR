@@ -2,19 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // ICONS
-import {
-  Delete,
-  Check,
-  Visibility,
-  AttachFile,
-  Edit,
-} from '@material-ui/icons/';
+import { Delete, Check, AttachFile, Edit } from '@material-ui/icons/';
 
 // COMPONENTS
 import StyledButton from '@components/Button';
 import { Grid } from '@material-ui/core';
 import ErrorMessage from '@components/Messages/error';
 import Tooltip from '@components/ToolTip';
+import InputOrLatexContent from './PreviewLatex';
 
 // import DragImageInput from './dragImage';
 
@@ -30,6 +25,8 @@ import {
   ContainerImage,
   StackImageButton,
   PreviewImageButton,
+  TitleQuestionMathJax,
+  AnswerQuestionMathJax,
 } from '../style';
 
 const MiddleSide = ({
@@ -38,7 +35,6 @@ const MiddleSide = ({
   updateQuestion,
   updateAnswer,
   handleClickOpenAlert,
-  handleOpenPreviewQuestion,
   handleOpenDragImage,
   errors,
   location,
@@ -53,19 +49,30 @@ const MiddleSide = ({
             </ErrorMessage>
           )}
           <Grid item xs={12}>
-            <StyledTitleInput
-              disabled={location.state.published}
-              placeholder="DIGITE O ENUNCIADO AQUI"
-              formikID="question.title"
-              handleFormikChange={formik.handleChange}
-              value={formik.values.question.title}
-              handlePropsChange={{
-                handleUpdate: updateQuestion,
-                key: 'title',
-                index: formik.values.index,
+            <InputOrLatexContent
+              latexComponent={{
+                component: TitleQuestionMathJax,
+                propsLatex: {
+                  placeholder: 'DIGITE O ENUNCIADO AQUI',
+                },
               }}
-              required
-              autoFocus
+              inputComponent={{
+                component: StyledTitleInput,
+                propsInput: {
+                  disabled: location.state.published,
+                  placeholder: 'DIGITE O ENUNCIADO AQUI',
+                  formikID: 'question.title',
+                  handleFormikChange: formik.handleChange,
+                  value: formik.values.question.title,
+                  handlePropsChange: {
+                    handleUpdate: updateQuestion,
+                    key: 'title',
+                    index: formik.values.index,
+                  },
+                  required: true,
+                  autoFocus: true,
+                },
+              }}
             />
           </Grid>
 
@@ -187,37 +194,36 @@ const MiddleSide = ({
                     />
                   )}
                 </>
-                <StyledAnswerInput
-                  type="text"
-                  disabled={location.state.published}
-                  placeholder={`DIGITE A ALTERNATIVA ${index + 1}`}
-                  formikID={`question.answer[${index}].title`}
-                  value={item.title}
-                  handleFormikChange={formik.handleChange}
-                  handlePropsChange={{
-                    handleUpdate: updateAnswer,
-                    key: 'title',
-                    indexQuestion: formik.values.index,
-                    indexAnswer: index,
+                <InputOrLatexContent
+                  latexComponent={{
+                    component: AnswerQuestionMathJax,
+                    propsLatex: {
+                      placeholder: `DIGITE A ALTERNATIVA ${index + 1}`,
+                    },
                   }}
-                  required
+                  inputComponent={{
+                    component: StyledAnswerInput,
+                    propsInput: {
+                      type: 'text',
+                      disabled: location.state.published,
+                      placeholder: `DIGITE A ALTERNATIVA ${index + 1}`,
+                      formikID: `question.answer[${index}].title`,
+                      value: item.title,
+                      handleFormikChange: formik.handleChange,
+                      handlePropsChange: {
+                        handleUpdate: updateAnswer,
+                        key: 'title',
+                        indexQuestion: formik.values.index,
+                        indexAnswer: index,
+                      },
+                      required: true,
+                    },
+                  }}
                 />
               </Grid>
             ))}
           </Grid>
 
-          <GridButton item xs={6}>
-            <StyledButton
-              style={{ width: '80%' }}
-              color="secondary"
-              variant="outlined"
-              onClick={handleOpenPreviewQuestion}
-              startIcon={<Visibility />}
-              size="large"
-            >
-              Visualizar
-            </StyledButton>
-          </GridButton>
           <GridButton item xs={6}>
             <StyledButton
               type="submit"

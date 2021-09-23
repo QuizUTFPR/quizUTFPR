@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { MathJax } from 'better-react-mathjax';
 
 import {
   Grid,
@@ -91,7 +92,39 @@ export const StyledAnswerInput = styled(QuestionInput)`
   transition: border 0.3s linear;
 `;
 
+export const AnswerQuestionMathJax = styled(MathJax)`
+  display: flex !important;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 59px;
+  padding: 20px 10px;
+  background: white;
+  border-radius: 0 5px 5px 0;
+  border: 2px solid ${({ theme }) => theme.palette.primary.main};
+  border-left: none;
+  outline: none;
+  transition: border 0.3s linear;
+`;
+
 export const StyledTitleInput = styled(QuestionInput)`
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 20px 10px;
+  background: white;
+  text-align: center;
+  font-weight: bolder;
+  height: 100px;
+  transition: border 0.3s linear;
+  font-size: 1.2em;
+`;
+
+export const TitleQuestionMathJax = styled(MathJax)`
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  cursor: text;
   width: 100%;
   border: none;
   outline: none;
