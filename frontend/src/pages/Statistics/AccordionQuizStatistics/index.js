@@ -23,8 +23,10 @@ import {
   StudentWrapper,
   StudentInformation,
   AnswerNumberOfChoices,
-  NameStudent,
-  ChoiceStudent,
+  BoldText,
+  WrapperStudentChoice,
+  StudentName,
+  BadgeStudentChoice,
   IsStudentChoiceCorrect,
   BoxStudent,
   QuizPercentageHit,
@@ -44,19 +46,21 @@ import {
   TextValueResumeOfQuestion,
 } from '../style';
 
-const getStudentChoice = (choice) => {
+const getStudentChoice = (answer, choice) => {
   const studentChoice = [];
-  if (choice.checked1) studentChoice.push(1);
-  if (choice.checked2) studentChoice.push(2);
-  if (choice.checked3) studentChoice.push(3);
-  if (choice.checked4) studentChoice.push(4);
+
+  if (choice.checked1) studentChoice.push(answer[0].title);
+  if (choice.checked2) studentChoice.push(answer[1].title);
+  if (choice.checked3) studentChoice.push(answer[2].title);
+  if (choice.checked4) studentChoice.push(answer[3].title);
 
   if (!studentChoice.length) return ['Sem Escolha'];
   return studentChoice;
 };
 
 const checkStudentChoice = (answer, choices) => {
-  const studentChoice = getStudentChoice(choices);
+  const studentChoice = getStudentChoice(answer, choices);
+
   if (studentChoice[0] === 'Sem Escolha')
     return (
       <Tooltip arrow ariaLabel="errada" title="Questão errada">
@@ -65,7 +69,7 @@ const checkStudentChoice = (answer, choices) => {
     );
 
   const correctAnswer = answer
-    .map((item, index) => (item.is_correct ? index + 1 : null))
+    .map((item) => (item.is_correct ? item.title : null))
     .filter(Boolean);
 
   const wrongStudentChoices = studentChoice.filter(
@@ -93,6 +97,7 @@ const checkStudentChoice = (answer, choices) => {
 
 const AccordionWrapper = ({ quizData }) => {
   const { questions, percentageOfQuizHit, quiz } = quizData;
+
   return (
     <>
       {!percentageOfQuizHit && (
@@ -195,11 +200,18 @@ const AccordionWrapper = ({ quizData }) => {
                 {question.question_choice.map((choice) => (
                   <StudentInformation key={choice.student_quiz_id}>
                     <BoxStudent>
-                      <NameStudent>{choice.student.name}</NameStudent>
-                      <ChoiceStudent>
-                        Alternativas escolhidas:{' '}
-                        {getStudentChoice(choice).map((item) => `${item}   `)}
-                      </ChoiceStudent>
+                      <BoldText>Aluno: </BoldText>
+                      <StudentName>{choice.student.name}</StudentName>
+                      <WrapperStudentChoice>
+                        <BoldText>Alternativas Escolhidas</BoldText>
+                        {getStudentChoice(question.answer, choice).map(
+                          (item) => (
+                            <BadgeStudentChoice key={item}>
+                              {item}
+                            </BadgeStudentChoice>
+                          )
+                        )}
+                      </WrapperStudentChoice>
                     </BoxStudent>
                     <IsStudentChoiceCorrect>
                       {checkStudentChoice(question.answer, choice)}

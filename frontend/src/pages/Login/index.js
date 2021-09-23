@@ -12,13 +12,12 @@ import {
   Lock,
 } from '@material-ui/icons';
 
-// ASSETS
-// import { ReactComponent as Illustration } from '@assets/login_illustration.svg';
-
 // HOOKS
 import useAuth from '@hooks/Auth';
 
+// ROTAS
 import { HOME } from '@routes';
+
 import {
   StyledContainer,
   DescriptionsGrid,
@@ -29,8 +28,6 @@ import {
   StyledButton,
   LogoUTFPR,
 } from './style';
-
-// ROTAS
 
 const LoginPage = ({ history }) => {
   const { login } = useAuth();
