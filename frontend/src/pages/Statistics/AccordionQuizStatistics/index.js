@@ -115,7 +115,6 @@ const AccordionWrapper = ({ quizData }) => {
               fontSize: '2em',
               fontWeight: 'bolder',
             }}
-            color="yellow"
             value={parseInt(percentageOfQuizHit, 10)}
           />
 
@@ -144,7 +143,6 @@ const AccordionWrapper = ({ quizData }) => {
                   {index + 1}.{`  ${question.title}`}
                 </Typography>
                 <CircularProgressWithLabel
-                  color="yellow"
                   value={parseInt(question.percentageOfHit, 10)}
                 />
               </BarQuestion>
@@ -171,7 +169,6 @@ const AccordionWrapper = ({ quizData }) => {
                     Percentual de acerto
                   </TextTitleResumeOfQuestion>
                   <CircularProgressWithLabel
-                    color="yellow"
                     value={parseInt(question.percentageOfHit, 10)}
                   />
                 </WrapperResumeQuestion>
