@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MathJax } from 'better-react-mathjax';
+import Katex from '@components/Katex';
 
 import {
   Grid,
@@ -92,7 +92,7 @@ export const StyledAnswerInput = styled(QuestionInput)`
   transition: border 0.3s linear;
 `;
 
-export const AnswerQuestionMathJax = styled(MathJax)`
+export const AnswerQuestionMathJax = styled(Katex)`
   display: flex !important;
   justify-content: flex-start;
   align-items: center;
@@ -120,7 +120,7 @@ export const StyledTitleInput = styled(QuestionInput)`
   font-size: 1.2em;
 `;
 
-export const TitleQuestionMathJax = styled(MathJax)`
+export const TitleQuestionMathJax = styled(Katex)`
   display: flex !important;
   justify-content: center;
   align-items: center;

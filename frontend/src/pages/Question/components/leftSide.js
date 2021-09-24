@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MathJax } from 'better-react-mathjax';
 
 // ICONS
 import { AddCircle, ArrowUpward, ArrowDownward } from '@material-ui/icons/';
@@ -9,7 +8,7 @@ import { AddCircle, ArrowUpward, ArrowDownward } from '@material-ui/icons/';
 // COMPONENTS
 import { Grid, Typography, IconButton } from '@material-ui/core';
 import StyledButton from '@components/Button';
-// import configMathJax from '../../../config/mathJax';
+import Katex from '@components/Katex';
 
 import {
   StyledLeftGrid,
@@ -79,9 +78,7 @@ const LeftSide = ({
                 variant="outlined"
                 onClick={handleChangeQuestion(item, index)}
               >
-                <MathJax dynamic hideUntilTypeset="every">
-                  {item.title ? item.title : 'Sem Enunciado'}
-                </MathJax>
+                <Katex>{item.title ? item.title : 'Sem Enunciado'}</Katex>
               </CardSelectQuestion>
             </Grid>
           </Grid>

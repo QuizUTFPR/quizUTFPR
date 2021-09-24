@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { MathJax } from 'better-react-mathjax';
+import Katex from '@components/Katex';
 
 // UTILS
 import getStringTypeOfQuestion from '@utils/getStringTypeOfQuestion';
@@ -68,9 +68,7 @@ const Questions = ({ id, checked, onChange, question }) => (
         </Grid>
         <Divider />
         <TitleQuestion variant="h5" component="h2" color="primary">
-          <MathJax dynamic hideUntilTypeset="every">
-            {question.title}
-          </MathJax>
+          <Katex>{question.title}</Katex>
         </TitleQuestion>
         <Typography color="textSecondary">Alternativas</Typography>
         <Grid container spacing={1}>
@@ -79,15 +77,11 @@ const Questions = ({ id, checked, onChange, question }) => (
             <Grid item xs={12} md={6} key={`${item.id}+${item.title}`}>
               {item.is_correct ? (
                 <CorrectgAnswer>
-                  <MathJax dynamic hideUntilTypeset="every">
-                    {item.title}{' '}
-                  </MathJax>
+                  <Katex>{item.title} </Katex>
                 </CorrectgAnswer>
               ) : (
                 <WrongAnswer>
-                  <MathJax dynamic hideUntilTypeset="every">
-                    {item.title}
-                  </MathJax>
+                  <Katex>{item.title}</Katex>
                 </WrongAnswer>
               )}
             </Grid>
