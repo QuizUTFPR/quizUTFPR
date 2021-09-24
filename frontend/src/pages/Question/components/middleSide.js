@@ -50,6 +50,7 @@ const MiddleSide = ({
           )}
           <Grid item xs={12}>
             <InputOrLatexContent
+              disabled={location.state.published}
               latexComponent={{
                 component: TitleQuestionMathJax,
                 propsLatex: {
@@ -195,6 +196,7 @@ const MiddleSide = ({
                   )}
                 </>
                 <InputOrLatexContent
+                  disabled={location.state.published}
                   latexComponent={{
                     component: AnswerQuestionMathJax,
                     propsLatex: {
