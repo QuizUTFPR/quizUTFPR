@@ -25,17 +25,18 @@ const DrawerComponent = () => {
   return (
     <Suspense fallback={<Loading />}>
       <Drawer.Navigator
-        drawerContentOptions={{
+        screenOptions={{
           activeTintColor: colors.purple,
           itemStyle: {},
           labelStyle: {
             fontFamily: 'PoppinsSemiBold',
           },
+          headerShown: false,
         }}
         drawerContent={(props) => <MyDrawer colors={colors} {...props} />}
       >
         <Drawer.Screen
-          name="Home"
+          name="HomeDrawer"
           options={{
             drawerLabel: ({ color }) => (
               <DrawerLabelStyled color={color}>Inicio</DrawerLabelStyled>

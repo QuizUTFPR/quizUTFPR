@@ -15,14 +15,17 @@ import HomeScreen from '@pages/Home';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => (
-  <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
+  <Tab.Navigator
+    tabBar={(props) => <TabBar {...props} />}
+    screenOptions={{ headerShown: false }}
+  >
     <Tab.Screen
       options={{
         Icon: Ionicons,
         name: 'md-home',
         size: 32,
       }}
-      name="Inicio"
+      name="Teste do Tab"
       component={HomeScreen}
     />
   </Tab.Navigator>

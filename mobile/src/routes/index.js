@@ -34,20 +34,18 @@ const routes = () => {
   return (
     <Suspense fallback={<Loading />}>
       <NavigationContainer theme={navigationTheme}>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           {studentInfo.token === null && studentInfo.student === null ? (
             <>
               <Stack.Screen
-                options={{ headerShown: false }}
-                name="InitialScreen"
+                name="RoutesTokenNotRequired"
                 component={RoutesTokenNotRequired}
               />
             </>
           ) : (
             <>
               <Stack.Screen
-                options={{ headerShown: false }}
-                name="Home"
+                name="RoutesTokenIsRequired"
                 component={RoutesTokenIsRequired}
               />
             </>

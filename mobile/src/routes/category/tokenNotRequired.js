@@ -12,22 +12,13 @@ const Stack = createStackNavigator();
 
 const DontHaveTokenStack = () => (
   <Suspense fallback={<Loading />}>
-    <Stack.Navigator initialRouteName="InitialScreen">
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="InitialScreen"
-        component={InitialScreen}
-      />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Login"
-        component={Login}
-      />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Register"
-        component={Register}
-      />
+    <Stack.Navigator
+      initialRouteName="InitialScreen"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="InitialScreen" component={InitialScreen} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   </Suspense>
 );
