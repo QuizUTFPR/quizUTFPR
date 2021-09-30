@@ -6,6 +6,10 @@ import QuizPublishedController from '../../app/controllers/QuizController/QuizPu
 // Crio uma instância do método Router;
 const router = new Router();
 
-router.get('/getAll', QuizPublishedController.index);
+
+// CASO MANDAR UMA PÁGINA ELE REALIZA A PAGINAÇÃO
+// CASO CONTRARIO EXIBE TODOS
+router.get('/getAll/', QuizPublishedController.index);
+router.get('/getAll/:page', QuizPublishedController.index);
 
 export default router;

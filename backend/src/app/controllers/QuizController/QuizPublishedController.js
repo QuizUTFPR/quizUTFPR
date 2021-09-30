@@ -10,6 +10,7 @@ class QuizPublishedController {
   async index(req, res) {
     try {
       const student_id = req.userId;
+      const { page } = req.params;
 
       const quizzes = await Quiz.findAll({
         where: {
@@ -45,6 +46,8 @@ class QuizPublishedController {
             },
           },
         ],
+        offset: page ? (page-1)*3 : 0,
+        limit: page ? 3: null,
       });
 
       const quizzesInProgress = (

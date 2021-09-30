@@ -24,6 +24,7 @@ const Auth = ({ children }) => {
 
       localStorage.setItem('@TOKEN', data.token);
       localStorage.setItem('@TEACHER', JSON.stringify(data.teacher));
+      localStorage.setItem('@REFRESH_TOKEN', data.refresh_token);
 
       return response;
     } catch (err) {

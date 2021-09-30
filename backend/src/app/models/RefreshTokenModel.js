@@ -13,7 +13,7 @@ class RefreshToken extends Model {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
-        expires_in: Sequelize.INTEGER,
+        expires_in: Sequelize.DATE,
       },
       {
         sequelize,

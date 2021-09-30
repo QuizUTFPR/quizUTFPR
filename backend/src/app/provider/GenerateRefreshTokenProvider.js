@@ -1,13 +1,20 @@
 import dayjs from 'dayjs';
 import authConfig from '../../config/auth';
 import RefreshToken from '../models/RefreshTokenModel';
+import utc from 'dayjs/plugin/utc'
+dayjs.extend(utc)
 
 class GenerateRefreshTokenProvider {
   async execute(userId) {
     try {
-      const expiresIn = dayjs()
-        .add(authConfig.refreshExpiration, 'hours')
-        .unix();
+      const expiresIn = dayjs.utc()
+        .add(parseInt(authConfig.refreshExpiration), 'm').format();
+    
+
+      await RefreshToken.destroy({
+        where: { user_id: userId },
+      });
+      
 
       const generatedRefreshToken = await RefreshToken.create({
         user_id: userId,

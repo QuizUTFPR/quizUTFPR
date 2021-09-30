@@ -1,40 +1,36 @@
 import dayjs from 'dayjs';
 import RefreshToken from '../../models/RefreshTokenModel';
 import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
-import GenereateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
 
 class RefreshTokenController {
   async handle(req, res) {
-    const { refresh_token } = req.body;
-
-    const refreshToken = await RefreshToken.findOne({
-      where: { id: refresh_token },
-    });
-
-    if (!refreshToken)
-      return res.status(403).json({ error: 'Invalid refresh token!' });
-
-    const refreshTokenExpired = dayjs().isAfter(refreshToken.expires_in);
-
-    const token = await GenerateTokenProvider.execute(refreshToken.user_id);
-
-    if (refreshTokenExpired) {
-      await RefreshToken.destroy({
-        where: { id: refreshToken.id },
+    try {
+      const { refresh_token } = req.body;
+  
+      const refreshToken = await RefreshToken.findOne({
+        where: { id: refresh_token },
       });
-
-      const newRefreshToken = await GenereateRefreshTokenProvider.execute(
-        refreshToken.user_id
-      );
-
-      console.log('New Refresh Token: ', newRefreshToken);
-
+  
+      if (!refreshToken)
+      return res.status(403).json({ error: 'Invalid refresh token!' });
+      
+      const refreshTokenExpired = dayjs().isAfter(dayjs(refreshToken.expires_in));
+      
+      
+      if(refreshTokenExpired)
+        return res.status(403).json({ error: 'Refresh token expired!' });
+    
+  
+      const token = await GenerateTokenProvider.execute(refreshToken.user_id);
+  
       return res
         .status(200)
-        .json({ token, refresh_token: newRefreshToken.dataValues.id });
+        .json({ token });
+      
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json(error);
     }
-
-    return res.status(200).json({ token });
   }
 }
 

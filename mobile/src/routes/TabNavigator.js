@@ -25,7 +25,7 @@ const TabNavigator = () => (
         name: 'md-home',
         size: 32,
       }}
-      name="Teste do Tab"
+      name="INICIO"
       component={HomeScreen}
     />
   </Tab.Navigator>

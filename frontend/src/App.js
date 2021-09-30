@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { LinearProgress } from '@material-ui/core';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 // import PropTypes from 'prop-types'
 
 // CONTEXT
@@ -19,9 +19,16 @@ const Login = lazy(() => import('./pages/Login'));
 const Question = lazy(() => import('./pages/Question'));
 const ExpiredToken = lazy(() => import('./pages/ConfirmExpireOfToken'));
 
-function App({ location, history }) {
+function App({
+  location,
+  // history
+}) {
   const [checkedToken, setCheckedToken] = useState(false);
-  const { teacherInfo, setTeacherInfo, logout } = useAuth();
+  const {
+    teacherInfo,
+    setTeacherInfo,
+    // logout
+  } = useAuth();
 
   useEffect(() => {
     const token = localStorage.getItem('@TOKEN');
@@ -38,16 +45,15 @@ function App({ location, history }) {
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (teacherInfo.token) {
-      const { token } = teacherInfo;
-      const { payload } = jwt.decode(token, { complete: true });
-      const dateNow = new Date();
-
-      if (payload.exp < dateNow.getTime() / 1000) {
-        logout();
-        history.push(TOKENEXPIRED);
-      }
-    }
+    // if (teacherInfo.token) {
+    //   const { token } = teacherInfo;
+    //   const { payload } = jwt.decode(token, { complete: true });
+    //   const dateNow = new Date();
+    //   if (payload.exp < dateNow.getTime() / 1000) {
+    //     logout();
+    //     history.push(TOKENEXPIRED);
+    //   }
+    // }
   });
 
   if (!checkedToken) return <LinearProgress />;

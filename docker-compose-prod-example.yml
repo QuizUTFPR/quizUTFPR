@@ -45,6 +45,7 @@ services:
       - PORT=3334
       - SECRET=SECRET_AQUI
       - EXPIRE_IN=DIAS_PARA_EXPIRAR_TOKEN
+      - REFRESH_EXPIRATION=   
     networks:
       - app-tier
 
