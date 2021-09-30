@@ -8,8 +8,8 @@ import TabBar from '@components/TabBar';
 import { Ionicons } from '@expo/vector-icons';
 
 // STACKS
-// import HomeStack from './stacks/home';
-import HomeScreen from '@pages/Home';
+import HomeStack from './stacks/home';
+// import HomeScreen from '@pages/Home';
 
 // TAB CREATION
 const Tab = createBottomTabNavigator();
@@ -25,8 +25,8 @@ const TabNavigator = () => (
         name: 'md-home',
         size: 32,
       }}
-      name="INICIO"
-      component={HomeScreen}
+      name="HomeStack"
+      component={HomeStack}
     />
   </Tab.Navigator>
 );

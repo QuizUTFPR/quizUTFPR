@@ -7,9 +7,13 @@ class RefreshTokenController {
     try {
       const { refresh_token } = req.body;
   
+
+      console.log(refresh_token)
       const refreshToken = await RefreshToken.findOne({
         where: { id: refresh_token },
       });
+
+      console.log("achado", refreshToken)
   
       if (!refreshToken)
       return res.status(403).json({ error: 'Invalid refresh token!' });

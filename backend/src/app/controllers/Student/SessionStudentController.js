@@ -2,8 +2,13 @@ import * as Yup from 'yup';
 import jwt from 'jsonwebtoken';
 import authConfig from '../../../config/auth';
 
+// PROVIDER
+import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
+import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
+
 // MODELS
 import Student from '../../models/StudentModel';
+import RefreshToken from '../../models/RefreshTokenModel';
 
 class SessionStudentController {
   // Cadastra um único registro
@@ -33,14 +38,22 @@ class SessionStudentController {
 
       const { id, name } = student;
 
+      // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
+      await RefreshToken.destroy({
+        where: { user_id: id },
+      });
+
+      const token = await GenerateTokenProvider.execute(id);
+      const refreshToken = await GenerateRefreshTokenProvider.execute(id);
+
+
       return res.status(200).json({
         student: {
           name,
           email,
         },
-        token: jwt.sign({ id }, authConfig.secret, {
-          expiresIn: authConfig.expireIn,
-        }),
+        token: token,
+        refresh_token: refreshToken.id
       });
     } catch (err) {
       return res.status(500).json(err);

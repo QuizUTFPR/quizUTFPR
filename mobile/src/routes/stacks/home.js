@@ -5,7 +5,7 @@ import Loading from '@components/Loading';
 
 // PAGES
 const Home = lazy(() => import('@pages/Home'));
-
+const Logout = lazy(() => import('@pages/Logout'));
 // STACK
 const Stack = createStackNavigator();
 
@@ -16,6 +16,11 @@ const HomeStack = () => (
         options={{ headerShown: false }}
         name="Home"
         component={Home}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Logout"
+        component={Logout}
       />
     </Stack.Navigator>
   </Suspense>

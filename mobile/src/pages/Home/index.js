@@ -46,14 +46,21 @@ const Home = () => {
   const [pin, setPin] = useState();
 
   const getAllPublishedQuizzes = async () => {
-    const { data } = await api.get('/publishedQuiz/getAll/1');
-
-    setAllQuizzes(data);
+    try {
+      const { data } = await api.get('/publishedQuiz/getAll/1');
+      setAllQuizzes(data);
+    } catch (error) {
+      // console.error(error);
+    }
   };
 
   const getAllQuizzesInProgress = async () => {
-    const { data } = await api.get('/studentQuiz/getQuizInProgress');
-    setQuizzesInProgress(data);
+    try {
+      const { data } = await api.get('/studentQuiz/getQuizInProgress');
+      setQuizzesInProgress(data);
+    } catch (error) {
+      // console.log(error);
+    }
   };
 
   const onRefresh = useCallback(async () => {

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import * as Yup from 'yup';
 
+// PROVIDER
+import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
+import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
+
 // MODELS
 import Teacher from '../../models/TeacherModel';
-import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
 import RefreshToken from '../../models/RefreshTokenModel';
-import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
 
 class SessionTeacherController {
   // Cadastra um único registro
