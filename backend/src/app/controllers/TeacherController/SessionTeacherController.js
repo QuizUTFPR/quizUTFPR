@@ -1,10 +1,11 @@
 import axios from 'axios';
 import * as Yup from 'yup';
-import jwt from 'jsonwebtoken';
-import authConfig from '../../../config/auth';
 
 // MODELS
 import Teacher from '../../models/TeacherModel';
+import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
+import RefreshToken from '../../models/RefreshTokenModel';
+import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
 
 class SessionTeacherController {
   // Cadastra um único registro
@@ -19,7 +20,6 @@ class SessionTeacherController {
       if (!(await schema.isValid(req.body))) {
         return res.status(400).json({ error: 'Falha na validação!' });
       }
-
 
       const { username, password } = req.body;
 
@@ -82,15 +82,22 @@ class SessionTeacherController {
 
       const { id, name, uid } = teacher;
 
+      // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
+      await RefreshToken.destroy({
+        where: { user_id: id },
+      });
+
+      const token = await GenerateTokenProvider.execute(id);
+      const refreshToken = await GenerateRefreshTokenProvider.execute(id);
+
       return res.json({
         teacher: {
           name,
           teacherEmail,
           uid,
         },
-        token: jwt.sign({ id }, authConfig.secret, {
-          expiresIn: authConfig.expireIn,
-        }),
+        token,
+        refresh_token: refreshToken.id,
       });
     } catch (err) {
       if (err.response.status === 401) {

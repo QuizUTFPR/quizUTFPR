@@ -28,8 +28,6 @@ class Teacher extends Model {
     return this;
   }
 
-  static associate() {}
-
   // checkPassword(password) {
   //   return bcrypt.compare(password, this.password_hash);
   // }
