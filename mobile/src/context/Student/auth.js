@@ -58,7 +58,6 @@ const StudentAuth = ({ children }) => {
       saveOnLocalStorage(studentStorageItem, { studentValues });
       saveOnLocalStorage(tokenStorageItem, token);
       saveOnLocalStorage(refreshStorageItem, RefreshToken);
-      console.log('logado');
       return response;
     } catch (error) {
       return {
@@ -74,7 +73,6 @@ const StudentAuth = ({ children }) => {
       const response = await api.post('/student/login', { email, password });
 
       const { student, token, refresh_token: RefreshToken } = response.data;
-
       const studentValues = {
         student,
         token,

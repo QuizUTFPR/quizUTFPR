@@ -10,6 +10,9 @@ import CountDown from '@pages/CountDown';
 import Question from '@pages/Question';
 import Statistics from '@pages/Statistics';
 
+import Logout from '@pages/Logout';
+// const Logout = lazy(() => import('@pages/Logout'));
+
 const MenuDrawer = lazy(() => import('@components/MenuDrawer'));
 const QuizDescription = lazy(() => import('@pages/QuizDescription'));
 const Attempt = lazy(() => import('@pages/AttemptsOfQuiz'));
@@ -27,6 +30,11 @@ const TokenStack = () => (
         <Stack.Screen name="CountDown" component={CountDown} />
         <Stack.Screen name="Question" component={Question} />
         <Stack.Screen name="Statistics" component={Statistics} />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Logout"
+          component={Logout}
+        />
       </Stack.Navigator>
     </QuestionProvider>
   </Suspense>

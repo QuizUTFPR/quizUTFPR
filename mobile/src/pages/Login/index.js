@@ -63,7 +63,6 @@ const Login = ({ navigation }) => {
           validationSchema={loginValidationSchema}
           onSubmit={async (values) => {
             const response = await login(values);
-
             if (response.status !== 200) {
               setShowToast({
                 open: true,

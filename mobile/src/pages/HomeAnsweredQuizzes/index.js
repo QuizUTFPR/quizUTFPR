@@ -35,14 +35,8 @@ const Home = () => {
     try {
       const { data } = await api.get('/studentQuiz/getAllFinishedQuizzes');
       setQuizzes(data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
