@@ -23,6 +23,9 @@ export const StyledImageBackground = styled.ImageBackground.attrs({
   justify-content: space-between;
   padding-left: 15px;
   padding-right: 15px;
+  background: ${({ theme }) => theme.color.red};
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 `;
 
 export const GoBackButtonWrapper = styled(StyledButton).attrs({

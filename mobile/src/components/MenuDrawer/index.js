@@ -4,7 +4,7 @@ import Loading from '@components/Loading';
 import { useTheme } from '@react-navigation/native';
 
 // ICONS
-import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 // STYLES
 import { DrawerLabelStyled } from './styles';
@@ -16,7 +16,6 @@ const Drawer = createDrawerNavigator();
 
 // PAGES
 const TabNavigator = lazy(() => import('@routes/TabNavigator'));
-const AnsweredQuizzes = lazy(() => import('@pages/AnsweredQuizzes'));
 // const HomeStack = lazy(() => import('@routes/stacks/home'));
 
 const DrawerComponent = () => {
@@ -50,24 +49,6 @@ const DrawerComponent = () => {
             ),
           }}
           component={TabNavigator}
-        />
-        <Drawer.Screen
-          name="AnsweredQuizzes"
-          options={{
-            drawerLabel: ({ color }) => (
-              <DrawerLabelStyled color={color}>
-                Quizzes Respondidos
-              </DrawerLabelStyled>
-            ),
-            drawerIcon: ({ focused, size }) => (
-              <FontAwesome5
-                name="book"
-                size={size}
-                color={focused ? colors.purple : 'grey'}
-              />
-            ),
-          }}
-          component={AnsweredQuizzes}
         />
       </Drawer.Navigator>
     </Suspense>

@@ -8,27 +8,18 @@ import api from '@api';
 import Container from '@components/Container';
 
 // ICONS
-import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 // THEME
 import theme from '../../styles/theme';
 
 // STYLES
 import {
-  HeaderWrapper,
-  HeaderInformations,
-  HeaderWelcomeTextView,
   StyledTitle,
-  StyledParagraph,
-  HeaderButton,
-  SearchInput,
-  InputWrapper,
-  BackgroundHeader,
   QuizCard,
   Description,
-  StyledWelcome,
   StyledImage,
-  QuizTitle,
+  // QuizTitle,
   StyledIconButton,
   StyledView,
   StyledScrollView,
@@ -38,21 +29,10 @@ import {
   QuizProgressText,
 } from './styles';
 
-const Home = () => {
+const HomeQuizInProgress = () => {
   const navigation = useNavigation();
   const [isRefreshing, setRefreshing] = useState(false);
-  const [allQuizzes, setAllQuizzes] = useState([]);
   const [allQuizzesInProgress, setQuizzesInProgress] = useState([]);
-  const [pin, setPin] = useState();
-
-  const getAllPublishedQuizzes = async () => {
-    try {
-      const { data } = await api.get('/publishedQuiz/getAll/1');
-      setAllQuizzes(data);
-    } catch (error) {
-      // console.error(error);
-    }
-  };
 
   const getAllQuizzesInProgress = async () => {
     try {
@@ -65,32 +45,9 @@ const Home = () => {
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    await getAllPublishedQuizzes();
     await getAllQuizzesInProgress();
     setRefreshing(false);
   });
-
-  const getQuizByPIN = async () => {
-    try {
-      const { data } = await api.post('/quiz/getByPIN', { pin });
-
-      navigation.navigate('Descricao', {
-        idStudentQuiz: data.id_student_quiz,
-        questionAmount: data.questionAmount,
-        studentChoicesAmount: data.studentChoicesAmount,
-        quiz: {
-          id: data.quiz.id,
-          title: data.quiz.title,
-          description: data.quiz.description,
-          pin: data.quiz.pin,
-          image: data.quiz.image_base64,
-          tags: data.quiz.tags_quiz.map((tag) => tag.name),
-        },
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   useFocusEffect(
     useCallback(() => {
@@ -108,32 +65,6 @@ const Home = () => {
 
   return (
     <Container>
-      <HeaderWrapper>
-        <BackgroundHeader>
-          <HeaderInformations>
-            <HeaderButton onPress={() => navigation.openDrawer()}>
-              <AntDesign name="menu-fold" size={32} color="white" />
-            </HeaderButton>
-            <HeaderWelcomeTextView>
-              <StyledWelcome fill="white">Seja bem-vindo,</StyledWelcome>
-              <StyledParagraph fill="white">
-                Escolha um quiz e divirta-se!
-              </StyledParagraph>
-            </HeaderWelcomeTextView>
-          </HeaderInformations>
-
-          <InputWrapper>
-            <FontAwesome name="search" size={25} color={theme.color.purple} />
-            <SearchInput
-              defaultValue={pin}
-              onSubmitEditing={getQuizByPIN}
-              onChangeText={(pinText) => setPin(pinText)}
-              placeholder="Digite o PIN"
-            />
-          </InputWrapper>
-        </BackgroundHeader>
-      </HeaderWrapper>
-
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
@@ -142,7 +73,7 @@ const Home = () => {
         <>
           {allQuizzesInProgress.length > 0 && (
             <QuizContainer>
-              <QuizTitle>Em Progresso</QuizTitle>
+              {/* <QuizTitle>Em Progresso</QuizTitle> */}
               {allQuizzesInProgress.map((item) => (
                 <QuizCard
                   key={item.quiz.id}
@@ -202,55 +133,10 @@ const Home = () => {
               ))}
             </QuizContainer>
           )}
-
-          {allQuizzes.length > 0 && (
-            <QuizContainer>
-              <QuizTitle>Quizes</QuizTitle>
-              {allQuizzes.map((quiz) => (
-                <QuizCard
-                  key={quiz.id}
-                  onPress={() =>
-                    navigation.navigate('Descricao', {
-                      quiz: {
-                        id: quiz.id,
-                        title: quiz.title,
-                        description: quiz.description,
-                        pin: quiz.pin,
-                        image: quiz.image_base64,
-                        tags: quiz.tags_quiz.map((tag) => tag.name),
-                      },
-                    })
-                  }
-                >
-                  <StyledImage
-                    source={
-                      quiz.image_base64.length
-                        ? {
-                            uri: quiz.image_base64,
-                          }
-                        : null
-                    }
-                  />
-                  <StyledView>
-                    <Description>
-                      <StyledTitle fill="black">{quiz.title}</StyledTitle>
-                    </Description>
-                  </StyledView>
-                  <StyledIconButton>
-                    <AntDesign
-                      name="arrowright"
-                      size={24}
-                      color={theme.color.purple}
-                    />
-                  </StyledIconButton>
-                </QuizCard>
-              ))}
-            </QuizContainer>
-          )}
         </>
       </StyledScrollView>
     </Container>
   );
 };
 
-export default Home;
+export default HomeQuizInProgress;

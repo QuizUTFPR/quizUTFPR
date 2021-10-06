@@ -2,7 +2,7 @@ import { DefaultTheme } from '@react-navigation/native';
 import { PixelRatio } from 'react-native';
 import theming from 'styled-theming';
 
-let FONT_BACK_LABEL = 18;
+let FONT_BACK_LABEL = 14;
 
 const backgroundColorButton = theming.variants('mode', 'variant', {
   primary: { light: '#4B24B1' },
@@ -23,7 +23,7 @@ const fillColor = theming.variants('mode', 'fill', {
 });
 
 if (PixelRatio.get() <= 2) {
-  FONT_BACK_LABEL = 14;
+  FONT_BACK_LABEL = 12;
 }
 
 const theme = {
