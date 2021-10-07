@@ -1,7 +1,11 @@
 import crc32 from 'fast-crc32c';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 
 // MODELS
 import Quiz from '../../models/QuizModel';
+
+dayjs.extend(utc);
 
 class PublishQuizController {
   // Lista todos os registros
@@ -22,6 +26,7 @@ class PublishQuizController {
 
       quiz.published = true;
       quiz.pin = pin;
+      quiz.publish_date = dayjs.utc().format();
       quiz.save();
 
       return res.status(200).json();

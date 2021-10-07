@@ -25,7 +25,7 @@ class RecentPublishedQuizController {
           'id_image',
           'pin',
           'image_base64',
-          'created_at',
+          'publish_date',
         ],
         include: [
           {
@@ -47,7 +47,7 @@ class RecentPublishedQuizController {
             },
           },
         ],
-        order: [['created_at', 'DESC']],
+        order: [['publish_date', 'DESC']],
       });
 
       const quizzesInProgress = (
