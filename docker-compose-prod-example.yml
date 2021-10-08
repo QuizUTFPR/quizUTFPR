@@ -46,6 +46,7 @@ services:
       - SECRET=SECRET_AQUI
       - EXPIRE_IN=DIAS_PARA_EXPIRAR_TOKEN
       - REFRESH_EXPIRATION=   
+      - TIMEZONE=+03:00
     networks:
       - app-tier
 

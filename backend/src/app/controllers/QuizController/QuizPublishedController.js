@@ -46,8 +46,8 @@ class QuizPublishedController {
             },
           },
         ],
-        offset: page ? (page-1)*3 : 0,
-        limit: page ? 3: null,
+        offset: page ? (page - 1) * 3 : 0,
+        limit: page ? 3 : null,
       });
 
       const quizzesInProgress = (

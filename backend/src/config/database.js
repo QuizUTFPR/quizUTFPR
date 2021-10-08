@@ -12,4 +12,5 @@ module.exports = {
     underscoredAll: true,
     freezeTableName: true,
   },
+  timezone: process.env.TIMEZONE,
 };
