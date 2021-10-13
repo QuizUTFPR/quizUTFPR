@@ -30,7 +30,10 @@ class SessionTeacherController {
         username: process.env.LDAP_USERNAME,
         password: process.env.LDAP_PASSWORD,
       });
+      console.log(responseLDAP);
+
       const ldapToken = responseLDAP.data.token;
+      console.log('inciando login');
 
       // VERIFICANDO SE DADOS ESTÃO CORRETOS DE ACORDO COM O LDAP
       const responseLoginLDAP = await axios.post(
@@ -102,6 +105,7 @@ class SessionTeacherController {
         refresh_token: refreshToken.id,
       });
     } catch (err) {
+      console.log(err);
       if (err.response.status === 401) {
         return res
           .status(403)

@@ -9,9 +9,8 @@ import compression from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
 import path from 'path';
-import './database';
-
 import routes from './routes';
+import './database';
 
 class App {
   // O construtor irá invocar minha instância e os middlewares;

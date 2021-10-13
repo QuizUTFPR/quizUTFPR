@@ -7,10 +7,12 @@ import StudentQuizController from '../../app/controllers/StudentQuiz/StudentQuiz
 import StudentQuizInProgressController from '../../app/controllers/StudentQuiz/StudentQuizInProgressController';
 import QuestionQuizPublishedController from '../../app/controllers/StudentQuiz/QuestionQuizPublishedController';
 import StudentQuizFinishedController from '../../app/controllers/StudentQuiz/StudentQuizFinishedController';
+import FavoriteStudentQuizController from '../../app/controllers/FavoriteController/FavoriteStudentQuizController';
 
 // Crio uma instância do método Router;
 const router = new Router();
 
+router.post('/favorites', FavoriteStudentQuizController.index);
 router.post('/createChoice', StudentQuestionChoiceController.store);
 router.post('/startQuiz', StudentQuizController.store);
 router.put('/finishQuiz', StudentQuizController.update);
