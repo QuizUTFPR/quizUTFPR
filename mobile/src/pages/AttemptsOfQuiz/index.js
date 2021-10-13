@@ -2,23 +2,21 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-// COMPONENTS
-import Container from '@components/Container';
-
 // ICONS
 import { Ionicons } from '@expo/vector-icons';
 
-// STYLES
+// COMPONENTS
+import Attempts from './Components/Attempts';
+
 import {
-  QuizTitle,
-  QuizCard,
-  Description,
-  TitleText,
-  StyledIconButton,
+  QuizAttemptsHeader,
+  StyledImageBackground,
   GoBackButtonWrapper,
-  StyledView,
-  StyledScrollView,
-  QuizContainer,
+  StyledIconButton,
+  BottomDecoration,
+  Description,
+  StyledText,
+  Divider,
 } from './styles';
 
 const Home = ({ route }) => {
@@ -26,33 +24,37 @@ const Home = ({ route }) => {
   const { attempts, teacher } = route.params;
 
   return (
-    <Container>
-      <StyledScrollView>
-        <GoBackButtonWrapper>
-          <StyledIconButton onPress={() => navigation.goBack()}>
-            <Ionicons name="chevron-back" size={32} color="white" />
-          </StyledIconButton>
-        </GoBackButtonWrapper>
+    <>
+      <QuizAttemptsHeader>
+        <StyledImageBackground
+          // source={
+          //   image.length
+          //     ? {
+          //         uri: image,
+          //       }
+          //     : null
+          // }
+          source={null}
+        >
+          <GoBackButtonWrapper>
+            <StyledIconButton onPress={() => navigation.goBack()}>
+              <Ionicons name="chevron-back" size={32} color="white" />
+            </StyledIconButton>
+          </GoBackButtonWrapper>
+          <BottomDecoration />
+        </StyledImageBackground>
+        <Description>
+          <StyledText title>Título do Quiz</StyledText>
+          <StyledText>By: {teacher.name}</StyledText>
+          <StyledText>Qtde. de questões: 1</StyledText>
+        </Description>
+      </QuizAttemptsHeader>
 
-        <QuizContainer>
-          <TitleText>Minhas Tentativas</TitleText>
-          {attempts.map((item, index) => (
-            <QuizCard key={item.id}>
-              <StyledView>
-                <Description>
-                  <QuizTitle fill="black">{`Tentativa: ${
-                    index + 1
-                  }`}</QuizTitle>
-                  <QuizTitle fill="black">{`Score: ${item.score}`}</QuizTitle>
-                  <QuizTitle fill="black">{`Acertos: ${item.hit_amount}`}</QuizTitle>
-                  <QuizTitle fill="black">{`Professor: ${teacher.name}`}</QuizTitle>
-                </Description>
-              </StyledView>
-            </QuizCard>
-          ))}
-        </QuizContainer>
-      </StyledScrollView>
-    </Container>
+      <Divider />
+
+      <Attempts attempts={attempts} />
+    </>
   );
 };
+
 export default Home;

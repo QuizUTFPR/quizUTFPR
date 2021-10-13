@@ -5,71 +5,56 @@ import { StyledButton } from '@components/ButtonGradient/style';
 // DIMENSION TRANSFORMERS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
+export const QuizAttemptsHeader = styled.View`
+  width: ${widthPercentageToDp('100%')}px;
+  height: ${heightPercentageToDp('45%')}px;
+`;
+
+export const StyledImageBackground = styled.ImageBackground`
+  flex: 1;
+  justify-content: space-between;
+  background: ${({ theme }) => theme.color.red};
+`;
+
 export const GoBackButtonWrapper = styled(StyledButton).attrs({
   colors: ['#4B24B1', '#3b1b96'],
 })`
-  align-self: flex-start;
+  margin-top: ${Constants.statusBarHeight + 10}px;
   margin-left: 25px;
   align-items: center;
   width: 40px;
   height: 40px;
-  margin-top: ${Constants.statusBarHeight + 10}px;
-`;
-
-export const TitleText = styled.Text`
-  color: ${({ theme }) => theme.color.purple};
-  font-size: ${({ theme }) => theme.fontSize + 3}px;
-  font-family: 'PoppinsBold';
-`;
-
-export const QuizCard = styled.TouchableOpacity.attrs({ activeOpacity: 0.8 })`
-  flex-direction: row;
-  align-self: flex-start;
-  align-items: center;
-  justify-content: space-between;
-  width: ${widthPercentageToDp('85%')}px;
-  border-radius: 10px;
-  margin-bottom: ${heightPercentageToDp('2%')}px;
-  background: ${({ theme }) => theme.color.white};
-`;
-
-export const Description = styled.View`
-  flex: 1;
-`;
-
-export const StyledView = styled.View`
-  height: 100%;
-  flex: 1;
-`;
-
-export const StyledImage = styled.Image`
-  width: 35%;
-  height: 100%;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-`;
-
-export const QuizTitle = styled.Text.attrs({
-  ellipsizeMode: 'tail',
-  numberOfLines: 1,
-})`
-  font-size: ${({ theme }) => theme.fontSize - 2}px;
-  color: ${({ theme }) => theme.color.fill};
-  font-family: 'PoppinsBold';
-  margin-left: 10px;
-  margin-top: 5px;
 `;
 
 export const StyledIconButton = styled.Text``;
 
-export const StyledScrollView = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    alignItems: 'center',
-  },
-})`
+export const BottomDecoration = styled.View`
   width: ${widthPercentageToDp('100%')}px;
+  height: ${heightPercentageToDp('5%')}px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  background: #eaeaf5;
 `;
 
-export const QuizContainer = styled.View`
-  margin-top: 20px;
+export const Description = styled.View`
+  width: ${widthPercentageToDp('100%')}px;
+  margin-left: 22px;
+`;
+
+export const StyledText = styled.Text`
+  font-family: ${({ title }) => (title ? 'PoppinsBold' : 'PoppinsSemiBold')};
+  font-size: ${({ title }) =>
+    ({ theme }) =>
+      title ? theme.fontSize + 10 : theme.fontSize}px;
+  color: ${({ title }) =>
+    ({ theme }) =>
+      title ? theme.color.purple : theme.color.black};
+`;
+
+export const Divider = styled.View`
+  width: ${widthPercentageToDp('92%')}px;
+  height: ${heightPercentageToDp('0.2%')}px;
+  margin-top: ${heightPercentageToDp('2%')}px;
+  background: ${({ theme }) => theme.color.whiteGrey};
+  align-self: center;
 `;

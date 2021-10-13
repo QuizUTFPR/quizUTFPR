@@ -21,6 +21,7 @@ export const Progress = styled.View`
   border-bottom-right-radius: 20px;
   z-index: 5;
 `;
+
 export const ProgressBG = styled.View`
   position: absolute;
   bottom: 0;
