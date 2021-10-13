@@ -74,6 +74,7 @@ const Home = () => {
                   navigation.navigate('AttempsOfQuiz', {
                     attempts: quiz.quiz_student,
                     teacher: quiz.teacher,
+                    isFavorite: quiz.isFavorite,
                   })
                 }
               >

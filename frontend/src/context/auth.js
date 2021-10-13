@@ -16,7 +16,7 @@ const Auth = ({ children }) => {
     if (!username || !password) return 404;
     try {
       const response = await api.post('/login', { username, password });
-      console.log('response', response);
+
       const { data } = response;
       setTeacherInfo({
         token: data.token,

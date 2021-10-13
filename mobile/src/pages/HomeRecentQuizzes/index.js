@@ -83,6 +83,7 @@ const HomeRecentQuizzes = () => {
                         pin: quiz.pin,
                         image: quiz.image_base64,
                         tags: quiz.tags_quiz.map((tag) => tag.name),
+                        isFavorite: quiz.isFavorite,
                       },
                     })
                   }

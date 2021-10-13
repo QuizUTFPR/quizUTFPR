@@ -89,6 +89,7 @@ const HomeQuizInProgress = () => {
                         pin: item.quiz.pin,
                         image: item.quiz.image_base64,
                         tags: item.quiz.tags_quiz.map((tag) => tag.name),
+                        isFavorite: item.quiz.isFavorite,
                       },
                     })
                   }

@@ -12,10 +12,10 @@ import FavoriteStudentQuizController from '../../app/controllers/FavoriteControl
 // Crio uma instância do método Router;
 const router = new Router();
 
-router.post('/favorites', FavoriteStudentQuizController.index);
 router.post('/createChoice', StudentQuestionChoiceController.store);
 router.post('/startQuiz', StudentQuizController.store);
 router.put('/finishQuiz', StudentQuizController.update);
+router.get('/favorites', FavoriteStudentQuizController.index);
 router.get('/getQuizInProgress', StudentQuizInProgressController.index);
 router.get('/getAllFinishedQuizzes', StudentQuizFinishedController.index);
 router.post('/getQuestionQuiz/', QuestionQuizPublishedController.index);

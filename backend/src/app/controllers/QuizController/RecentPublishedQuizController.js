@@ -4,6 +4,7 @@ import Quiz from '../../models/QuizModel';
 import Teacher from '../../models/TeacherModel';
 import Tag from '../../models/TagModel';
 import File from '../../models/FileModel';
+import FavoriteStudentQuiz from '../../models/FavoriteStudentQuiz';
 
 class RecentPublishedQuizController {
   // Lista todos os registros
@@ -64,7 +65,23 @@ class RecentPublishedQuizController {
         (quiz) => !quizzesInProgress.includes(quiz.id)
       );
 
-      return res.status(200).json(returnedQuizzes);
+      const verifyingFavoriteQuizzes = await Promise.all(
+        returnedQuizzes.map(async (quiz) => {
+          const isFavorite = await FavoriteStudentQuiz.findOne({
+            where: {
+              quiz_id: quiz.id,
+              student_id,
+            },
+          });
+
+          return {
+            ...quiz.dataValues,
+            isFavorite: !!isFavorite,
+          };
+        })
+      );
+
+      return res.status(200).json(verifyingFavoriteQuizzes);
     } catch (err) {
       return res.status(500).json(err);
     }

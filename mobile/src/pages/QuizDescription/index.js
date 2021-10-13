@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React, { useState } from 'react';
-import { Ionicons, Feather } from '@expo/vector-icons';
+import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import * as Clipboard from 'expo-clipboard';
@@ -42,15 +42,17 @@ import {
   StyledTitleProgress,
   StyledTextProgress,
   PinWrapper,
+  Favorite,
 } from './styles';
 
 const QuizDescription = ({ route }) => {
   // eslint-disable-next-line no-unused-vars
   const { idStudentQuiz, questionAmount, studentChoicesAmount, quiz } =
     route.params;
-  const { title, description, tags, id, pin, image } = quiz;
+  const { title, description, tags, id, pin, image, isFavorite } = quiz;
 
   const [visibleGiveUPModal, setVisibleGivUPModal] = useState(false);
+  const [favorite, setFavorite] = useState(isFavorite);
 
   const [studentQuizID, setStudentQuizID] = useState(idStudentQuiz);
   const { getQuestionsOfQuizFromDatabase } = useQuestions();
@@ -96,6 +98,22 @@ const QuizDescription = ({ route }) => {
       open: true,
       message: 'PIN copiado!',
     });
+  };
+
+  const handleFavorite = async () => {
+    try {
+      if (favorite) {
+        await api.delete('/quiz/deleteFavorite', {
+          params: { quiz_id: id },
+        });
+        setFavorite(false);
+      } else {
+        await api.post('/quiz/favorite', { quiz_id: id });
+        setFavorite(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -157,8 +175,15 @@ const QuizDescription = ({ route }) => {
 
         <StyledScrollView>
           <BodyDescription>
-            <StyledTitle>PIN</StyledTitle>
+            <Favorite onPress={handleFavorite}>
+              {favorite ? (
+                <MaterialIcons name="favorite" size={35} color="red" />
+              ) : (
+                <MaterialIcons name="favorite-border" size={35} color="black" />
+              )}
+            </Favorite>
 
+            <StyledTitle>PIN</StyledTitle>
             <PinWrapper onPress={copyToClipboardAndShowToast}>
               <StyledPIN>{pin}</StyledPIN>
               <Feather name="copy" size={25} color="black" />

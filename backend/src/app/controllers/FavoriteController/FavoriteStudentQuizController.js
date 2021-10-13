@@ -9,16 +9,7 @@ class FavoriteStudentQuizController {
   // exibe todos os registros
   async index(req, res) {
     try {
-      const schema = Yup.object().shape({
-        student_id: Yup.number().required(),
-      });
-
-      // Check body of requisiton
-      if (!(await schema.isValid(req.body))) {
-        return res.status(400).json({ error: 'Corpo de requisição inválido!' });
-      }
-
-      const { student_id } = req.body;
+      const student_id = req.userId;
 
       const favorites = await FavoriteStudentQuiz.findAll({
         where: {
@@ -42,8 +33,14 @@ class FavoriteStudentQuizController {
         ],
       });
 
-      return res.status(200).json(favorites);
+      const returnedFavorites = favorites.map((item) => ({
+        ...item.dataValues,
+        isFavorite: true,
+      }));
+
+      return res.status(200).json(returnedFavorites);
     } catch (error) {
+      console.log(error);
       return res.status(500).json(error);
     }
   }
@@ -53,7 +50,6 @@ class FavoriteStudentQuizController {
     try {
       const schema = Yup.object().shape({
         quiz_id: Yup.number().required(),
-        student_id: Yup.number().required(),
       });
 
       // Check body of requisiton
@@ -61,7 +57,8 @@ class FavoriteStudentQuizController {
         return res.status(400).json({ error: 'Corpo de requisição inválido!' });
       }
 
-      const { quiz_id, student_id } = req.body;
+      const student_id = req.userId;
+      const { quiz_id } = req.body;
 
       const favorite = await FavoriteStudentQuiz.create({
         quiz_id,
@@ -78,7 +75,6 @@ class FavoriteStudentQuizController {
     try {
       const schema = Yup.object().shape({
         quiz_id: Yup.number().required(),
-        student_id: Yup.number().required(),
       });
 
       // Check body of requisiton
@@ -86,7 +82,8 @@ class FavoriteStudentQuizController {
         return res.status(400).json({ error: 'Corpo de requisição inválido!' });
       }
 
-      const { quiz_id, student_id } = req.query;
+      const student_id = req.userId;
+      const { quiz_id } = req.query;
 
       const favoriteInstance = await FavoriteStudentQuiz.findOne({
         where: {
