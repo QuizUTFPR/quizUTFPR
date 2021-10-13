@@ -147,3 +147,9 @@ export const PinWrapper = styled.TouchableOpacity.attrs({
   flex-direction: row;
   align-items: center;
 `;
+
+export const Favorite = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})`
+  margin-top: 20px;
+`;

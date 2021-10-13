@@ -42,6 +42,11 @@ class Student extends Model {
       foreignKey: 'student_id',
       as: 'student_quiz',
     });
+
+    this.hasMany(models.FavoriteStudentQuiz, {
+      foreignKey: 'student_id',
+      as: 'student_favorite',
+    });
   }
 
   checkPassword(password) {

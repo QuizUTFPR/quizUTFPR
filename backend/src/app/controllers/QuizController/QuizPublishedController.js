@@ -4,6 +4,7 @@ import Quiz from '../../models/QuizModel';
 import Teacher from '../../models/TeacherModel';
 import Tag from '../../models/TagModel';
 import File from '../../models/FileModel';
+import FavoriteStudentQuiz from '../../models/FavoriteStudentQuiz';
 
 class QuizPublishedController {
   // Lista todos os registros
@@ -46,8 +47,8 @@ class QuizPublishedController {
             },
           },
         ],
-        offset: page ? (page-1)*3 : 0,
-        limit: page ? 3: null,
+        offset: page ? (page - 1) * 3 : 0,
+        limit: page ? 3 : null,
       });
 
       const quizzesInProgress = (
@@ -64,10 +65,26 @@ class QuizPublishedController {
         (quiz) => !quizzesInProgress.includes(quiz.id)
       );
 
+      const verifyingFavoriteQuizzes = await Promise.all(
+        returnedQuizzes.map(async (quiz) => {
+          const isFavorite = await FavoriteStudentQuiz.findOne({
+            where: {
+              quiz_id: quiz.id,
+              student_id,
+            },
+          });
+
+          return {
+            ...quiz.dataValues,
+            isFavorite: !!isFavorite,
+          };
+        })
+      );
+
       // if(!quizzes.length)
       //   return res.status(404).json({error: "Não existe nenhum quiz cadastrado."});
 
-      return res.status(200).json(returnedQuizzes);
+      return res.status(200).json(verifyingFavoriteQuizzes);
     } catch (err) {
       return res.status(500).json(err);
     }

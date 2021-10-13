@@ -4,6 +4,7 @@ import Teacher from '../../models/TeacherModel';
 import Tag from '../../models/TagModel';
 // import File from '../../models/FileModel';
 import Student from '../../models/StudentModel';
+import FavoriteStudentQuiz from '../../models/FavoriteStudentQuiz';
 
 class StudentQuizInProgressController {
   // Lista todos os registros
@@ -52,12 +53,21 @@ class StudentQuizInProgressController {
         QuizzesInProgress.map(async (item) => {
           const questionAmount = await item.quiz.countQuestions();
           const studentChoicesAmount = await item.countQuiz_question_choice();
+          const isFavorite = await FavoriteStudentQuiz.findOne({
+            where: {
+              quiz_id: item.quiz.id,
+              student_id,
+            },
+          });
 
           return {
             id_student_quiz: item.id,
             studentChoicesAmount,
             questionAmount,
-            quiz: item.quiz,
+            quiz: {
+              ...item.quiz.dataValues,
+              isFavorite: !!isFavorite,
+            },
           };
         })
       );

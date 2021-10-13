@@ -7,6 +7,7 @@ import QuizTeacherController from '../../app/controllers/QuizController/QuizTeac
 import PublishQuizController from '../../app/controllers/QuizController/PublishQuizController';
 import PINQuizController from '../../app/controllers/QuizController/PINQuizController';
 import RecentPublishedQuizController from '../../app/controllers/QuizController/RecentPublishedQuizController';
+import FavoriteStudentQuizController from '../../app/controllers/FavoriteController/FavoriteStudentQuizController';
 
 // Crio uma instância do método Router;
 const router = new Router();
@@ -19,6 +20,8 @@ router.put('/update', QuizController.update);
 
 router.delete('/delete', QuizController.delete);
 
+router.post('/favorite', FavoriteStudentQuizController.store);
+router.delete('/deleteFavorite', FavoriteStudentQuizController.delete);
 router.post('/create', QuizController.store);
 router.post('/publish', PublishQuizController.update);
 router.post('/getByPIN', PINQuizController.index);

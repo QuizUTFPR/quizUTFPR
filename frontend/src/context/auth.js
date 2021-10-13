@@ -16,6 +16,7 @@ const Auth = ({ children }) => {
     if (!username || !password) return 404;
     try {
       const response = await api.post('/login', { username, password });
+
       const { data } = response;
       setTeacherInfo({
         token: data.token,
@@ -28,6 +29,7 @@ const Auth = ({ children }) => {
 
       return response;
     } catch (err) {
+      console.log({ ...err });
       return err;
     }
   };
