@@ -6,7 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 // COMPONENTS
-import Attempts from './Components/Attempts';
+// import Attempts from './Components/Attempts';
+import Tags from './Components/Tags';
 
 import {
   QuizAttemptsHeader,
@@ -18,6 +19,8 @@ import {
   StyledText,
   Divider,
 } from './styles';
+
+const fakeTags = ['tag1', 'tag2', 'tag tag tag tag 1', 'tag tag 2', 'tag'];
 
 const Home = ({ route }) => {
   const navigation = useNavigation();
@@ -52,7 +55,9 @@ const Home = ({ route }) => {
 
       <Divider />
 
-      <Attempts attempts={attempts} />
+      <Tags tags={fakeTags} />
+
+      {/* <Attempts attempts={attempts} /> */}
     </>
   );
 };
