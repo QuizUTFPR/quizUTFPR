@@ -58,3 +58,28 @@ export const Divider = styled.View`
   background: ${({ theme }) => theme.color.whiteGrey};
   align-self: center;
 `;
+
+export const ButtonsContainer = styled.View`
+  align-self: center;
+  flex-direction: row;
+  align-items: center;
+  height: ${heightPercentageToDp('5%')}px;
+  width: ${widthPercentageToDp('90%')}px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+`;
+
+export const ButtonWrapper = styled.View`
+  border-bottom-color: ${({ theme }) => theme.color.purple};
+  border-bottom-width: ${({ selected }) => (selected ? '3' : '0')}px;
+  margin-top: ${({ selected }) => (selected ? '3' : '0')}px;
+  margin-right: 7px;
+`;
+
+export const StyledButtonNavigation = styled.Text`
+  font-family: PoppinsBold;
+  font-size: ${({ theme }) => theme.fontSize + 3}px;
+  color: ${({ selected }) =>
+    ({ theme }) =>
+      selected ? theme.color.purple : theme.color.lightGrey};
+`;

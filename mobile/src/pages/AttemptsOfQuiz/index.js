@@ -1,12 +1,12 @@
 /* eslint-disable global-require */
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 // ICONS
 import { Ionicons } from '@expo/vector-icons';
 
 // COMPONENTS
-// import Attempts from './Components/Attempts';
+import Attempts from './Components/Attempts';
 import Tags from './Components/Tags';
 
 import {
@@ -18,6 +18,9 @@ import {
   Description,
   StyledText,
   Divider,
+  ButtonsContainer,
+  ButtonWrapper,
+  StyledButtonNavigation,
 } from './styles';
 
 const fakeTags = ['tag1', 'tag2', 'tag tag tag tag 1', 'tag tag 2', 'tag'];
@@ -25,6 +28,19 @@ const fakeTags = ['tag1', 'tag2', 'tag tag tag tag 1', 'tag tag 2', 'tag'];
 const Home = ({ route }) => {
   const navigation = useNavigation();
   const { attempts, teacher } = route.params;
+
+  const [isAttemptsSelected, setAttemptsSelect] = useState(true);
+  const [isTagsSelected, setTagsSelect] = useState(false);
+
+  const handleClickAttemptsSelected = () => {
+    setAttemptsSelect(true);
+    setTagsSelect(false);
+  };
+
+  const handleClickTagsSelected = () => {
+    setTagsSelect(true);
+    setAttemptsSelect(false);
+  };
 
   return (
     <>
@@ -55,9 +71,28 @@ const Home = ({ route }) => {
 
       <Divider />
 
-      <Tags tags={fakeTags} />
+      <ButtonsContainer>
+        <ButtonWrapper selected={isAttemptsSelected}>
+          <StyledButtonNavigation
+            selected={isAttemptsSelected}
+            onPress={() => handleClickAttemptsSelected()}
+          >
+            Tentativas
+          </StyledButtonNavigation>
+        </ButtonWrapper>
+        <ButtonWrapper selected={isTagsSelected}>
+          <StyledButtonNavigation
+            selected={isTagsSelected}
+            onPress={() => handleClickTagsSelected()}
+          >
+            Tags
+          </StyledButtonNavigation>
+        </ButtonWrapper>
+      </ButtonsContainer>
 
-      {/* <Attempts attempts={attempts} /> */}
+      {isAttemptsSelected && <Attempts attempts={attempts} />}
+
+      {isTagsSelected && <Tags tags={fakeTags} />}
     </>
   );
 };

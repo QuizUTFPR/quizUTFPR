@@ -11,10 +11,6 @@ export const StyledScrollView = styled.ScrollView.attrs({
   width: ${widthPercentageToDp('100%')}px;
 `;
 
-export const TagsWrapper = styled.View`
-  margin-top: ${heightPercentageToDp('1%')}px;
-`;
-
 export const TagContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
