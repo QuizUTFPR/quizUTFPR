@@ -87,7 +87,7 @@ export const StyledButtonNavigation = styled.Text`
 export const PlayButtonWrapper = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-bottom: ${heightPercentageToDp('-9%')}px;
+  margin-bottom: ${heightPercentageToDp('-5%')}px;
   margin-right: ${widthPercentageToDp('4%')}px;
   justify-content: flex-end;
 `;
