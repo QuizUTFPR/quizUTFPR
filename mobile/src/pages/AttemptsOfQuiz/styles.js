@@ -7,7 +7,7 @@ import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
 export const QuizAttemptsHeader = styled.View`
   width: ${widthPercentageToDp('100%')}px;
-  height: ${heightPercentageToDp('45%')}px;
+  height: ${heightPercentageToDp('46%')}px;
 `;
 
 export const StyledImageBackground = styled.ImageBackground`
@@ -30,7 +30,7 @@ export const StyledIconButton = styled.Text``;
 
 export const BottomDecoration = styled.View`
   width: ${widthPercentageToDp('100%')}px;
-  height: ${heightPercentageToDp('5%')}px;
+  height: ${heightPercentageToDp('4%')}px;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
   background: #eaeaf5;
@@ -82,4 +82,32 @@ export const StyledButtonNavigation = styled.Text`
   color: ${({ selected }) =>
     ({ theme }) =>
       selected ? theme.color.purple : theme.color.lightGrey};
+`;
+
+export const PlayButtonWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: ${heightPercentageToDp('-9%')}px;
+  margin-right: ${widthPercentageToDp('4%')}px;
+  justify-content: flex-end;
+`;
+
+export const ButtonStyled = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})``;
+
+export const IconButtonWrapper = styled(StyledButton).attrs({
+  colors: ['#4B24B1', '#3b1b96'],
+})`
+  flex-direction: row;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
+
+export const StyledButtonText = styled.Text`
+  font-family: PoppinsBold;
+  font-size: ${({ theme }) => theme.fontSize}px;
+  color: ${({ theme }) => theme.color.white};
+  margin-left: ${widthPercentageToDp('1%')}px;
 `;

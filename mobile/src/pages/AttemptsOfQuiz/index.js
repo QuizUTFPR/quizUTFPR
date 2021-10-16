@@ -21,12 +21,26 @@ import {
   ButtonsContainer,
   ButtonWrapper,
   StyledButtonNavigation,
+  PlayButtonWrapper,
+  ButtonStyled,
+  IconButtonWrapper,
+  StyledButtonText,
 } from './styles';
 
 const Home = ({ route }) => {
   const navigation = useNavigation();
-  const { attempts, teacher, title, image, amountOfQuestions, tags } =
-    route.params;
+  const {
+    id,
+    title,
+    description,
+    pin,
+    attempts,
+    teacher,
+    image,
+    amountOfQuestions,
+    tags,
+    isFavorite,
+  } = route.params;
 
   const tagsNames = tags.map((tag) => tag.name);
 
@@ -60,6 +74,30 @@ const Home = ({ route }) => {
               <Ionicons name="chevron-back" size={32} color="white" />
             </StyledIconButton>
           </GoBackButtonWrapper>
+          <PlayButtonWrapper resume={false}>
+            <ButtonStyled
+              onPress={() =>
+                navigation.navigate('Descricao', {
+                  quiz: {
+                    id,
+                    title,
+                    description,
+                    pin,
+                    image,
+                    tags: tagsNames,
+                    isFavorite,
+                  },
+                })
+              }
+            >
+              <IconButtonWrapper>
+                <StyledIconButton>
+                  <Ionicons name="ios-play-circle" size={32} color="white" />
+                </StyledIconButton>
+                <StyledButtonText fill="white">JOGAR</StyledButtonText>
+              </IconButtonWrapper>
+            </ButtonStyled>
+          </PlayButtonWrapper>
           <BottomDecoration />
         </StyledImageBackground>
         <Description>
