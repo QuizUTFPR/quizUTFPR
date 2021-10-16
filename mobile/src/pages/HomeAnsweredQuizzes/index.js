@@ -75,6 +75,10 @@ const Home = () => {
                     attempts: quiz.quiz_student,
                     teacher: quiz.teacher,
                     isFavorite: quiz.isFavorite,
+                    title: quiz.title,
+                    image: quiz.image_base64,
+                    amountOfQuestions: quiz.amountOfQuestions,
+                    tags: quiz.tags_quiz,
                   })
                 }
               >

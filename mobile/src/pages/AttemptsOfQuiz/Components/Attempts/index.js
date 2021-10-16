@@ -16,7 +16,7 @@ import {
   AttemptDateAndHits,
 } from './styles';
 
-const Attempts = ({ attempts }) => (
+const Attempts = ({ attempts, amountOfQuestions }) => (
   <StyledScrollView>
     {attempts.map((attempt) => {
       const date = new Date(attempt.createdAt);
@@ -27,18 +27,17 @@ const Attempts = ({ attempts }) => (
       const hours = `${date.getHours()}`;
       const minutes = `${date.getMinutes()}`;
 
+      // eslint-disable-next-line camelcase
+      const { id, score, hit_amount } = attempt;
+
       return (
-        <AttemptCard key={attempt.id}>
+        <AttemptCard key={id}>
           <AttemptNumberWrapper>
             <StyledHashtag>#</StyledHashtag>
-            <AttemptNumber>{attempt.id}</AttemptNumber>
+            <AttemptNumber>{id}</AttemptNumber>
           </AttemptNumberWrapper>
           <AttemptInformations>
-            <Score>
-              {attempt.score === 1
-                ? `${attempt.score} pt.`
-                : `${attempt.score} pts.`}
-            </Score>
+            <Score>{score === 1 ? `${score} pt.` : `${score} pts.`}</Score>
 
             <AttemptDateAndHits>
               <SytledDateTime>
@@ -48,10 +47,16 @@ const Attempts = ({ attempts }) => (
                 {minutes.length === 1 ? `0${minutes}` : minutes}
               </SytledDateTime>
 
-              <QuizProgressText fill="purple">1/10</QuizProgressText>
+              <QuizProgressText fill="purple">
+                {/* eslint-disable-next-line camelcase */}
+                {hit_amount}/{amountOfQuestions}
+              </QuizProgressText>
             </AttemptDateAndHits>
             <QuizProgressBarBackground fill="lightGrey">
-              <QuizProgressBar porcentage={(1 * 100) / 10} fill="purple" />
+              <QuizProgressBar
+                porcentage={(attempt.hit_amount * 100) / amountOfQuestions}
+                fill="purple"
+              />
             </QuizProgressBarBackground>
           </AttemptInformations>
         </AttemptCard>

@@ -3,6 +3,7 @@ import Quiz from '../../models/QuizModel';
 import Teacher from '../../models/TeacherModel';
 import StudentQuiz from '../../models/StudentQuiz';
 import FavoriteStudentQuiz from '../../models/FavoriteStudentQuiz';
+import Tag from '../../models/TagModel';
 
 class StudentQuizFinishedController {
   // Lista todos os registros
@@ -27,6 +28,11 @@ class StudentQuizFinishedController {
             as: 'teacher',
             attributes: ['id', 'name', 'email'],
           },
+          {
+            model: Tag,
+            as: 'tags_quiz',
+            attributes: ['name'],
+          },
         ],
       });
 
@@ -39,9 +45,12 @@ class StudentQuizFinishedController {
             },
           });
 
+          const amountOfQuestions = await quiz.countQuestions();
+
           return {
             ...quiz.dataValues,
             isFavorite: !!isFavorite,
+            amountOfQuestions,
           };
         })
       );

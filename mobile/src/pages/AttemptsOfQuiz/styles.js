@@ -65,15 +65,15 @@ export const ButtonsContainer = styled.View`
   align-items: center;
   height: ${heightPercentageToDp('5%')}px;
   width: ${widthPercentageToDp('90%')}px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin-top: ${widthPercentageToDp('3%')}px;
+  margin-bottom: ${widthPercentageToDp('3%')}px;
 `;
 
 export const ButtonWrapper = styled.View`
   border-bottom-color: ${({ theme }) => theme.color.purple};
   border-bottom-width: ${({ selected }) => (selected ? '3' : '0')}px;
   margin-top: ${({ selected }) => (selected ? '3' : '0')}px;
-  margin-right: 7px;
+  margin-right: ${widthPercentageToDp('5%')}px;
 `;
 
 export const StyledButtonNavigation = styled.Text`

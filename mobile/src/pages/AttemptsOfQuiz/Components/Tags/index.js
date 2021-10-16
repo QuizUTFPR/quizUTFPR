@@ -17,7 +17,7 @@ const Tags = ({ tags }) => (
     {tags.map((tag) => (
       <TagContainer key={tag}>
         <TagText>{tag}</TagText>
-        <IconButtonWrapper onPress={() => console.log('clicou na tag')}>
+        <IconButtonWrapper onPress={() => console.log(`clicou na tag ${tag}`)}>
           <AntDesign name="arrowright" size={24} color={theme.color.purple} />
         </IconButtonWrapper>
       </TagContainer>

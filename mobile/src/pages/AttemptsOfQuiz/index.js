@@ -23,11 +23,12 @@ import {
   StyledButtonNavigation,
 } from './styles';
 
-const fakeTags = ['tag1', 'tag2', 'tag tag tag tag 1', 'tag tag 2', 'tag'];
-
 const Home = ({ route }) => {
   const navigation = useNavigation();
-  const { attempts, teacher } = route.params;
+  const { attempts, teacher, title, image, amountOfQuestions, tags } =
+    route.params;
+
+  const tagsNames = tags.map((tag) => tag.name);
 
   const [isAttemptsSelected, setAttemptsSelect] = useState(true);
   const [isTagsSelected, setTagsSelect] = useState(false);
@@ -46,14 +47,13 @@ const Home = ({ route }) => {
     <>
       <QuizAttemptsHeader>
         <StyledImageBackground
-          // source={
-          //   image.length
-          //     ? {
-          //         uri: image,
-          //       }
-          //     : null
-          // }
-          source={null}
+          source={
+            image.length
+              ? {
+                  uri: image,
+                }
+              : null
+          }
         >
           <GoBackButtonWrapper>
             <StyledIconButton onPress={() => navigation.goBack()}>
@@ -63,9 +63,9 @@ const Home = ({ route }) => {
           <BottomDecoration />
         </StyledImageBackground>
         <Description>
-          <StyledText title>Título do Quiz</StyledText>
+          <StyledText title>{title}</StyledText>
           <StyledText>By: {teacher.name}</StyledText>
-          <StyledText>Qtde. de questões: 1</StyledText>
+          <StyledText>Qtde. de questões: {amountOfQuestions}</StyledText>
         </Description>
       </QuizAttemptsHeader>
 
@@ -90,9 +90,11 @@ const Home = ({ route }) => {
         </ButtonWrapper>
       </ButtonsContainer>
 
-      {isAttemptsSelected && <Attempts attempts={attempts} />}
+      {isAttemptsSelected && (
+        <Attempts attempts={attempts} amountOfQuestions={amountOfQuestions} />
+      )}
 
-      {isTagsSelected && <Tags tags={fakeTags} />}
+      {isTagsSelected && <Tags tags={tagsNames} />}
     </>
   );
 };
