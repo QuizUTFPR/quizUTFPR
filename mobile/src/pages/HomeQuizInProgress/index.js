@@ -90,6 +90,7 @@ const HomeQuizInProgress = () => {
                         image: item.quiz.image_base64,
                         tags: item.quiz.tags_quiz.map((tag) => tag.name),
                         isFavorite: item.quiz.isFavorite,
+                        noTime: item.quiz.no_time,
                       },
                     })
                   }

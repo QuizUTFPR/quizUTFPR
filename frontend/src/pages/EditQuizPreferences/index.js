@@ -16,6 +16,8 @@ import {
   Divider,
   TextField,
   MenuItem,
+  FormControlLabel,
+  Checkbox,
 } from '@material-ui/core';
 
 // ASSETS
@@ -49,6 +51,7 @@ const EditPreferences = forwardRef((props, ref) => {
       imageObj: null,
       imageBase64: quiz.image_base64,
       tags: quiz.tags_quiz.map((tag) => tag.name),
+      noTime: quiz.no_time,
     },
     onSubmit: async (values) => {
       // const responseFile = null;
@@ -69,6 +72,7 @@ const EditPreferences = forwardRef((props, ref) => {
         description: values.description,
         visibility: values.visibility,
         imageBase64: base64,
+        noTime: values.noTime,
       };
 
       // if (responseFile) {
@@ -79,6 +83,7 @@ const EditPreferences = forwardRef((props, ref) => {
       if (responseQuiz.status === 200) props.handleClose();
     },
   });
+
   return (
     <Wrapper container spacing={3}>
       <Grid container justifyContent="center" alignItems="center">
@@ -135,7 +140,7 @@ const EditPreferences = forwardRef((props, ref) => {
           />
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={3}>
           <TextField
             fullWidth
             label="Visibilidade"
@@ -152,6 +157,23 @@ const EditPreferences = forwardRef((props, ref) => {
             <MenuItem value="public">Público</MenuItem>
             <MenuItem value="private">Privado</MenuItem>
           </TextField>
+        </Grid>
+
+        <Grid item xs={3}>
+          <FormControlLabel
+            label="Sem limite de tempo"
+            control={
+              <Checkbox
+                id="noTime"
+                name="noTime"
+                variant="outlined"
+                checked={formik.values.noTime}
+                onChange={(event) =>
+                  formik.setFieldValue('noTime', event.target.checked)
+                }
+              />
+            }
+          />
         </Grid>
 
         <Grid item xs={12}>

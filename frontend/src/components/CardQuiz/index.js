@@ -15,6 +15,7 @@ import {
 const Card = ({
   image,
   imageTitle,
+  noTime,
   title,
   published,
   description,
@@ -31,7 +32,7 @@ const Card = ({
       component={Link}
       to={{
         pathname: `${QUESTION}${idQuiz}`,
-        state: { title, published },
+        state: { title, published, noTime },
       }}
     >
       <StyledCardContent>

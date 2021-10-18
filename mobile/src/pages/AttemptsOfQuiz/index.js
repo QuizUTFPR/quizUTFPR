@@ -40,6 +40,7 @@ const Home = ({ route }) => {
     amountOfQuestions,
     tags,
     isFavorite,
+    noTime,
   } = route.params;
 
   const tagsNames = tags.map((tag) => tag.name);
@@ -86,6 +87,7 @@ const Home = ({ route }) => {
                     image,
                     tags: tagsNames,
                     isFavorite,
+                    noTime,
                   },
                 })
               }

@@ -129,10 +129,11 @@ class StudentQuizController {
             studentAmountQuestionCorrect += 1;
           }
 
+          const noTime = quiz.no_time;
           const questionScore = question.score;
           const timeOfQuestion = question.timer;
           const timeLeft = item.time_left;
-          const bonus = (timeLeft / timeOfQuestion) * (50 / 100);
+          const bonus = noTime ? 1 : (timeLeft / timeOfQuestion) * (50 / 100);
 
           score += questionScore + questionScore * bonus;
           final += (1 / correctAnswerAmount) * studentAnswerCorrect * score;

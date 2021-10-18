@@ -26,6 +26,7 @@ class QuizPublishedController {
           'id_image',
           'pin',
           'image_base64',
+          'no_time',
         ],
         include: [
           {

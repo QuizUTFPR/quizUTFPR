@@ -24,7 +24,14 @@ class StudentQuizInProgressController {
           {
             model: Quiz,
             as: 'quiz',
-            attributes: ['id', 'title', 'description', 'pin', 'image_base64'],
+            attributes: [
+              'id',
+              'title',
+              'description',
+              'pin',
+              'image_base64',
+              'no_time',
+            ],
             include: [
               {
                 model: Teacher,

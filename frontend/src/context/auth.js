@@ -29,7 +29,7 @@ const Auth = ({ children }) => {
 
       return response;
     } catch (err) {
-      console.log({ ...err });
+      // console.log({ ...err });
       return err;
     }
   };

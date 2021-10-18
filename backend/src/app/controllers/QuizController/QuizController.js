@@ -21,18 +21,22 @@ class QuizController {
         id_image: Yup.number(),
         tags: Yup.array().required('Informe as tags do quiz!'),
         imageBase64: Yup.string(),
+        noTime: Yup.bool().required(),
       });
+
+      console.log(req.body);
 
       // Check body of requisiton
       if (!(await schema.isValid(req.body)))
         return res.status(400).json({ error: 'Falha na validação!' });
 
       const id_teacher = req.userId;
-      const { imageBase64 } = req.body;
+      const { imageBase64, noTime } = req.body;
 
       const quiz = await Quiz.create({
         id_teacher,
         image_base64: imageBase64,
+        no_time: noTime,
         ...req.body,
       });
 
@@ -68,6 +72,7 @@ class QuizController {
           'id_image',
           'pin',
           'image_base64',
+          'no_time',
         ],
         include: [
           {
@@ -117,6 +122,7 @@ class QuizController {
           'id_image',
           'pin',
           'image_base64',
+          'no_time',
         ],
         include: [
           {
@@ -197,6 +203,7 @@ class QuizController {
         id_image: Yup.number(),
         tags: Yup.array().required('Informe as tags do quiz!'),
         imageBase64: Yup.string(),
+        noTime: Yup.bool().required(),
       });
 
       // Check body of requisiton
@@ -211,6 +218,7 @@ class QuizController {
         visibility,
         // id_image,
         imageBase64,
+        noTime,
       } = req.body;
 
       const quiz = await Quiz.findByPk(id);
@@ -218,6 +226,7 @@ class QuizController {
       quiz.description = description;
       quiz.visibility = visibility;
       quiz.image_base64 = imageBase64;
+      quiz.no_time = noTime;
       // if (id_image) quiz.id_image = id_image;
       quiz.save();
 
@@ -245,6 +254,7 @@ class QuizController {
 
       return res.status(200).json(quiz);
     } catch (err) {
+      console.log(err);
       return res.status(500).json(err);
     }
   }

@@ -50,6 +50,7 @@ const Question = () => {
     initialRequestQuestion,
     amountOfQuestion,
     amountAlreadyAnswered,
+    noTime,
   } = useQuestions();
 
   const navigation = useNavigation();
@@ -59,7 +60,7 @@ const Question = () => {
   );
 
   const [timer, setTimer] = useState({
-    seconds: null,
+    seconds: 0,
     interval: null,
   });
 
@@ -88,6 +89,7 @@ const Question = () => {
     if (
       JSON.stringify(initialRequestQuestion) ===
         JSON.stringify(requestQuestion) &&
+      !noTime &&
       timer.seconds > 0
     ) {
       setShowToast({
@@ -112,35 +114,39 @@ const Question = () => {
   };
 
   useEffect(() => {
-    clearInterval(timer.interval);
-    setTimer(
-      {
-        seconds: quizData.questions[quizData.indexOnScreen].timer,
-        interval: setInterval(() => {
-          setTimer((prevState) => ({
-            ...prevState,
-            seconds: prevState.seconds > 0 ? prevState.seconds - 1 : 0,
-          }));
-        }, 1000),
-      },
-      [quizData]
-    );
+    if (!noTime) {
+      clearInterval(timer.interval);
+      setTimer(
+        {
+          seconds: quizData.questions[quizData.indexOnScreen].timer,
+          interval: setInterval(() => {
+            setTimer((prevState) => ({
+              ...prevState,
+              seconds: prevState.seconds > 0 ? prevState.seconds - 1 : 0,
+            }));
+          }, 1000),
+        },
+        [quizData]
+      );
+    }
 
     return () => clearInterval(timer.interval);
   }, [quizData]);
 
   useEffect(() => {
-    Animated.timing(widthAnimation, {
-      toValue: 0,
-      duration: quizData.questions[quizData.indexOnScreen].timer * 1000,
-      useNativeDriver: false,
-    }).start();
+    if (!noTime) {
+      Animated.timing(widthAnimation, {
+        toValue: 0,
+        duration: quizData.questions[quizData.indexOnScreen].timer * 1000,
+        useNativeDriver: false,
+      }).start();
+    }
 
     return () => clearInterval(timer.interval);
   }, [widthAnimation]);
 
   useEffect(() => {
-    if (timer.seconds === 0) {
+    if (!noTime && timer.seconds === 0) {
       clearInterval(timer.interval);
       showDialog();
     }
@@ -257,7 +263,9 @@ const Question = () => {
             </InformationsWrapper>
           </QuestionWrapper>
 
-          <Timer widthAnimation={widthAnimation} timerState={timer} />
+          {!noTime && (
+            <Timer widthAnimation={widthAnimation} timerState={timer} />
+          )}
         </ImageBackground>
       </LinearContainer>
 

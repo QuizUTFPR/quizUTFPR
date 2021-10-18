@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
@@ -49,18 +49,18 @@ const QuizDescription = ({ route }) => {
   // eslint-disable-next-line no-unused-vars
   const { idStudentQuiz, questionAmount, studentChoicesAmount, quiz } =
     route.params;
-  const { title, description, tags, id, pin, image, isFavorite } = quiz;
+  const { title, description, tags, id, pin, image, isFavorite, noTime } = quiz;
 
   const [visibleGiveUPModal, setVisibleGivUPModal] = useState(false);
   const [favorite, setFavorite] = useState(isFavorite);
 
   const [studentQuizID, setStudentQuizID] = useState(idStudentQuiz);
-  const { getQuestionsOfQuizFromDatabase } = useQuestions();
+  const { getQuestionsOfQuizFromDatabase, setNoTime } = useQuestions();
+
   const navigation = useNavigation();
 
   const startQuizAndGetAllQuestions = async () => {
     const { data } = await api.post('/studentQuiz/startQuiz', { quiz_id: id });
-
     await getQuestionsOfQuizFromDatabase(id, data.id);
     navigation.navigate('CountDown');
   };
@@ -115,6 +115,10 @@ const QuizDescription = ({ route }) => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    setNoTime(noTime);
+  }, []);
 
   return (
     <>

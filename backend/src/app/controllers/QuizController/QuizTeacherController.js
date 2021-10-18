@@ -23,6 +23,7 @@ class QuizTeacherController {
           'published',
           'pin',
           'image_base64',
+          'no_time',
         ],
         include: [
           {

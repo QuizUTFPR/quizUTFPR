@@ -27,6 +27,7 @@ class RecentPublishedQuizController {
           'pin',
           'image_base64',
           'publish_date',
+          'no_time',
         ],
         include: [
           {

@@ -16,6 +16,7 @@ const Question = ({ children }) => {
     checkedAnswer: [false, false, false, false],
   };
 
+  const [noTime, setNoTime] = useState(false);
   const [quizData, setQuizData] = useState(initialValue);
   const [quizID, setQuizID] = useState(-1);
   const [amountOfQuestion, setAmountOfQuestion] = useState(0);
@@ -106,6 +107,8 @@ const Question = ({ children }) => {
         StudentQuizID,
         amountOfQuestion,
         amountAlreadyAnswered,
+        noTime,
+        setNoTime,
       }}
     >
       {children}

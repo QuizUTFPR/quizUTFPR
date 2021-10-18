@@ -30,6 +30,7 @@ class FavoriteStudentQuizController {
           [Sequelize.literal('quiz.pin'), 'pin'],
           [Sequelize.literal('quiz.image_base64'), 'image_base64'],
           [Sequelize.literal('quiz.publish_date'), 'publish_date'],
+          [Sequelize.literal('quiz.no_time'), 'no_time'],
         ],
       });
 

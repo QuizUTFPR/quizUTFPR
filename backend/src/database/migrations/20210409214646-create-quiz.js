@@ -45,6 +45,10 @@ module.exports = {
       publish_date: {
         type: Sequelize.DATE,
       },
+      no_time: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

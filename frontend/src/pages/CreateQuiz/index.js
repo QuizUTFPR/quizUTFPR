@@ -22,6 +22,8 @@ import {
   Divider,
   MenuItem,
   TextField,
+  Checkbox,
+  FormControlLabel,
 } from '@material-ui/core';
 import { PreviewImage } from './style';
 
@@ -35,6 +37,7 @@ const CriarQuiz = ({ history }) => {
       imageUrl: '',
       tags: ['UTFPR', 'QUIZ'],
       published: false,
+      noTime: false,
     },
     onSubmit: async (values) => {
       // const responseFile = null;
@@ -46,7 +49,6 @@ const CriarQuiz = ({ history }) => {
 
         // responseFile = await api.post('/files', file);
       }
-
       const quiz = {
         title: values.title,
         tags: values.tags,
@@ -54,6 +56,7 @@ const CriarQuiz = ({ history }) => {
         visibility: values.visibility,
         published: values.published,
         imageBase64: base64,
+        noTime: values.noTime,
       };
 
       // if (responseFile) {
@@ -66,7 +69,7 @@ const CriarQuiz = ({ history }) => {
       if (responseQuiz.status === 200) {
         history.push({
           pathname: `${QUESTION}${data.quiz.id}`,
-          state: { title: data.quiz.title },
+          state: { title: data.quiz.title, noTime: data.quiz.no_time },
         });
       }
     },
@@ -117,7 +120,7 @@ const CriarQuiz = ({ history }) => {
           />
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={3}>
           <TextField
             fullWidth
             label="Visibilidade"
@@ -134,6 +137,23 @@ const CriarQuiz = ({ history }) => {
             <MenuItem value="public">Público</MenuItem>
             <MenuItem value="private">Privado</MenuItem>
           </TextField>
+        </Grid>
+
+        <Grid item xs={3}>
+          <FormControlLabel
+            label="Sem limite de tempo"
+            control={
+              <Checkbox
+                id="noTime"
+                name="noTime"
+                variant="outlined"
+                value={formik.values.noTime}
+                onChange={(event) =>
+                  formik.setFieldValue('noTime', event.target.checked)
+                }
+              />
+            }
+          />
         </Grid>
 
         <Grid item xs={12}>

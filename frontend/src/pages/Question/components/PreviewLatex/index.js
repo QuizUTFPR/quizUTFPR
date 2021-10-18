@@ -24,7 +24,7 @@ const InputOrLatexContent = ({ inputComponent, latexComponent, disabled }) => {
         />
       ) : (
         <LatexContent
-          onTypeset={(e) => console.log(e)}
+          // onTypeset={(e) => console.log(e)}
           component={LatexComponent}
           propsLatex={propsLatex}
           onClick={() => changeComponent(true)}

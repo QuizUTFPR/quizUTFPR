@@ -164,6 +164,7 @@ const Quiz = ({ history }) => {
               description={quiz.description}
               idQuiz={quiz.id}
               published={quiz.published}
+              noTime={quiz.no_time}
             >
               {!quiz.published && (
                 <Tooltip arrow ariaLabel="publicar" title="Publicar">

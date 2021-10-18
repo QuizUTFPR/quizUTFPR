@@ -72,6 +72,7 @@ const Home = () => {
                 key={quiz.id}
                 onPress={() =>
                   navigation.navigate('AttempsOfQuiz', {
+                    id: quiz.id,
                     attempts: quiz.quiz_student,
                     teacher: quiz.teacher,
                     isFavorite: quiz.isFavorite,
@@ -79,6 +80,7 @@ const Home = () => {
                     image: quiz.image_base64,
                     amountOfQuestions: quiz.amountOfQuestions,
                     tags: quiz.tags_quiz,
+                    noTime: quiz.no_time,
                   })
                 }
               >

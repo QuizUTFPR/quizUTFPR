@@ -19,6 +19,7 @@ class StatisticsQuizController {
           'visibility',
           'id_image',
           'pin',
+          'no_time',
         ],
       });
 

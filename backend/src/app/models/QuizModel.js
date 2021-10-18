@@ -13,6 +13,7 @@ class Quiz extends Model {
         pin: Sequelize.STRING,
         image_base64: Sequelize.TEXT('medium'),
         publish_date: Sequelize.DATE,
+        no_time: Sequelize.BOOLEAN,
       },
       {
         sequelize,

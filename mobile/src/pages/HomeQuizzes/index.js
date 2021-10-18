@@ -84,6 +84,7 @@ const HomeQuizzes = () => {
                         image: quiz.image_base64,
                         tags: quiz.tags_quiz.map((tag) => tag.name),
                         isFavorite: quiz.isFavorite,
+                        noTime: quiz.no_time,
                       },
                     })
                   }
