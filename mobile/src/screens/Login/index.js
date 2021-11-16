@@ -32,10 +32,10 @@ const Login = ({ navigation }) => {
   const loginValidationSchema = Yup.object().shape({
     email: Yup.string()
       .email('Por favor, informe um e-mail válido')
-      .required('Por favor, informe um e-mail'),
+      .required('Obrigatório'),
     password: Yup.string()
       .min(8, ({ min }) => `O mínimo são ${min} caracteres`)
-      .required('A senha é obrigatória'),
+      .required('Obrigatório'),
   });
 
   const { login } = useStudentAuth();

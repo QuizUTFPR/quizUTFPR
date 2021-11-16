@@ -3,14 +3,6 @@ import styled from 'styled-components';
 // DIMENSION TRANSFORMERS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
-export const StyledScrollView = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    alignItems: 'center',
-  },
-})`
-  width: ${widthPercentageToDp('100%')}px;
-`;
-
 export const TagContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -20,7 +12,7 @@ export const TagContainer = styled.View`
   padding-left: 22px;
   padding-right: 22px;
   border-radius: 30px;
-  margin-top: ${heightPercentageToDp('1%')}px;
+  margin-bottom: ${heightPercentageToDp('2%')}px;
   background: ${({ theme }) => theme.color.white};
 `;
 

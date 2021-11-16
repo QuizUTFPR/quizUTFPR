@@ -29,15 +29,15 @@ const Register = ({ navigation }) => {
   const registerValidationSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, ({ min }) => `O mínimo são ${min} caracteres`)
-      .required('Informe um apelido'),
+      .required('Obrigatório'),
     email: Yup.string()
       .email('Informe um e-mail válido')
-      .required('Informe um e-mail'),
+      .required('Obrigatório'),
     password: Yup.string()
       .min(8, ({ min }) => `O mínimo são ${min} caracteres`)
-      .required('A senha é obrigatória'),
+      .required('Obrigatório'),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Deve ser igual a senha')
+      .oneOf([Yup.ref('password'), null], 'Confirmação errada')
       .required('Obrigatório'),
   });
 

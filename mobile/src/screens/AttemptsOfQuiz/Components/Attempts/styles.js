@@ -14,7 +14,7 @@ export const AttemptCard = styled.View`
   border-radius: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  margin-top: ${heightPercentageToDp('2%')}px;
+  margin-bottom: ${heightPercentageToDp('2%')}px;
 `;
 
 export const Score = styled.Text`
@@ -35,14 +35,6 @@ export const SytledDateTime = styled.Text`
   font-family: PoppinsSemiBold;
   font-size: ${({ theme }) => theme.fontSize - 3}px;
   color: ${({ theme }) => theme.color.lightGrey};
-`;
-
-export const StyledScrollView = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    alignItems: 'center',
-  },
-})`
-  width: ${widthPercentageToDp('100%')}px;
 `;
 
 export const AttemptNumberWrapper = styled.View`

@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 // STACKS
 import TopTabStack from './TopTabNavigator';
-// import HomeScreen from '@pages/Home';
+// import HomeScreen from '@screens/Home';
 
 // TAB CREATION
 const Tab = createBottomTabNavigator();

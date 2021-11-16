@@ -14,7 +14,7 @@ import MyDrawer from './myDrawer';
 
 const Drawer = createDrawerNavigator();
 
-// PAGES
+// Screens
 const TabNavigator = lazy(() => import('@routes/TabNavigator'));
 // const HomeStack = lazy(() => import('@routes/stacks/home'));
 

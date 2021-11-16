@@ -6,10 +6,10 @@ import Loading from '@components/Loading';
 import theme from '../styles/theme';
 
 // SCREEN
-const HomeAnsweredQuizzes = lazy(() => import('@pages/HomeAnsweredQuizzes'));
-const HomeQuizInProgress = lazy(() => import('@pages/HomeQuizInProgress'));
-const HomeQuizzes = lazy(() => import('@pages/HomeQuizzes'));
-const HomeRecentQuizzes = lazy(() => import('@pages/HomeRecentQuizzes'));
+const HomeAnsweredQuizzes = lazy(() => import('@screens/HomeAnsweredQuizzes'));
+const HomeQuizInProgress = lazy(() => import('@screens/HomeQuizInProgress'));
+const HomeQuizzes = lazy(() => import('@screens/HomeQuizzes'));
+const HomeRecentQuizzes = lazy(() => import('@screens/HomeRecentQuizzes'));
 
 // STACKS
 const TopTab = createMaterialTopTabNavigator();

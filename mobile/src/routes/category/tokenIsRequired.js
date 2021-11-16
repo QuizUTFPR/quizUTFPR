@@ -5,17 +5,17 @@ import Loading from '@components/Loading';
 // CONTEXT
 import QuestionProvider from '@context/Question';
 
-// PAGES
-import CountDown from '@pages/CountDown';
-import Question from '@pages/Question';
-import Statistics from '@pages/Statistics';
+// Screens
+import CountDown from '@screens/CountDown';
+import Question from '@screens/Question';
+import Statistics from '@screens/Statistics';
 
-import Logout from '@pages/Logout';
-// const Logout = lazy(() => import('@pages/Logout'));
+import Logout from '@screens/Logout';
+// const Logout = lazy(() => import('@screens/Logout'));
 
 const MenuDrawer = lazy(() => import('@components/MenuDrawer'));
-const QuizDescription = lazy(() => import('@pages/QuizDescription'));
-const Attempt = lazy(() => import('@pages/AttemptsOfQuiz'));
+const QuizDescription = lazy(() => import('@screens/QuizDescription'));
+const Attempt = lazy(() => import('@screens/AttemptsOfQuiz'));
 
 // STACK
 const Stack = createStackNavigator();

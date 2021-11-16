@@ -2,10 +2,10 @@ import React, { lazy, Suspense } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Loading from '@components/Loading';
 
-// PAGES
-const InitialScreen = lazy(() => import('@pages/InitialScreen2'));
-const Login = lazy(() => import('@pages/Login'));
-const Register = lazy(() => import('@pages/Register'));
+// Screens
+const InitialScreen = lazy(() => import('@screens/InitialScreen2'));
+const Login = lazy(() => import('@screens/Login'));
+const Register = lazy(() => import('@screens/Register'));
 
 // STACK
 const Stack = createStackNavigator();

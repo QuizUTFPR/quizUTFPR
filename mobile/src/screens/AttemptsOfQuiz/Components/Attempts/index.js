@@ -2,7 +2,6 @@ import React from 'react';
 
 // STYLES
 import {
-  StyledScrollView,
   AttemptCard,
   Score,
   StyledHashtag,
@@ -17,7 +16,7 @@ import {
 } from './styles';
 
 const Attempts = ({ attempts, amountOfQuestions }) => (
-  <StyledScrollView>
+  <>
     {attempts.map((attempt) => {
       const date = new Date(attempt.createdAt);
       const day = `${date.getDay()}`;
@@ -62,7 +61,7 @@ const Attempts = ({ attempts, amountOfQuestions }) => (
         </AttemptCard>
       );
     })}
-  </StyledScrollView>
+  </>
 );
 
 export default Attempts;

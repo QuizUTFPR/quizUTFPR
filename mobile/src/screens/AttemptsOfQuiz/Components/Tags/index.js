@@ -5,15 +5,10 @@ import { AntDesign } from '@expo/vector-icons';
 import theme from '../../../../styles/theme';
 
 // STYLES
-import {
-  StyledScrollView,
-  TagContainer,
-  TagText,
-  IconButtonWrapper,
-} from './styles';
+import { TagContainer, TagText, IconButtonWrapper } from './styles';
 
 const Tags = ({ tags }) => (
-  <StyledScrollView>
+  <>
     {tags.map((tag) => (
       <TagContainer key={tag}>
         <TagText>{tag}</TagText>
@@ -22,7 +17,7 @@ const Tags = ({ tags }) => (
         </IconButtonWrapper>
       </TagContainer>
     ))}
-  </StyledScrollView>
+  </>
 );
 
 export default Tags;

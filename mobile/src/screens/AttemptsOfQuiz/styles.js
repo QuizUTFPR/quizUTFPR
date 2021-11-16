@@ -66,7 +66,7 @@ export const ButtonsContainer = styled.View`
   height: ${heightPercentageToDp('5%')}px;
   width: ${widthPercentageToDp('90%')}px;
   margin-top: ${widthPercentageToDp('3%')}px;
-  margin-bottom: ${widthPercentageToDp('3%')}px;
+  margin-bottom: ${widthPercentageToDp('5%')}px;
 `;
 
 export const ButtonWrapper = styled.View`
@@ -110,4 +110,12 @@ export const StyledButtonText = styled.Text`
   font-size: ${({ theme }) => theme.fontSize}px;
   color: ${({ theme }) => theme.color.white};
   margin-left: ${widthPercentageToDp('1%')}px;
+`;
+
+export const StyledScrollView = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    alignItems: 'center',
+  },
+})`
+  width: ${widthPercentageToDp('100%')}px;
 `;

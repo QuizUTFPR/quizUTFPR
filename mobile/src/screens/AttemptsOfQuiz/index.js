@@ -25,6 +25,7 @@ import {
   ButtonStyled,
   IconButtonWrapper,
   StyledButtonText,
+  StyledScrollView,
 } from './styles';
 
 const Home = ({ route }) => {
@@ -59,7 +60,7 @@ const Home = ({ route }) => {
   };
 
   return (
-    <>
+    <StyledScrollView>
       <QuizAttemptsHeader>
         <StyledImageBackground
           source={
@@ -135,7 +136,7 @@ const Home = ({ route }) => {
       )}
 
       {isTagsSelected && <Tags tags={tagsNames} />}
-    </>
+    </StyledScrollView>
   );
 };
 
