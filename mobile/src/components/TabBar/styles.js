@@ -18,12 +18,11 @@ export const StyledView = styled.View.attrs({ elevation: 5 })`
 export const StyledTabButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
+  margin: 0 10px;
 `;
 
 export const StyledText = styled.Text`
-  color: ${({ theme }) =>
-    (isFocused) =>
-      isFocused ? theme.color.purple : theme.color.grey};
+  color: ${({ theme, isFocused }) => (isFocused ? theme.color.purple : 'grey')};
   font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize - 4}px;
 `;

@@ -6,11 +6,11 @@ import TabBar from '@components/TabBar';
 import HeaderHome from '@components/HeaderHome';
 
 // ICONS
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 // STACKS
+import SearchTag from '@screens/SearchTag';
 import TopTabStack from './TopTabNavigator';
-// import HomeScreen from '@screens/Home';
 
 // TAB CREATION
 const Tab = createBottomTabNavigator();
@@ -27,6 +27,17 @@ const TabNavigator = () => (
       }}
       name="HomeStack"
       component={TopTabStack}
+    />
+    <Tab.Screen
+      options={{
+        Icon: MaterialIcons,
+        name: 'category',
+        size: 32,
+        header: () => <></>,
+        tabBarLabel: 'Categoria',
+      }}
+      name="SearchTagScreen"
+      component={SearchTag}
     />
   </Tab.Navigator>
 );

@@ -44,14 +44,14 @@ const TabBar = ({ state, descriptors, navigation }) => (
           testID={options.tabBarTestID}
           onPress={onPress}
           onLongPress={onLongPress}
-          key={route}
+          key={route.key}
         >
           <options.Icon
             name={options.name}
             size={options.size}
             color={isFocused ? theme.color.purple : 'grey'}
           />
-          <StyledText isFocused>{label}</StyledText>
+          <StyledText isFocused={isFocused}>{label}</StyledText>
         </StyledTabButton>
       );
     })}

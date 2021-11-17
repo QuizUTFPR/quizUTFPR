@@ -34,6 +34,7 @@ const HomeQuizzes = () => {
 
   const getAllPublishedQuizzes = async () => {
     try {
+      console.log('teste');
       const { data } = await api.post('/publishedQuiz/getAll', {
         page: 1,
       });
@@ -63,6 +64,7 @@ const HomeQuizzes = () => {
     return unsubscribeListenTabPress;
   }, [navigation]);
 
+  console.log(allQuizzes);
   return (
     <Container>
       <StyledScrollView
