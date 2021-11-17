@@ -12,6 +12,9 @@ class RecentPublishedQuizController {
     try {
       const student_id = req.userId;
 
+      const page = req.body.page || false;
+      const limit = req.body.limit || 3;
+
       const quizzes = await Quiz.findAll({
         where: {
           published: true,
@@ -50,7 +53,10 @@ class RecentPublishedQuizController {
           },
         ],
         order: [['publish_date', 'DESC']],
+        offset: page ? (page - 1) * limit : 0,
+        limit: page ? limit : null,
       });
+
 
       const quizzesInProgress = (
         await (

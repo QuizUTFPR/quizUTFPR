@@ -9,9 +9,10 @@ import Container from '@components/Container';
 
 // ICONS
 import { AntDesign } from '@expo/vector-icons';
+import theme from '@theme';
+import SeeMoreButton from '../../components/SeeMoreButton';
 
 // THEME
-import theme from '@theme';
 
 // STYLES
 import {
@@ -33,7 +34,9 @@ const HomeRecentQuizzes = () => {
 
   const getAllRecentPublishedQuiz = async () => {
     try {
-      const { data } = await api.get('/quiz/getRecentQuiz');
+      const { data } = await api.post('/quiz/getRecentQuiz', {
+        page: 1,
+      });
       setAllQuizzes(data);
     } catch (error) {
       console.error(error);
@@ -67,8 +70,15 @@ const HomeRecentQuizzes = () => {
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
-        <>
-          {allQuizzes.length > 0 && (
+        {allQuizzes.length > 0 && (
+          <>
+            <SeeMoreButton
+              onPress={() => {
+                navigation.navigate('InfinityScrollQuizzesStack', {
+                  screen: 'InfinityScrollRecentQuizzes',
+                });
+              }}
+            />
             <QuizContainer>
               {/* <QuizTitle>Novos Quizzes</QuizTitle> */}
               {allQuizzes.map((quiz) => (
@@ -113,8 +123,8 @@ const HomeRecentQuizzes = () => {
                 </QuizCard>
               ))}
             </QuizContainer>
-          )}
-        </>
+          </>
+        )}
       </StyledScrollView>
     </Container>
   );

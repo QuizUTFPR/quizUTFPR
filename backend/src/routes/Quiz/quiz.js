@@ -13,7 +13,7 @@ import FavoriteStudentQuizController from '../../app/controllers/FavoriteControl
 const router = new Router();
 
 router.get('/', QuizTeacherController.index);
-router.get('/getRecentQuiz', RecentPublishedQuizController.index);
+router.post('/getRecentQuiz', RecentPublishedQuizController.index);
 router.get('/:tag', QuizController.show);
 
 router.put('/update', QuizController.update);
