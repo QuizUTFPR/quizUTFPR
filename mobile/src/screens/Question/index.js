@@ -60,7 +60,7 @@ const Question = () => {
   );
 
   const [timer, setTimer] = useState({
-    seconds: 0,
+    seconds: 30,
     interval: null,
   });
 
@@ -167,6 +167,8 @@ const Question = () => {
       }),
     [navigation]
   );
+
+  console.log('no time', noTime);
 
   return (
     <Container>

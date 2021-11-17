@@ -15,8 +15,6 @@ class QuizPublishedController {
       const page = req.body.page || false;
       const limit = req.body.limit || 3;
 
-    console.log(page, limit)
-
       const quizzes = await Quiz.findAll({
         where: {
           published: true,

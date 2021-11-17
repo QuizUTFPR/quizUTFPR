@@ -12,6 +12,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 // THEME
 import theme from '@theme';
+import SeeMoreButton from '../../components/SeeMoreButton';
 
 // STYLES
 import {
@@ -33,7 +34,10 @@ const FavoriteQuizzes = () => {
 
   const getAllFavoriteQuizzes = async () => {
     try {
-      const { data } = await api.get('/studentQuiz/favorites');
+      const { data } = await api.post('/studentQuiz/favorites', {
+        page: 1,
+      });
+
       setAllQuizzes(data);
     } catch (error) {
       // console.error(error);
@@ -62,6 +66,13 @@ const FavoriteQuizzes = () => {
 
   return (
     <Container>
+      <SeeMoreButton
+        onPress={() => {
+          navigation.navigate('InfinityScrollQuizzesStack', {
+            screen: 'InfinityScrollFavoriteQuizzes',
+          });
+        }}
+      />
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />

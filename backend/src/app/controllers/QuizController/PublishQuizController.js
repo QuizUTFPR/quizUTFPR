@@ -26,7 +26,6 @@ class PublishQuizController {
           .status(404)
           .json({ error: 'Nenhuma questão cadastrada no quiz.' });
 
-      console.log('TIMEZONE:', new Date());
 
       quiz.published = true;
       quiz.pin = pin;

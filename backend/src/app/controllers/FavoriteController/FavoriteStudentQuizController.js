@@ -4,12 +4,16 @@ import * as Yup from 'yup';
 // MODELS
 import FavoriteStudentQuiz from '../../models/FavoriteStudentQuiz';
 import Quiz from '../../models/QuizModel';
+import Tag from '../../models/TagModel';
 
 class FavoriteStudentQuizController {
   // exibe todos os registros
   async index(req, res) {
     try {
       const student_id = req.userId;
+
+      const page = req.body.page || false;
+      const limit = req.body.limit || 3;
 
       const favorites = await FavoriteStudentQuiz.findAll({
         where: {
@@ -19,23 +23,26 @@ class FavoriteStudentQuizController {
           {
             model: Quiz,
             as: 'quiz',
-            attributes: [],
+            attributes: ['id', 'id_teacher', 'title', 'description', 'pin', 'image_base64', 'publish_date', 'no_time'],
+            include: [
+              {
+                model: Tag,
+                as: 'tags_quiz',
+                attributes: ['name'],
+                through: {
+                  attributes: [],
+                },
+              },
+            ]
           },
         ],
-        attributes: [
-          [Sequelize.literal('quiz.id'), 'id'],
-          [Sequelize.literal('quiz.id_teacher'), 'id_teacher'],
-          [Sequelize.literal('quiz.title'), 'title'],
-          [Sequelize.literal('quiz.description'), 'description'],
-          [Sequelize.literal('quiz.pin'), 'pin'],
-          [Sequelize.literal('quiz.image_base64'), 'image_base64'],
-          [Sequelize.literal('quiz.publish_date'), 'publish_date'],
-          [Sequelize.literal('quiz.no_time'), 'no_time'],
-        ],
+        attributes:[],
+        offset: page ? (page - 1) * limit : 0,
+        limit: page ? limit : null,
       });
 
       const returnedFavorites = favorites.map((item) => ({
-        ...item.dataValues,
+        ...item.dataValues.quiz.dataValues,
         isFavorite: true,
       }));
 

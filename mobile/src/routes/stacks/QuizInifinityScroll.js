@@ -8,6 +8,10 @@ const InfinityScrollHomeQuizzes = lazy(() =>
   import('@screens/HomeTopMenuScreen/InfinityScroll/Quizzes')
 );
 
+const InfinityScrollFavoriteQuizzes = lazy(() =>
+  import('@screens/HomeTopMenuScreen/InfinityScroll/FavoriteQuizzes')
+);
+
 // STACK
 const Stack = createStackNavigator();
 
@@ -17,6 +21,10 @@ const HomeQuizzesStack = () => (
       <Stack.Screen
         name="InfinityScrollHomeQuizzes"
         component={InfinityScrollHomeQuizzes}
+      />
+      <Stack.Screen
+        name="InfinityScrollFavoriteQuizzes"
+        component={InfinityScrollFavoriteQuizzes}
       />
     </Stack.Navigator>
   </Suspense>

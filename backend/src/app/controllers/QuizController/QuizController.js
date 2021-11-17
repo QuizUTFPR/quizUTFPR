@@ -24,7 +24,6 @@ class QuizController {
         noTime: Yup.bool().required(),
       });
 
-      console.log(req.body);
 
       // Check body of requisiton
       if (!(await schema.isValid(req.body)))
