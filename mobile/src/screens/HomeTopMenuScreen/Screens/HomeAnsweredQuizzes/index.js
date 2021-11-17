@@ -11,7 +11,7 @@ import Container from '@components/Container';
 import { AntDesign } from '@expo/vector-icons';
 
 // THEME
-import theme from '../../styles/theme';
+import theme from '@theme';
 
 // STYLES
 import {

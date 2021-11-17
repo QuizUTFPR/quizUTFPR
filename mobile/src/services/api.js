@@ -28,8 +28,11 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error?.config || error;
     const requestStatus = error?.response?.status || null;
+    const refreshTokenExpired =
+      error?.response?.data?.refresh_token_expired || false;
+    console.log('aaaa', refreshTokenExpired);
     // Do something with response error
-    if (requestStatus === 401) {
+    if (requestStatus === 401 && !refreshTokenExpired) {
       const refreshToken = await AsyncStorage.getItem('@REFRESH_TOKEN');
       const response = await api.post('/refresh-token', {
         refresh_token: JSON.parse(refreshToken),
@@ -41,7 +44,8 @@ api.interceptors.response.use(
       return api.request(originalRequest);
     }
 
-    if (requestStatus === 403) {
+    if (requestStatus === 401 && refreshTokenExpired) {
+      console.log('nao deu certo', error.response);
       navigate('Logout');
     } else {
       return Promise.reject(error);

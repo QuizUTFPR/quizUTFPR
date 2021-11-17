@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // COMPONENTS
 import TabBar from '@components/TabBar';
-import Header from '@components/HeaderHome';
+import HeaderHome from '@components/HeaderHome';
 
 // ICONS
 import { Ionicons } from '@expo/vector-icons';
@@ -22,7 +22,7 @@ const TabNavigator = () => (
         Icon: Ionicons,
         name: 'md-home',
         size: 32,
-        header: () => <Header />,
+        header: () => <HeaderHome />,
         tabBarLabel: 'Inicio',
       }}
       name="HomeStack"

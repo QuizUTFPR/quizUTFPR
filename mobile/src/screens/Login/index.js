@@ -10,7 +10,7 @@ import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 
 // COMPONENTS
 import Container from '@components/Container';
-import Header from '@components/Header';
+import HeaderLoginRegister from '@components/HeaderLoginRegister';
 import Input from '@components/Input';
 import DismissKeyboard from '@components/DismissKeyboard';
 import ButtonGradient from '@components/ButtonGradient';
@@ -86,7 +86,7 @@ const Login = ({ navigation }) => {
                 <BackgroundImage />
                 <DismissKeyboard>
                   <>
-                    <Header
+                    <HeaderLoginRegister
                       iconButton={
                         <Ionicons name="chevron-back" size={32} color="white" />
                       }

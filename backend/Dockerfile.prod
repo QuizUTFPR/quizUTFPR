@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:16.13.0-alpine3.14
 
 RUN mkdir -p /home/node/api_prod/node_modules && chown -R node:node /home/node/api_prod
 

@@ -7,7 +7,7 @@ import { Container } from './style';
 
 const maxSize = 734003;
 
-const StyledDropzone = (props) => {
+const StyledDropzone = ({ handleChange }) => {
   const [openSnackBar, setOpenSnackBar] = useState({
     message: '',
     open: false,
@@ -48,7 +48,7 @@ const StyledDropzone = (props) => {
     maxFiles: 1,
     maxSize,
     onDropAccepted: (files) => {
-      props.handleChange(files);
+      handleChange(files);
     },
     onDropRejected: () => {
       handleOpenErrorSnackBar('Imagem Inválida');

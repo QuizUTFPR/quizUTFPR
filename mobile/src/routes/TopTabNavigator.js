@@ -6,10 +6,24 @@ import Loading from '@components/Loading';
 import theme from '../styles/theme';
 
 // SCREEN
-const HomeAnsweredQuizzes = lazy(() => import('@screens/HomeAnsweredQuizzes'));
-const HomeQuizInProgress = lazy(() => import('@screens/HomeQuizInProgress'));
-const HomeQuizzes = lazy(() => import('@screens/HomeQuizzes'));
-const HomeRecentQuizzes = lazy(() => import('@screens/HomeRecentQuizzes'));
+const HomeAnsweredQuizzes = lazy(() =>
+  import('@screens/HomeTopMenuScreen/Screens/HomeAnsweredQuizzes')
+);
+const HomeQuizInProgress = lazy(() =>
+  import('@screens/HomeTopMenuScreen/Screens/HomeQuizInProgress')
+);
+
+const HomeRecentQuizzes = lazy(() =>
+  import('@screens/HomeTopMenuScreen/Screens/HomeRecentQuizzes')
+);
+
+const FavoriteQuizzes = lazy(() =>
+  import('@screens/HomeTopMenuScreen/Screens/HomeFavoriteQuizzes')
+);
+
+const HomeQuizzes = lazy(() =>
+  import('@screens/HomeTopMenuScreen/Screens/HomeQuizzes')
+);
 
 // STACKS
 const TopTab = createMaterialTopTabNavigator();
@@ -46,6 +60,11 @@ const TopTabNavigator = () => (
         name="QuizzesInProgress"
         component={HomeQuizInProgress}
         options={{ tabBarLabel: 'Em Andamento' }}
+      />
+      <TopTab.Screen
+        name="FavoriteQuizzes"
+        component={FavoriteQuizzes}
+        options={{ tabBarLabel: 'Favoritos' }}
       />
       <TopTab.Screen
         name="HomeRecentQuizzes"

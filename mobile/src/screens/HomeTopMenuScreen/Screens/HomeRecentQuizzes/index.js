@@ -11,7 +11,7 @@ import Container from '@components/Container';
 import { AntDesign } from '@expo/vector-icons';
 
 // THEME
-import theme from '../../styles/theme';
+import theme from '@theme';
 
 // STYLES
 import {
@@ -24,28 +24,25 @@ import {
   StyledView,
   StyledScrollView,
   QuizContainer,
-  QuizProgressBar,
-  QuizProgressBarBackground,
-  QuizProgressText,
 } from './styles';
 
-const HomeQuizInProgress = () => {
+const HomeRecentQuizzes = () => {
   const navigation = useNavigation();
   const [isRefreshing, setRefreshing] = useState(false);
-  const [allQuizzesInProgress, setQuizzesInProgress] = useState([]);
+  const [allQuizzes, setAllQuizzes] = useState([]);
 
-  const getAllQuizzesInProgress = async () => {
+  const getAllRecentPublishedQuiz = async () => {
     try {
-      const { data } = await api.get('/studentQuiz/getQuizInProgress');
-      setQuizzesInProgress(data);
+      const { data } = await api.get('/quiz/getRecentQuiz');
+      setAllQuizzes(data);
     } catch (error) {
-      // console.log(error);
+      console.error(error);
     }
   };
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    await getAllQuizzesInProgress();
+    await getAllRecentPublishedQuiz();
     setRefreshing(false);
   });
 
@@ -71,59 +68,41 @@ const HomeQuizInProgress = () => {
         }
       >
         <>
-          {allQuizzesInProgress.length > 0 && (
+          {allQuizzes.length > 0 && (
             <QuizContainer>
-              {/* <QuizTitle>Em Progresso</QuizTitle> */}
-              {allQuizzesInProgress.map((item) => (
+              {/* <QuizTitle>Novos Quizzes</QuizTitle> */}
+              {allQuizzes.map((quiz) => (
                 <QuizCard
-                  key={item.quiz.id}
+                  key={quiz.id}
                   onPress={() =>
                     navigation.navigate('Descricao', {
-                      idStudentQuiz: item.id_student_quiz,
-                      questionAmount: item.questionAmount,
-                      studentChoicesAmount: item.studentChoicesAmount,
                       quiz: {
-                        id: item.quiz.id,
-                        title: item.quiz.title,
-                        description: item.quiz.description,
-                        pin: item.quiz.pin,
-                        image: item.quiz.image_base64,
-                        tags: item.quiz.tags_quiz.map((tag) => tag.name),
-                        isFavorite: item.quiz.isFavorite,
-                        noTime: item.quiz.no_time,
+                        id: quiz.id,
+                        title: quiz.title,
+                        description: quiz.description,
+                        pin: quiz.pin,
+                        image: quiz.image_base64,
+                        tags: quiz.tags_quiz.map((tag) => tag.name),
+                        isFavorite: quiz.isFavorite,
+                        noTime: quiz.no_time,
                       },
                     })
                   }
                 >
                   <StyledImage
                     source={
-                      item.quiz.image_base64.length
+                      quiz.image_base64.length
                         ? {
-                            uri: item.quiz.image_base64,
+                            uri: quiz.image_base64,
                           }
                         : null
                     }
                   />
                   <StyledView>
                     <Description>
-                      <StyledTitle fill="black">{item.quiz.title}</StyledTitle>
+                      <StyledTitle fill="black">{quiz.title}</StyledTitle>
                     </Description>
-                    <QuizProgressBarBackground fill="lightGrey">
-                      <QuizProgressBar
-                        porcentage={
-                          (item.studentChoicesAmount * 100) /
-                          item.questionAmount
-                        }
-                        fill="purple"
-                      />
-                    </QuizProgressBarBackground>
                   </StyledView>
-                  <QuizProgressText fill="purple">
-                    {Math.floor(
-                      (item.studentChoicesAmount * 100) / item.questionAmount
-                    )}
-                    %
-                  </QuizProgressText>
                   <StyledIconButton>
                     <AntDesign
                       name="arrowright"
@@ -141,4 +120,4 @@ const HomeQuizInProgress = () => {
   );
 };
 
-export default HomeQuizInProgress;
+export default HomeRecentQuizzes;

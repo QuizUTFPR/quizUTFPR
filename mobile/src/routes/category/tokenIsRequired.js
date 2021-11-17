@@ -9,8 +9,11 @@ import QuestionProvider from '@context/Question';
 import CountDown from '@screens/CountDown';
 import Question from '@screens/Question';
 import Statistics from '@screens/Statistics';
-
 import Logout from '@screens/Logout';
+
+// Stack
+import InfinityScrollStack from '../stacks/QuizInifinityScroll';
+
 // const Logout = lazy(() => import('@screens/Logout'));
 
 const MenuDrawer = lazy(() => import('@components/MenuDrawer'));
@@ -34,6 +37,10 @@ const TokenStack = () => (
           options={{ headerShown: false }}
           name="Logout"
           component={Logout}
+        />
+        <Stack.Screen
+          name="InfinityScrollQuizzesStack"
+          component={InfinityScrollStack}
         />
       </Stack.Navigator>
     </QuestionProvider>

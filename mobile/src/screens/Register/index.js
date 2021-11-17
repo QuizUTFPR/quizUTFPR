@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import Container from '@components/Container';
 import Input from '@components/Input';
 import ButtonGradient from '@components/ButtonGradient';
-import Header from '@components/Header';
+import HeaderLoginRegister from '@components/HeaderLoginRegister';
 import DismissKeyboard from '@components/DismissKeyboard';
 
 // STYLES
@@ -70,7 +70,7 @@ const Register = ({ navigation }) => {
               <DismissKeyboard>
                 <>
                   <BackgroundImage />
-                  <Header
+                  <HeaderLoginRegister
                     iconButton={
                       <Ionicons name="chevron-back" size={32} color="white" />
                     }

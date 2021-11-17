@@ -11,7 +11,7 @@ import Container from '@components/Container';
 import { AntDesign } from '@expo/vector-icons';
 
 // THEME
-import theme from '../../styles/theme';
+import theme from '@theme';
 
 // STYLES
 import {
@@ -24,6 +24,8 @@ import {
   StyledView,
   StyledScrollView,
   QuizContainer,
+  SeeMore,
+  SeeMoreText,
 } from './styles';
 
 const HomeQuizzes = () => {
@@ -33,7 +35,9 @@ const HomeQuizzes = () => {
 
   const getAllPublishedQuizzes = async () => {
     try {
-      const { data } = await api.get('/publishedQuiz/getAll/1');
+      const { data } = await api.post('/publishedQuiz/getAll', {
+        page: 1,
+      });
       setAllQuizzes(data);
     } catch (error) {
       // console.error(error);
@@ -62,6 +66,15 @@ const HomeQuizzes = () => {
 
   return (
     <Container>
+      <SeeMore
+        onPress={() => {
+          navigation.navigate('InfinityScrollQuizzesStack', {
+            screen: 'InfinityScrollHomeQuizzes',
+          });
+        }}
+      >
+        <SeeMoreText fill="white">Ver tudo</SeeMoreText>
+      </SeeMore>
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
