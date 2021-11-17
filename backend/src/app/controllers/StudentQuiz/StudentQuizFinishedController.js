@@ -11,6 +11,9 @@ class StudentQuizFinishedController {
     try {
       const student_id = req.userId;
 
+      const page = req.body.page || false;
+      const limit = req.body.limit || 3;
+
       const quizzesFinished = await Quiz.findAll({
         where: { published: true },
         attributes: [
@@ -41,6 +44,8 @@ class StudentQuizFinishedController {
             attributes: ['name'],
           },
         ],
+        offset: page ? (page - 1) * limit : 0,
+        limit: page ? limit : null,
       });
 
       const returnedQuizzesFinished = await Promise.all(

@@ -17,7 +17,7 @@ router.post('/startQuiz', StudentQuizController.store);
 router.put('/finishQuiz', StudentQuizController.update);
 router.post('/favorites', FavoriteStudentQuizController.index);
 router.post('/getQuizInProgress', StudentQuizInProgressController.index);
-router.get('/getAllFinishedQuizzes', StudentQuizFinishedController.index);
+router.post('/getAllFinishedQuizzes', StudentQuizFinishedController.index);
 router.post('/getQuestionQuiz/', QuestionQuizPublishedController.index);
 
 export default router;

@@ -76,5 +76,5 @@ export const StyledScrollView = styled.ScrollView.attrs({
 `;
 
 export const QuizContainer = styled.View`
-  margin-top: 20px;
+  margin-top: 10px;
 `;

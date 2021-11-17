@@ -12,6 +12,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 // THEME
 import theme from '@theme';
+import SeeMoreButton from '../../components/SeeMoreButton';
 
 // STYLES
 import {
@@ -33,9 +34,14 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const { data } = await api.get('/studentQuiz/getAllFinishedQuizzes');
+      const { data } = await api.post('/studentQuiz/getAllFinishedQuizzes', {
+        page: 1,
+      });
+
       setQuizzes(data);
-    } catch (error) {}
+    } catch (error) {
+      // console.log(error);
+    }
   };
 
   const onRefresh = useCallback(async () => {
@@ -65,50 +71,61 @@ const Home = () => {
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
-        <>
-          <QuizContainer>
-            {quizzes.map((quiz) => (
-              <QuizCard
-                key={quiz.id}
-                onPress={() =>
-                  navigation.navigate('AttempsOfQuiz', {
-                    id: quiz.id,
-                    attempts: quiz.quiz_student,
-                    teacher: quiz.teacher,
-                    isFavorite: quiz.isFavorite,
-                    title: quiz.title,
-                    image: quiz.image_base64,
-                    amountOfQuestions: quiz.amountOfQuestions,
-                    tags: quiz.tags_quiz,
-                    noTime: quiz.no_time,
-                  })
-                }
-              >
-                <StyledImage
-                  source={
-                    quiz.image_base64.length ? { uri: quiz.image_base64 } : null
+        {quizzes.length > 0 && (
+          <>
+            <SeeMoreButton
+              onPress={() => {
+                navigation.navigate('InfinityScrollQuizzesStack', {
+                  screen: 'InfinityScrollAnsweredQuizzes',
+                });
+              }}
+            />
+            <QuizContainer>
+              {quizzes.map((quiz) => (
+                <QuizCard
+                  key={quiz.id}
+                  onPress={() =>
+                    navigation.navigate('AttempsOfQuiz', {
+                      id: quiz.id,
+                      attempts: quiz.quiz_student,
+                      teacher: quiz.teacher,
+                      isFavorite: quiz.isFavorite,
+                      title: quiz.title,
+                      image: quiz.image_base64,
+                      amountOfQuestions: quiz.amountOfQuestions,
+                      tags: quiz.tags_quiz,
+                      noTime: quiz.no_time,
+                    })
                   }
-                />
-                <StyledView>
-                  <Description>
-                    <QuizTitle fill="black">{quiz.title}</QuizTitle>
-                    <TeacherName fill="black">
-                      Prof.: {quiz.teacher.name}
-                    </TeacherName>
-                  </Description>
-                </StyledView>
-
-                <StyledIconButton>
-                  <AntDesign
-                    name="arrowright"
-                    size={24}
-                    color={theme.color.purple}
+                >
+                  <StyledImage
+                    source={
+                      quiz.image_base64.length
+                        ? { uri: quiz.image_base64 }
+                        : null
+                    }
                   />
-                </StyledIconButton>
-              </QuizCard>
-            ))}
-          </QuizContainer>
-        </>
+                  <StyledView>
+                    <Description>
+                      <QuizTitle fill="black">{quiz.title}</QuizTitle>
+                      <TeacherName fill="black">
+                        Prof.: {quiz.teacher.name}
+                      </TeacherName>
+                    </Description>
+                  </StyledView>
+
+                  <StyledIconButton>
+                    <AntDesign
+                      name="arrowright"
+                      size={24}
+                      color={theme.color.purple}
+                    />
+                  </StyledIconButton>
+                </QuizCard>
+              ))}
+            </QuizContainer>
+          </>
+        )}
       </StyledScrollView>
     </Container>
   );
