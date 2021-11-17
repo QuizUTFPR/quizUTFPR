@@ -12,6 +12,7 @@ export const SeeMore = styled.TouchableOpacity.attrs({
   justify-content: center;
   align-items: center;
   background: ${({ theme }) => theme.color.purple};
+  margin-right: 30px;
 `;
 
 export const SeeMoreText = styled.Text`

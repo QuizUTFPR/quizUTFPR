@@ -12,6 +12,9 @@ class StudentQuizInProgressController {
     try {
       const student_id = req.userId;
 
+      const page = req.body.page || false;
+      const limit = req.body.limit || 3;
+
       const student = await Student.findByPk(student_id);
       if (!student)
         return res.status(404).json({ error: 'Aluno não encontrado!' });
@@ -54,6 +57,8 @@ class StudentQuizInProgressController {
             ],
           },
         ],
+        offset: page ? (page - 1) * limit : 0,
+        limit: page ? limit : null,
       });
 
       const studentQuizInProgress = await Promise.all(

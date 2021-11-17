@@ -66,20 +66,20 @@ const FavoriteQuizzes = () => {
 
   return (
     <Container>
-      <SeeMoreButton
-        onPress={() => {
-          navigation.navigate('InfinityScrollQuizzesStack', {
-            screen: 'InfinityScrollFavoriteQuizzes',
-          });
-        }}
-      />
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
-        <>
-          {allQuizzes.length > 0 && (
+        {allQuizzes.length > 0 && (
+          <>
+            <SeeMoreButton
+              onPress={() => {
+                navigation.navigate('InfinityScrollQuizzesStack', {
+                  screen: 'InfinityScrollFavoriteQuizzes',
+                });
+              }}
+            />
             <QuizContainer>
               {/* <QuizTitle>Quizes</QuizTitle> */}
               {allQuizzes.map((quiz) => (
@@ -124,8 +124,8 @@ const FavoriteQuizzes = () => {
                 </QuizCard>
               ))}
             </QuizContainer>
-          )}
-        </>
+          </>
+        )}
       </StyledScrollView>
     </Container>
   );

@@ -12,6 +12,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 // THEME
 import theme from '@theme';
+import SeeMoreButton from '../../components/SeeMoreButton';
 
 // STYLES
 import {
@@ -24,8 +25,6 @@ import {
   StyledView,
   StyledScrollView,
   QuizContainer,
-  SeeMore,
-  SeeMoreText,
 } from './styles';
 
 const HomeQuizzes = () => {
@@ -66,22 +65,21 @@ const HomeQuizzes = () => {
 
   return (
     <Container>
-      <SeeMore
-        onPress={() => {
-          navigation.navigate('InfinityScrollQuizzesStack', {
-            screen: 'InfinityScrollHomeQuizzes',
-          });
-        }}
-      >
-        <SeeMoreText fill="white">Ver tudo</SeeMoreText>
-      </SeeMore>
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
-        <>
-          {allQuizzes.length > 0 && (
+        {allQuizzes.length > 0 && (
+          <>
+            <SeeMoreButton
+              onPress={() => {
+                navigation.navigate('InfinityScrollQuizzesStack', {
+                  screen: 'InfinityScrollHomeQuizzes',
+                });
+              }}
+            />
+
             <QuizContainer>
               {/* <QuizTitle>Quizes</QuizTitle> */}
               {allQuizzes.map((quiz) => (
@@ -126,8 +124,8 @@ const HomeQuizzes = () => {
                 </QuizCard>
               ))}
             </QuizContainer>
-          )}
-        </>
+          </>
+        )}
       </StyledScrollView>
     </Container>
   );

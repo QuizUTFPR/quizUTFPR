@@ -12,6 +12,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 // THEME
 import theme from '@theme';
+import SeeMoreButton from '../../components/SeeMoreButton';
 
 // STYLES
 import {
@@ -36,7 +37,9 @@ const HomeQuizInProgress = () => {
 
   const getAllQuizzesInProgress = async () => {
     try {
-      const { data } = await api.get('/studentQuiz/getQuizInProgress');
+      const { data } = await api.post('/studentQuiz/getQuizInProgress', {
+        page: 1,
+      });
       setQuizzesInProgress(data);
     } catch (error) {
       // console.log(error);
@@ -70,8 +73,15 @@ const HomeQuizInProgress = () => {
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
-        <>
-          {allQuizzesInProgress.length > 0 && (
+        {allQuizzesInProgress.length > 0 && (
+          <>
+            <SeeMoreButton
+              onPress={() => {
+                navigation.navigate('InfinityScrollQuizzesStack', {
+                  screen: 'InfinityScrollInProgressQuizzes',
+                });
+              }}
+            />
             <QuizContainer>
               {/* <QuizTitle>Em Progresso</QuizTitle> */}
               {allQuizzesInProgress.map((item) => (
@@ -134,8 +144,8 @@ const HomeQuizInProgress = () => {
                 </QuizCard>
               ))}
             </QuizContainer>
-          )}
-        </>
+          </>
+        )}
       </StyledScrollView>
     </Container>
   );
