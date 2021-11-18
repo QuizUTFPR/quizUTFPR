@@ -7,22 +7,22 @@ import theme from '../styles/theme';
 
 // SCREEN
 const HomeAnsweredQuizzes = lazy(() =>
-  import('@screens/HomeTopMenuScreen/Screens/HomeAnsweredQuizzes')
+  import('@screens/HomeScreens/Screens/HomeAnsweredQuizzes')
 );
 const HomeQuizInProgress = lazy(() =>
-  import('@screens/HomeTopMenuScreen/Screens/HomeQuizInProgress')
+  import('@screens/HomeScreens/Screens/HomeQuizInProgress')
 );
 
 const HomeRecentQuizzes = lazy(() =>
-  import('@screens/HomeTopMenuScreen/Screens/HomeRecentQuizzes')
+  import('@screens/HomeScreens/Screens/HomeRecentQuizzes')
 );
 
 const FavoriteQuizzes = lazy(() =>
-  import('@screens/HomeTopMenuScreen/Screens/HomeFavoriteQuizzes')
+  import('@screens/HomeScreens/Screens/HomeFavoriteQuizzes')
 );
 
 const HomeQuizzes = lazy(() =>
-  import('@screens/HomeTopMenuScreen/Screens/HomeQuizzes')
+  import('@screens/HomeScreens/Screens/HomeQuizzes')
 );
 
 // STACKS
