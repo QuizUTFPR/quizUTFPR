@@ -168,8 +168,6 @@ const Question = () => {
     [navigation]
   );
 
-  console.log('no time', noTime);
-
   return (
     <Container>
       <LinearContainer>

@@ -5,23 +5,23 @@ import Loading from '@components/Loading';
 // Screens
 
 const InfinityScrollHomeQuizzes = lazy(() =>
-  import('@screens/HomeTopMenuScreen/InfinityScroll/Quizzes')
+  import('@screens/HomeScreens/InfinityScroll/Quizzes')
 );
 
 const InfinityScrollFavoriteQuizzes = lazy(() =>
-  import('@screens/HomeTopMenuScreen/InfinityScroll/FavoriteQuizzes')
+  import('@screens/HomeScreens/InfinityScroll/FavoriteQuizzes')
 );
 
 const InfinityScrollInProgressQuizzes = lazy(() =>
-  import('@screens/HomeTopMenuScreen/InfinityScroll/InProgressQuizzes')
+  import('@screens/HomeScreens/InfinityScroll/InProgressQuizzes')
 );
 
 const InfinityScrollRecentQuizzes = lazy(() =>
-  import('@screens/HomeTopMenuScreen/InfinityScroll/RecentQuizzes')
+  import('@screens/HomeScreens/InfinityScroll/RecentQuizzes')
 );
 
 const InfinityScrollAnsweredQuizzes = lazy(() =>
-  import('@screens/HomeTopMenuScreen/InfinityScroll/AnsweredQuizzes')
+  import('@screens/HomeScreens/InfinityScroll/AnsweredQuizzes')
 );
 
 // STACK
