@@ -46,14 +46,13 @@ class SessionStudentController {
       const token = await GenerateTokenProvider.execute(id);
       const refreshToken = await GenerateRefreshTokenProvider.execute(id);
 
-
       return res.status(200).json({
         student: {
           name,
           email,
         },
-        token: token,
-        refresh_token: refreshToken.id
+        token,
+        refresh_token: refreshToken.id,
       });
     } catch (err) {
       return res.status(500).json(err);

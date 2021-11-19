@@ -23,7 +23,16 @@ class FavoriteStudentQuizController {
           {
             model: Quiz,
             as: 'quiz',
-            attributes: ['id', 'id_teacher', 'title', 'description', 'pin', 'image_base64', 'publish_date', 'no_time'],
+            attributes: [
+              'id',
+              'id_teacher',
+              'title',
+              'description',
+              'pin',
+              'image_base64',
+              'publish_date',
+              'no_time',
+            ],
             include: [
               {
                 model: Tag,
@@ -33,10 +42,10 @@ class FavoriteStudentQuizController {
                   attributes: [],
                 },
               },
-            ]
+            ],
           },
         ],
-        attributes:[],
+        attributes: [],
         offset: page ? (page - 1) * limit : 0,
         limit: page ? limit : null,
       });

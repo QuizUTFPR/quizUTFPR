@@ -14,14 +14,20 @@ class RefreshTokenController {
       console.log('achado', refreshToken);
 
       if (!refreshToken)
-        return res.status(401).json({ error: 'Invalid refresh token!', refresh_token_expired: true });
+        return res.status(401).json({
+          error: 'Invalid refresh token!',
+          refresh_token_expired: true,
+        });
 
       const refreshTokenExpired = dayjs().isAfter(
         dayjs(refreshToken.expires_in)
       );
 
       if (refreshTokenExpired)
-        return res.status(401).json({ error: 'Refresh token expired!', refresh_token_expired: true });
+        return res.status(401).json({
+          error: 'Refresh token expired!',
+          refresh_token_expired: true,
+        });
 
       const token = await GenerateTokenProvider.execute(refreshToken.user_id);
 
