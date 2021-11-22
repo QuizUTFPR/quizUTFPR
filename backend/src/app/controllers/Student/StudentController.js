@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 // import jwt from 'jsonwebtoken';
 // import authConfig from '../../../config/auth';
 
@@ -11,7 +11,7 @@ import * as Yup from 'yup';
 // import RefreshToken from '../../models/RefreshTokenModel';
 
 // SERVICES
-import CreateStudentService from '../../services/CreateStudent';
+import CreateStudentService from '../../services/Student/CreateStudent';
 
 class StudentController {
   // Cadastra um único registro
@@ -65,7 +65,9 @@ class StudentController {
       return res.status(200).json(student);
     } catch (error) {
       console.log(error);
-      return res.status(500).json(error);
+      return (
+        res.status(error.status).json(error) || res.status(500).json(error)
+      );
     }
   }
 }

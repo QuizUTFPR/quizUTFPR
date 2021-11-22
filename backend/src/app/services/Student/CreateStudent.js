@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
-import GenerateTokenProvider from '../provider/GenerateTokenProvider';
-import GenerateRefreshTokenProvider from '../provider/GenerateRefreshTokenProvider';
-import RefreshToken from '../models/RefreshTokenModel';
-import StudentRepository from '../repositories/Student';
+import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
+import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
+import RefreshToken from '../../models/RefreshTokenModel';
+import StudentRepository from '../../repositories/Student';
 
 class CreateStudentService {
   constructor() {
@@ -17,7 +17,9 @@ class CreateStudentService {
     });
 
     if (!(await schema.isValid(data))) {
-      throw new Error('Falha na validação!');
+      const error = new Error('Falha na validação!');
+      error.status = 403;
+      throw error;
     }
 
     const student = await this.studentRepository.store(data);
