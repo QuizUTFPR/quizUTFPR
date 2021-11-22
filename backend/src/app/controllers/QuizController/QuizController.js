@@ -1,68 +1,38 @@
-import * as Yup from 'yup';
-
-// MODELS
-import Quiz from '../../models/QuizModel';
 import Teacher from '../../models/TeacherModel';
 import Question from '../../models/QuestionModel';
 import Answer from '../../models/AnswerModel';
 import Tag from '../../models/TagModel';
-// import File from '../../models/FileModel';
+
+// SERVICES
+import QuizService from '../../services/Quiz';
 
 class QuizController {
   async store(req, res) {
     try {
-      const schema = Yup.object().shape({
-        title: Yup.string()
-          .min(1, 'Seu título deve conter pelo menos um caracter.')
-          .max(300, 'Máximo de caracteres atingidos.')
-          .required(),
-        description: Yup.string().required(),
-        visibility: Yup.string().required().max(10),
-        id_image: Yup.number(),
-        tags: Yup.array().required('Informe as tags do quiz!'),
-        imageBase64: Yup.string(),
-        noTime: Yup.bool().required(),
-      });
-
-
-      // Check body of requisiton
-      if (!(await schema.isValid(req.body)))
-        return res.status(400).json({ error: 'Falha na validação!' });
-
       const id_teacher = req.userId;
       const { imageBase64, noTime } = req.body;
 
-      const quiz = await Quiz.create({
+      const quizService = new QuizService();
+      const quiz = quizService.create({
         id_teacher,
         image_base64: imageBase64,
         no_time: noTime,
         ...req.body,
       });
 
-      const { tags } = req.body;
-
-      tags.map(async (tagObject) => {
-        const [tag] = await Tag.findOrCreate({
-          where: {
-            name: tagObject,
-          },
-        });
-
-        tag.addQuiz(quiz);
-      });
-      return res.status(200).json({
-        quiz,
-      });
-    } catch (err) {
-      // console.log(err);
-      return res.status(500).json(err);
+      return res.status(200).json({ quiz });
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        error.status(500).json(error)
+      );
     }
   }
 
-  // Lista todos os registros
   async index(req, res) {
     try {
-      const quizzes = await Quiz.findAll({
+      const quizService = new QuizService();
+      const quizzes = await quizService.index({
         attributes: [
           'id',
           'title',
@@ -79,11 +49,7 @@ class QuizController {
             as: 'teacher',
             attributes: ['name', 'email'],
           },
-          // {
-          //   model: File,
-          //   as: 'image_quiz',
-          //   attributes: ['url', 'path', 'name'],
-          // },
+
           {
             model: Tag,
             as: 'tags_quiz',
@@ -95,24 +61,22 @@ class QuizController {
         ],
       });
 
-      if (!quizzes.length)
-        return res
-          .status(404)
-          .json({ error: 'Não existe nenhum quiz cadastrado.' });
-
       return res.status(200).json(quizzes);
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json(err);
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
     }
   }
 
-  // Exibe um único registro
+  // exibe com base na tag
   async show(req, res) {
     try {
       const { tag } = req.params;
 
-      const quiz = await Quiz.findAll({
+      const quizService = new QuizService();
+      const quizzes = quizService.index({
         attributes: [
           'id',
           'title',
@@ -177,106 +141,53 @@ class QuizController {
         order: [[{ model: Answer, as: 'answer' }, 'id', 'ASC']],
       });
 
-      if (!quiz.length)
-        return res
-          .status(404)
-          .json({ error: 'Não existe nenhum quiz com a tag informada.' });
-
-      return res.status(200).json(quiz);
-    } catch (err) {
-      return res.status(500).json(err);
+      return res.status(200).json(quizzes);
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
     }
   }
 
-  // Altera um único registro
   async update(req, res) {
     try {
-      const schema = Yup.object().shape({
-        id: Yup.number().required(),
-        title: Yup.string()
-          .min(1, 'Seu título deve conter pelo menos um caracter.')
-          .max(300, 'Máximo de caracteres atingidos.')
-          .required(),
-        description: Yup.string().required(),
-        visibility: Yup.string().required().max(10),
-        id_image: Yup.number(),
-        tags: Yup.array().required('Informe as tags do quiz!'),
-        imageBase64: Yup.string(),
-        noTime: Yup.bool().required(),
-      });
+      const { id, tags, title, description, visibility, imageBase64, noTime } =
+        req.body;
 
-      // Check body of requisiton
-      if (!(await schema.isValid(req.body)))
-        return res.status(400).json({ error: 'Falha na validação!' });
-
-      const {
+      const quizService = new QuizService();
+      const quiz = quizService.update({
         id,
         tags,
         title,
         description,
         visibility,
-        // id_image,
         imageBase64,
         noTime,
-      } = req.body;
-
-      const quiz = await Quiz.findByPk(id);
-      quiz.title = title;
-      quiz.description = description;
-      quiz.visibility = visibility;
-      quiz.image_base64 = imageBase64;
-      quiz.no_time = noTime;
-      // if (id_image) quiz.id_image = id_image;
-      quiz.save();
-
-      const tagsAlreadyInQuiz = await quiz.getTags_quiz();
-      const arrayTagsAlreadyInQuiz = tagsAlreadyInQuiz.map((item) => item.name);
-
-      tags.map(async (tagObject) => {
-        const [tag] = await Tag.findOrCreate({
-          where: {
-            name: tagObject,
-          },
-        });
-
-        if (!arrayTagsAlreadyInQuiz.find((element) => element === tag)) {
-          tag.addQuiz(quiz);
-        }
-      });
-
-      // eslint-disable-next-line array-callback-return
-      tagsAlreadyInQuiz.map((tagInQuiz) => {
-        if (!tags.find((element) => element === tagInQuiz.name)) {
-          tagInQuiz.removeQuiz(quiz);
-        }
       });
 
       return res.status(200).json(quiz);
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json(err);
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
     }
   }
 
-  // Remove um único registro
   async delete(req, res) {
     try {
       const { id_quiz } = req.body;
 
-      const quiz = await Quiz.findByPk(id_quiz);
-
-      if (!quiz)
-        return res
-          .status(404)
-          .json({ error: 'Não existe nenhum quiz com o ID informado.' });
-
-      const image_quiz = await quiz.getImage_quiz();
-      if (image_quiz) image_quiz.destroy();
-      quiz.destroy();
+      const quizService = new QuizService();
+      await quizService.delete(id_quiz);
 
       return res.status(200).json();
-    } catch (err) {
-      return res.status(500).json(err);
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
     }
   }
 }

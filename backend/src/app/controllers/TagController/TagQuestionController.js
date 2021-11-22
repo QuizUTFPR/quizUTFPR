@@ -1,12 +1,15 @@
 // MODELS
-import Tag from '../../models/TagModel';
 import Question from '../../models/QuestionModel';
+
+// SERVICES
+import TagService from '../../services/Tag';
 
 class TagQuestionController {
   // Lista todos os registros
   async index(req, res) {
     try {
-      const tags = await Tag.findAll({
+      const tagService = new TagService();
+      const tags = await tagService.execute({
         include: [
           {
             model: Question,
@@ -32,12 +35,12 @@ class TagQuestionController {
         },
       });
 
-      if (!tags.length) 
-        return res.status(204).send("Não existe nenhuma tag com questões cadastrada.");
-
       return res.status(200).json(tags);
-    } catch (err) {
-      return res.status(500).json(err);
+    } catch (error) {
+      return (
+        (!!error.status && error.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
     }
   }
 }

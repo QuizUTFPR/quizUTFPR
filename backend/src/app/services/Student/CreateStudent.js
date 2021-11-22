@@ -22,7 +22,7 @@ class CreateStudentService {
       throw error;
     }
 
-    const student = await this.studentRepository.store(data);
+    const student = await this.studentRepository.create(data);
     const { id, email, name } = student;
 
     // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO

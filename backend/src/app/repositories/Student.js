@@ -1,7 +1,7 @@
 import Student from '../models/StudentModel';
 
 class StudentRepository {
-  async store(student) {
+  async create(student) {
     return Student.create(student);
   }
 
