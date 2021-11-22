@@ -1,14 +1,4 @@
-// import * as Yup from 'yup';
-// import jwt from 'jsonwebtoken';
-// import authConfig from '../../../config/auth';
-
-// PROVIDER
-// import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
-// import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
-
-// MODELS
-// import Student from '../../models/StudentModel';
-// import RefreshToken from '../../models/RefreshTokenModel';
+// SERVICES
 import StudentSessionService from '../../services/Student/StudentSession';
 
 class SessionStudentController {
@@ -75,7 +65,8 @@ class SessionStudentController {
     } catch (error) {
       console.log(error);
       return (
-        res.status(error.status).json(error) || res.status(500).json(error)
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
       );
     }
   }

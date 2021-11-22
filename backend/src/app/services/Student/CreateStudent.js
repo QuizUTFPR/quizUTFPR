@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
 import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
 import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
-import RefreshToken from '../../models/RefreshTokenModel';
 import StudentRepository from '../../repositories/Student';
+import DeleteRefreshTokenService from '../RefreshToken/DeleteRefreshToken';
 
 class CreateStudentService {
   constructor() {
@@ -26,13 +26,13 @@ class CreateStudentService {
     const { id, email, name } = student;
 
     // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
-    await RefreshToken.destroy({
+    const deleteRefreshTokenService = new DeleteRefreshTokenService();
+    await deleteRefreshTokenService.execute({
       where: { user_id: id },
     });
 
     const token = await GenerateTokenProvider.execute(id);
     const refreshToken = await GenerateRefreshTokenProvider.execute(id);
-    console.log('student id:', id);
 
     return {
       student: {

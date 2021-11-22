@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import authConfig from '../../config/auth';
-import RefreshToken from '../models/RefreshTokenModel';
+
+// REPOSITORIES
+import RefreshTokenRepository from '../repositories/RefreshToken';
 
 dayjs.extend(utc);
 
@@ -13,11 +15,12 @@ class GenerateRefreshTokenProvider {
         .add(parseInt(authConfig.refreshExpiration), 'm')
         .format();
 
-      await RefreshToken.destroy({
+      const refreshTokenRepository = new RefreshTokenRepository();
+      await refreshTokenRepository.delete({
         where: { user_id: userId },
       });
 
-      const generatedRefreshToken = await RefreshToken.create({
+      const generatedRefreshToken = await refreshTokenRepository.create({
         user_id: userId,
         expires_in: expiresIn,
       });
