@@ -9,6 +9,10 @@ class StudentRepository {
     return Student.findOne(where);
   }
 
+  async findByPk(pk) {
+    return Student.findByPk(pk);
+  }
+
   async checkPass(student, password) {
     return student.checkPassword(password);
   }

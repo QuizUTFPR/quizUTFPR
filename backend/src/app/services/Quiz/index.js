@@ -1,6 +1,10 @@
 import * as Yup from 'yup';
-import QuizRepository from '../../repositories/Quiz';
+
+// MODELS
 import Tag from '../../models/TagModel';
+
+// REPOSITORIES
+import QuizRepository from '../../repositories/Quiz';
 
 class QuizService {
   constructor() {
@@ -47,6 +51,8 @@ class QuizService {
 
       tag.addQuiz(quiz);
     });
+
+    return quiz;
   }
 
   async index(query) {
@@ -59,6 +65,10 @@ class QuizService {
     }
 
     return quizzes;
+  }
+
+  async findByPk(pk) {
+    await this.quizRepository.findByPk(pk);
   }
 
   async update(data) {

@@ -13,14 +13,14 @@ class QuizController {
       const { imageBase64, noTime } = req.body;
 
       const quizService = new QuizService();
-      const quiz = quizService.create({
+      const quiz = await quizService.create({
         id_teacher,
         image_base64: imageBase64,
         no_time: noTime,
         ...req.body,
       });
 
-      return res.status(200).json({ quiz });
+      return res.status(200).json(quiz);
     } catch (error) {
       return (
         (!!error.status && res.status(error.status).json(error)) ||
@@ -76,7 +76,7 @@ class QuizController {
       const { tag } = req.params;
 
       const quizService = new QuizService();
-      const quizzes = quizService.index({
+      const quizzes = await quizService.index({
         attributes: [
           'id',
           'title',
@@ -156,7 +156,7 @@ class QuizController {
         req.body;
 
       const quizService = new QuizService();
-      const quiz = quizService.update({
+      const quiz = await quizService.update({
         id,
         tags,
         title,
