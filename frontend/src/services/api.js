@@ -34,7 +34,7 @@ api.interceptors.response.use(
       originalRequest.headers.Authorization = token ? `Bearer ${token}` : '';
       return api.request(originalRequest);
     }
-    if (requestStatus === 403) {
+    if (requestStatus === 401) {
       localStorage.clear('@TOKEN');
       localStorage.clear('@TEACHER');
       window.location = TOKENEXPIRED;

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import { LinearProgress } from '@material-ui/core';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 // import PropTypes from 'prop-types'
 
@@ -26,13 +26,13 @@ const MainPage = () => (
   <Suspense fallback={<LinearProgress />}>
     <Div>
       <Menu />
-      <Switch>
-        <Route path={HOME} component={Home} exact />
-        <Route path={QUIZ} component={Quiz} exact />
-        <Route path={CREATE_QUIZ} component={CreateQuiz} exact />
-        <Route path={CLASSES} component={Classes} exact />
-        <Route path={`${STATISTICS_QUIZ}/:id`} component={Statistics} exact />
-      </Switch>
+      <Routes>
+        <Route path={HOME} element={<Home />} exact />
+        <Route path={QUIZ} element={<Quiz />} exact />
+        <Route path={CREATE_QUIZ} element={<CreateQuiz />} exact />
+        <Route path={CLASSES} element={<Classes />} exact />
+        <Route path={`${STATISTICS_QUIZ}/:id`} element={<Statistics />} exact />
+      </Routes>
     </Div>
   </Suspense>
 );

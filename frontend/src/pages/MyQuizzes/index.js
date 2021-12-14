@@ -1,5 +1,5 @@
 import React, { useState, useEffect, forwardRef, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '@api';
 
 // COMPONENTS
@@ -45,7 +45,9 @@ const TextPINReffed = forwardRef((props, ref) => (
   </TextPIN>
 ));
 
-const Quiz = ({ history }) => {
+const Quiz = () => {
+  const navigate = useNavigate();
+
   const [quizzes, setQuizzes] = useState(false);
   const [isModalOpen, setModalOpen] = useState({
     open: false,
@@ -189,9 +191,7 @@ const Quiz = ({ history }) => {
                     title="Visualizar estatisticas"
                   >
                     <IconWrapper
-                      onClick={() =>
-                        history.push(`${STATISTICS_QUIZ}/${quiz.id}`)
-                      }
+                      onClick={() => navigate(`${STATISTICS_QUIZ}/${quiz.id}`)}
                     >
                       <BarChart />
                     </IconWrapper>

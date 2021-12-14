@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 import api from '@api';
@@ -27,7 +27,9 @@ import {
 } from '@material-ui/core';
 import { PreviewImage } from './style';
 
-const CriarQuiz = ({ history }) => {
+const CriarQuiz = () => {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -67,9 +69,8 @@ const CriarQuiz = ({ history }) => {
       const { data } = responseQuiz;
 
       if (responseQuiz.status === 200) {
-        history.push({
-          pathname: `${QUESTION}${data.quiz.id}`,
-          state: { title: data.quiz.title, noTime: data.quiz.no_time },
+        navigate(`${QUESTION}${data.id}`, {
+          state: { title: data.title, noTime: data.no_time },
         });
       }
     },
@@ -188,14 +189,6 @@ const CriarQuiz = ({ history }) => {
       </Grid>
     </GridContainer>
   );
-};
-
-CriarQuiz.defaultProps = {};
-
-CriarQuiz.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
 export default CriarQuiz;

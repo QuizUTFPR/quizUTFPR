@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 // ROUTES
@@ -25,7 +24,10 @@ import DragImageContainer from './components/dragImageContainer';
 // PAGES
 import TypeOfQuestion from '../TypeOfQuestion';
 
-const Question = ({ history, location }) => {
+const Question = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   // eslint-disable-next-line camelcase
   const { id_quiz } = useParams();
   const {
@@ -121,7 +123,7 @@ const Question = ({ history, location }) => {
   };
 
   const handleGetOut = () => {
-    if (isSaved) history.push(QUIZ);
+    if (isSaved) navigate(QUIZ);
     else handleOpenGetOutAlert();
   };
 
@@ -161,11 +163,11 @@ const Question = ({ history, location }) => {
     if (!isSaved) {
       handleSave().then((saved) => {
         if (saved) {
-          history.push(QUIZ);
+          navigate(QUIZ);
         }
       });
     } else {
-      history.push(QUIZ);
+      navigate(QUIZ);
     }
   };
 
@@ -258,19 +260,6 @@ const Question = ({ history, location }) => {
       </Modal>
     </>
   );
-};
-
-Question.defaultProps = {};
-
-Question.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-    location: PropTypes.shape({
-      state: PropTypes.shape({
-        title: PropTypes.string,
-      }),
-    }),
-  }).isRequired,
 };
 
 export default Question;

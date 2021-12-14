@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { LinearProgress } from '@material-ui/core';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 // import jwt from 'jsonwebtoken';
 // import PropTypes from 'prop-types'
 
@@ -19,10 +19,8 @@ const Login = lazy(() => import('./pages/Login'));
 const Question = lazy(() => import('./pages/Question'));
 const ExpiredToken = lazy(() => import('./pages/ConfirmExpireOfToken'));
 
-function App({
-  location,
-  // history
-}) {
+function App() {
+  const location = useLocation();
   const [checkedToken, setCheckedToken] = useState(false);
   const {
     teacherInfo,
@@ -56,10 +54,12 @@ function App({
     // }
   });
 
-  if (!checkedToken) return <LinearProgress />;
+  if (!checkedToken) {
+    return <LinearProgress />;
+  }
 
   if (teacherInfo.token && location.pathname === LOGIN) {
-    return <Redirect to={HOME} />;
+    return <Navigate to={HOME} />;
   }
 
   if (
@@ -67,25 +67,25 @@ function App({
     location.pathname !== LOGIN &&
     location.pathname !== TOKENEXPIRED
   ) {
-    return <Redirect to={LOGIN} />;
+    return <Navigate to={LOGIN} />;
   }
 
   return (
     <Suspense fallback={<LinearProgress />}>
-      <Switch>
-        <Route path={TOKENEXPIRED} exact component={ExpiredToken} />
-        <Route path={LOGIN} exact component={Login} />
+      <Routes>
+        <Route path={TOKENEXPIRED} exact element={<ExpiredToken />} />
+        <Route path={LOGIN} exact element={<Login />} />
         <Route
           path={`${QUESTION}:id_quiz`}
           exact
-          render={(props) => (
+          element={
             <QuestionQuizProvider>
-              <Question {...props} />
+              <Question />
             </QuestionQuizProvider>
-          )}
+          }
         />
-        <Route exact component={MainPage} />
-      </Switch>
+        <Route path="*" element={<MainPage />} />
+      </Routes>
     </Suspense>
   );
 }

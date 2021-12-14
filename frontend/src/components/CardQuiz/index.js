@@ -30,10 +30,8 @@ const Card = ({
     )}
     <CardActionArea
       component={Link}
-      to={{
-        pathname: `${QUESTION}${idQuiz}`,
-        state: { title, published, noTime },
-      }}
+      to={`${QUESTION}${idQuiz}`}
+      state={{ title, published, noTime }}
     >
       <StyledCardContent>
         <Typography color="primary" component="h5" variant="h5">

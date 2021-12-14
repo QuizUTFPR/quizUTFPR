@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import AuthProvider from '@context/auth';
@@ -19,9 +19,9 @@ function Root() {
         <GlobalStyle />
         <AuthProvider>
           <BrowserRouter>
-            <Switch>
-              <Route exact component={App} />
-            </Switch>
+            <Routes>
+              <Route path="*" element={<App />} />
+            </Routes>
           </BrowserRouter>
         </AuthProvider>
       </StyledThemeProvider>

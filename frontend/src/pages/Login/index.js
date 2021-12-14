@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+
+import { useNavigate } from 'react-router-dom';
 
 // COMPONENTS
 import { Grid, InputAdornment, IconButton } from '@material-ui/core';
@@ -29,7 +30,9 @@ import {
   LogoUTFPR,
 } from './style';
 
-const LoginPage = ({ history }) => {
+const LoginPage = () => {
+  const navigate = useNavigate();
+
   const { login } = useAuth();
 
   const [values, setValues] = useState({
@@ -81,7 +84,7 @@ const LoginPage = ({ history }) => {
               e.preventDefault();
               const response = await login(values.username, values.password);
               if (response.status === 200) {
-                history.push(HOME);
+                navigate(HOME);
               } else {
                 setError(response.response.data.error);
               }
@@ -146,14 +149,6 @@ const LoginPage = ({ history }) => {
       </Grid>
     </StyledContainer>
   );
-};
-
-LoginPage.defaultProps = {};
-
-LoginPage.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
 export default LoginPage;
