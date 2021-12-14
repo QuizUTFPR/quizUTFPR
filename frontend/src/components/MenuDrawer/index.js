@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // COMPONENTS
 import { Link } from 'react-router-dom';
-import { List, Divider, Avatar } from '@material-ui/core';
+import { List, Divider, Avatar, Tooltip } from '@material-ui/core';
 import {
   Help,
   Home,
@@ -122,25 +122,29 @@ const MenuDrawer = () => {
         {open && <Divider />}
         <List>
           {FirstMenu.map((option) => (
-            <Link
-              key={option.text}
-              to={option.to}
-              style={{ textDecoration: 'none' }}
-            >
-              <StyledListItem button key={option.text}>
-                <StyledListItemIcon>{option.icon}</StyledListItemIcon>
-                <StyledListItemText color="primary" primary={option.text} />
-              </StyledListItem>
-            </Link>
+            <Tooltip title={open ? '' : option.text} placement="right">
+              <Link
+                key={option.text}
+                to={option.to}
+                style={{ textDecoration: 'none' }}
+              >
+                <StyledListItem button key={option.text}>
+                  <StyledListItemIcon>{option.icon}</StyledListItemIcon>
+                  <StyledListItemText color="primary" primary={option.text} />
+                </StyledListItem>
+              </Link>
+            </Tooltip>
           ))}
         </List>
         <Divider />
         <List>
           {SecondMenu.map((option) => (
-            <StyledListItem button key={option.text} onClick={option.onClick}>
-              <StyledListItemIcon>{option.icon}</StyledListItemIcon>
-              <StyledListItemText primary={option.text} />
-            </StyledListItem>
+            <Tooltip title={open ? '' : option.text} placement="right">
+              <StyledListItem button key={option.text} onClick={option.onClick}>
+                <StyledListItemIcon>{option.icon}</StyledListItemIcon>
+                <StyledListItemText primary={option.text} />
+              </StyledListItem>
+            </Tooltip>
           ))}
         </List>
       </StyledDrawer>
