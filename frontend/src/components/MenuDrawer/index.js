@@ -6,18 +6,18 @@ import { List, Divider, Avatar } from '@material-ui/core';
 import {
   Help,
   Home,
-  // Class,
   LibraryBooks,
   ExitToApp,
   ArrowBackIos,
   ArrowForwardIos,
+  School,
 } from '@material-ui/icons';
 
 // HOOKS
 import useAuth from '@hooks/Auth';
 
 // ROTAS
-import { QUIZ, HOME } from '@routes';
+import { QUIZ, HOME, CLASSES } from '@routes';
 
 // STYLES
 import {
@@ -48,15 +48,15 @@ const MenuDrawer = () => {
       icon: <Home />,
       to: HOME,
     },
-    // {
-    //   text: 'Minhas Turmas',
-    //   icon: <Class />,
-    //   to: CLASSES,
-    // },
     {
       text: 'Meus Quizzes',
       icon: <LibraryBooks />,
       to: QUIZ,
+    },
+    {
+      text: 'Minhas Turmas',
+      icon: <School />,
+      to: CLASSES,
     },
   ];
 
