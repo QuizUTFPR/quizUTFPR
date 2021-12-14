@@ -122,12 +122,12 @@ const MenuDrawer = () => {
         {open && <Divider />}
         <List>
           {FirstMenu.map((option) => (
-            <Tooltip title={open ? '' : option.text} placement="right">
-              <Link
-                key={option.text}
-                to={option.to}
-                style={{ textDecoration: 'none' }}
-              >
+            <Tooltip
+              key={option.text}
+              title={open ? '' : option.text}
+              placement="right"
+            >
+              <Link to={option.to} style={{ textDecoration: 'none' }}>
                 <StyledListItem button key={option.text}>
                   <StyledListItemIcon>{option.icon}</StyledListItemIcon>
                   <StyledListItemText color="primary" primary={option.text} />
@@ -139,8 +139,12 @@ const MenuDrawer = () => {
         <Divider />
         <List>
           {SecondMenu.map((option) => (
-            <Tooltip title={open ? '' : option.text} placement="right">
-              <StyledListItem button key={option.text} onClick={option.onClick}>
+            <Tooltip
+              key={option.text}
+              title={open ? '' : option.text}
+              placement="right"
+            >
+              <StyledListItem button onClick={option.onClick}>
                 <StyledListItemIcon>{option.icon}</StyledListItemIcon>
                 <StyledListItemText primary={option.text} />
               </StyledListItem>
