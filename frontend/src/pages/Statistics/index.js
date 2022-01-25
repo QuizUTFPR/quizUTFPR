@@ -7,9 +7,9 @@ import GridContainer from '@components/Container';
 import {
   Grid,
   // Tooltip,
-} from '@material-ui/core';
+} from '@mui/material';
 import TabMenu from '@components/TabMenu';
-import { Face, LibraryBooks } from '@material-ui/icons';
+import { Face, LibraryBooks } from '@mui/icons-material';
 
 import AccordionQuizStatistics from './AccordionQuizStatistics';
 import AccordionStudentQuizStatistics from './AccordionStudentQuizStatistics';

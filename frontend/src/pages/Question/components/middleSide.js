@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // ICONS
-import { Delete, Check, AttachFile, Edit } from '@material-ui/icons/';
+import { Delete, Check, AttachFile, Edit } from '@mui/icons-material/';
 
 // COMPONENTS
 import StyledButton from '@components/Button';
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import ErrorMessage from '@components/Messages/error';
 import Tooltip from '@components/ToolTip';
 import InputOrLatexContent from './PreviewLatex';

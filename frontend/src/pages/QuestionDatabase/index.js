@@ -12,8 +12,8 @@ import {
   Typography,
   Divider,
   CircularProgress,
-} from '@material-ui/core';
-import { Close, Search } from '@material-ui/icons';
+} from '@mui/material';
+import { Close, Search } from '@mui/icons-material';
 import SnackBar from '@components/SnackBar';
 import Question from './question';
 

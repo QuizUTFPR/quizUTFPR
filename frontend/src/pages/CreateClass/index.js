@@ -15,7 +15,7 @@ import GridContainer from '@components/Container';
 import Button from '@components/Button';
 
 import DragImageInput from '@components/DragZone';
-import { Grid, Typography, Divider, TextField } from '@material-ui/core';
+import { Grid, Typography, Divider, TextField } from '@mui/material';
 import { PreviewImage } from './style';
 
 const CriarQuiz = () => {

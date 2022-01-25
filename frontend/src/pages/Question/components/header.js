@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // ICONS
-import { Save, CheckCircle, Done, Warning, Create } from '@material-ui/icons/';
+import { Save, CheckCircle, Done, Warning, Create } from '@mui/icons-material/';
 
 // COMPONENTS
 import StyledButton from '@components/Button';
-import { Grid, Typography, Toolbar } from '@material-ui/core';
+import { Grid, Typography, Toolbar } from '@mui/material';
 import {
   StyledAppBar,
   StyledMessage,

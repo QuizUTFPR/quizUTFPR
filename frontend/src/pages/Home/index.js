@@ -1,7 +1,7 @@
 import React from 'react';
 
 // COMPONENTS
-import { Typography, Grid } from '@material-ui/core';
+import { Typography, Grid } from '@mui/material';
 
 // STYLE
 import { LogoUTFPR, StyledHomeGrid } from './style';

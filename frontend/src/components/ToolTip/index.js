@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tooltip } from '@material-ui/core';
+import { Tooltip } from '@mui/material';
 
 const ToolTipComponent = ({ title, ariaLabel, children, ...props }) => (
   <Tooltip arrow aria-label={ariaLabel} title={title} {...props}>

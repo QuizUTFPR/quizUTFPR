@@ -6,13 +6,13 @@ import useQuestionQuiz from '@hooks/QuestionQuiz';
 
 import ChipInput from '@components/ChipInput';
 
-export default function TagInput({
+const TagInput = ({
   children,
   formikID,
   handleFormikChange,
   handlePropsChange,
   ...props
-}) {
+}) => {
   const [timer, setTimer] = useState(null);
   const { setTyping } = useQuestionQuiz();
 
@@ -44,17 +44,18 @@ export default function TagInput({
     [props.value, handlePropsChange]
   );
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{myTagInput}</>;
-}
+};
 
-function MemoizedTagInput({
+const MemoizedTagInput = ({
   formikID,
   setTyping,
   handleFormikChange,
   handleUpdateContext,
   handlePropsChange,
   ...props
-}) {
+}) => {
   return (
     <ChipInput
       id={formikID}
@@ -66,10 +67,11 @@ function MemoizedTagInput({
       {...props}
     />
   );
-}
+};
 
 TagInput.defaultProps = {
   handleFormikChange: () => {},
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   children: <></>,
 };
 
@@ -83,3 +85,5 @@ TagInput.propTypes = {
     index: PropTypes.number,
   }).isRequired,
 };
+
+export default TagInput;

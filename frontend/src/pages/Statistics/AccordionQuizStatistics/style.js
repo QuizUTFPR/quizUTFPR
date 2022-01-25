@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Grid, Typography, Paper } from '@material-ui/core';
+import { Grid, Typography, Paper } from '@mui/material';
 
 export const BarQuestion = styled(Grid).attrs({
   item: true,

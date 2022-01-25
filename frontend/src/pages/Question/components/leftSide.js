@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // ICONS
-import { AddCircle, ArrowUpward, ArrowDownward } from '@material-ui/icons/';
+import { AddCircle, ArrowUpward, ArrowDownward } from '@mui/icons-material/';
 
 // COMPONENTS
-import { Grid, Typography, IconButton } from '@material-ui/core';
+import { Grid, Typography, IconButton } from '@mui/material';
 import StyledButton from '@components/Button';
 import Katex from '@components/Katex';
 

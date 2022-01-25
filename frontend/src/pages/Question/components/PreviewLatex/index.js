@@ -14,24 +14,20 @@ const InputOrLatexContent = ({ inputComponent, latexComponent, disabled }) => {
     }
   };
 
-  return (
-    <>
-      {seeInput ? (
-        <InputComponent
-          {...propsInput}
-          autoFocus
-          onBlur={() => changeComponent(false)}
-        />
-      ) : (
-        <LatexContent
-          // onTypeset={(e) => console.log(e)}
-          component={LatexComponent}
-          propsLatex={propsLatex}
-          onClick={() => changeComponent(true)}
-          value={value}
-        />
-      )}
-    </>
+  return seeInput ? (
+    <InputComponent
+      {...propsInput}
+      autoFocus
+      onBlur={() => changeComponent(false)}
+    />
+  ) : (
+    <LatexContent
+      // onTypeset={(e) => console.log(e)}
+      component={LatexComponent}
+      propsLatex={propsLatex}
+      onClick={() => changeComponent(true)}
+      value={value}
+    />
   );
 };
 

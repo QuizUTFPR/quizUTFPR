@@ -1,8 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
-import { LinearProgress } from '@material-ui/core';
+import { LinearProgress } from '@mui/material';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-// import jwt from 'jsonwebtoken';
-// import PropTypes from 'prop-types'
 
 // CONTEXT
 import QuestionQuizProvider from '@context/questions_quiz';
@@ -19,7 +17,7 @@ const Login = lazy(() => import('./pages/Login'));
 const Question = lazy(() => import('./pages/Question'));
 const ExpiredToken = lazy(() => import('./pages/ConfirmExpireOfToken'));
 
-function App() {
+const App = () => {
   const location = useLocation();
   const [checkedToken, setCheckedToken] = useState(false);
   const {
@@ -40,20 +38,6 @@ function App() {
     }
     setCheckedToken(true);
   }, []);
-
-  // eslint-disable-next-line consistent-return
-  useEffect(() => {
-    // if (teacherInfo.token) {
-    //   const { token } = teacherInfo;
-    //   const { payload } = jwt.decode(token, { complete: true });
-    //   const dateNow = new Date();
-    //   if (payload.exp < dateNow.getTime() / 1000) {
-    //     logout();
-    //     history.push(TOKENEXPIRED);
-    //   }
-    // }
-  });
-
   if (!checkedToken) {
     return <LinearProgress />;
   }
@@ -88,6 +72,6 @@ function App() {
       </Routes>
     </Suspense>
   );
-}
+};
 
 export default App;

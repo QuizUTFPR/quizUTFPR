@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
-export default function QuestionInput({
+const QuestionInput = ({
   formikID,
   handleFormikChange,
   handlePropsChange,
   value,
   ...props
-}) {
+}) => {
   const [timer, setTimer] = useState(null);
   const { setTyping, isTyping } = useQuestionQuiz();
 
@@ -44,10 +44,11 @@ export default function QuestionInput({
     [value, handlePropsChange]
   );
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{myInput}</>;
-}
+};
 
-function MemoizedInput({
+const MemoizedInput = ({
   value,
   formikID,
   isTyping,
@@ -56,7 +57,7 @@ function MemoizedInput({
   handleUpdateContext,
   handlePropsChange,
   ...props
-}) {
+}) => {
   return (
     <input
       value={value}
@@ -72,7 +73,7 @@ function MemoizedInput({
       {...props}
     />
   );
-}
+};
 
 QuestionInput.defaultProps = {
   handleFormikChange: () => {},
@@ -90,3 +91,5 @@ QuestionInput.propTypes = {
   }).isRequired,
   value: PropTypes.string.isRequired,
 };
+
+export default QuestionInput;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Typography, AccordionSummary, Grid } from '@material-ui/core';
+import { Typography, AccordionSummary, Grid } from '@mui/material';
 
 export const TitlePage = styled(Typography)`
   overflow: hidden;

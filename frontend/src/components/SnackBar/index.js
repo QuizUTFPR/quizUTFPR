@@ -1,9 +1,9 @@
 import React, { forwardRef, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/core/Alert';
-import Slide from '@material-ui/core/Slide';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import Slide from '@mui/material/Slide';
 
 const Alert = forwardRef((props, ref) => (
   <MuiAlert ref={ref} elevation={6} variant="filled" {...props} />

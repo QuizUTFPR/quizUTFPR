@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { navigate } from './rootNavigation';
 
 // const ip = '10.0.0.105:3333';
-const ip = '10.0.2.2:3333'; // Android Studio ********NÃO APAGAR********
+const ip = '192.168.0.105:3333'; // Android Studio ********NÃO APAGAR********
 // const ip = '192.168.237.64:3333';
 
 const api = axios.create({

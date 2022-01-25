@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
-import { Checkbox } from '@material-ui/core';
+import { Checkbox } from '@mui/material';
 
-export default function CheckBoxInput({
+const CheckBoxInput = ({
   formikID,
   handleFormikChange,
   handlePropsChange,
   checked,
   ...props
-}) {
+}) => {
   const [timer, setTimer] = useState(null);
   const { setTyping } = useQuestionQuiz();
 
@@ -44,10 +44,11 @@ export default function CheckBoxInput({
     [checked, handlePropsChange]
   );
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{myCheckbox}</>;
-}
+};
 
-function MemoizedCheckbox({
+const MemoizedCheckbox = ({
   type,
   formikID,
   setTyping,
@@ -56,7 +57,7 @@ function MemoizedCheckbox({
   handlePropsChange,
   checked,
   ...props
-}) {
+}) => {
   return (
     <Checkbox
       id={formikID}
@@ -69,7 +70,7 @@ function MemoizedCheckbox({
       {...props}
     />
   );
-}
+};
 
 CheckBoxInput.defaultProps = {
   handleFormikChange: () => {},
@@ -86,3 +87,5 @@ CheckBoxInput.propTypes = {
   }).isRequired,
   checked: PropTypes.bool.isRequired,
 };
+
+export default CheckBoxInput;

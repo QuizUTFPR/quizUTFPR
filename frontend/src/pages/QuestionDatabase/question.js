@@ -13,7 +13,7 @@ import {
   // Button,
   Divider,
   Grid,
-} from '@material-ui/core';
+} from '@mui/material';
 
 const defaultMargin = '10px';
 
@@ -24,7 +24,7 @@ const QuestionCard = styled(Card)`
   }
 `;
 
-const Answer = styled(Typography)`
+const Answer = styled.div`
   padding: 10px;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.12);
@@ -74,7 +74,12 @@ const Questions = ({ id, checked, onChange, question }) => (
         <Grid container spacing={1}>
           {question.answer.map((item) => (
             // eslint-disable-next-line react/no-array-index-key
-            <Grid item xs={12} md={6} key={`${item.id}+${item.title}`}>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              key={`${item.id}+${item.title}+${Math.random()}`}
+            >
               {item.is_correct ? (
                 <CorrectgAnswer>
                   <Katex>{item.title} </Katex>

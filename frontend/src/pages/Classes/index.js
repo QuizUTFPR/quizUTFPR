@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import GridContainer from '@components/Container';
 
 // MATERIAL-UI COMPONENTS
-import { Grid, Typography, Divider, Button } from '@material-ui/core';
+import { Grid, Typography, Divider, Button } from '@mui/material';
 
 // ROUTES
 import { CREATE_CLASS } from '@routes';

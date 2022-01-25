@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // ICONS
-import { FileCopy } from '@material-ui/icons/';
+import { FileCopy } from '@mui/icons-material/';
 
 // COMPONENTS
-import { Grid, Typography, FormControlLabel } from '@material-ui/core';
+import { Grid, Typography, FormControlLabel } from '@mui/material';
 import {
   StyledRightGrid,
   GridItemStyledRight,

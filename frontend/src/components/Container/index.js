@@ -8,6 +8,7 @@ const Container = ({ children, ...props }) => (
 );
 
 Container.defaultProps = {
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   children: <></>,
 };
 

@@ -9,7 +9,7 @@ import {
   ListItemText,
   ListItem,
   IconButton,
-} from '@material-ui/core';
+} from '@mui/material';
 
 const WidthDrawer = '210px';
 const WidthIcon = '50px;';
@@ -20,14 +20,18 @@ export const StyledIconButton = styled(IconButton)`
 `;
 
 export const StyledDrawer = styled(Drawer)`
-  width: ${({ open }) =>
-    open ? `calc(${WidthDrawer} + 50px)` : `${WidthIcon}`};
-  overflow-x: hidden;
+  && .MuiDrawer-paper {
+    width: ${({ open }) => (open ? `calc(${WidthDrawer} + 50px)` : WidthIcon)};
+    overflow-x: hidden;
+    transition: 0.5s;
+  }
+  width: ${({ open }) => (open ? `calc(${WidthDrawer} + 50px)` : WidthIcon)};
 
   && div {
     width: ${({ open }) => !open && '55px'};
     transition: margin 0.2s ease;
   }
+  transition: 0.5s;
 `;
 
 export const AvatarBox = styled(Box)`

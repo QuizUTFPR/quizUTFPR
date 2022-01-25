@@ -3,13 +3,7 @@ import styled from 'styled-components';
 // import MyBackgound from '@assets/background_login_copy.svg';
 import { ReactComponent as UTFPR } from '@assets/marcaUTFPR/logoUTFPR.svg';
 
-import {
-  Container,
-  Grid,
-  Typography,
-  Button,
-  TextField,
-} from '@material-ui/core';
+import { Container, Grid, Typography, Button, TextField } from '@mui/material';
 
 export const StyledContainer = styled(Container)`
   background: white;

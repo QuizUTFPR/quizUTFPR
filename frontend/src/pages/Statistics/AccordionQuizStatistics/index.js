@@ -6,7 +6,7 @@ import {
   AccordionDetails,
   Typography,
   Divider,
-} from '@material-ui/core';
+} from '@mui/material';
 import Tooltip from '@components/ToolTip';
 import CircularProgressWithLabel from '@components/CircularProgressWithLabel';
 
@@ -16,7 +16,7 @@ import {
   CheckCircle,
   Cancel,
   // SentimentSatisfied,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 // STYLES
 import {

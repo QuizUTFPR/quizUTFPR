@@ -24,7 +24,7 @@ import {
   TextField,
   Checkbox,
   FormControlLabel,
-} from '@material-ui/core';
+} from '@mui/material';
 import { PreviewImage } from './style';
 
 const CriarQuiz = () => {

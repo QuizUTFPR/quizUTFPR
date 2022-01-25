@@ -4,25 +4,28 @@ import React, { useMemo } from 'react';
 // STYLE
 import { PlaceHolder } from './style';
 
-export default function LatexContent(props) {
+const LatexContent = (props) => {
   const myInput = useMemo(() => <MemoizedLatexContent {...props} />, [props]);
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{myInput}</>;
-}
+};
 
-function MemoizedLatexContent({
+const MemoizedLatexContent = ({
   component: Component,
   value,
   propsLatex,
   ...props
-}) {
+}) => {
   return (
     <Component {...props}>
       {!value ? <PlaceHolder>{propsLatex.placeholder}</PlaceHolder> : value}
     </Component>
   );
-}
+};
 
 LatexContent.defaultProps = {};
 
 LatexContent.propTypes = {};
+
+export default LatexContent;

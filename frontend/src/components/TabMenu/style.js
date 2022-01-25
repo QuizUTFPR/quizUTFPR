@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 
 export const BoxWrapperStyled = styled(Box)`
   width: 100%;

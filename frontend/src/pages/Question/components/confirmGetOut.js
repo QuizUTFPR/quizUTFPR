@@ -11,7 +11,7 @@ import {
   DialogContentText,
   DialogContent,
   DialogTitle,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import GridContainer from '@components/Container';
 import Button from '@components/Button';

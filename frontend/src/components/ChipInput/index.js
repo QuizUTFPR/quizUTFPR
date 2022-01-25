@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TextField } from '@material-ui/core';
-import Autocomplete from '@material-ui/core/Autocomplete';
+import { TextField } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
 import { ChipStyled } from './style';
 
-export default function ChipsArray({
+const ChipsArray = ({
   value,
   variant,
   onChange,
   id,
   suggestions,
   ...props
-}) {
+}) => {
   return (
     <Autocomplete
       {...props}
@@ -42,7 +42,7 @@ export default function ChipsArray({
       )}
     />
   );
-}
+};
 
 ChipsArray.defaultProps = {
   onChange: () => {},
@@ -57,3 +57,5 @@ ChipsArray.propTypes = {
   suggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
   variant: PropTypes.string,
 };
+
+export default ChipsArray;

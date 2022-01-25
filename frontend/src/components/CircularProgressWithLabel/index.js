@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CircularProgress, Typography, Box } from '@material-ui/core';
+import { CircularProgress, Typography, Box } from '@mui/material';
 
 const CircularProgressWithLabel = ({ value, styleText, ...props }) => {
   let color = 'success';

@@ -1,15 +1,8 @@
 import styled from 'styled-components';
 import Katex from '@components/Katex';
 
-import {
-  Grid,
-  AppBar,
-  Button,
-  Box,
-  Stack,
-  IconButton,
-} from '@material-ui/core';
-import { ExitToApp } from '@material-ui/icons/';
+import { Grid, AppBar, Button, Box, Stack, IconButton } from '@mui/material';
+import { ExitToApp } from '@mui/icons-material/';
 import QuestionInput from './components/input';
 import CheckBox from './components/checkbox';
 import MyRadio from './components/radio';

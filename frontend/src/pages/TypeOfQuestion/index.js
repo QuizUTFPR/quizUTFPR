@@ -3,10 +3,10 @@ import React, { forwardRef, useState } from 'react';
 // COMPONENTS
 import Modal from '@components/Modal';
 import Button from '@components/Button';
-import { IconButton, Grid, Typography, Divider } from '@material-ui/core';
+import { IconButton, Grid, Typography, Divider } from '@mui/material';
 
 // ASSETS
-import { Save, Search, Close } from '@material-ui/icons/';
+import { Save, Search, Close } from '@mui/icons-material/';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';

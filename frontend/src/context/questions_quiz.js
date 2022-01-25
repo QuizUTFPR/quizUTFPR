@@ -75,6 +75,7 @@ const QuestionQuiz = ({ children }) => {
 
         const response = await api.post('/question/create', {
           ...item,
+          // eslint-disable-next-line camelcase
           quiz_id: id_quiz,
           index,
           imageBase64: base64,
@@ -286,6 +287,7 @@ const QuestionQuiz = ({ children }) => {
 
   return (
     <QuestionQuizContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         questions,
         isSaved,

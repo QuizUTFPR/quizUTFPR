@@ -24,11 +24,11 @@ import {
   Typography,
   Divider,
   // Tooltip,
-} from '@material-ui/core';
+} from '@mui/material';
 import Button from '@components/Button';
 
 // MATERIAL-UI ICONS
-import { Edit, Delete, Publish, BarChart } from '@material-ui/icons';
+import { Edit, Delete, Publish, BarChart } from '@mui/icons-material';
 
 // STYLE
 import { TextPIN } from './style';

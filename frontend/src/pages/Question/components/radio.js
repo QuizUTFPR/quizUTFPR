@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
-export default function RadioInput({
+const RadioInput = ({
   formikID,
   formikOtherID,
   handleFormikChange,
   handlePropsChange,
   value,
   ...props
-}) {
+}) => {
   const [timer, setTimer] = useState(null);
   const { setTyping } = useQuestionQuiz();
 
@@ -45,10 +45,11 @@ export default function RadioInput({
     [value, handlePropsChange]
   );
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{myRadio}</>;
-}
+};
 
-function MemoizedRadio({
+const MemoizedRadio = ({
   formikID,
   formikOtherID,
   setTyping,
@@ -57,7 +58,7 @@ function MemoizedRadio({
   handlePropsChange,
   value,
   ...props
-}) {
+}) => {
   return (
     <input
       type="radio"
@@ -94,7 +95,7 @@ function MemoizedRadio({
       {...props}
     />
   );
-}
+};
 
 RadioInput.defaultProps = {
   handleFormikChange: () => {},
@@ -113,3 +114,5 @@ RadioInput.propTypes = {
     indexOtherAnswer: PropTypes.number,
   }).isRequired,
 };
+
+export default RadioInput;

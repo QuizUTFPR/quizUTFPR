@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Typography, Grid } from '@material-ui/core';
+import { Typography, Grid } from '@mui/material';
 import Button from '@components/Button';
 import { HOME } from '@routes';
-import ErrorIcon from '@material-ui/icons/Error';
+import ErrorIcon from '@mui/icons-material/Error';
 import { useNavigate } from 'react-router-dom';
 import { StyledGridContainer } from './style';
 

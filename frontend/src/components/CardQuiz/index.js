@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Typography, CardActionArea } from '@material-ui/core';
+import { Typography, CardActionArea } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { QUESTION } from '@routes';
 import {
@@ -51,6 +51,7 @@ Card.defaultProps = {
   description: 'Descrição',
   title: 'Título do Quiz',
   image: '',
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   children: <></>,
 };
 

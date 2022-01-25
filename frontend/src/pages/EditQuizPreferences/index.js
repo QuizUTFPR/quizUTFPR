@@ -18,11 +18,11 @@ import {
   MenuItem,
   FormControlLabel,
   Checkbox,
-} from '@material-ui/core';
+} from '@mui/material';
 
 // ASSETS
-// import SaveIcon from '@material-ui/icons/Save';
-import { Close } from '@material-ui/icons';
+// import SaveIcon from '@mui/icons-material/Save';
+import { Close } from '@mui/icons-material';
 import { PreviewImage, FormWrapper, GridContainerModal } from './style';
 
 const Wrapper = forwardRef((props, ref) => (

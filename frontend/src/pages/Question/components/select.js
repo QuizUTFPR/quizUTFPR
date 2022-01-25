@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
-import { TextField } from '@material-ui/core';
+import { TextField } from '@mui/material';
 
-export default function SelectInput({
+const SelectInput = ({
   children,
   formikID,
   handleFormikChange,
   handlePropsChange,
   ...props
-}) {
+}) => {
   const [timer, setTimer] = useState(null);
 
   const { setTyping } = useQuestionQuiz();
@@ -47,10 +47,11 @@ export default function SelectInput({
     [props.value, handlePropsChange]
   );
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{mySelect}</>;
-}
+};
 
-function MemoizedSelect({
+const MemoizedSelect = ({
   formikID,
   setTyping,
   handleFormikChange,
@@ -58,7 +59,7 @@ function MemoizedSelect({
   handlePropsChange,
   children,
   ...props
-}) {
+}) => {
   return (
     <TextField
       id={formikID}
@@ -74,10 +75,11 @@ function MemoizedSelect({
       {children}
     </TextField>
   );
-}
+};
 
 SelectInput.defaultProps = {
   handleFormikChange: () => {},
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   children: <></>,
   handlePropsChange: {
     handleUpdate: () => {},
@@ -98,3 +100,5 @@ SelectInput.propTypes = {
     value: PropTypes.string,
   }),
 };
+
+export default SelectInput;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // COMPONENTS
 import { Link } from 'react-router-dom';
-import { List, Divider, Avatar, Tooltip } from '@material-ui/core';
+import { List, Divider, Avatar, Tooltip } from '@mui/material';
 import {
   Help,
   Home,
@@ -11,7 +11,7 @@ import {
   ArrowBackIos,
   ArrowForwardIos,
   School,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 // HOOKS
 import useAuth from '@hooks/Auth';
@@ -74,85 +74,81 @@ const MenuDrawer = () => {
   ];
 
   return (
-    <>
-      <StyledDrawer open={open} variant="permanent" anchor="left">
-        <StyledIconButton
-          open={open}
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawer}
-          edge="start"
-        >
-          {open ? (
-            <ArrowBackIos color="primary" />
-          ) : (
-            <ArrowForwardIos color="primary" />
-          )}
-        </StyledIconButton>
-
-        <Divider />
-
-        {open && (
-          <AvatarBox>
-            <>
-              <StyledBadge
-                overlap="circular"
-                variant="dot"
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-              >
-                <Avatar
-                  alt="Remy Sharp"
-                  src="https://image.flaticon.com/icons/png/512/147/147144.png"
-                />
-              </StyledBadge>
-
-              <TextBox>
-                <AdminName color="primary">
-                  {teacherInfo.teacher.name}
-                </AdminName>
-                <AdminDescription color="primary">UTFPR</AdminDescription>
-              </TextBox>
-            </>
-          </AvatarBox>
+    <StyledDrawer open={open} variant="permanent" anchor="left">
+      <StyledIconButton
+        open={open}
+        color="inherit"
+        aria-label="open drawer"
+        onClick={handleDrawer}
+        edge="start"
+      >
+        {open ? (
+          <ArrowBackIos color="primary" />
+        ) : (
+          <ArrowForwardIos color="primary" />
         )}
+      </StyledIconButton>
 
-        {open && <Divider />}
-        <List>
-          {FirstMenu.map((option) => (
-            <Tooltip
-              key={option.text}
-              title={open ? '' : option.text}
-              placement="right"
+      <Divider />
+
+      {open && (
+        <AvatarBox>
+          <>
+            <StyledBadge
+              overlap="circular"
+              variant="dot"
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
             >
-              <Link to={option.to} style={{ textDecoration: 'none' }}>
-                <StyledListItem button key={option.text}>
-                  <StyledListItemIcon>{option.icon}</StyledListItemIcon>
-                  <StyledListItemText color="primary" primary={option.text} />
-                </StyledListItem>
-              </Link>
-            </Tooltip>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {SecondMenu.map((option) => (
-            <Tooltip
-              key={option.text}
-              title={open ? '' : option.text}
-              placement="right"
-            >
-              <StyledListItem button onClick={option.onClick}>
+              <Avatar
+                alt="Remy Sharp"
+                src="https://image.flaticon.com/icons/png/512/147/147144.png"
+              />
+            </StyledBadge>
+
+            <TextBox>
+              <AdminName color="primary">{teacherInfo.teacher.name}</AdminName>
+              <AdminDescription color="primary">UTFPR</AdminDescription>
+            </TextBox>
+          </>
+        </AvatarBox>
+      )}
+
+      {open && <Divider />}
+      <List>
+        {FirstMenu.map((option) => (
+          <Tooltip
+            key={option.text}
+            title={open ? '' : option.text}
+            placement="right"
+          >
+            <Link to={option.to} style={{ textDecoration: 'none' }}>
+              <StyledListItem button key={option.text}>
                 <StyledListItemIcon>{option.icon}</StyledListItemIcon>
-                <StyledListItemText primary={option.text} />
+                <StyledListItemText color="primary" primary={option.text} />
               </StyledListItem>
-            </Tooltip>
-          ))}
-        </List>
-      </StyledDrawer>
-    </>
+            </Link>
+          </Tooltip>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {SecondMenu.map((option) => (
+          <Tooltip
+            key={option.text}
+            title={open ? '' : option.text}
+            placement="right"
+          >
+            <StyledListItem button onClick={option.onClick}>
+              <StyledListItemIcon>{option.icon}</StyledListItemIcon>
+              <StyledListItemText primary={option.text} />
+            </StyledListItem>
+          </Tooltip>
+        ))}
+      </List>
+    </StyledDrawer>
   );
 };
 

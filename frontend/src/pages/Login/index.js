@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // COMPONENTS
-import { Grid, InputAdornment, IconButton } from '@material-ui/core';
+import { Grid, InputAdornment, IconButton } from '@mui/material';
 import ErrorMessage from '@components/Messages/error';
 
 import {
@@ -11,7 +11,7 @@ import {
   Visibility,
   VisibilityOff,
   Lock,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 // HOOKS
 import useAuth from '@hooks/Auth';

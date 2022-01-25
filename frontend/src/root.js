@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { CssBaseline, ThemeProvider } from '@material-ui/core';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import AuthProvider from '@context/auth';
 
@@ -11,7 +11,7 @@ import theme from './theme/theme';
 
 // CONTEXT
 
-function Root() {
+const Root = () => {
   return (
     <ThemeProvider theme={theme}>
       <StyledThemeProvider theme={theme}>
@@ -27,6 +27,6 @@ function Root() {
       </StyledThemeProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default Root;

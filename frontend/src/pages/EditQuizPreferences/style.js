@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import GridContainer from '@components/Container';
 
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 
 export const GridContainerModal = styled(GridContainer)`
   max-height: 90vh;

@@ -2,9 +2,9 @@ import React, { forwardRef } from 'react';
 
 // COMPONENTS
 // import Button from '@components/Button';
-import { IconButton, Grid, Typography, Divider } from '@material-ui/core';
+import { IconButton, Grid, Typography, Divider } from '@mui/material';
 import GridContainer from '@components/Container';
-import { Close } from '@material-ui/icons/';
+import { Close } from '@mui/icons-material/';
 import DragImageInput from './dragImage';
 
 // ASSETS
