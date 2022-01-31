@@ -1,23 +1,28 @@
 import styled from 'styled-components';
+import { widthPercentageToDp } from '@styles/dimensions';
 
 import { Feather } from '@expo/vector-icons';
 
 export const Wrapper = styled.View`
+  background: white;
+  border-radius: 20px;
+  min-height: 50px;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: ${widthPercentageToDp('90%')}px;
+`;
+
+export const ChipWrapper = styled.View`
   flex-direction: row;
-  align-items: center;
-  border-radius: 5px;
-  background: ${({ theme }) => theme.color.lightBlueGrey};
-  border: 2px solid ${({ theme }) => theme.color.purple};
-  padding: 10px 0;
   flex-wrap: wrap;
-  width: 100%;
 `;
 
 export const StyledInput = styled.TextInput`
-  padding-left: 10px;
+  border-radius: 10px;
+  height: 40px;
   font-family: 'PoppinsRegular';
-  margin-top: 5px;
-  width: 100%;
 `;
 
 export const Chip = styled.View`

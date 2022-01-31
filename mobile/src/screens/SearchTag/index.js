@@ -1,27 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Components
-import ChipInput from '@components/ChipInput';
 import Container from '@components/Container';
-import { SafeArea, StyledButton } from './style';
+import { Text } from 'react-native';
+import { SafeArea } from './style';
 
-const SearchTag = () => {
-  const [chips, setChips] = useState([]);
-
-  return (
-    <Container>
-      <SafeArea>
-        <ChipInput
-          placeholder="Adicionar tags"
-          chips={chips}
-          setChips={setChips}
-        />
-        <StyledButton variant="primary" onPress={() => console.log(chips)}>
-          Pesquisar
-        </StyledButton>
-      </SafeArea>
-    </Container>
-  );
-};
+const SearchTag = () => (
+  <Container>
+    <SafeArea>
+      <Text>Teste</Text>
+    </SafeArea>
+  </Container>
+);
 
 export default SearchTag;

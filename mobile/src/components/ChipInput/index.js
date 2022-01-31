@@ -7,6 +7,7 @@ import {
   TextChip,
   RemoveIcon,
   RemoveButton,
+  ChipWrapper,
 } from './style';
 
 const ChipInput = ({ chips, setChips, placeholder }) => {
@@ -25,16 +26,24 @@ const ChipInput = ({ chips, setChips, placeholder }) => {
     setChips((prevChips) => prevChips.filter((_, index) => index !== idx));
   };
 
+  const removeLastWhenPressBackSpace = () => {
+    if (chips.length > 0) {
+      removeChip(chips.length - 1)();
+    }
+  };
+
   return (
     <Wrapper>
-      {chips.map((item, idx) => (
-        <Chip key={(item, idx)}>
-          <TextChip>{item}</TextChip>
-          <RemoveButton onPress={removeChip(idx)}>
-            <RemoveIcon />
-          </RemoveButton>
-        </Chip>
-      ))}
+      <ChipWrapper>
+        {chips.map((item, idx) => (
+          <Chip key={(item, idx)}>
+            <TextChip>{item}</TextChip>
+            <RemoveButton onPress={removeChip(idx)}>
+              <RemoveIcon />
+            </RemoveButton>
+          </Chip>
+        ))}
+      </ChipWrapper>
       <StyledInput
         value={value}
         onSubmitEditing={handleAddChip}
@@ -43,6 +52,11 @@ const ChipInput = ({ chips, setChips, placeholder }) => {
         keyboardType="default"
         returnKeyType="done"
         blurOnSubmit={false}
+        onKeyPress={({ nativeEvent }) => {
+          if (value === '' && nativeEvent.key === 'Backspace') {
+            removeLastWhenPressBackSpace();
+          }
+        }}
       />
     </Wrapper>
   );

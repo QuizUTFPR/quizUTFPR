@@ -59,7 +59,7 @@ const TopTabNavigator = () => (
       <TopTab.Screen
         name="QuizzesInProgress"
         component={HomeQuizInProgress}
-        options={{ tabBarLabel: 'Em Andamento' }}
+        options={{ tabBarLabel: 'Em Andamento', headerShown: false }}
       />
       <TopTab.Screen
         name="FavoriteQuizzes"

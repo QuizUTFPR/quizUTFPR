@@ -1,14 +1,18 @@
 import styled from 'styled-components/native';
+import { Platform, StatusBar } from 'react-native';
 
 import HeaderBackground from '@assets/patterns/sunburst.png';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
+import ButtonGradient from '@components/ButtonGradient';
 
-export const HeaderWrapper = styled.View``;
+export const HeaderWrapper = styled.SafeAreaView``;
 
 export const HeaderInformations = styled.View`
   flex-direction: row;
+  width: 100%;
   align-items: center;
   justify-content: space-around;
+  margin-bottom: ${({ theme }) => theme.size.padding}px;
 `;
 
 export const HeaderButton = styled.TouchableOpacity.attrs({
@@ -18,7 +22,7 @@ export const HeaderButton = styled.TouchableOpacity.attrs({
 export const SearchInput = styled.TextInput.attrs({})`
   padding-left: 10px;
   border-radius: 10px;
-  height: 40px;
+  min-height: 40px;
   flex: 1;
   font-family: 'PoppinsRegular';
 `;
@@ -33,9 +37,12 @@ export const BackgroundHeader = styled.ImageBackground.attrs({
   source: HeaderBackground,
   resizeMode: 'cover',
 })`
-  justify-content: center;
+  padding-top: ${Platform.OS === 'android' ? StatusBar.currentHeight : 0}px;
+  align-items: center;
+  justify-content: space-around;
   width: ${widthPercentageToDp('100%')}px;
-  height: ${heightPercentageToDp('28%')}px;
+  min-height: ${heightPercentageToDp('28%')}px;
+  padding-bottom: 20px;
 `;
 
 export const InputWrapper = styled.View.attrs({ elevation: 10 })`
@@ -62,4 +69,10 @@ export const StyledParagraph = styled.Text`
 export const HeaderWelcomeTextView = styled.View`
   justify-content: center;
   align-items: center;
+`;
+
+export const StyledButton = styled(ButtonGradient)`
+  height: 60px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 `;

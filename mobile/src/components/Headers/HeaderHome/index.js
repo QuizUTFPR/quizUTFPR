@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import api from '@api';
-import theme from '../../styles/theme';
+import theme from '@theme';
 
 // ICONS
 
@@ -17,6 +17,8 @@ import {
   InputWrapper,
   SearchInput,
 } from './style';
+
+// import
 
 const Header = () => {
   const navigation = useNavigation();

@@ -3,7 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // COMPONENTS
 import TabBar from '@components/TabBar';
-import HeaderHome from '@components/HeaderHome';
+import HeaderHome from '@components/Headers/HeaderHome';
+import HeaderSearchTag from '@components/Headers/HeaderSearchTag';
 
 // ICONS
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -33,7 +34,7 @@ const TabNavigator = () => (
         Icon: MaterialIcons,
         name: 'category',
         size: 32,
-        header: () => <></>,
+        header: () => <HeaderSearchTag />,
         tabBarLabel: 'Categoria',
       }}
       name="SearchTagScreen"
