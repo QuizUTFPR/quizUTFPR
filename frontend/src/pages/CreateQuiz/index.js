@@ -8,7 +8,7 @@ import api from '@api';
 import { QUESTION } from '@routes';
 
 // UTILS
-import getBase64 from '@utils/getBase64OfImage';
+// import getBase64 from '@utils/getBase64OfImage';
 
 // COMPONENTS
 import GridContainer from '@components/Container';
@@ -43,30 +43,30 @@ const CriarQuiz = () => {
     },
     onSubmit: async (values) => {
       // const responseFile = null;
-      let base64 = '';
-      if (values.imageObj !== null) {
-        base64 = await getBase64(values.imageObj);
-        // const file = new FormData();
-        // file.append('file', values.imageObj);
+      // let base64 = '';
+      const {
+        imageObj,
+        title,
+        tags,
+        description,
+        visibility,
+        published,
+        noTime,
+      } = values;
 
-        // responseFile = await api.post('/files', file);
-      }
-      const quiz = {
-        title: values.title,
-        tags: values.tags,
-        description: values.description,
-        visibility: values.visibility,
-        published: values.published,
-        imageBase64: base64,
-        noTime: values.noTime,
-      };
-
-      // if (responseFile) {
-      //   quiz.id_image = responseFile.data.id;
+      // if (values.imageObj !== null) {
+      //   base64 = await getBase64(values.imageObj);
       // }
 
-      const responseQuiz = await api.post('/quiz/create', quiz);
+      const body = { title, tags, description, visibility, published, noTime };
+
+      const file = new FormData();
+      file.append('file', imageObj);
+      file.append('values', JSON.stringify(body));
+
+      const responseQuiz = await api.post('/quiz/create', file);
       const { data } = responseQuiz;
+      console.log(data);
 
       if (responseQuiz.status === 200) {
         navigate(`${QUESTION}${data.id}`, {

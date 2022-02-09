@@ -69,7 +69,7 @@ const checkStudentChoice = (answer, choices) => {
     );
 
   const correctAnswer = answer
-    .map((item) => (item.is_correct ? item.title : null))
+    .map((item) => (item.isCorrect ? item.title : null))
     .filter(Boolean);
 
   const wrongStudentChoices = studentChoice.filter(
@@ -150,7 +150,7 @@ const AccordionWrapper = ({ quizData }) => {
             <AccordionDetails>
               <AnswerWrapper>
                 {question.answer.map((answer, i) => (
-                  <AnswerItem correct={answer.is_correct} key={answer.id}>
+                  <AnswerItem correct={answer.isCorrect} key={answer.id}>
                     <AnswerTitle>
                       {i + 1}.{`  ${answer.title}`}
                     </AnswerTitle>

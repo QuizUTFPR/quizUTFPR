@@ -34,12 +34,12 @@ const DragImageContainer = forwardRef((props, ref) => {
       <Grid container spacing={3} justifyContent="center" align="center">
         <Grid item xs={12}>
           <DragImageInput
-            formikID={['question.imageObj', 'question.imageBase64']}
+            formikID={['question.imageObj', 'question.imageUrl']}
             name="Imagem de Capa"
             handleFormikChange={formik.setFieldValue}
             handlePropsChange={{
               handleUpdate: updateQuestion,
-              key: ['imageObj', 'imageBase64'],
+              key: ['imageObj', 'imageUrl'],
               index: formik.values.index,
             }}
             handleCloseModal={handleClose}

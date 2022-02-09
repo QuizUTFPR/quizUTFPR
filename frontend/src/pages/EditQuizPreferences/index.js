@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import api from '@api';
 
 // UTILS
-import getBase64 from '@utils/getBase64OfImage';
+// import getBase64 from '@utils/getBase64OfImage';
 
 // COMPONENTS
 import Button from '@components/Button';
@@ -47,39 +47,38 @@ const EditPreferences = forwardRef((props, ref) => {
       title: quiz.title,
       description: quiz.description,
       visibility: quiz.visibility,
-      // imageUrl: quiz.image_quiz ? quiz.image_quiz.url : '',
+      imageUrl: quiz.image?.url,
       imageObj: null,
-      imageBase64: quiz.image_base64,
-      tags: quiz.tags_quiz.map((tag) => tag.name),
-      noTime: quiz.no_time,
+      // imageBase64: quiz.image?.url,
+      tags: quiz.tagsQuiz.map((tag) => tag.name),
+      noTime: quiz.noTime,
     },
     onSubmit: async (values) => {
       // const responseFile = null;
-      let base64 = '';
+      // let base64 = '';
 
-      if (values.imageObj !== null) {
-        base64 = await getBase64(values.imageObj);
+      // if (values.imageObj !== null) {
+      //   base64 = await getBase64(values.imageObj);
 
-        // const file = new FormData();
-        // file.append('file', values.imageObj);
-        // responseFile = await api.post('/files', file);
-      }
+      //   // const file = new FormData();
+      //   // file.append('file', values.imageObj);
+      //   // responseFile = await api.post('/files', file);
+      // }
 
-      const quizUpdated = {
-        id: values.id,
-        title: values.title,
-        tags: values.tags,
-        description: values.description,
-        visibility: values.visibility,
-        imageBase64: base64,
-        noTime: values.noTime,
-      };
+      const { id, imageObj, title, tags, description, visibility, noTime } =
+        values;
+
+      const body = { id, title, tags, description, visibility, noTime };
+
+      const file = new FormData();
+      file.append('file', imageObj);
+      file.append('values', JSON.stringify(body));
 
       // if (responseFile) {
       //   quizUpdated.id_image = responseFile.data.id;
       // }
 
-      const responseQuiz = await api.put('/quiz/update', quizUpdated);
+      const responseQuiz = await api.put('/quiz/update', file);
       if (responseQuiz.status === 200) props.handleClose();
     },
   });
@@ -110,19 +109,16 @@ const EditPreferences = forwardRef((props, ref) => {
         onSubmit={formik.handleSubmit}
         spacing={2}
       >
-        {formik.values.imageBase64 && (
+        {formik.values.imageUrl && (
           <Grid item xs={6} style={{ display: 'flex' }}>
-            <PreviewImage src={formik.values.imageBase64} />
+            <PreviewImage src={formik.values.imageUrl} />
           </Grid>
         )}
         <Grid item xs={12}>
           <DragImageInput
             handleChange={(files) => {
               formik.setFieldValue('imageObj', files[0]);
-              formik.setFieldValue(
-                'imageBase64',
-                URL.createObjectURL(files[0])
-              );
+              formik.setFieldValue('imageUrl', URL.createObjectURL(files[0]));
             }}
           />
         </Grid>

@@ -2,12 +2,12 @@ export const TrueOrFalseAnswer = [
   {
     id: -1,
     title: 'Verdadeiro',
-    is_correct: true,
+    isCorrect: true,
   },
   {
     id: -1,
     title: 'Falso',
-    is_correct: false,
+    isCorrect: false,
   },
 ];
 
@@ -15,22 +15,22 @@ export const MultipleChoiceAnswer = [
   {
     id: -1,
     title: '',
-    is_correct: false,
+    isCorrect: false,
   },
   {
     id: -1,
     title: '',
-    is_correct: false,
+    isCorrect: false,
   },
   {
     id: -1,
     title: '',
-    is_correct: false,
+    isCorrect: false,
   },
   {
     id: -1,
     title: '',
-    is_correct: false,
+    isCorrect: false,
   },
 ];
 
@@ -83,6 +83,6 @@ export const initialValue = [
 
 export const initialValueErrors = {
   title: false,
-  is_correct: false,
+  isCorrect: false,
   answer: false,
 };

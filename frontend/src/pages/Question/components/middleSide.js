@@ -77,7 +77,7 @@ const MiddleSide = ({
             />
           </Grid>
 
-          {formik.values.question.imageBase64 && (
+          {formik.values.question.imageUrl && (
             <ContainerImage>
               {!location.state.published && (
                 <StackImageButton>
@@ -94,10 +94,10 @@ const MiddleSide = ({
                     <PreviewImageButton
                       size="small"
                       onClick={() => {
-                        formik.setFieldValue('question.imageBase64', '');
+                        formik.setFieldValue('question.imageUrl', '');
                         updateQuestion({
                           value: '',
-                          key: 'imageBase64',
+                          key: 'imageUrl',
                           index: formik.values.index,
                         });
                       }}
@@ -107,10 +107,10 @@ const MiddleSide = ({
                   </Tooltip>
                 </StackImageButton>
               )}
-              <PreviewImage src={formik.values.question.imageBase64} />
+              <PreviewImage src={formik.values.question.imageUrl} />
             </ContainerImage>
           )}
-          {!location.state.published && !formik.values.question.imageBase64 && (
+          {!location.state.published && !formik.values.question.imageUrl && (
             <Grid item xs={12}>
               <StyledButton
                 style={{ width: '50%' }}
@@ -127,7 +127,7 @@ const MiddleSide = ({
           )}
 
           <Grid item xs={12}>
-            {errors.is_correct && (
+            {errors.isCorrect && (
               <ErrorMessage style={{ marginBottom: '10px' }}>
                 Por favor, informe ao menos uma alternativa correta.
               </ErrorMessage>
@@ -157,7 +157,7 @@ const MiddleSide = ({
                 <>
                   <ShowOption
                     disabled={location.state.published}
-                    checked={Boolean(item.is_correct)}
+                    checked={Boolean(item.isCorrect)}
                   >
                     <Check />
                   </ShowOption>
@@ -165,12 +165,12 @@ const MiddleSide = ({
                     <HiddenCheckBox
                       disabled={location.state.published}
                       style={{ width: '50px', height: '50px' }}
-                      checked={Boolean(item.is_correct)}
-                      formikID={`question.answer[${index}].is_correct`}
+                      checked={Boolean(item.isCorrect)}
+                      formikID={`question.answer[${index}].isCorrect`}
                       handleFormikChange={formik.handleChange}
                       handlePropsChange={{
                         handleUpdate: updateAnswer,
-                        key: 'is_correct',
+                        key: 'isCorrect',
                         indexQuestion: formik.values.index,
                         indexAnswer: index,
                       }}
@@ -179,15 +179,15 @@ const MiddleSide = ({
                     <HiddenRadio
                       disabled={location.state.published}
                       style={{ width: '50px', height: '50px' }}
-                      value={item.is_correct}
-                      formikID={`question.answer[${index}].is_correct`}
+                      value={item.isCorrect}
+                      formikID={`question.answer[${index}].isCorrect`}
                       formikOtherID={`question.answer[${
                         index === 0 ? 1 : 0
-                      }].is_correct`}
+                      }].isCorrect`}
                       handleFormikChange={formik.setFieldValue}
                       handlePropsChange={{
                         handleUpdate: updateAnswer,
-                        key: 'is_correct',
+                        key: 'isCorrect',
                         indexQuestion: formik.values.index,
                         indexAnswer: index,
                         indexOtherAnswer: index === 0 ? 1 : 0,
@@ -257,7 +257,7 @@ MiddleSide.propTypes = {
   handleClickOpenAlert: PropTypes.func.isRequired,
   errors: PropTypes.shape({
     title: PropTypes.bool,
-    is_correct: PropTypes.bool,
+    isCorrect: PropTypes.bool,
     answer: PropTypes.bool,
   }).isRequired,
 };

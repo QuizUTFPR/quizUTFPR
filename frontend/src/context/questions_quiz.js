@@ -4,7 +4,7 @@ import api from '@api';
 import * as yup from 'yup';
 
 // UTILS
-import getBase64 from '@utils/getBase64OfImage';
+// import getBase64 from '@utils/getBase64OfImage';
 
 import {
   TrueOrFalseAnswer,
@@ -31,16 +31,19 @@ const QuestionQuiz = ({ children }) => {
         id: question.id,
         type: question.type,
         copy: question.copy,
-        availableOnQuestionsDB: question.available_on_questions_db,
+        availableOnQuestionsDB: question.availableOnQuestionsDb,
         imageObj: null,
-        imageBase64: question.image_base64,
-        // imageUrl: question.image_question ? question.image_question.url : '',
+        imageBase64: question.imageBase64,
+        imageUrl: question?.image_question?.url,
         title: question.title,
         timer: question.timer,
-        difficultyLevel: question.difficulty_level,
+        difficultyLevel: question.difficultyLevel,
         tags: question.tags_question.map((tag) => tag.name),
         answer: question.answer,
       }));
+
+      console.log(initialQuestions);
+
       setQuestions(initialQuestions);
       return initialQuestions[0];
     } catch (error) {
@@ -48,8 +51,7 @@ const QuestionQuiz = ({ children }) => {
     }
   };
 
-  // eslint-disable-next-line camelcase
-  const saveQuestionOnDatabase = (id_quiz) => {
+  const saveQuestionOnDatabase = (quizId) => {
     try {
       if (questionToRemove.length) {
         questionToRemove.map((removed) =>
@@ -58,32 +60,48 @@ const QuestionQuiz = ({ children }) => {
       }
 
       questions.map(async (item, index) => {
-        // let responseFile = null;
-        let base64 = item.imageBase64;
+        const {
+          id,
+          type,
+          copy,
+          availableOnQuestionsDB,
+          imageObj,
+          title,
+          timer,
+          difficultyLevel,
+          tags,
+          answer,
+        } = item;
 
-        if (item.imageObj !== null) {
-          base64 = await getBase64(item.imageObj);
+        const body = {
+          id,
+          type,
+          copy,
+          availableOnQuestionsDB,
+          title,
+          timer,
+          difficultyLevel,
+          tags,
+          answer,
+          index,
+          quizId,
+        };
+        // let base64 = item.imageBase64;
 
-          // const file = new FormData();
-          // file.append('file', item.imageObj);
-          // responseFile = await api.post('/files', file);
-        }
+        // if (item.imageObj !== null) {
+        //   base64 = await getBase64(item.imageObj);
 
-        // if (responseFile) {
-        //   item.id_image = responseFile.data.id;
         // }
 
-        const response = await api.post('/question/create', {
-          ...item,
-          // eslint-disable-next-line camelcase
-          quiz_id: id_quiz,
-          index,
-          imageBase64: base64,
-        });
+        const file = new FormData();
+        file.append('file', imageObj);
+        file.append('values', JSON.stringify(body));
+
+        const response = await api.post('/question/create', file);
 
         if (response.status !== 200) throw new Error('questao nao criada');
       });
-      setTimeout(() => getAllQuestionOfTheQuiz(id_quiz), 1000);
+      setTimeout(() => getAllQuestionOfTheQuiz(quizId), 1000);
       setSaved(true);
     } catch (error) {
       setSaved(false);
@@ -255,17 +273,17 @@ const QuestionQuiz = ({ children }) => {
           yup.object().shape({
             id: yup.number().required(),
             title: yup.string().required(),
-            is_correct: yup.bool().required(),
+            isCorrect: yup.bool().required(),
           })
         )
         .test((answer) => {
           // eslint-disable-next-line camelcase
-          const isRight = answer.map(({ is_correct }) => is_correct);
+          const isRight = answer.map(({ isCorrect }) => isCorrect);
           if (!isRight.includes(true)) {
             return new yup.ValidationError(
               'Please check one checkbox',
               null,
-              'is_correct'
+              'isCorrect'
             );
           }
           return true;
@@ -292,17 +310,17 @@ const QuestionQuiz = ({ children }) => {
         yup.object().shape({
           id: yup.number().required(),
           title: yup.string().required(),
-          is_correct: yup.bool().required(),
+          isCorrect: yup.bool().required(),
         })
       )
       .test((answer) => {
         // eslint-disable-next-line camelcase
-        const isRight = answer.map(({ is_correct }) => is_correct);
+        const isRight = answer.map(({ isCorrect }) => isCorrect);
         if (!isRight.includes(true)) {
           return new yup.ValidationError(
             'Please check one checkbox',
             null,
-            'is_correct'
+            'isCorrect'
           );
         }
         return true;

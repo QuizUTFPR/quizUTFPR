@@ -160,13 +160,13 @@ const Quiz = () => {
           quizzes.map((quiz) => (
             <Card
               key={quiz.id}
-              image={quiz.image_base64}
+              image={quiz.image?.url}
               imageTitle={quiz.title}
               title={quiz.title}
               description={quiz.description}
               idQuiz={quiz.id}
               published={quiz.published}
-              noTime={quiz.no_time}
+              noTime={quiz.noTime}
             >
               {!quiz.published && (
                 <Tooltip arrow ariaLabel="publicar" title="Publicar">

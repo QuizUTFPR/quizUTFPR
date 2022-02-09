@@ -27,7 +27,7 @@
     "yup": "0.32.11"
   },
   "scripts": {
-    "start": "HOST=localhost craco start",
+    "start": "craco start",
     "build": "DISABLE_ESLINT_PLUGIN='true' craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
