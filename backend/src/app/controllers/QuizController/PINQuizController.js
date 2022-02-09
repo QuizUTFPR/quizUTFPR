@@ -76,7 +76,7 @@ class PINQuizController {
       const { pin } = req.body;
       const student_id = req.userId;
 
-      const quiz = await this.this.pinQuizService.findByPin({
+      const quiz = await this.pinQuizService.findByPin({
         pin,
         student_id,
       });
