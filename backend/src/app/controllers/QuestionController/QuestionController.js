@@ -7,6 +7,9 @@ import Quiz from '../../models/QuizModel';
 import Tag from '../../models/TagModel';
 // import File from '../../models/FileModel';
 
+// REPOSITORIES
+import AnswerRepository from '../../repositories/Answer';
+
 async function getScoreBasedOnDifficulty(difficulty) {
   switch (difficulty) {
     case 'Muito Fácil':
@@ -118,13 +121,14 @@ class QuestionController {
 
       // ATUALIZANDO OU CRIANDO AS QUESTÕES
       const id_question = question.id;
+      const answerRepository = new AnswerRepository();
 
       // eslint-disable-next-line consistent-return
       answer.map(async (answerItem) => {
-        const answerFounded = await Answer.findByPk(answerItem.id);
+        const answerFounded = await answerRepository.findById(answerItem.id);
         if (!answerFounded) {
           try {
-            await Answer.create({
+            await answerRepository.create({
               id_question,
               title: answerItem.title,
               is_correct: answerItem.is_correct,
