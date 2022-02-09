@@ -111,6 +111,7 @@ const Quiz = () => {
 
       getQuizzes();
     } catch (error) {
+      console.log(error);
       handleClickSnackBar(error.response.data.error, 'error');
     }
   };

@@ -196,6 +196,8 @@ class QuestionService {
         tagInQuestion.removeQuestion(question);
       }
     });
+
+    return question;
   }
 
   async index() {

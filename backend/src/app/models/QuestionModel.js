@@ -32,7 +32,7 @@ class Question extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Quiz, {
-      through: 'questionQuiz',
+      through: 'question_quiz',
       foreignKey: 'questionId',
       as: 'quizzes',
       onDelete: 'CASCADE',
@@ -52,7 +52,7 @@ class Question extends Model {
     });
 
     this.belongsToMany(models.Tag, {
-      through: 'questionTags',
+      through: 'question_tags',
       foreignKey: 'questionId',
       as: 'tagsQuestion',
       onDelete: 'CASCADE',

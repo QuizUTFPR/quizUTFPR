@@ -105,7 +105,8 @@ class SessionTeacherController {
       });
     } catch (err) {
       console.log(err);
-      if (err.response.status === 401) {
+      // if (err.response.status === 401) {
+      if (err.status === 401) {
         return res
           .status(403)
           .json({ error: 'Dados de usuário ou senha incorretos' });

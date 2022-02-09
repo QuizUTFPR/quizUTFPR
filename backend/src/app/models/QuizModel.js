@@ -31,14 +31,14 @@ class Quiz extends Model {
     });
 
     this.belongsToMany(models.Question, {
-      through: 'questionQuiz',
+      through: 'question_quiz',
       foreignKey: 'quizId',
       as: 'questions',
       onDelete: 'CASCADE',
     });
 
     this.belongsToMany(models.Tag, {
-      through: 'quizTags',
+      through: 'quiz_tags',
       foreignKey: 'quizId',
       as: 'tagsQuiz',
       onDelete: 'CASCADE',
