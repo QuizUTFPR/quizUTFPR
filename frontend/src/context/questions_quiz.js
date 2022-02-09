@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import api from '@api';
 import * as yup from 'yup';
 
@@ -109,46 +109,62 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const updateQuestion = ({ value, key, index }) => {
-    setQuestions((prevState) =>
-      prevState.map((question, i) => {
-        if (i === index) {
-          return {
-            ...question,
-            [key]: value,
-          };
-        }
+    // const testeAntigo = questions.map((question, i) => {
+    //   if (i === index) {
+    //     return {
+    //       ...question,
+    //       [key]: value,
+    //     };
+    //   }
 
-        return question;
-      })
-    );
+    //   return question;
+    // });
+
+    setQuestions((prevState) => {
+      const newData = [...prevState];
+      newData[index] = {
+        ...newData[index],
+        [key]: value,
+      };
+
+      return newData;
+    });
     setSaved(false);
     setErrors(initialValueErrors);
   };
 
   const updateAnswer = ({ value, key, indexQuestion, indexAnswer }) => {
-    setQuestions((prevState) =>
-      prevState.map((question, i) => {
-        if (i === indexQuestion) {
-          return {
-            ...question,
-            answer: [
-              ...question.answer.map((answerItem, index) => {
-                if (index === indexAnswer) {
-                  return {
-                    ...answerItem,
-                    [key]: value,
-                  };
-                }
+    // const oldQuestions = questions.map((question, i) => {
+    //   if (i === indexQuestion) {
+    //     return {
+    //       ...question,
+    //       answer: [
+    //         ...question.answer.map((answerItem, index) => {
+    //           if (index === indexAnswer) {
+    //             return {
+    //               ...answerItem,
+    //               [key]: value,
+    //             };
+    //           }
 
-                return answerItem;
-              }),
-            ],
-          };
-        }
+    //           return answerItem;
+    //         }),
+    //       ],
+    //     };
+    //   }
 
-        return question;
-      })
-    );
+    //   return question;
+    // });
+
+    setQuestions((prevState) => {
+      const newData = [...prevState];
+      newData[indexQuestion].answer[indexAnswer] = {
+        ...newData[indexQuestion].answer[indexAnswer],
+        [key]: value,
+      };
+
+      return newData;
+    });
     setSaved(false);
     setErrors(initialValueErrors);
   };
@@ -166,18 +182,26 @@ const QuestionQuiz = ({ children }) => {
     formikUpdate(formikTypeID, type);
     formikUpdate(formikAnswerID, choosedType);
 
-    setQuestions((prevState) =>
-      prevState.map((question, i) => {
-        if (i === indexQuestion) {
-          return {
-            ...question,
-            type,
-            answer: choosedType,
-          };
-        }
-        return question;
-      })
-    );
+    // const oldWay = questions.map((question, i) => {
+    //   if (i === indexQuestion) {
+    //     return {
+    //       ...question,
+    //       type,
+    //       answer: choosedType,
+    //     };
+    //   }
+    //   return question;
+    // });
+
+    setQuestions((prevState) => {
+      const newData = [...prevState];
+      newData[indexQuestion] = {
+        ...newData[indexQuestion],
+        type,
+        answer: choosedType,
+      };
+      return newData;
+    });
 
     handleClose();
     setSaved(false);
@@ -316,10 +340,6 @@ const QuestionQuiz = ({ children }) => {
       {children}
     </QuestionQuizContext.Provider>
   );
-};
-
-QuestionQuiz.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default QuestionQuiz;
