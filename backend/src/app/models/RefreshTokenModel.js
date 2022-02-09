@@ -9,15 +9,16 @@ class RefreshToken extends Model {
           defaultValue: Sequelize.UUIDV4,
           primaryKey: true,
         },
-        user_id: {
+        userId: {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
-        expires_in: Sequelize.DATE,
+        expiresIn: Sequelize.DATE,
       },
       {
         sequelize,
         tableName: 'refresh_token',
+        underscored: true,
       }
     );
 

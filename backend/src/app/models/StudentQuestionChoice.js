@@ -4,11 +4,11 @@ class StudentQuestionChoice extends Model {
   static init(sequelize) {
     super.init(
       {
-        student_id: Sequelize.INTEGER,
-        question_id: Sequelize.INTEGER,
-        quiz_id: Sequelize.INTEGER,
-        student_quiz_id: Sequelize.INTEGER,
-        time_left: Sequelize.INTEGER.UNSIGNED,
+        studentId: Sequelize.INTEGER,
+        questionId: Sequelize.INTEGER,
+        quizId: Sequelize.INTEGER,
+        studentQuizId: Sequelize.INTEGER,
+        timeLeft: Sequelize.INTEGER.UNSIGNED,
         checked1: Sequelize.BOOLEAN,
         checked2: Sequelize.BOOLEAN,
         checked3: Sequelize.BOOLEAN,
@@ -17,6 +17,7 @@ class StudentQuestionChoice extends Model {
       {
         sequelize,
         tableName: 'student_question_answer',
+        underscored: true,
       }
     );
 
@@ -25,23 +26,23 @@ class StudentQuestionChoice extends Model {
 
   static associate(models) {
     this.belongsTo(models.Student, {
-      foreignKey: 'student_id',
+      foreignKey: 'studentId',
       as: 'student',
     });
 
     this.belongsTo(models.Question, {
-      foreignKey: 'question_id',
+      foreignKey: 'questionId',
       as: 'question',
     });
 
     this.belongsTo(models.Quiz, {
-      foreignKey: 'quiz_id',
+      foreignKey: 'quizId',
       as: 'quiz',
     });
 
     this.belongsTo(models.StudentQuiz, {
-      foreignKey: 'student_quiz_id',
-      as: 'quiz_question_choice',
+      foreignKey: 'studentQuizId',
+      as: 'quizQuestionChoice',
     });
   }
 }

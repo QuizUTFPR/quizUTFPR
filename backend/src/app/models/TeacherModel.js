@@ -15,6 +15,7 @@ class Teacher extends Model {
       {
         sequelize,
         tableName: 'teacher',
+        underscored: true,
       }
     );
 

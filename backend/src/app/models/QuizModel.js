@@ -54,17 +54,17 @@ class Quiz extends Model {
 
     this.hasMany(models.StudentQuestionChoice, {
       foreignKey: 'quizId',
-      as: 'quiz_student_choice',
+      as: 'quizStudentChoice',
     });
 
     this.hasMany(models.StudentQuiz, {
       foreignKey: 'quizId',
-      as: 'quiz_student',
+      as: 'quizStudent',
     });
 
     this.hasMany(models.FavoriteStudentQuiz, {
       foreignKey: 'quizId',
-      as: 'quiz_favorite',
+      as: 'quizFavorite',
     });
   }
 }
