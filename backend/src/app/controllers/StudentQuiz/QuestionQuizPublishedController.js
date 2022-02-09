@@ -9,26 +9,26 @@ class QuestionQuizPublishedController {
   // Lista todos os registros
   async index(req, res) {
     try {
-      const student_id = req.userId;
-      const { quiz_id, id_student_quiz } = req.body;
+      const studentId = req.userId;
+      const { quizId, idStudentQuiz } = req.body;
 
-      const quiz = await Quiz.findByPk(quiz_id);
+      const quiz = await Quiz.findByPk(quizId);
 
       if (!quiz) return res.status(404).json({ error: 'Quiz não encontrado!' });
 
       const studentQuiz = await StudentQuiz.findOne({
         where: {
-          id: id_student_quiz,
-          is_finished: false,
+          id: idStudentQuiz,
+          isFinished: false,
         },
       });
 
       if (!studentQuiz)
         return res.status(404).json({ error: 'Tentativa não encontrada!' });
 
-      const studentQuizChoices = await studentQuiz.getQuiz_question_choice();
+      const studentQuizChoices = await studentQuiz.getQuizQuestionChoice();
       const arrayIDStudentQuizChoices = studentQuizChoices.map(
-        (item) => item.question_id
+        (item) => item.questionId
       );
 
       const questionOfQuiz = await quiz.getQuestions({
@@ -39,7 +39,6 @@ class QuestionQuizPublishedController {
           'timer',
           'difficultyLevel',
           'type',
-          'imageBase64',
           'idImage',
         ],
         include: [
@@ -50,12 +49,12 @@ class QuestionQuizPublishedController {
           },
           {
             model: File,
-            as: 'image_question',
+            as: 'imageQuestion',
             attributes: ['url', 'path', 'name'],
           },
           {
             model: Tag,
-            as: 'tags_question',
+            as: 'tagsQuestion',
             attributes: ['name'],
             through: {
               attributes: [],
@@ -69,11 +68,11 @@ class QuestionQuizPublishedController {
       });
 
       const amountOfQuestion = await quiz.countQuestions();
-      const amountStudentChoice = await quiz.countQuiz_student_choice({
+      const amountStudentChoice = await quiz.countQuizStudentChoice({
         where: {
-          quiz_id: quiz.id,
-          student_quiz_id: id_student_quiz,
-          student_id,
+          quizId: quiz.id,
+          studentQuizId: idStudentQuiz,
+          studentId,
         },
       });
 

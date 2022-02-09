@@ -14,7 +14,7 @@ class PublishQuizService {
 
   async execute(id) {
     const pin = crc32.calculate(toString(id), id);
-    console.log('PIN', pin);
+
     const quiz = await this.quizRepository.findByPk(id);
 
     if (!quiz) {
@@ -33,7 +33,7 @@ class PublishQuizService {
 
     quiz.published = true;
     quiz.pin = pin;
-    quiz.publish_date = dayjs.utc().format();
+    quiz.publishDate = dayjs.utc().format();
     quiz.save();
   }
 }

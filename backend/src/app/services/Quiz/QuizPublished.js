@@ -15,11 +15,9 @@ class QuizPublishedService {
   }
 
   async execute(data) {
-    const { student_id } = data;
+    const { studentId } = data;
     const page = data.page || false;
     const limit = data.limit || 3;
-
-    console.log('ID:', student_id);
 
     const quizzes = await this.quizRepository.findAll({
       where: {
@@ -31,10 +29,9 @@ class QuizPublishedService {
         'title',
         'description',
         'visibility',
-        'id_image',
+        'idImage',
         'pin',
-        'image_base64',
-        'no_time',
+        'noTime',
       ],
       include: [
         {
@@ -44,7 +41,7 @@ class QuizPublishedService {
         },
         {
           model: File,
-          as: 'image_quiz',
+          as: 'imageQuiz',
           attributes: ['url', 'path', 'name'],
         },
         {
@@ -62,14 +59,13 @@ class QuizPublishedService {
 
     const quizzesInProgress = (
       await (
-        await this.studentRepository.findByPk(student_id)
-      ).getStudent_quiz({
+        await this.studentRepository.findByPk(studentId)
+      ).getStudentQuiz({
         where: {
-          is_finished: false,
+          isFinished: false,
         },
       })
-    ).map((item) => item.quiz_id);
-    console.log(quizzesInProgress);
+    ).map((item) => item.quizId);
 
     const returnedQuizzes = quizzes.filter(
       (quiz) => !quizzesInProgress.includes(quiz.id)
@@ -79,8 +75,8 @@ class QuizPublishedService {
       returnedQuizzes.map(async (quiz) => {
         const isFavorite = await FavoriteStudentQuiz.findOne({
           where: {
-            quiz_id: quiz.id,
-            student_id,
+            quizId: quiz.id,
+            studentId,
           },
         });
 

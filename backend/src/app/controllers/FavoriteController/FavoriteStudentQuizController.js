@@ -1,23 +1,23 @@
-import Sequelize from 'sequelize';
 import * as Yup from 'yup';
 
 // MODELS
 import FavoriteStudentQuiz from '../../models/FavoriteStudentQuiz';
 import Quiz from '../../models/QuizModel';
 import Tag from '../../models/TagModel';
+import File from '../../models/FileModel';
 
 class FavoriteStudentQuizController {
   // exibe todos os registros
   async index(req, res) {
     try {
-      const student_id = req.userId;
+      const studentId = req.userId;
 
       const page = req.body.page || false;
       const limit = req.body.limit || 3;
 
       const favorites = await FavoriteStudentQuiz.findAll({
         where: {
-          student_id,
+          studentId,
         },
         include: [
           {
@@ -25,22 +25,27 @@ class FavoriteStudentQuizController {
             as: 'quiz',
             attributes: [
               'id',
-              'id_teacher',
+              'idTeacher',
               'title',
               'description',
               'pin',
-              'image_base64',
-              'publish_date',
-              'no_time',
+              'publishDate',
+              'noTime',
+              'idImage',
             ],
             include: [
               {
                 model: Tag,
-                as: 'tags_quiz',
+                as: 'tagsQuiz',
                 attributes: ['name'],
                 through: {
                   attributes: [],
                 },
+              },
+              {
+                model: File,
+                as: 'image',
+                attributes: ['id', 'path', 'url'],
               },
             ],
           },
@@ -66,7 +71,7 @@ class FavoriteStudentQuizController {
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
-        quiz_id: Yup.number().required(),
+        quizId: Yup.number().required(),
       });
 
       // Check body of requisiton
@@ -74,12 +79,12 @@ class FavoriteStudentQuizController {
         return res.status(400).json({ error: 'Corpo de requisição inválido!' });
       }
 
-      const student_id = req.userId;
-      const { quiz_id } = req.body;
+      const quizId = req.userId;
+      const { studentId } = req.body;
 
       const favorite = await FavoriteStudentQuiz.create({
-        quiz_id,
-        student_id,
+        quizId,
+        studentId,
       });
 
       return res.status(200).json(favorite);
@@ -91,7 +96,7 @@ class FavoriteStudentQuizController {
   async delete(req, res) {
     try {
       const schema = Yup.object().shape({
-        quiz_id: Yup.number().required(),
+        quizId: Yup.number().required(),
       });
 
       // Check body of requisiton
@@ -99,13 +104,13 @@ class FavoriteStudentQuizController {
         return res.status(400).json({ error: 'Corpo de requisição inválido!' });
       }
 
-      const student_id = req.userId;
-      const { quiz_id } = req.query;
+      const studentId = req.userId;
+      const { quizId } = req.query;
 
       const favoriteInstance = await FavoriteStudentQuiz.findOne({
         where: {
-          quiz_id,
-          student_id,
+          quizId,
+          studentId,
         },
       });
 

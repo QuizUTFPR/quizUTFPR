@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 // MODELS
 import Answer from '../../models/AnswerModel';
 import Tag from '../../models/TagModel';
+import File from '../../models/FileModel';
 
 // REPOSITORIES
 import AnswerRepository from '../../repositories/Answer';
@@ -35,7 +36,7 @@ class QuestionService {
 
   async validate(data) {
     const schema = Yup.object().shape({
-      quiz_id: Yup.number().required(),
+      quizId: Yup.number().required(),
       index: Yup.number().required(),
       id: Yup.number().required(),
       copy: Yup.boolean().required(),
@@ -49,18 +50,17 @@ class QuestionService {
       tags: Yup.array()
         .of(Yup.string())
         .required('Informe as tags da questão!'),
-      id_image: Yup.number().nullable(),
+      idImage: Yup.number().nullable(),
       type: Yup.string().required('Informe o tipo da questão'),
       answer: Yup.array()
         .of(
           Yup.object().shape({
             id: Yup.number().required(),
             title: Yup.string().required(),
-            is_correct: Yup.bool().required(),
+            isCorrect: Yup.bool().required(),
           })
         )
         .required('Informe as alternativas.'),
-      imageBase64: Yup.string(),
     });
 
     const isValid = await schema.isValid(data);
@@ -82,17 +82,16 @@ class QuestionService {
       title,
       timer,
       difficultyLevel,
-      quiz_id,
+      quizId,
       answer,
       tags,
       type,
-      id_image,
+      idImage,
       index,
-      imageBase64,
     } = data;
 
     const quizService = new QuizService();
-    const quiz = await quizService.create(quiz_id);
+    const quiz = await quizService.create(quizId);
 
     if (!quiz) {
       const quizNotExistsError = new Error('Quiz não encontrado!');
@@ -107,16 +106,15 @@ class QuestionService {
       try {
         question = await this.questionRepository.create({
           copy,
-          available_on_questions_db: availableOnQuestionsDB,
+          availableOnQuestionsDb: availableOnQuestionsDB,
           title,
           timer,
-          difficulty_level: difficultyLevel,
-          quiz_id,
-          id_image,
+          difficultyLevel,
+          quizId,
+          idImage,
           type,
           index,
           score,
-          image_base64: imageBase64,
         });
       } catch (error) {
         const createQuestionError = new Error(error);
@@ -127,18 +125,17 @@ class QuestionService {
       question.title = title;
       question.index = index;
       question.timer = timer;
-      question.difficulty_level = difficultyLevel;
+      question.difficultyLevel = difficultyLevel;
       question.copy = copy;
       question.type = type;
       question.score = score;
-      question.image_base64 = imageBase64;
-      question.available_on_questions_db = availableOnQuestionsDB;
-      if (id_image) question.id_image = id_image;
+      question.availableOnQuestionsDb = availableOnQuestionsDB;
+      question.idImage = idImage || quiz.idImage;
       question.save();
     }
 
     // ATUALIZANDO OU CRIANDO AS QUESTÕES
-    const id_question = question.id;
+    const idQuestion = question.id;
     const answerRepository = new AnswerRepository();
 
     // eslint-disable-next-line consistent-return
@@ -147,9 +144,9 @@ class QuestionService {
       if (!answerFounded) {
         try {
           await answerRepository.create({
-            id_question,
+            idQuestion,
             title: answerItem.title,
-            is_correct: answerItem.is_correct,
+            isCorrect: answerItem.isCorrect,
           });
         } catch (error) {
           const createAnswerError = new Error(error);
@@ -158,7 +155,7 @@ class QuestionService {
         }
       } else {
         answerFounded.title = answerItem.title;
-        answerFounded.is_correct = answerItem.is_correct;
+        answerFounded.isCorrect = answerItem.isCorrect;
         answerFounded.save();
       }
     });
@@ -175,7 +172,7 @@ class QuestionService {
 
     await quiz.addQuestion(question);
     // ATUALIZANDO TAG DAS QUESTÕES
-    const tagsAlreadyInQuestion = await question.getTags_question();
+    const tagsAlreadyInQuestion = await question.getTagsQuestion();
     const arrayTagsAlreadyInQuestion = tagsAlreadyInQuestion.map(
       (item) => item.name
     );
@@ -207,16 +204,16 @@ class QuestionService {
         {
           model: Answer,
           as: 'answer',
-          attributes: ['id', 'title', 'is_correct'],
+          attributes: ['id', 'title', 'isCorrect'],
         },
-        // {
-        //   model: File,
-        //   as: 'image_question',
-        //   attributes: ['url', 'path', 'name'],
-        // },
+        {
+          model: File,
+          as: 'imageQuestion',
+          attributes: ['url', 'path', 'name'],
+        },
         {
           model: Tag,
-          as: 'tags_question',
+          as: 'tagsQuestion',
           attributes: ['name'],
           through: {
             attributes: [],
@@ -240,22 +237,22 @@ class QuestionService {
 
     const questions = await this.questionRepository.findAll({
       where: {
-        available_on_questions_db: true,
+        availableOnQuestionsDb: true,
       },
       include: [
         {
           model: Answer,
           as: 'answer',
-          attributes: ['id', 'title', 'is_correct'],
+          attributes: ['id', 'title', 'isCorrect'],
         },
-        // {
-        //   model: File,
-        //   as: 'image_question',
-        //   attributes: ['url', 'path', 'name'],
-        // },
+        {
+          model: File,
+          as: 'imageQuestion',
+          attributes: ['url', 'path', 'name'],
+        },
         {
           model: Tag,
-          as: 'tags_question',
+          as: 'tagsQuestion',
           where: {
             name: tag,
           },
@@ -287,17 +284,11 @@ class QuestionService {
       throw error;
     }
 
-    // const { id_image } = question;
-
-    // const file = await File.findByPk(id_image);
-
-    // if (file) file.destroy();
-
     const answers = await question.getAnswer();
-    const tags = await question.getTags_question();
+    const tags = await question.getTagsQuestion();
 
     answers.map((item) => item.destroy());
-    tags.map((item) => question.removeTags_question(item));
+    tags.map((item) => question.removeTagsQuestion(item));
     question.destroy();
 
     return question;

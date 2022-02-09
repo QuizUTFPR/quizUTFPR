@@ -56,7 +56,6 @@ class QuestionController {
             })
           )
           .required('Informe as alternativas.'),
-        imageBase64: Yup.string(),
       });
 
       const { values } = req.body;
@@ -80,7 +79,6 @@ class QuestionController {
         tags,
         type,
         index,
-        imageBase64,
       } = data;
 
       const quiz = await Quiz.findByPk(quizId);
@@ -103,7 +101,6 @@ class QuestionController {
             type,
             index,
             score,
-            imageBase64,
           });
         } catch (error) {
           return res.status(500).json(error);
@@ -117,7 +114,6 @@ class QuestionController {
         question.copy = copy;
         question.type = type;
         question.score = score;
-        question.imageBase64 = imageBase64;
         question.availableOnQuestionsDb = availableOnQuestionsDb;
         question.idImage = idImage || quiz.idImage;
         question.save();
@@ -159,7 +155,7 @@ class QuestionController {
 
       await quiz.addQuestion(question);
       // ATUALIZANDO TAG DAS QUESTÕES
-      const tagsAlreadyInQuestion = await question.getTags_question();
+      const tagsAlreadyInQuestion = await question.getTagsQuestion();
       const arrayTagsAlreadyInQuestion = tagsAlreadyInQuestion.map(
         (item) => item.name
       );
@@ -203,7 +199,6 @@ class QuestionController {
           'availableOnQuestionsDb',
           'type',
           'score',
-          'imageBase64',
           'idImage',
         ],
         include: [
@@ -214,12 +209,12 @@ class QuestionController {
           },
           {
             model: File,
-            as: 'image_question',
+            as: 'imageQuestion',
             attributes: ['url', 'path', 'name'],
           },
           {
             model: Tag,
-            as: 'tags_question',
+            as: 'tagsQuestion',
             attributes: ['name'],
             through: {
               attributes: [],
@@ -256,7 +251,6 @@ class QuestionController {
           'difficultyLevel',
           'type',
           'score',
-          'imageBase64',
           'idImage',
         ],
         include: [
@@ -267,12 +261,12 @@ class QuestionController {
           },
           {
             model: File,
-            as: 'image_question',
+            as: 'imageQuestion',
             attributes: ['url', 'path', 'name'],
           },
           {
             model: Tag,
-            as: 'tags_question',
+            as: 'tagsQuestion',
             where: {
               name: tag,
             },
@@ -307,10 +301,10 @@ class QuestionController {
         return res.status(404).json({ error: 'Questão não encontrada!' });
 
       const answers = await question.getAnswer();
-      const tags = await question.getTags_question();
+      const tags = await question.getTagsQuestion();
 
       answers.map((item) => item.destroy());
-      tags.map((item) => question.removeTags_question(item));
+      tags.map((item) => question.removeTagsQuestion(item));
       question.destroy();
 
       return res.status(200).json(question);

@@ -15,7 +15,7 @@ class RecentPublishedQuizService {
   }
 
   async execute(data) {
-    const { student_id } = data;
+    const { studentId } = data;
     const page = data.page || false;
     const limit = data.limit || 3;
 
@@ -29,11 +29,10 @@ class RecentPublishedQuizService {
         'title',
         'description',
         'visibility',
-        'id_image',
+        'idImage',
         'pin',
-        'image_base64',
-        'publish_date',
-        'no_time',
+        'publishDate',
+        'noTime',
       ],
       include: [
         {
@@ -43,7 +42,7 @@ class RecentPublishedQuizService {
         },
         {
           model: File,
-          as: 'image_quiz',
+          as: 'imageQuiz',
           attributes: ['url', 'path', 'name'],
         },
         {
@@ -55,20 +54,20 @@ class RecentPublishedQuizService {
           },
         },
       ],
-      order: [['publish_date', 'DESC']],
+      order: [['publishDate', 'DESC']],
       offset: page ? (page - 1) * limit : 0,
       limit: page ? limit : null,
     });
 
     const quizzesInProgress = (
       await (
-        await this.studentRepository.findByPk(student_id)
-      ).getStudent_quiz({
+        await this.studentRepository.findByPk(studentId)
+      ).getStudentQuiz({
         where: {
-          is_finished: false,
+          isFinished: false,
         },
       })
-    ).map((item) => item.quiz_id);
+    ).map((item) => item.quizId);
 
     const returnedQuizzes = quizzes.filter(
       (quiz) => !quizzesInProgress.includes(quiz.id)
@@ -78,8 +77,8 @@ class RecentPublishedQuizService {
       returnedQuizzes.map(async (quiz) => {
         const isFavorite = await FavoriteStudentQuiz.findOne({
           where: {
-            quiz_id: quiz.id,
-            student_id,
+            quizId: quiz.id,
+            studentId,
           },
         });
 

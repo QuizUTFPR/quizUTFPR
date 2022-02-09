@@ -10,18 +10,18 @@ class StudentQuizInProgressController {
   // Lista todos os registros
   async index(req, res) {
     try {
-      const student_id = req.userId;
+      const studentId = req.userId;
 
       const page = req.body.page || false;
       const limit = req.body.limit || 3;
 
-      const student = await Student.findByPk(student_id);
+      const student = await Student.findByPk(studentId);
       if (!student)
         return res.status(404).json({ error: 'Aluno não encontrado!' });
 
-      const QuizzesInProgress = await student.getStudent_quiz({
+      const QuizzesInProgress = await student.getStudentQuiz({
         where: {
-          is_finished: false,
+          isFinished: false,
         },
         include: [
           {
@@ -32,7 +32,6 @@ class StudentQuizInProgressController {
               'title',
               'description',
               'pin',
-              'imageBase64',
               'noTime',
               'idImage',
             ],
@@ -44,12 +43,12 @@ class StudentQuizInProgressController {
               },
               {
                 model: File,
-                as: 'image_quiz',
+                as: 'imageQuiz',
                 attributes: ['url', 'path', 'name'],
               },
               {
                 model: Tag,
-                as: 'tags_quiz',
+                as: 'tagsQuiz',
                 attributes: ['name'],
                 through: {
                   attributes: [],
@@ -65,16 +64,16 @@ class StudentQuizInProgressController {
       const studentQuizInProgress = await Promise.all(
         QuizzesInProgress.map(async (item) => {
           const questionAmount = await item.quiz.countQuestions();
-          const studentChoicesAmount = await item.countQuiz_question_choice();
+          const studentChoicesAmount = await item.countQuizQuestionChoice();
           const isFavorite = await FavoriteStudentQuiz.findOne({
             where: {
-              quiz_id: item.quiz.id,
-              student_id,
+              quizId: item.quiz.id,
+              studentId,
             },
           });
 
           return {
-            id_student_quiz: item.id,
+            idStudentQuiz: item.id,
             studentChoicesAmount,
             questionAmount,
             quiz: {

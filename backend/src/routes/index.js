@@ -7,7 +7,7 @@ import Teacher from './Teacher/teacher';
 import Quiz from './Quiz/quiz';
 import Question from './Question/question';
 import Tag from './Tag/tag';
-import StudentQuiz from './Student/student_quiz';
+import StudentQuiz from './Student/studentQuiz';
 import Student from './Student/student';
 import PublishedQuiz from './PublishedQuiz/quiz';
 import Statistics from './Statistics';

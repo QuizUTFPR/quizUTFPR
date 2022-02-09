@@ -10,29 +10,21 @@ class StudentQuizFinishedController {
   // Lista todos os registros
   async index(req, res) {
     try {
-      const student_id = req.userId;
+      const studentId = req.userId;
 
       const page = req.body.page || false;
       const limit = req.body.limit || 3;
 
       const quizzesFinished = await Quiz.findAll({
         where: { published: true },
-        attributes: [
-          'id',
-          'title',
-          'description',
-          'pin',
-          'imageBase64',
-          'noTime',
-          'idImage',
-        ],
+        attributes: ['id', 'title', 'description', 'pin', 'noTime', 'idImage'],
         include: [
           {
             model: StudentQuiz,
-            as: 'quiz_student',
+            as: 'quizStudent',
             required: true,
             where: {
-              student_id,
+              studentId,
             },
           },
           {
@@ -59,8 +51,8 @@ class StudentQuizFinishedController {
         quizzesFinished.map(async (quiz) => {
           const isFavorite = await FavoriteStudentQuiz.findOne({
             where: {
-              quiz_id: quiz.id,
-              student_id,
+              quizId: quiz.id,
+              studentId,
             },
           });
 

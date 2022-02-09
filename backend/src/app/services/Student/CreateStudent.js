@@ -28,7 +28,7 @@ class CreateStudentService {
     // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
     const deleteRefreshTokenService = new DeleteRefreshTokenService();
     await deleteRefreshTokenService.execute({
-      where: { user_id: id },
+      where: { userId: id },
     });
 
     const token = await GenerateTokenProvider.execute(id);
@@ -40,7 +40,7 @@ class CreateStudentService {
         name,
       },
       token,
-      refresh_token: refreshToken.id,
+      refreshToken: refreshToken.id,
     };
   }
 }

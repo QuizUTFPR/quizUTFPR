@@ -12,7 +12,7 @@ class QuestionTagController {
 
       const questions = await Question.findAll({
         where: {
-          available_on_questions_db: true,
+          availableOnQuestionsDb: true,
         },
         attributes: [
           'id',
@@ -32,12 +32,12 @@ class QuestionTagController {
           },
           {
             model: File,
-            as: 'image_question',
+            as: 'imageQuestion',
             attributes: ['url', 'path', 'name'],
           },
           {
             model: Tag,
-            as: 'tags_question',
+            as: 'tagsQuestion',
             attributes: ['name'],
             require: true,
             through: {
@@ -51,7 +51,7 @@ class QuestionTagController {
       const filteredQuestionByTag = await Promise.all(
         // eslint-disable-next-line consistent-return
         questions.map(async (item) => {
-          const questionTags = (await item.getTags_question()).map(
+          const questionTags = (await item.getTagsQuestion()).map(
             (element) => element.name
           );
           const intersection = questionTags.filter((element) =>

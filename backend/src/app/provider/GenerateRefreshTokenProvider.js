@@ -12,17 +12,17 @@ class GenerateRefreshTokenProvider {
     try {
       const expiresIn = dayjs
         .utc()
-        .add(parseInt(authConfig.refreshExpiration), 'm')
+        .add(parseInt(authConfig.refreshExpiration, 10), 'm')
         .format();
 
       const refreshTokenRepository = new RefreshTokenRepository();
       await refreshTokenRepository.delete({
-        where: { user_id: userId },
+        where: { userId },
       });
 
       const generatedRefreshToken = await refreshTokenRepository.create({
-        user_id: userId,
-        expires_in: expiresIn,
+        userId,
+        expiresIn,
       });
 
       return generatedRefreshToken;

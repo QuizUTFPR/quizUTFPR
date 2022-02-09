@@ -14,7 +14,7 @@ class QuizTeacherService {
   async execute(data) {
     const quizzes = await this.quizRepository.findAll({
       where: {
-        id_teacher: data,
+        idTeacher: data,
       },
       attributes: [
         'id',
@@ -24,7 +24,6 @@ class QuizTeacherService {
         'idImage',
         'published',
         'pin',
-        'imageBase64',
         'noTime',
       ],
       include: [

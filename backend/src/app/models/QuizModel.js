@@ -11,7 +11,6 @@ class Quiz extends Model {
         idImage: Sequelize.INTEGER,
         published: Sequelize.BOOLEAN,
         pin: Sequelize.STRING,
-        imageBase64: Sequelize.TEXT('medium'),
         publishDate: Sequelize.DATE,
         noTime: Sequelize.BOOLEAN,
       },
@@ -32,14 +31,14 @@ class Quiz extends Model {
     });
 
     this.belongsToMany(models.Question, {
-      through: 'question_quiz',
+      through: 'questionQuiz',
       foreignKey: 'quizId',
       as: 'questions',
       onDelete: 'CASCADE',
     });
 
     this.belongsToMany(models.Tag, {
-      through: 'quiz_tags',
+      through: 'quizTags',
       foreignKey: 'quizId',
       as: 'tagsQuiz',
       onDelete: 'CASCADE',

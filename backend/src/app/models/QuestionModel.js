@@ -18,8 +18,7 @@ class Question extends Model {
           'Difícil',
           'Muito Difícil'
         ),
-        type: Sequelize.ENUM('multiple_choice', 'single_choice'),
-        imageBase64: Sequelize.TEXT('medium'),
+        type: Sequelize.ENUM('multipleChoice', 'singleChoice'),
       },
       {
         sequelize,
@@ -33,7 +32,7 @@ class Question extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Quiz, {
-      through: 'question_quiz',
+      through: 'questionQuiz',
       foreignKey: 'questionId',
       as: 'quizzes',
       onDelete: 'CASCADE',
@@ -53,7 +52,7 @@ class Question extends Model {
     });
 
     this.belongsToMany(models.Tag, {
-      through: 'question_tags',
+      through: 'questionTags',
       foreignKey: 'questionId',
       as: 'tagsQuestion',
       onDelete: 'CASCADE',

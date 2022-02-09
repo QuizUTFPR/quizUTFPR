@@ -39,7 +39,7 @@ class StudentSessionService {
     // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
     const deleteRefreshTokenService = new DeleteRefreshTokenService();
     await deleteRefreshTokenService.execute({
-      where: { user_id: id },
+      where: { userId: id },
     });
 
     const token = await GenerateRefreshTokenProvider.execute(id);
@@ -51,7 +51,7 @@ class StudentSessionService {
         email,
       },
       token,
-      refresh_token: refreshToken.id,
+      refreshToken: refreshToken.id,
     };
   }
 }

@@ -12,33 +12,33 @@ class CreateRefreshTokenService {
   }
 
   async execute(data) {
-    const { refresh_token } = data;
+    const { refreshToken } = data;
 
-    const refreshToken = await this.refreshTokenRepository.find({
-      where: { id: refresh_token },
+    const refreshTokenItem = await this.refreshTokenRepository.find({
+      where: { id: refreshToken },
     });
 
-    console.log('achado', refreshToken);
-
-    if (!refreshToken)
+    if (!refreshTokenItem)
       // eslint-disable-next-line no-throw-literal
       throw {
         status: 401,
         error: 'Invalid refresh token1!',
-        refresh_token_expired: true,
+        refreshTokenExpired: true,
       };
 
-    const refreshTokenExpired = dayjs().isAfter(dayjs(refreshToken.expires_in));
+    const refreshTokenExpired = dayjs().isAfter(
+      dayjs(refreshTokenItem.expiresIn)
+    );
 
     if (refreshTokenExpired)
       // eslint-disable-next-line no-throw-literal
       throw {
         status: 401,
         error: 'Invalid refresh token!',
-        refresh_token_expired: true,
+        refreshTokenExpired: true,
       };
 
-    const token = await GenerateTokenProvider.execute(refreshToken.user_id);
+    const token = await GenerateTokenProvider.execute(refreshTokenItem.userId);
 
     return token;
   }

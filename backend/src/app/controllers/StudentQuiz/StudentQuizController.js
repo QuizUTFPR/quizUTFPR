@@ -10,7 +10,7 @@ class StudentQuizController {
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
-        quiz_id: Yup.number('ID do quiz inválido!').required(
+        quizId: Yup.number('ID do quiz inválido!').required(
           'Por favor, informe o id do quiz'
         ),
       });
@@ -19,16 +19,16 @@ class StudentQuizController {
         return res.status(400).json({ error: 'Falha na validação!' });
       }
 
-      const student_id = req.userId;
+      const studentId = req.userId;
 
-      const { quiz_id } = req.body;
+      const { quizId } = req.body;
 
       const finished = await StudentQuiz.create({
-        student_id,
-        quiz_id,
-        hit_amount: 0,
+        studentId,
+        quizId,
+        hitAmount: 0,
         score: 0,
-        is_finished: false,
+        isFinished: false,
       });
 
       return res.status(200).json(finished);
@@ -40,10 +40,10 @@ class StudentQuizController {
   async update(req, res) {
     try {
       const schema = Yup.object().shape({
-        id_student_quiz: Yup.number('ID da tentativa inválido!').required(
+        idStudentQuiz: Yup.number('ID da tentativa inválido!').required(
           'Por favor, informe o ID da tentativa de resposta do aluno ao quiz!'
         ),
-        quiz_id: Yup.number('ID do quiz inválido!').required(
+        quizId: Yup.number('ID do quiz inválido!').required(
           'Por favor, informe o id do quiz'
         ),
       });
@@ -52,19 +52,19 @@ class StudentQuizController {
         return res.status(400).json({ error: 'Falha na validação!' });
       }
 
-      const student_id = req.userId;
+      const studentId = req.userId;
 
-      const { quiz_id, id_student_quiz } = req.body;
+      const { quizId, idStudentQuiz } = req.body;
 
-      const quiz = await Quiz.findByPk(quiz_id);
+      const quiz = await Quiz.findByPk(quizId);
       const questionQuiz = await quiz.getQuestions();
       const idQuestionsAnswered = (
-        await quiz.getQuiz_student_choice({
+        await quiz.getQuizStudentChoice({
           where: {
-            student_quiz_id: id_student_quiz,
+            studentQuizId: idStudentQuiz,
           },
         })
-      ).map((item) => item.question_id);
+      ).map((item) => item.questionId);
 
       const questionNotAnswered = questionQuiz.filter(
         (question) => !idQuestionsAnswered.includes(question.id)
@@ -74,16 +74,16 @@ class StudentQuizController {
       await Promise.all(
         questionNotAnswered.map(async (question) => {
           await StudentQuestionChoice.create({
-            question_id: question.id,
-            student_id,
-            quiz_id,
-            student_quiz_id: id_student_quiz,
+            questionId: question.id,
+            studentId,
+            quizId,
+            studentQuizId: idStudentQuiz,
           });
         })
       );
 
-      const studentQuiz = await StudentQuiz.findByPk(id_student_quiz);
-      const studentChoices = await studentQuiz.getQuiz_question_choice();
+      const studentQuiz = await StudentQuiz.findByPk(idStudentQuiz);
+      const studentChoices = await studentQuiz.getQuizQuestionChoice();
 
       // CALCULANDO SCORE
       let score = 0;
@@ -100,24 +100,24 @@ class StudentQuizController {
             item.checked4,
           ];
           const question = questionQuiz.find(
-            (element) => element.id === item.question_id
+            (element) => element.id === item.questionId
           );
           const answers = await question.getAnswer({ order: [['id', 'ASC']] });
 
           let hasWrongChoice = false;
           // eslint-disable-next-line array-callback-return
           answers.map((itemAnswers, index) => {
-            if (itemAnswers.is_correct) {
+            if (itemAnswers.isCorrect) {
               correctAnswerAmount += 1;
             }
 
-            if (!itemAnswers.is_correct && studentAnswers[index]) {
+            if (!itemAnswers.isCorrect && studentAnswers[index]) {
               hasWrongChoice = true;
               studentAnswerCorrect = 0;
             }
 
             if (
-              itemAnswers.is_correct &&
+              itemAnswers.isCorrect &&
               studentAnswers[index] &&
               !hasWrongChoice
             ) {
@@ -129,10 +129,10 @@ class StudentQuizController {
             studentAmountQuestionCorrect += 1;
           }
 
-          const noTime = quiz.no_time;
+          const { noTime } = quiz;
           const questionScore = question.score;
           const timeOfQuestion = question.timer;
-          const timeLeft = item.time_left;
+          const { timeLeft } = item;
           const bonus = noTime ? 1 : (timeLeft / timeOfQuestion) * (50 / 100);
 
           score += questionScore + questionScore * bonus;
@@ -140,7 +140,7 @@ class StudentQuizController {
         })
       );
 
-      const studentQuizUpdated = await StudentQuiz.findByPk(id_student_quiz);
+      const studentQuizUpdated = await StudentQuiz.findByPk(idStudentQuiz);
 
       if (!studentQuizUpdated)
         return res
@@ -148,8 +148,8 @@ class StudentQuizController {
           .json({ error: 'Nenhuma tentativa de resposta de quiz encontrado.' });
 
       studentQuizUpdated.score = final;
-      studentQuizUpdated.hit_amount = studentAmountQuestionCorrect;
-      studentQuizUpdated.is_finished = true;
+      studentQuizUpdated.hitAmount = studentAmountQuestionCorrect;
+      studentQuizUpdated.isFinished = true;
       studentQuizUpdated.save();
 
       if (!studentQuizUpdated)
@@ -158,8 +158,8 @@ class StudentQuizController {
           .json({ error: 'Nenhuma tentativa de resposta de quiz encontrado.' });
 
       studentQuizUpdated.score = final;
-      studentQuizUpdated.hit_amount = studentAnswerCorrect;
-      studentQuizUpdated.is_finished = true;
+      studentQuizUpdated.hitAmount = studentAnswerCorrect;
+      studentQuizUpdated.isFinished = true;
       studentQuizUpdated.save();
 
       return res.status(200).json(studentQuizUpdated);

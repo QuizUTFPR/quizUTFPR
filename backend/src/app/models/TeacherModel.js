@@ -10,7 +10,7 @@ class Teacher extends Model {
         uid: Sequelize.STRING,
         // O campo 'virtual' nao existe no db, apenas na execução
         // password: Sequelize.VIRTUAL,
-        // password_hash: Sequelize.STRING,
+        // passwordHash: Sequelize.STRING,
       },
       {
         sequelize,
@@ -22,7 +22,7 @@ class Teacher extends Model {
     // this.addHook('beforeSave', async (teacher) => {
     //   if (teacher.password) {
     //     // eslint-disable-next-line no-param-reassign
-    //     teacher.password_hash = await bcrypt.hash(teacher.password, 8);
+    //     teacher.passwordHash = await bcrypt.hash(teacher.password, 8);
     //   }
     // });
 
@@ -30,7 +30,7 @@ class Teacher extends Model {
   }
 
   // checkPassword(password) {
-  //   return bcrypt.compare(password, this.password_hash);
+  //   return bcrypt.compare(password, this.passwordHash);
   // }
 }
 

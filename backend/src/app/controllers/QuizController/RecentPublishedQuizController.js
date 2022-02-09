@@ -5,13 +5,13 @@ class RecentPublishedQuizController {
   // Lista todos os registros
   async index(req, res) {
     try {
-      const student_id = req.userId;
+      const studentId = req.userId;
       const page = req.body.page || false;
       const limit = req.body.limit || 3;
 
       const recentPublishedQuizService = new RecentPublishedQuizService();
       const quizzes = await recentPublishedQuizService.execute({
-        student_id,
+        studentId,
         page,
         limit,
       });

@@ -9,17 +9,17 @@ class StatisticsQuizController {
   // Lista todos os registros
   async show(req, res) {
     try {
-      const { quiz_id } = req.body;
+      const { quizId } = req.body;
 
-      const quiz = await Quiz.findByPk(quiz_id, {
+      const quiz = await Quiz.findByPk(quizId, {
         attributes: [
           'id',
           'title',
           'description',
           'visibility',
-          'id_image',
+          'idImage',
           'pin',
-          'no_time',
+          'noTime',
         ],
       });
 
@@ -34,7 +34,7 @@ class StatisticsQuizController {
           {
             model: Answer,
             as: 'answer',
-            attributes: ['id', 'title', 'is_correct'],
+            attributes: ['id', 'title', 'isCorrect'],
           },
         ],
         attributes: [
@@ -43,7 +43,7 @@ class StatisticsQuizController {
           'index',
           'timer',
           'score',
-          'difficulty_level',
+          'difficultyLevel',
           'type',
         ],
         order: [
@@ -65,12 +65,12 @@ class StatisticsQuizController {
         });
 
       //  GETTING ALL THE STUDENT THAT ANSWERED THE QUIZ
-      const studentQuizAttempt = await quiz.getQuiz_student({
+      const studentQuizAttempt = await quiz.getQuizStudent({
         where: {
-          is_finished: true,
+          isFinished: true,
         },
-        attributes: ['student_id', 'quiz_id'],
-        group: ['student_id'],
+        attributes: ['studentId', 'quizId'],
+        group: ['studentId'],
       });
 
       const studentQuiz = await Promise.all(
@@ -80,20 +80,20 @@ class StatisticsQuizController {
             include: [
               {
                 model: StudentQuiz,
-                as: 'student_quiz',
+                as: 'studentQuiz',
                 where: {
-                  quiz_id,
-                  is_finished: true,
+                  quizId,
+                  isFinished: true,
                 },
-                attributes: ['id', 'score', 'student_id'],
+                attributes: ['id', 'score', 'studentId'],
                 include: [
                   {
                     model: StudentQuestionChoice,
-                    as: 'quiz_question_choice',
+                    as: 'quizQuestionChoice',
                     attributes: [
                       'id',
-                      'time_left',
-                      'question_id',
+                      'timeLeft',
+                      'questionId',
                       'checked1',
                       'checked2',
                       'checked3',
@@ -104,10 +104,10 @@ class StatisticsQuizController {
               },
             ],
             order: [
-              [{ model: StudentQuiz, as: 'student_quiz' }, 'score', 'DESC'],
+              [{ model: StudentQuiz, as: 'studentQuiz' }, 'score', 'DESC'],
               [
-                { model: StudentQuiz, as: 'student_quiz' },
-                { model: StudentQuestionChoice, as: 'quiz_question_choice' },
+                { model: StudentQuiz, as: 'studentQuiz' },
+                { model: StudentQuestionChoice, as: 'quizQuestionChoice' },
                 'id',
                 'ASC',
               ],
@@ -116,7 +116,7 @@ class StatisticsQuizController {
 
           return {
             ...student.dataValues,
-            student_quiz: student.student_quiz[0],
+            studentQuiz: student.studentQuiz[0],
           };
         })
       );

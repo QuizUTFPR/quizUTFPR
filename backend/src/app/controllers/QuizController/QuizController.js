@@ -21,7 +21,6 @@ class QuizController {
 
       const quiz = await quizService.create({
         idTeacher,
-        // image_base64: imageBase64,
         idImage,
         title,
         tags,
@@ -50,10 +49,9 @@ class QuizController {
           'title',
           'description',
           'visibility',
-          'id_image',
+          'idImage',
           'pin',
-          'image_base64',
-          'no_time',
+          'noTime',
         ],
         include: [
           {
@@ -64,7 +62,7 @@ class QuizController {
 
           {
             model: Tag,
-            as: 'tags_quiz',
+            as: 'tagsQuiz',
             attributes: ['name'],
             through: {
               attributes: [],
@@ -73,6 +71,7 @@ class QuizController {
           {
             model: File,
             as: 'image',
+            attributes: ['id', 'path', 'url'],
           },
         ],
       });
@@ -98,10 +97,9 @@ class QuizController {
           'title',
           'description',
           'visibility',
-          'id_image',
+          'idImage',
           'pin',
-          'image_base64',
-          'no_time',
+          'noTime',
         ],
         include: [
           {
@@ -117,10 +115,10 @@ class QuizController {
               'index',
               'title',
               'timer',
-              'difficulty_level',
+              'difficultyLevel',
               'score',
               'copy',
-              'available_on_questions_db',
+              'availableOnQuestionsDb',
               'type',
             ],
             through: {
@@ -130,21 +128,26 @@ class QuizController {
               {
                 model: Answer,
                 as: 'answer',
-                attributes: ['title', 'is_correct'],
+                attributes: ['title', 'isCorrect'],
               },
               {
                 model: Tag,
-                as: 'tags_question',
+                as: 'tagsQuestion',
                 attributes: ['name'],
                 through: {
                   attributes: [],
                 },
               },
+              {
+                model: File,
+                as: 'imageQuestion',
+                attributes: ['id', 'path', 'url'],
+              },
             ],
           },
           {
             model: Tag,
-            as: 'tags_quiz',
+            as: 'tagsQuiz',
             attributes: ['name'],
             where: {
               name: tag,
@@ -152,6 +155,11 @@ class QuizController {
             through: {
               attributes: [],
             },
+          },
+          {
+            model: File,
+            as: 'image',
+            attributes: ['id', 'path', 'url'],
           },
         ],
         order: [[{ model: Answer, as: 'answer' }, 'id', 'ASC']],
@@ -181,7 +189,6 @@ class QuizController {
         title,
         description,
         visibility,
-        // imageBase64,
         idImage,
         noTime,
       });
@@ -198,10 +205,10 @@ class QuizController {
 
   async delete(req, res) {
     try {
-      const { id_quiz } = req.body;
+      const { idQuiz } = req.body;
 
       const quizService = new QuizService();
-      await quizService.delete(id_quiz);
+      await quizService.delete(idQuiz);
 
       return res.status(200).json();
     } catch (error) {

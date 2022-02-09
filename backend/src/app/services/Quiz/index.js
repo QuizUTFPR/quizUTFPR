@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 
 // MODELS
 import Tag from '../../models/TagModel';
-// import File from '../../models/FileModel';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
@@ -23,7 +22,6 @@ class QuizService {
       description: Yup.string().required(),
       visibility: Yup.string().required().max(10),
       tags: Yup.array().required('Informe as tags do quiz!'),
-      imageBase64: Yup.string(),
       noTime: Yup.bool().required(),
       idImage: Yup.number(),
     });

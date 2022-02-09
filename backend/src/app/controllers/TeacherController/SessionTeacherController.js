@@ -51,7 +51,7 @@ class SessionTeacherController {
       const {
         email: teacherEmail,
         name: teacherName,
-        dn: personCategory,
+        // dn: personCategory,
       } = responseLoginLDAP.data;
 
       // IMPEDIR ALUNOS DE SE CONECTAR NO 1 DE CONTROLE
@@ -88,7 +88,7 @@ class SessionTeacherController {
 
       // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
       await RefreshToken.destroy({
-        where: { user_id: id },
+        where: { userId: id },
       });
 
       const token = await GenerateTokenProvider.execute(id);
@@ -101,7 +101,7 @@ class SessionTeacherController {
           uid,
         },
         token,
-        refresh_token: refreshToken.id,
+        refreshToken: refreshToken.id,
       });
     } catch (err) {
       console.log(err);

@@ -8,16 +8,16 @@ class StudentQuestionChoiceController {
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
-        student_quiz_id: Yup.number('ID da tentativa inválido!').required(
+        studentQuizId: Yup.number('ID da tentativa inválido!').required(
           'Por favor, informe o ID da tentativa!'
         ),
-        question_id: Yup.number('ID da questão inválido!').required(
+        questionId: Yup.number('ID da questão inválido!').required(
           'Por favor, informe o id da questão'
         ),
-        quiz_id: Yup.number('id do quiz inválido!').required(
+        quizId: Yup.number('id do quiz inválido!').required(
           'Por favor, informe o ID da questão'
         ),
-        time_left: Yup.number('O tempo restão é invalido!').required(
+        timeLeft: Yup.number('O tempo restão é invalido!').required(
           'Por favor, informe um tempo restante'
         ),
         arrayOfChecked: Yup.array(
@@ -29,14 +29,9 @@ class StudentQuestionChoiceController {
         return res.status(400).json({ error: 'Falha na validação!' });
       }
 
-      const student_id = req.userId;
-      const {
-        question_id,
-        student_quiz_id,
-        arrayOfChecked,
-        quiz_id,
-        time_left,
-      } = req.body;
+      const studentId = req.userId;
+      const { questionId, studentQuizId, arrayOfChecked, quizId, timeLeft } =
+        req.body;
 
       const checked1 = arrayOfChecked[0];
       const checked2 = arrayOfChecked[1];
@@ -44,11 +39,11 @@ class StudentQuestionChoiceController {
       const checked4 = arrayOfChecked[3];
 
       const studentQuestionChoice = await StudentQuestionChoice.create({
-        quiz_id,
-        student_id,
-        question_id,
-        student_quiz_id,
-        time_left,
+        quizId,
+        studentId,
+        questionId,
+        studentQuizId,
+        timeLeft,
         checked1,
         checked2,
         checked3,

@@ -13,7 +13,7 @@ class PINQuizService {
   }
 
   async findByPin(data) {
-    const { pin, student_id } = data;
+    const { pin, studentId } = data;
 
     const quiz = await Quiz.findOne({
       where: {
@@ -27,7 +27,7 @@ class PINQuizService {
         },
         {
           model: File,
-          as: 'image_quiz',
+          as: 'imageQuiz',
           attributes: ['url', 'path', 'name'],
         },
         {
@@ -49,21 +49,21 @@ class PINQuizService {
 
     const questionAmount = await quiz.countQuestions();
 
-    const quizStudent = await quiz.getQuiz_student({
+    const quizStudent = await quiz.getQuizStudent({
       where: {
-        quiz_id: quiz.id,
-        student_id,
-        is_finished: false,
+        quizId: quiz.id,
+        studentId,
+        isFinished: false,
       },
     });
 
     let studentChoicesAmount = null;
     if (quizStudent.length > 0) {
-      studentChoicesAmount = await quiz.countQuiz_student_choice({
+      studentChoicesAmount = await quiz.countQuizStudentChoice({
         where: {
-          student_id,
-          quiz_id: quiz.id,
-          student_quiz_id: quizStudent[0].id,
+          studentId,
+          quizId: quiz.id,
+          studentQuizId: quizStudent[0].id,
         },
       });
     }
@@ -72,7 +72,7 @@ class PINQuizService {
       quiz,
       questionAmount,
       studentChoicesAmount,
-      id_student_quiz: quizStudent.length > 0 ? quizStudent[0].id : null,
+      idStudentQuiz: quizStudent.length > 0 ? quizStudent[0].id : null,
     };
   }
 }

@@ -35,12 +35,12 @@ class QuestionQuizController {
           },
           {
             model: File,
-            as: 'image_question',
+            as: 'imageQuestion',
             attributes: ['url', 'path', 'name'],
           },
           {
             model: Tag,
-            as: 'tags_question',
+            as: 'tagsQuestion',
             attributes: ['name'],
             through: {
               attributes: [],

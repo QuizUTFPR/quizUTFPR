@@ -9,9 +9,9 @@ class StatisticsQuizController {
   // Lista todos os registros
   async show(req, res) {
     try {
-      const { quiz_id } = req.body;
+      const { quizId } = req.body;
 
-      const quiz = await Quiz.findByPk(quiz_id, {
+      const quiz = await Quiz.findByPk(quizId, {
         attributes: ['id', 'title', 'pin'],
       });
 
@@ -26,7 +26,7 @@ class StatisticsQuizController {
           {
             model: Answer,
             as: 'answer',
-            attributes: ['id', 'title', 'is_correct'],
+            attributes: ['id', 'title', 'isCorrect'],
           },
         ],
         attributes: [
@@ -35,7 +35,7 @@ class StatisticsQuizController {
           'index',
           'timer',
           'score',
-          'difficulty_level',
+          'difficultyLevel',
           'type',
         ],
         order: [
@@ -57,12 +57,12 @@ class StatisticsQuizController {
         });
 
       //  GETTING ALL THE STUDENT THAT ANSWERED THE QUIZ
-      const studentQuizAttempt = await quiz.getQuiz_student({
+      const studentQuizAttempt = await quiz.getQuizStudent({
         where: {
-          is_finished: true,
+          isFinished: true,
         },
-        attributes: ['student_id', 'quiz_id'],
-        group: ['student_id'],
+        attributes: ['studentId', 'quizId'],
+        group: ['studentId'],
       });
 
       // GETTING THE ATTEMPT FROM EACH STUDENT CONSIDERING THE HIGHEST SCORE
@@ -73,10 +73,10 @@ class StatisticsQuizController {
             include: [
               {
                 model: StudentQuiz,
-                as: 'student_quiz',
+                as: 'studentQuiz',
                 where: {
-                  quiz_id,
-                  is_finished: true,
+                  quizId,
+                  isFinished: true,
                 },
                 attributes: ['id', 'score'],
               },
@@ -85,7 +85,7 @@ class StatisticsQuizController {
               [
                 {
                   model: StudentQuiz,
-                  as: 'student_quiz',
+                  as: 'studentQuiz',
                 },
                 'score',
                 'DESC',
@@ -93,7 +93,7 @@ class StatisticsQuizController {
             ],
           });
 
-          return student.student_quiz[0].id;
+          return student.studentQuiz[0].id;
         })
       );
 
@@ -103,14 +103,14 @@ class StatisticsQuizController {
       // WE ONLY CONSIDER THE CHOICE ABOUT THE BEST SCORE
       const returnedQuestions = await Promise.all(
         questions.map(async (question) => {
-          const question_choice = await question.getQuestion_choice({
+          const questionChoice = await question.getQuestionChoice({
             where: {
-              student_quiz_id: ArrayOfIDAboutBestScoreAttemptQuiz,
+              studentQuizId: ArrayOfIDAboutBestScoreAttemptQuiz,
             },
             attributes: [
-              'student_quiz_id',
-              'student_id',
-              'time_left',
+              'studentQuizId',
+              'studentId',
+              'timeLeft',
               'checked1',
               'checked2',
               'checked3',
@@ -127,11 +127,12 @@ class StatisticsQuizController {
 
           let sumOfTimeSpentToAnswer = 0; // AVG OF TIME THAT WAS SPENT TO ANSWER THE QUESTION
           // eslint-disable-next-line array-callback-return
-          question_choice.map((questionChoice) => {
-            sumOfTimeSpentToAnswer += question.timer - questionChoice.time_left;
+          questionChoice.map((questionMapItem) => {
+            sumOfTimeSpentToAnswer += question.timer - questionMapItem.timeLeft;
           });
+
           const avgOfTimeSpentToAnswer =
-            sumOfTimeSpentToAnswer / question_choice.length;
+            sumOfTimeSpentToAnswer / questionChoice.length;
 
           // CALCULATING HOW MANY TIMES EACH ANSWER HAD BEEN CHOOSED
           const { answer } = question;
@@ -142,48 +143,32 @@ class StatisticsQuizController {
 
           let hitAmount = 0; // SUM OF HIT (CORRECT ANSWER)
           // eslint-disable-next-line array-callback-return
-          question_choice.map((choice) => {
+          questionChoice.map((choice) => {
             const { checked1, checked2, checked3, checked4 } = choice;
             let hasWrongChoice = false;
             let hitAmountChoice = 0;
 
             if (checked1) {
               answer[0].dataValues.numberOfChoices += 1;
-              if (
-                checked1 &&
-                answer[0].dataValues.is_correct &&
-                !hasWrongChoice
-              )
+              if (checked1 && answer[0].dataValues.isCorrect && !hasWrongChoice)
                 hitAmountChoice += 1;
               else hasWrongChoice = true;
             }
             if (checked2) {
               answer[1].dataValues.numberOfChoices += 1;
-              if (
-                checked2 &&
-                answer[1].dataValues.is_correct &&
-                !hasWrongChoice
-              )
+              if (checked2 && answer[1].dataValues.isCorrect && !hasWrongChoice)
                 hitAmountChoice += 1;
               else hasWrongChoice = true;
             }
             if (checked3) {
               answer[2].dataValues.numberOfChoices += 1;
-              if (
-                checked3 &&
-                answer[2].dataValues.is_correct &&
-                !hasWrongChoice
-              )
+              if (checked3 && answer[2].dataValues.isCorrect && !hasWrongChoice)
                 hitAmountChoice += 1;
               else hasWrongChoice = true;
             }
             if (checked4) {
               answer[3].dataValues.numberOfChoices += 1;
-              if (
-                checked4 &&
-                answer[3].dataValues.is_correct &&
-                !hasWrongChoice
-              )
+              if (checked4 && answer[3].dataValues.isCorrect && !hasWrongChoice)
                 hitAmountChoice += 1;
               else hasWrongChoice = true;
             }
@@ -191,14 +176,15 @@ class StatisticsQuizController {
             if (!hasWrongChoice) hitAmount += hitAmountChoice;
           });
 
-          const percentageOfHit = (hitAmount * 100) / question_choice.length;
+          const percentageOfHit = (hitAmount * 100) / questionChoice.length;
           percentageOfQuizHit += percentageOfHit;
+
           return {
             avgOfTimeSpentToAnswer: avgOfTimeSpentToAnswer.toFixed(2),
             percentageOfHit: percentageOfHit.toFixed(2),
             ...question.dataValues,
             answer,
-            question_choice,
+            questionChoice,
           };
         })
       );
