@@ -2,7 +2,7 @@
 import Quiz from '../../models/QuizModel';
 import Teacher from '../../models/TeacherModel';
 import Tag from '../../models/TagModel';
-// import File from '../../models/FileModel';
+import File from '../../models/FileModel';
 import Student from '../../models/StudentModel';
 import FavoriteStudentQuiz from '../../models/FavoriteStudentQuiz';
 
@@ -32,8 +32,9 @@ class StudentQuizInProgressController {
               'title',
               'description',
               'pin',
-              'image_base64',
-              'no_time',
+              'imageBase64',
+              'noTime',
+              'idImage',
             ],
             include: [
               {
@@ -41,11 +42,11 @@ class StudentQuizInProgressController {
                 as: 'teacher',
                 attributes: ['name', 'email'],
               },
-              // {
-              //   model: File,
-              //   as: 'image_quiz',
-              //   attributes: ['url', 'path', 'name'],
-              // },
+              {
+                model: File,
+                as: 'image_quiz',
+                attributes: ['url', 'path', 'name'],
+              },
               {
                 model: Tag,
                 as: 'tags_quiz',

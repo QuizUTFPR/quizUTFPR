@@ -1,6 +1,7 @@
 // MODELS
 import Teacher from '../../models/TeacherModel';
 import Tag from '../../models/TagModel';
+import File from '../../models/FileModel';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
@@ -20,11 +21,11 @@ class QuizTeacherService {
         'title',
         'description',
         'visibility',
-        'id_image',
+        'idImage',
         'published',
         'pin',
-        'image_base64',
-        'no_time',
+        'imageBase64',
+        'noTime',
       ],
       include: [
         {
@@ -34,11 +35,16 @@ class QuizTeacherService {
         },
         {
           model: Tag,
-          as: 'tags_quiz',
+          as: 'tagsQuiz',
           attributes: ['name'],
           through: {
             attributes: [],
           },
+        },
+        {
+          model: File,
+          as: 'image',
+          attributes: ['id', 'url', 'path'],
         },
       ],
     });

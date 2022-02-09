@@ -19,9 +19,9 @@ class TagQuestionController {
               'id',
               'title',
               'timer',
-              'difficulty_level',
+              'difficultyLevel',
               'copy',
-              'available_on_questions_db',
+              'availableOnQuestionsDb',
               'type',
             ],
             through: {

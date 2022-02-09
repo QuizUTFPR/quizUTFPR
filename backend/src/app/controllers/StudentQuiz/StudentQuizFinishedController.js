@@ -4,6 +4,7 @@ import Teacher from '../../models/TeacherModel';
 import StudentQuiz from '../../models/StudentQuiz';
 import FavoriteStudentQuiz from '../../models/FavoriteStudentQuiz';
 import Tag from '../../models/TagModel';
+import File from '../../models/FileModel';
 
 class StudentQuizFinishedController {
   // Lista todos os registros
@@ -21,8 +22,9 @@ class StudentQuizFinishedController {
           'title',
           'description',
           'pin',
-          'image_base64',
-          'no_time',
+          'imageBase64',
+          'noTime',
+          'idImage',
         ],
         include: [
           {
@@ -40,8 +42,13 @@ class StudentQuizFinishedController {
           },
           {
             model: Tag,
-            as: 'tags_quiz',
+            as: 'tagsQuiz',
             attributes: ['name'],
+          },
+          {
+            model: File,
+            as: 'image',
+            attributes: ['id', 'url', 'path'],
           },
         ],
         offset: page ? (page - 1) * limit : 0,

@@ -20,8 +20,8 @@ class TagQuizController {
               'title',
               'description',
               'visibility',
-              'id_image',
-              'no_time',
+              'idImage',
+              'noTime',
             ],
             through: {
               attributes: [],

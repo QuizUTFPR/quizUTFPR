@@ -46,7 +46,7 @@ module.exports = {
         foreignKey: true,
         references: { model: 'file', key: 'id' },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
         allowNull: true,
       },
       type: {

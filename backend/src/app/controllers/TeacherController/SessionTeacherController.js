@@ -33,7 +33,6 @@ class SessionTeacherController {
       console.log(responseLDAP);
 
       const ldapToken = responseLDAP.data.token;
-      console.log('inciando login');
 
       // VERIFICANDO SE DADOS ESTÃO CORRETOS DE ACORDO COM O LDAP
       const responseLoginLDAP = await axios.post(

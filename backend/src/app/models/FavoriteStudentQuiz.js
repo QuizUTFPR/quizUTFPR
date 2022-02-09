@@ -4,12 +4,13 @@ class FavoriteStudentQuiz extends Model {
   static init(sequelize) {
     super.init(
       {
-        quiz_id: Sequelize.INTEGER,
-        student_id: Sequelize.INTEGER,
+        quizId: Sequelize.INTEGER,
+        studentId: Sequelize.INTEGER,
       },
       {
         sequelize,
         tableName: 'favorite_student_quiz',
+        underscored: true,
       }
     );
 
@@ -18,12 +19,12 @@ class FavoriteStudentQuiz extends Model {
 
   static associate(models) {
     this.belongsTo(models.Student, {
-      foreignKey: 'student_id',
+      foreignKey: 'studentId',
       as: 'student',
     });
 
     this.belongsTo(models.Quiz, {
-      foreignKey: 'quiz_id',
+      foreignKey: 'quizId',
       as: 'quiz',
     });
   }

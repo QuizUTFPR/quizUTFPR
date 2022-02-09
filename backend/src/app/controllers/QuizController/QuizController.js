@@ -2,6 +2,7 @@ import Teacher from '../../models/TeacherModel';
 import Question from '../../models/QuestionModel';
 import Answer from '../../models/AnswerModel';
 import Tag from '../../models/TagModel';
+import File from '../../models/FileModel';
 
 // SERVICES
 import QuizService from '../../services/Quiz';
@@ -9,22 +10,33 @@ import QuizService from '../../services/Quiz';
 class QuizController {
   async store(req, res) {
     try {
-      const id_teacher = req.userId;
-      const { imageBase64, noTime } = req.body;
+      const idTeacher = req.userId;
+      const { idImage } = req;
+
+      const { values } = req.body;
+      const { title, tags, description, visibility, published, noTime } =
+        JSON.parse(values);
 
       const quizService = new QuizService();
+
       const quiz = await quizService.create({
-        id_teacher,
-        image_base64: imageBase64,
-        no_time: noTime,
-        ...req.body,
+        idTeacher,
+        // image_base64: imageBase64,
+        idImage,
+        title,
+        tags,
+        description,
+        visibility,
+        published,
+        noTime,
       });
 
       return res.status(200).json(quiz);
     } catch (error) {
+      console.log(error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
-        error.status(500).json(error)
+        res.status(500).json(error)
       );
     }
   }
@@ -57,6 +69,10 @@ class QuizController {
             through: {
               attributes: [],
             },
+          },
+          {
+            model: File,
+            as: 'image',
           },
         ],
       });
@@ -152,8 +168,11 @@ class QuizController {
 
   async update(req, res) {
     try {
-      const { id, tags, title, description, visibility, imageBase64, noTime } =
-        req.body;
+      const { idImage } = req;
+
+      const { values } = req.body;
+      const { id, title, tags, description, visibility, noTime } =
+        JSON.parse(values);
 
       const quizService = new QuizService();
       const quiz = await quizService.update({
@@ -162,12 +181,14 @@ class QuizController {
         title,
         description,
         visibility,
-        imageBase64,
+        // imageBase64,
+        idImage,
         noTime,
       });
 
       return res.status(200).json(quiz);
     } catch (error) {
+      console.log(error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)

@@ -6,13 +6,14 @@ class Answer extends Model {
   static init(sequelize) {
     super.init(
       {
-        id_question: Sequelize.INTEGER,
+        idQuestion: Sequelize.INTEGER,
         title: Sequelize.STRING,
-        is_correct: Sequelize.BOOLEAN,
+        isCorrect: Sequelize.BOOLEAN,
       },
       {
         sequelize,
         tableName: 'answer',
+        underscored: true,
       }
     );
 
@@ -21,7 +22,7 @@ class Answer extends Model {
 
   static associate(models) {
     this.belongsTo(models.Question, {
-      foreignKey: 'id_question',
+      foreignKey: 'idQuestion',
       as: 'question',
     });
   }

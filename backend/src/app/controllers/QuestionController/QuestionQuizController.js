@@ -2,7 +2,7 @@
 import Quiz from '../../models/QuizModel';
 import Answer from '../../models/AnswerModel';
 import Tag from '../../models/TagModel';
-// import File from '../../models/FileModel';
+import File from '../../models/FileModel';
 
 class QuestionQuizController {
   // Lista todos os registros
@@ -20,24 +20,24 @@ class QuestionQuizController {
           'index',
           'title',
           'timer',
-          'difficulty_level',
+          'difficultyLevel',
           'score',
           'copy',
-          'available_on_questions_db',
+          'availableOnQuestionsDb',
           'type',
-          'image_base64',
+          'idImage',
         ],
         include: [
           {
             model: Answer,
             as: 'answer',
-            attributes: ['id', 'title', 'is_correct'],
+            attributes: ['id', 'title', 'isCorrect'],
           },
-          // {
-          //   model: File,
-          //   as: 'image_question',
-          //   attributes: ['url', 'path', 'name'],
-          // },
+          {
+            model: File,
+            as: 'image_question',
+            attributes: ['url', 'path', 'name'],
+          },
           {
             model: Tag,
             as: 'tags_question',

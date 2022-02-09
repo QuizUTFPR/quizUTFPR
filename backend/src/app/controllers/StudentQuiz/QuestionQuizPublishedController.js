@@ -2,7 +2,7 @@
 import Quiz from '../../models/QuizModel';
 import Answer from '../../models/AnswerModel';
 import Tag from '../../models/TagModel';
-// import File from '../../models/FileModel';
+import File from '../../models/FileModel';
 import StudentQuiz from '../../models/StudentQuiz';
 
 class QuestionQuizPublishedController {
@@ -37,9 +37,10 @@ class QuestionQuizPublishedController {
           'index',
           'title',
           'timer',
-          'difficulty_level',
+          'difficultyLevel',
           'type',
-          'image_base64',
+          'imageBase64',
+          'idImage',
         ],
         include: [
           {
@@ -47,11 +48,11 @@ class QuestionQuizPublishedController {
             as: 'answer',
             attributes: ['id', 'title'],
           },
-          // {
-          //   model: File,
-          //   as: 'image_question',
-          //   attributes: ['url', 'path', 'name'],
-          // },
+          {
+            model: File,
+            as: 'image_question',
+            attributes: ['url', 'path', 'name'],
+          },
           {
             model: Tag,
             as: 'tags_question',

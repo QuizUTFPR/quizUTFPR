@@ -5,7 +5,7 @@ import Question from '../../models/QuestionModel';
 import Answer from '../../models/AnswerModel';
 import Quiz from '../../models/QuizModel';
 import Tag from '../../models/TagModel';
-// import File from '../../models/FileModel';
+import File from '../../models/FileModel';
 
 // REPOSITORIES
 import AnswerRepository from '../../repositories/Answer';
@@ -31,7 +31,7 @@ class QuestionController {
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
-        quiz_id: Yup.number().required(),
+        quizId: Yup.number().required(),
         index: Yup.number().required(),
         id: Yup.number().required(),
         copy: Yup.boolean().required(),
@@ -45,61 +45,65 @@ class QuestionController {
         tags: Yup.array()
           .of(Yup.string())
           .required('Informe as tags da questão!'),
-        id_image: Yup.number().nullable(),
+        idImage: Yup.number().nullable(),
         type: Yup.string().required('Informe o tipo da questão'),
         answer: Yup.array()
           .of(
             Yup.object().shape({
               id: Yup.number().required(),
               title: Yup.string().required(),
-              is_correct: Yup.bool().required(),
+              isCorrect: Yup.bool().required(),
             })
           )
           .required('Informe as alternativas.'),
         imageBase64: Yup.string(),
       });
 
+      const { values } = req.body;
+      const { idImage } = req;
+      const parsedValues = JSON.parse(values);
+      const data = { ...parsedValues, idImage };
+
       // Check body of requisiton
-      if (!(await schema.isValid(req.body)))
+      if (!(await schema.isValid(data)))
         return res.status(400).json({ error: 'Falha na validação!' });
 
       const {
         id,
         copy,
-        availableOnQuestionsDB,
+        availableOnQuestionsDB: availableOnQuestionsDb,
         title,
         timer,
         difficultyLevel,
-        quiz_id,
+        quizId,
         answer,
         tags,
         type,
-        id_image,
         index,
         imageBase64,
-      } = req.body;
+      } = data;
 
-      const quiz = await Quiz.findByPk(quiz_id);
+      const quiz = await Quiz.findByPk(quizId);
+
       if (!quiz) return res.status(404).json({ error: 'Quiz não encontrado!' });
 
       let question = await Question.findByPk(id);
       const score = await getScoreBasedOnDifficulty(difficultyLevel);
-
       if (!question) {
         // CASO QUESTÃO NÃO EXISTIR CRIO A MESMA E AS ALTERNATIVAS
         try {
           question = await Question.create({
             copy,
-            available_on_questions_db: availableOnQuestionsDB,
+            availableOnQuestionsDb,
             title,
             timer,
-            difficulty_level: difficultyLevel,
-            quiz_id,
-            id_image,
+            difficultyLevel,
+            quizId,
+            idImage,
             type,
             index,
             score,
-            image_base64: imageBase64,
+            imageBase64,
           });
         } catch (error) {
           return res.status(500).json(error);
@@ -109,18 +113,18 @@ class QuestionController {
         question.title = title;
         question.index = index;
         question.timer = timer;
-        question.difficulty_level = difficultyLevel;
+        question.difficultyLevel = difficultyLevel;
         question.copy = copy;
         question.type = type;
         question.score = score;
-        question.image_base64 = imageBase64;
-        question.available_on_questions_db = availableOnQuestionsDB;
-        if (id_image) question.id_image = id_image;
+        question.imageBase64 = imageBase64;
+        question.availableOnQuestionsDb = availableOnQuestionsDb;
+        question.idImage = idImage || quiz.idImage;
         question.save();
       }
 
       // ATUALIZANDO OU CRIANDO AS QUESTÕES
-      const id_question = question.id;
+      const idQuestion = question.id;
       const answerRepository = new AnswerRepository();
 
       // eslint-disable-next-line consistent-return
@@ -129,16 +133,16 @@ class QuestionController {
         if (!answerFounded) {
           try {
             await answerRepository.create({
-              id_question,
+              idQuestion,
               title: answerItem.title,
-              is_correct: answerItem.is_correct,
+              isCorrect: answerItem.isCorrect,
             });
           } catch (error) {
             return res.status(500).json(error);
           }
         } else {
           answerFounded.title = answerItem.title;
-          answerFounded.is_correct = answerItem.is_correct;
+          answerFounded.isCorrect = answerItem.isCorrect;
           answerFounded.save();
         }
       });
@@ -194,24 +198,25 @@ class QuestionController {
           'index',
           'title',
           'timer',
-          'difficulty_level',
+          'difficultyLevel',
           'copy',
-          'available_on_questions_db',
+          'availableOnQuestionsDb',
           'type',
           'score',
-          'image_base64',
+          'imageBase64',
+          'idImage',
         ],
         include: [
           {
             model: Answer,
             as: 'answer',
-            attributes: ['id', 'title', 'is_correct'],
+            attributes: ['id', 'title', 'isCorrect'],
           },
-          // {
-          //   model: File,
-          //   as: 'image_question',
-          //   attributes: ['url', 'path', 'name'],
-          // },
+          {
+            model: File,
+            as: 'image_question',
+            attributes: ['url', 'path', 'name'],
+          },
           {
             model: Tag,
             as: 'tags_question',
@@ -242,28 +247,29 @@ class QuestionController {
 
       const questions = await Question.findAll({
         where: {
-          available_on_questions_db: true,
+          availableOnQuestionsDb: true,
         },
         attributes: [
           'id',
           'title',
           'timer',
-          'difficulty_level',
+          'difficultyLevel',
           'type',
           'score',
-          'image_base64',
+          'imageBase64',
+          'idImage',
         ],
         include: [
           {
             model: Answer,
             as: 'answer',
-            attributes: ['id', 'title', 'is_correct'],
+            attributes: ['id', 'title', 'isCorrect'],
           },
-          // {
-          //   model: File,
-          //   as: 'image_question',
-          //   attributes: ['url', 'path', 'name'],
-          // },
+          {
+            model: File,
+            as: 'image_question',
+            attributes: ['url', 'path', 'name'],
+          },
           {
             model: Tag,
             as: 'tags_question',
@@ -299,12 +305,6 @@ class QuestionController {
 
       if (!question)
         return res.status(404).json({ error: 'Questão não encontrada!' });
-
-      // const { id_image } = question;
-
-      // const file = await File.findByPk(id_image);
-
-      // if (file) file.destroy();
 
       const answers = await question.getAnswer();
       const tags = await question.getTags_question();

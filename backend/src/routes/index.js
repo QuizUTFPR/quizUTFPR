@@ -3,7 +3,7 @@ import { Router } from 'express';
 
 // ROUTES
 import Teacher from './Teacher/teacher';
-import File from './File/file';
+// import File from './File/file';
 import Quiz from './Quiz/quiz';
 import Question from './Question/question';
 import Tag from './Tag/tag';
@@ -24,7 +24,7 @@ router.use('/student', Student);
 // Todas as rotas abaixo que forem chamadas abaixo deveram ser autenticadas
 router.use('/studentQuiz', verifyJWT, StudentQuiz);
 router.use('/publishedQuiz', verifyJWT, PublishedQuiz);
-router.use('/files', verifyJWT, File);
+// router.use('/files', verifyJWT, File);
 router.use('/quiz', verifyJWT, Quiz);
 router.use('/question', verifyJWT, Question);
 router.use('/tag', verifyJWT, Tag);

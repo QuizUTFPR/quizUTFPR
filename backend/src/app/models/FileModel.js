@@ -1,4 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
+import fs from 'fs';
+import path from 'path';
 
 class File extends Model {
   static init(sequelize) {
@@ -14,8 +16,24 @@ class File extends Model {
         },
       },
       {
+        hooks: {
+          beforeDestroy: (file) => {
+            fs.unlinkSync(
+              path.resolve(
+                __dirname,
+                '..',
+                '..',
+                '..',
+                'tmp',
+                'uploads',
+                file.path
+              )
+            );
+          },
+        },
         sequelize,
         tableName: 'file',
+        underscored: true,
       }
     );
 

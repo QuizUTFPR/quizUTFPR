@@ -1,7 +1,10 @@
 import * as Yup from 'yup';
+// import fs from 'fs';
+// import path from 'path';
 
 // MODELS
 import Tag from '../../models/TagModel';
+// import File from '../../models/FileModel';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
@@ -19,10 +22,10 @@ class QuizService {
         .required(),
       description: Yup.string().required(),
       visibility: Yup.string().required().max(10),
-      id_image: Yup.number(),
       tags: Yup.array().required('Informe as tags do quiz!'),
       imageBase64: Yup.string(),
       noTime: Yup.bool().required(),
+      idImage: Yup.number(),
     });
 
     const isValid = await schema.isValid(data);
@@ -79,18 +82,17 @@ class QuizService {
       throw error;
     }
 
-    const { id, tags, title, description, visibility, imageBase64, noTime } =
-      data;
+    const { id, tags, title, description, visibility, idImage, noTime } = data;
 
     const quiz = await this.quizRepository.findByPk(id);
     quiz.title = title;
     quiz.description = description;
     quiz.visibility = visibility;
-    quiz.image_base64 = imageBase64;
-    quiz.no_time = noTime;
+    quiz.idImage = idImage || quiz.idImage;
+    quiz.noTime = noTime;
     quiz.save();
 
-    const tagsAlreadyInQuiz = await quiz.getTags_quiz();
+    const tagsAlreadyInQuiz = await quiz.getTagsQuiz();
     const arrayTagsAlreadyInQuiz = tagsAlreadyInQuiz.map((item) => item.name);
 
     tags.map(async (tagObject) => {
@@ -124,8 +126,6 @@ class QuizService {
       throw error;
     }
 
-    const image_quiz = await quiz.getImage_quiz();
-    if (image_quiz) image_quiz.destroy();
     quiz.destroy();
   }
 }

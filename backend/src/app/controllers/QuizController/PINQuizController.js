@@ -28,7 +28,7 @@ class PINQuizController {
   //         },
   //         {
   //           model: Tag,
-  //           as: 'tags_quiz',
+  //           as: 'tagsQuiz',
   //           attributes: ['name'],
   //           through: {
   //             attributes: [],
