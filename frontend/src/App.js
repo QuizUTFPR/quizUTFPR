@@ -59,6 +59,7 @@ const App = () => {
       <Routes>
         <Route path={TOKENEXPIRED} exact element={<ExpiredToken />} />
         <Route path={LOGIN} exact element={<Login />} />
+
         <Route
           path={`${QUESTION}:id_quiz`}
           exact
