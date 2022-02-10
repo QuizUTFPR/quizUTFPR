@@ -90,6 +90,7 @@ class QuestionService {
       type,
       idImage,
       index,
+      imageUrl,
     } = data;
 
     const quiz = await this.quizRepository.findByPk(Number(quizId));
@@ -133,7 +134,7 @@ class QuestionService {
       question.availableOnQuestionsDb = availableOnQuestionsDB;
 
       let oldImageId = false;
-      if (!idImage) {
+      if (!idImage && !imageUrl) {
         oldImageId = question.idImage;
         question.idImage = null;
       } else {

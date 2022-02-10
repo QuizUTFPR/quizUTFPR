@@ -18,17 +18,31 @@ class File extends Model {
       {
         hooks: {
           beforeDestroy: (file) => {
-            fs.unlinkSync(
-              path.resolve(
-                __dirname,
-                '..',
-                '..',
-                '..',
-                'tmp',
-                'uploads',
-                file.path
+            if (
+              fs.existsSync(
+                path.resolve(
+                  __dirname,
+                  '..',
+                  '..',
+                  '..',
+                  'tmp',
+                  'uploads',
+                  file.path
+                )
               )
-            );
+            ) {
+              fs.unlinkSync(
+                path.resolve(
+                  __dirname,
+                  '..',
+                  '..',
+                  '..',
+                  'tmp',
+                  'uploads',
+                  file.path
+                )
+              );
+            }
           },
         },
         sequelize,

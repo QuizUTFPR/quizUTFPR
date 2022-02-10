@@ -21,7 +21,6 @@ class QuestionTagController {
           'difficultyLevel',
           'score',
           'type',
-          'imageBase64',
           'idImage',
         ],
         include: [
