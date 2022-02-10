@@ -34,7 +34,7 @@ class PublishQuizService {
     quiz.published = true;
     quiz.pin = pin;
     quiz.publishDate = dayjs.utc().format();
-    quiz.save();
+    await quiz.save();
   }
 }
 

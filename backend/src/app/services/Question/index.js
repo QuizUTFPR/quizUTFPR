@@ -7,10 +7,9 @@ import File from '../../models/FileModel';
 
 // REPOSITORIES
 import AnswerRepository from '../../repositories/Answer';
-
-// SERVICES
-import QuizService from '../Quiz/index';
-import TagService from '../Tag';
+import QuestionRepository from '../../repositories/Question';
+import QuizRepository from '../../repositories/Quiz';
+import TagRepository from '../../repositories/Tag';
 
 async function getScoreBasedOnDifficulty(difficulty) {
   switch (difficulty) {
@@ -31,7 +30,10 @@ async function getScoreBasedOnDifficulty(difficulty) {
 
 class QuestionService {
   constructor() {
-    this.questionRepository = new this.QuestionRepository();
+    this.questionRepository = new QuestionRepository();
+    this.quizRepository = new QuizRepository();
+    this.answerRepository = new AnswerRepository();
+    this.tagRepository = new TagRepository();
   }
 
   async validate(data) {
@@ -90,8 +92,7 @@ class QuestionService {
       index,
     } = data;
 
-    const quizService = new QuizService();
-    const quiz = await quizService.create(quizId);
+    const quiz = await this.quizRepository.findByPk(Number(quizId));
 
     if (!quiz) {
       const quizNotExistsError = new Error('Quiz não encontrado!');
@@ -99,7 +100,7 @@ class QuestionService {
       throw quizNotExistsError;
     }
 
-    let question = await this.questionRepository.findByPk(id);
+    let question = await this.questionRepository.findById(id);
     const score = await getScoreBasedOnDifficulty(difficultyLevel);
 
     if (!question) {
@@ -130,20 +131,32 @@ class QuestionService {
       question.type = type;
       question.score = score;
       question.availableOnQuestionsDb = availableOnQuestionsDB;
-      question.idImage = idImage || quiz.idImage;
-      question.save();
+
+      let oldImageId = false;
+      if (!idImage) {
+        oldImageId = question.idImage;
+        question.idImage = null;
+      } else {
+        question.idImage = idImage;
+      }
+
+      await question.save();
+
+      if (oldImageId) {
+        const image = await File.findByPk(oldImageId);
+        await image.destroy();
+      }
     }
 
     // ATUALIZANDO OU CRIANDO AS QUESTÕES
     const idQuestion = question.id;
-    const answerRepository = new AnswerRepository();
 
     // eslint-disable-next-line consistent-return
     answer.map(async (answerItem) => {
-      const answerFounded = await answerRepository.findById(answerItem.id);
+      const answerFounded = await this.answerRepository.findById(answerItem.id);
       if (!answerFounded) {
         try {
-          await answerRepository.create({
+          await this.answerRepository.create({
             idQuestion,
             title: answerItem.title,
             isCorrect: answerItem.isCorrect,
@@ -156,7 +169,7 @@ class QuestionService {
       } else {
         answerFounded.title = answerItem.title;
         answerFounded.isCorrect = answerItem.isCorrect;
-        answerFounded.save();
+        await answerFounded.save();
       }
     });
 
@@ -178,8 +191,7 @@ class QuestionService {
     );
 
     tags.map(async (tagObject) => {
-      const tagService = new TagService();
-      const [tag] = await tagService.findOrCreate({
+      const [tag] = await this.tagRepository.findOrCreate({
         where: {
           name: tagObject,
         },

@@ -150,7 +150,7 @@ class StudentQuizController {
       studentQuizUpdated.score = final;
       studentQuizUpdated.hitAmount = studentAmountQuestionCorrect;
       studentQuizUpdated.isFinished = true;
-      studentQuizUpdated.save();
+      await studentQuizUpdated.save();
 
       if (!studentQuizUpdated)
         return res
@@ -160,7 +160,7 @@ class StudentQuizController {
       studentQuizUpdated.score = final;
       studentQuizUpdated.hitAmount = studentAnswerCorrect;
       studentQuizUpdated.isFinished = true;
-      studentQuizUpdated.save();
+      await studentQuizUpdated.save();
 
       return res.status(200).json(studentQuizUpdated);
     } catch (err) {

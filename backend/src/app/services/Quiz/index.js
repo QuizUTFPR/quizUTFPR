@@ -88,7 +88,7 @@ class QuizService {
     quiz.visibility = visibility;
     quiz.idImage = idImage || quiz.idImage;
     quiz.noTime = noTime;
-    quiz.save();
+    await quiz.save();
 
     const tagsAlreadyInQuiz = await quiz.getTagsQuiz();
     const arrayTagsAlreadyInQuiz = tagsAlreadyInQuiz.map((item) => item.name);
