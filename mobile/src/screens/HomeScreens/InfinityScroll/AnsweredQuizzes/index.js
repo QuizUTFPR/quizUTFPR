@@ -63,14 +63,14 @@ const QuizzesInfinityScroll = () => {
             navigate={() =>
               navigation.navigate('AttempsOfQuiz', {
                 id: quiz.id,
-                attempts: quiz.quiz_student,
+                attempts: quiz.quizStudent,
                 teacher: quiz.teacher,
                 isFavorite: quiz.isFavorite,
                 title: quiz.title,
-                image: quiz.image_base64,
+                image: quiz?.image?.url,
                 amountOfQuestions: quiz.amountOfQuestions,
-                tags: quiz.tags_quiz,
-                noTime: quiz.no_time,
+                tags: quiz.tagsQuiz,
+                noTime: quiz.noTime,
               })
             }
             color={theme.color.purple}

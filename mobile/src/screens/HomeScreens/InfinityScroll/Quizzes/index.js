@@ -69,10 +69,10 @@ const QuizzesInfinityScroll = () => {
                   title: quiz.title,
                   description: quiz.description,
                   pin: quiz.pin,
-                  image: quiz.image_base64,
-                  tags: quiz.tags_quiz.map((tag) => tag.name),
+                  image: quiz?.image?.url,
+                  tags: quiz.tagsQuiz.map((tag) => tag.name),
                   isFavorite: quiz.isFavorite,
-                  noTime: quiz.no_time,
+                  noTime: quiz.noTime,
                 },
               })
             }

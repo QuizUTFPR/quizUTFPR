@@ -64,7 +64,7 @@ const QuizzesInfinityScroll = () => {
             color={theme.color.purple}
             navigate={() =>
               navigation.navigate('Descricao', {
-                idStudentQuiz: item.id_student_quiz,
+                idStudentQuiz: item.idStudentQuiz,
                 questionAmount: item.questionAmount,
                 studentChoicesAmount: item.studentChoicesAmount,
                 quiz: {
@@ -72,10 +72,10 @@ const QuizzesInfinityScroll = () => {
                   title: item.quiz.title,
                   description: item.quiz.description,
                   pin: item.quiz.pin,
-                  image: item.quiz.image_base64,
-                  tags: item.quiz.tags_quiz.map((tag) => tag.name),
+                  image: item.quiz?.image?.url,
+                  tags: item.quiz.tagsQuiz.map((tag) => tag.name),
                   isFavorite: item.quiz.isFavorite,
-                  noTime: item.quiz.no_time,
+                  noTime: item.quiz.noTime,
                 },
               })
             }

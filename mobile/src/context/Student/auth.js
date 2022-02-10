@@ -31,6 +31,7 @@ const StudentAuth = ({ children }) => {
     try {
       const jsonValue = JSON.stringify(values);
       await AsyncStorage.setItem(key, jsonValue);
+      return true;
     } catch (error) {
       console.warn(error);
       return error;
@@ -46,7 +47,7 @@ const StudentAuth = ({ children }) => {
         password,
       });
 
-      const { student, token, refresh_token: RefreshToken } = response.data;
+      const { student, token, refreshToken: RefreshToken } = response.data;
 
       const studentValues = {
         student,
@@ -72,7 +73,7 @@ const StudentAuth = ({ children }) => {
       const { email, password } = values;
       const response = await api.post('/student/login', { email, password });
 
-      const { student, token, refresh_token: RefreshToken } = response.data;
+      const { student, token, refreshToken: RefreshToken } = response.data;
       const studentValues = {
         student,
         token,

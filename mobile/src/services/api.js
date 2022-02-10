@@ -2,8 +2,8 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { navigate } from './rootNavigation';
 
-const ip = '10.0.0.103:3333';
-// const ip = '10.0.2.2:3333'; // Android Studio ********NÃO APAGAR********
+// const ip = '10.0.0.103:3333';
+const ip = '10.0.2.2:3333'; // Android Studio ********NÃO APAGAR********
 // const ip = '192.168.237.64:3333';
 
 const api = axios.create({
@@ -18,7 +18,9 @@ api.interceptors.request.use(async (config) => {
   const data = await AsyncStorage.getItem('@TOKEN');
   if (data) {
     // const token = data != null ? JSON.parse(data) : null;
-    config.headers.common.Authorization = data ? `Bearer ${data}` : '';
+    config.headers.common.Authorization = data
+      ? `Bearer ${JSON.parse(data)}`
+      : '';
   }
 
   return config;
@@ -30,12 +32,12 @@ api.interceptors.response.use(
     const originalRequest = error?.config || error;
     const requestStatus = error?.response?.status || null;
     const refreshTokenExpired =
-      error?.response?.data?.refresh_token_expired || false;
+      error?.response?.data?.refreshTokenExpired || false;
 
     if (requestStatus === 401 && !refreshTokenExpired) {
       const refreshToken = await AsyncStorage.getItem('@REFRESH_TOKEN');
       const response = await api.post('/refresh-token', {
-        refresh_token: JSON.parse(refreshToken),
+        refreshToken: JSON.parse(refreshToken),
       });
       const { token } = response.data;
       await AsyncStorage.setItem('@TOKEN', token);
@@ -46,9 +48,9 @@ api.interceptors.response.use(
 
     if (requestStatus === 401 && refreshTokenExpired) {
       navigate('Logout');
-    } else {
-      return Promise.reject(error);
     }
+
+    return Promise.reject(error);
   }
 );
 

@@ -30,16 +30,16 @@ const Header = () => {
       const { data } = await api.post('/quiz/getByPIN', { pin });
 
       navigation.navigate('Descricao', {
-        idStudentQuiz: data.id_student_quiz,
+        idStudentQuiz: data.idStudentQuiz,
         questionAmount: data.questionAmount,
         studentChoicesAmount: data.studentChoicesAmount,
         quiz: {
-          id: data.quiz.id,
-          title: data.quiz.title,
-          description: data.quiz.description,
-          pin: data.quiz.pin,
-          image: data.quiz.image_base64,
-          tags: data.quiz.tags_quiz.map((tag) => tag.name),
+          id: data?.quiz?.id,
+          title: data?.quiz?.title,
+          description: data?.quiz?.description,
+          pin: data?.quiz?.pin,
+          image: data.quiz?.image?.url,
+          tags: data?.quiz?.tagsQuiz.map((tag) => tag.name),
         },
       });
     } catch (err) {

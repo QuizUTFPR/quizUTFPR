@@ -28,8 +28,8 @@ const Question = ({ children }) => {
 
   const handleFinishQuizAnswering = async () => {
     const { data } = await api.put('/studentQuiz/finishQuiz', {
-      id_student_quiz: StudentQuizID,
-      quiz_id: quizID,
+      idStudentQuiz: StudentQuizID,
+      quizId: quizID,
     });
 
     return data;
@@ -37,10 +37,10 @@ const Question = ({ children }) => {
 
   const handleSaveRequestQuestionOnDatabase = async (timeLeft) => {
     const requestData = {
-      time_left: timeLeft,
-      student_quiz_id: StudentQuizID,
-      quiz_id: quizID,
-      question_id: quizData.questions[quizData.indexOnScreen].id,
+      timeLeft,
+      studentQuizId: StudentQuizID,
+      quizId: quizID,
+      questionId: quizData.questions[quizData.indexOnScreen].id,
       arrayOfChecked: requestQuestion.checkedAnswer,
     };
 
@@ -52,15 +52,15 @@ const Question = ({ children }) => {
   };
 
   // eslint-disable-next-line camelcase
-  const getQuestionsOfQuizFromDatabase = async (quiz_id, id_student_quiz) => {
+  const getQuestionsOfQuizFromDatabase = async (quizId, idStudentQuiz) => {
     const { data } = await api.post('/studentQuiz/getQuestionQuiz', {
-      quiz_id,
-      id_student_quiz,
+      quizId,
+      idStudentQuiz,
     });
 
     setAlreadyAnswered(data.amountStudentChoice);
-    setQuizID(quiz_id);
-    setStudentQuizID(id_student_quiz);
+    setQuizID(quizId);
+    setStudentQuizID(idStudentQuiz);
     setAmountOfQuestion(data.amountOfQuestion);
     setQuizData({
       indexOnScreen: 0,

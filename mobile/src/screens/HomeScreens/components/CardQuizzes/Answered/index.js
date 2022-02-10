@@ -14,9 +14,7 @@ import { TeacherName } from './style';
 
 const CardQuizAnswered = ({ quiz, color, navigate }) => (
   <QuizCard onPress={navigate}>
-    <StyledImage
-      source={quiz.image_base64.length ? { uri: quiz.image_base64 } : null}
-    />
+    <StyledImage source={quiz?.image?.url ? { uri: quiz.image.url } : null} />
     <StyledView>
       <Description>
         <QuizTitle fill="black">{quiz.title}</QuizTitle>

@@ -64,7 +64,7 @@ const Home = ({ route }) => {
       <QuizAttemptsHeader>
         <StyledImageBackground
           source={
-            image.length
+            image
               ? {
                   uri: image,
                 }

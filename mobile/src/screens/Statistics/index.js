@@ -52,7 +52,7 @@ const Statistics = ({ route }) => {
   const navigation = useNavigation();
 
   const { amountOfQuestion } = useQuestions();
-  const { hit_amount: hitAmount, score } = route.params;
+  const { hitAmount, score } = route.params;
 
   const hitsPercentage = (hitAmount * 100) / amountOfQuestion;
 

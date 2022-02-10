@@ -23,9 +23,9 @@ const CardQuizBasic = ({ navigate, quiz, color }) => (
   <QuizCard onPress={navigate}>
     <StyledImage
       source={
-        quiz.quiz.image_base64.length
+        quiz?.quiz?.image?.url
           ? {
-              uri: quiz.quiz.image_base64,
+              uri: quiz.quiz.image.url,
             }
           : null
       }

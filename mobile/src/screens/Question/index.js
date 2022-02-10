@@ -201,11 +201,11 @@ const Question = () => {
                 <QuestionDescription>
                   <QuestionImage
                     source={
-                      quizData.questions[quizData.indexOnScreen].image_base64
+                      quizData.questions[quizData.indexOnScreen]?.image?.url
                         .length
                         ? {
                             uri: quizData.questions[quizData.indexOnScreen]
-                              .image_base64,
+                              ?.image?.url,
                           }
                         : null
                     }

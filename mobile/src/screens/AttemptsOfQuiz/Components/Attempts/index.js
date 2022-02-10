@@ -26,8 +26,7 @@ const Attempts = ({ attempts, amountOfQuestions }) => (
       const hours = `${date.getHours()}`;
       const minutes = `${date.getMinutes()}`;
 
-      // eslint-disable-next-line camelcase
-      const { id, score, hit_amount } = attempt;
+      const { id, score, hitAmount } = attempt;
 
       return (
         <AttemptCard key={id}>
@@ -47,13 +46,12 @@ const Attempts = ({ attempts, amountOfQuestions }) => (
               </SytledDateTime>
 
               <QuizProgressText fill="purple">
-                {/* eslint-disable-next-line camelcase */}
-                {hit_amount}/{amountOfQuestions}
+                {hitAmount}/{amountOfQuestions}
               </QuizProgressText>
             </AttemptDateAndHits>
             <QuizProgressBarBackground fill="lightGrey">
               <QuizProgressBar
-                porcentage={(attempt.hit_amount * 100) / amountOfQuestions}
+                porcentage={(attempt.hitAmount * 100) / amountOfQuestions}
                 fill="purple"
               />
             </QuizProgressBarBackground>

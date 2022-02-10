@@ -60,7 +60,7 @@ const QuizDescription = ({ route }) => {
   const navigation = useNavigation();
 
   const startQuizAndGetAllQuestions = async () => {
-    const { data } = await api.post('/studentQuiz/startQuiz', { quiz_id: id });
+    const { data } = await api.post('/studentQuiz/startQuiz', { quizId: id });
     await getQuestionsOfQuizFromDatabase(id, data.id);
     navigation.navigate('CountDown');
   };
@@ -72,8 +72,8 @@ const QuizDescription = ({ route }) => {
 
   const giveUPQuiz = async () => {
     await api.put('/studentQuiz/finishQuiz', {
-      quiz_id: id,
-      id_student_quiz: studentQuizID,
+      quizId: id,
+      idStudentQuiz: studentQuizID,
     });
 
     setStudentQuizID(null);
@@ -104,11 +104,15 @@ const QuizDescription = ({ route }) => {
     try {
       if (favorite) {
         await api.delete('/quiz/deleteFavorite', {
-          params: { quiz_id: id },
+          params: {
+            quizId: id,
+          },
         });
         setFavorite(false);
       } else {
-        await api.post('/quiz/favorite', { quiz_id: id });
+        await api.post('/quiz/favorite', {
+          quizId: id,
+        });
         setFavorite(true);
       }
     } catch (error) {
@@ -126,7 +130,7 @@ const QuizDescription = ({ route }) => {
         <QuizDescriptionHeader>
           <StyledImageBackground
             source={
-              image.length
+              image
                 ? {
                     uri: image,
                   }
