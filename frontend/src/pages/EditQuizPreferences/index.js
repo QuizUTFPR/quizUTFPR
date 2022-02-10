@@ -49,22 +49,10 @@ const EditPreferences = forwardRef((props, ref) => {
       visibility: quiz.visibility,
       imageUrl: quiz.image?.url,
       imageObj: null,
-      // imageBase64: quiz.image?.url,
       tags: quiz.tagsQuiz.map((tag) => tag.name),
       noTime: quiz.noTime,
     },
     onSubmit: async (values) => {
-      // const responseFile = null;
-      // let base64 = '';
-
-      // if (values.imageObj !== null) {
-      //   base64 = await getBase64(values.imageObj);
-
-      //   // const file = new FormData();
-      //   // file.append('file', values.imageObj);
-      //   // responseFile = await api.post('/files', file);
-      // }
-
       const { id, imageObj, title, tags, description, visibility, noTime } =
         values;
 
@@ -73,10 +61,6 @@ const EditPreferences = forwardRef((props, ref) => {
       const file = new FormData();
       file.append('file', imageObj);
       file.append('values', JSON.stringify(body));
-
-      // if (responseFile) {
-      //   quizUpdated.id_image = responseFile.data.id;
-      // }
 
       const responseQuiz = await api.put('/quiz/update', file);
       if (responseQuiz.status === 200) props.handleClose();

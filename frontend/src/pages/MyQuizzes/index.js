@@ -105,7 +105,7 @@ const Quiz = () => {
   const handleRemoveQuiz = async () => {
     try {
       await api.delete('/quiz/delete', {
-        data: { id_quiz: openAlert.idQuiz },
+        data: { idQuiz: openAlert.idQuiz },
       });
       handleClickSnackBar('Quiz removido com sucesso!', 'success');
 

@@ -3,7 +3,7 @@ import { LinearProgress } from '@mui/material';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 // CONTEXT
-import QuestionQuizProvider from '@context/questions_quiz';
+import QuestionQuizProvider from '@context/questionsQuiz';
 
 // HOOKS
 import useAuth from '@hooks/Auth';
@@ -61,7 +61,7 @@ const App = () => {
         <Route path={LOGIN} exact element={<Login />} />
 
         <Route
-          path={`${QUESTION}:id_quiz`}
+          path={`${QUESTION}:idQuiz`}
           exact
           element={
             <QuestionQuizProvider>

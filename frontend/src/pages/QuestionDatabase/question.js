@@ -80,7 +80,7 @@ const Questions = ({ id, checked, onChange, question }) => (
               md={6}
               key={`${item.id}+${item.title}+${Math.random()}`}
             >
-              {item.is_correct ? (
+              {item.isCorrect ? (
                 <CorrectgAnswer>
                   <Katex>{item.title} </Katex>
                 </CorrectgAnswer>

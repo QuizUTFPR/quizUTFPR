@@ -1,10 +1,6 @@
 import React, { createContext, useState } from 'react';
-// import PropTypes from 'prop-types';
 import api from '@api';
 import * as yup from 'yup';
-
-// UTILS
-// import getBase64 from '@utils/getBase64OfImage';
 
 import {
   TrueOrFalseAnswer,
@@ -13,7 +9,7 @@ import {
   MockupQuestionMultipleChoice,
   initialValue,
   initialValueErrors,
-} from './mockups_question_quiz';
+} from './mockupsQuestionQuiz';
 
 export const QuestionQuizContext = createContext();
 
@@ -26,8 +22,9 @@ const QuestionQuiz = ({ children }) => {
 
   const getAllQuestionOfTheQuiz = async (id) => {
     try {
-      const response = await api.get(`/question/quiz/${id}`);
-      const initialQuestions = response.data.map((question) => ({
+      const { data } = await api.get(`/question/quiz/${id}`);
+
+      const initialQuestions = data.map((question) => ({
         id: question.id,
         type: question.type,
         copy: question.copy,
@@ -42,8 +39,6 @@ const QuestionQuiz = ({ children }) => {
         answer: question.answer,
       }));
 
-      console.log(initialQuestions);
-
       setQuestions(initialQuestions);
       return initialQuestions[0];
     } catch (error) {
@@ -53,12 +48,19 @@ const QuestionQuiz = ({ children }) => {
 
   const saveQuestionOnDatabase = (quizId) => {
     try {
+      // REMOVING QUESTIONS
       if (questionToRemove.length) {
-        questionToRemove.map((removed) =>
-          api.delete('/question/delete', { data: { id: removed.id } })
-        );
+        questionToRemove.forEach((removed) => {
+          console.log('removendo', removed.id);
+          api.delete('/question/delete', {
+            data: {
+              id: removed.id,
+            },
+          });
+        });
       }
 
+      // SAVING QUESTIONS
       questions.map(async (item, index) => {
         const {
           id,
@@ -71,6 +73,7 @@ const QuestionQuiz = ({ children }) => {
           difficultyLevel,
           tags,
           answer,
+          imageUrl,
         } = item;
 
         const body = {
@@ -85,6 +88,7 @@ const QuestionQuiz = ({ children }) => {
           answer,
           index,
           quizId,
+          imageUrl,
         };
 
         const file = new FormData();
@@ -97,6 +101,7 @@ const QuestionQuiz = ({ children }) => {
       });
       setTimeout(() => getAllQuestionOfTheQuiz(quizId), 1000);
       setSaved(true);
+      setQuestionToRemove([]);
     } catch (error) {
       setSaved(false);
     }
@@ -211,8 +216,7 @@ const QuestionQuiz = ({ children }) => {
       availableOnQuestionsDB: yup.boolean().required(),
       // eslint-disable-next-line react/forbid-prop-types
       imageObj: yup.object().nullable(),
-      // imageUrl: yup.string(),
-      imageBase64: yup.string(),
+      imageUrl: yup.string(),
       title: yup.string().min(1).required(),
       timer: yup.number().required(),
       difficultyLevel: yup.string().required(),
@@ -227,7 +231,6 @@ const QuestionQuiz = ({ children }) => {
           })
         )
         .test((answer) => {
-          // eslint-disable-next-line camelcase
           const isRight = answer.map(({ isCorrect }) => isCorrect);
           if (!isRight.includes(true)) {
             return new yup.ValidationError(
@@ -248,8 +251,7 @@ const QuestionQuiz = ({ children }) => {
     availableOnQuestionsDB: yup.boolean().required(),
     // eslint-disable-next-line react/forbid-prop-types
     imageObj: yup.object().nullable(),
-    // imageUrl: yup.string(),
-    imageBase64: yup.string(),
+    imageUrl: yup.string(),
     title: yup.string().min(1).required(),
     timer: yup.number().required(),
     difficultyLevel: yup.string().required(),
@@ -264,7 +266,6 @@ const QuestionQuiz = ({ children }) => {
         })
       )
       .test((answer) => {
-        // eslint-disable-next-line camelcase
         const isRight = answer.map(({ isCorrect }) => isCorrect);
         if (!isRight.includes(true)) {
           return new yup.ValidationError(

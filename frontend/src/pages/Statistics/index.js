@@ -28,7 +28,7 @@ const Statistics = () => {
       const { data: studentQuizStatistics } = await api.post(
         '/statistics/getStudentQuizStatistics',
         {
-          quiz_id: id,
+          quizId: id,
         }
       );
       setStudentQuiz(studentQuizStatistics);
@@ -36,7 +36,7 @@ const Statistics = () => {
       const { data: questionQuizStatistics } = await api.post(
         '/statistics/getQuestionQuizStatistics',
         {
-          quiz_id: id,
+          quizId: id,
         }
       );
 

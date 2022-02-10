@@ -28,8 +28,7 @@ const Question = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // eslint-disable-next-line camelcase
-  const { id_quiz } = useParams();
+  const { idQuiz } = useParams();
   const {
     questions,
     getAllQuestionOfTheQuiz,
@@ -88,8 +87,7 @@ const Question = () => {
   const handleCloseGetOutAlert = () => setOpenGetOutAlert(false);
 
   const fetchQuestions = async () => {
-    // eslint-disable-next-line camelcase
-    const firstQuestion = await getAllQuestionOfTheQuiz(id_quiz);
+    const firstQuestion = await getAllQuestionOfTheQuiz(idQuiz);
     setOnScreen({ index: 0, question: firstQuestion });
   };
 
@@ -130,7 +128,7 @@ const Question = () => {
   const handleSave = async () => {
     // VERIFICO SE AS QUESTÃO ESTÃO VALIDAS
     if (await validationSchemeArrayQuestion.isValid(questions)) {
-      saveQuestionOnDatabase(id_quiz);
+      saveQuestionOnDatabase(idQuiz);
       return true;
     }
     // PROCURO QUAL QUESTÃO É INVALIDA E QUAIS SEUS ERROS

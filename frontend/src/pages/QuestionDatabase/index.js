@@ -24,13 +24,14 @@ const Wrapper = forwardRef((props, ref) => (
   <GridContainer ref={ref} {...props} />
 ));
 
-// async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
-//   const response = await fetch(url);
-//   const data = await response.blob();
-//   return new File([data], name, {
-//     type: response.headers.get('content-type') || defaultType,
-//   });
-// }
+async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
+  const response = await fetch(url);
+  const data = await response.blob();
+
+  return new File([data], name, {
+    type: response.headers.get('content-type') || defaultType,
+  });
+}
 
 // eslint-disable-next-line no-unused-vars
 const QuestionDatabase = forwardRef((props, ref) => {
@@ -84,28 +85,22 @@ const QuestionDatabase = forwardRef((props, ref) => {
           const newQuestions = await Promise.all(
             data.map(
               async ({
-                tags_question,
-                image_question,
-                difficulty_level,
+                tagsQuestion,
+                imageQuestion,
+                difficultyLevel,
                 answer,
-                image_base64,
                 ...rest
               }) => ({
                 ...rest,
                 copy: true,
                 id: -1,
-                difficultyLevel: difficulty_level,
+                difficultyLevel,
                 availableOnQuestionsDB: false,
-                imageObj: null,
-                // imageObj:
-                //   image_question &&
-                //   (await getFileFromUrl(
-                //     image_question.url,
-                //     image_question.name
-                //   )),
-                // imageUrl: image_question ? image_question.url : '',
-                imageBase64: image_base64,
-                tags: tags_question.map((item) => item.name),
+                imageObj:
+                  imageQuestion?.url &&
+                  (await getFileFromUrl(imageQuestion?.url)),
+                imageUrl: imageQuestion?.url,
+                tags: tagsQuestion.map((item) => item.name),
                 answer: answer.map((item) => ({ ...item, id: -1 })),
               })
             )

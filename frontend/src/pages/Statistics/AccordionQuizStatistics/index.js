@@ -187,15 +187,15 @@ const AccordionWrapper = ({ quizData }) => {
                     Quantidade de jogadores
                   </TextTitleResumeOfQuestion>
                   <TextValueResumeOfQuestion>
-                    {question.question_choice.length}
+                    {question.questionChoice.length}
                   </TextValueResumeOfQuestion>
                 </WrapperResumeQuestion>
               </WrapperResumeOfQuestion>
 
               <StudentWrapper>
                 <HeaderTitle>Respostas</HeaderTitle>
-                {question.question_choice.map((choice) => (
-                  <StudentInformation key={choice.student_quiz_id}>
+                {question.questionChoice.map((choice) => (
+                  <StudentInformation key={choice.studentQuizId}>
                     <BoxStudent>
                       <BoldText>Aluno: </BoldText>
                       <StudentName>{choice.student.name}</StudentName>

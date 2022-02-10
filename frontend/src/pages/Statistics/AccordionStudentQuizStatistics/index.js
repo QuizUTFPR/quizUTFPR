@@ -57,7 +57,7 @@ const AccordionWrapper = ({ quizData, pin }) => {
               <Typography>
                 {studentIndex + 1}.{`  ${student.name}`}
               </Typography>
-              <Typography>Score: {student.student_quiz.score}</Typography>
+              <Typography>Score: {student.studentQuiz.score}</Typography>
             </StudentBar>
           </StyledAccordionSummary>
           <AccordionDetails>
@@ -84,7 +84,7 @@ const AccordionWrapper = ({ quizData, pin }) => {
                         Dificuldade
                       </TextTitleResumeOfQuestion>
                       <TextValueResumeOfQuestion>
-                        {question.difficulty_level}
+                        {question.difficultyLevel}
                       </TextValueResumeOfQuestion>
                     </WrapperResumeQuestion>
                     <Divider />
@@ -110,17 +110,17 @@ const AccordionWrapper = ({ quizData, pin }) => {
                   <AnswerWrapper>
                     {question.answer.map((answer, i) => (
                       <AnswerItem
-                        correct={answer.is_correct}
+                        correct={answer.isCorrect}
                         studentChecked={
-                          student.student_quiz.quiz_question_choice[
-                            questionIndex
-                          ][`checked${i + 1}`]
+                          student.studentQuiz.quizQuestionChoice[questionIndex][
+                            `checked${i + 1}`
+                          ]
                         }
                         key={answer.id}
                       >
                         <AnswerTitle
                           studentChecked={
-                            student.student_quiz.quiz_question_choice[
+                            student.studentQuiz.quizQuestionChoice[
                               questionIndex
                             ][`checked${i + 1}`]
                           }

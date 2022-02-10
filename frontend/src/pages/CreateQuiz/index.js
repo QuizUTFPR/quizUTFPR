@@ -42,8 +42,6 @@ const CriarQuiz = () => {
       noTime: false,
     },
     onSubmit: async (values) => {
-      // const responseFile = null;
-      // let base64 = '';
       const {
         imageObj,
         title,
@@ -53,10 +51,6 @@ const CriarQuiz = () => {
         published,
         noTime,
       } = values;
-
-      // if (values.imageObj !== null) {
-      //   base64 = await getBase64(values.imageObj);
-      // }
 
       const body = { title, tags, description, visibility, published, noTime };
 
@@ -70,7 +64,7 @@ const CriarQuiz = () => {
 
       if (responseQuiz.status === 200) {
         navigate(`${QUESTION}${data.id}`, {
-          state: { title: data.title, noTime: data.no_time },
+          state: { title: data.title, noTime: data.noTime },
         });
       }
     },
