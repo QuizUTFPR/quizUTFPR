@@ -17,12 +17,17 @@ class QuizPublishedController {
       const page = req.body.page || false;
       const limit = req.body.limit || 3;
 
+      console.log('teste');
+
       const quizPublishedService = new QuizPublishedService();
+
       const quizzes = await quizPublishedService.execute({
         studentId,
         page,
         limit,
       });
+
+      console.log(quizzes);
 
       return res.status(200).json(quizzes);
     } catch (error) {

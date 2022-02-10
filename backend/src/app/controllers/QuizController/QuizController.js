@@ -52,6 +52,7 @@ class QuizController {
           'idImage',
           'pin',
           'noTime',
+          'idTeacher',
         ],
         include: [
           {
@@ -100,6 +101,7 @@ class QuizController {
           'idImage',
           'pin',
           'noTime',
+          'idTeacher',
         ],
         include: [
           {
@@ -120,6 +122,7 @@ class QuizController {
               'copy',
               'availableOnQuestionsDb',
               'type',
+              'idImage',
             ],
             through: {
               attributes: [],

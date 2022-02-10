@@ -50,7 +50,7 @@ class FavoriteStudentQuizController {
             ],
           },
         ],
-        attributes: [],
+        attributes: ['quizId'],
         offset: page ? (page - 1) * limit : 0,
         limit: page ? limit : null,
       });
@@ -79,8 +79,8 @@ class FavoriteStudentQuizController {
         return res.status(400).json({ error: 'Corpo de requisição inválido!' });
       }
 
-      const quizId = req.userId;
-      const { studentId } = req.body;
+      const studentId = req.userId;
+      const { quizId } = req.body;
 
       const favorite = await FavoriteStudentQuiz.create({
         quizId,
@@ -89,6 +89,7 @@ class FavoriteStudentQuizController {
 
       return res.status(200).json(favorite);
     } catch (err) {
+      console.log(err);
       return res.status(500).json(err);
     }
   }

@@ -25,6 +25,7 @@ class QuizTeacherService {
         'published',
         'pin',
         'noTime',
+        'idTeacher',
       ],
       include: [
         {

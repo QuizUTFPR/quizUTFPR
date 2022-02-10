@@ -100,9 +100,7 @@ class QuizService {
     }
 
     await quiz.save();
-    console.log('old', oldImageId);
     if (oldImageId) {
-      console.log('vai deletar antiga', oldImageId);
       const image = await File.findByPk(oldImageId);
       await image.destroy();
     }

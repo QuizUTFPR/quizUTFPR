@@ -1,7 +1,8 @@
 import * as Yup from 'yup';
-import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
 import StudentRepository from '../../repositories/Student';
 import DeleteRefreshTokenService from '../RefreshToken/DeleteRefreshToken';
+import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
+import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
 
 class StudentSessionService {
   constructor() {
@@ -42,7 +43,7 @@ class StudentSessionService {
       where: { userId: id },
     });
 
-    const token = await GenerateRefreshTokenProvider.execute(id);
+    const token = await GenerateTokenProvider.execute(id);
     const refreshToken = await GenerateRefreshTokenProvider.execute(id);
 
     return {

@@ -33,6 +33,7 @@ router.delete('/delete', QuizController.delete);
 
 router.post('/favorite', FavoriteStudentQuizController.store);
 router.delete('/deleteFavorite', FavoriteStudentQuizController.delete);
+
 router.post(
   '/create',
   multerInstance.single('file'),

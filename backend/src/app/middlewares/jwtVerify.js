@@ -22,7 +22,6 @@ export default async (req, res, next) => {
     const { id } = await promisify(jwt.verify)(token, authConfig.secret);
     req.userId = id;
   } catch (error) {
-    console.log(error);
     return res.status(401).json({
       error: 'Falha na autenticação, token inválido!',
     });

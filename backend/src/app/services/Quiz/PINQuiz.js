@@ -14,7 +14,7 @@ class PINQuizService {
 
   async findByPin(data) {
     const { pin, studentId } = data;
-
+    console.log(data);
     const quiz = await Quiz.findOne({
       where: {
         pin,
@@ -27,7 +27,7 @@ class PINQuizService {
         },
         {
           model: File,
-          as: 'imageQuiz',
+          as: 'image',
           attributes: ['url', 'path', 'name'],
         },
         {
@@ -77,4 +77,4 @@ class PINQuizService {
   }
 }
 
-export default PINQuizService;
+export default new PINQuizService();

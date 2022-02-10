@@ -32,6 +32,7 @@ class QuizPublishedService {
         'idImage',
         'pin',
         'noTime',
+        'idTeacher',
       ],
       include: [
         {
@@ -41,7 +42,7 @@ class QuizPublishedService {
         },
         {
           model: File,
-          as: 'imageQuiz',
+          as: 'image',
           attributes: ['url', 'path', 'name'],
         },
         {

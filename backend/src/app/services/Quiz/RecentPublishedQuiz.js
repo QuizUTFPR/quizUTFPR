@@ -33,6 +33,7 @@ class RecentPublishedQuizService {
         'pin',
         'publishDate',
         'noTime',
+        'idTeacher',
       ],
       include: [
         {
@@ -42,7 +43,7 @@ class RecentPublishedQuizService {
         },
         {
           model: File,
-          as: 'imageQuiz',
+          as: 'image',
           attributes: ['url', 'path', 'name'],
         },
         {

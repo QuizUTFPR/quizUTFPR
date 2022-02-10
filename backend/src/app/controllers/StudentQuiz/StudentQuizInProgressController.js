@@ -34,6 +34,7 @@ class StudentQuizInProgressController {
               'pin',
               'noTime',
               'idImage',
+              'idTeacher',
             ],
             include: [
               {
@@ -43,7 +44,7 @@ class StudentQuizInProgressController {
               },
               {
                 model: File,
-                as: 'imageQuiz',
+                as: 'image',
                 attributes: ['url', 'path', 'name'],
               },
               {
