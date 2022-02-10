@@ -1,8 +1,8 @@
 export default (type) => {
   switch (type) {
-    case 'multiple_choice':
+    case 'multipleChoice':
       return 'Múltipla Escolha';
-    case 'single_choice':
+    case 'singleChoice':
       return 'Escolha Única';
     default:
       return '';

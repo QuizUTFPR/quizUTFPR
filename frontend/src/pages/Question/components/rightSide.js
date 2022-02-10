@@ -54,8 +54,8 @@ const RightSide = ({
               }}
               required
             >
-              <option value="multiple_choice">Múltipla Escolha</option>
-              <option value="single_choice">Verdadeiro ou Falso</option>
+              <option value="multipleChoice">Múltipla Escolha</option>
+              <option value="singleChoice">Verdadeiro ou Falso</option>
             </SelectInput>
           </GridItemStyledRight>
 
@@ -135,7 +135,7 @@ const RightSide = ({
               <FormControlLabel
                 control={
                   <CheckBox
-                    type="multiple_choice"
+                    type="multipleChoice"
                     disabled={
                       Boolean(formik.values.question.copy) ||
                       location.state.published

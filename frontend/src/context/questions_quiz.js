@@ -34,11 +34,11 @@ const QuestionQuiz = ({ children }) => {
         availableOnQuestionsDB: question.availableOnQuestionsDb,
         imageObj: null,
         imageBase64: question.imageBase64,
-        imageUrl: question?.image_question?.url,
+        imageUrl: question?.imageQuestion?.url,
         title: question.title,
         timer: question.timer,
         difficultyLevel: question.difficultyLevel,
-        tags: question.tags_question.map((tag) => tag.name),
+        tags: question.tagsQuestion.map((tag) => tag.name),
         answer: question.answer,
       }));
 
@@ -86,12 +86,6 @@ const QuestionQuiz = ({ children }) => {
           index,
           quizId,
         };
-        // let base64 = item.imageBase64;
-
-        // if (item.imageObj !== null) {
-        //   base64 = await getBase64(item.imageObj);
-
-        // }
 
         const file = new FormData();
         file.append('file', imageObj);
@@ -127,17 +121,6 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const updateQuestion = ({ value, key, index }) => {
-    // const testeAntigo = questions.map((question, i) => {
-    //   if (i === index) {
-    //     return {
-    //       ...question,
-    //       [key]: value,
-    //     };
-    //   }
-
-    //   return question;
-    // });
-
     setQuestions((prevState) => {
       const newData = [...prevState];
       newData[index] = {
@@ -152,28 +135,6 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const updateAnswer = ({ value, key, indexQuestion, indexAnswer }) => {
-    // const oldQuestions = questions.map((question, i) => {
-    //   if (i === indexQuestion) {
-    //     return {
-    //       ...question,
-    //       answer: [
-    //         ...question.answer.map((answerItem, index) => {
-    //           if (index === indexAnswer) {
-    //             return {
-    //               ...answerItem,
-    //               [key]: value,
-    //             };
-    //           }
-
-    //           return answerItem;
-    //         }),
-    //       ],
-    //     };
-    //   }
-
-    //   return question;
-    // });
-
     setQuestions((prevState) => {
       const newData = [...prevState];
       newData[indexQuestion].answer[indexAnswer] = {
@@ -196,20 +157,9 @@ const QuestionQuiz = ({ children }) => {
     formikAnswerID,
   }) => {
     const choosedType =
-      type === 'multiple_choice' ? MultipleChoiceAnswer : TrueOrFalseAnswer;
+      type === 'multipleChoice' ? MultipleChoiceAnswer : TrueOrFalseAnswer;
     formikUpdate(formikTypeID, type);
     formikUpdate(formikAnswerID, choosedType);
-
-    // const oldWay = questions.map((question, i) => {
-    //   if (i === indexQuestion) {
-    //     return {
-    //       ...question,
-    //       type,
-    //       answer: choosedType,
-    //     };
-    //   }
-    //   return question;
-    // });
 
     setQuestions((prevState) => {
       const newData = [...prevState];

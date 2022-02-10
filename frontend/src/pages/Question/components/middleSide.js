@@ -161,7 +161,7 @@ const MiddleSide = ({
                   >
                     <Check />
                   </ShowOption>
-                  {formik.values.question.type === 'multiple_choice' ? (
+                  {formik.values.question.type === 'multipleChoice' ? (
                     <HiddenCheckBox
                       disabled={location.state.published}
                       style={{ width: '50px', height: '50px' }}

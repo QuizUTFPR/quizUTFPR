@@ -8,7 +8,7 @@ const teste = {
       timer: 30,
       score: 40,
       difficulty_level: 'Muito Difícil',
-      type: 'multiple_choice',
+      type: 'multipleChoice',
       answer: [
         {
           id: 1,
@@ -39,7 +39,7 @@ const teste = {
       timer: 30,
       score: 15,
       difficulty_level: 'Médio',
-      type: 'multiple_choice',
+      type: 'multipleChoice',
       answer: [
         {
           id: 17,
@@ -70,7 +70,7 @@ const teste = {
       timer: 30,
       score: 15,
       difficulty_level: 'Médio',
-      type: 'multiple_choice',
+      type: 'multipleChoice',
       answer: [
         {
           id: 13,
@@ -101,7 +101,7 @@ const teste = {
       timer: 30,
       score: 10,
       difficulty_level: 'Fácil',
-      type: 'multiple_choice',
+      type: 'multipleChoice',
       answer: [
         {
           id: 5,
@@ -133,7 +133,7 @@ const teste = {
       timer: 30,
       score: 15,
       difficulty_level: 'Médio',
-      type: 'multiple_choice',
+      type: 'multipleChoice',
       answer: [
         {
           id: 9,
@@ -164,7 +164,7 @@ const teste = {
       timer: 30,
       score: 15,
       difficulty_level: 'Médio',
-      type: 'multiple_choice',
+      type: 'multipleChoice',
       answer: [
         {
           id: 25,
@@ -196,7 +196,7 @@ const teste = {
       timer: 30,
       score: 15,
       difficulty_level: 'Médio',
-      type: 'multiple_choice',
+      type: 'multipleChoice',
       answer: [
         {
           id: 21,

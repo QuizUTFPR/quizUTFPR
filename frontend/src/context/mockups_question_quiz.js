@@ -36,7 +36,7 @@ export const MultipleChoiceAnswer = [
 
 export const MockupQuestionTrueOrFalse = {
   id: -1,
-  type: 'single_choice',
+  type: 'singleChoice',
   copy: false,
   title: '',
   timer: 30,
@@ -51,7 +51,7 @@ export const MockupQuestionTrueOrFalse = {
 
 export const MockupQuestionMultipleChoice = {
   id: -1,
-  type: 'multiple_choice',
+  type: 'multipleChoice',
   copy: false,
   title: '',
   timer: 30,
@@ -67,7 +67,7 @@ export const MockupQuestionMultipleChoice = {
 export const initialValue = [
   {
     id: -1,
-    type: 'multiple_choice',
+    type: 'multipleChoice',
     copy: false,
     title: '',
     timer: 30,
