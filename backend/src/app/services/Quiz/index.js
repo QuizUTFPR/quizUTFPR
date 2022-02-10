@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 
 // MODELS
 import Tag from '../../models/TagModel';
+import File from '../../models/FileModel';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
@@ -86,9 +87,25 @@ class QuizService {
     quiz.title = title;
     quiz.description = description;
     quiz.visibility = visibility;
-    quiz.idImage = idImage || quiz.idImage;
     quiz.noTime = noTime;
+
+    // Image
+    let oldImageId = false;
+
+    if (idImage) {
+      oldImageId = quiz.idImage;
+      quiz.idImage = idImage;
+    } else {
+      quiz.idImage = null;
+    }
+
     await quiz.save();
+    console.log('old', oldImageId);
+    if (oldImageId) {
+      console.log('vai deletar antiga', oldImageId);
+      const image = await File.findByPk(oldImageId);
+      await image.destroy();
+    }
 
     const tagsAlreadyInQuiz = await quiz.getTagsQuiz();
     const arrayTagsAlreadyInQuiz = tagsAlreadyInQuiz.map((item) => item.name);
