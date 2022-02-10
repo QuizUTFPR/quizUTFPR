@@ -10,7 +10,7 @@ class Quiz extends Model {
         visibility: Sequelize.STRING,
         idImage: Sequelize.INTEGER,
         published: Sequelize.BOOLEAN,
-        pin: Sequelize.STRING,
+        pin: Sequelize.TEXT,
         publishDate: Sequelize.DATE,
         noTime: Sequelize.BOOLEAN,
       },

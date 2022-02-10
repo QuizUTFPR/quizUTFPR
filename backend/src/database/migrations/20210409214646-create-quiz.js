@@ -38,7 +38,7 @@ module.exports = {
         allowNull: true,
       },
       pin: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: true,
         unique: true,
       },
