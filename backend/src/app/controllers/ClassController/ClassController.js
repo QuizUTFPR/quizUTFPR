@@ -1,8 +1,11 @@
 // SERVICES
 import CreateClassService from '../../services/Class/CreateClass';
+import FindByPkClassService from '../../services/Class/FindByPkClass';
+import GetAllClassesService from '../../services/Class/GetAllClasses';
+import DeleteClassService from '../../services/Class/DeleteClass';
+import UpdateClassService from '../../services/Class/UpdateClass';
 
-class StudentController {
-  // Cadastra um único registro
+class ClassController {
   async store(req, res) {
     try {
       const { title, description } = req.body;
@@ -16,9 +19,72 @@ class StudentController {
         idImage,
       });
 
+      console.log(classCreated, 'classCreated');
+
       return res.status(200).json(classCreated);
     } catch (error) {
-      console.log(error);
+      console.log('deu erro carai', error);
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
+    }
+  }
+
+  async show(req, res) {
+    try {
+      const { id } = req.body;
+
+      const classSearched = await FindByPkClassService.execute({ id });
+
+      return res.status(200).json(classSearched);
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
+    }
+  }
+
+  async index(req, res) {
+    try {
+      const allClasses = await GetAllClassesService.execute();
+
+      return res.status(200).json(allClasses);
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
+    }
+  }
+
+  async destroy(req, res) {
+    try {
+      const { id } = req.body;
+
+      const deletedClass = await DeleteClassService.execute({ id });
+
+      return res.status(200).json(deletedClass);
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
+    }
+  }
+
+  async update(req, res) {
+    try {
+      const { id, ...values } = req.body;
+
+      const updatedClass = await UpdateClassService.execute(
+        { ...values },
+        { id }
+      );
+
+      return res.status(200).json(updatedClass);
+    } catch (error) {
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
@@ -27,4 +93,4 @@ class StudentController {
   }
 }
 
-export default new StudentController();
+export default new ClassController();

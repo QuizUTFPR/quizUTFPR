@@ -71,7 +71,7 @@ class FavoriteStudentQuizController {
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
-        quizId: Yup.number().required(),
+        quizId: Yup.string().required(),
       });
 
       // Check body of requisiton
@@ -97,7 +97,7 @@ class FavoriteStudentQuizController {
   async delete(req, res) {
     try {
       const schema = Yup.object().shape({
-        quizId: Yup.number().required(),
+        quizId: Yup.string().required(),
       });
 
       // Check body of requisiton

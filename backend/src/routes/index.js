@@ -11,7 +11,7 @@ import StudentQuiz from './Student/studentQuiz';
 import Student from './Student/student';
 import PublishedQuiz from './PublishedQuiz/quiz';
 import Statistics from './Statistics';
-
+import Classes from './Class';
 // MIDDLEWARES
 import verifyJWT from '../app/middlewares/jwtVerify';
 
@@ -24,10 +24,10 @@ router.use('/student', Student);
 // Todas as rotas abaixo que forem chamadas abaixo deveram ser autenticadas
 router.use('/studentQuiz', verifyJWT, StudentQuiz);
 router.use('/publishedQuiz', verifyJWT, PublishedQuiz);
-// router.use('/files', verifyJWT, File);
 router.use('/quiz', verifyJWT, Quiz);
 router.use('/question', verifyJWT, Question);
 router.use('/tag', verifyJWT, Tag);
 router.use('/statistics', verifyJWT, Statistics);
+router.use('/class', verifyJWT, Classes);
 
 export default router;

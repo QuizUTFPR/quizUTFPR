@@ -17,7 +17,7 @@ module.exports = {
         },
       },
       quiz_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         onDelete: 'CASCADE',
         references: {
           model: 'quiz',

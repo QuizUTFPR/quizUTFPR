@@ -38,7 +38,7 @@ class QuestionService {
 
   async validate(data) {
     const schema = Yup.object().shape({
-      quizId: Yup.number().required(),
+      quizId: Yup.string().required(),
       index: Yup.number().required(),
       id: Yup.number().required(),
       copy: Yup.boolean().required(),
@@ -93,7 +93,7 @@ class QuestionService {
       imageUrl,
     } = data;
 
-    const quiz = await this.quizRepository.findByPk(Number(quizId));
+    const quiz = await this.quizRepository.findByPk(quizId);
 
     if (!quiz) {
       const quizNotExistsError = new Error('Quiz não encontrado!');

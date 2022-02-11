@@ -4,13 +4,18 @@ class Quiz extends Model {
   static init(sequelize) {
     super.init(
       {
+        id: {
+          type: Sequelize.UUID,
+          defaultValue: Sequelize.UUIDV4,
+          primaryKey: true,
+        },
         idTeacher: Sequelize.INTEGER,
         title: Sequelize.STRING,
         description: Sequelize.STRING,
         visibility: Sequelize.STRING,
         idImage: Sequelize.INTEGER,
         published: Sequelize.BOOLEAN,
-        pin: Sequelize.TEXT,
+        pin: Sequelize.STRING,
         publishDate: Sequelize.DATE,
         noTime: Sequelize.BOOLEAN,
       },

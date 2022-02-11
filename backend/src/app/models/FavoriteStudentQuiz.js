@@ -4,7 +4,7 @@ class FavoriteStudentQuiz extends Model {
   static init(sequelize) {
     super.init(
       {
-        quizId: Sequelize.INTEGER,
+        quizId: Sequelize.UUID,
         studentId: Sequelize.INTEGER,
       },
       {

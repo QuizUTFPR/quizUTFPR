@@ -10,7 +10,7 @@ class CreateClassService {
   async execute(data) {
     const schema = Yup.object().shape({
       title: Yup.string().required(),
-      description: Yup.string().email().required(),
+      description: Yup.string().required(),
       idTeacher: Yup.number().required(),
       idImage: Yup.number(),
     });
@@ -22,8 +22,10 @@ class CreateClassService {
     }
 
     const classInstance = await this.classRepository.create(data);
+
     const { id } = classInstance;
-    const pin = crc32.calculate(toString(id), id);
+    const pin = crc32.calculate(toString(id));
+
     await this.classRepository.update(
       {
         pin,
@@ -33,7 +35,10 @@ class CreateClassService {
       }
     );
 
-    return classInstance;
+    return {
+      ...classInstance.dataValues,
+      pin,
+    };
   }
 }
 

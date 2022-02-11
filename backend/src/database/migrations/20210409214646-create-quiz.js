@@ -2,10 +2,10 @@ module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable('quiz', {
       id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.UUID,
         primaryKey: true,
+        allowNull: false,
+        defaultValue: Sequelize.UUIDV4,
       },
       id_teacher: {
         type: Sequelize.INTEGER,
@@ -38,7 +38,7 @@ module.exports = {
         allowNull: true,
       },
       pin: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
         allowNull: true,
         unique: true,
       },

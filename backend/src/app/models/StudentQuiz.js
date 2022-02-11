@@ -5,7 +5,7 @@ class StudentQuiz extends Model {
     super.init(
       {
         studentId: Sequelize.INTEGER,
-        quizId: Sequelize.INTEGER,
+        quizId: Sequelize.UUID,
         hitAmount: Sequelize.INTEGER,
         score: Sequelize.INTEGER,
         isFinished: Sequelize.BOOLEAN,

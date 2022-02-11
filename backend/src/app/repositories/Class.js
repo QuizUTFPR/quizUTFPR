@@ -1,7 +1,8 @@
 import Class from '../models/ClassModel';
 
-class AnswerRepository {
+class ClassRepository {
   async create(data) {
+    console.log('repos', data);
     return Class.create(data);
   }
 
@@ -18,8 +19,9 @@ class AnswerRepository {
   }
 
   async update(values, where) {
+    console.log(values, where);
     return Class.update(values, where);
   }
 }
 
-export default AnswerRepository;
+export default ClassRepository;

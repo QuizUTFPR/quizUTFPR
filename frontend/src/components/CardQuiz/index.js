@@ -60,7 +60,7 @@ Card.propTypes = {
   imageTitle: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
-  idQuiz: PropTypes.number.isRequired,
+  idQuiz: PropTypes.string.isRequired,
   children: PropTypes.node,
 };
 

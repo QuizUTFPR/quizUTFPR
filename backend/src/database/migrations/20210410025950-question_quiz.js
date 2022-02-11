@@ -12,7 +12,7 @@ module.exports = {
         }, // Quiz hasMany Questions
       },
       quiz_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         primaryKey: true,
         allowNull: false,
         onDelete: 'CASCADE',

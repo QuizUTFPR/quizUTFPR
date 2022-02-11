@@ -3,14 +3,13 @@ module.exports = {
     await queryInterface.createTable('classes', {
       id: {
         type: Sequelize.UUID,
-        allowNull: false,
-        autoIncrement: true,
-        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
+        allowNull: false,
+        defaultValue: Sequelize.UUIDV4,
       },
       pin: {
-        allowNull: false,
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
+        allowNull: true,
         unique: true,
       },
       title: {
@@ -23,8 +22,10 @@ module.exports = {
       },
       id_teacher: {
         type: Sequelize.INTEGER,
+        foreignKey: true,
         allowNull: false,
         onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         references: {
           model: 'teacher',
           key: 'id',

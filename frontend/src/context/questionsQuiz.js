@@ -51,7 +51,6 @@ const QuestionQuiz = ({ children }) => {
       // REMOVING QUESTIONS
       if (questionToRemove.length) {
         questionToRemove.forEach((removed) => {
-          console.log('removendo', removed.id);
           api.delete('/question/delete', {
             data: {
               id: removed.id,

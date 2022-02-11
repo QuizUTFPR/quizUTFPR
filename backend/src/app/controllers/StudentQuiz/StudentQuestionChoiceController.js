@@ -14,7 +14,7 @@ class StudentQuestionChoiceController {
         questionId: Yup.number('ID da questão inválido!').required(
           'Por favor, informe o id da questão'
         ),
-        quizId: Yup.number('id do quiz inválido!').required(
+        quizId: Yup.string('id do quiz inválido!').required(
           'Por favor, informe o ID da questão'
         ),
         timeLeft: Yup.number('O tempo restão é invalido!').required(

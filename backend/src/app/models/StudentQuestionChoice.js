@@ -6,7 +6,7 @@ class StudentQuestionChoice extends Model {
       {
         studentId: Sequelize.INTEGER,
         questionId: Sequelize.INTEGER,
-        quizId: Sequelize.INTEGER,
+        quizId: Sequelize.UUID,
         studentQuizId: Sequelize.INTEGER,
         timeLeft: Sequelize.INTEGER.UNSIGNED,
         checked1: Sequelize.BOOLEAN,

@@ -4,9 +4,13 @@ class Class extends Model {
   static init(sequelize) {
     super.init(
       {
-        id: Sequelize.UUID,
+        id: {
+          type: Sequelize.UUID,
+          defaultValue: Sequelize.UUIDV4,
+          primaryKey: true,
+        },
         idTeacher: Sequelize.INTEGER,
-        pin: Sequelize.TEXT,
+        pin: Sequelize.STRING,
         title: Sequelize.TEXT,
         description: Sequelize.TEXT,
         idImage: Sequelize.INTEGER,
