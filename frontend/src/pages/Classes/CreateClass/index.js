@@ -1,11 +1,11 @@
 import React from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
-// import api from '@api';
+import api from '@api';
 
 // ROTAS
-// import { QUESTION } from '@routes';
+import { CLASSES } from '@routes';
 
 // UTILS
 // import getBase64 from '@utils/getBase64OfImage';
@@ -19,20 +19,31 @@ import { Grid, Typography, Divider, TextField } from '@mui/material';
 import { PreviewImage } from './style';
 
 const CriarQuiz = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
       title: '',
       description: '',
-      visibility: 'public',
       imageObj: null,
       imageUrl: '',
-      published: false,
-      noTime: false,
     },
     onSubmit: async (values) => {
-      console.log(values);
+      const { title, description, imageObj } = values;
+
+      const body = { title, description };
+
+      const file = new FormData();
+      file.append('file', imageObj);
+      file.append('values', JSON.stringify(body));
+
+      const { data, status } = await api.post('/class/create', file);
+
+      if (status === 200) {
+        navigate(`${CLASSES}`, {
+          state: { title: data.title, noTime: data.noTime },
+        });
+      }
     },
   });
 
