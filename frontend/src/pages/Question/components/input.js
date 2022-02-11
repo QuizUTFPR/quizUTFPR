@@ -66,7 +66,6 @@ const MemoizedInput = ({
         if (!isTyping) {
           setTyping(true);
         }
-        // console.log('digitou', formikID);
         handleFormikChange(formikID)(e);
         handleUpdateContext({ value: e.target.value, ...handlePropsChange });
       }}

@@ -13,7 +13,7 @@ class PublishQuizService {
   }
 
   async execute(id) {
-    const pin = crc32.calculate(toString(id));
+    const pin = crc32.calculate(toString(id), new Date().getTime());
 
     const quiz = await this.quizRepository.findByPk(id);
 

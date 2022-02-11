@@ -22,7 +22,6 @@ const HomeQuizzes = () => {
 
   const getAllPublishedQuizzes = async () => {
     try {
-      console.log('indo buscar');
       const { data } = await api.post('/publishedQuiz/getAll', {
         page: 1,
       });

@@ -19,11 +19,9 @@ class ClassController {
         idImage,
       });
 
-      console.log(classCreated, 'classCreated');
 
       return res.status(200).json(classCreated);
     } catch (error) {
-      console.log('deu erro carai', error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)

@@ -14,7 +14,6 @@ export default (file) =>
           resize: true, // defaults to true, set false if you do not want to resize the image width and height
         })
         .then((data) => {
-          console.log(data[0]);
           resolve(data[0].prefix + data[0].data);
         });
 

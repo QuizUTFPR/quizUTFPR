@@ -1,5 +1,7 @@
 import crc32 from 'fast-crc32c';
 import * as Yup from 'yup';
+
+// Repositories
 import ClassRepository from '../../repositories/Class';
 
 class CreateClassService {
@@ -24,7 +26,7 @@ class CreateClassService {
     const classInstance = await this.classRepository.create(data);
 
     const { id } = classInstance;
-    const pin = crc32.calculate(toString(id));
+    const pin = crc32.calculate(toString(id), new Date().getTime());
 
     await this.classRepository.update(
       {
