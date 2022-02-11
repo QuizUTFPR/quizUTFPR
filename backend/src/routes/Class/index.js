@@ -8,6 +8,7 @@ import uploadImage from '../../app/middlewares/uploadImage';
 
 // CONTROLLERS
 import ClassController from '../../app/controllers/ClassController/ClassController';
+import ClassTeacherController from '../../app/controllers/ClassController/ClassTeacherController';
 
 // Crio uma instância do método Router;
 const router = new Router();
@@ -26,8 +27,11 @@ router.put(
   uploadImage,
   ClassController.update
 );
-router.get('/', ClassController.index);
-router.post('/getAllClasses', ClassController.show);
+router.get('/getAllClasses', ClassController.index);
+router.post('/getClass', ClassController.show);
 router.delete('/delete', ClassController.destroy);
+
+// TEACHER REALATION
+router.get('/getAllTeacherClasses', ClassTeacherController.index);
 
 export default router;

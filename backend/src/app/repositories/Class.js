@@ -9,12 +9,8 @@ class ClassRepository {
     return Class.findByPk(pk);
   }
 
-  async findAll(otherProps) {
-    return Class.findAll({ ...otherProps });
-  }
-
-  async delete(where) {
-    return Class.destroy(where);
+  async findAll(props) {
+    return Class.findAll({ ...props });
   }
 
   async update(values, where) {

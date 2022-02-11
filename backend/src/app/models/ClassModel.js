@@ -33,7 +33,7 @@ class Class extends Model {
 
     this.belongsTo(models.File, {
       foreignKey: 'idImage',
-      as: 'image',
+      as: 'imageClass',
       onDelete: 'CASCADE',
       hooks: true,
     });

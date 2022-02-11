@@ -18,13 +18,16 @@ class DeleteClass {
     }
 
     const { id } = whereProp;
-    const classInstance = await this.classRepository.delete({
-      where: {
-        id,
-      },
-    });
 
-    return classInstance;
+    const classInstance = await this.classRepository.findById(id);
+
+    if (!classInstance) {
+      const error = new Error('Não existe nenhum quiz com o ID informado.');
+      error.status = 404;
+      throw error;
+    }
+
+    await classInstance.destroy();
   }
 }
 
