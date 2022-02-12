@@ -1,34 +1,8 @@
-// import * as Yup from 'yup';
-
 // MODELS
 import Question from '../../models/QuestionModel';
-// import Answer from '../../models/AnswerModel';
-// import Quiz from '../../models/QuizModel';
-// import Tag from '../../models/TagModel';
-// import File from '../../models/FileModel';
-
-// REPOSITORIES
-// import AnswerRepository from '../../repositories/Answer';
 
 // SERVICES
 import QuestionService from '../../services/Question';
-
-// async function getScoreBasedOnDifficulty(difficulty) {
-//   switch (difficulty) {
-//     case 'Muito Fácil':
-//       return 5;
-//     case 'Fácil':
-//       return 10;
-//     case 'Médio':
-//       return 15;
-//     case 'Difícil':
-//       return 30;
-//     case 'Muito Difícil':
-//       return 40;
-//     default:
-//       return 0;
-//   }
-// }
 
 class QuestionController {
   async store(req, res) {
