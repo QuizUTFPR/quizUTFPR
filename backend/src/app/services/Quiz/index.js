@@ -139,7 +139,7 @@ class QuizService {
       throw error;
     }
 
-    quiz.destroy();
+    await quiz.destroy();
   }
 }
 

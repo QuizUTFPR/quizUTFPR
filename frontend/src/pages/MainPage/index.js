@@ -25,7 +25,7 @@ const Quiz = lazy(() => import('../MyQuizzes'));
 const CreateQuiz = lazy(() => import('../CreateQuiz'));
 const Classes = lazy(() => import('../Classes'));
 const Statistics = lazy(() => import('../Statistics'));
-const CreateClass = lazy(() => import('../CreateClass'));
+const CreateClass = lazy(() => import('../Classes/CreateClass'));
 
 const MainPage = () => (
   <Suspense fallback={<LinearProgress />}>

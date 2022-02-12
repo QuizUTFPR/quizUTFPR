@@ -4,7 +4,7 @@ import api from '@api';
 
 // COMPONENTS
 import GridContainer from '@components/Container';
-import Card from '@components/CardQuiz';
+import Card from '@components/Card';
 import Modal from '@components/Modal';
 import AlertRemoveMessage from '@components/ConfirmRemove';
 import PublishQuizMessage from '@components/ConfirmPublishQuiz';
@@ -15,7 +15,7 @@ import SnackBar from '@components/SnackBar';
 import QuizPreferences from '@pages/EditQuizPreferences';
 
 // ROUTES
-import { CREATE_QUIZ, STATISTICS_QUIZ } from '@routes';
+import { CREATE_QUIZ, STATISTICS_QUIZ, QUESTION } from '@routes';
 
 // MATERIAL-UI COMPONENTS
 import {
@@ -107,6 +107,7 @@ const Quiz = () => {
       await api.delete('/quiz/delete', {
         data: { idQuiz: openAlert.idQuiz },
       });
+
       handleClickSnackBar('Quiz removido com sucesso!', 'success');
 
       getQuizzes();
@@ -165,7 +166,7 @@ const Quiz = () => {
               imageTitle={quiz.title}
               title={quiz.title}
               description={quiz.description}
-              idQuiz={quiz.id}
+              to={`${QUESTION}${quiz.id}`}
               published={quiz.published}
               noTime={quiz.noTime}
             >

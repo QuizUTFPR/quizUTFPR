@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { Typography, CardActionArea } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { QUESTION } from '@routes';
+
+// MATERIAL-UI COMPONENTS
+import { Typography, CardActionArea } from '@mui/material';
+
+// STYLE
 import {
   StyledCard,
   StyledCardMedia,
@@ -15,12 +17,11 @@ import {
 const Card = ({
   image,
   imageTitle,
-  noTime,
   title,
-  published,
   description,
-  idQuiz,
+  to,
   children,
+  ...props
 }) => (
   <StyledCard>
     {image ? (
@@ -28,11 +29,7 @@ const Card = ({
     ) : (
       <EmptyImage />
     )}
-    <CardActionArea
-      component={Link}
-      to={`${QUESTION}${idQuiz}`}
-      state={{ title, published, noTime }}
-    >
+    <CardActionArea component={Link} to={to} state={{ title, ...props }}>
       <StyledCardContent>
         <Typography color="primary" component="h5" variant="h5">
           {title}
@@ -49,7 +46,7 @@ const Card = ({
 Card.defaultProps = {
   imageTitle: 'Título da Image',
   description: 'Descrição',
-  title: 'Título do Quiz',
+  title: 'Título',
   image: '',
   // eslint-disable-next-line react/jsx-no-useless-fragment
   children: <></>,
@@ -60,7 +57,7 @@ Card.propTypes = {
   imageTitle: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
-  idQuiz: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
   children: PropTypes.node,
 };
 
