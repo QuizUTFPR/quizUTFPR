@@ -30,7 +30,6 @@ class SessionTeacherController {
         username: process.env.LDAP_USERNAME,
         password: process.env.LDAP_PASSWORD,
       });
-      console.log(responseLDAP);
 
       const ldapToken = responseLDAP.data.token;
 
@@ -104,13 +103,12 @@ class SessionTeacherController {
         refreshToken: refreshToken.id,
       });
     } catch (err) {
-      console.log(err);
-      // if (err.response.status === 401) {
-      if (err.status === 401) {
+      if (err.response.status === 401) {
         return res
           .status(403)
           .json({ error: 'Dados de usuário ou senha incorretos' });
       }
+
       return res.status(500).json(err);
     }
   }

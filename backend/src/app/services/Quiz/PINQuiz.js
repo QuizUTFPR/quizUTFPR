@@ -14,7 +14,7 @@ class PINQuizService {
 
   async findByPin(data) {
     const { pin, studentId } = data;
-    console.log(data);
+
     const quiz = await Quiz.findOne({
       where: {
         pin,

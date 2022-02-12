@@ -8,7 +8,11 @@
   "scripts": {
     "start:dev": "nodemon src/server",
     "start:prod": "sucrase-node src/server.js",
-    "dev:debug": "nodemon --inspect src/server"
+    "dev:debug": "nodemon --inspect src/server",
+    "test": "jest",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
+    "pretest": "cross-env NODE_ENV=test npm run migrate:reset"
   },
   "dependencies": {
     "axios": "0.21.4",
@@ -30,12 +34,16 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.15.7",
+    "@babel/preset-env": "7.16.11",
+    "cross-env": "7.0.3",
     "eslint": "7.32.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-prettier": "4.0.0",
+    "jest": "27.5.1",
     "nodemon": "2.0.12",
-    "prettier": "2.4.1"
+    "prettier": "2.4.1",
+    "supertest": "6.2.2"
   }
 }

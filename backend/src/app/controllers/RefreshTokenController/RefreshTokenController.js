@@ -15,7 +15,6 @@ class RefreshTokenController {
 
       return res.status(200).json({ token });
     } catch (error) {
-      console.log('ERROR:', error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
