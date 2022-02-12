@@ -18,3 +18,5 @@ describe('Teacher Endpoints', () => {
     expect(res.statusCode).toEqual(403);
   });
 });
+
+afterAll(() => app.close());
