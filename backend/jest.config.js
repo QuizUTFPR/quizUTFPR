@@ -14,7 +14,7 @@ module.exports = {
   // cacheDirectory: "/tmp/jest_rs",
 
   // Automatically clear mock calls, instances and results before every test
-  // clearMocks: false,
+  clearMocks: true,
 
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
@@ -23,7 +23,7 @@ module.exports = {
   // collectCoverageFrom: undefined,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: 'coverage',
+  coverageDirectory: "coverage",
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -31,7 +31,7 @@ module.exports = {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  // coverageProvider: "babel",
+  coverageProvider: "v8",
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -71,7 +71,14 @@ module.exports = {
   // ],
 
   // An array of file extensions your modules use
-  moduleFileExtensions: ['js', 'mjs'],
+  // moduleFileExtensions: [
+  //   "js",
+  //   "jsx",
+  //   "ts",
+  //   "tsx",
+  //   "json",
+  //   "node"
+  // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
@@ -150,7 +157,7 @@ module.exports = {
   // ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
-  testRegex: '((\\.|/*.)(test))\\.js?$',
+  // testRegex: [],
 
   // This option allows the use of a custom results processor
   // testResultsProcessor: undefined,
@@ -165,10 +172,7 @@ module.exports = {
   // timers: "real",
 
   // A map from regular expressions to paths to transformers
-  transform: {
-    '^.+\\.js$': 'babel-jest',
-    '^.+\\.mjs$': 'babel-jest',
-  },
+  // transform: undefined,
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [

@@ -15,10 +15,10 @@ class SessionStudentController {
 
       return res.status(200).json(student);
     } catch (error) {
-      console.log(error);
       return (
-        (!!error.status && res.status(error.status).json(error)) ||
-        res.status(500).json(error)
+        (!!error.status &&
+          res.status(error.status).json({ error: error.message })) ||
+        res.status(500).json({ error: error.message })
       );
     }
   }

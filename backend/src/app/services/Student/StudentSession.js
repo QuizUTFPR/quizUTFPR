@@ -17,7 +17,9 @@ class StudentSessionService {
 
     // Check body of requisiton
     if (!(await schema.isValid(data))) {
-      throw new Error('Falha na validação!');
+      const error = new Error('Falha na validação!');
+      error.status = 403;
+      throw error;
     }
 
     const { email, password } = data;
