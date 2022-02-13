@@ -26,7 +26,12 @@ const Stack = createStackNavigator();
 const TokenStack = () => (
   <Suspense fallback={<Loading />}>
     <QuestionProvider>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          presentation: 'transparentModal',
+        }}
+      >
         <Stack.Screen name="HomeMenuDrawer" component={MenuDrawer} />
         <Stack.Screen name="AttempsOfQuiz" component={Attempt} />
         <Stack.Screen name="Descricao" component={QuizDescription} />

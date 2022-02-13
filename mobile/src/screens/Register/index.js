@@ -53,7 +53,13 @@ const Register = ({ navigation }) => {
           confirmPassword: '',
         }}
         validationSchema={registerValidationSchema}
-        onSubmit={(values) => register(values)}
+        onSubmit={async (values) => {
+          try {
+            await register(values);
+          } catch (error) {
+            console.log('teste', error);
+          }
+        }}
       >
         {({
           handleChange,

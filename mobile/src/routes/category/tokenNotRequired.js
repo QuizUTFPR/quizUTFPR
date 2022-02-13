@@ -14,7 +14,10 @@ const DontHaveTokenStack = () => (
   <Suspense fallback={<Loading />}>
     <Stack.Navigator
       initialRouteName="InitialScreen"
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+        presentation: 'transparentModal',
+      }}
     >
       <Stack.Screen name="InitialScreen" component={InitialScreen} />
       <Stack.Screen name="Login" component={Login} />

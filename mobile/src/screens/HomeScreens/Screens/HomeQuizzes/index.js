@@ -1,8 +1,8 @@
-/* eslint-disable global-require */
 import React, { useState, useCallback, useEffect } from 'react';
-import { RefreshControl } from 'react-native';
+import { RefreshControl, Text } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import api from '@api';
+import { useSpring, animated } from '@react-spring/native';
 
 // COMPONENTS
 import Container from '@components/Container';
@@ -19,6 +19,12 @@ const HomeQuizzes = () => {
   const navigation = useNavigation();
   const [isRefreshing, setRefreshing] = useState(false);
   const [allQuizzes, setAllQuizzes] = useState([]);
+
+  const [moveMe, toggleMoveMe] = useState(false);
+
+  const move = useSpring({
+    backgroundColor: moveMe ? 'orange' : 'red',
+  });
 
   const getAllPublishedQuizzes = async () => {
     try {
@@ -58,6 +64,9 @@ const HomeQuizzes = () => {
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
+        <animated.View style={move}>
+          <Text onPress={() => toggleMoveMe(!moveMe)}>teste</Text>
+        </animated.View>
         {allQuizzes.length > 0 && (
           <>
             <SeeMoreButton
