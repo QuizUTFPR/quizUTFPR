@@ -2,7 +2,7 @@
 import { Router } from 'express';
 
 // CONTROLLERS
-import QuizPublishedController from '../../app/controllers/QuizController/QuizPublishedController';
+import QuizPublishedController from '../../../app/controllers/QuizController/QuizPublishedController';
 // Crio uma instância do método Router;
 const router = new Router();
 

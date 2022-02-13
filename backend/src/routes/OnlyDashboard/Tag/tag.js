@@ -2,9 +2,9 @@
 import { Router } from 'express';
 
 // CONTROLLERS
-import Tag from '../../app/controllers/TagController/TagController';
-import TagQuestion from '../../app/controllers/TagController/TagQuestionController';
-import TagQuiz from '../../app/controllers/TagController/TagQuizController';
+import Tag from '../../../app/controllers/TagController/TagController';
+import TagQuestion from '../../../app/controllers/TagController/TagQuestionController';
+import TagQuiz from '../../../app/controllers/TagController/TagQuizController';
 
 // Crio uma instância do método Router;
 const router = new Router();

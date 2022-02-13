@@ -19,7 +19,7 @@ describe('Mobile Endpoints', () => {
     expect(res.body).toHaveProperty('refreshToken');
   });
 
-  it('should fail creante an account with duplicated email -> /student/register', async () => {
+  it('should fail create an account with duplicated email -> /student/register', async () => {
     const res = await request(app).post('/student/register').send({
       name: 'Teste',
       email: 'teste@gmail.com',
@@ -27,6 +27,7 @@ describe('Mobile Endpoints', () => {
     });
 
     expect(res.statusCode).toEqual(403);
+    expect(res.body).toHaveProperty('response', 'E-mail já cadastrado!');
   });
 
   it('should login sucessfully -> /student/login', async () => {
@@ -52,7 +53,7 @@ describe('Mobile Endpoints', () => {
     });
 
     expect(res.statusCode).toEqual(400);
-    expect(res.body).toHaveProperty('error', 'Senha Incorreta!');
+    expect(res.body).toHaveProperty('response', 'Senha Incorreta!');
   });
 
   it('should fail login with invalid email -> /student/login', async () => {
@@ -62,7 +63,7 @@ describe('Mobile Endpoints', () => {
     });
 
     expect(res.statusCode).toEqual(403);
-    expect(res.body).toHaveProperty('error', 'E-mail Inválido!');
+    expect(res.body).toHaveProperty('response', 'E-mail Inválido!');
   });
 });
 

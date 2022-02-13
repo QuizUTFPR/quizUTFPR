@@ -17,8 +17,9 @@ class StudentSessionService {
 
     // Check body of requisiton
     if (!(await schema.isValid(data))) {
-      const error = new Error('Falha na validação!');
+      const error = new Error();
       error.status = 403;
+      error.response = 'Falha na validação!';
       throw error;
     }
 
@@ -26,14 +27,16 @@ class StudentSessionService {
 
     const student = await this.studentRepository.find({ where: { email } });
     if (!student) {
-      const error = new Error('E-mail Inválido!');
+      const error = new Error();
       error.status = 403;
+      error.response = 'E-mail Inválido!';
       throw error;
     }
 
     if (!(await this.studentRepository.checkPass(student, password))) {
-      const error = new Error('Senha Incorreta!');
+      const error = new Error();
       error.status = 400;
+      error.response = 'Senha Incorreta!';
       throw error;
     }
 

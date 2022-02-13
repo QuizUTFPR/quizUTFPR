@@ -10,7 +10,7 @@ class StudentQuizController {
   async store(req, res) {
     try {
       const schema = Yup.object().shape({
-        quizId: Yup.sring('ID do quiz inválido!').required(
+        quizId: Yup.string('ID do quiz inválido!').required(
           'Por favor, informe o id do quiz'
         ),
       });

@@ -2,8 +2,8 @@
 import { Router } from 'express';
 
 // CONTROLLERS
-import StudentController from '../../app/controllers/Student/StudentController';
-import SessionStudentController from '../../app/controllers/Student/SessionStudentController';
+import StudentController from '../../../app/controllers/Student/StudentController';
+import SessionStudentController from '../../../app/controllers/Student/SessionStudentController';
 
 // Crio uma instância do método Router;
 const router = new Router();
