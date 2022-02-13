@@ -17,8 +17,16 @@ class CreateStudentService {
     });
 
     if (!(await schema.isValid(data))) {
-      const error = new Error('Falha na validação!');
+      const error = new Error();
+      error.response = 'Falha na validação!';
       error.status = 403;
+      throw error;
+    }
+
+    if (await this.studentRepository.find({ where: { email: data.email } })) {
+      const error = new Error();
+      error.status = 403;
+      error.response = 'E-mail já cadastrado!';
       throw error;
     }
 

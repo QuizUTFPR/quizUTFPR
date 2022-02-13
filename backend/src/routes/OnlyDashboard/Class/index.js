@@ -3,12 +3,12 @@ import { Router } from 'express';
 
 // Multer
 import multer from 'multer';
-import multerConfig from '../../config/multer';
-import uploadImage from '../../app/middlewares/uploadImage';
+import multerConfig from '../../../config/multer';
+import uploadImage from '../../../app/middlewares/uploadImage';
 
 // CONTROLLERS
-import ClassController from '../../app/controllers/ClassController/ClassController';
-import ClassTeacherController from '../../app/controllers/ClassController/ClassTeacherController';
+import ClassController from '../../../app/controllers/ClassController/ClassController';
+import ClassTeacherController from '../../../app/controllers/ClassController/ClassTeacherController';
 
 // Crio uma instância do método Router;
 const router = new Router();

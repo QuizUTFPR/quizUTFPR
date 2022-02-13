@@ -60,9 +60,14 @@ const QuizDescription = ({ route }) => {
   const navigation = useNavigation();
 
   const startQuizAndGetAllQuestions = async () => {
-    const { data } = await api.post('/studentQuiz/startQuiz', { quizId: id });
-    await getQuestionsOfQuizFromDatabase(id, data.id);
-    navigation.navigate('CountDown');
+    try {
+      console.log('vai cumeçar', id);
+      const { data } = await api.post('/studentQuiz/startQuiz', { quizId: id });
+      await getQuestionsOfQuizFromDatabase(id, data.id);
+      navigation.navigate('CountDown');
+    } catch (error) {
+      console.log('erro', error);
+    }
   };
 
   const continueQuizAndGetAllQuestions = async () => {

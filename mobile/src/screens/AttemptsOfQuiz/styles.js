@@ -117,5 +117,6 @@ export const StyledScrollView = styled.ScrollView.attrs({
     alignItems: 'center',
   },
 })`
+  background: ${({ theme }) => theme.color.lightBlueGrey};
   width: ${widthPercentageToDp('100%')}px;
 `;

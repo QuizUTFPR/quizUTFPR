@@ -61,10 +61,11 @@ const StudentAuth = ({ children }) => {
       saveOnLocalStorage(refreshStorageItem, RefreshToken);
       return response;
     } catch (error) {
-      return {
+      const err = {
         status: error.response.status,
-        message: error.response.data.error,
+        message: error.response.data.response,
       };
+      throw err;
     }
   };
 

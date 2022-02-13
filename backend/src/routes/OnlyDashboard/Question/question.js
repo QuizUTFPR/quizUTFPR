@@ -3,13 +3,13 @@ import { Router } from 'express';
 
 // Multer
 import multer from 'multer';
-import multerConfig from '../../config/multer';
-import uploadImage from '../../app/middlewares/uploadImage';
+import multerConfig from '../../../config/multer';
+import uploadImage from '../../../app/middlewares/uploadImage';
 
 // CONTROLLERS
-import Question from '../../app/controllers/QuestionController/QuestionController';
-import QuestionQuiz from '../../app/controllers/QuestionController/QuestionQuizController';
-import QuestionTag from '../../app/controllers/QuestionController/QuestionTagController';
+import Question from '../../../app/controllers/QuestionController/QuestionController';
+import QuestionQuiz from '../../../app/controllers/QuestionController/QuestionQuizController';
+import QuestionTag from '../../../app/controllers/QuestionController/QuestionTagController';
 
 // Crio uma instância do método Router;
 const router = new Router();
