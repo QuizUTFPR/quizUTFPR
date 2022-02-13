@@ -16,7 +16,7 @@ class QuestionsOfQuizService {
   // Lista todas as questões de um determinado quiz
   async index(props) {
     const { id } = props;
-    const quiz = this.quizRepository.findByPk(id);
+    const quiz = await this.quizRepository.findByPk(id);
 
     if (!quiz) {
       const error = Error('Quiz não encontrado!');
