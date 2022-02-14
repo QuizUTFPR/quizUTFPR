@@ -19,8 +19,9 @@ class QuestionsOfQuizService {
     const quiz = await this.quizRepository.findByPk(id);
 
     if (!quiz) {
-      const error = Error('Quiz não encontrado!');
+      const error = Error();
       error.status = 404;
+      error.response = 'Quiz não encontrado!';
       throw error;
     }
 
@@ -64,8 +65,9 @@ class QuestionsOfQuizService {
     });
 
     if (!questionsOfQuiz.length) {
-      const error = new Error('Não existe nenhuma questão cadastrada');
+      const error = new Error();
       error.status = 204;
+      error.response = 'Não existe nenhuma questão cadastrada';
       throw error;
     }
 

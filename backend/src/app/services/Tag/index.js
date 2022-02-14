@@ -9,8 +9,9 @@ class TagService {
     const tags = await this.tagRepository.findAll(query);
 
     if (!tags.length) {
-      const error = new Error('Não foi encontrada nenhuma tag.');
+      const error = new Error();
       error.status = 404;
+      error.response = 'Não foi encontrada nenhuma tag.';
       throw error;
     }
 
@@ -18,4 +19,4 @@ class TagService {
   }
 }
 
-export default TagService;
+export default new TagService();

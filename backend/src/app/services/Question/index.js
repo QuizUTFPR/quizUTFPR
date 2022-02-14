@@ -281,21 +281,23 @@ class QuestionService {
     });
 
     if (!questions.length) {
-      const error = new Error('Não existe nenhuma questão cadastrada.');
+      const error = new Error();
       error.status = 404;
+      error.response = 'Não existe nenhuma questão cadastrada.';
       throw error;
     }
 
     return questions;
   }
 
-  async delete(props) {
-    const { id } = props;
+  async delete(data) {
+    const { id } = data;
     const question = await this.questionRepository.findById(id);
 
     if (!question) {
-      const error = new Error('Questão não encontrada!');
+      const error = new Error();
       error.status = 404;
+      error.response = 'Questão não encontrada!';
       throw error;
     }
 
@@ -310,4 +312,4 @@ class QuestionService {
   }
 }
 
-export default QuestionService;
+export default new QuestionService();

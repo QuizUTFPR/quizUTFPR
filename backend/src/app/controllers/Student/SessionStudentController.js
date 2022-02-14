@@ -7,8 +7,7 @@ class SessionStudentController {
     const { email, password } = req.body;
 
     try {
-      const studentSessionService = new StudentSessionService();
-      const student = await studentSessionService.execute({
+      const student = await StudentSessionService.execute({
         email,
         password,
       });
@@ -16,7 +15,7 @@ class SessionStudentController {
       return res.status(200).json(student);
     } catch (error) {
       return (
-        (!!error.status && res.status(error.status).json(error)) ||
+        (!!error.status && res.status(error.status).json(error.response)) ||
         res.status(500).json(error)
       );
     }

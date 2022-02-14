@@ -62,8 +62,9 @@ class QuestionsByTagsService {
       filteredQuestionByTag.filter(Boolean);
 
     if (!filteredQuestionByTagWithoutUndefined.length) {
-      const error = new Error('Não existe nenhuma questão cadastrada!');
+      const error = new Error();
       error.status = 404;
+      error.response = 'Não existe nenhuma questão cadastrada!';
       throw error;
     }
 

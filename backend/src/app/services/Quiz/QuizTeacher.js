@@ -50,8 +50,9 @@ class QuizTeacherService {
     });
 
     if (!quizzes.length) {
-      const error = new Error('Não existe nenhum quiz cadastrado.');
+      const error = new Error();
       error.status = 404;
+      error.response = 'Não existe nenhum quiz cadastrado.';
       throw error;
     }
 
@@ -59,4 +60,4 @@ class QuizTeacherService {
   }
 }
 
-export default QuizTeacherService;
+export default new QuizTeacherService();

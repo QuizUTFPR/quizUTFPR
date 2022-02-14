@@ -12,8 +12,9 @@ class DeleteClass {
     });
 
     if (!(await schema.isValid(whereProp))) {
-      const error = new Error('Falha na validação!');
+      const error = new Error();
       error.status = 403;
+      error.response = 'Falha na validação!';
       throw error;
     }
 
@@ -22,8 +23,9 @@ class DeleteClass {
     const classInstance = await this.classRepository.findById(id);
 
     if (!classInstance) {
-      const error = new Error('Não existe nenhum quiz com o ID informado.');
+      const error = new Error();
       error.status = 404;
+      error.response = 'Não existe nenhum quiz com o ID informado.';
       throw error;
     }
 

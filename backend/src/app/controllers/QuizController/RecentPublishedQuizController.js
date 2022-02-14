@@ -9,17 +9,19 @@ class RecentPublishedQuizController {
       const page = req.body.page || false;
       const limit = req.body.limit || 3;
 
-      const recentPublishedQuizService = new RecentPublishedQuizService();
-      const quizzes = await recentPublishedQuizService.execute({
+      const quizzes = await RecentPublishedQuizService.execute({
         studentId,
         page,
         limit,
       });
 
       return res.status(200).json(quizzes);
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json(err);
+    } catch (error) {
+      console.log(error);
+      return (
+        (!!error.status && res.status(error.status).json(error.response)) ||
+        res.status(500).json(error)
+      );
     }
   }
 }

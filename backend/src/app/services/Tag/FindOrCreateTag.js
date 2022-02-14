@@ -10,4 +10,4 @@ class FindOrCreateTagService {
   }
 }
 
-export default FindOrCreateTagService;
+export default new FindOrCreateTagService();

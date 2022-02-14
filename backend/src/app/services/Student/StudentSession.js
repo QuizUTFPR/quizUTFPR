@@ -43,8 +43,7 @@ class StudentSessionService {
     const { id, name } = student;
 
     // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
-    const deleteRefreshTokenService = new DeleteRefreshTokenService();
-    await deleteRefreshTokenService.execute({
+    await DeleteRefreshTokenService.execute({
       where: { userId: id },
     });
 
@@ -62,4 +61,4 @@ class StudentSessionService {
   }
 }
 
-export default StudentSessionService;
+export default new StudentSessionService();

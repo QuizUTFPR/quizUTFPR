@@ -1,17 +1,15 @@
 import * as Yup from 'yup';
-// import fs from 'fs';
-// import path from 'path';
-
-// MODELS
-import Tag from '../../models/TagModel';
-import File from '../../models/FileModel';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
+import FileRepository from '../../repositories/File';
+import TagRepository from '../../repositories/Tag';
 
 class QuizService {
   constructor() {
     this.quizRepository = new QuizRepository();
+    this.fileRepository = new FileRepository();
+    this.tagRepository = new TagRepository();
   }
 
   async validate(data) {
@@ -35,8 +33,9 @@ class QuizService {
   async create(data) {
     // Check requisiton body
     if (!(await this.validate(data))) {
-      const error = new Error('Falha na validação!');
+      const error = new Error();
       error.status = 400;
+      error.response = 'Falha na validação!';
       throw error;
     }
 
@@ -45,7 +44,7 @@ class QuizService {
     const { tags } = data;
 
     tags.map(async (tagObject) => {
-      const [tag] = await Tag.findOrCreate({
+      const [tag] = await this.tagRepository.findOrCreate({
         where: {
           name: tagObject,
         },
@@ -61,8 +60,9 @@ class QuizService {
     const quizzes = this.quizRepository.index(query);
 
     if (!quizzes.length) {
-      const error = new Error('Não existe nenhum quiz cadastrado.');
+      const error = new Error();
       error.status = 404;
+      error.response = 'Não existe nenhum quiz cadastrado.';
       throw error;
     }
 
@@ -76,8 +76,9 @@ class QuizService {
   async update(data) {
     // Check body of requisiton
     if (!(await this.validate(data))) {
-      const error = new Error('Falha na validação!');
+      const error = new Error();
       error.status = 400;
+      error.response = 'Falha na validação!';
       throw error;
     }
 
@@ -101,7 +102,7 @@ class QuizService {
 
     await quiz.save();
     if (oldImageId) {
-      const image = await File.findByPk(oldImageId);
+      const image = await this.fileRepository.findByPk(oldImageId);
       await image.destroy();
     }
 
@@ -109,7 +110,7 @@ class QuizService {
     const arrayTagsAlreadyInQuiz = tagsAlreadyInQuiz.map((item) => item.name);
 
     tags.map(async (tagObject) => {
-      const [tag] = await Tag.findOrCreate({
+      const [tag] = await this.tagRepository.findOrCreate({
         where: {
           name: tagObject,
         },
@@ -134,8 +135,9 @@ class QuizService {
     const quiz = await this.quizRepository.findByPk(data);
 
     if (!quiz) {
-      const error = new Error('Não existe nenhum quiz com o ID informado.');
+      const error = new Error();
       error.status = 404;
+      error.response = 'Não existe nenhum quiz com o ID informado.';
       throw error;
     }
 
@@ -143,4 +145,4 @@ class QuizService {
   }
 }
 
-export default QuizService;
+export default new QuizService();

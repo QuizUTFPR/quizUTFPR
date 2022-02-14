@@ -44,4 +44,4 @@ class CreateRefreshTokenService {
   }
 }
 
-export default CreateRefreshTokenService;
+export default new CreateRefreshTokenService();

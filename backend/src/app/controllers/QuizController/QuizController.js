@@ -42,8 +42,7 @@ class QuizController {
 
   async index(req, res) {
     try {
-      const quizService = new QuizService();
-      const quizzes = await quizService.index({
+      const quizzes = await QuizService.index({
         attributes: [
           'id',
           'title',
@@ -80,7 +79,7 @@ class QuizController {
       return res.status(200).json(quizzes);
     } catch (error) {
       return (
-        (!!error.status && res.status(error.status).json(error)) ||
+        (!!error.status && res.status(error.status).json(error.response)) ||
         res.status(500).json(error)
       );
     }
@@ -91,8 +90,7 @@ class QuizController {
     try {
       const { tag } = req.params;
 
-      const quizService = new QuizService();
-      const quizzes = await quizService.index({
+      const quizzes = await QuizService.index({
         attributes: [
           'id',
           'title',
@@ -171,7 +169,7 @@ class QuizController {
       return res.status(200).json(quizzes);
     } catch (error) {
       return (
-        (!!error.status && res.status(error.status).json(error)) ||
+        (!!error.status && res.status(error.status).json(error.response)) ||
         res.status(500).json(error)
       );
     }
@@ -185,8 +183,7 @@ class QuizController {
       const { id, title, tags, description, visibility, noTime } =
         JSON.parse(values);
 
-      const quizService = new QuizService();
-      const quiz = await quizService.update({
+      const quiz = await QuizService.update({
         id,
         tags,
         title,
@@ -200,7 +197,7 @@ class QuizController {
     } catch (error) {
       console.log(error);
       return (
-        (!!error.status && res.status(error.status).json(error)) ||
+        (!!error.status && res.status(error.status).json(error.response)) ||
         res.status(500).json(error)
       );
     }
@@ -210,8 +207,7 @@ class QuizController {
     try {
       const { idQuiz } = req.body;
 
-      const quizService = new QuizService();
-      await quizService.delete(idQuiz);
+      await QuizService.delete(idQuiz);
 
       return res.status(200).json();
     } catch (error) {

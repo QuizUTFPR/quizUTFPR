@@ -10,4 +10,4 @@ class DeleteRefreshTokenService {
   }
 }
 
-export default DeleteRefreshTokenService;
+export default new DeleteRefreshTokenService();

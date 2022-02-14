@@ -2,11 +2,12 @@ import * as Yup from 'yup';
 
 // MODELS
 import ClassRepository from '../../repositories/Class';
-import File from '../../models/FileModel';
+import FileRepository from '../../repositories/File';
 
 class UpdateClass {
   constructor() {
     this.classRepository = new ClassRepository();
+    this.fileRepository = new FileRepository();
   }
 
   async execute(data) {
@@ -18,8 +19,9 @@ class UpdateClass {
     });
 
     if (!(await schema.isValid(data))) {
-      const error = new Error('Falha na validação!');
+      const error = new Error();
       error.status = 403;
+      error.response = 'Falha na validação!';
       throw error;
     }
 
@@ -41,7 +43,7 @@ class UpdateClass {
 
     await classInstance.save();
     if (oldImageId) {
-      const image = await File.findByPk(oldImageId);
+      const image = await this.fileRepository.findByPk(oldImageId);
       await image.destroy();
     }
 

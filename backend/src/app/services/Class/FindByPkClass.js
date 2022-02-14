@@ -12,8 +12,9 @@ class FindByPkClass {
     });
 
     if (!(await schema.isValid(data))) {
-      const error = new Error('Falha na validação!');
+      const error = new Error();
       error.status = 403;
+      error.response = 'Falha na validação!';
       throw error;
     }
 

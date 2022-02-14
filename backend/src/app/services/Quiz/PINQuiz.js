@@ -1,5 +1,4 @@
 // MODELS
-import Quiz from '../../models/QuizModel';
 import Teacher from '../../models/TeacherModel';
 import Tag from '../../models/TagModel';
 import File from '../../models/FileModel';
@@ -15,7 +14,7 @@ class PINQuizService {
   async findByPin(data) {
     const { pin, studentId } = data;
 
-    const quiz = await Quiz.findOne({
+    const quiz = await this.quizRepository.findOne({
       where: {
         pin,
       },
@@ -42,8 +41,9 @@ class PINQuizService {
     });
 
     if (!quiz) {
-      const error = new Error('PIN inválido!');
+      const error = new Error();
       error.status = 404;
+      error.response = 'PIN inválido!';
       throw error;
     }
 

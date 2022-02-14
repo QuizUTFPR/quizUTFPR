@@ -18,16 +18,18 @@ class PublishQuizService {
     const quiz = await this.quizRepository.findByPk(id);
 
     if (!quiz) {
-      const error = new Error('Nenhum quiz encontrado.');
+      const error = new Error();
       error.status = 404;
+      error.response = 'Nenhum quiz encontrado.';
       throw error;
     }
 
     const countQuestion = await quiz.countQuestions();
 
     if (countQuestion < 1) {
-      const error = new Error('Nenhuma questão cadastrada no quiz.');
+      const error = new Error();
       error.status = 404;
+      error.response = 'Nenhuma questão cadastrada no quiz.';
       throw error;
     }
 
@@ -38,4 +40,4 @@ class PublishQuizService {
   }
 }
 
-export default PublishQuizService;
+export default new PublishQuizService();

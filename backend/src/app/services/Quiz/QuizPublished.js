@@ -2,16 +2,17 @@
 import Teacher from '../../models/TeacherModel';
 import Tag from '../../models/TagModel';
 import File from '../../models/FileModel';
-import FavoriteStudentQuiz from '../../models/FavoriteStudentQuiz';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
 import StudentRepository from '../../repositories/Student';
+import FavoriteStudentQuizRepository from '../../repositories/FavoriteStudentQuiz';
 
 class QuizPublishedService {
   constructor() {
     this.quizRepository = new QuizRepository();
     this.studentRepository = new StudentRepository();
+    this.favoriteStudentQuizRepository = new FavoriteStudentQuizRepository();
   }
 
   async execute(data) {
@@ -74,7 +75,7 @@ class QuizPublishedService {
 
     const verifyingFavoriteQuizzes = await Promise.all(
       returnedQuizzes.map(async (quiz) => {
-        const isFavorite = await FavoriteStudentQuiz.findOne({
+        const isFavorite = await this.favoriteStudentQuizRepository.findOne({
           where: {
             quizId: quiz.id,
             studentId,
@@ -92,4 +93,4 @@ class QuizPublishedService {
   }
 }
 
-export default QuizPublishedService;
+export default new QuizPublishedService();

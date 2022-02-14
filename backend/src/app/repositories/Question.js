@@ -5,8 +5,8 @@ class QuestionRepository {
     return Question.create(question);
   }
 
-  async findById(id) {
-    return Question.findByPk(id);
+  async findById(id, props = {}) {
+    return Question.findByPk(id, { ...props });
   }
 
   async findAll(otherProps = {}) {

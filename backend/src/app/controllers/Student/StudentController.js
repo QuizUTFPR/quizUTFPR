@@ -6,8 +6,7 @@ class StudentController {
   async store(req, res) {
     const { name, email, password } = req.body;
     try {
-      const studentService = new CreateStudentService();
-      const student = await studentService.execute({
+      const student = await CreateStudentService.execute({
         name,
         email,
         password,
@@ -16,7 +15,7 @@ class StudentController {
       return res.status(200).json(student);
     } catch (error) {
       return (
-        (!!error.status && res.status(error.status).json(error)) ||
+        (!!error.status && res.status(error.status).json(error.response)) ||
         res.status(500).json(error)
       );
     }

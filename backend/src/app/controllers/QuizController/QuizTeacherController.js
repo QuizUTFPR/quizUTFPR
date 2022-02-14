@@ -7,13 +7,12 @@ class QuizTeacherController {
     try {
       const idTeacher = req.userId;
 
-      const quizTeacherService = new QuizTeacherService();
-      const quizzes = await quizTeacherService.execute(idTeacher);
+      const quizzes = await QuizTeacherService.execute(idTeacher);
 
       return res.status(200).json(quizzes);
     } catch (error) {
       return (
-        (!!error.status && res.status(error.status).json(error)) ||
+        (!!error.status && res.status(error.status).json(error.response)) ||
         res.status(500).json(error)
       );
     }
