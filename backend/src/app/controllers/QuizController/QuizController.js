@@ -17,9 +17,7 @@ class QuizController {
       const { title, tags, description, visibility, published, noTime } =
         JSON.parse(values);
 
-      const quizService = new QuizService();
-
-      const quiz = await quizService.create({
+      const quiz = await QuizService.create({
         idTeacher,
         idImage,
         title,
@@ -79,7 +77,7 @@ class QuizController {
       return res.status(200).json(quizzes);
     } catch (error) {
       return (
-        (!!error.status && res.status(error.status).json(error.response)) ||
+        (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
       );
     }
@@ -169,7 +167,7 @@ class QuizController {
       return res.status(200).json(quizzes);
     } catch (error) {
       return (
-        (!!error.status && res.status(error.status).json(error.response)) ||
+        (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
       );
     }
@@ -197,7 +195,7 @@ class QuizController {
     } catch (error) {
       console.log(error);
       return (
-        (!!error.status && res.status(error.status).json(error.response)) ||
+        (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
       );
     }

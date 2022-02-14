@@ -19,7 +19,7 @@ class RecentPublishedQuizController {
     } catch (error) {
       console.log(error);
       return (
-        (!!error.status && res.status(error.status).json(error.response)) ||
+        (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
       );
     }

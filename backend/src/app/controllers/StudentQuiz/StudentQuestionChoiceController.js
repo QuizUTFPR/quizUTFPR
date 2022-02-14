@@ -12,7 +12,7 @@ class StudentQuestionChoiceController {
       return res.status(200).json(studentQuestionChoice);
     } catch (error) {
       return (
-        (!!error.status && res.status(error.status).json(error.response)) ||
+        (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
       );
     }

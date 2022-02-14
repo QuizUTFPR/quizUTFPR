@@ -79,7 +79,9 @@ const QuestionDatabase = forwardRef((props, ref) => {
     onSubmit: async ({ tag }) => {
       try {
         setLoading(true);
-        const { data } = await api.post(`question/getFromTags`, tag);
+        const { data } = await api.post(`question/getFromTags`, {
+          aimedTagQuestions: tag,
+        });
 
         if (data) {
           const newQuestions = await Promise.all(

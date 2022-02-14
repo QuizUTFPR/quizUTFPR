@@ -14,6 +14,7 @@ class QuestionsByTagsService {
   // Retorna as questões que possuem as tags passadas
   async index(props) {
     const { aimedTagQuestions } = props;
+    console.log(props);
 
     const questions = await this.questionRepository.findAll({
       where: {
@@ -49,9 +50,10 @@ class QuestionsByTagsService {
         const questionTags = (await item.getTagsQuestion()).map(
           (element) => element.name
         );
-        const intersection = questionTags.filter((element) =>
-          aimedTagQuestions.includes(element)
-        );
+        const intersection = questionTags.filter((element) => {
+          console.log('element', element, aimedTagQuestions);
+          return aimedTagQuestions.includes(element);
+        });
         if (intersection.length === aimedTagQuestions.length) {
           return item;
         }
