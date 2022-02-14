@@ -24,7 +24,7 @@ class CreateFavoriteStudentQuizService {
     const studentId = data.userId;
     const { quizId } = data.body;
 
-    const favorite = this.favoriteStudentQuizRepository.create({
+    const favorite = await this.favoriteStudentQuizRepository.create({
       quizId,
       studentId,
     });

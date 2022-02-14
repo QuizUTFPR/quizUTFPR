@@ -9,8 +9,8 @@ class QuizRepository {
     return Quiz.findAll(query);
   }
 
-  async findByPk(pk) {
-    return Quiz.findByPk(pk);
+  async findByPk(pk, props = {}) {
+    return Quiz.findByPk(pk, { ...props });
   }
 }
 

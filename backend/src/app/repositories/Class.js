@@ -9,7 +9,7 @@ class ClassRepository {
     return Class.findByPk(pk);
   }
 
-  async findAll(props) {
+  async findAll(props = {}) {
     return Class.findAll({ ...props });
   }
 

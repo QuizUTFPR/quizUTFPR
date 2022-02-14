@@ -12,7 +12,7 @@ class FavoriteStudentQuizRepository {
     return FavoriteStudentQuiz.create(data);
   }
 
-  async findOne(props) {
+  async findOne(props = {}) {
     return FavoriteStudentQuiz.findOne({ ...props });
   }
 }
