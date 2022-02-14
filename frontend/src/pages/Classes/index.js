@@ -4,12 +4,12 @@ import api from '@api';
 
 // COMPONENTS
 import Card from '@components/Card';
-import GridContainer from '@components/Container';
+import Container from '@components/Container';
 import Modal from '@components/Modal';
 import Tooltip from '@components/ToolTip';
 
 // MATERIAL-UI COMPONENTS
-import { Grid, Typography, Divider, Button, IconButton } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 
 // MATERIAL-UI ICONS
 import { Edit } from '@mui/icons-material';
@@ -21,7 +21,7 @@ import { CREATE_CLASS } from '@routes';
 import EditClass from './EditClass';
 
 // STYLE
-import { TextPIN } from './style';
+import { TextPIN, HeaderTitle, HeaderTitleText, HeaderDivider } from './style';
 
 const MyClasses = () => {
   const [classes, setClasses] = useState([]);
@@ -29,8 +29,6 @@ const MyClasses = () => {
   const getClasses = async () => {
     try {
       const { data, status } = await api.get('/class/getAllTeacherClasses');
-
-      console.log('data', data);
 
       if (status !== 200) setClasses(false);
 
@@ -62,11 +60,9 @@ const MyClasses = () => {
 
   return (
     <>
-      <GridContainer container spacing={3}>
-        <Grid container align="center" justifyContent="space-between">
-          <Typography color="primary" component="h4" variant="h4">
-            Minhas Turmas
-          </Typography>
+      <Container container>
+        <HeaderTitle container align="center" justifyContent="space-between">
+          <HeaderTitleText color="primary">Minhas Turmas</HeaderTitleText>
 
           <Button
             variant="contained"
@@ -76,11 +72,9 @@ const MyClasses = () => {
           >
             Criar Turma
           </Button>
-        </Grid>
+        </HeaderTitle>
 
-        <Grid item>
-          <Divider />
-        </Grid>
+        <HeaderDivider />
 
         {!classes ? (
           <p>Vazio!</p>
@@ -105,7 +99,7 @@ const MyClasses = () => {
             </Card>
           ))
         )}
-      </GridContainer>
+      </Container>
 
       {/* MODALS */}
       <Modal

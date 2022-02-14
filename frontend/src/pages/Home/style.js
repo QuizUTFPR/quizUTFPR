@@ -11,5 +11,5 @@ export const LogoUTFPR = styled(UTFPR)`
 `;
 
 export const StyledHomeGrid = styled(GridContainer)`
-  flex-direction: row;
+  flex-direction: column;
 `;

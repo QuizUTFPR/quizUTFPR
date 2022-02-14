@@ -1,18 +1,10 @@
 import styled, { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import {
-  Drawer,
-  Badge,
-  Typography,
-  Box,
-  ListItemIcon,
-  ListItemText,
-  ListItem,
-  IconButton,
-} from '@mui/material';
+import { Drawer, Badge, Typography, Box, IconButton } from '@mui/material';
 
 const WidthDrawer = '210px';
-const WidthIcon = '50px;';
+const WidthIcon = '60px;';
 
 export const StyledIconButton = styled(IconButton)`
   margin-left: ${({ open }) => (open ? WidthDrawer : '5px')};
@@ -25,12 +17,13 @@ export const StyledDrawer = styled(Drawer)`
     overflow-x: hidden;
     transition: 0.5s;
   }
+
   width: ${({ open }) => (open ? `calc(${WidthDrawer} + 50px)` : WidthIcon)};
 
-  && div {
+  /* && div {
     width: ${({ open }) => !open && '55px'};
-    transition: margin 0.2s ease;
-  }
+    transition: all 0.2s ease;
+  } */
   transition: 0.5s;
 `;
 
@@ -80,7 +73,7 @@ export const StyledBadge = styled(Badge)`
 `;
 export const AdminName = styled(Typography)`
   font-weight: bolder;
-  font-size: 1.1em;
+  font-size: 1rem;
 `;
 
 export const AdminDescription = styled(Typography)`
@@ -89,14 +82,44 @@ export const AdminDescription = styled(Typography)`
   opacity: 0.8;
 `;
 
-export const StyledListItem = styled(ListItem)`
+export const WrapperLine = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  cursor: pointer;
+
+  :not(:last-child) {
+    margin-bottom: 5px;
+  }
+`;
+
+export const Line = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 15px 20px;
+  align-items: center;
+  border-radius: 16px;
+  transition: all 0.2s ease;
+
+  color: ${({ theme }) => theme.palette.primary.main};
+  background: ${({ isActive }) => (isActive ? 'red' : 'white')};
+  background: ${({ isActive }) => (isActive ? '#dbdbdb' : 'white')};
+  margin: ${({ open }) => (open ? '0 10px' : '')};
+  justify-content: ${({ open }) => (!open ? 'center' : '')};
+
+  :hover {
+    background: #dbdbdb;
+  }
+`;
+
+export const IconLine = styled.div`
+  display: flex;
+  margin-right: ${({ open }) => (open ? '10px' : '')};
+
   color: ${({ theme }) => theme.palette.primary.main};
 `;
 
-export const StyledListItemIcon = styled(ListItemIcon)`
+export const TextLine = styled.p`
   color: ${({ theme }) => theme.palette.primary.main};
-`;
-
-export const StyledListItemText = styled(ListItemText)`
-  color: ${({ theme }) => theme.palette.primary.main};
+  font-size: 1rem;
+  font-weight: 500;
 `;

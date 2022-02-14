@@ -9,9 +9,12 @@ import { Typography, CardActionArea } from '@mui/material';
 import {
   StyledCard,
   StyledCardMedia,
-  StyledCardContent,
   StyledCardActions,
   EmptyImage,
+  WrapperContentCard,
+  StyledCardActionArea,
+  TitleCard,
+  DescriptionCard,
 } from './style';
 
 const Card = ({
@@ -29,16 +32,16 @@ const Card = ({
     ) : (
       <EmptyImage />
     )}
-    <CardActionArea component={Link} to={to} state={{ title, ...props }}>
-      <StyledCardContent>
-        <Typography color="primary" component="h5" variant="h5">
-          {title}
-        </Typography>
-        <Typography variant="subtitle1" color="textSecondary">
-          {description}
-        </Typography>
-      </StyledCardContent>
-    </CardActionArea>
+    <WrapperContentCard>
+      <StyledCardActionArea
+        component={Link}
+        to={to}
+        state={{ title, ...props }}
+      >
+        <TitleCard color="primary">{title}</TitleCard>
+        <DescriptionCard color="textSecondary">{description}</DescriptionCard>
+      </StyledCardActionArea>
+    </WrapperContentCard>
     <StyledCardActions>{children}</StyledCardActions>
   </StyledCard>
 );

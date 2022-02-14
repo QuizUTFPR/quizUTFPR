@@ -44,6 +44,7 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'no-unused-vars': 'off',
   },
   settings: {
     'import/resolver': {

@@ -12,6 +12,7 @@ import useQuestionQuiz from '@hooks/QuestionQuiz';
 // COMPONENTS
 import Modal from '@components/Modal';
 import AlertRemoveMessage from '@components/ConfirmRemove';
+import AnimatedContainer from '@components/WrapperAnimatedPage';
 import { ContainerGrid } from './style';
 import Header from './components/header';
 import LeftSide from './components/leftSide';
@@ -20,7 +21,6 @@ import RightSide from './components/rightSide';
 import AlertGetOut from './components/confirmGetOut';
 import ChangeQuestion from './components/confirmChangeTypeQuestion';
 import DragImageContainer from './components/dragImageContainer';
-
 // PAGES
 import TypeOfQuestion from '../TypeOfQuestion';
 
@@ -170,7 +170,7 @@ const Question = () => {
   };
 
   return (
-    <>
+    <AnimatedContainer>
       <Header
         handleGetOut={handleGetOut}
         location={location}
@@ -256,7 +256,7 @@ const Question = () => {
           handleClose={handleCloseDragImage}
         />
       </Modal>
-    </>
+    </AnimatedContainer>
   );
 };
 

@@ -6,13 +6,14 @@ import { Save, CheckCircle, Done, Warning, Create } from '@mui/icons-material/';
 
 // COMPONENTS
 import StyledButton from '@components/Button';
-import { Grid, Typography, Toolbar } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import {
   StyledAppBar,
   StyledMessage,
   BoxStyledAction,
   WrapperMessage,
   StyledExitIcon,
+  StyledToolBar,
 } from '../style';
 
 const Header = ({
@@ -49,52 +50,50 @@ const Header = ({
   }
   return (
     <StyledAppBar position="static" color="transparent">
-      <Toolbar>
-        <Grid container justifyContent="space-between" alignItems="center">
-          <Grid item>
-            <StyledButton
-              color="secondary"
-              variant="outlined"
-              onClick={handleGetOut}
-              startIcon={<StyledExitIcon />}
-              size="large"
-            >
-              Sair
-            </StyledButton>
-          </Grid>
-
-          <Grid item>
-            <Typography component="h4" variant="h4" color="primary">
-              {location.state ? location.state.title : 'Sem Título'}
-            </Typography>
-          </Grid>
-
-          <BoxStyledAction>
-            {statusOfQuestions}
-            <StyledButton
-              style={{ marginRight: '20px' }}
-              color="primary"
-              variant="outlined"
-              onClick={handleSave}
-              startIcon={<Save />}
-              size="large"
-              disabled={isSaved || isTyping || location.state.published}
-            >
-              Salvar
-            </StyledButton>
-            <StyledButton
-              disabled={location.state.published}
-              color="primary"
-              variant="contained"
-              onClick={handleFinish}
-              startIcon={<CheckCircle />}
-              size="large"
-            >
-              Finalizar
-            </StyledButton>
-          </BoxStyledAction>
+      <StyledToolBar>
+        <Grid item>
+          <StyledButton
+            color="secondary"
+            variant="outlined"
+            onClick={handleGetOut}
+            startIcon={<StyledExitIcon />}
+            size="large"
+          >
+            Sair
+          </StyledButton>
         </Grid>
-      </Toolbar>
+
+        {/* <Grid item> */}
+        <Typography noWrap component="h4" variant="h4" color="primary">
+          {location.state ? location.state.title : 'Sem Título'}
+        </Typography>
+        {/* </Grid> */}
+
+        <BoxStyledAction>
+          {statusOfQuestions}
+          <StyledButton
+            style={{ marginRight: '20px' }}
+            color="primary"
+            variant="outlined"
+            onClick={handleSave}
+            startIcon={<Save />}
+            size="large"
+            disabled={isSaved || isTyping || location.state.published}
+          >
+            Salvar
+          </StyledButton>
+          <StyledButton
+            disabled={location.state.published}
+            color="primary"
+            variant="contained"
+            onClick={handleFinish}
+            startIcon={<CheckCircle />}
+            size="large"
+          >
+            Finalizar
+          </StyledButton>
+        </BoxStyledAction>
+      </StyledToolBar>
     </StyledAppBar>
   );
 };

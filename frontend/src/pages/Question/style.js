@@ -1,11 +1,25 @@
 import styled from 'styled-components';
 import Katex from '@components/Katex';
 
-import { Grid, AppBar, Button, Box, Stack, IconButton } from '@mui/material';
+import {
+  Grid,
+  AppBar,
+  Button,
+  Box,
+  Stack,
+  IconButton,
+  Toolbar,
+} from '@mui/material';
 import { ExitToApp } from '@mui/icons-material/';
 import QuestionInput from './components/input';
 import CheckBox from './components/checkbox';
 import MyRadio from './components/radio';
+
+export const StyledToolBar = styled(Toolbar)`
+  flex-wrap: nowrap;
+  gap: 20px;
+  justify-content: space-between;
+`;
 
 export const StyledAppBar = styled(AppBar)`
   background: white;
@@ -184,6 +198,7 @@ export const StyledMessage = styled.span`
 export const BoxStyledAction = styled(Box)`
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 `;
 
 export const WrapperMessage = styled.div`
@@ -227,18 +242,20 @@ export const HiddenCheckBox = styled(CheckBox)`
 `;
 
 export const ShowOption = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   height: 59px;
   width: 70px;
-  //border: 2px solid rgba(0, 0, 0, 0.54);
   border: 2px solid ${({ theme }) => theme.palette.primary.main};
   border-radius: 5px 0 0 5px;
   background: ${({ checked, theme }) =>
     checked ? theme.palette.primary.main : 'white'};
+
   && svg {
     display: ${({ checked }) => (checked ? '' : 'none')};
     fill: white;
-    margin-top: calc(100% - 48px);
     font-size: 2.5em;
   }
 `;

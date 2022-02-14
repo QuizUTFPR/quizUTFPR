@@ -6,9 +6,10 @@ export const GridContainer = styled(Grid)`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  margin: 40px;
+  margin-top: 40px;
   background: ${({ theme }) => theme.palette.background.bgContainer};
   border-radius: 5px;
+  width: calc(100vw - 340px);
   overflow-wrap: break-word;
-  max-width: calc(100vw - 340px);
+  overflow: hidden;
 `;

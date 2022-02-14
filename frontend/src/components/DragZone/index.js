@@ -62,14 +62,8 @@ const StyledDropzone = ({ handleChange }) => {
       >
         <input {...getInputProps()} />
         <p> Você pode arrastar e soltar imagens aqui para adicioná-las.</p>
-        <p style={{ marginTop: '-10px' }}>
-          Tamanho máximo: {maxSize / 1000000} MB
-        </p>
-        <Button
-          style={{ marginTop: '-10px' }}
-          color="secondary"
-          variant="outlined"
-        >
+        <p>Tamanho máximo: {maxSize / 1000} kB</p>
+        <Button color="secondary" variant="outlined">
           BROWSE
         </Button>
       </Container>

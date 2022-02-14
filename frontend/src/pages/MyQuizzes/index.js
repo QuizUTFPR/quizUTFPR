@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '@api';
 
 // COMPONENTS
-import GridContainer from '@components/Container';
+import Container from '@components/Container';
 import Card from '@components/Card';
 import Modal from '@components/Modal';
 import AlertRemoveMessage from '@components/ConfirmRemove';
@@ -18,20 +18,14 @@ import QuizPreferences from '@pages/EditQuizPreferences';
 import { CREATE_QUIZ, STATISTICS_QUIZ, QUESTION } from '@routes';
 
 // MATERIAL-UI COMPONENTS
-import {
-  Grid,
-  IconButton,
-  Typography,
-  Divider,
-  // Tooltip,
-} from '@mui/material';
+import { IconButton } from '@mui/material';
 import Button from '@components/Button';
 
 // MATERIAL-UI ICONS
 import { Edit, Delete, Publish, BarChart } from '@mui/icons-material';
 
 // STYLE
-import { TextPIN } from './style';
+import { TextPIN, HeaderTitle, HeaderTitleText, HeaderDivider } from './style';
 
 const IconWrapper = forwardRef((props, ref) => (
   <IconButton ref={ref} onClick={props.onClick} {...props}>
@@ -138,11 +132,9 @@ const Quiz = () => {
 
   return (
     <>
-      <GridContainer container spacing={3}>
-        <Grid container align="center" justifyContent="space-between">
-          <Typography color="primary" component="h4" variant="h4">
-            Quizzes Cadastrados
-          </Typography>
+      <Container container>
+        <HeaderTitle container align="center" justifyContent="space-between">
+          <HeaderTitleText color="primary">Quizzes Cadastrados</HeaderTitleText>
 
           <Button
             variant="contained"
@@ -152,10 +144,10 @@ const Quiz = () => {
           >
             Criar Quiz
           </Button>
-        </Grid>
-        <Grid item>
-          <Divider />
-        </Grid>
+        </HeaderTitle>
+
+        <HeaderDivider />
+
         {!quizzes ? (
           <p>Vazio!</p>
         ) : (
@@ -215,7 +207,7 @@ const Quiz = () => {
             </Card>
           ))
         )}
-      </GridContainer>
+      </Container>
 
       {/* MODALS */}
       <Modal

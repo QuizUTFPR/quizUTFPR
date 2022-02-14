@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 // COMPONENTS
-import { Link } from 'react-router-dom';
 import { List, Divider, Avatar, Tooltip } from '@mui/material';
 import {
   Help,
@@ -27,14 +27,16 @@ import {
   StyledBadge,
   AdminName,
   AdminDescription,
-  StyledListItemIcon,
-  StyledListItemText,
-  StyledListItem,
+  WrapperLine,
+  TextLine,
+  IconLine,
+  Line,
   StyledIconButton,
 } from './style';
 
 const MenuDrawer = () => {
   const { teacherInfo, logout } = useAuth();
+  const { pathname } = useLocation();
 
   const [open, setOpen] = useState(true);
 
@@ -124,12 +126,12 @@ const MenuDrawer = () => {
             title={open ? '' : option.text}
             placement="right"
           >
-            <Link to={option.to} style={{ textDecoration: 'none' }}>
-              <StyledListItem button key={option.text}>
-                <StyledListItemIcon>{option.icon}</StyledListItemIcon>
-                <StyledListItemText color="primary" primary={option.text} />
-              </StyledListItem>
-            </Link>
+            <WrapperLine to={option.to}>
+              <Line open={open} isActive={option.to === pathname}>
+                <IconLine open={open}>{option.icon}</IconLine>
+                {open && <TextLine color="primary">{option.text}</TextLine>}
+              </Line>
+            </WrapperLine>
           </Tooltip>
         ))}
       </List>
@@ -141,10 +143,12 @@ const MenuDrawer = () => {
             title={open ? '' : option.text}
             placement="right"
           >
-            <StyledListItem button onClick={option.onClick}>
-              <StyledListItemIcon>{option.icon}</StyledListItemIcon>
-              <StyledListItemText primary={option.text} />
-            </StyledListItem>
+            <WrapperLine as="div" onClick={option.onClick}>
+              <Line open={open}>
+                <IconLine open={open}>{option.icon}</IconLine>
+                {open && <TextLine color="primary">{option.text}</TextLine>}
+              </Line>
+            </WrapperLine>
           </Tooltip>
         ))}
       </List>

@@ -7,11 +7,11 @@ import { Typography, Grid } from '@mui/material';
 import { LogoUTFPR, StyledHomeGrid } from './style';
 
 const Home = () => (
-  <StyledHomeGrid container justifyContent="center" align="center">
+  <StyledHomeGrid justifyContent="center" align="center">
     <Grid item xs={12}>
       <LogoUTFPR />
     </Grid>
-    <Grid item xs={12}>
+    <Grid item>
       <Typography color="primary">
         Seja Bem-Vindo ao Painel de Controle
       </Typography>

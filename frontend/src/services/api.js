@@ -35,7 +35,6 @@ api.interceptors.response.use(
       return api.request(originalRequest);
     }
 
-    console.log('status', requestStatus);
     if (requestStatus === 401) {
       localStorage.clear('@TOKEN');
       localStorage.clear('@TEACHER');
