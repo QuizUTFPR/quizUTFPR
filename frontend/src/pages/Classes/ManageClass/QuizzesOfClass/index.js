@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Style
-import { Wrapper } from './style';
+import { Wrapper, QuizzesWrapper } from './style';
 
 const QuizzesOfClass = () => {
   return (
@@ -11,7 +11,7 @@ const QuizzesOfClass = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      quizzes
+      <QuizzesWrapper>test</QuizzesWrapper>
     </Wrapper>
   );
 };

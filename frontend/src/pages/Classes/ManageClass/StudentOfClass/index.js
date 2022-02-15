@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Style
-import { Wrapper } from './style';
+import { Wrapper, StudentsWrapper } from './style';
 
 const StudentOfClass = () => {
   return (
@@ -11,7 +11,7 @@ const StudentOfClass = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      estudantes
+      <StudentsWrapper>estudantes</StudentsWrapper>
     </Wrapper>
   );
 };
