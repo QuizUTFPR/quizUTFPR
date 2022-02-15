@@ -3,6 +3,7 @@ import api from '@api';
 import { useParams } from 'react-router-dom';
 
 // Style
+import { LibraryBooks, Person, LocationSearching } from '@mui/icons-material';
 import {
   Wrapper,
   InfoClassWrapper,
@@ -10,6 +11,13 @@ import {
   Bold,
   ValueText,
   WrapperText,
+  WrapperInformation,
+  RightWrapper,
+  LeftWrapper,
+  CircleIconInformation,
+  ContentWrapperInformation,
+  TitleInformation,
+  ValueInformation,
 } from './style';
 
 const InfoOfClass = () => {
@@ -37,23 +45,59 @@ const InfoOfClass = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <InfoClassWrapper>
-        <ImageClass src={classInstance?.imageClass?.url} />
-        <WrapperText>
-          <Bold>Título:</Bold>
-          <ValueText>{classInstance?.title}</ValueText>
-        </WrapperText>
+      <LeftWrapper>
+        <InfoClassWrapper>
+          <ImageClass src={classInstance?.imageClass?.url} />
+          <WrapperText>
+            <Bold>Título:</Bold>
+            <ValueText>{classInstance?.title}</ValueText>
+          </WrapperText>
 
-        <WrapperText>
-          <Bold>Descrição:</Bold>
-          <ValueText>{classInstance?.description}</ValueText>
-        </WrapperText>
+          <WrapperText>
+            <Bold>Descrição:</Bold>
+            <ValueText>{classInstance?.description}</ValueText>
+          </WrapperText>
 
-        <WrapperText>
-          <Bold>PIN:</Bold>
-          <ValueText>{classInstance?.pin}</ValueText>
-        </WrapperText>
-      </InfoClassWrapper>
+          <WrapperText>
+            <Bold>PIN:</Bold>
+            <ValueText>{classInstance?.pin}</ValueText>
+          </WrapperText>
+        </InfoClassWrapper>
+      </LeftWrapper>
+
+      <RightWrapper>
+        <WrapperInformation>
+          <CircleIconInformation color="purple">
+            <LibraryBooks sx={{ color: 'white' }} />
+          </CircleIconInformation>
+          <ContentWrapperInformation>
+            <TitleInformation>Quizzes Anexados</TitleInformation>
+            <ValueInformation>Existem 5 quizzes anexados.</ValueInformation>
+          </ContentWrapperInformation>
+        </WrapperInformation>
+
+        <WrapperInformation>
+          <CircleIconInformation color="#e52f92">
+            <Person sx={{ color: 'white' }} />
+          </CircleIconInformation>
+          <ContentWrapperInformation>
+            <TitleInformation>Alunos Inscritos</TitleInformation>
+            <ValueInformation>Existem 5 alunos cadastrados.</ValueInformation>
+          </ContentWrapperInformation>
+        </WrapperInformation>
+
+        <WrapperInformation>
+          <CircleIconInformation color="#25368f">
+            <LocationSearching sx={{ color: 'white' }} />
+          </CircleIconInformation>
+          <ContentWrapperInformation>
+            <TitleInformation>Último Aluno Inscrito</TitleInformation>
+            <ValueInformation>
+              O aluno Cleberson foi o último a entrar na turma.
+            </ValueInformation>
+          </ContentWrapperInformation>
+        </WrapperInformation>
+      </RightWrapper>
     </Wrapper>
   );
 };
