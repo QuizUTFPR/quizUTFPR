@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Style
-import { Wrapper } from './style';
+import { Wrapper, Teste } from './style';
 
 const InfoOfClass = () => {
   return (
@@ -11,7 +11,7 @@ const InfoOfClass = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      info
+      <Teste>foto</Teste>
     </Wrapper>
   );
 };

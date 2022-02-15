@@ -12,6 +12,7 @@ export const ToolBar = styled.header`
   align-items: center;
   padding: 0 20px;
   background: white;
+  box-shadow: 1px 1px 8px -3px rgb(54 48 48 / 49%);
 `;
 
 export const WrapperTeacher = styled.div`

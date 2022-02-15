@@ -7,21 +7,21 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const Wrapper = styled.div`
-  background: white;
-  border: 1px solid #e5e5e5;
+export const WrapperMenu = styled.div`
+  display: flex;
   margin-top: 40px;
-  border-radius: 8px;
   width: 90vw;
+  justify-content: center;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: white;
+  gap: 10px;
+  box-shadow: 1px 1px 8px -3px rgb(54 48 48 / 49%);
 `;
 
-export const WrapperMenuContent = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  border-bottom: 1px solid #e5e5e5;
-  padding: 0 10px;
-  gap: 10px;
+export const Wrapper = styled.div`
+  margin-top: 20px;
+  width: 90vw;
 `;
 
 export const ItemMenuContent = styled.div`
@@ -32,15 +32,13 @@ export const ItemMenuContent = styled.div`
   color: ${({ isActive, theme }) =>
     isActive ? theme.palette.primary.main : '#dbdbdb'};
   transition: all 0.2s ease-in-out;
-  margin: 5px 0;
-  border-radius: 8px;
+  border-bottom: 2px solid
+    ${({ isActive, theme }) =>
+      isActive ? theme.palette.primary.main : 'white'};
 
   :hover {
     color: ${({ theme }) => theme.palette.primary.main};
     background: #f9f9f9;
+    border-bottom: 2px solid ${({ theme }) => theme.palette.primary.main};
   }
-`;
-
-export const Content = styled.div`
-  padding: 20px;
 `;

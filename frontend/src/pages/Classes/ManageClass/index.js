@@ -11,13 +11,7 @@ import QuizzesOfClass from './QuizzesOfClass';
 import StudentOfClass from './StudentOfClass';
 
 // Style
-import {
-  Container,
-  Content,
-  Wrapper,
-  WrapperMenuContent,
-  ItemMenuContent,
-} from './style';
+import { Container, Wrapper, WrapperMenu, ItemMenuContent } from './style';
 
 const menu = [
   {
@@ -41,26 +35,25 @@ const ManageClass = () => {
     <AnimatedContainer>
       <Container>
         <Toolbaar />
-        <Wrapper>
-          <WrapperMenuContent>
-            {menu.map((item) => (
-              <ItemMenuContent
-                key={item.key}
-                onClick={() => setActiveScreen(item.key)}
-                isActive={activeScreen === item.key}
-              >
-                {item.label}
-              </ItemMenuContent>
-            ))}
-          </WrapperMenuContent>
 
-          <Content>
-            <AnimatePresence>
-              {activeScreen === 0 && <InfoOfClass />}
-              {activeScreen === 1 && <QuizzesOfClass />}
-              {activeScreen === 2 && <StudentOfClass />}
-            </AnimatePresence>
-          </Content>
+        <WrapperMenu>
+          {menu.map((item) => (
+            <ItemMenuContent
+              key={item.key}
+              onClick={() => setActiveScreen(item.key)}
+              isActive={activeScreen === item.key}
+            >
+              {item.label}
+            </ItemMenuContent>
+          ))}
+        </WrapperMenu>
+
+        <Wrapper>
+          <AnimatePresence>
+            {activeScreen === 0 && <InfoOfClass />}
+            {activeScreen === 1 && <QuizzesOfClass />}
+            {activeScreen === 2 && <StudentOfClass />}
+          </AnimatePresence>
         </Wrapper>
       </Container>
     </AnimatedContainer>

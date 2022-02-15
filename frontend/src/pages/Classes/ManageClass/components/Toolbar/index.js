@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Components
 import StyledButton from '@components/Button';
@@ -11,12 +11,12 @@ import {
   StyledAvatar,
   NameTeacher,
   WrapperTeacher,
-  ClassName,
+  // ClassName,
 } from './style';
 
 const CustomToolBar = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   return (
     <ToolBar>
@@ -29,7 +29,7 @@ const CustomToolBar = () => {
         Sair
       </StyledButton>
 
-      <ClassName>{location?.state?.title || 'Sem Título'}</ClassName>
+      {/* <ClassName>{location?.state?.title || 'Sem Título'}</ClassName> */}
 
       <WrapperTeacher>
         <StyledAvatar src="https://image.flaticon.com/icons/png/512/147/147144.png" />
