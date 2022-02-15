@@ -15,7 +15,7 @@ import { Button, IconButton } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 
 // ROUTES
-import { CREATE_CLASS } from '@routes';
+import { CREATE_CLASS, CLASSES } from '@routes';
 
 // MODALS
 import EditClass from './EditClass';
@@ -83,10 +83,10 @@ const MyClasses = () => {
             <Card
               key={classInstance.id}
               image={classInstance?.imageClass?.url}
-              imageTile={classInstance.title}
+              imageTitle={classInstance.title}
               title={classInstance.title}
               description={classInstance.description}
-              to="#"
+              to={`${CLASSES}/${classInstance.id}`}
             >
               <Tooltip arrow ariaLabel="pin" title="PIN utilizado pelo aluno">
                 <TextPIN>{classInstance.pin}</TextPIN>

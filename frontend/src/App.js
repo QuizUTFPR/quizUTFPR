@@ -9,13 +9,14 @@ import QuestionQuizProvider from '@context/questionsQuiz';
 import useAuth from '@hooks/Auth';
 
 // ROUTES
-import { LOGIN, QUESTION, HOME, TOKENEXPIRED } from '@routes';
+import { LOGIN, QUESTION, HOME, TOKENEXPIRED, CLASSES } from '@routes';
 
 // PAGES
 const MainPage = lazy(() => import('./pages/MainPage'));
 const Login = lazy(() => import('./pages/Login'));
 const ManageQuiz = lazy(() => import('./pages/Quizzes/ManageQuiz'));
 const ExpiredToken = lazy(() => import('./pages/ConfirmExpireOfToken'));
+const ManageClass = lazy(() => import('./pages/Classes/ManageClass'));
 
 const App = () => {
   const location = useLocation();
@@ -69,6 +70,7 @@ const App = () => {
             </QuestionQuizProvider>
           }
         />
+        <Route path={`${CLASSES}/:idClass`} exact element={<ManageClass />} />
         <Route path="*" element={<MainPage />} />
       </Routes>
     </Suspense>
