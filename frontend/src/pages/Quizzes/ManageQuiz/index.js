@@ -22,7 +22,7 @@ import AlertGetOut from './components/confirmGetOut';
 import ChangeQuestion from './components/confirmChangeTypeQuestion';
 import DragImageContainer from './components/dragImageContainer';
 // PAGES
-import TypeOfQuestion from '../TypeOfQuestion';
+import TypeOfQuestion from './ModalTypeOfQuestion';
 
 const Question = () => {
   const location = useLocation();

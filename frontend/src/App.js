@@ -14,7 +14,7 @@ import { LOGIN, QUESTION, HOME, TOKENEXPIRED } from '@routes';
 // PAGES
 const MainPage = lazy(() => import('./pages/MainPage'));
 const Login = lazy(() => import('./pages/Login'));
-const Question = lazy(() => import('./pages/Question'));
+const ManageQuiz = lazy(() => import('./pages/Quizzes/ManageQuiz'));
 const ExpiredToken = lazy(() => import('./pages/ConfirmExpireOfToken'));
 
 const App = () => {
@@ -65,7 +65,7 @@ const App = () => {
           exact
           element={
             <QuestionQuizProvider>
-              <Question />
+              <ManageQuiz />
             </QuestionQuizProvider>
           }
         />

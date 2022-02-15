@@ -21,8 +21,8 @@ const Menu = lazy(() => import('@components/MenuDrawer'));
 
 // PAGES
 const Home = lazy(() => import('../Home'));
-const Quiz = lazy(() => import('../MyQuizzes'));
-const CreateQuiz = lazy(() => import('../CreateQuiz'));
+const Quiz = lazy(() => import('../Quizzes'));
+const CreateQuiz = lazy(() => import('../Quizzes/CreateQuiz'));
 const Classes = lazy(() => import('../Classes'));
 const Statistics = lazy(() => import('../Statistics'));
 const CreateClass = lazy(() => import('../Classes/CreateClass'));

@@ -10,7 +10,7 @@ import { Save, Search, Close } from '@mui/icons-material/';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
-import QuestionDatabase from '../QuestionDatabase';
+import QuestionDatabase from '../ModalQuestionDatabase';
 
 // STYLE
 import { StyledWrapper } from './style';

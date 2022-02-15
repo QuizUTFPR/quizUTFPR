@@ -109,7 +109,7 @@ const CriarQuiz = () => {
 
         <Grid item xs={6}>
           <Button fullWidth variant="contained" color="primary" type="submit">
-            CRIAR QUIZ
+            CRIAR TURMA
           </Button>
         </Grid>
       </Grid>

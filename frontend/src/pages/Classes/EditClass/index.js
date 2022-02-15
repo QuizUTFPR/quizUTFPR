@@ -64,7 +64,7 @@ const EditPreferences = forwardRef((props, ref) => {
 
         <Grid item xs={9} md={11}>
           <Typography variant="h5" color="primary">
-            Preferências do Quiz
+            Preferências da Turma
           </Typography>
         </Grid>
       </Grid>

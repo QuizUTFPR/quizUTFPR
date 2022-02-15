@@ -12,7 +12,7 @@ import Tooltip from '@components/ToolTip';
 import SnackBar from '@components/SnackBar';
 
 // PAGES
-import QuizPreferences from '@pages/EditQuizPreferences';
+import QuizPreferences from '@pages/Quizzes/EditQuiz';
 
 // ROUTES
 import { CREATE_QUIZ, STATISTICS_QUIZ, QUESTION } from '@routes';
