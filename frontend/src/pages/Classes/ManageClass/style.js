@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: white;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -9,6 +8,7 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
+  background: white;
   border: 1px solid #e5e5e5;
   margin-top: 40px;
   border-radius: 8px;
@@ -37,6 +37,7 @@ export const ItemMenuContent = styled.div`
 
   :hover {
     color: ${({ theme }) => theme.palette.primary.main};
+    background: #f9f9f9;
   }
 `;
 

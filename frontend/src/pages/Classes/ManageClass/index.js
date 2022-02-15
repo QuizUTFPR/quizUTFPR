@@ -5,6 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedContainer from '@components/WrapperAnimatedPage';
 import Toolbaar from './components/Toolbar';
 
+// Pages
+import InfoOfClass from './InfoOfClass';
+import QuizzesOfClass from './QuizzesOfClass';
+import StudentOfClass from './StudentOfClass';
+
 // Style
 import {
   Container,
@@ -51,36 +56,9 @@ const ManageClass = () => {
 
           <Content>
             <AnimatePresence>
-              {activeScreen === 0 && (
-                <motion.p
-                  key="info"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  informações
-                </motion.p>
-              )}
-              {activeScreen === 1 && (
-                <motion.p
-                  key="quiz"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  quizzes
-                </motion.p>
-              )}
-              {activeScreen === 2 && (
-                <motion.p
-                  key="alunos"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  alunos
-                </motion.p>
-              )}
+              {activeScreen === 0 && <InfoOfClass />}
+              {activeScreen === 1 && <QuizzesOfClass />}
+              {activeScreen === 2 && <StudentOfClass />}
             </AnimatePresence>
           </Content>
         </Wrapper>

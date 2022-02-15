@@ -101,7 +101,6 @@ export const Line = styled.div`
   transition: all 0.2s ease;
 
   color: ${({ theme }) => theme.palette.primary.main};
-  background: ${({ isActive }) => (isActive ? 'red' : 'white')};
   background: ${({ isActive }) => (isActive ? '#dbdbdb' : 'white')};
   margin: ${({ open }) => (open ? '0 10px' : '')};
   justify-content: ${({ open }) => (!open ? 'center' : '')};

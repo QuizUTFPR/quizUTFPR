@@ -11,6 +11,7 @@ export const ToolBar = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  background: white;
 `;
 
 export const WrapperTeacher = styled.div`
