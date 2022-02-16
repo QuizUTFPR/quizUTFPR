@@ -18,6 +18,7 @@ import {
   ContentWrapperInformation,
   TitleInformation,
   ValueInformation,
+  EmptyImage,
 } from './style';
 
 const InfoOfClass = () => {
@@ -47,20 +48,23 @@ const InfoOfClass = () => {
     >
       <LeftWrapper>
         <InfoClassWrapper>
-          <ImageClass src={classInstance?.imageClass?.url} />
+          {classInstance?.imageClass?.url ? (
+            <ImageClass src={classInstance?.imageClass?.url} />
+          ) : (
+            <EmptyImage />
+          )}
           <WrapperText>
-            <Bold>Título:</Bold>
+            <Bold>PIN:</Bold>
+            <ValueText>{classInstance?.pin}</ValueText>
+          </WrapperText>
+          <WrapperText>
+            <Bold>Nome da Turma:</Bold>
             <ValueText>{classInstance?.title}</ValueText>
           </WrapperText>
 
           <WrapperText>
             <Bold>Descrição:</Bold>
             <ValueText>{classInstance?.description}</ValueText>
-          </WrapperText>
-
-          <WrapperText>
-            <Bold>PIN:</Bold>
-            <ValueText>{classInstance?.pin}</ValueText>
           </WrapperText>
         </InfoClassWrapper>
       </LeftWrapper>
@@ -83,18 +87,6 @@ const InfoOfClass = () => {
           <ContentWrapperInformation>
             <TitleInformation>Alunos Inscritos</TitleInformation>
             <ValueInformation>Existem 5 alunos cadastrados.</ValueInformation>
-          </ContentWrapperInformation>
-        </WrapperInformation>
-
-        <WrapperInformation>
-          <CircleIconInformation color="#25368f">
-            <LocationSearching sx={{ color: 'white' }} />
-          </CircleIconInformation>
-          <ContentWrapperInformation>
-            <TitleInformation>Último Aluno Inscrito</TitleInformation>
-            <ValueInformation>
-              O aluno Cleberson foi o último a entrar na turma.
-            </ValueInformation>
           </ContentWrapperInformation>
         </WrapperInformation>
       </RightWrapper>
