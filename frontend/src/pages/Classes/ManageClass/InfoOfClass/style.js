@@ -4,6 +4,10 @@ import { motion } from 'framer-motion';
 export const Wrapper = styled(motion.div)`
   display: flex;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export const RightWrapper = styled.div`
@@ -11,10 +15,18 @@ export const RightWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const LeftWrapper = styled.div`
   width: 60%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const InfoClassWrapper = styled.div`
@@ -26,6 +38,14 @@ export const InfoClassWrapper = styled.div`
 
 export const ImageClass = styled.img`
   width: 100%;
+  border-radius: 8px;
+`;
+
+export const EmptyImage = styled.div`
+  border-radius: 8px;
+  width: 100%;
+  height: 300px;
+  background: ${({ theme }) => theme.palette.primary.main};
 `;
 
 export const WrapperText = styled.div``;

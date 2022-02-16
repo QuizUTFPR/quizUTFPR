@@ -42,3 +42,12 @@ export const ItemMenuContent = styled.div`
     border-bottom: 2px solid ${({ theme }) => theme.palette.primary.main};
   }
 `;
+
+export const ClassName = styled.p`
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;

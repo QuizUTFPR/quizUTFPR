@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
 import ClassRepository from '../../repositories/Class';
 
+// Models
+import File from '../../models/FileModel';
+
 class FindByPkClass {
   constructor() {
     this.classRepository = new ClassRepository();
@@ -20,7 +23,16 @@ class FindByPkClass {
 
     const { id } = data;
 
-    const classInstance = await this.classRepository.findById(id);
+    const classInstance = await this.classRepository.findById(id, {
+      attributes: ['id', 'pin', 'title', 'description'],
+      include: [
+        {
+          model: File,
+          as: 'imageClass',
+          attributes: ['path', 'url'],
+        },
+      ],
+    });
 
     return classInstance;
   }
