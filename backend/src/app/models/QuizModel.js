@@ -70,6 +70,13 @@ class Quiz extends Model {
       foreignKey: 'quizId',
       as: 'quizFavorite',
     });
+
+    this.belongsToMany(models.Class, {
+      through: 'quiz_class',
+      foreignKey: 'idQuiz',
+      as: 'quizzes',
+      onDelete: 'CASCADE',
+    });
   }
 }
 

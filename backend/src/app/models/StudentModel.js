@@ -48,6 +48,13 @@ class Student extends Model {
       foreignKey: 'studentId',
       as: 'studentFavorite',
     });
+
+    this.belongsToMany(models.Class, {
+      through: 'student_class',
+      foreignKey: 'idStudent',
+      as: 'students',
+      onDelete: 'CASCADE',
+    });
   }
 
   checkPassword(password) {

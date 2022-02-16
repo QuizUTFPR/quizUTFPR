@@ -37,6 +37,20 @@ class Class extends Model {
       onDelete: 'CASCADE',
       hooks: true,
     });
+
+    this.belongsToMany(models.Student, {
+      through: 'student_class',
+      foreignKey: 'idClass',
+      as: 'classes',
+      onDelete: 'CASCADE',
+    });
+
+    this.belongsToMany(models.Quiz, {
+      through: 'quiz_class',
+      foreignKey: 'idClass',
+      ass: 'classes',
+      onDelete: 'CASCADE',
+    });
   }
 }
 
