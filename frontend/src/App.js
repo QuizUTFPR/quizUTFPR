@@ -9,7 +9,7 @@ import QuestionQuizProvider from '@context/questionsQuiz';
 import useAuth from '@hooks/Auth';
 
 // ROUTES
-import { LOGIN, QUESTION, HOME, TOKENEXPIRED, CLASSES } from '@routes';
+import { LOGIN, QUESTION, HOME, TOKENEXPIRED, MANAGE_CLASSES } from '@routes';
 
 // PAGES
 const MainPage = lazy(() => import('./pages/MainPage'));
@@ -70,7 +70,11 @@ const App = () => {
             </QuestionQuizProvider>
           }
         />
-        <Route path={`${CLASSES}/:idClass`} exact element={<ManageClass />} />
+        <Route
+          path={`${MANAGE_CLASSES}/:idClass`}
+          exact
+          element={<ManageClass />}
+        />
         <Route path="*" element={<MainPage />} />
       </Routes>
     </Suspense>

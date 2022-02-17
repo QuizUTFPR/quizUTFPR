@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 // Components
 import StyledButton from '@components/Button';
 
+// Routes
+import { CLASSES } from '@routes';
+
 // Style
 import {
   ToolBar,
@@ -21,7 +24,7 @@ const CustomToolBar = () => {
   return (
     <ToolBar>
       <StyledButton
-        onClick={() => navigate(-1)}
+        onClick={() => navigate(CLASSES)}
         color="primary"
         startIcon={<StyledExitIcon />}
         size="large"

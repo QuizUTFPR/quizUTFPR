@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import api from '@api';
 
 // ROTAS
-import { CLASSES } from '@routes';
+import { MANAGE_CLASSES } from '@routes';
 
 // UTILS
 // import getBase64 from '@utils/getBase64OfImage';
@@ -40,8 +40,8 @@ const CriarQuiz = () => {
       const { data, status } = await api.post('/class/create', file);
 
       if (status === 200) {
-        navigate(`${CLASSES}`, {
-          state: { title: data.title, noTime: data.noTime },
+        navigate(`${MANAGE_CLASSES}/${data.id}`, {
+          state: { title: data.title },
         });
       }
     },
