@@ -39,7 +39,7 @@ class ClassQuizController {
     }
   }
 
-  async deleteQuizFromClass(req, res) {
+  async delete(req, res) {
     try {
       const { idClass, idQuiz } = req.body;
       const removedQuiz = await DeleteQuizFromClassService.execute({

@@ -9,6 +9,8 @@ import uploadImage from '../../../app/middlewares/uploadImage';
 // CONTROLLERS
 import ClassController from '../../../app/controllers/ClassController/ClassController';
 import ClassTeacherController from '../../../app/controllers/ClassController/ClassTeacherController';
+import ClassStudentController from '../../../app/controllers/ClassController/ClassStudentController';
+import ClassQuizController from '../../../app/controllers/ClassController/ClassQuizController';
 
 // Crio uma instância do método Router;
 const router = new Router();
@@ -33,5 +35,15 @@ router.delete('/delete', ClassController.destroy);
 
 // TEACHER REALATION
 router.get('/getAllTeacherClasses', ClassTeacherController.index);
+
+// STUDENT RELATION
+router.post('/attachSudent', ClassStudentController.store);
+router.get('/getAllClassStudents', ClassStudentController.index);
+router.delete('/dettachStudent', ClassStudentController.delete);
+
+// QUIZ RELATION
+router.post('/attachQuiz', ClassQuizController.store);
+router.get('/getAllClassStudents', ClassQuizController.index);
+router.delete('/dettachStudent', ClassQuizController.delete);
 
 export default router;
