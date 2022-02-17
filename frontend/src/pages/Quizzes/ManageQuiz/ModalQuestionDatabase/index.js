@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { forwardRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import api from '@api';
 
@@ -20,10 +20,6 @@ import Question from './question';
 // ICONS
 import { StyledSearchTagButton } from './style';
 
-const Wrapper = forwardRef((props, ref) => (
-  <GridContainer ref={ref} {...props} />
-));
-
 async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
   const response = await fetch(url);
   const data = await response.blob();
@@ -33,8 +29,11 @@ async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
   });
 }
 
-// eslint-disable-next-line no-unused-vars
-const QuestionDatabase = forwardRef((props, ref) => {
+const QuestionDatabase = ({
+  handleClose,
+  handleaddQuestion,
+  handleRemoveQuestion,
+}) => {
   const [isLoading, setLoading] = useState(false);
   const [checkboxes, setCheckboxes] = useState([]);
 
@@ -134,7 +133,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
           );
         }
       } catch (error) {
-        handleClickSnackBar(error.response.data.error, 'error');
+        handleClickSnackBar(error.response.data.response, 'error');
       }
     };
 
@@ -148,18 +147,18 @@ const QuestionDatabase = forwardRef((props, ref) => {
     }));
 
     if (e.target.checked) {
-      props.handleaddQuestion(question);
+      handleaddQuestion(question);
     } else {
-      props.handleRemoveQuestion(question);
+      handleRemoveQuestion(question);
     }
   };
 
   return (
     <>
-      <Wrapper container spacing={3}>
+      <GridContainer container spacing={3}>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={3} md={1}>
-            <IconButton aria-label="closeModal" onClick={props.handleClose}>
+            <IconButton aria-label="closeModal" onClick={handleClose}>
               <Close />
             </IconButton>
           </Grid>
@@ -247,7 +246,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
             </Grid>
           ))}
         </Grid>
-      </Wrapper>
+      </GridContainer>
 
       <SnackBar
         openSnackBar={stateSnackBar.open}
@@ -258,6 +257,6 @@ const QuestionDatabase = forwardRef((props, ref) => {
       />
     </>
   );
-});
+};
 
 export default QuestionDatabase;

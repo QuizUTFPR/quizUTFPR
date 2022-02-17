@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '@api';
 
@@ -26,18 +26,6 @@ import { Edit, Delete, Publish, BarChart } from '@mui/icons-material';
 
 // STYLE
 import { TextPIN, HeaderTitle, HeaderTitleText, HeaderDivider } from './style';
-
-const IconWrapper = forwardRef((props, ref) => (
-  <IconButton ref={ref} onClick={props.onClick} {...props}>
-    {props.children}
-  </IconButton>
-));
-
-const TextPINReffed = forwardRef((props, ref) => (
-  <TextPIN ref={ref} {...props}>
-    {props.children}
-  </TextPIN>
-));
 
 const Quiz = () => {
   const navigate = useNavigate();
@@ -164,9 +152,9 @@ const Quiz = () => {
             >
               {!quiz.published && (
                 <Tooltip arrow ariaLabel="publicar" title="Publicar">
-                  <IconWrapper onClick={() => handleClickOpenPublish(quiz.id)}>
+                  <IconButton onClick={() => handleClickOpenPublish(quiz.id)}>
                     <Publish />
-                  </IconWrapper>
+                  </IconButton>
                 </Tooltip>
               )}
 
@@ -177,31 +165,31 @@ const Quiz = () => {
                     ariaLabel="pin"
                     title="PIN utilizado pelo aluno"
                   >
-                    <TextPINReffed>{quiz.pin}</TextPINReffed>
+                    <TextPIN>{quiz.pin}</TextPIN>
                   </Tooltip>
                   <Tooltip
                     arrow
                     ariaLabel="statistics"
                     title="Visualizar estatisticas"
                   >
-                    <IconWrapper
+                    <IconButton
                       onClick={() => navigate(`${STATISTICS_QUIZ}/${quiz.id}`)}
                     >
                       <BarChart />
-                    </IconWrapper>
+                    </IconButton>
                   </Tooltip>
                 </>
               )}
               <Tooltip arrow ariaLabel="editar" title="Editar">
-                <IconWrapper onClick={handleOpenModal(quiz)}>
+                <IconButton onClick={handleOpenModal(quiz)}>
                   <Edit />
-                </IconWrapper>
+                </IconButton>
               </Tooltip>
               {!quiz.published && (
                 <Tooltip arrow ariaLabel="deletar" title="Deletar">
-                  <IconWrapper onClick={() => handleClickOpenAlert(quiz.id)}>
+                  <IconButton onClick={() => handleClickOpenAlert(quiz.id)}>
                     <Delete />
-                  </IconWrapper>
+                  </IconButton>
                 </Tooltip>
               )}
             </Card>
@@ -232,7 +220,7 @@ const Quiz = () => {
         />
       </Modal>
 
-      <Modal open={openPublish.open} handleClose={handleCloseAlert}>
+      <Modal open={openPublish.open} handleClose={handleClosePublish}>
         <PublishQuizMessage
           handleClose={handleClosePublish}
           onClick={publishQuiz}

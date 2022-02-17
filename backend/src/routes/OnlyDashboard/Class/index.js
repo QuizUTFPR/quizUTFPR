@@ -37,7 +37,7 @@ router.delete('/delete', ClassController.destroy);
 router.get('/getAllTeacherClasses', ClassTeacherController.index);
 
 // STUDENT RELATION
-router.post('/attachSudent', ClassStudentController.store);
+router.post('/attachStudent', ClassStudentController.store);
 router.get('/getAllClassStudents', ClassStudentController.index);
 router.delete('/dettachStudent', ClassStudentController.delete);
 

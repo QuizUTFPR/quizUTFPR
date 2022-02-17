@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
@@ -16,16 +16,9 @@ import {
 import GridContainer from '@components/Container';
 import Button from '@components/Button';
 
-const Wrapper = forwardRef((props, ref) => (
-  <GridContainer ref={ref} {...props} />
-));
-
-// eslint-disable-next-line no-unused-vars
-const GetOutAlert = forwardRef((props, ref) => {
-  const { handleClose } = props;
-
+const GetOutAlert = ({ handleClose }) => {
   return (
-    <Wrapper>
+    <GridContainer>
       <DialogTitle id="id-dialog-title">Deseja mesmo sair?</DialogTitle>
       <DialogContent>
         <DialogContentText id="id-dialog-description">
@@ -47,9 +40,9 @@ const GetOutAlert = forwardRef((props, ref) => {
           Sair mesmo assim
         </Button>
       </DialogActions>
-    </Wrapper>
+    </GridContainer>
   );
-});
+};
 
 GetOutAlert.defaultProps = {
   handleClose: () => {},

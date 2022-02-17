@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 // COMPONENTS
 // import Button from '@components/Button';
@@ -9,9 +9,7 @@ import DragImageInput from './dragImage';
 
 // ASSETS
 
-// eslint-disable-next-line no-unused-vars
-const DragImageContainer = forwardRef((props, ref) => {
-  const { handleClose, updateQuestion, formik } = props;
+const DragImageContainer = ({ handleClose, updateQuestion, formik }) => {
   return (
     <GridContainer container spacing={3} style={{ width: '70vw' }}>
       <Grid container justifyContent="center" alignItems="center">
@@ -48,6 +46,6 @@ const DragImageContainer = forwardRef((props, ref) => {
       </Grid>
     </GridContainer>
   );
-});
+};
 
 export default DragImageContainer;

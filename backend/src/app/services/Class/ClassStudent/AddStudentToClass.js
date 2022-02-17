@@ -2,6 +2,8 @@
 import ClassRepository from '../../../repositories/Class';
 import StudentRepository from '../../../repositories/Student';
 
+// import getMethod from '../../../utils/getMethodsOfAssociation';
+
 class AddStudentToClassService {
   constructor() {
     this.classRepository = new ClassRepository();
@@ -28,7 +30,7 @@ class AddStudentToClassService {
       throw error;
     }
 
-    classInstance.addStudent(studentInstance);
+    classInstance.addClass_students(studentInstance);
 
     return classInstance;
   }

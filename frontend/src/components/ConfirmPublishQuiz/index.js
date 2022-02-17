@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 // COMPONENTS
 import {
@@ -10,21 +10,14 @@ import {
 import GridContainer from '@components/Container';
 import Button from '@components/Button';
 
-const Wrapper = forwardRef((props, ref) => (
-  <GridContainer ref={ref} {...props} />
-));
-
-// eslint-disable-next-line no-unused-vars
-const PublishQuizAlert = forwardRef((props, ref) => {
-  const { onClick, handleClose, title, description } = props;
-
+const PublishQuizAlert = ({ onClick, handleClose, title, description }) => {
   const handlePublish = () => {
     onClick();
     handleClose();
   };
 
   return (
-    <Wrapper>
+    <GridContainer>
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
@@ -44,8 +37,8 @@ const PublishQuizAlert = forwardRef((props, ref) => {
           Publicar
         </Button>
       </DialogActions>
-    </Wrapper>
+    </GridContainer>
   );
-});
+};
 
 export default PublishQuizAlert;

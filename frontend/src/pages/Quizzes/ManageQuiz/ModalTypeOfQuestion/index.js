@@ -1,9 +1,10 @@
-import React, { forwardRef, useState } from 'react';
+import React, { useState } from 'react';
 
 // COMPONENTS
 import Modal from '@components/Modal';
 import Button from '@components/Button';
 import { IconButton, Grid, Typography, Divider } from '@mui/material';
+import GridContainer from '@components/Container';
 
 // ASSETS
 import { Save, Search, Close } from '@mui/icons-material/';
@@ -12,11 +13,7 @@ import { Save, Search, Close } from '@mui/icons-material/';
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 import QuestionDatabase from '../ModalQuestionDatabase';
 
-// STYLE
-import { StyledWrapper } from './style';
-
-// eslint-disable-next-line no-unused-vars
-const TypeOfQuestion = forwardRef((props, ref) => {
+const TypeOfQuestion = ({ updateScreen, handleClose }) => {
   const {
     questions,
     addQuestion,
@@ -32,71 +29,69 @@ const TypeOfQuestion = forwardRef((props, ref) => {
 
   const handleAddQuestion = (mockup) => () => {
     addQuestion(mockup);
-    props.updateScreen(mockup, questions.length)();
-    props.handleClose();
+    updateScreen(mockup, questions.length)();
+    handleClose();
   };
 
   return (
     <>
-      <StyledWrapper
-        container
-        spacing={3}
-        isVisible={isModalQuestionDatabaseOpen}
-      >
-        <Grid container justifyContent="center" alignItems="center">
-          <Grid item xs={3} md={1}>
-            <IconButton aria-label="closeModal" onClick={props.handleClose}>
-              <Close />
-            </IconButton>
+      {!isModalQuestionDatabaseOpen && (
+        <GridContainer container spacing={3}>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid item xs={3} md={1}>
+              <IconButton aria-label="closeModal" onClick={handleClose}>
+                <Close />
+              </IconButton>
+            </Grid>
+
+            <Grid item xs={9} md={11}>
+              <Typography variant="h5" color="primary">
+                Qual tipo de questão deseja criar?
+              </Typography>
+            </Grid>
           </Grid>
 
-          <Grid item xs={9} md={11}>
-            <Typography variant="h5" color="primary">
-              Qual tipo de questão deseja criar?
-            </Typography>
+          <Grid item>
+            <Divider />
           </Grid>
-        </Grid>
 
-        <Grid item>
-          <Divider />
-        </Grid>
-
-        <Grid container spacing={3} justifyContent="center" align="center">
-          <Grid item xs={12}>
-            <Button
-              fullWidth
-              onClick={handleOpenModalQuestionDB}
-              variant="contained"
-              startIcon={<Search />}
-              color="primary"
-            >
-              USAR QUESTÃO DO BANCO
-            </Button>
+          <Grid container spacing={3} justifyContent="center" align="center">
+            <Grid item xs={12}>
+              <Button
+                fullWidth
+                onClick={handleOpenModalQuestionDB}
+                variant="contained"
+                startIcon={<Search />}
+                color="primary"
+              >
+                USAR QUESTÃO DO BANCO
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                startIcon={<Save />}
+                color="secondary"
+                variant="outlined"
+                onClick={handleAddQuestion(MockupQuestionMultipleChoice)}
+              >
+                Multipla Escolha
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                startIcon={<Save />}
+                color="secondary"
+                variant="outlined"
+                onClick={handleAddQuestion(MockupQuestionTrueOrFalse)}
+              >
+                Verdadeiro ou Falso
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              startIcon={<Save />}
-              color="secondary"
-              variant="outlined"
-              onClick={handleAddQuestion(MockupQuestionMultipleChoice)}
-            >
-              Multipla Escolha
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              fullWidth
-              startIcon={<Save />}
-              color="secondary"
-              variant="outlined"
-              onClick={handleAddQuestion(MockupQuestionTrueOrFalse)}
-            >
-              Verdadeiro ou Falso
-            </Button>
-          </Grid>
-        </Grid>
-      </StyledWrapper>
+        </GridContainer>
+      )}
 
       <Modal
         open={isModalQuestionDatabaseOpen}
@@ -113,6 +108,6 @@ const TypeOfQuestion = forwardRef((props, ref) => {
       </Modal>
     </>
   );
-});
+};
 
 export default TypeOfQuestion;

@@ -23,7 +23,6 @@ import {
 const StudentOfClass = () => {
   const [students, setStudents] = useState([]);
   const { idClass } = useParams();
-  console.log('idClass', idClass);
 
   const getAllStudents = async () => {
     try {
@@ -31,7 +30,6 @@ const StudentOfClass = () => {
         `/class/getAllClassStudents?idClass=${idClass}`
       );
 
-      console.log('data', data);
       setStudents(data);
     } catch (error) {
       console.log(error);
@@ -51,11 +49,11 @@ const StudentOfClass = () => {
     >
       <StudentsWrapper>
         {students.map((item) => (
-          <Student>
+          <Student key={item.id}>
             <StyledAvatar />
             <WrapperText>
-              <TextBold>Jhonatan Guilherme de Oliveira Cunha</TextBold>
-              <Text>jhonatancunha@alunos.utfpr.edu.br</Text>
+              <TextBold>{item.name}</TextBold>
+              <Text>{item.email}</Text>
             </WrapperText>
             <ActionsWrapper>
               <Tooltip arrow ariaLabel="deletar" title="Enviar Notificação">

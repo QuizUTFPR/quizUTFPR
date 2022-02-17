@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import api from '@api';
 
@@ -19,10 +19,7 @@ import { Close } from '@mui/icons-material';
 // STYLE
 import { PreviewImage, FormWrapper, GridContainerModal } from './style';
 
-// eslint-disable-next-line no-unused-vars
-const EditPreferences = forwardRef((props, ref) => {
-  const { classObj } = props;
-
+const EditPreferences = ({ handleClose, classObj }) => {
   const formik = useFormik({
     initialValues: {
       id: classObj.id,
@@ -41,7 +38,7 @@ const EditPreferences = forwardRef((props, ref) => {
       file.append('values', JSON.stringify(body));
 
       const responseQuiz = await api.put('/class/update', file);
-      if (responseQuiz.status === 200) props.handleClose();
+      if (responseQuiz.status === 200) handleClose();
     },
   });
 
@@ -57,7 +54,7 @@ const EditPreferences = forwardRef((props, ref) => {
     >
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={3} md={1}>
-          <IconButton aria-label="closeModal" onClick={props.handleClose}>
+          <IconButton aria-label="closeModal" onClick={handleClose}>
             <Close />
           </IconButton>
         </Grid>
@@ -129,6 +126,6 @@ const EditPreferences = forwardRef((props, ref) => {
       </FormWrapper>
     </GridContainerModal>
   );
-});
+};
 
 export default EditPreferences;

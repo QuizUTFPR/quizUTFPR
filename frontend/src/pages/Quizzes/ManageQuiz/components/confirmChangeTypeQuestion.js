@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // COMPONENTS
@@ -12,16 +12,9 @@ import {
 import GridContainer from '@components/Container';
 import Button from '@components/Button';
 
-const Wrapper = forwardRef((props, ref) => (
-  <GridContainer ref={ref} {...props} />
-));
-
-// eslint-disable-next-line no-unused-vars
-const ChangeQuestionType = forwardRef((props, ref) => {
-  const { handleClose, modalState, handleChange } = props;
-
+const ChangeQuestionType = ({ handleClose, modalState, handleChange }) => {
   return (
-    <Wrapper>
+    <GridContainer>
       <DialogTitle id="id-dialog-title">
         Deseja mesmo alterar o tipo da questão?
       </DialogTitle>
@@ -42,9 +35,9 @@ const ChangeQuestionType = forwardRef((props, ref) => {
           Confirmar
         </Button>
       </DialogActions>
-    </Wrapper>
+    </GridContainer>
   );
-});
+};
 
 ChangeQuestionType.defaultProps = {
   handleClose: () => {},

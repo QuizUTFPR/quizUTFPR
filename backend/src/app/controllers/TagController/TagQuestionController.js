@@ -1,4 +1,5 @@
 // MODELS
+import { restart } from 'nodemon';
 import Question from '../../models/QuestionModel';
 
 // SERVICES
@@ -36,8 +37,9 @@ class TagQuestionController {
 
       return res.status(200).json(tags);
     } catch (error) {
+      console.log(error);
       return (
-        (!!error.status && error.status(error.status).json(error)) ||
+        (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
       );
     }
