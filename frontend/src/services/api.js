@@ -21,8 +21,10 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     const requestStatus = error.response.status;
+    const refreshTokenExpired =
+      error?.response?.data?.refreshTokenExpired || false;
 
-    if (requestStatus === 401) {
+    if (requestStatus === 401 && !refreshTokenExpired) {
       const refreshToken = localStorage.getItem('@REFRESH_TOKEN');
       const response = await api.post('/refresh-token', {
         refreshToken,
@@ -35,7 +37,7 @@ api.interceptors.response.use(
       return api.request(originalRequest);
     }
 
-    if (requestStatus === 401) {
+    if (requestStatus === 401 && refreshTokenExpired) {
       localStorage.clear('@TOKEN');
       localStorage.clear('@TEACHER');
       window.location = TOKENEXPIRED;
