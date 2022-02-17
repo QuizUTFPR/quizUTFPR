@@ -1,15 +1,6 @@
 function getAllMethods(obj) {
-  const result = [];
-  obj.foreach((item, id) => {
-    try {
-      if (typeof item === 'function') {
-        result.push(`${id}: ${item.toString()}`);
-      }
-    } catch (err) {
-      result.push(`${id}: inaccessible`);
-    }
-  });
-  return result;
+  // eslint-disable-next-line no-proto
+  return Object.keys(obj.__proto__);
 }
 
 export default getAllMethods;

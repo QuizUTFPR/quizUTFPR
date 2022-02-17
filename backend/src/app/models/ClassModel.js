@@ -41,14 +41,14 @@ class Class extends Model {
     this.belongsToMany(models.Student, {
       through: 'student_class',
       foreignKey: 'idClass',
-      as: 'classes',
+      as: 'class_students',
       onDelete: 'CASCADE',
     });
 
     this.belongsToMany(models.Quiz, {
-      through: 'quiz_class',
+      through: 'quizz_class',
       foreignKey: 'idClass',
-      ass: 'classes',
+      as: 'class_quizzes',
       onDelete: 'CASCADE',
     });
   }

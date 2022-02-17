@@ -30,8 +30,9 @@ class GetAllStudentsFromClassService {
       throw error;
     }
 
-    const students = classInstance.getStudents();
+    const students = await classInstance.getClass_students();
 
+    console.log(students);
     return students;
   }
 }

@@ -52,7 +52,7 @@ class Student extends Model {
     this.belongsToMany(models.Class, {
       through: 'student_class',
       foreignKey: 'idStudent',
-      as: 'students',
+      as: 'student_classes',
       onDelete: 'CASCADE',
     });
   }

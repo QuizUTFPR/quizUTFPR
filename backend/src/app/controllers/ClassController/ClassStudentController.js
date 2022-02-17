@@ -6,7 +6,11 @@ import GetAllStudentsFromClassService from '../../services/Class/ClassStudent/Ge
 class ClassStudentConstroller {
   async store(req, res) {
     try {
-      const classInstance = await AddStudentToClassService.execute(req.body);
+      const { idClass, idStudent } = req.body;
+      const classInstance = await AddStudentToClassService.execute({
+        idClass,
+        idStudent,
+      });
 
       return res.status(200).json(classInstance);
     } catch (error) {
@@ -19,10 +23,13 @@ class ClassStudentConstroller {
 
   async index(req, res) {
     try {
-      const quizzes = await GetAllStudentsFromClassService(req.body);
+      const { idClass } = req.query;
+
+      const quizzes = await GetAllStudentsFromClassService.execute({ idClass });
 
       return res.status(200).json(quizzes);
     } catch (error) {
+      console.log('error', error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
