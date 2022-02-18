@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '@api';
 
 // Components
 import { Close } from '@mui/icons-material';
@@ -9,6 +10,23 @@ import { FormWrapper, GridContainerModal } from './style';
 
 const ModalGetAvailableQuizzes = (props) => {
   console.log('props', props);
+
+  const [availableQuizzes, setAvailableQuizzes] = useState([]);
+
+  const getAvailableQuizzes = async () => {
+    try {
+      const response = await api.get('/quiz');
+
+      if (response.status !== 200) setAvailableQuizzes([]);
+      else setAvailableQuizzes(response.data);
+    } catch (error) {
+      console.log('Published teacher quizzes error:', error);
+    }
+  };
+
+  useEffect(() => {
+    getAvailableQuizzes();
+  }, []);
 
   return (
     <GridContainerModal
@@ -47,7 +65,9 @@ const ModalGetAvailableQuizzes = (props) => {
         // onSubmit={formik.handleSubmit}
         spacing={2}
       >
-        teste
+        {availableQuizzes.map((quiz) => (
+          <p key={quiz.id}>{quiz.title}</p>
+        ))}
       </FormWrapper>
     </GridContainerModal>
   );
