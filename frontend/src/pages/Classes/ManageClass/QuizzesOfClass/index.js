@@ -85,7 +85,7 @@ const QuizzesOfClass = () => {
         modalTitle="Anexar Quizzes"
         modalDescription="Adicione quizzes em sua turma..."
       >
-        <ModalGetAvailableQuizzes />
+        <ModalGetAvailableQuizzes handleClose={toogleModal} />
       </Modal>
     </>
   );

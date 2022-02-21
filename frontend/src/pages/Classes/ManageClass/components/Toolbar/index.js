@@ -7,6 +7,9 @@ import StyledButton from '@components/Button';
 // Routes
 import { CLASSES } from '@routes';
 
+// HOOKS
+import useAuth from '@hooks/Auth';
+
 // Style
 import {
   ToolBar,
@@ -19,6 +22,7 @@ import {
 
 const CustomToolBar = () => {
   const navigate = useNavigate();
+  const { teacherInfo } = useAuth();
   // const location = useLocation();
 
   return (
@@ -36,7 +40,7 @@ const CustomToolBar = () => {
 
       <WrapperTeacher>
         <StyledAvatar src="https://image.flaticon.com/icons/png/512/147/147144.png" />
-        <NameTeacher>Jhonatan Cunha</NameTeacher>
+        <NameTeacher>{teacherInfo.teacher.name}</NameTeacher>
       </WrapperTeacher>
     </ToolBar>
   );

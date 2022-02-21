@@ -228,7 +228,7 @@ const QuestionDatabase = ({
               // eslint-disable-next-line react/no-array-index-key
               key={index}
               item
-              xs={12}
+              // xs={12}
               onClick={() =>
                 handleClickSnackBar(
                   'Questão adicionada com sucesso!',
