@@ -24,7 +24,7 @@ class ClassQuizController {
 
   async index(req, res) {
     try {
-      const { idClass } = req.body;
+      const { idClass } = req.params;
 
       const quizzesFromClass = await GetAllQuizzesFromClassService.execute({
         idClass,
