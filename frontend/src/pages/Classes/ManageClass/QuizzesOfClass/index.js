@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import api from '@api';
 
 // Components
 import { Divider } from '@mui/material';
@@ -29,7 +30,23 @@ import { ClassName } from '../style';
 
 const QuizzesOfClass = () => {
   const { state } = useLocation();
+  const { idClass } = useParams();
   const [visibilityModal, setvisibilityModal] = useState(false);
+  const [quizzes, setQuizzes] = useState([]);
+
+  const getAttachedQuizzes = async () => {
+    try {
+      const { data } = await api.get(`/class/getAllClassQuiz/${idClass}`);
+
+      setQuizzes(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAttachedQuizzes();
+  }, []);
 
   const toogleModal = () => setvisibilityModal((prevState) => !prevState);
 
@@ -57,24 +74,28 @@ const QuizzesOfClass = () => {
           <Divider />
 
           <ContainerContent>
-            <WrapperQuiz>
-              {/* <ImageQuiz /> */}
-              <EmptyImage />
-              <QuizRightWrapper>
-                <QuizInfoWrapper>
-                  <QuizTitle>Título do Quiz</QuizTitle>
-                  <QuizDescription>Decrição do Quiz</QuizDescription>
-                </QuizInfoWrapper>
+            {quizzes.map((quiz) => {
+              return (
+                <WrapperQuiz key={quiz.id}>
+                  {/* <ImageQuiz /> */}
+                  <EmptyImage />
+                  <QuizRightWrapper>
+                    <QuizInfoWrapper>
+                      <QuizTitle>{quiz.title}</QuizTitle>
+                      <QuizDescription>{quiz.description}</QuizDescription>
+                    </QuizInfoWrapper>
 
-                <WrapperActions>
-                  <Tooltip arrow ariaLabel="deletar" title="Deletar">
-                    <StyledIconButton>
-                      <Delete />
-                    </StyledIconButton>
-                  </Tooltip>
-                </WrapperActions>
-              </QuizRightWrapper>
-            </WrapperQuiz>
+                    <WrapperActions>
+                      <Tooltip arrow ariaLabel="deletar" title="Deletar">
+                        <StyledIconButton>
+                          <Delete />
+                        </StyledIconButton>
+                      </Tooltip>
+                    </WrapperActions>
+                  </QuizRightWrapper>
+                </WrapperQuiz>
+              );
+            })}
           </ContainerContent>
         </QuizzesWrapper>
       </Wrapper>

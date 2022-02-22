@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import getAllMethods from '../../../utils/getMethodsOfAssociation';
 
 // REPOSITORIES
 import ClassRepository from '../../../repositories/Class';
@@ -30,7 +31,8 @@ class GetAllQuizzesFromClassService {
       throw error;
     }
 
-    const quizzes = classInstance.getQuizzes();
+    console.log(getAllMethods(classInstance));
+    const quizzes = await classInstance.getClass_quizzes();
 
     return quizzes;
   }

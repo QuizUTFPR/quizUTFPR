@@ -13,7 +13,7 @@ class ClassQuizController {
         idQuiz,
       });
 
-      return res.satus(200).json(classInstance);
+      return res.status(200).json(classInstance);
     } catch (error) {
       return (
         (!!error.status && res.status(error.status).json(error)) ||
@@ -24,7 +24,7 @@ class ClassQuizController {
 
   async index(req, res) {
     try {
-      const { idClass } = req.body;
+      const { idClass } = req.params;
 
       const quizzesFromClass = await GetAllQuizzesFromClassService.execute({
         idClass,

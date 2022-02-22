@@ -1,8 +1,8 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 // COMPONENTS
-import Tooltip from '@components/ToolTip';
-import { Delete } from '@mui/icons-material';
+import { CardActionArea } from '@mui/material';
 
 // STYLE
 import {
@@ -21,19 +21,20 @@ import {
 
 const Quiz = ({ quiz, id, checked, onChange }) => {
   return (
-    // <QuizCard variant="outlined" checked={Boolean(checked)}>
-    <QuizCard variant="outlined" xs={12} checked={Boolean(true)}>
-      <WrapperQuiz>
-        <CheckBox checked={Boolean(checked)} onChange={onChange(id)} />
-        {/* <ImageQuiz /> */}
-        <EmptyImage />
-        <QuizRightWrapper>
-          <QuizInfoWrapper>
-            <QuizTitle>{quiz.title}</QuizTitle>
-            <QuizDescription>{quiz.description}</QuizDescription>
-          </QuizInfoWrapper>
-        </QuizRightWrapper>
-      </WrapperQuiz>
+    <QuizCard variant="outlined" checked={Boolean(checked)}>
+      <CardActionArea component="label">
+        <WrapperQuiz>
+          <CheckBox checked={Boolean(checked)} onChange={onChange(id)} />
+          {quiz.idImage && <ImageQuiz />}
+          {!quiz.idImage && <EmptyImage />}
+          <QuizRightWrapper>
+            <QuizInfoWrapper>
+              <QuizTitle>{quiz.title}</QuizTitle>
+              <QuizDescription>{quiz.description}</QuizDescription>
+            </QuizInfoWrapper>
+          </QuizRightWrapper>
+        </WrapperQuiz>
+      </CardActionArea>
     </QuizCard>
   );
 };

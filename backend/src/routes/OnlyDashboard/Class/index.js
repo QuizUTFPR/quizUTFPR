@@ -43,7 +43,7 @@ router.delete('/dettachStudent', ClassStudentController.delete);
 
 // QUIZ RELATION
 router.post('/attachQuiz', ClassQuizController.store);
-router.get('/getAllClassQuiz', ClassQuizController.index);
+router.get('/getAllClassQuiz/:idClass', ClassQuizController.index);
 router.delete('/dettachQuiz', ClassQuizController.delete);
 
 export default router;

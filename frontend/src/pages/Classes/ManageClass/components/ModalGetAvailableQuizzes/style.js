@@ -16,9 +16,8 @@ export const PreviewImage = styled.img`
 
 export const FormWrapper = styled(Grid)`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  /* justify-content: center; */
-  align-items: center;
+  justify-content: center;
   position: relative;
 `;

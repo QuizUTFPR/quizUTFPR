@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '@api';
+import { useParams } from 'react-router-dom';
 
 // Components
 import { Close } from '@mui/icons-material';
@@ -19,6 +20,7 @@ const ModalGetAvailableQuizzes = ({ handleClose }) => {
     autoHideDuration: 1000,
   });
   const [checkboxes, setCheckboxes] = useState([]);
+  const { idClass } = useParams();
 
   const getAvailableQuizzes = async () => {
     try {
@@ -54,8 +56,17 @@ const ModalGetAvailableQuizzes = ({ handleClose }) => {
     setStateSnackBar((prevState) => ({ ...prevState, open: false }));
   };
 
-  const handleAddQuiz = () => {
-    console.log('adicionou');
+  const handleAddQuiz = async (idQuiz) => {
+    try {
+      const { classInstance } = await api.post('/class/attachQuiz', {
+        idClass,
+        idQuiz,
+      });
+
+      console.log('class', classInstance);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleQuizzesChecked = (quiz) => (e) => {
@@ -65,7 +76,8 @@ const ModalGetAvailableQuizzes = ({ handleClose }) => {
     }));
 
     if (e.target.checked) {
-      handleAddQuiz(quiz);
+      handleAddQuiz(quiz.id);
+      handleClose();
     }
   };
 
