@@ -34,7 +34,10 @@ class FindByPkClass {
       ],
     });
 
-    return classInstance;
+    const attachedQuizzes = await classInstance.countClass_quizzes();
+    const studentsSubscribed = await classInstance.countClass_students();
+
+    return { ...classInstance.dataValues, attachedQuizzes, studentsSubscribed };
   }
 }
 
