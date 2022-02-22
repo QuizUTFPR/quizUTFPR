@@ -13,7 +13,7 @@ class AddQuizToClassService {
   async execute(data) {
     const schema = Yup.object().shape({
       idClass: Yup.string().required(),
-      idQuiz: Yup.number().required(),
+      idQuiz: Yup.string().required(),
     });
 
     if (!(await schema.isValid(data))) {
@@ -42,7 +42,7 @@ class AddQuizToClassService {
       throw error;
     }
 
-    await classInstance.addQuiz(quizInstance);
+    await classInstance.addClass_quiz(quizInstance);
     return classInstance;
   }
 }
