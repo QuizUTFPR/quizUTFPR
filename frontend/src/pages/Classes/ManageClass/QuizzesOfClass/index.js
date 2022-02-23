@@ -37,7 +37,7 @@ const QuizzesOfClass = () => {
   const getAttachedQuizzes = async () => {
     try {
       const { data } = await api.get(`/class/getAllClassQuiz/${idClass}`);
-      console.log('buscando...');
+      console.log('buscando...', data);
 
       setQuizzes(data);
     } catch (error) {
@@ -47,19 +47,18 @@ const QuizzesOfClass = () => {
 
   useEffect(() => {
     getAttachedQuizzes();
+
+    return () => setQuizzes([]);
   }, []);
 
   const toogleModal = () => setvisibilityModal((prevState) => !prevState);
 
   const handleRemoveQuiz = async (idQuiz) => {
     try {
-      console.log('type', typeof idClass, typeof idQuiz);
-
-      const { data } = await api.delete('/class/dettachQuiz', {
+      await api.delete('/class/dettachQuiz', {
         data: { idClass, idQuiz },
       });
 
-      console.log(data);
       getAttachedQuizzes();
     } catch (error) {
       console.log(error);
@@ -122,7 +121,10 @@ const QuizzesOfClass = () => {
         modalTitle="Anexar Quizzes"
         modalDescription="Adicione quizzes em sua turma..."
       >
-        <ModalGetAvailableQuizzes handleClose={toogleModal} />
+        <ModalGetAvailableQuizzes
+          handleUpdateQuizzes={getAttachedQuizzes}
+          handleClose={toogleModal}
+        />
       </Modal>
     </>
   );

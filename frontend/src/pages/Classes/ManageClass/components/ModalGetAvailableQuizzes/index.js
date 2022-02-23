@@ -11,7 +11,7 @@ import Quiz from './Quiz';
 // Style
 import { FormWrapper, GridContainerModal } from './style';
 
-const ModalGetAvailableQuizzes = ({ handleClose }) => {
+const ModalGetAvailableQuizzes = ({ handleClose, handleUpdateQuizzes }) => {
   const [availableQuizzes, setAvailableQuizzes] = useState([]);
   const [stateSnackBar, setStateSnackBar] = useState({
     open: false,
@@ -58,12 +58,12 @@ const ModalGetAvailableQuizzes = ({ handleClose }) => {
 
   const handleAddQuiz = async (idQuiz) => {
     try {
-      const { classInstance } = await api.post('/class/attachQuiz', {
+      await api.post('/class/attachQuiz', {
         idClass,
         idQuiz,
       });
 
-      console.log('class', classInstance);
+      handleUpdateQuizzes();
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +84,7 @@ const ModalGetAvailableQuizzes = ({ handleClose }) => {
   useEffect(() => {
     getAvailableQuizzes();
 
-    return setAvailableQuizzes([]);
+    return () => setAvailableQuizzes([]);
   }, []);
 
   return (
