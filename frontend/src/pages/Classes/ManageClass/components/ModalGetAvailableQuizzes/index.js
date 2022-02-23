@@ -24,7 +24,9 @@ const ModalGetAvailableQuizzes = ({ handleClose, handleUpdateQuizzes }) => {
 
   const getAvailableQuizzes = async () => {
     try {
-      const response = await api.get('/quiz');
+      const response = await api.post('/class/availableQuizzes', {
+        idClass,
+      });
 
       if (response.status !== 200) setAvailableQuizzes([]);
       else setAvailableQuizzes(response.data);
