@@ -77,7 +77,7 @@ const InfoOfClass = () => {
           <ContentWrapperInformation>
             <TitleInformation>Quizzes Anexados</TitleInformation>
             <ValueInformation>
-              Existem {classInstance?.studentsSubscribed} quizzes anexados.
+              Existem {classInstance?.attachedQuizzes} quizzes anexados.
             </ValueInformation>
           </ContentWrapperInformation>
         </WrapperInformation>
@@ -89,7 +89,7 @@ const InfoOfClass = () => {
           <ContentWrapperInformation>
             <TitleInformation>Alunos Inscritos</TitleInformation>
             <ValueInformation>
-              Existem {classInstance?.attachedQuizzes} alunos cadastrados.
+              Existem {classInstance?.studentsSubscribed} alunos cadastrados.
             </ValueInformation>
           </ContentWrapperInformation>
         </WrapperInformation>

@@ -83,6 +83,8 @@ const ModalGetAvailableQuizzes = ({ handleClose }) => {
 
   useEffect(() => {
     getAvailableQuizzes();
+
+    return setAvailableQuizzes([]);
   }, []);
 
   return (

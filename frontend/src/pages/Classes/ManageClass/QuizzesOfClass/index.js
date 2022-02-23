@@ -37,6 +37,7 @@ const QuizzesOfClass = () => {
   const getAttachedQuizzes = async () => {
     try {
       const { data } = await api.get(`/class/getAllClassQuiz/${idClass}`);
+      console.log('buscando...');
 
       setQuizzes(data);
     } catch (error) {
@@ -49,6 +50,21 @@ const QuizzesOfClass = () => {
   }, []);
 
   const toogleModal = () => setvisibilityModal((prevState) => !prevState);
+
+  const handleRemoveQuiz = async (idQuiz) => {
+    try {
+      console.log('type', typeof idClass, typeof idQuiz);
+
+      const { data } = await api.delete('/class/dettachQuiz', {
+        data: { idClass, idQuiz },
+      });
+
+      console.log(data);
+      getAttachedQuizzes();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -85,7 +101,7 @@ const QuizzesOfClass = () => {
                       <QuizDescription>{quiz.description}</QuizDescription>
                     </QuizInfoWrapper>
 
-                    <WrapperActions>
+                    <WrapperActions onClick={() => handleRemoveQuiz(quiz.id)}>
                       <Tooltip arrow ariaLabel="deletar" title="Deletar">
                         <StyledIconButton>
                           <Delete />

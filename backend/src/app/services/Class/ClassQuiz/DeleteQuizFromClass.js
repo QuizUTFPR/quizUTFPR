@@ -11,6 +11,10 @@ class DeleteQuizFromClassService {
   }
 
   async execute(data) {
+    const { idClass, idQuiz } = data;
+    console.log(idClass);
+    console.log(idQuiz);
+
     const schema = Yup.object().shape({
       idClass: Yup.string().required(),
       idQuiz: Yup.string().required(),
@@ -23,7 +27,7 @@ class DeleteQuizFromClassService {
       throw error;
     }
 
-    const { idClass, idQuiz } = data;
+    // const { idClass, idQuiz } = data;
     const classInstance = await this.classRepository.findById(idClass);
 
     if (!classInstance) {
@@ -42,7 +46,7 @@ class DeleteQuizFromClassService {
       throw error;
     }
 
-    classInstance.removeQuiz(quiz);
+    classInstance.removeClass_quiz(quiz);
 
     return quiz;
   }
