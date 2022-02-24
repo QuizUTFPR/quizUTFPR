@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import api from '@api';

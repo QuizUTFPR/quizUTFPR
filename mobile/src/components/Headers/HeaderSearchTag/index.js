@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-// import api from '@api';
 import theme from '@theme';
 import ChipInput from '@components/ChipInput';
+
+// HOOKS
+import useSearchQuizByTag from '@hook/useSearchQuizByTag';
 
 // Style
 import {
@@ -20,6 +22,8 @@ import {
 const Header = () => {
   const navigation = useNavigation();
   const [chips, setChips] = useState([]);
+
+  const { getQuizByTags } = useSearchQuizByTag();
 
   return (
     <HeaderWrapper>
@@ -44,7 +48,7 @@ const Header = () => {
       <StyledButton
         colors={theme.color.gradients.orange}
         variant="primary"
-        onPress={() => console.log(chips)}
+        onPress={() => getQuizByTags(chips)}
       >
         Pesquisar
       </StyledButton>
