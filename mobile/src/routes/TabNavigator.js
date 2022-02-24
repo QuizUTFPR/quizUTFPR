@@ -8,7 +8,6 @@ import SearchQuizByTagProvider from '@context/SearchQuizByTag';
 import TabBar from '@components/TabBar';
 import HeaderHome from '@components/Headers/HeaderHome';
 import HeaderClassPage from '@components/Headers/HeaderClassPage';
-import HeaderSearchTag from '@components/Headers/HeaderSearchTag';
 
 // ICONS
 import {
@@ -18,8 +17,8 @@ import {
 } from '@expo/vector-icons';
 
 // STACKS
-import SearchTag from '@screens/SearchTag';
 import ClassPage from '@screens/Class';
+import SearchQuizByTagStack from './stacks/SearchQuizByTagStack';
 import TopTabStack from './TopTabNavigator';
 
 // TAB CREATION
@@ -44,11 +43,11 @@ const TabNavigator = () => (
           Icon: MaterialIcons,
           name: 'category',
           size: 32,
-          header: () => <HeaderSearchTag />,
+          headerShown: false,
           tabBarLabel: 'Categoria',
         }}
-        name="SearchTagScreen"
-        component={SearchTag}
+        name="SearchQuizByTagStack"
+        component={SearchQuizByTagStack}
       />
       <Tab.Screen
         options={{

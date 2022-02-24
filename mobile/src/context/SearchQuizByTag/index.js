@@ -8,15 +8,21 @@ export const SearchQuizByTagContext = createContext();
 
 const SearchQuizByTag = ({ children }) => {
   const [quizzes, setQuizzes] = useState([]);
+  const [tags, setTags] = useState([]);
 
-  const getQuizByTags = async (chips) => {
+  const getQuizByTags = async () => {
     try {
       const { data } = await api.post('/quiz/quizzesByTags', {
-        aimedTags: chips,
+        aimedTags: tags,
       });
       setQuizzes(data);
+
+      return false;
     } catch (err) {
-      console.log(err);
+      setQuizzes([]);
+      console.log('error', err);
+
+      return true;
     }
   };
 
@@ -25,6 +31,8 @@ const SearchQuizByTag = ({ children }) => {
       value={{
         getQuizByTags,
         quizzes,
+        setTags,
+        tags,
       }}
     >
       {children}
