@@ -1,3 +1,5 @@
+import * as Yup from 'yup';
+
 // REPOSITORIES
 import StudentRepository from '../../repositories/Student';
 
@@ -7,6 +9,17 @@ class GetClassFromStudentService {
   }
 
   async execute(data) {
+    const schema = Yup.object().shape({
+      idStudent: Yup.number().required(),
+    });
+
+    if (!(await schema.isValid(data))) {
+      const error = new Error();
+      error.status = 403;
+      error.response = 'Falha na validação!';
+      throw error;
+    }
+
     const { idStudent } = data;
 
     const student = await this.studentRepository.findByPk(idStudent);
@@ -18,7 +31,16 @@ class GetClassFromStudentService {
       throw error;
     }
 
-    const classes
+    const classes = await student.getStudent_classes();
+
+    if (!classes.length) {
+      const error = new Error();
+      error.status = 204;
+      error.response = 'O aluno não está inscrito em nenhuma turma.';
+      throw error;
+    }
+
+    return classes;
   }
 }
 
