@@ -1,11 +1,11 @@
-import GetAvailableClassesService from '../../services/Class/ClassStudent/GetAvailableClasses';
+import GetAvailableStudentClassesService from '../../services/Class/ClassStudent/GetAvailableStudentClasses';
 
-class AvailableClassesController {
+class AvailableStudentClassesController {
   async index(req, res) {
     try {
       const { idClass, studentId } = req.params;
 
-      const availableClasses = GetAvailableClassesService.execute({
+      const availableClasses = GetAvailableStudentClassesService.execute({
         idClass,
         studentId,
       });
@@ -20,4 +20,4 @@ class AvailableClassesController {
   }
 }
 
-export default new AvailableClassesController();
+export default new AvailableStudentClassesController();

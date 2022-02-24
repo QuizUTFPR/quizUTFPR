@@ -8,7 +8,7 @@ import File from '../../../models/FileModel';
 import ClassRepository from '../../../repositories/Class';
 import StudentRepository from '../../../repositories/Student';
 
-class GetAvailableClassesService {
+class GetAvailableStudentClassesService {
   constructor() {
     this.classRepository = new ClassRepository();
     this.studentRepository = new StudentRepository();
@@ -61,4 +61,4 @@ class GetAvailableClassesService {
   }
 }
 
-export default new GetAvailableClassesService();
+export default new GetAvailableStudentClassesService();
