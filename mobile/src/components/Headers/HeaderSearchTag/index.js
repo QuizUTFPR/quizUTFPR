@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import theme from '@theme';
@@ -21,9 +21,8 @@ import {
 
 const Header = () => {
   const navigation = useNavigation();
-  const [chips, setChips] = useState([]);
 
-  const { getQuizByTags } = useSearchQuizByTag();
+  const { getQuizByTags, tags, setTags } = useSearchQuizByTag();
 
   return (
     <HeaderWrapper>
@@ -33,7 +32,7 @@ const Header = () => {
             <AntDesign name="menu-fold" size={32} color="white" />
           </HeaderButton>
           <HeaderWelcomeTextView>
-            <StyledWelcome fill="white">Busca por Tag's,</StyledWelcome>
+            <StyledWelcome fill="white">Busca por Tag&apos;s,</StyledWelcome>
             <StyledParagraph fill="white">
               Faça sua busca personalizada!
             </StyledParagraph>
@@ -41,14 +40,19 @@ const Header = () => {
         </HeaderInformations>
         <ChipInput
           placeholder="Digite as tags aqui..."
-          chips={chips}
-          setChips={setChips}
+          chips={tags}
+          setChips={setTags}
         />
       </BackgroundHeader>
       <StyledButton
         colors={theme.color.gradients.orange}
         variant="primary"
-        onPress={() => getQuizByTags(chips)}
+        onPress={async () => {
+          const hasError = await getQuizByTags();
+          if (!hasError) {
+            navigation.navigate('ResultSearchTag');
+          }
+        }}
       >
         Pesquisar
       </StyledButton>

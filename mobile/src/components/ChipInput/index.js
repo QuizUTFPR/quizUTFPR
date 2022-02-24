@@ -35,21 +35,23 @@ const ChipInput = ({ chips, setChips, placeholder }) => {
 
   return (
     <Wrapper>
-      <ChipWrapper
-        ref={ref}
-        onContentSizeChange={() => {
-          ref.current.scrollToEnd({ animated: true });
-        }}
-      >
-        {chips.map((item, idx) => (
-          <Chip key={(item, idx)}>
-            <TextChip>{item}</TextChip>
-            <RemoveButton onPress={removeChip(idx)}>
-              <RemoveIcon />
-            </RemoveButton>
-          </Chip>
-        ))}
-      </ChipWrapper>
+      {chips.length > 0 && (
+        <ChipWrapper
+          ref={ref}
+          onContentSizeChange={() => {
+            ref.current.scrollToEnd({ animated: true });
+          }}
+        >
+          {chips.map((item, idx) => (
+            <Chip key={(item, idx)}>
+              <TextChip>{item}</TextChip>
+              <RemoveButton onPress={removeChip(idx)}>
+                <RemoveIcon />
+              </RemoveButton>
+            </Chip>
+          ))}
+        </ChipWrapper>
+      )}
       <StyledInput
         value={value}
         onSubmitEditing={handleAddChip}
