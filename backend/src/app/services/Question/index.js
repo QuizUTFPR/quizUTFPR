@@ -71,6 +71,8 @@ class QuestionService {
   }
 
   async createQuestion(data) {
+    console.log('data', data);
+
     if (!(await this.validate(data))) {
       const questionNotExistsError = new Error('Falha na validação');
       questionNotExistsError.status = 400;

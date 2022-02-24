@@ -7,10 +7,10 @@ export const QuizCard = styled(Card)`
   width: 100%;
   border-radius: 8px;
   margin-bottom: 20px;
-  && {
-    border-color: ${({ checked, theme }) =>
-      checked ? theme.palette.primary.main : ''};
-  }
+
+  border: 1px solid
+    ${({ checked, theme }) =>
+      checked ? theme.palette.primary.main : 'rgba(0, 0, 0, 0.12)'};
 
   &&:last-child {
     margin-bottom: 0px;
@@ -20,7 +20,6 @@ export const QuizCard = styled(Card)`
 export const WrapperQuiz = styled.div`
   height: 120px;
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   display: flex;
   align-items: center;

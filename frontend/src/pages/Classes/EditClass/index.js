@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useFormik } from 'formik';
 import api from '@api';
 
@@ -19,7 +19,9 @@ import { Close } from '@mui/icons-material';
 // STYLE
 import { PreviewImage, FormWrapper, GridContainerModal } from './style';
 
-const EditPreferences = ({ handleClose, classObj }) => {
+const EditPreferences = forwardRef((props, _) => {
+  const { handleClose, classObj } = props;
+
   const formik = useFormik({
     initialValues: {
       id: classObj.id,
@@ -126,6 +128,6 @@ const EditPreferences = ({ handleClose, classObj }) => {
       </FormWrapper>
     </GridContainerModal>
   );
-};
+});
 
 export default EditPreferences;

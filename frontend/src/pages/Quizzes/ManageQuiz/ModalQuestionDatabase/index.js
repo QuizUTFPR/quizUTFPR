@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import { useFormik } from 'formik';
 import api from '@api';
 
 // COMPONENTS
-import GridContainer from '@components/Container';
+import Wrapper from '@components/RefferedContainer';
 import TagInput from '@components/ChipInput';
 import {
   IconButton,
@@ -29,11 +29,8 @@ async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
   });
 }
 
-const QuestionDatabase = ({
-  handleClose,
-  handleaddQuestion,
-  handleRemoveQuestion,
-}) => {
+const QuestionDatabase = forwardRef((props, ref) => {
+  const { handleClose, handleaddQuestion, handleRemoveQuestion } = props;
   const [isLoading, setLoading] = useState(false);
   const [checkboxes, setCheckboxes] = useState([]);
 
@@ -89,6 +86,7 @@ const QuestionDatabase = ({
                 tagsQuestion,
                 imageQuestion,
                 difficultyLevel,
+                availableOnQuestionsDb,
                 answer,
                 ...rest
               }) => ({
@@ -140,22 +138,28 @@ const QuestionDatabase = ({
     getTags();
   }, []);
 
-  const handleQuestionChecked = (question) => (e) => {
+  const handleQuestionChecked = (index) => (e) => {
+    const question = formik.values.questions[index];
+
     setCheckboxes((prevState) => ({
       ...prevState,
       [question.title]: e.target.checked,
     }));
 
     if (e.target.checked) {
-      handleaddQuestion(question);
+      const indexOfNewQuestion = handleaddQuestion(question);
+
+      // A linha abaixo realiza a alteração no objeto de valores do formik
+      question.index = indexOfNewQuestion;
     } else {
-      handleRemoveQuestion(question);
+      const newIndexAfterAdding = formik.values.questions[index].index;
+      handleRemoveQuestion(newIndexAfterAdding);
     }
   };
 
   return (
     <>
-      <GridContainer container spacing={3}>
+      <Wrapper container spacing={3}>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={3} md={1}>
             <IconButton aria-label="closeModal" onClick={handleClose}>
@@ -241,12 +245,12 @@ const QuestionDatabase = ({
                 question={question}
                 id={question.title}
                 checked={checkboxes[question.title]}
-                onChange={() => handleQuestionChecked(question)}
+                onChange={() => handleQuestionChecked(index)}
               />
             </Grid>
           ))}
         </Grid>
-      </GridContainer>
+      </Wrapper>
 
       <SnackBar
         openSnackBar={stateSnackBar.open}
@@ -257,6 +261,6 @@ const QuestionDatabase = ({
       />
     </>
   );
-};
+});
 
 export default QuestionDatabase;

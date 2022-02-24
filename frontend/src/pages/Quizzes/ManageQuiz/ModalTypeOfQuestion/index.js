@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { forwardRef } from 'react';
 
 // COMPONENTS
 import Modal from '@components/Modal';
 import Button from '@components/Button';
 import { IconButton, Grid, Typography, Divider } from '@mui/material';
-import GridContainer from '@components/Container';
+import Wrapper from '@components/RefferedContainer';
 
 // ASSETS
 import { Save, Search, Close } from '@mui/icons-material/';
@@ -13,7 +13,14 @@ import { Save, Search, Close } from '@mui/icons-material/';
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 import QuestionDatabase from '../ModalQuestionDatabase';
 
-const TypeOfQuestion = ({ updateScreen, handleClose }) => {
+const TypeOfQuestion = forwardRef((props, ref) => {
+  const {
+    updateScreen,
+    handleClose,
+    isModalQuestionDatabaseOpen,
+    toogleModalQuestionDB,
+  } = props;
+
   const {
     questions,
     addQuestion,
@@ -22,12 +29,7 @@ const TypeOfQuestion = ({ updateScreen, handleClose }) => {
     MockupQuestionMultipleChoice,
   } = useQuestionQuiz();
 
-  const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] =
-    useState(false);
-  const handleOpenModalQuestionDB = () => setModalQuestionDatabaseOpen(true);
-  const handleCloseModalQuestionDB = () => setModalQuestionDatabaseOpen(false);
-
-  const handleAddQuestion = (mockup) => () => {
+  const handleAddMockupQuestion = (mockup) => () => {
     addQuestion(mockup);
     updateScreen(mockup, questions.length)();
     handleClose();
@@ -36,7 +38,7 @@ const TypeOfQuestion = ({ updateScreen, handleClose }) => {
   return (
     <>
       {!isModalQuestionDatabaseOpen && (
-        <GridContainer container spacing={3}>
+        <Wrapper container spacing={3}>
           <Grid container justifyContent="center" alignItems="center">
             <Grid item xs={3} md={1}>
               <IconButton aria-label="closeModal" onClick={handleClose}>
@@ -59,7 +61,7 @@ const TypeOfQuestion = ({ updateScreen, handleClose }) => {
             <Grid item xs={12}>
               <Button
                 fullWidth
-                onClick={handleOpenModalQuestionDB}
+                onClick={toogleModalQuestionDB}
                 variant="contained"
                 startIcon={<Search />}
                 color="primary"
@@ -73,7 +75,7 @@ const TypeOfQuestion = ({ updateScreen, handleClose }) => {
                 startIcon={<Save />}
                 color="secondary"
                 variant="outlined"
-                onClick={handleAddQuestion(MockupQuestionMultipleChoice)}
+                onClick={handleAddMockupQuestion(MockupQuestionMultipleChoice)}
               >
                 Multipla Escolha
               </Button>
@@ -84,13 +86,13 @@ const TypeOfQuestion = ({ updateScreen, handleClose }) => {
                 startIcon={<Save />}
                 color="secondary"
                 variant="outlined"
-                onClick={handleAddQuestion(MockupQuestionTrueOrFalse)}
+                onClick={handleAddMockupQuestion(MockupQuestionTrueOrFalse)}
               >
                 Verdadeiro ou Falso
               </Button>
             </Grid>
           </Grid>
-        </GridContainer>
+        </Wrapper>
       )}
 
       <Modal
@@ -100,14 +102,13 @@ const TypeOfQuestion = ({ updateScreen, handleClose }) => {
         style={{ overflow: 'scroll' }}
       >
         <QuestionDatabase
-          questions={questions}
           handleaddQuestion={addQuestion}
           handleRemoveQuestion={removeQuestion}
-          handleClose={handleCloseModalQuestionDB}
+          handleClose={toogleModalQuestionDB}
         />
       </Modal>
     </>
   );
-};
+});
 
 export default TypeOfQuestion;

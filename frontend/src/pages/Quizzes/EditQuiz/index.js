@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useFormik } from 'formik';
 import api from '@api';
 
@@ -25,7 +25,9 @@ import {
 import { Close } from '@mui/icons-material';
 import { PreviewImage, FormWrapper, GridContainerModal } from './style';
 
-const EditPreferences = ({ quiz, handleClose }) => {
+const EditPreferences = forwardRef((props, _) => {
+  const { quiz, handleClose } = props;
+
   const formik = useFormik({
     initialValues: {
       id: quiz.id,
@@ -169,7 +171,7 @@ const EditPreferences = ({ quiz, handleClose }) => {
             fullWidth
             value={formik.values.tags}
             suggestions={['Aprenda', 'JavaScript']}
-            onChange={(_, value) => formik.setFieldValue('tags', value)}
+            onChange={(__, value) => formik.setFieldValue('tags', value)}
           />
         </Grid>
 
@@ -181,6 +183,6 @@ const EditPreferences = ({ quiz, handleClose }) => {
       </FormWrapper>
     </GridContainerModal>
   );
-};
+});
 
 export default EditPreferences;

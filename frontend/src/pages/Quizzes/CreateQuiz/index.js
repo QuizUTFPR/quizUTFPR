@@ -60,7 +60,6 @@ const CriarQuiz = () => {
 
       const responseQuiz = await api.post('/quiz/create', file);
       const { data } = responseQuiz;
-      console.log(data);
 
       if (responseQuiz.status === 200) {
         navigate(`${QUESTION}${data.id}`, {

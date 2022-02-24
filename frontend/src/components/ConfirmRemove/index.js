@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 // COMPONENTS
 import {
@@ -7,17 +7,19 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
-import GridContainer from '@components/Container';
+import Wrapper from '@components/RefferedContainer';
 import Button from '@components/Button';
 
-const AlertRemoveQuestion = ({ onClick, handleClose, title, description }) => {
+const AlertRemoveQuestion = forwardRef((props, _) => {
+  const { onClick, handleClose, title, description } = props;
+
   const handleRemove = () => {
     onClick();
     handleClose();
   };
 
   return (
-    <GridContainer>
+    <Wrapper>
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
@@ -37,8 +39,8 @@ const AlertRemoveQuestion = ({ onClick, handleClose, title, description }) => {
           Excluir
         </Button>
       </DialogActions>
-    </GridContainer>
+    </Wrapper>
   );
-};
+});
 
 export default AlertRemoveQuestion;

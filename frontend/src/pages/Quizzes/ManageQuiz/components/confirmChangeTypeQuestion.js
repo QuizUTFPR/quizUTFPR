@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 // COMPONENTS
@@ -9,12 +9,14 @@ import {
   DialogTitle,
 } from '@mui/material';
 
-import GridContainer from '@components/Container';
+import Wrapper from '@components/RefferedContainer';
 import Button from '@components/Button';
 
-const ChangeQuestionType = ({ handleClose, modalState, handleChange }) => {
+const ChangeQuestionType = forwardRef((props, _) => {
+  const { handleClose, modalState, handleChange } = props;
+
   return (
-    <GridContainer>
+    <Wrapper>
       <DialogTitle id="id-dialog-title">
         Deseja mesmo alterar o tipo da questão?
       </DialogTitle>
@@ -35,9 +37,9 @@ const ChangeQuestionType = ({ handleClose, modalState, handleChange }) => {
           Confirmar
         </Button>
       </DialogActions>
-    </GridContainer>
+    </Wrapper>
   );
-};
+});
 
 ChangeQuestionType.defaultProps = {
   handleClose: () => {},

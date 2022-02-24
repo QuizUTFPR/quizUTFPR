@@ -5,6 +5,9 @@ import { Op } from 'sequelize';
 import QuizRepository from '../../../repositories/Quiz';
 import ClassRepository from '../../../repositories/Class';
 
+// MODELS
+import File from '../../../models/FileModel';
+
 class GetAllAvailableQuizzesService {
   constructor() {
     this.quizRepository = new QuizRepository();
@@ -43,8 +46,17 @@ class GetAllAvailableQuizzesService {
       where: {
         idTeacher,
         published: true,
-        id: { [Op.notIn]: idClassQuizzes },
+        id: {
+          [Op.notIn]: idClassQuizzes,
+        },
       },
+      include: [
+        {
+          model: File,
+          as: 'image',
+          attributes: ['url', 'path'],
+        },
+      ],
     });
 
     if (!availableQuizzes.length) {

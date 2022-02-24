@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import GridContainer from '@components/Container';
+import Wrapper from '@components/RefferedContainer';
 
 import { Grid } from '@mui/material';
 
-export const GridContainerModal = styled(GridContainer)`
+export const GridContainerModal = styled(Wrapper)`
   max-height: 90vh;
   flex-wrap: nowrap;
   overflow-y: scroll;

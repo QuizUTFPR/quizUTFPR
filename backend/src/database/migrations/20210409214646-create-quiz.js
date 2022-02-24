@@ -10,7 +10,10 @@ module.exports = {
       id_teacher: {
         type: Sequelize.INTEGER,
         foreignKey: true,
-        references: { model: 'teacher', key: 'id' },
+        references: {
+          model: 'teacher',
+          key: 'id',
+        },
         allowNull: false,
       },
       title: {
@@ -32,7 +35,10 @@ module.exports = {
       id_image: {
         type: Sequelize.INTEGER,
         foreignKey: true,
-        references: { model: 'file', key: 'id' },
+        references: {
+          model: 'file',
+          key: 'id',
+        },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         allowNull: true,

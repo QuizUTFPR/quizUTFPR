@@ -37,7 +37,6 @@ const QuizzesOfClass = () => {
   const getAttachedQuizzes = async () => {
     try {
       const { data } = await api.get(`/class/getAllClassQuiz/${idClass}`);
-      console.log('buscando...', data);
 
       setQuizzes(data);
     } catch (error) {

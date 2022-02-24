@@ -23,8 +23,8 @@ const QuestionQuiz = ({ children }) => {
   const getAllQuestionOfTheQuiz = async (id) => {
     try {
       const { data } = await api.get(`/question/quiz/${id}`);
-
       const initialQuestions = data.map((question) => ({
+        index: question.index,
         id: question.id,
         type: question.type,
         copy: question.copy,
@@ -46,59 +46,64 @@ const QuestionQuiz = ({ children }) => {
     }
   };
 
-  const saveQuestionOnDatabase = (quizId) => {
+  const saveQuestionOnDatabase = async (quizId) => {
     try {
       // REMOVING QUESTIONS
       if (questionToRemove.length) {
-        questionToRemove.forEach((removed) => {
-          api.delete('/question/delete', {
-            data: {
-              id: removed.id,
-            },
-          });
+        questionToRemove.forEach(async (removed) => {
+          if (removed.id !== -1) {
+            await api.delete('/question/delete', {
+              data: {
+                id: removed.id,
+              },
+            });
+          }
         });
       }
-
       // SAVING QUESTIONS
-      questions.map(async (item, index) => {
-        const {
-          id,
-          type,
-          copy,
-          availableOnQuestionsDB,
-          imageObj,
-          title,
-          timer,
-          difficultyLevel,
-          tags,
-          answer,
-          imageUrl,
-        } = item;
+      await Promise.all(
+        questions.map(async (item) => {
+          const {
+            id,
+            type,
+            copy,
+            availableOnQuestionsDB,
+            imageObj,
+            title,
+            timer,
+            difficultyLevel,
+            tags,
+            answer,
+            imageUrl,
+            index,
+          } = item;
 
-        const body = {
-          id,
-          type,
-          copy,
-          availableOnQuestionsDB,
-          title,
-          timer,
-          difficultyLevel,
-          tags,
-          answer,
-          index,
-          quizId,
-          imageUrl,
-        };
+          const body = {
+            id,
+            type,
+            copy,
+            availableOnQuestionsDB,
+            title,
+            timer,
+            difficultyLevel,
+            tags,
+            answer,
+            quizId,
+            imageUrl,
+            index,
+          };
 
-        const file = new FormData();
-        file.append('file', imageObj);
-        file.append('values', JSON.stringify(body));
+          const file = new FormData();
+          file.append('file', imageObj);
+          file.append('values', JSON.stringify(body));
 
-        const response = await api.post('/question/create', file);
+          const response = await api.post('/question/create', file);
 
-        if (response.status !== 200) throw new Error('questao nao criada');
-      });
-      setTimeout(() => getAllQuestionOfTheQuiz(quizId), 1000);
+          if (response.status !== 200) throw new Error('questao nao criada');
+        })
+      );
+
+      getAllQuestionOfTheQuiz(quizId);
       setSaved(true);
       setQuestionToRemove([]);
     } catch (error) {
@@ -107,10 +112,17 @@ const QuestionQuiz = ({ children }) => {
   };
 
   const addQuestion = (item) => {
-    const updatedQuestions = [...questions, { ...item }];
+    const newQuestion = {
+      ...item,
+      index: questions.length,
+    };
+
+    const updatedQuestions = [...questions, { ...newQuestion }];
     setQuestions(updatedQuestions);
     setSaved(false);
     setErrors(initialValueErrors);
+
+    return newQuestion.index;
   };
 
   const removeQuestion = (index) => {

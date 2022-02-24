@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import api from '@api';
 import { useParams } from 'react-router-dom';
 
@@ -11,7 +11,8 @@ import Quiz from './Quiz';
 // Style
 import { FormWrapper, GridContainerModal } from './style';
 
-const ModalGetAvailableQuizzes = ({ handleClose, handleUpdateQuizzes }) => {
+const ModalGetAvailableQuizzes = forwardRef((props, _) => {
+  const { handleClose, handleUpdateQuizzes } = props;
   const [availableQuizzes, setAvailableQuizzes] = useState([]);
   const [stateSnackBar, setStateSnackBar] = useState({
     open: false,
@@ -20,6 +21,7 @@ const ModalGetAvailableQuizzes = ({ handleClose, handleUpdateQuizzes }) => {
     autoHideDuration: 1000,
   });
   const [checkboxes, setCheckboxes] = useState([]);
+
   const { idClass } = useParams();
 
   const getAvailableQuizzes = async () => {
@@ -64,6 +66,25 @@ const ModalGetAvailableQuizzes = ({ handleClose, handleUpdateQuizzes }) => {
         idClass,
         idQuiz,
       });
+      handleClickSnackBar(
+        'Quiz adicionado com sucesso!',
+        'success',
+        checkboxes[idQuiz]
+      );
+      handleUpdateQuizzes();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRemoveQuiz = async (idQuiz) => {
+    try {
+      await api.delete('/class/dettachQuiz', {
+        data: {
+          idClass,
+          idQuiz,
+        },
+      });
 
       handleUpdateQuizzes();
     } catch (error) {
@@ -72,14 +93,16 @@ const ModalGetAvailableQuizzes = ({ handleClose, handleUpdateQuizzes }) => {
   };
 
   const handleQuizzesChecked = (quiz) => (e) => {
+    e.preventDefault();
     setCheckboxes((prevState) => ({
       ...prevState,
-      [quiz.title]: e.target.checked,
+      [quiz.id]: e.target.checked,
     }));
 
     if (e.target.checked) {
       handleAddQuiz(quiz.id);
-      handleClose();
+    } else {
+      handleRemoveQuiz(quiz.id);
     }
   };
 
@@ -132,18 +155,11 @@ const ModalGetAvailableQuizzes = ({ handleClose, handleUpdateQuizzes }) => {
               key={index}
               item
               xs={12}
-              onClick={() =>
-                handleClickSnackBar(
-                  'Quiz adicionado com sucesso!',
-                  'success',
-                  checkboxes[quiz.title]
-                )
-              }
             >
               <Quiz
                 quiz={quiz}
-                checked={checkboxes[quiz.title]}
-                id={quiz.title}
+                checked={checkboxes[quiz.id]}
+                id={quiz.id}
                 onChange={() => handleQuizzesChecked(quiz)}
               />
             </Grid>
@@ -159,6 +175,6 @@ const ModalGetAvailableQuizzes = ({ handleClose, handleUpdateQuizzes }) => {
       />
     </>
   );
-};
+});
 
 export default ModalGetAvailableQuizzes;

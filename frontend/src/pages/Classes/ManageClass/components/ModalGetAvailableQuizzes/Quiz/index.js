@@ -19,14 +19,17 @@ import {
   QuizRightWrapper,
 } from './style';
 
-const Quiz = ({ quiz, id, checked, onChange }) => {
+const Quiz = ({ quiz, id, checked, onChange, onClick }) => {
   return (
-    <QuizCard variant="outlined" checked={Boolean(checked)}>
+    <QuizCard variant="outlined" checked={Boolean(checked)} onClick={onClick}>
       <CardActionArea component="label">
         <WrapperQuiz>
           <CheckBox checked={Boolean(checked)} onChange={onChange(id)} />
-          {quiz.idImage && <ImageQuiz />}
-          {!quiz.idImage && <EmptyImage />}
+          {quiz?.image?.url ? (
+            <ImageQuiz src={quiz?.image?.url} />
+          ) : (
+            <EmptyImage />
+          )}
           <QuizRightWrapper>
             <QuizInfoWrapper>
               <QuizTitle>{quiz.title}</QuizTitle>

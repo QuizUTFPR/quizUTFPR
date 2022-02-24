@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
@@ -13,12 +13,14 @@ import {
   DialogTitle,
 } from '@mui/material';
 
-import GridContainer from '@components/Container';
+import Wrapper from '@components/RefferedContainer';
 import Button from '@components/Button';
 
-const GetOutAlert = ({ handleClose }) => {
+const GetOutAlert = forwardRef((props, _) => {
+  const { handleClose } = props;
+
   return (
-    <GridContainer>
+    <Wrapper>
       <DialogTitle id="id-dialog-title">Deseja mesmo sair?</DialogTitle>
       <DialogContent>
         <DialogContentText id="id-dialog-description">
@@ -40,9 +42,9 @@ const GetOutAlert = ({ handleClose }) => {
           Sair mesmo assim
         </Button>
       </DialogActions>
-    </GridContainer>
+    </Wrapper>
   );
-};
+});
 
 GetOutAlert.defaultProps = {
   handleClose: () => {},

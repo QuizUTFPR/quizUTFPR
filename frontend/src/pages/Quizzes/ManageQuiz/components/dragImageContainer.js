@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 // COMPONENTS
 // import Button from '@components/Button';
 import { IconButton, Grid, Typography, Divider } from '@mui/material';
-import GridContainer from '@components/Container';
+import Wrapper from '@components/RefferedContainer';
 import { Close } from '@mui/icons-material/';
 import DragImageInput from './dragImage';
 
 // ASSETS
 
-const DragImageContainer = ({ handleClose, updateQuestion, formik }) => {
+const DragImageContainer = forwardRef((props, _) => {
+  const { handleClose, updateQuestion, formik } = props;
+
   return (
-    <GridContainer container spacing={3} style={{ width: '70vw' }}>
+    <Wrapper container spacing={3} style={{ width: '70vw' }}>
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={3} md={1}>
           <IconButton aria-label="closeModal" onClick={handleClose}>
@@ -44,8 +46,8 @@ const DragImageContainer = ({ handleClose, updateQuestion, formik }) => {
           />
         </Grid>
       </Grid>
-    </GridContainer>
+    </Wrapper>
   );
-};
+});
 
 export default DragImageContainer;

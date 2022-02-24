@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { StyledModal } from './style';
 
@@ -10,7 +10,6 @@ const ModalWrapper = ({
   children,
 }) => {
   const ref = useRef(null);
-  const ChildrenRef = forwardRef((props, _) => children);
 
   return (
     <StyledModal
@@ -20,7 +19,7 @@ const ModalWrapper = ({
       onClose={handleClose}
       ref={ref}
     >
-      <ChildrenRef />
+      {children}
     </StyledModal>
   );
 };

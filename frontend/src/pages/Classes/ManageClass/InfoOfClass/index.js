@@ -37,8 +37,6 @@ const InfoOfClass = () => {
     getClass();
   }, []);
 
-  console.log(classInstance);
-
   return (
     <Wrapper
       key="info"

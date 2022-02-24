@@ -10,6 +10,7 @@ import { QUIZ } from '@routes';
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
 // COMPONENTS
+
 import Modal from '@components/Modal';
 import AlertRemoveMessage from '@components/ConfirmRemove';
 import AnimatedContainer from '@components/WrapperAnimatedPage';
@@ -47,6 +48,7 @@ const Question = () => {
     questionToDown,
     questionToUp,
   } = useQuestionQuiz();
+
   const [openChangeTypeQuestionModal, setTypeQuestionModal] = useState({
     open: false,
     indexQuestion: null,
@@ -56,6 +58,9 @@ const Question = () => {
   const [openAlert, setOpenAlert] = useState(false);
   const [openGetOutAlert, setOpenGetOutAlert] = useState(false);
   const [openDragImage, setOpenDragImage] = useState(false);
+  const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] =
+    useState(false);
+
   const [onScreen, setOnScreen] = useState({
     index: 0,
     question: questions[0],
@@ -82,6 +87,8 @@ const Question = () => {
 
   const handleOpenModalTypeQuestion = () => setOpenTypeOfQuestion(true);
   const handleCloseModalTypeQuestion = () => setOpenTypeOfQuestion(false);
+  const toogleModalQuestionDB = () =>
+    setModalQuestionDatabaseOpen((prevState) => !prevState);
 
   const handleOpenGetOutAlert = () => setOpenGetOutAlert(true);
   const handleCloseGetOutAlert = () => setOpenGetOutAlert(false);
@@ -223,8 +230,11 @@ const Question = () => {
         <TypeOfQuestion
           updateScreen={handleChangeQuestion}
           handleClose={handleCloseModalTypeQuestion}
+          toogleModalQuestionDB={toogleModalQuestionDB}
+          isModalQuestionDatabaseOpen={isModalQuestionDatabaseOpen}
         />
       </Modal>
+
       <Modal open={openAlert} handleClose={handleCloseAlert}>
         <AlertRemoveMessage
           handleClose={handleCloseAlert}
