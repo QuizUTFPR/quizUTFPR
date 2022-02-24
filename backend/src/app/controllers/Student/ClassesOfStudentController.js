@@ -1,7 +1,7 @@
 class ClassesOfStudentController {
   async index(req, res) {
     try {
-      const { studentId } = req.body;
+      const { idClass, idStudent } = req.body;
     } catch (error) {
       return (
         (!!error.status && res.status(error.status).json(error)) ||
