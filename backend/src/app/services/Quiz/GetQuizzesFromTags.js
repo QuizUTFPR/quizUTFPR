@@ -1,4 +1,6 @@
-import getAllMethods from '../../utils/getMethodsOfAssociation';
+// MODELS
+import Teacher from '../../models/TeacherModel';
+import File from '../../models/FileModel';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
@@ -15,9 +17,19 @@ class GetQuizzesFromTagsService {
       where: {
         published: true,
       },
+      include: [
+        {
+          model: Teacher,
+          as: 'teacher',
+          attributes: ['name'],
+        },
+        {
+          model: File,
+          as: 'image',
+          attributes: ['url', 'path', 'name'],
+        },
+      ],
     });
-
-    console.log(getAllMethods(quizzes));
 
     const filteredQuizzesByTag = await Promise.all(
       // eslint-disable-next-line consistent-return
