@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import {
   StyledInput,
@@ -12,6 +12,7 @@ import {
 
 const ChipInput = ({ chips, setChips, placeholder }) => {
   const [value, setValue] = useState();
+  const ref = useRef();
 
   const handleAddChip = () => {
     const newValue = value.trim();
@@ -34,7 +35,12 @@ const ChipInput = ({ chips, setChips, placeholder }) => {
 
   return (
     <Wrapper>
-      <ChipWrapper>
+      <ChipWrapper
+        ref={ref}
+        onContentSizeChange={() => {
+          ref.current.scrollToEnd({ animated: true });
+        }}
+      >
         {chips.map((item, idx) => (
           <Chip key={(item, idx)}>
             <TextChip>{item}</TextChip>

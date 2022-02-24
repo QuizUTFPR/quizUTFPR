@@ -65,5 +65,5 @@ export const StyledParagraph = styled.Text`
 
 export const HeaderWelcomeTextView = styled.View`
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 `;

@@ -19,30 +19,30 @@ import {
   QuizProgressText,
 } from './style';
 
-const CardQuizBasic = ({ navigate, quiz, color }) => (
+const CardInProgress = ({ navigate, data, color }) => (
   <QuizCard onPress={navigate}>
     <StyledImage
       source={
-        quiz?.quiz?.image?.url
+        data?.quiz?.image?.url
           ? {
-              uri: quiz.quiz.image.url,
+              uri: data.quiz.image.url,
             }
           : null
       }
     />
     <StyledView>
       <Description>
-        <QuizTitle fill="black">{quiz.quiz.title}</QuizTitle>
+        <QuizTitle fill="black">{data.quiz.title}</QuizTitle>
       </Description>
       <QuizProgressBarBackground fill="lightGrey">
         <QuizProgressBar
-          porcentage={(quiz.studentChoicesAmount * 100) / quiz.questionAmount}
+          porcentage={(data.studentChoicesAmount * 100) / data.questionAmount}
           fill="purple"
         />
       </QuizProgressBarBackground>
     </StyledView>
     <QuizProgressText fill="purple">
-      {Math.floor((quiz.studentChoicesAmount * 100) / quiz.questionAmount)}%
+      {Math.floor((data.studentChoicesAmount * 100) / data.questionAmount)}%
     </QuizProgressText>
     <StyledIconButton>
       <AntDesign name="arrowright" size={24} color={color} />
@@ -50,4 +50,4 @@ const CardQuizBasic = ({ navigate, quiz, color }) => (
   </QuizCard>
 );
 
-export default CardQuizBasic;
+export default CardInProgress;

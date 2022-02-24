@@ -23,7 +23,7 @@ class ClassStudentConstroller {
 
   async index(req, res) {
     try {
-      const { idClass } = req.query;
+      const { idClass } = req.params;
 
       const quizzes = await GetAllStudentsFromClassService.execute({ idClass });
 

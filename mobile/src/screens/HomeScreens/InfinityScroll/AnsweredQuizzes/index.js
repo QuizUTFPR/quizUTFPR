@@ -8,7 +8,7 @@ import api from '@api';
 import Container from '@components/Container';
 import GoBackHeader from '@components/GoBackHeader';
 import theme from '@theme';
-import CardQuizAnswered from '../../components/CardQuizzes/Answered';
+import CardQuizAnswered from '@components/Card/WithTeacherName';
 
 const QuizzesInfinityScroll = () => {
   const navigation = useNavigation();
@@ -59,7 +59,7 @@ const QuizzesInfinityScroll = () => {
         renderItem={({ item: quiz }) => (
           <CardQuizAnswered
             key={quiz.id}
-            quiz={quiz}
+            data={quiz}
             navigate={() =>
               navigation.navigate('AttempsOfQuiz', {
                 id: quiz.id,

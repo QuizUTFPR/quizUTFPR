@@ -1,13 +1,13 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { RefreshControl, Text } from 'react-native';
+import { RefreshControl } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import api from '@api';
-import { useSpring, animated } from '@react-spring/native';
+// import { useSpring, animated } from '@react-spring/native';
 
 // COMPONENTS
 import Container from '@components/Container';
 import theme from '@theme';
-import CardQuizBasic from '../../components/CardQuizzes/Basic';
+import CardQuizBasic from '@components/Card/Basic';
 
 // THEME
 import SeeMoreButton from '../../components/SeeMoreButton';
@@ -20,11 +20,11 @@ const HomeQuizzes = () => {
   const [isRefreshing, setRefreshing] = useState(false);
   const [allQuizzes, setAllQuizzes] = useState([]);
 
-  const [moveMe, toggleMoveMe] = useState(false);
+  // const [moveMe, toggleMoveMe] = useState(false);
 
-  const move = useSpring({
-    backgroundColor: moveMe ? 'orange' : 'red',
-  });
+  // const move = useSpring({
+  //   backgroundColor: moveMe ? 'orange' : 'red',
+  // });
 
   const getAllPublishedQuizzes = async () => {
     try {
@@ -64,9 +64,9 @@ const HomeQuizzes = () => {
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
-        <animated.View style={move}>
+        {/* <animated.View style={move}>
           <Text onPress={() => toggleMoveMe(!moveMe)}>teste</Text>
-        </animated.View>
+        </animated.View> */}
         {allQuizzes.length > 0 && (
           <>
             <SeeMoreButton
@@ -82,7 +82,7 @@ const HomeQuizzes = () => {
               {allQuizzes.map((quiz) => (
                 <CardQuizBasic
                   key={quiz.id}
-                  quiz={quiz}
+                  data={quiz}
                   color={theme.color.purple}
                   navigate={() =>
                     navigation.navigate('Descricao', {

@@ -9,7 +9,7 @@ import Container from '@components/Container';
 
 // THEME
 import theme from '@theme';
-import CardQuizInProgress from '../../components/CardQuizzes/InProgress';
+import CardQuizInProgress from '@components/Card/InProgress';
 import SeeMoreButton from '../../components/SeeMoreButton';
 
 // STYLES
@@ -71,7 +71,7 @@ const HomeQuizInProgress = () => {
               {allQuizzesInProgress.map((item) => (
                 <CardQuizInProgress
                   key={item.quiz.id}
-                  quiz={item}
+                  data={item}
                   color={theme.color.purple}
                   navigate={() =>
                     navigation.navigate('Descricao', {

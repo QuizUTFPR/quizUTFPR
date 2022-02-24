@@ -14,9 +14,13 @@ export const Wrapper = styled.View`
   width: ${widthPercentageToDp('90%')}px;
 `;
 
-export const ChipWrapper = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
+export const ChipWrapper = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+})`
+  max-height: 150px;
 `;
 
 export const StyledInput = styled.TextInput`

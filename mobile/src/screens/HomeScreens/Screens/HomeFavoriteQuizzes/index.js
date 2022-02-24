@@ -9,7 +9,7 @@ import Container from '@components/Container';
 
 // THEME
 import theme from '@theme';
-import CardQuizBasic from '../../components/CardQuizzes/Basic';
+import CardQuizBasic from '@components/Card/Basic';
 import SeeMoreButton from '../../components/SeeMoreButton';
 
 // STYLES
@@ -73,7 +73,7 @@ const FavoriteQuizzes = () => {
               {allQuizzes.map((quiz) => (
                 <CardQuizBasic
                   key={quiz.id}
-                  quiz={quiz}
+                  data={quiz}
                   color={theme.color.purple}
                   navigate={() =>
                     navigation.navigate('Descricao', {

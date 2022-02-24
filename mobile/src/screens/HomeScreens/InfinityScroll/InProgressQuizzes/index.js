@@ -9,7 +9,7 @@ import Container from '@components/Container';
 import GoBackHeader from '@components/GoBackHeader';
 
 import theme from '@theme';
-import CardQuizInProgress from '../../components/CardQuizzes/InProgress';
+import CardQuizInProgress from '@components/Card/InProgress';
 
 const QuizzesInfinityScroll = () => {
   const navigation = useNavigation();
@@ -60,7 +60,7 @@ const QuizzesInfinityScroll = () => {
         renderItem={({ item }) => (
           <CardQuizInProgress
             key={item.quiz.id}
-            quiz={item}
+            data={item}
             color={theme.color.purple}
             navigate={() =>
               navigation.navigate('Descricao', {

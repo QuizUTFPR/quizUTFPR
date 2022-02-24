@@ -39,7 +39,7 @@ router.get('/getAllTeacherClasses', ClassTeacherController.index);
 
 // STUDENT RELATION
 router.post('/attachStudent', ClassStudentController.store);
-router.get('/getAllClassStudents', ClassStudentController.index);
+router.get('/getAllClassStudents/:idClass', ClassStudentController.index);
 router.delete('/dettachStudent', ClassStudentController.delete);
 
 // QUIZ RELATION

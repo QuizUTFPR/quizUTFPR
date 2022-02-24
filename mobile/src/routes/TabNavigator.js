@@ -4,13 +4,19 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // COMPONENTS
 import TabBar from '@components/TabBar';
 import HeaderHome from '@components/Headers/HeaderHome';
+import HeaderClassPage from '@components/Headers/HeaderClassPage';
 import HeaderSearchTag from '@components/Headers/HeaderSearchTag';
 
 // ICONS
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import {
+  Ionicons,
+  MaterialIcons,
+  MaterialCommunityIcons,
+} from '@expo/vector-icons';
 
 // STACKS
 import SearchTag from '@screens/SearchTag';
+import ClassPage from '@screens/Class';
 import TopTabStack from './TopTabNavigator';
 
 // TAB CREATION
@@ -39,6 +45,17 @@ const TabNavigator = () => (
       }}
       name="SearchTagScreen"
       component={SearchTag}
+    />
+    <Tab.Screen
+      options={{
+        Icon: MaterialCommunityIcons,
+        name: 'google-classroom',
+        size: 32,
+        header: () => <HeaderClassPage />,
+        tabBarLabel: 'Turmas',
+      }}
+      name="ClassPage"
+      component={ClassPage}
     />
   </Tab.Navigator>
 );

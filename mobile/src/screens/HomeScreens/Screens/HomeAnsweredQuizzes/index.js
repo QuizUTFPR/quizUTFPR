@@ -9,7 +9,7 @@ import Container from '@components/Container';
 
 // THEME
 import theme from '@theme';
-import CardQuizAnswered from '../../components/CardQuizzes/Answered';
+import CardQuizAnswered from '@components/Card/WithTeacherName';
 import SeeMoreButton from '../../components/SeeMoreButton';
 
 // STYLES
@@ -72,7 +72,7 @@ const Home = () => {
               {quizzes.map((quiz) => (
                 <CardQuizAnswered
                   key={quiz.id}
-                  quiz={quiz}
+                  data={quiz}
                   navigate={() =>
                     navigation.navigate('AttempsOfQuiz', {
                       id: quiz.id,

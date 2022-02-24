@@ -1,9 +1,6 @@
 import React from 'react';
-
-// Icons
 import { AntDesign } from '@expo/vector-icons';
 
-// Style
 import {
   QuizCard,
   StyledImage,
@@ -13,26 +10,22 @@ import {
   StyledIconButton,
 } from '../style';
 
-const CardQuizBasic = ({ navigate, quiz, color }) => (
+import { TeacherName } from './style';
+
+const WithTeacherName = ({ data, color, navigate }) => (
   <QuizCard onPress={navigate}>
-    <StyledImage
-      source={
-        quiz?.image?.url
-          ? {
-              uri: quiz.image.url,
-            }
-          : null
-      }
-    />
+    <StyledImage source={data?.image?.url ? { uri: data.image.url } : null} />
     <StyledView>
       <Description>
-        <QuizTitle fill="black">{quiz.title}</QuizTitle>
+        <QuizTitle fill="black">{data.title}</QuizTitle>
+        <TeacherName fill="black">Prof.: {data.teacher.name}</TeacherName>
       </Description>
     </StyledView>
+
     <StyledIconButton>
       <AntDesign name="arrowright" size={24} color={color} />
     </StyledIconButton>
   </QuizCard>
 );
 
-export default CardQuizBasic;
+export default WithTeacherName;

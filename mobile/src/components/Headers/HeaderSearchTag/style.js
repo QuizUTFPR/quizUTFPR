@@ -11,7 +11,8 @@ export const HeaderInformations = styled.View`
   flex-direction: row;
   width: 100%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 30px;
   margin-bottom: ${({ theme }) => theme.size.padding}px;
 `;
 

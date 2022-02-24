@@ -9,9 +9,8 @@ import Container from '@components/Container';
 
 // ICONS
 import theme from '@theme';
+import CardQuizBasic from '@components/Card/Basic';
 import SeeMoreButton from '../../components/SeeMoreButton';
-
-import CardQuizBasic from '../../components/CardQuizzes/Basic';
 
 // STYLES
 import { StyledScrollView, QuizContainer } from '../../style';
@@ -74,7 +73,7 @@ const HomeRecentQuizzes = () => {
               {allQuizzes.map((quiz) => (
                 <CardQuizBasic
                   key={quiz.id}
-                  quiz={quiz}
+                  data={quiz}
                   color={theme.color.purple}
                   navigate={() =>
                     navigation.navigate('Descricao', {

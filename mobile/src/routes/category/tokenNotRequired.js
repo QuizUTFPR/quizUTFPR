@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Loading from '@components/Loading';
 
 // Screens
-const InitialScreen = lazy(() => import('@screens/InitialScreen2'));
+const InitialScreen = lazy(() => import('@screens/InitialScreen'));
 const Login = lazy(() => import('@screens/Login'));
 const Register = lazy(() => import('@screens/Register'));
 
