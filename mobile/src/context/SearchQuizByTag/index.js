@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 // API
@@ -9,22 +9,40 @@ export const SearchQuizByTagContext = createContext();
 const SearchQuizByTag = ({ children }) => {
   const [quizzes, setQuizzes] = useState([]);
   const [tags, setTags] = useState([]);
+  const [shouldUpdate, setShouldUpdate] = useState(false);
 
+  // eslint-disable-next-line consistent-return
   const getQuizByTags = async () => {
-    try {
-      const { data } = await api.post('/quiz/quizzesByTags', {
-        aimedTags: tags,
-      });
-      setQuizzes(data);
+    if (tags.length > 0) {
+      try {
+        const { data } = await api.post('/quiz/quizzesByTags', {
+          aimedTags: tags,
+        });
 
-      return false;
-    } catch (err) {
+        setQuizzes(data);
+
+        return false;
+      } catch (err) {
+        setQuizzes([]);
+        console.log('error', err);
+
+        return true;
+      }
+    } else {
       setQuizzes([]);
-      console.log('error', err);
-
-      return true;
     }
   };
+
+  const removeTagAndGetNewQuizzes = async (idx) => {
+    const oldTags = [...tags];
+    oldTags.splice(idx, 1);
+    setTags(oldTags);
+    setShouldUpdate((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    getQuizByTags();
+  }, [shouldUpdate]);
 
   return (
     <SearchQuizByTagContext.Provider
@@ -33,6 +51,7 @@ const SearchQuizByTag = ({ children }) => {
         quizzes,
         setTags,
         tags,
+        removeTagAndGetNewQuizzes,
       }}
     >
       {children}

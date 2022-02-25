@@ -61,7 +61,6 @@ const QuizDescription = ({ route }) => {
 
   const startQuizAndGetAllQuestions = async () => {
     try {
-      console.log('vai cumeçar', id);
       const { data } = await api.post('/studentQuiz/startQuiz', { quizId: id });
       await getQuestionsOfQuizFromDatabase(id, data.id);
       navigation.navigate('CountDown');

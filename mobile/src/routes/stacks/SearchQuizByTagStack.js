@@ -3,7 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Loading from '@components/Loading';
 
 // COMPONENTS
-import HeaderSearchTag from '@components/Headers/HeaderSearchTag';
+import HeaderSearchQuizByTag from '@components/Headers/HeaderSearchQuizByTag';
+import HeaderResultSearchQuizByTag from '@components/Headers/HeaderResultSearchQuizByTag';
 
 // Screens
 const SearchTag = lazy(() => import('@screens/SearchQuizByTag'));
@@ -19,12 +20,12 @@ const SearchQuizByTagStack = () => (
   <Suspense fallback={<Loading />}>
     <Stack.Navigator>
       <Stack.Screen
-        options={{ header: () => <HeaderSearchTag /> }}
+        options={{ header: () => <HeaderSearchQuizByTag /> }}
         name="SearchTag"
         component={SearchTag}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={{ header: () => <HeaderResultSearchQuizByTag /> }}
         name="ResultSearchTag"
         component={ResultSearchTag}
       />

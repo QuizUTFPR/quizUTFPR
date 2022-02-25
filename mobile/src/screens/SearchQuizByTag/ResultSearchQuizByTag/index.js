@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import theme from '@theme';
-import { Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 // HOOKS
 import useSearchQuizByTag from '@hook/useSearchQuizByTag';
@@ -10,17 +10,42 @@ import Container from '@components/Container';
 import CardWithTeacherName from '@components/Card/WithTeacherName';
 
 // STYLES
-import { QuizContainer, SafeArea } from './style';
+import {
+  QuizContainer,
+  SafeArea,
+  TagWrapper,
+  TextBolder,
+  WrapperTags,
+  TagText,
+  RemoveIcon,
+  RemoveButton,
+} from './style';
 
 const ResultSearchTag = () => {
-  const { quizzes, tags } = useSearchQuizByTag();
+  const { quizzes, tags, removeTagAndGetNewQuizzes } = useSearchQuizByTag();
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    if (quizzes.length === 0) {
+      navigation.goBack();
+    }
+  }, [quizzes]);
 
   return (
     <Container>
       <SafeArea>
-        {tags.map((item) => (
-          <Text key={item}>{item}</Text>
-        ))}
+        <WrapperTags horizontal>
+          {tags.map((item, idx) => (
+            <TagWrapper key={item}>
+              <TagText>{item}</TagText>
+              <RemoveButton onPress={() => removeTagAndGetNewQuizzes(idx)}>
+                <RemoveIcon />
+              </RemoveButton>
+            </TagWrapper>
+          ))}
+        </WrapperTags>
+
+        <TextBolder>Resultados</TextBolder>
 
         <QuizContainer>
           {quizzes.map((quiz) => (
