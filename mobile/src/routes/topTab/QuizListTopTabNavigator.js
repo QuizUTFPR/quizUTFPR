@@ -2,8 +2,8 @@ import React, { lazy, Suspense } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Loading from '@components/Loading';
 
-// TEMA
-import theme from '../styles/theme';
+// THEME
+import theme from '@theme';
 
 // SCREEN
 const HomeAnsweredQuizzes = lazy(() =>

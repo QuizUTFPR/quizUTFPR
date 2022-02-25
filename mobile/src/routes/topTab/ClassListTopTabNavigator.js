@@ -3,7 +3,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Loading from '@components/Loading';
 
 // TEMA
-import theme from '../styles/theme';
+import theme from '@theme';
 
 // SCREEN
 const AllClassList = lazy(() => import('@screens/Class/AllClassList'));
@@ -29,10 +29,10 @@ const ClassListTopTabNavigator = () => (
           backgroundColor: 'transparent',
         },
         // tabBarScrollEnabled: true,
-        // tabBarItemStyle: {
-        //   width: 170,
-        //   height: 60,
-        // },
+        tabBarItemStyle: {
+          // width: 170,
+          height: 60,
+        },
         tabBarLabelStyle: {
           fontFamily: 'PoppinsBold',
           fontSize: theme.fontSize,

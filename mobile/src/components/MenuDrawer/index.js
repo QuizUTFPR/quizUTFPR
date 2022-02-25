@@ -15,7 +15,9 @@ import MyDrawer from './myDrawer';
 const Drawer = createDrawerNavigator();
 
 // Screens
-const TabNavigator = lazy(() => import('@routes/TabNavigator'));
+const BottomTabNavigator = lazy(() =>
+  import('@routes/bottomTab/BottomTabNavigator')
+);
 // const HomeStack = lazy(() => import('@routes/stacks/home'));
 
 const DrawerComponent = () => {
@@ -48,7 +50,7 @@ const DrawerComponent = () => {
               />
             ),
           }}
-          component={TabNavigator}
+          component={BottomTabNavigator}
         />
       </Drawer.Navigator>
     </Suspense>

@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import theme from '@theme';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
-import { useFocusEffect } from '@react-navigation/native';
+import theme from '@theme';
 
 import api from '@api';
 
@@ -14,10 +14,12 @@ import { StyledScrollView, ClassContainer } from './style';
 
 const ClassPage = () => {
   const [classList, setClassList] = useState([]);
+  const navigation = useNavigation();
 
   const getClasses = async () => {
     try {
       const { data } = await api.get('/class/availableClasses');
+      console.log('data', data);
       setClassList(data);
     } catch (error) {
       console.log(error);
@@ -37,7 +39,17 @@ const ClassPage = () => {
             <CardWithTeacherName
               key={item.id}
               data={item}
-              navigate={() => console.log('teste')}
+              navigate={() =>
+                navigation.navigate('ClassStack', {
+                  screen: 'InfoOfClass',
+                  id: item.id,
+                  teacher: item.teacher,
+                  title: item.title,
+                  image: item?.image?.url,
+                  description: item.description,
+                  pin: item.pin,
+                })
+              }
               color={theme.color.purple}
             />
           ))}

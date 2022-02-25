@@ -17,9 +17,9 @@ import {
 } from '@expo/vector-icons';
 
 // STACKS
-import SearchQuizByTagStack from './stacks/SearchQuizByTagStack';
-import QuizListTopTabStack from './QuizListTopTabNavigator';
-import ClassListTopTabStack from './ClassListTopTabNavigator';
+import SearchQuizByTagStack from '../stacks/SearchQuizByTagStack';
+import QuizListTopTabStack from '../topTab/QuizListTopTabNavigator';
+import ClassListTopTabStack from '../topTab/ClassListTopTabNavigator';
 
 // TAB CREATION
 const Tab = createBottomTabNavigator();
