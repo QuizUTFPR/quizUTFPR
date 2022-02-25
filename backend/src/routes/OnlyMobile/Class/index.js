@@ -5,7 +5,6 @@ import AvailableStudentClassesController from '../../../app/controllers/ClassCon
 
 const router = new Router();
 
-router.get(
-  '/availableClasses/:idClass/:studentId',
-  AvailableStudentClassesController.index
-);
+router.get('/availableClasses', AvailableStudentClassesController.index);
+
+export default router;

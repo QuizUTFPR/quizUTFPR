@@ -14,6 +14,7 @@ import Student from './OnlyMobile/Student/student';
 import PublishedQuiz from './OnlyMobile/PublishedQuiz/quiz';
 import StudentQuiz from './OnlyMobile/Student/studentQuiz';
 import QuizMobile from './OnlyMobile/Quiz';
+import ClassesMobile from './OnlyMobile/Class';
 
 // MIDDLEWARES
 import verifyJWT from '../app/middlewares/jwtVerify';
@@ -32,5 +33,6 @@ router.use('/question', verifyJWT, Question);
 router.use('/tag', verifyJWT, Tag);
 router.use('/statistics', verifyJWT, Statistics);
 router.use('/class', verifyJWT, Classes);
+router.use('/class', verifyJWT, ClassesMobile);
 
 export default router;

@@ -17,9 +17,9 @@ import {
 } from '@expo/vector-icons';
 
 // STACKS
-import ClassPage from '@screens/Class';
 import SearchQuizByTagStack from './stacks/SearchQuizByTagStack';
-import TopTabStack from './TopTabNavigator';
+import QuizListTopTabStack from './QuizListTopTabNavigator';
+import ClassListTopTabStack from './ClassListTopTabNavigator';
 
 // TAB CREATION
 const Tab = createBottomTabNavigator();
@@ -36,7 +36,7 @@ const TabNavigator = () => (
           tabBarLabel: 'Inicio',
         }}
         name="HomeStack"
-        component={TopTabStack}
+        component={QuizListTopTabStack}
       />
       <Tab.Screen
         options={{
@@ -57,8 +57,8 @@ const TabNavigator = () => (
           header: () => <HeaderClassPage />,
           tabBarLabel: 'Turmas',
         }}
-        name="ClassPage"
-        component={ClassPage}
+        name="ClassListTopTabStack"
+        component={ClassListTopTabStack}
       />
     </Tab.Navigator>
   </SearchQuizByTagProvider>

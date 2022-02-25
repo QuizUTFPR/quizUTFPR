@@ -3,10 +3,11 @@ import GetAvailableStudentClassesService from '../../services/Class/ClassStudent
 class AvailableStudentClassesController {
   async index(req, res) {
     try {
-      const { idClass, studentId } = req.params;
+      const studentId = req.userId;
 
-      const availableClasses = GetAvailableStudentClassesService.execute({
-        idClass,
+      console.log('studentId', studentId);
+
+      const availableClasses = await GetAvailableStudentClassesService.execute({
         studentId,
       });
 

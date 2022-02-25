@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 
 // MODELS
 import File from '../../../models/FileModel';
+import Teacher from '../../../models/TeacherModel';
 
 // REPOSITORIES
 import ClassRepository from '../../../repositories/Class';
@@ -44,8 +45,13 @@ class GetAvailableStudentClassesService {
       include: [
         {
           model: File,
-          as: 'image',
+          as: 'imageClass',
           attributes: ['url', 'path'],
+        },
+        {
+          model: Teacher,
+          as: 'teacher',
+          attributes: ['name', 'email'],
         },
       ],
     });
