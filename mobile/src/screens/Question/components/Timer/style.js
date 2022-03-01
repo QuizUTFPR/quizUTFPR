@@ -34,7 +34,7 @@ export const ProgressBG = styled.View`
 
 export const TextTimer = styled.Text`
   position: absolute;
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   bottom: ${positionBottomText}px;
   right: ${positionRightText}px;
   font-family: 'PoppinsBold';

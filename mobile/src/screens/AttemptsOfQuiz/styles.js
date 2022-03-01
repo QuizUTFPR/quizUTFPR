@@ -45,7 +45,7 @@ export const StyledText = styled.Text`
   font-family: ${({ title }) => (title ? 'PoppinsBold' : 'PoppinsSemiBold')};
   font-size: ${({ title }) =>
     ({ theme }) =>
-      title ? theme.fontSize + 10 : theme.fontSize}px;
+      title ? theme.fontSize.medium : theme.fontSize.normal}px;
   color: ${({ title }) =>
     ({ theme }) =>
       title ? theme.color.purple : theme.color.black};
@@ -78,7 +78,7 @@ export const ButtonWrapper = styled.View`
 
 export const StyledButtonNavigation = styled.Text`
   font-family: PoppinsBold;
-  font-size: ${({ theme }) => theme.fontSize + 3}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ selected }) =>
     ({ theme }) =>
       selected ? theme.color.purple : theme.color.lightGrey};
@@ -107,7 +107,7 @@ export const IconButtonWrapper = styled(StyledButton).attrs({
 
 export const StyledButtonText = styled.Text`
   font-family: PoppinsBold;
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.white};
   margin-left: ${widthPercentageToDp('1%')}px;
 `;

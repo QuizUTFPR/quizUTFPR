@@ -20,7 +20,7 @@ export const InputWrapper = styled.View`
 export const StyledTextButton = styled.Text`
   margin-top: ${`${heightPercentageToDp('0.5%')}px`};
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize - 3}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   padding: 10px;
 `;
 

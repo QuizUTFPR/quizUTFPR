@@ -19,7 +19,7 @@ export const WrapperTags = styled.ScrollView`
 
 export const TextBolder = styled.Text`
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize + 10}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
 `;
 
 export const TagWrapper = styled.View`

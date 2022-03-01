@@ -14,20 +14,6 @@ export const BackgroundImage = styled(Waves).attrs(({ theme }) => ({
   position: absolute;
 `;
 
-export const StyledTitle = styled.Text`
-  align-self: flex-start;
-  font-size: ${({ theme }) => theme.fontSize + 12}px;
-  font-family: 'PoppinsBlack';
-  color: white;
-`;
-
-export const StyledText = styled.Text`
-  align-self: flex-start;
-  font-size: ${({ theme }) => theme.fontSize - 4}px;
-  font-family: 'PoppinsRegular';
-  color: white;
-`;
-
 export const InputWrapper = styled.View`
   padding-top: 110px;
   width: ${`${widthPercentageToDp('85%')}px`};
@@ -36,7 +22,7 @@ export const InputWrapper = styled.View`
 export const StyledTextButton = styled.Text`
   margin-top: ${`${heightPercentageToDp('0.5%')}px`};
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize - 3}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   text-align: center;
 `;
 

@@ -11,7 +11,7 @@ export const StyledButton = styled(LinearGradient)`
 
 export const StyledText = styled.Text`
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};
   text-align: center;
 `;

@@ -52,14 +52,14 @@ export const Body = styled.View`
 export const StyledTitle = styled.Text`
   text-align: center;
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize + 10}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
 `;
 
 export const StyledText = styled.Text`
   text-align: center;
   margin-bottom: 10px;
   font-family: 'PoppinsSemiBold';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
 `;
 
 export const Footer = styled.View`
@@ -76,7 +76,7 @@ export const RedoButton = styled.TouchableOpacity.attrs({
 `;
 export const RedoButtonText = styled.Text`
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};
   text-align: center;
   opacity: 0.2;

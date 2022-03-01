@@ -211,7 +211,7 @@ const Question = () => {
                     }
                   />
                   <MathJaxSvg
-                    fontSize={theme.fontSize}
+                    fontSize={theme.fontSize.normal}
                     color="black"
                     fontCache
                     style={{
@@ -234,7 +234,7 @@ const Question = () => {
                       onPress={() => handleSetCheckedAnswer(index)}
                     >
                       <MathJaxSvg
-                        fontSize={theme.fontSize - 3}
+                        fontSize={theme.fontSize.normal}
                         color={
                           requestQuestion.checkedAnswer[index]
                             ? 'white'

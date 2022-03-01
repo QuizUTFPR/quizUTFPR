@@ -18,7 +18,7 @@ export const TagContainer = styled.View`
 
 export const TagText = styled.Text`
   font-family: PoppinsSemiBold;
-  font-size: ${({ theme }) => theme.fontSize + 2}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.purple};
   margin-bottom: ${heightPercentageToDp('-0.5%')}px;
 `;

@@ -51,7 +51,7 @@ const TopTabNavigator = () => (
         },
         tabBarLabelStyle: {
           fontFamily: 'PoppinsBold',
-          fontSize: theme.fontSize,
+          fontSize: theme.fontSize.normal,
           overflow: 'hidden',
         },
       }}

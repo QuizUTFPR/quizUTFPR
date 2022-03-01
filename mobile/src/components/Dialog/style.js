@@ -29,13 +29,13 @@ export const StyledText = styled.Text`
   margin-top: 20px;
   text-align: center;
   font-family: 'PoppinsSemiBold';
-  font-size: ${({ theme }) => theme.fontSize + 5}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
 `;
 
 export const StyledTitle = styled.Text`
   color: ${({ theme }) => theme.color.fill};
   font-family: 'PoppinsBlack';
-  font-size: ${({ theme }) => theme.fontSize + 10}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   margin-bottom: ${({ theme }) => theme.size.margin + 10}px;
 `;
 
@@ -49,7 +49,7 @@ export const SecondButton = styled.TouchableOpacity.attrs({
 `;
 export const SecondButtonText = styled.Text`
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};
   text-align: center;
 `;

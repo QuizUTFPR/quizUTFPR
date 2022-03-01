@@ -31,7 +31,7 @@ export const StyledView = styled(Animated.View)`
 `;
 
 export const StyledText = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize - 2.5}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   font-family: 'PoppinsRegular';
   color: ${({ theme, type }) => correctColor(type, theme)};
   margin-left: 2%;

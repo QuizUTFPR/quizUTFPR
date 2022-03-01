@@ -18,13 +18,13 @@ export const AttemptCard = styled.View`
 `;
 
 export const Score = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize + 5}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   font-family: PoppinsSemiBold;
   color: ${({ theme }) => theme.color.purple};
 `;
 
 export const StyledHashtag = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize + 15}px;
+  font-size: ${({ theme }) => theme.fontSize.medium}px;
   font-family: PoppinsBold;
   color: ${({ theme }) => theme.color.lightPurple};
   margin-bottom: ${heightPercentageToDp('-1%')}px;
@@ -33,7 +33,7 @@ export const StyledHashtag = styled.Text`
 
 export const SytledDateTime = styled.Text`
   font-family: PoppinsSemiBold;
-  font-size: ${({ theme }) => theme.fontSize - 3}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.lightGrey};
 `;
 
@@ -45,7 +45,7 @@ export const AttemptNumberWrapper = styled.View`
 `;
 
 export const AttemptNumber = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize + 30}px;
+  font-size: ${({ theme }) => theme.fontSize.large}px;
   font-family: PoppinsBold;
   color: ${({ theme }) => theme.color.lightPurple};
   margin-bottom: ${heightPercentageToDp('-1%')}px;
@@ -73,7 +73,7 @@ export const QuizProgressBar = styled.View`
 
 export const QuizProgressText = styled.Text`
   color: ${({ theme }) => theme.color.fill};
-  font-size: ${({ theme }) => theme.fontSize + 2}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   font-family: 'PoppinsBold';
   margin-right: 5px;
   margin-bottom: ${heightPercentageToDp('-2%')}px;

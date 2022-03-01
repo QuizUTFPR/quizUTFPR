@@ -11,14 +11,14 @@ export const StyledIconButton = styled.Text`
 
 export const StyledTitle = styled.Text`
   align-self: flex-start;
-  font-size: ${({ theme }) => theme.fontSize + 12}px;
+  font-size: ${({ theme }) => theme.fontSize.large}px;
   font-family: 'PoppinsBlack';
   color: white;
 `;
 
 export const StyledText = styled.Text`
   align-self: flex-start;
-  font-size: ${({ theme }) => theme.fontSize - 2}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   font-family: 'PoppinsRegular';
   color: white;
 `;

@@ -39,7 +39,7 @@ export const QuizTitle = styled.Text.attrs({
   numberOfLines: 1,
   adjustsFontSizeToFit: true,
 })`
-  font-size: ${({ theme }) => theme.fontSize - 1}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};
   font-family: 'PoppinsBold';
   margin-left: 10px;

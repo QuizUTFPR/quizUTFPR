@@ -21,6 +21,6 @@ export const QuizProgressText = styled.Text`
   right: 5px;
   bottom: 0;
   color: ${({ theme }) => theme.color.fill};
-  font-size: ${({ theme }) => theme.fontSize - 2}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   font-family: 'PoppinsBold';
 `;

@@ -1,8 +1,16 @@
 import { DefaultTheme } from '@react-navigation/native';
-import { PixelRatio } from 'react-native';
+import { PixelRatio, Dimensions, Platform } from 'react-native';
 import theming from 'styled-theming';
 
-let FONT_BACK_LABEL = 14;
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+
+export function normalize(size) {
+  if (Platform.OS === 'ios') {
+    return Math.round(PixelRatio.roundToNearestPixel(size));
+  }
+  return Math.round(PixelRatio.roundToNearestPixel(size)) - 2;
+}
+let FONT_BACK_LABEL = normalize(14);
 
 const backgroundColorButton = theming.variants('mode', 'variant', {
   primary: { light: '#4B24B1' },
@@ -23,12 +31,39 @@ const fillColor = theming.variants('mode', 'fill', {
 });
 
 if (PixelRatio.get() <= 2) {
-  FONT_BACK_LABEL = 12;
+  FONT_BACK_LABEL = normalize(12);
+} else {
+  FONT_BACK_LABEL = normalize(13);
+}
+
+console.log('SCREEN_HEIGHT', SCREEN_HEIGHT);
+console.log('SCREEN_WIDTH', SCREEN_WIDTH);
+
+// FONTES
+const FONT_SIZE_NORMAL = normalize(FONT_BACK_LABEL + 5);
+let FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 5);
+let FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 10);
+const FONT_SIZE_EXTRA_LARGE = normalize(FONT_BACK_LABEL + 20);
+
+if (SCREEN_HEIGHT < 1000 && SCREEN_WIDTH > 400) {
+  FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 7);
+  FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 20);
+} else if (SCREEN_HEIGHT < 1000) {
+  FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 7);
+  FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 20);
+} else {
+  FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 15);
+  FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 40);
 }
 
 const theme = {
   mode: 'light',
-  fontSize: FONT_BACK_LABEL,
+  fontSize: {
+    normal: FONT_SIZE_NORMAL,
+    medium: FONT_SIZE_MEDIUM,
+    large: FONT_SIZE_LARGE,
+    extraLarge: FONT_SIZE_EXTRA_LARGE,
+  },
   color: {
     fill: fillColor,
     backgroundButton: backgroundColorButton,

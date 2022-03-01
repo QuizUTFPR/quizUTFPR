@@ -43,7 +43,7 @@ export const StyledIconButton = styled.Text``;
 
 export const StyledText = styled.Text`
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize + 1}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};
   margin-left: 5px;
 `;
@@ -86,13 +86,13 @@ export const BodyDescription = styled.View`
 
 export const StyledTitle = styled.Text`
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize + 5}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   margin-top: ${heightPercentageToDp('2%')}px;
 `;
 
 export const StyledPIN = styled(StyledTitle)`
   font-family: 'PoppinsRegular';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   align-self: flex-start;
   margin-top: 0px;
   padding-right: 10px;
@@ -100,7 +100,7 @@ export const StyledPIN = styled(StyledTitle)`
 
 export const StyledDescriptionText = styled.Text`
   font-family: 'PoppinsRegular';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   align-self: flex-start;
 `;
 
@@ -111,7 +111,7 @@ export const TagsContainer = styled.View`
 
 export const StyledTag = styled.Text`
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   margin-right: ${widthPercentageToDp('2%')}px;
   margin-bottom: ${heightPercentageToDp('1%')}px;
   padding-left: 15px;

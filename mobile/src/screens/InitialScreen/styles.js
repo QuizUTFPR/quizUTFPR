@@ -37,13 +37,13 @@ export const WrapperButton = styled.SafeAreaView`
 `;
 
 export const StyledTitle = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize + 12}px;
+  font-size: ${({ theme }) => theme.fontSize.medium}px;
   font-family: 'PoppinsBlack';
   color: ${({ theme }) => theme.color.fill};
 `;
 
 export const StyledParagraph = styled.Text`
   font-family: 'PoppinsRegular';
-  font-size: ${({ theme }) => theme.fontSize - 2}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};
 `;

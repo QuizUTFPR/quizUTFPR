@@ -26,7 +26,7 @@ export const SearchInput = styled.TextInput.attrs({})`
 `;
 
 export const StyledWelcome = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize + 12}px;
+  font-size: ${({ theme }) => theme.fontSize.large}px;
   font-family: 'PoppinsBlack';
   color: ${({ theme }) => theme.color.fill};
 `;
@@ -59,7 +59,7 @@ export const InputWrapper = styled.View.attrs({ elevation: 10 })`
 export const StyledParagraph = styled.Text`
   margin-top: -10px;
   font-family: 'PoppinsRegular';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};
 `;
 

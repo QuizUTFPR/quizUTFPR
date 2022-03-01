@@ -15,7 +15,7 @@ export const Avatar = styled.Image.attrs({
 export const StudentName = styled.Text`
   text-align: center;
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};
   margin-bottom: 10px;
   margin-top: 10px;

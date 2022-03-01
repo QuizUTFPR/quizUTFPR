@@ -9,7 +9,7 @@ export const StyledButton = styled.TouchableOpacity`
 
 export const StyledText = styled.Text`
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.textButton};
   text-align: center; ;
 `;

@@ -54,7 +54,7 @@ export const CurrentQuestionView = styled.View.attrs({
 `;
 
 export const CurrentQuestion = styled.Text`
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   margin-bottom: 5px;
   margin-top: 10px;
   font-family: 'PoppinsBold';
