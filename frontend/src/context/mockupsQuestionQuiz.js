@@ -75,6 +75,7 @@ export const initialValue = [
     availableOnQuestionsDB: false,
     answer: MultipleChoiceAnswer,
     tags: [],
+    index: 0,
   },
 ];
 
