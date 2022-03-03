@@ -4,13 +4,13 @@ import Loading from '@components/Loading';
 
 // CONTEXT
 import QuestionProvider from '@context/Question';
-import HeaderClassPage from '@components/Headers/HeaderClassPage';
 
 // Screens
 import CountDown from '@screens/CountDown';
 import Question from '@screens/Question';
 import Statistics from '@screens/Statistics';
 import Logout from '@screens/Logout';
+import HeaderInfoClassPage from '../../components/Headers/HeaderInfoClassPage';
 
 // Stack
 const InfinityScrollStack = lazy(() => import('../stacks/QuizInifinityScroll'));
@@ -51,7 +51,7 @@ const TokenStack = () => (
         <Stack.Screen
           options={{
             headerShown: true,
-            header: () => <HeaderClassPage />,
+            header: () => <HeaderInfoClassPage />,
           }}
           name="ClassStack"
           component={TopTabClassInfo}

@@ -1,6 +1,19 @@
 import React from 'react';
-import { Text } from 'react-native';
 
-const InfoOfClass = () => <Text>teste</Text>;
+// STYLES
+import {
+  // ClassInfoHeader,
+  // StyledImageBackground,
+  ClassDetailsContainer,
+  Title,
+} from './style';
+
+const InfoOfClass = () => (
+  <>
+    <ClassDetailsContainer fill="white">
+      <Title>Título da Turma</Title>
+    </ClassDetailsContainer>
+  </>
+);
 
 export default InfoOfClass;
