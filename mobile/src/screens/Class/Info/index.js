@@ -12,7 +12,8 @@ import {
   Subtitle,
   StyledDescription,
   Footer,
-  StyledCancel,
+  TextCancel,
+  CancelButton,
 } from './style';
 
 const InfoOfClass = () => (
@@ -23,19 +24,19 @@ const InfoOfClass = () => (
       <DetailsContainer>
         {/* PIN */}
         <DetailCard>
-          <MaterialIcons name="privacy-tip" size={24} color="black" />
+          <MaterialIcons name="privacy-tip" size={24} color="white" />
           <StyledText>124114</StyledText>
         </DetailCard>
 
         {/* QTD QUIZZES */}
         <DetailCard>
-          <MaterialCommunityIcons name="bookshelf" size={24} color="black" />
+          <MaterialCommunityIcons name="bookshelf" size={24} color="white" />
           <StyledText>10</StyledText>
         </DetailCard>
 
         {/* PROFESSOR */}
         <DetailCard>
-          <MaterialCommunityIcons name="teach" size={24} color="black" />
+          <MaterialCommunityIcons name="teach" size={24} color="white" />
           <StyledText numberOfLines={1}>Ivanilton Polato</StyledText>
         </DetailCard>
       </DetailsContainer>
@@ -53,9 +54,11 @@ const InfoOfClass = () => (
     </StyledScrollView>
 
     <Footer>
-      <StyledCancel onPress={console.log('cancelou')}>
-        Cancelar Inscrição
-      </StyledCancel>
+      <CancelButton>
+        <TextCancel onPress={console.log('cancelou')}>
+          Cancelar Inscrição
+        </TextCancel>
+      </CancelButton>
     </Footer>
   </ClassContainer>
 );

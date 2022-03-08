@@ -6,7 +6,6 @@ export const ClassContainer = styled(SafeAreaView)`
   padding-left: ${({ theme }) => theme.size.padding}px;
   padding-right: ${({ theme }) => theme.size.padding}px;
   flex: 1;
-  padding-top: -${({ theme }) => theme.size.margin + 15}px;
 `;
 
 export const StyledScrollView = styled.ScrollView`
@@ -37,7 +36,7 @@ export const DetailCard = styled.View`
   border-radius: 50px;
   padding-left: 10px;
   padding-right: 5px;
-  background: ${({ theme }) => theme.color.lightPurple};
+  background: ${({ theme }) => theme.color.purple};
 `;
 
 export const StyledText = styled.Text`
@@ -46,6 +45,7 @@ export const StyledText = styled.Text`
   flex: 1;
   text-align: center;
   overflow: hidden;
+  color: ${({ theme }) => theme.color.white};
 `;
 
 export const Subtitle = styled.Text`
@@ -64,7 +64,12 @@ export const Footer = styled.View`
   align-self: center;
 `;
 
-export const StyledCancel = styled.Text`
+export const CancelButton = styled.TouchableOpacity.attrs({
+  hitSlop: { top: 10, bottom: 10, left: 10, right: 10 },
+  activeOpacity: 0.8,
+})``;
+
+export const TextCancel = styled.Text`
   font-family: 'PoppinsBold';
   text-decoration: underline;
   color: ${({ theme }) => theme.color.lightGrey};

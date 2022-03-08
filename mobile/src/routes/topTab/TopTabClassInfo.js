@@ -7,6 +7,8 @@ import theme from '@theme';
 
 // Screens
 const InfoOfClass = lazy(() => import('@screens/Class/Info'));
+const QuizzesOfClass = lazy(() => import('@screens/Class/Quizzes'));
+const MessagesOfClass = lazy(() => import('@screens/Class/Messages'));
 
 // STACK
 const TopTab = createMaterialTopTabNavigator();
@@ -14,6 +16,7 @@ const TopTab = createMaterialTopTabNavigator();
 const SearchQuizByTagTopTab = () => (
   <Suspense fallback={<Loading />}>
     <TopTab.Navigator
+      style={{ backgroundColor: 'white' }}
       screenOptions={{
         tabBarScrollEnabled: true,
         tabBarStyle: {
@@ -24,7 +27,6 @@ const SearchQuizByTagTopTab = () => (
         },
         tabBarActiveTintColor: theme.color.purple,
         tabBarInactiveTintColor: theme.color.grey,
-
         tabBarIndicatorStyle: {
           backgroundColor: 'transparent',
         },
@@ -44,6 +46,20 @@ const SearchQuizByTagTopTab = () => (
         component={InfoOfClass}
         options={{
           tabBarLabel: 'Info',
+        }}
+      />
+      <TopTab.Screen
+        name="QuizzesOfClass"
+        component={QuizzesOfClass}
+        options={{
+          tabBarLabel: 'Quizzes',
+        }}
+      />
+      <TopTab.Screen
+        name="MessagesOfClass"
+        component={MessagesOfClass}
+        options={{
+          tabBarLabel: 'Mensagens',
         }}
       />
     </TopTab.Navigator>
