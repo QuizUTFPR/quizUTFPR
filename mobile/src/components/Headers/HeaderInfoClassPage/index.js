@@ -26,7 +26,7 @@ const HeaderInfoClassPage = () => {
           </StyledIconButton>
         </GoBackButtonWrapper>
         <ButtonWrapper>
-          <ButtonStyled onPress={console.log('clicou Entrar')}>
+          <ButtonStyled onPress={() => console.log('clicou Entrar')}>
             <SubscribeButton>
               <StyledText>ENTRAR</StyledText>
             </SubscribeButton>
