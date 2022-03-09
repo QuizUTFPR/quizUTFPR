@@ -20,7 +20,7 @@ const ClassPage = () => {
     try {
       const { data } = await api.get('/class/availableClasses');
       console.log('data', data);
-      setClassList(data);
+      setClassList(data.length ? data : []);
     } catch (error) {
       console.log(error);
     }
