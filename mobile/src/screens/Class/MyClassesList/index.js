@@ -47,6 +47,7 @@ const ClassPage = () => {
                     image: item?.image?.url,
                     description: item.description,
                     pin: item.pin,
+                    amountOfQuizzes: item.amountOfQuizzes,
                     subscribed: true,
                   },
                 })

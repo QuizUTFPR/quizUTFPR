@@ -17,10 +17,9 @@ import {
 } from './style';
 
 const InfoOfClass = ({ route }) => {
-  const { teacher, title, image, description, pin, subscribed } = route.params;
+  const { teacher, title, description, pin, amountOfQuizzes, subscribed } =
+    route.params;
   const { name } = teacher;
-
-  // console.log('TEACHER', teacher);
 
   return (
     <ClassContainer fill="white">
@@ -37,7 +36,7 @@ const InfoOfClass = ({ route }) => {
           {/* QTD QUIZZES */}
           <DetailCard width="20%">
             <MaterialCommunityIcons name="bookshelf" size={24} color="white" />
-            <StyledText>10</StyledText>
+            <StyledText>{amountOfQuizzes}</StyledText>
           </DetailCard>
 
           {/* PROFESSOR */}

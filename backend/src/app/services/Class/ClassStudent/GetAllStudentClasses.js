@@ -56,7 +56,14 @@ class GetAllStudentClassesService {
       throw error;
     }
 
-    return studentClasses;
+    const studentClassesWithStatistics = await Promise.all(
+      studentClasses.map(async (studentClass) => {
+        const amountOfQuizzes = await studentClass.countClass_quizzes();
+        return { ...studentClass.dataValues, amountOfQuizzes };
+      })
+    );
+
+    return studentClassesWithStatistics;
   }
 }
 
