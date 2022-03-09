@@ -1,13 +1,14 @@
 // SERVICES
-import GetAllStudentClasses from '../../services/Class/ClassStudent/GetAllStudentClasses';
+import GetAllStudentClassesService from '../../services/Class/ClassStudent/GetAllStudentClasses';
 
 class StudentClassesController {
   async index(req, res) {
     try {
       const studentId = req.userId;
 
-      const studentClasses = await GetAllStudentClasses.execute(studentId);
-      console.log('STUDENT CLASSES', studentClasses);
+      const studentClasses = await GetAllStudentClassesService.execute({
+        studentId,
+      });
 
       return res.status(200).json(studentClasses);
     } catch (error) {

@@ -1,4 +1,4 @@
-import Yup from 'yup';
+import * as Yup from 'yup';
 
 // MODELS
 import File from '../../../models/FileModel';
@@ -7,7 +7,7 @@ import Teacher from '../../../models/TeacherModel';
 // REPOSITORIES
 import StudentRepository from '../../../repositories/Student';
 
-class GetAllStudentClasses {
+class GetAllStudentClassesService {
   constructor() {
     this.studentRepository = new StudentRepository();
   }
@@ -34,7 +34,7 @@ class GetAllStudentClasses {
       throw error;
     }
 
-    const studentClasses = await this.student.getStudent_Classes({
+    const studentClasses = await student.getStudent_classes({
       include: [
         {
           model: File,
@@ -60,4 +60,4 @@ class GetAllStudentClasses {
   }
 }
 
-export default new GetAllStudentClasses();
+export default new GetAllStudentClassesService();

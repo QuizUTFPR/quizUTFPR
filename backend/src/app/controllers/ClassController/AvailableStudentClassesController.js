@@ -5,8 +5,6 @@ class AvailableStudentClassesController {
     try {
       const studentId = req.userId;
 
-      console.log('studentId', studentId);
-
       const availableClasses = await GetAvailableStudentClassesService.execute({
         studentId,
       });
