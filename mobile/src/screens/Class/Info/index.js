@@ -16,51 +16,53 @@ import {
   CancelButton,
 } from './style';
 
-const InfoOfClass = () => (
-  <ClassContainer fill="white">
-    <StyledScrollView>
-      <Title>Título da Turma</Title>
+const InfoOfClass = ({ route }) => {
+  console.log('ROUTE', route);
+  const { teacher, title, image, description, pin, subscribed } = route.params;
+  const { name } = teacher;
 
-      <DetailsContainer>
-        {/* PIN */}
-        <DetailCard>
-          <MaterialIcons name="privacy-tip" size={24} color="white" />
-          <StyledText>124114</StyledText>
-        </DetailCard>
+  // console.log('TEACHER', teacher);
 
-        {/* QTD QUIZZES */}
-        <DetailCard>
-          <MaterialCommunityIcons name="bookshelf" size={24} color="white" />
-          <StyledText>10</StyledText>
-        </DetailCard>
+  return (
+    <ClassContainer fill="white">
+      <StyledScrollView>
+        <Title>{title}</Title>
 
-        {/* PROFESSOR */}
-        <DetailCard>
-          <MaterialCommunityIcons name="teach" size={24} color="white" />
-          <StyledText numberOfLines={1}>Ivanilton Polato</StyledText>
-        </DetailCard>
-      </DetailsContainer>
+        <DetailsContainer>
+          {/* PIN */}
+          <DetailCard width="39%">
+            <MaterialIcons name="privacy-tip" size={24} color="white" />
+            <StyledText>{pin}</StyledText>
+          </DetailCard>
 
-      <Subtitle>Descrição</Subtitle>
-      <StyledDescription>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </StyledDescription>
-    </StyledScrollView>
+          {/* QTD QUIZZES */}
+          <DetailCard width="20%">
+            <MaterialCommunityIcons name="bookshelf" size={24} color="white" />
+            <StyledText>10</StyledText>
+          </DetailCard>
 
-    <Footer>
-      <CancelButton>
-        <TextCancel onPress={console.log('cancelou')}>
-          Cancelar Inscrição
-        </TextCancel>
-      </CancelButton>
-    </Footer>
-  </ClassContainer>
-);
+          {/* PROFESSOR */}
+          <DetailCard width="39%">
+            <MaterialCommunityIcons name="teach" size={24} color="white" />
+            <StyledText numberOfLines={1}>{name}</StyledText>
+          </DetailCard>
+        </DetailsContainer>
+
+        <Subtitle>Descrição</Subtitle>
+        <StyledDescription>{description}</StyledDescription>
+      </StyledScrollView>
+
+      <Footer>
+        <CancelButton>
+          {subscribed && (
+            <TextCancel onPress={console.log('cancelou')}>
+              Cancelar Inscrição
+            </TextCancel>
+          )}
+        </CancelButton>
+      </Footer>
+    </ClassContainer>
+  );
+};
 
 export default InfoOfClass;

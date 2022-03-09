@@ -40,12 +40,15 @@ const ClassPage = () => {
               navigate={() =>
                 navigation.navigate('ClassStack', {
                   screen: 'InfoOfClass',
-                  id: item.id,
-                  teacher: item.teacher,
-                  title: item.title,
-                  image: item?.image?.url,
-                  description: item.description,
-                  pin: item.pin,
+                  params: {
+                    id: item.id,
+                    teacher: item.teacher,
+                    title: item.title,
+                    image: item?.image?.url,
+                    description: item.description,
+                    pin: item.pin,
+                    subscribed: true,
+                  },
                 })
               }
               color={theme.color.purple}

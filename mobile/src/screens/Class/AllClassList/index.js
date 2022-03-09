@@ -21,6 +21,7 @@ const ClassPage = () => {
       const { data } = await api.get('/class/availableClasses');
       console.log('data', data);
       setClassList(data.length ? data : []);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -42,12 +43,15 @@ const ClassPage = () => {
               navigate={() =>
                 navigation.navigate('ClassStack', {
                   screen: 'InfoOfClass',
-                  id: item.id,
-                  teacher: item.teacher,
-                  title: item.title,
-                  image: item?.image?.url,
-                  description: item.description,
-                  pin: item.pin,
+                  params: {
+                    id: item.id,
+                    teacher: item.teacher,
+                    title: item.title,
+                    image: item?.image?.url,
+                    description: item.description,
+                    pin: item.pin,
+                    subscribed: false,
+                  },
                 })
               }
               color={theme.color.purple}

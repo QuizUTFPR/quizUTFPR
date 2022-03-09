@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+// import { SafeAreaView } from 'react-native-safe-area-context';
 
-export const ClassContainer = styled(SafeAreaView)`
+export const ClassContainer = styled.View`
   background: ${({ theme }) => theme.color.fill};
   padding-left: ${({ theme }) => theme.size.padding}px;
   padding-right: ${({ theme }) => theme.size.padding}px;
+  padding-top: ${({ theme }) => theme.size.padding + 5}px;
   flex: 1;
 `;
 
@@ -23,7 +24,7 @@ export const DetailsContainer = styled.View`
   justify-content: space-between;
   width: 100%;
   margin-bottom: ${({ theme }) => theme.size.margin}px;
-  margin-top: ${({ theme }) => theme.size.margin}px;
+  margin-top: ${({ theme }) => theme.size.margin - 10}px;
 `;
 
 export const DetailCard = styled.View`
@@ -31,7 +32,7 @@ export const DetailCard = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 114px;
+  width: ${({ width }) => width};
   height: 40px;
   border-radius: 50px;
   padding-left: 10px;

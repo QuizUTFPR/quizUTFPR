@@ -44,7 +44,7 @@ const ClassListTopTabNavigator = () => (
         name="AllClassListTopTab"
         component={AllClassList}
         options={{
-          tabBarLabel: 'Todas as Turmas',
+          tabBarLabel: 'Turmas Disponíveis',
           headerShown: false,
         }}
       />
