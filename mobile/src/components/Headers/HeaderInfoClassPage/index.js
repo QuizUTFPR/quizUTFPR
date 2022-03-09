@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import api from '@api';
 
 // STYLES
 import {
@@ -17,7 +18,24 @@ import {
 const HeaderInfoClassPage = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const { subscribed } = route.params.params;
+  const { subscribed, id } = route.params.params;
+
+  const registerStudentInClass = async () => {
+    try {
+      await api.post('/class/attachStudent', {
+        idClass: id,
+      });
+
+      navigation.setParams({
+        params: {
+          ...route.params.params,
+          subscribed: true,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <ClassInfoHeader>
@@ -29,7 +47,7 @@ const HeaderInfoClassPage = () => {
         </GoBackButtonWrapper>
         {!subscribed && (
           <ButtonWrapper>
-            <ButtonStyled onPress={() => console.log('clicou Entrar')}>
+            <ButtonStyled onPress={registerStudentInClass}>
               <SubscribeButton>
                 <StyledText>ENTRAR</StyledText>
               </SubscribeButton>

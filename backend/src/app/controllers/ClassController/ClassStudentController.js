@@ -6,7 +6,8 @@ import GetAllStudentsFromClassService from '../../services/Class/ClassStudent/Ge
 class ClassStudentConstroller {
   async store(req, res) {
     try {
-      const { idClass, idStudent } = req.body;
+      const idStudent = req.userId;
+      const { idClass } = req.body;
       const classInstance = await AddStudentToClassService.execute({
         idClass,
         idStudent,

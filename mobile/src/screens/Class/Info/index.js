@@ -17,7 +17,6 @@ import {
 } from './style';
 
 const InfoOfClass = ({ route }) => {
-  console.log('ROUTE', route);
   const { teacher, title, image, description, pin, subscribed } = route.params;
   const { name } = teacher;
 

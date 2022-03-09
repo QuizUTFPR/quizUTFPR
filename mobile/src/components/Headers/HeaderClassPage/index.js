@@ -27,9 +27,7 @@ const HeaderClassPage = () => {
 
   const getClassByPin = async () => {
     try {
-      console.log('pin', pin);
       // const { data } = await api.post('/quiz/getByPIN', { pin });
-
       // navigation.navigate('Descricao', {
       //   idStudentQuiz: data.idStudentQuiz,
       //   questionAmount: data.questionAmount,
