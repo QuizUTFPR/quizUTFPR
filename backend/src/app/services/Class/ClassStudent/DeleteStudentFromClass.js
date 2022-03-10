@@ -13,7 +13,7 @@ class DeleteStudentFromClassService {
   async execute(data) {
     const schema = Yup.object().shape({
       idClass: Yup.string().required(),
-      idStudent: Yup.number().required(),
+      studentId: Yup.number().required(),
     });
 
     if (!(await schema.isValid(data))) {

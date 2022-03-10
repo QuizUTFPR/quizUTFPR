@@ -1,5 +1,7 @@
 import React from 'react';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import api from '@api';
+import useStudentAuth from '../../../hook/useStudentAuth';
 
 // STYLES
 import {
@@ -20,6 +22,17 @@ const InfoOfClass = ({ route }) => {
   const { teacher, title, description, pin, amountOfQuizzes, subscribed } =
     route.params;
   const { name } = teacher;
+  const { studentInfo } = useStudentAuth();
+
+  console.log('INFO', studentInfo);
+
+  const unSubscribeStudent = async () => {
+    try {
+      await api.delete('/class/dettachStudent', { idClass: route.params.id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <ClassContainer fill="white">
@@ -53,7 +66,7 @@ const InfoOfClass = ({ route }) => {
       <Footer>
         <CancelButton>
           {subscribed && (
-            <TextCancel onPress={console.log('cancelou')}>
+            <TextCancel onPress={unSubscribeStudent}>
               Cancelar Inscrição
             </TextCancel>
           )}

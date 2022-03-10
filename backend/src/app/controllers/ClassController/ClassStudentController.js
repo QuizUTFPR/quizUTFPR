@@ -40,8 +40,12 @@ class ClassStudentConstroller {
 
   async delete(req, res) {
     try {
+      const { studentId } = req.userId;
+      const { idClass } = req.body;
+
       const removedStudent = await DeleteStudentFromClassService.execute(
-        req.body
+        idClass,
+        studentId
       );
 
       return res.status(200).json(removedStudent);
