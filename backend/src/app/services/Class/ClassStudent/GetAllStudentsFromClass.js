@@ -32,7 +32,6 @@ class GetAllStudentsFromClassService {
 
     const students = await classInstance.getClass_students();
 
-    console.log(students);
     return students;
   }
 }
