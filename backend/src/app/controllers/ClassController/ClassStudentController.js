@@ -8,6 +8,7 @@ class ClassStudentConstroller {
     try {
       const idStudent = req.userId;
       const { idClass } = req.body;
+
       const classInstance = await AddStudentToClassService.execute({
         idClass,
         idStudent,
@@ -30,7 +31,6 @@ class ClassStudentConstroller {
 
       return res.status(200).json(quizzes);
     } catch (error) {
-      console.log('error', error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
@@ -40,13 +40,13 @@ class ClassStudentConstroller {
 
   async delete(req, res) {
     try {
-      const { studentId } = req.userId;
-      const { idClass } = req.body;
+      const studentId = req.userId;
+      const { idClass } = req.query;
 
-      const removedStudent = await DeleteStudentFromClassService.execute(
+      const removedStudent = await DeleteStudentFromClassService.execute({
         idClass,
-        studentId
-      );
+        studentId,
+      });
 
       return res.status(200).json(removedStudent);
     } catch (error) {

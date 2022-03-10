@@ -59,11 +59,12 @@ class GetAvailableStudentClassesService {
     const availableClassesWithStatistics = await Promise.all(
       availableClasses.map(async (availableClass) => {
         const amountOfQuizzes = await availableClass.countClass_quizzes();
-        return { ...availableClass.dataValues, amountOfQuizzes };
+        return {
+          ...availableClass.dataValues,
+          amountOfQuizzes,
+        };
       })
     );
-
-    console.log('TESTE', availableClassesWithStatistics);
 
     if (!availableClassesWithStatistics.length) {
       const error = new Error();

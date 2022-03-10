@@ -23,7 +23,7 @@ class DeleteStudentFromClassService {
       throw error;
     }
 
-    const { idClass, idStudent } = data;
+    const { idClass, studentId } = data;
     const classInstance = await this.classRepository.findById(idClass);
 
     if (!classInstance) {
@@ -33,7 +33,7 @@ class DeleteStudentFromClassService {
       throw error;
     }
 
-    const student = await this.studentRepository.findByPk(idStudent);
+    const student = await this.studentRepository.findByPk(studentId);
 
     if (!classInstance) {
       const error = new Error();
@@ -42,7 +42,7 @@ class DeleteStudentFromClassService {
       throw error;
     }
 
-    classInstance.removeStudent(student);
+    classInstance.removeClass_student(student);
 
     return student;
   }
