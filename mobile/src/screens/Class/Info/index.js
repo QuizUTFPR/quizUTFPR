@@ -1,7 +1,8 @@
 import React from 'react';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
 import api from '@api';
-import useStudentAuth from '../../../hook/useStudentAuth';
 
 // STYLES
 import {
@@ -18,17 +19,29 @@ import {
   CancelButton,
 } from './style';
 
-const InfoOfClass = ({ route }) => {
+const InfoOfClass = () => {
+  const route = useRoute();
+
   const { teacher, title, description, pin, amountOfQuizzes, subscribed } =
     route.params;
   const { name } = teacher;
-  const { studentInfo } = useStudentAuth();
-
-  console.log('INFO', studentInfo);
+  const navigation = useNavigation();
 
   const unSubscribeStudent = async () => {
     try {
-      await api.delete('/class/dettachStudent', { idClass: route.params.id });
+      await api.delete('/class/dettachStudent', {
+        params: {
+          idClass: route.params.id,
+        },
+      });
+
+      navigation.replace('ClassStack', {
+        screen: 'InfoOfClass',
+        params: {
+          ...route.params,
+          subscribed: false,
+        },
+      });
     } catch (error) {
       console.log(error);
     }

@@ -51,7 +51,7 @@ const TokenStack = () => (
         <Stack.Screen
           options={{
             headerShown: true,
-            header: () => <HeaderInfoClassPage />,
+            header: (props) => <HeaderInfoClassPage {...props} />,
           }}
           name="ClassStack"
           component={TopTabClassInfo}
