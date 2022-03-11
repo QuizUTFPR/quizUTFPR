@@ -5,4 +5,4 @@ function useClass() {
   return useContext(ClassContext);
 }
 
-export default useClass();
+export default useClass;

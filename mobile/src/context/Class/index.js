@@ -16,9 +16,7 @@ const ClassContextProvider = ({ children }) => {
 
   const [classData, setClassData] = useState(initialValues);
 
-  const handleSetClassData = (values) => {
-    setClassData({ ...values });
-  };
+  const handleSetClassData = (values) => setClassData(values);
 
   return (
     <ClassContext.Provider

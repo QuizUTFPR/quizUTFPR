@@ -20,12 +20,6 @@ const HomeQuizzes = () => {
   const [isRefreshing, setRefreshing] = useState(false);
   const [allQuizzes, setAllQuizzes] = useState([]);
 
-  // const [moveMe, toggleMoveMe] = useState(false);
-
-  // const move = useSpring({
-  //   backgroundColor: moveMe ? 'orange' : 'red',
-  // });
-
   const getAllPublishedQuizzes = async () => {
     try {
       const { data } = await api.post('/publishedQuiz/getAll', {
