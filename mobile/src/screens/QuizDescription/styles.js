@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { StyledButton } from '@components/ButtonGradient/style';
+import Constants from 'expo-constants';
 
 // COMPONENTS
 import { Container } from '@components/Container/style';
@@ -28,6 +29,13 @@ export const StyledImageBackground = styled.ImageBackground.attrs({
   border-bottom-right-radius: 30px;
 `;
 
+export const TopWrapperButtons = styled.View`
+  flex-direction: row;
+  margin-top: ${Constants.statusBarHeight}px;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const GoBackButtonWrapper = styled(StyledButton).attrs({
   // colors: ['#fdb646', '#f99f4c'],
   colors: ['#4B24B1', '#3b1b96'],
@@ -35,8 +43,12 @@ export const GoBackButtonWrapper = styled(StyledButton).attrs({
   align-items: center;
   width: 40px;
   height: 40px;
-  margin-top: ${heightPercentageToDp('5%')}px;
-  margin-left: ${heightPercentageToDp('2%')}px;
+`;
+
+export const Favorite = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})`
+  /* margin-top: 20px; */
 `;
 
 export const StyledIconButton = styled.Text``;
@@ -146,10 +158,4 @@ export const PinWrapper = styled.TouchableOpacity.attrs({
 })`
   flex-direction: row;
   align-items: center;
-`;
-
-export const Favorite = styled.TouchableOpacity.attrs({
-  activeOpacity: 0.8,
-})`
-  margin-top: 20px;
 `;

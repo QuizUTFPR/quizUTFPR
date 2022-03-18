@@ -37,10 +37,12 @@ class GetQuizzesFromTagsService {
         const quizTags = (await item.getTagsQuiz()).map(
           (element) => element.name
         );
+
         const intersection = quizTags.filter((element) => {
           console.log('element', element, aimedTags);
           return aimedTags.includes(element);
         });
+
         if (intersection.length === aimedTags.length) {
           return item;
         }

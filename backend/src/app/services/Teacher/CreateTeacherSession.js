@@ -27,35 +27,38 @@ class CreateTeacherSessionService {
       throw error;
     }
 
-    const { username, password } = data;
+    const {
+      username,
+      // password
+    } = data;
 
     // OBTENDO TOKEN PARA CONSEGUIR UTILIZAR API DO LDAP
-    const responseLDAP = await axios.post(`${process.env.LDAP_URL}/login`, {
-      username: process.env.LDAP_USERNAME,
-      password: process.env.LDAP_PASSWORD,
-    });
+    // const responseLDAP = await axios.post(`${process.env.LDAP_URL}/login`, {
+    //   username: process.env.LDAP_USERNAME,
+    //   password: process.env.LDAP_PASSWORD,
+    // });
 
-    const ldapToken = responseLDAP.data.token;
+    // const ldapToken = responseLDAP.data.token;
 
     // VERIFICANDO SE DADOS ESTÃO CORRETOS DE ACORDO COM O LDAP
-    const responseLoginLDAP = await axios.post(
-      `${process.env.LDAP_URL}/ldap/doLogin`,
-      {
-        username,
-        password,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${ldapToken}`,
-        },
-      }
-    );
+    // const responseLoginLDAP = await axios.post(
+    //   `${process.env.LDAP_URL}/ldap/doLogin`,
+    //   {
+    //     username,
+    //     password,
+    //   },
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${ldapToken}`,
+    //     },
+    //   }
+    // );
 
-    const {
-      email: teacherEmail,
-      name: teacherName,
-      // dn: personCategory,
-    } = responseLoginLDAP.data;
+    // const {
+    //   email: teacherEmail,
+    //   name: teacherName,
+    //   // dn: personCategory,
+    // } = responseLoginLDAP.data;
 
     // IMPEDIR ALUNOS DE SE CONECTAR NO 1 DE CONTROLE
     // if ((personCategory.indexOf('alunos') !== -1)){
@@ -70,17 +73,17 @@ class CreateTeacherSessionService {
     });
 
     // FORMATANDO NOME DO PROFESSOR
-    const splittedName = teacherName.split(' ');
-    const formatedName = `${splittedName[0]} ${
-      splittedName[splittedName.length - 1]
-    }`;
+    // const splittedName = teacherName.split(' ');
+    // const formatedName = `${splittedName[0]} ${
+    //   splittedName[splittedName.length - 1]
+    // }`;
 
     // CASO NÃO EXISTA CRIO UMA CONTA NO BANCO PARA O MESMO
     if (!teacher)
       teacher = await this.teacherRepository.create({
         uid: username,
-        name: formatedName,
-        email: teacherEmail,
+        name: 'formatedName',
+        email: 'teacherEmail@gmail.com',
       });
 
     // if (!(await teacher.checkPassword(password))) {
@@ -100,7 +103,7 @@ class CreateTeacherSessionService {
     return {
       teacher: {
         name,
-        teacherEmail,
+        teacherEmail: 'teacherEmail@gmail.com',
         uid,
       },
       token,

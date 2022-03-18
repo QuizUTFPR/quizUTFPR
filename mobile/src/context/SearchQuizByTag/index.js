@@ -13,7 +13,11 @@ const SearchQuizByTag = ({ children }) => {
 
   // eslint-disable-next-line consistent-return
   const getQuizByTags = async () => {
-    if (tags.length > 0) {
+    const hasTagsInContext = tags.length > 0;
+
+    console.log('tags', tags);
+
+    if (hasTagsInContext) {
       try {
         const { data } = await api.post('/quiz/quizzesByTags', {
           aimedTags: tags,
@@ -24,12 +28,14 @@ const SearchQuizByTag = ({ children }) => {
         return false;
       } catch (err) {
         setQuizzes([]);
-        console.log('error', err);
+        console.log('error', { ...err });
 
         return true;
       }
     } else {
+      console.log('erro no contexto vazio');
       setQuizzes([]);
+      return true;
     }
   };
 

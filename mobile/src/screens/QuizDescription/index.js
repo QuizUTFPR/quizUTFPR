@@ -17,6 +17,7 @@ import SadAnimation from '@assets/lottie/sad_emote.json';
 
 // HOOKS
 import useQuestions from '@hook/useQuestion';
+import useSearchQuizByTag from '@hook/useSearchQuizByTag';
 
 // STYLES
 import {
@@ -43,6 +44,7 @@ import {
   StyledTextProgress,
   PinWrapper,
   Favorite,
+  TopWrapperButtons,
 } from './styles';
 
 const QuizDescription = ({ route }) => {
@@ -53,11 +55,14 @@ const QuizDescription = ({ route }) => {
 
   const [visibleGiveUPModal, setVisibleGivUPModal] = useState(false);
   const [favorite, setFavorite] = useState(isFavorite);
+  const [ableToSearchQuizByTag, setAbleToSearchQuizByTag] = useState(false);
 
   const [studentQuizID, setStudentQuizID] = useState(idStudentQuiz);
   const { getQuestionsOfQuizFromDatabase, setNoTime } = useQuestions();
 
   const navigation = useNavigation();
+
+  const { getQuizByTags, setTags, tags: contextTags } = useSearchQuizByTag();
 
   const startQuizAndGetAllQuestions = async () => {
     try {
@@ -126,7 +131,28 @@ const QuizDescription = ({ route }) => {
 
   useEffect(() => {
     setNoTime(noTime);
+
+    return () => {
+      setAbleToSearchQuizByTag(false);
+    };
   }, []);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const hasError = await getQuizByTags();
+      console.log('hasError', hasError);
+      if (!hasError) {
+        console.log('fez navigate');
+
+        navigation.navigate('SearchQuizByTagStack', {
+          screen: 'ResultSearchTag',
+        });
+      }
+    };
+    if (ableToSearchQuizByTag) {
+      fetch();
+    }
+  }, [contextTags]);
 
   return (
     <>
@@ -141,19 +167,25 @@ const QuizDescription = ({ route }) => {
                 : null
             }
           >
-            <GoBackButtonWrapper>
-              <StyledIconButton onPress={() => navigation.goBack()}>
-                <Ionicons name="chevron-back" size={32} color="white" />
-              </StyledIconButton>
-            </GoBackButtonWrapper>
+            <TopWrapperButtons>
+              <GoBackButtonWrapper>
+                <StyledIconButton onPress={() => navigation.goBack()}>
+                  <Ionicons name="chevron-back" size={32} color="white" />
+                </StyledIconButton>
+              </GoBackButtonWrapper>
 
-            <Favorite onPress={handleFavorite}>
-              {favorite ? (
-                <MaterialIcons name="favorite" size={35} color="red" />
-              ) : (
-                <MaterialIcons name="favorite-border" size={35} color="black" />
-              )}
-            </Favorite>
+              <Favorite onPress={handleFavorite}>
+                {favorite ? (
+                  <MaterialIcons name="favorite" size={35} color="white" />
+                ) : (
+                  <MaterialIcons
+                    name="favorite-border"
+                    size={35}
+                    color="white"
+                  />
+                )}
+              </Favorite>
+            </TopWrapperButtons>
 
             {studentQuizID ? (
               <ButtonWrapper resume>
@@ -210,7 +242,15 @@ const QuizDescription = ({ route }) => {
 
             <TagsContainer>
               {tags.map((tag) => (
-                <StyledTag key={tag}>{tag}</StyledTag>
+                <StyledTag
+                  onPress={async () => {
+                    setTags([tag]);
+                    setAbleToSearchQuizByTag(true);
+                  }}
+                  key={tag}
+                >
+                  {tag}
+                </StyledTag>
               ))}
             </TagsContainer>
           </BodyDescription>

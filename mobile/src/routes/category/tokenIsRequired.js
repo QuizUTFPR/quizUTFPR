@@ -5,6 +5,7 @@ import Loading from '@components/Loading';
 // CONTEXT
 import QuestionProvider from '@context/Question';
 import ClassContextProvider from '@context/Class';
+import SearchQuizByTagProvider from '@context/SearchQuizByTag';
 
 // Screens
 import CountDown from '@screens/CountDown';
@@ -29,36 +30,38 @@ const TokenStack = () => (
   <Suspense fallback={<Loading />}>
     <QuestionProvider>
       <ClassContextProvider>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-            presentation: 'transparentModal',
-          }}
-        >
-          <Stack.Screen name="HomeMenuDrawer" component={MenuDrawer} />
-          <Stack.Screen name="AttempsOfQuiz" component={Attempt} />
-          <Stack.Screen name="Descricao" component={QuizDescription} />
-          <Stack.Screen name="CountDown" component={CountDown} />
-          <Stack.Screen name="Question" component={Question} />
-          <Stack.Screen name="Statistics" component={Statistics} />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Logout"
-            component={Logout}
-          />
-          <Stack.Screen
-            name="InfinityScrollQuizzesStack"
-            component={InfinityScrollStack}
-          />
-          <Stack.Screen
-            options={{
-              headerShown: true,
-              header: (props) => <HeaderInfoClassPage {...props} />,
+        <SearchQuizByTagProvider>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+              presentation: 'transparentModal',
             }}
-            name="ClassStack"
-            component={TopTabClassInfo}
-          />
-        </Stack.Navigator>
+          >
+            <Stack.Screen name="HomeMenuDrawer" component={MenuDrawer} />
+            <Stack.Screen name="AttempsOfQuiz" component={Attempt} />
+            <Stack.Screen name="Descricao" component={QuizDescription} />
+            <Stack.Screen name="CountDown" component={CountDown} />
+            <Stack.Screen name="Question" component={Question} />
+            <Stack.Screen name="Statistics" component={Statistics} />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Logout"
+              component={Logout}
+            />
+            <Stack.Screen
+              name="InfinityScrollQuizzesStack"
+              component={InfinityScrollStack}
+            />
+            <Stack.Screen
+              options={{
+                headerShown: true,
+                header: (props) => <HeaderInfoClassPage {...props} />,
+              }}
+              name="ClassStack"
+              component={TopTabClassInfo}
+            />
+          </Stack.Navigator>
+        </SearchQuizByTagProvider>
       </ClassContextProvider>
     </QuestionProvider>
   </Suspense>
