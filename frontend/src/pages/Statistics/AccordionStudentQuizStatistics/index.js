@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '@api';
 
 // COMPONENTS
 import {
@@ -6,6 +7,9 @@ import {
   AccordionDetails,
   Divider,
   Typography,
+  TextField,
+  MenuItem,
+  Grid,
 } from '@mui/material';
 // import Tooltip from '@components/ToolTip';
 // import CircularProgressWithLabel from '@components/CircularProgressWithLabel';
@@ -35,8 +39,40 @@ import {
   TextValueResumeOfQuestion,
 } from '../style';
 
-const AccordionWrapper = ({ quizData, pin }) => {
+const AccordionWrapper = ({ quizData, pin, quizId }) => {
   const { questions, studentQuiz } = quizData;
+  const [teacherClasses, setTeacherClasses] = useState([]);
+
+  console.log(studentQuiz[0]);
+
+  const handleGetTeacherClasses = async () => {
+    try {
+      const { data } = await api.get('/class/getAllTeacherClasses');
+      console.log('DATA', data);
+      setTeacherClasses(data);
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+
+  const handleGetStatistics = async (id, classId) => {
+    try {
+      const { data } = await api.post('/statistics/getStudentQuizStatistics', {
+        quizId: id,
+      });
+
+      console.log(data);
+      console.log(classId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetTeacherClasses();
+
+    return () => setTeacherClasses([]);
+  }, []);
 
   return (
     <>
@@ -46,6 +82,23 @@ const AccordionWrapper = ({ quizData, pin }) => {
           Compartilhe seu Quiz utilizando o seguinte PIN {pin}
         </StyledTypography>
       )}
+
+      <TextField
+        label="Turmas"
+        id="turmas"
+        name="turmas"
+        variant="outlined"
+        onChange={(event) => handleGetStatistics(quizId, event.target.value)}
+        required
+        select
+      >
+        {teacherClasses.map((teacherClass) => (
+          <MenuItem value={teacherClass.id} key={teacherClass.id}>
+            {teacherClass.title}
+          </MenuItem>
+        ))}
+      </TextField>
+
       {studentQuiz.map((student, studentIndex) => (
         <Accordion key={student.id} TransitionProps={{ unmountOnExit: true }}>
           <StyledAccordionSummary
