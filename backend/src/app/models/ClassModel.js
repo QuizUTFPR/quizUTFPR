@@ -14,6 +14,7 @@ class Class extends Model {
         title: Sequelize.TEXT,
         description: Sequelize.TEXT,
         idImage: Sequelize.INTEGER,
+        visibility: Sequelize.ENUM('private', 'public'),
       },
       {
         sequelize,

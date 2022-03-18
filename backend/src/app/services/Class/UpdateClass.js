@@ -16,6 +16,7 @@ class UpdateClass {
       title: Yup.string().required(),
       description: Yup.string().required(),
       idImage: Yup.number(),
+      visibility: Yup.string().required(),
     });
 
     if (!(await schema.isValid(data))) {

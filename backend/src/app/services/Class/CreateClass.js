@@ -15,6 +15,7 @@ class CreateClassService {
       description: Yup.string().required(),
       idTeacher: Yup.number().required(),
       idImage: Yup.number(),
+      visibility: Yup.string().required(),
     });
 
     if (!(await schema.isValid(data))) {
