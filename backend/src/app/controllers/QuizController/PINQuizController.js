@@ -12,6 +12,8 @@ class PINQuizController {
         studentId,
       });
 
+      console.log('quiz', quiz);
+
       return res.status(200).json(quiz);
     } catch (error) {
       return (

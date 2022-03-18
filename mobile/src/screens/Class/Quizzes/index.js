@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useCallback } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import api from '@api';
 import useClass from '@hook/useClass';
 
@@ -30,14 +30,15 @@ const QuizzesOfClass = () => {
 
       setClassQuizzes(data);
     } catch (error) {
-      console.log(error);
+      console.log('quizzes class', { ...error });
     }
   };
 
-  useEffect(() => {
-    getClassQuizzes();
-    return () => setClassQuizzes([]);
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getClassQuizzes();
+    }, [])
+  );
 
   return (
     <ClassContainer fill="white">

@@ -52,7 +52,6 @@ const QuizDescription = ({ route }) => {
   const { idStudentQuiz, questionAmount, studentChoicesAmount, quiz } =
     route.params;
   const { title, description, tags, id, pin, image, isFavorite, noTime } = quiz;
-
   const [visibleGiveUPModal, setVisibleGivUPModal] = useState(false);
   const [favorite, setFavorite] = useState(isFavorite);
   const [ableToSearchQuizByTag, setAbleToSearchQuizByTag] = useState(false);
@@ -243,7 +242,7 @@ const QuizDescription = ({ route }) => {
             <TagsContainer>
               {tags.map((tag) => (
                 <StyledTag
-                  onPress={async () => {
+                  onPress={() => {
                     setTags([tag]);
                     setAbleToSearchQuizByTag(true);
                   }}

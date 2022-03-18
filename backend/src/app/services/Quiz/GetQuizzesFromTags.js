@@ -1,6 +1,7 @@
 // MODELS
 import Teacher from '../../models/TeacherModel';
 import File from '../../models/FileModel';
+import Tag from '../../models/TagModel';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
@@ -27,6 +28,10 @@ class GetQuizzesFromTagsService {
           model: File,
           as: 'image',
           attributes: ['url', 'path', 'name'],
+        },
+        {
+          model: Tag,
+          as: 'tagsQuiz',
         },
       ],
     });

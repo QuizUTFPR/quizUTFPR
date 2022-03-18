@@ -9,6 +9,15 @@ class ClassRepository {
     return Class.findByPk(pk, { ...otherProps });
   }
 
+  async findByPIN(pin, otherProps) {
+    return Class.findOne({
+      where: {
+        pin,
+      },
+      ...otherProps,
+    });
+  }
+
   async findAll(props = {}) {
     return Class.findAll({ ...props });
   }

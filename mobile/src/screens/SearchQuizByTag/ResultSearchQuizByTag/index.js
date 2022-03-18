@@ -52,7 +52,20 @@ const ResultSearchTag = () => {
             <CardWithTeacherName
               key={quiz.id}
               data={quiz}
-              navigate={() => console.log('teste')}
+              navigate={() =>
+                navigation.navigate('Descricao', {
+                  quiz: {
+                    id: quiz.id,
+                    title: quiz.title,
+                    description: quiz.description,
+                    pin: quiz.pin,
+                    image: quiz?.image?.url,
+                    tags: quiz.tagsQuiz.map((tag) => tag.name),
+                    isFavorite: quiz.isFavorite,
+                    noTime: quiz.noTime,
+                  },
+                })
+              }
               color={theme.color.purple}
             />
           ))}

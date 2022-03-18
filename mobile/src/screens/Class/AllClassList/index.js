@@ -25,7 +25,7 @@ const ClassPage = () => {
       const { data } = await api.get('/class/availableClasses');
       setClassList(data.length ? data : []);
     } catch (error) {
-      console.log(error);
+      console.log('allclasslist', { ...error });
     }
   };
 
