@@ -60,7 +60,11 @@ const Statistics = () => {
       icon: <Face />,
       label: 'ANÁLISE POR ALUNOS',
       component: (
-        <AccordionStudentQuizStatistics quizData={studentQuiz} pin={quizPin} />
+        <AccordionStudentQuizStatistics
+          quizData={studentQuiz}
+          pin={quizPin}
+          quizId={id}
+        />
       ),
     },
   ];
