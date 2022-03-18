@@ -140,11 +140,11 @@ const QuizDescription = ({ route }) => {
   useEffect(() => {
     const fetch = async () => {
       const hasError = await getQuizByTags();
-      console.log('hasError', hasError);
-      if (!hasError) {
-        console.log('fez navigate');
+      // console.log('hasError', hasError);
 
+      if (!hasError) {
         navigation.navigate('SearchQuizByTagStack', {
+          initial: false,
           screen: 'ResultSearchTag',
         });
       }
