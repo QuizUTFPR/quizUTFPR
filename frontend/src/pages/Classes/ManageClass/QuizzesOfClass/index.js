@@ -91,8 +91,11 @@ const QuizzesOfClass = () => {
             {quizzes.map((quiz) => {
               return (
                 <WrapperQuiz key={quiz.id}>
-                  {/* <ImageQuiz /> */}
-                  <EmptyImage />
+                  {quiz?.image?.url ? (
+                    <ImageQuiz src={quiz?.image?.url} />
+                  ) : (
+                    <EmptyImage />
+                  )}
                   <QuizRightWrapper>
                     <QuizInfoWrapper>
                       <QuizTitle>{quiz.title}</QuizTitle>

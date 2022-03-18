@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 // Icons
 import { Ionicons } from '@expo/vector-icons';
@@ -9,9 +9,6 @@ import { HeaderWrapper, Background, StyledIconButton } from './style';
 
 const HeaderResultSearchQuizByTag = () => {
   const navigation = useNavigation();
-  const route = useRoute();
-
-  console.log('route', navigation.getParent());
 
   const handleGoBack = () => {
     navigation.goBack();

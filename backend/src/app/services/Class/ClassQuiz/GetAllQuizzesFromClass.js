@@ -3,6 +3,9 @@ import * as Yup from 'yup';
 // REPOSITORIES
 import ClassRepository from '../../../repositories/Class';
 
+// MODELS
+import File from '../../../models/FileModel';
+
 class GetAllQuizzesFromClassService {
   constructor() {
     this.classRepository = new ClassRepository();
@@ -23,6 +26,7 @@ class GetAllQuizzesFromClassService {
     const { idClass } = data;
     const classInstance = await this.classRepository.findById(idClass);
 
+
     if (!classInstance) {
       const error = new Error();
       error.status = 404;
@@ -30,7 +34,14 @@ class GetAllQuizzesFromClassService {
       throw error;
     }
 
-    const quizzes = await classInstance.getClass_quizzes();
+    const quizzes = await classInstance.getClass_quizzes({
+      include: [
+        {
+          model: File,
+          as: 'image',
+        },
+      ],
+    });
 
     return quizzes;
   }
