@@ -32,6 +32,7 @@ const ClassPage = () => {
   useFocusEffect(
     useCallback(() => {
       getClasses();
+      return () => setClassList([]);
     }, [])
   );
 

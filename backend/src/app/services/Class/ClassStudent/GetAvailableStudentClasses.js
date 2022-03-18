@@ -41,6 +41,7 @@ class GetAvailableStudentClassesService {
         id: {
           [Op.notIn]: idStudentClasses,
         },
+        visibility: 'public',
       },
       include: [
         {

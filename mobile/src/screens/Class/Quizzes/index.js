@@ -36,6 +36,7 @@ const QuizzesOfClass = () => {
 
   useEffect(() => {
     getClassQuizzes();
+    return () => setClassQuizzes([]);
   }, []);
 
   return (

@@ -15,7 +15,7 @@ import GridContainer from '@components/Container';
 import Button from '@components/Button';
 
 import DragImageInput from '@components/DragZone';
-import { Grid, Typography, Divider, TextField } from '@mui/material';
+import { Grid, Typography, Divider, TextField, MenuItem } from '@mui/material';
 import { PreviewImage } from './style';
 
 const CriarQuiz = () => {
@@ -27,11 +27,12 @@ const CriarQuiz = () => {
       description: '',
       imageObj: null,
       imageUrl: '',
+      visibility: 'private',
     },
     onSubmit: async (values) => {
-      const { title, description, imageObj } = values;
+      const { title, description, imageObj, visibility } = values;
 
-      const body = { title, description };
+      const body = { title, description, visibility };
 
       const file = new FormData();
       file.append('file', imageObj);
@@ -105,6 +106,25 @@ const CriarQuiz = () => {
             minRows={5}
             maxRows={5}
           />
+        </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Visibilidade"
+            id="visibility"
+            name="visibility"
+            variant="outlined"
+            value={formik.values.visibility}
+            onChange={(event) =>
+              formik.setFieldValue('visibility', event.target.value)
+            }
+            required
+            select
+          >
+            <MenuItem value="private">Privada</MenuItem>
+            <MenuItem value="public">Pública</MenuItem>
+          </TextField>
         </Grid>
 
         <Grid item xs={6}>
