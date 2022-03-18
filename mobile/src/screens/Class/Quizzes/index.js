@@ -50,7 +50,8 @@ const QuizzesOfClass = () => {
               key={quiz.id}
               data={quiz}
               color={theme.color.purple}
-              navigate={() =>
+              navigate={() => {
+                console.log('quiz', quiz);
                 navigation.navigate('Descricao', {
                   quiz: {
                     id: quiz.id,
@@ -58,12 +59,13 @@ const QuizzesOfClass = () => {
                     description: quiz.description,
                     pin: quiz.pin,
                     image: quiz?.image?.url,
-                    tags: quiz.tagsQuiz.map((tag) => tag.name),
+                    tags: ['UTFPR'],
+                    // tags: quiz?.tagsQuiz?.map((tag) => tag.name),
                     isFavorite: quiz.isFavorite,
                     noTime: quiz.noTime,
                   },
-                })
-              }
+                });
+              }}
             />
           ))}
         </QuizContainer>

@@ -285,9 +285,8 @@ const Question = () => {
             source={SadEmote}
           />
         }
-      >
-        Infelizmente o tempo de resposta esgotou...
-      </Dialog>
+        childrenText="Infelizmente o tempo de resposta esgotou..."
+      />
 
       <Dialog
         title="JÁ VAI? ESTÁ CEDO!"
@@ -310,10 +309,9 @@ const Question = () => {
             source={CloseAnimation}
           />
         }
-      >
-        Tem certeza que quer sair? Seu progresso será salvo para que você
-        continue depois...
-      </Dialog>
+        childrenText="Tem certeza que quer sair? Seu progresso será salvo para que você
+        continue depois..."
+      />
 
       <Toast
         type="warning"

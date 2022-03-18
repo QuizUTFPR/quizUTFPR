@@ -1,16 +1,22 @@
 import styled from 'styled-components/native';
 import ButtonGradient from '@components/ButtonGradient';
+import { heightPercentageToDp } from '@styles/dimensions';
 
 export const Wrapper = styled.View.attrs({ elevation: 15 })`
   background: ${({ theme }) => theme.color.fill};
   padding: ${({ theme }) => theme.size.padding}px;
   margin-left: ${({ theme }) => theme.size.margin + 10}px;
   margin-right: ${({ theme }) => theme.size.margin + 10}px;
-  margin-top: ${({ theme }) => theme.size.margin + 30}px;
-  margin-bottom: ${({ theme }) => theme.size.margin + 30}px;
   border-radius: 30px;
   justify-content: space-between;
-  flex: 1;
+
+  top: ${({ propHeight }) => heightPercentageToDp('50%') - propHeight / 2}px;
+
+  /* margin-top: ${({ theme }) => theme.size.margin + 30}px; */
+  /* margin-bottom: ${({ theme }) => theme.size.margin + 30}px; */
+  /* flex: 1; */
+  /* justify-content: center; */
+  /* align-items: center; */
 `;
 
 export const StyledWrapperButtons = styled.View`
@@ -22,7 +28,7 @@ export const StyledWrapperChildren = styled.View`
 `;
 
 export const StyledModal = styled.Modal`
-  background: blue;
+  background: red;
 `;
 
 export const StyledText = styled.Text`
@@ -37,6 +43,7 @@ export const StyledTitle = styled.Text`
   font-family: 'PoppinsBlack';
   font-size: ${({ theme }) => theme.fontSize.normal}px;
   margin-bottom: ${({ theme }) => theme.size.margin + 10}px;
+  text-align: center;
 `;
 
 export const FirstButton = styled(ButtonGradient)``;

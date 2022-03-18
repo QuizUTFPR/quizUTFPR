@@ -1,7 +1,11 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Loading from '@components/Loading';
 import theme from '@theme';
+
+// Components
+import FabButton from '@components/FabButton';
+import DialogFindClassByPin from '@screens/Class/FindClassByPin';
 
 // SCREEN
 const AllClassList = lazy(() => import('@screens/Class/AllClassList'));
@@ -10,49 +14,59 @@ const MyClassesList = lazy(() => import('@screens/Class/MyClassesList'));
 // STACKS
 const TopTab = createMaterialTopTabNavigator();
 
-const ClassListTopTabNavigator = () => (
-  <Suspense fallback={<Loading />}>
-    <TopTab.Navigator
-      screenOptions={{
-        tabBarStyle: {
-          borderBottomEndRadius: 30,
-          borderBottomRightRadius: 30,
-          borderBottomLeftRadius: 30,
-          borderBottomStartRadius: 30,
-        },
-        tabBarActiveTintColor: theme.color.purple,
-        tabBarInactiveTintColor: theme.color.grey,
+const ClassListTopTabNavigator = () => {
+  const [openModal, setOpenModal] = useState(false);
 
-        tabBarIndicatorStyle: {
-          backgroundColor: 'transparent',
-        },
-        // tabBarScrollEnabled: true,
-        tabBarItemStyle: {
-          // width: 170,
-          height: 60,
-        },
-        tabBarLabelStyle: {
-          fontFamily: 'PoppinsBold',
-          fontSize: theme.fontSize.normal,
-          overflow: 'hidden',
-        },
-      }}
-    >
-      <TopTab.Screen
-        name="AllClassListTopTab"
-        component={AllClassList}
-        options={{
-          tabBarLabel: 'Turmas Disponíveis',
-          headerShown: false,
+  return (
+    <Suspense fallback={<Loading />}>
+      <FabButton onPress={() => setOpenModal(true)} />
+      <TopTab.Navigator
+        screenOptions={{
+          tabBarStyle: {
+            borderBottomEndRadius: 30,
+            borderBottomRightRadius: 30,
+            borderBottomLeftRadius: 30,
+            borderBottomStartRadius: 30,
+          },
+          tabBarActiveTintColor: theme.color.purple,
+          tabBarInactiveTintColor: theme.color.grey,
+
+          tabBarIndicatorStyle: {
+            backgroundColor: 'transparent',
+          },
+          // tabBarScrollEnabled: true,
+          tabBarItemStyle: {
+            // width: 170,
+            height: 60,
+          },
+          tabBarLabelStyle: {
+            fontFamily: 'PoppinsBold',
+            fontSize: theme.fontSize.normal,
+            overflow: 'hidden',
+          },
         }}
+      >
+        <TopTab.Screen
+          name="AllClassListTopTab"
+          component={AllClassList}
+          options={{
+            tabBarLabel: 'Turmas Disponíveis',
+            headerShown: false,
+          }}
+        />
+        <TopTab.Screen
+          name="MyClassesListTopTab"
+          component={MyClassesList}
+          options={{ tabBarLabel: 'Minhas Turmas' }}
+        />
+      </TopTab.Navigator>
+
+      <DialogFindClassByPin
+        visible={openModal}
+        hideDialog={() => setOpenModal(false)}
       />
-      <TopTab.Screen
-        name="MyClassesListTopTab"
-        component={MyClassesList}
-        options={{ tabBarLabel: 'Minhas Turmas' }}
-      />
-    </TopTab.Navigator>
-  </Suspense>
-);
+    </Suspense>
+  );
+};
 
 export default ClassListTopTabNavigator;

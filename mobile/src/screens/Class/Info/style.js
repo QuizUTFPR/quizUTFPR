@@ -18,39 +18,24 @@ export const Title = styled.Text`
   font-family: 'PoppinsBold';
 `;
 
-export const DetailsContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: ${({ theme }) => theme.size.margin}px;
-  margin-top: ${({ theme }) => theme.size.margin - 10}px;
-`;
-
 export const DetailCard = styled.View`
-  display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  width: ${({ width }) => width};
-  height: 40px;
-  border-radius: 50px;
-  padding-left: 10px;
-  padding-right: 5px;
-  background: ${({ theme }) => theme.color.purple};
+  padding: 10px 0;
 `;
 
 export const StyledText = styled.Text`
   font-size: ${({ theme }) => theme.fontSize.normal}px;
+  color: ${({ theme }) => theme.color.blackRussian};
   font-family: 'PoppinsSemiBold';
-  flex: 1;
-  text-align: center;
+  padding-left: 5px;
   overflow: hidden;
-  color: ${({ theme }) => theme.color.white};
 `;
 
 export const Subtitle = styled.Text`
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   font-family: 'PoppinsBold';
+  margin-top: 10px;
 `;
 
 export const StyledDescription = styled.Text`

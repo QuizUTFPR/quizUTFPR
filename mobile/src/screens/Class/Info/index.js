@@ -3,13 +3,13 @@ import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import api from '@api';
+import theme from '@theme';
 
 // STYLES
 import {
   ClassContainer,
   StyledScrollView,
   Title,
-  DetailsContainer,
   DetailCard,
   StyledText,
   Subtitle,
@@ -52,25 +52,35 @@ const InfoOfClass = () => {
       <StyledScrollView>
         <Title>{title}</Title>
 
-        <DetailsContainer>
-          {/* PIN */}
-          <DetailCard width="39%">
-            <MaterialIcons name="privacy-tip" size={24} color="white" />
-            <StyledText>{pin}</StyledText>
-          </DetailCard>
+        {/* PIN */}
+        <DetailCard>
+          <MaterialIcons
+            name="privacy-tip"
+            size={24}
+            color={theme.color.blackRussian}
+          />
+          <StyledText>{pin}</StyledText>
+        </DetailCard>
 
-          {/* QTD QUIZZES */}
-          <DetailCard width="20%">
-            <MaterialCommunityIcons name="bookshelf" size={24} color="white" />
-            <StyledText>{amountOfQuizzes}</StyledText>
-          </DetailCard>
+        {/* QTD QUIZZES */}
+        <DetailCard>
+          <MaterialCommunityIcons
+            name="bookshelf"
+            size={24}
+            color={theme.color.blackRussian}
+          />
+          <StyledText>{amountOfQuizzes}</StyledText>
+        </DetailCard>
 
-          {/* PROFESSOR */}
-          <DetailCard width="39%">
-            <MaterialCommunityIcons name="teach" size={24} color="white" />
-            <StyledText numberOfLines={1}>{name}</StyledText>
-          </DetailCard>
-        </DetailsContainer>
+        {/* PROFESSOR */}
+        <DetailCard>
+          <MaterialCommunityIcons
+            name="teach"
+            size={24}
+            color={theme.color.blackRussian}
+          />
+          <StyledText numberOfLines={1}>{name}</StyledText>
+        </DetailCard>
 
         <Subtitle>Descrição</Subtitle>
         <StyledDescription>{description}</StyledDescription>

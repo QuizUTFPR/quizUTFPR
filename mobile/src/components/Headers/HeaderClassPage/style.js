@@ -17,14 +17,6 @@ export const HeaderButton = styled.TouchableOpacity.attrs({
   activeOpacity: 0.7,
 })``;
 
-export const SearchInput = styled.TextInput.attrs({})`
-  padding-left: 10px;
-  border-radius: 10px;
-  height: 40px;
-  flex: 1;
-  font-family: 'PoppinsRegular';
-`;
-
 export const StyledWelcome = styled.Text`
   font-size: ${({ theme }) => theme.fontSize.large}px;
   font-family: 'PoppinsBlack';
@@ -40,20 +32,6 @@ export const BackgroundHeader = styled.ImageBackground.attrs({
   width: ${widthPercentageToDp('100%')}px;
   height: ${heightPercentageToDp('28%')}px;
   padding-bottom: 20px;
-`;
-
-export const InputWrapper = styled.View.attrs({ elevation: 10 })`
-  background: white;
-  flex-direction: row;
-  border-radius: 20px;
-  height: 50px;
-  justify-content: center;
-  align-items: center;
-  padding-left: 10px;
-  padding-right: ${({ theme }) => theme.size.padding}px;
-  margin-left: ${({ theme }) => theme.size.padding}px;
-  margin-right: ${({ theme }) => theme.size.padding}px;
-  margin-top: ${({ theme }) => theme.size.padding}px;
 `;
 
 export const StyledParagraph = styled.Text`

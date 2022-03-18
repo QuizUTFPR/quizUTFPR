@@ -20,7 +20,7 @@ const QuizDescription = lazy(() => import('@screens/QuizDescription'));
 const Attempt = lazy(() => import('@screens/AttemptsOfQuiz'));
 
 // TOP TAB STACK
-const TopTabClassInfo = lazy(() => import('../topTab/TopTabClassInfo'));
+const TopTabClassInfo = lazy(() => import('../topTab/ClassInfoTopTab'));
 
 // STACK
 const Stack = createStackNavigator();

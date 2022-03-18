@@ -146,6 +146,15 @@ const QuizDescription = ({ route }) => {
                 <Ionicons name="chevron-back" size={32} color="white" />
               </StyledIconButton>
             </GoBackButtonWrapper>
+
+            <Favorite onPress={handleFavorite}>
+              {favorite ? (
+                <MaterialIcons name="favorite" size={35} color="red" />
+              ) : (
+                <MaterialIcons name="favorite-border" size={35} color="black" />
+              )}
+            </Favorite>
+
             {studentQuizID ? (
               <ButtonWrapper resume>
                 <ButtonStyled onPress={() => setVisibleGivUPModal(true)}>
@@ -187,14 +196,6 @@ const QuizDescription = ({ route }) => {
 
         <StyledScrollView>
           <BodyDescription>
-            <Favorite onPress={handleFavorite}>
-              {favorite ? (
-                <MaterialIcons name="favorite" size={35} color="red" />
-              ) : (
-                <MaterialIcons name="favorite-border" size={35} color="black" />
-              )}
-            </Favorite>
-
             <StyledTitle>PIN</StyledTitle>
             <PinWrapper onPress={copyToClipboardAndShowToast}>
               <StyledPIN>{pin}</StyledPIN>
@@ -245,10 +246,9 @@ const QuizDescription = ({ route }) => {
             source={SadAnimation}
           />
         }
-      >
-        Seu score será calculado parcialmente de acordo com as questões já
-        respondidas!
-      </Dialog>
+        childrenText="Seu score será calculado parcialmente de acordo com as questões já
+        respondidas!"
+      />
 
       <Toast handleClose={handleCloseToast} open={showToast.open}>
         {showToast.message}
