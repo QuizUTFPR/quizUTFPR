@@ -8,7 +8,6 @@ import Container from '@components/Container';
 import { SafeArea } from './style';
 
 const SearchTag = () => (
-  // console.log('search tag', useRoute());
   <Container>
     <SafeArea />
   </Container>

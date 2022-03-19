@@ -46,6 +46,7 @@ const Home = ({ route }) => {
 
   const tagsNames = tags.map((tag) => tag.name);
 
+  const [isFavoriteUpdatable, setIsFavoriteUpdatable] = useState(isFavorite);
   const [isAttemptsSelected, setAttemptsSelect] = useState(true);
   const [isTagsSelected, setTagsSelect] = useState(false);
 
@@ -87,9 +88,11 @@ const Home = ({ route }) => {
                     pin,
                     image,
                     tags: tagsNames,
-                    isFavorite,
+                    isFavorite: isFavoriteUpdatable,
                     noTime,
                   },
+                  setIsFavoriteUpdatable,
+                  shouldUpdateFavoriteStatus: true,
                 })
               }
             >

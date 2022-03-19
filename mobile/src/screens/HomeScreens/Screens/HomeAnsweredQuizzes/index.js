@@ -83,6 +83,8 @@ const Home = () => {
                       amountOfQuestions: quiz.amountOfQuestions,
                       tags: quiz.tagsQuiz,
                       noTime: quiz.noTime,
+                      description: quiz.description,
+                      pin: quiz.pin,
                     })
                   }
                   color={theme.color.purple}

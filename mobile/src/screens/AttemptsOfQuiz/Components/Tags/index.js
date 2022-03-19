@@ -20,7 +20,6 @@ const Tags = ({ tags }) => {
   useEffect(() => {
     const fetch = async () => {
       const hasError = await getQuizByTags();
-      // console.log('hasError', hasError);
 
       if (!hasError) {
         navigation.navigate('SearchQuizByTagStack', {

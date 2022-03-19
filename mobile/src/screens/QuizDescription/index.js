@@ -168,7 +168,18 @@ const QuizDescription = ({ route }) => {
           >
             <TopWrapperButtons>
               <GoBackButtonWrapper>
-                <StyledIconButton onPress={() => navigation.goBack()}>
+                <StyledIconButton
+                  onPress={() => {
+                    navigation.goBack();
+
+                    // Atualizar favorito quando vier de uma tela anterior
+                    // que nao realiza uma requisição para atualizar os estados
+                    if (route.params?.shouldUpdateFavoriteStatus) {
+                      console.log('Atualizando estado do favorito!!');
+                      route.params?.setIsFavoriteUpdatable(favorite);
+                    }
+                  }}
+                >
                   <Ionicons name="chevron-back" size={32} color="white" />
                 </StyledIconButton>
               </GoBackButtonWrapper>

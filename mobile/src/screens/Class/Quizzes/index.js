@@ -53,7 +53,6 @@ const QuizzesOfClass = () => {
               data={quiz}
               color={theme.color.purple}
               navigate={() => {
-                console.log('quiz', quiz);
                 navigation.navigate('Descricao', {
                   quiz: {
                     id: quiz.id,
