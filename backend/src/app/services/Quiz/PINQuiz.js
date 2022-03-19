@@ -5,10 +5,12 @@ import File from '../../models/FileModel';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
+import FavoriteStudentQuizRepository from '../../repositories/FavoriteStudentQuiz';
 
 class PINQuizService {
   constructor() {
     this.quizRepository = new QuizRepository();
+    this.favoriteStudentQuizRepository = new FavoriteStudentQuizRepository();
   }
 
   async findByPin(data) {
@@ -47,6 +49,14 @@ class PINQuizService {
       throw error;
     }
 
+    const didStudentFavoritedThisQuiz =
+      await this.favoriteStudentQuizRepository.findOne({
+        where: {
+          studentId,
+          quizId: quiz.id,
+        },
+      });
+
     const questionAmount = await quiz.countQuestions();
 
     const quizStudent = await quiz.getQuizStudent({
@@ -69,7 +79,10 @@ class PINQuizService {
     }
 
     return {
-      quiz,
+      quiz: {
+        ...quiz.dataValues,
+        isFavorite: !!didStudentFavoritedThisQuiz,
+      },
       questionAmount,
       studentChoicesAmount,
       idStudentQuiz: quizStudent.length > 0 ? quizStudent[0].id : null,

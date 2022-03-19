@@ -40,6 +40,7 @@ const Header = () => {
           pin: data?.quiz?.pin,
           image: data.quiz?.image?.url,
           tags: data?.quiz?.tagsQuiz.map((tag) => tag.name),
+          isFavorite: data?.quiz?.isFavorite,
         },
       });
     } catch (err) {

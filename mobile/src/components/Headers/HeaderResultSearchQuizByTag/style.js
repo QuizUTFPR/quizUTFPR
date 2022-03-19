@@ -9,11 +9,6 @@ import {
 import HeaderBackground from '@assets/patterns/sunburst.png';
 
 export const HeaderWrapper = styled.SafeAreaView`
-  width: 100%;
-  height: 100%;
-  padding-bottom: 20px;
-  align-items: center;
-  flex-direction: row;
   padding: 0 20px;
 `;
 
@@ -24,8 +19,10 @@ export const Background = styled.ImageBackground.attrs({
   borderBottomRightRadius: 30,
 })`
   padding-top: ${Platform.OS === 'android' ? StatusBar.currentHeight : 0}px;
+  padding-bottom: 20px;
   width: ${widthPercentageToDp('100%')}px;
-  height: 80px;
+  /* flex: 1; */
+  /* height: fit-content; */
 `;
 
 export const StyledIconButton = styled.Text``;

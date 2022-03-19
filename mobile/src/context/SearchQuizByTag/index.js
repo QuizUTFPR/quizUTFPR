@@ -15,8 +15,6 @@ const SearchQuizByTag = ({ children }) => {
   const getQuizByTags = async () => {
     const hasTagsInContext = tags.length > 0;
 
-    console.log('tags', tags);
-
     if (hasTagsInContext) {
       try {
         const { data } = await api.post('/quiz/quizzesByTags', {
@@ -33,7 +31,6 @@ const SearchQuizByTag = ({ children }) => {
         return true;
       }
     } else {
-      console.log('erro no contexto vazio');
       setQuizzes([]);
       return true;
     }

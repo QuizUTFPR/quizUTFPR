@@ -1,17 +1,20 @@
 // MODELS
 import Teacher from '../../models/TeacherModel';
 import File from '../../models/FileModel';
+import Tag from '../../models/TagModel';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
+import FavoriteStudentQuizRepository from '../../repositories/FavoriteStudentQuiz';
 
 class GetQuizzesFromTagsService {
   constructor() {
     this.quizRepository = new QuizRepository();
+    this.favoriteStudentQuizRepository = new FavoriteStudentQuizRepository();
   }
 
   async execute(data) {
-    const { aimedTags } = data;
+    const { aimedTags, studentId } = data;
 
     const quizzes = await this.quizRepository.findAll({
       where: {
@@ -28,38 +31,52 @@ class GetQuizzesFromTagsService {
           as: 'image',
           attributes: ['url', 'path', 'name'],
         },
+        {
+          model: Tag,
+          as: 'tagsQuiz',
+        },
       ],
     });
 
-    const filteredQuizzesByTag = await Promise.all(
-      // eslint-disable-next-line consistent-return
-      quizzes.map(async (item) => {
-        const quizTags = (await item.getTagsQuiz()).map(
+    const filteredQuizzesByTag = [];
+
+    await Promise.all(
+      quizzes.map(async (quiz) => {
+        const quizTags = (await quiz.getTagsQuiz()).map(
           (element) => element.name
         );
 
-        const intersection = quizTags.filter((element) => {
-          console.log('element', element, aimedTags);
-          return aimedTags.includes(element);
-        });
+        const intersection = quizTags.filter((element) =>
+          aimedTags.includes(element)
+        );
 
         if (intersection.length === aimedTags.length) {
-          return item;
+          const didStudentFavoritedThisQuiz =
+            await this.favoriteStudentQuizRepository.findOne({
+              where: {
+                studentId,
+                quizId: quiz.id,
+              },
+            });
+
+          filteredQuizzesByTag.push({
+            ...quiz.dataValues,
+            isFavorite: !!didStudentFavoritedThisQuiz,
+          });
         }
       })
     );
 
-    const filteredQuizzesByTagWithoutUndefined =
-      filteredQuizzesByTag.filter(Boolean);
-
-    if (!filteredQuizzesByTagWithoutUndefined.length) {
+    if (!filteredQuizzesByTag.length) {
       const error = new Error();
       error.status = 404;
       error.response = 'Não existe nenhum quiz cadastrado!';
       throw error;
     }
 
-    return filteredQuizzesByTagWithoutUndefined;
+    console.log('filteredQuizzesByTag', filteredQuizzesByTag);
+
+    return filteredQuizzesByTag;
   }
 }
 

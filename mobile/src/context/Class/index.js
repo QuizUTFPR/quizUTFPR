@@ -12,6 +12,7 @@ const ClassContextProvider = ({ children }) => {
     pin: null,
     amountOfQuizzes: null,
     subscribed: false,
+    imageURL: false,
   };
 
   const [classData, setClassData] = useState(initialValues);

@@ -3,7 +3,9 @@ import styled from 'styled-components';
 // DIMENSION TRANSFORMERS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
-export const TagContainer = styled.View`
+export const TagContainer = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

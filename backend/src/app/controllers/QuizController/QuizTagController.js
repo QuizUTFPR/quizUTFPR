@@ -5,8 +5,12 @@ class QuizTagController {
   async index(req, res) {
     try {
       const { aimedTags } = req.body;
+      const studentId = req.userId;
 
-      const quizzes = await GetQuizzesFromTagsService.execute({ aimedTags });
+      const quizzes = await GetQuizzesFromTagsService.execute({
+        aimedTags,
+        studentId,
+      });
 
       return res.status(200).json(quizzes);
     } catch (error) {

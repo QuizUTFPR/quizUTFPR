@@ -5,8 +5,14 @@ import { StatusBar } from 'expo-status-bar';
 import * as Font from 'expo-font';
 import { ThemeProvider } from 'styled-components';
 import StudentAuthProvider from '@context/Student/auth';
+import { LogBox } from 'react-native';
 import Routes from './src/routes';
 import theme from './src/styles/theme';
+
+if (__DEV__) {
+  // eslint-disable-next-line import/no-extraneous-dependencies
+  require('react-devtools');
+}
 
 const App = () => {
   const [loaded, setLoaded] = useState(false);
@@ -48,5 +54,9 @@ const App = () => {
     </ThemeProvider>
   );
 };
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 export default App;
