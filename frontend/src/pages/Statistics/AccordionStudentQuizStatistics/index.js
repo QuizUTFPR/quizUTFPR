@@ -39,16 +39,19 @@ import {
   TextValueResumeOfQuestion,
 } from '../style';
 
-const AccordionWrapper = ({ quizData, pin, quizId }) => {
-  const { questions, studentQuiz } = quizData;
+const AccordionWrapper = ({ quizData: quiz, pin, quizId }) => {
+  const { questions: initialQuestions, studentQuiz: initialStudentQuiz } = quiz;
   const [teacherClasses, setTeacherClasses] = useState([]);
+  const [quizData, setQuizData] = useState({
+    questions: initialQuestions,
+    studentQuiz: initialStudentQuiz,
+  });
 
-  console.log(studentQuiz[0]);
-
+  console.log('DATA', quizData);
   const handleGetTeacherClasses = async () => {
     try {
       const { data } = await api.get('/class/getAllTeacherClasses');
-      console.log('DATA', data);
+
       setTeacherClasses(data);
     } catch (error) {
       console.log('ERROR', error);
@@ -59,10 +62,15 @@ const AccordionWrapper = ({ quizData, pin, quizId }) => {
     try {
       const { data } = await api.post('/statistics/getStudentQuizStatistics', {
         quizId: id,
+        classId,
       });
 
-      console.log(data);
-      console.log(classId);
+      const { questions, studentQuiz } = data;
+
+      setQuizData({
+        questions,
+        studentQuiz,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +84,7 @@ const AccordionWrapper = ({ quizData, pin, quizId }) => {
 
   return (
     <>
-      {!studentQuiz.length && (
+      {!quizData.studentQuiz.length && (
         <StyledTypography>
           Seu Quiz não foi respondido por nenhum aluno até o momento. <br />
           Compartilhe seu Quiz utilizando o seguinte PIN {pin}
@@ -92,6 +100,7 @@ const AccordionWrapper = ({ quizData, pin, quizId }) => {
         required
         select
       >
+        <MenuItem>Todos</MenuItem>
         {teacherClasses.map((teacherClass) => (
           <MenuItem value={teacherClass.id} key={teacherClass.id}>
             {teacherClass.title}
@@ -99,7 +108,7 @@ const AccordionWrapper = ({ quizData, pin, quizId }) => {
         ))}
       </TextField>
 
-      {studentQuiz.map((student, studentIndex) => (
+      {quizData.studentQuiz.map((student, studentIndex) => (
         <Accordion key={student.id} TransitionProps={{ unmountOnExit: true }}>
           <StyledAccordionSummary
             expandIcon={<ExpandMore />}
@@ -114,7 +123,7 @@ const AccordionWrapper = ({ quizData, pin, quizId }) => {
             </StudentBar>
           </StyledAccordionSummary>
           <AccordionDetails>
-            {questions.map((question, questionIndex) => (
+            {quizData.questions.map((question, questionIndex) => (
               <Accordion
                 key={question.id}
                 TransitionProps={{ unmountOnExit: true }}

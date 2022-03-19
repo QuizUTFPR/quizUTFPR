@@ -87,9 +87,10 @@ const StudentAuth = ({ children }) => {
       setLoggedIn(true);
       return response;
     } catch (error) {
+      console.log('ERROR', error.response.data.response);
       return {
         status: error.response.status,
-        message: error.response.data.error,
+        message: error.response.data.response,
       };
     }
   };
