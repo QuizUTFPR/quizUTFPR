@@ -30,7 +30,7 @@ export const BackgroundHeader = styled.ImageBackground.attrs({
   padding-top: ${Platform.OS === 'android' ? StatusBar.currentHeight : 0}px;
   justify-content: space-around;
   width: ${widthPercentageToDp('100%')}px;
-  height: ${heightPercentageToDp('28%')}px;
+  height: ${heightPercentageToDp('20%')}px;
   padding-bottom: 20px;
 `;
 

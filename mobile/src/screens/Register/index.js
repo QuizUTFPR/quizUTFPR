@@ -106,12 +106,13 @@ const Register = ({ navigation }) => {
                       errorMessage={errors.email}
                       autoCompleteType="email"
                       placeholder="Digite seu endereço eletrônico"
-                      keyboardType="email-address"
                       icon={<Zocial name="email" size={18} color="black" />}
                       label="E-mail"
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
                       value={values.email}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
                     />
 
                     <Input
@@ -127,6 +128,7 @@ const Register = ({ navigation }) => {
                       onChangeText={handleChange('password')}
                       onBlur={handleBlur('password')}
                       value={values.password}
+                      autoCapitalize="none"
                     />
 
                     <Input
@@ -142,6 +144,7 @@ const Register = ({ navigation }) => {
                       onChangeText={handleChange('confirmPassword')}
                       onBlur={handleBlur('confirmPassword')}
                       value={values.confirmPassword}
+                      autoCapitalize="none"
                     />
                   </InputWrapper>
                 </>

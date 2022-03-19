@@ -31,7 +31,7 @@ import {
 const Login = ({ navigation }) => {
   const loginValidationSchema = Yup.object().shape({
     email: Yup.string()
-      .email('Por favor, informe um e-mail válido')
+      .email('Informe um e-mail válido')
       .required('Obrigatório'),
     password: Yup.string()
       .min(8, ({ min }) => `O mínimo são ${min} caracteres`)
@@ -111,6 +111,8 @@ const Login = ({ navigation }) => {
                         onChangeText={handleChange('email')}
                         onBlur={handleBlur('email')}
                         value={values.email}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
                       />
 
                       <Input
@@ -130,6 +132,7 @@ const Login = ({ navigation }) => {
                         onChangeText={handleChange('password')}
                         onBlur={handleBlur('password')}
                         value={values.password}
+                        autoCapitalize="none"
                       />
                     </InputWrapper>
                   </>
