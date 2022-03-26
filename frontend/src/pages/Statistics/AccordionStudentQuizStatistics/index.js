@@ -11,16 +11,9 @@ import {
   MenuItem,
   Grid,
 } from '@mui/material';
-// import Tooltip from '@components/ToolTip';
-// import CircularProgressWithLabel from '@components/CircularProgressWithLabel';
 
 // ICONS
-import {
-  ExpandMore,
-  // CheckCircle,
-  // Cancel,
-  // SentimentSatisfied,
-} from '@mui/icons-material';
+import { ExpandMore } from '@mui/icons-material';
 
 // UTILS
 import getStringTypeOfQuestion from '@utils/getStringTypeOfQuestion';
@@ -39,48 +32,30 @@ import {
   TextValueResumeOfQuestion,
 } from '../style';
 
-const AccordionWrapper = ({ quizData: quiz, pin, quizId }) => {
-  const { questions: initialQuestions, studentQuiz: initialStudentQuiz } = quiz;
+const AccordionWrapperStudent = ({ quizData }) => {
+  const { questions, studentQuiz } = quizData;
   const [teacherClasses, setTeacherClasses] = useState([]);
-  const [quizData, setQuizData] = useState({
-    questions: initialQuestions,
-    studentQuiz: initialStudentQuiz,
-  });
+  // const [quizData, setQuizData] = useState({
+  //   questions: initialQuestions,
+  //   studentQuiz: initialStudentQuiz,
+  // });
+  const pin = 123;
 
-  console.log('DATA', quizData);
-  const handleGetTeacherClasses = async () => {
-    try {
-      const { data } = await api.get('/class/getAllTeacherClasses');
+  // const handleGetTeacherClasses = async () => {
+  //   try {
+  //     const { data } = await api.get('/class/getAllTeacherClasses');
 
-      setTeacherClasses(data);
-    } catch (error) {
-      console.log('ERROR', error);
-    }
-  };
+  //     setTeacherClasses(data);
+  //   } catch (error) {
+  //     console.log('ERROR', error);
+  //   }
+  // };
 
-  const handleGetStatistics = async (id, classId) => {
-    try {
-      const { data } = await api.post('/statistics/getStudentQuizStatistics', {
-        quizId: id,
-        classId,
-      });
+  // useEffect(() => {
+  //   handleGetTeacherClasses();
 
-      const { questions, studentQuiz } = data;
-
-      setQuizData({
-        questions,
-        studentQuiz,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    handleGetTeacherClasses();
-
-    return () => setTeacherClasses([]);
-  }, []);
+  //   return () => setTeacherClasses([]);
+  // }, []);
 
   return (
     <>
@@ -91,7 +66,7 @@ const AccordionWrapper = ({ quizData: quiz, pin, quizId }) => {
         </StyledTypography>
       )}
 
-      <TextField
+      {/* <TextField
         label="Turmas"
         id="turmas"
         name="turmas"
@@ -106,7 +81,7 @@ const AccordionWrapper = ({ quizData: quiz, pin, quizId }) => {
             {teacherClass.title}
           </MenuItem>
         ))}
-      </TextField>
+      </TextField> */}
 
       {quizData.studentQuiz.map((student, studentIndex) => (
         <Accordion key={student.id} TransitionProps={{ unmountOnExit: true }}>
@@ -202,4 +177,4 @@ const AccordionWrapper = ({ quizData: quiz, pin, quizId }) => {
   );
 };
 
-export default AccordionWrapper;
+export default AccordionWrapperStudent;
