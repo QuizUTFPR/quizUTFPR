@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-// DIMENSION TRANSFORMERS
-import { widthPercentageToDp } from '@styles/dimensions';
+// COMPONENTS
+import CardQuizBasic from '@components/Card/Basic';
 
 export const ClassContainer = styled(SafeAreaView)`
   background: ${({ theme }) => theme.color.fill};
@@ -11,13 +11,7 @@ export const ClassContainer = styled(SafeAreaView)`
   flex: 1;
 `;
 
-export const StyledScrollView = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    alignItems: 'center',
-  },
-})`
-  width: ${widthPercentageToDp('100%')}px;
-`;
+export const StyledScrollView = styled.ScrollView``;
 
 export const Title = styled.Text`
   font-size: ${({ theme }) => theme.fontSize.medium}px;
@@ -26,4 +20,10 @@ export const Title = styled.Text`
 
 export const QuizContainer = styled.View`
   margin-top: 10px;
+`;
+
+export const StyledCardQuizBasic = styled(CardQuizBasic)`
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.color.blackRussian};
+  background: ${({ theme }) => theme.color.white};
 `;

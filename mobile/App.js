@@ -47,7 +47,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar style="light" />
+      <StatusBar backgroundColor="transparent" />
       <StudentAuthProvider>
         <Routes />
       </StudentAuthProvider>

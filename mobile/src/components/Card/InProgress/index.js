@@ -19,8 +19,8 @@ import {
   QuizProgressText,
 } from './style';
 
-const CardInProgress = ({ navigate, data, color }) => (
-  <QuizCard onPress={navigate}>
+const CardInProgress = ({ navigate, data, color, ...props }) => (
+  <QuizCard onPress={navigate} {...props}>
     <StyledImage
       source={
         data?.quiz?.image?.url

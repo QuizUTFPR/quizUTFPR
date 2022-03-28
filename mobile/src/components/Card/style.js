@@ -20,8 +20,8 @@ export const StyledImage = styled.Image.attrs({
 })`
   width: 35%;
   height: 100%;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
   background: ${({ theme }) => theme.color.purple};
 `;
 

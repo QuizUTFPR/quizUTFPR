@@ -13,8 +13,8 @@ import {
   StyledIconButton,
 } from '../style';
 
-const CardBasic = ({ navigate, data, color }) => (
-  <QuizCard onPress={navigate}>
+const CardBasic = ({ navigate, data, color, ...props }) => (
+  <QuizCard onPress={navigate} {...props}>
     <StyledImage
       source={
         data?.image?.url

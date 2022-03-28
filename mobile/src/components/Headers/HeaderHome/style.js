@@ -4,7 +4,7 @@ import HeaderBackground from '@assets/patterns/sunburst.png';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 import { Platform, StatusBar } from 'react-native';
 
-export const HeaderWrapper = styled.View``;
+export const HeaderWrapper = styled.SafeAreaView``;
 
 export const HeaderInformations = styled.View`
   flex-direction: row;

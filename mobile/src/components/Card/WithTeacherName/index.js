@@ -12,8 +12,8 @@ import {
 
 import { TeacherName } from './style';
 
-const WithTeacherName = ({ data, color, navigate }) => (
-  <QuizCard onPress={navigate}>
+const WithTeacherName = ({ data, color, navigate, ...props }) => (
+  <QuizCard onPress={navigate} {...props}>
     <StyledImage source={data?.image?.url ? { uri: data.image.url } : null} />
     <StyledView>
       <Description>

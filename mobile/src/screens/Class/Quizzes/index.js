@@ -1,13 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { Text } from 'react-native';
 import api from '@api';
 import useClass from '@hook/useClass';
 
 // THEME
 import theme from '@theme';
-
-// COMPONENTS
-import CardQuizBasic from '@components/Card/Basic';
 
 // STYLES
 import {
@@ -15,6 +13,7 @@ import {
   StyledScrollView,
   Title,
   QuizContainer,
+  StyledCardQuizBasic,
 } from './style';
 
 const QuizzesOfClass = () => {
@@ -46,9 +45,9 @@ const QuizzesOfClass = () => {
         <Title>Quizzes da Turma</Title>
 
         <QuizContainer>
-          {/* <QuizTitle>Quizes</QuizTitle> */}
+          {classQuizzes.length <= 0 && <Text>Nenhum quiz cadastrado...</Text>}
           {classQuizzes.map((quiz) => (
-            <CardQuizBasic
+            <StyledCardQuizBasic
               key={quiz.id}
               data={quiz}
               color={theme.color.purple}
