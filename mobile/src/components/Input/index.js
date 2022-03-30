@@ -20,6 +20,8 @@ const Input = ({
   label,
   icon,
   fill,
+  height,
+  paddingWrapper,
   ...props
 }) => {
   const [isChecked, setChecked] = useState(false);
@@ -34,7 +36,12 @@ const Input = ({
         {label}
         {error && ` (${errorMessage})`}
       </Label>
-      <InputWrapper fill={fill} error={error}>
+      <InputWrapper
+        fill={fill}
+        error={error}
+        height={height}
+        paddingWrapper={paddingWrapper}
+      >
         <InputView>
           <IconView>{icon}</IconView>
           <StyledTextInput
@@ -57,11 +64,15 @@ const Input = ({
 };
 Input.defaultProps = {
   secureTextEntry: false,
+  height: '55px',
+  paddingWrapper: '0px',
 };
 
 Input.propTypes = {
   secureTextEntry: PropTypes.bool,
   label: PropTypes.string.isRequired,
+  height: PropTypes.string,
+  paddingWrapper: PropTypes.string,
 };
 
 export default Input;

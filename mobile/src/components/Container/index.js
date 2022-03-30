@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Wrapper } from './style';
 
-const WrapperContainer = ({ children }) => (
-  <Container>
+const WrapperContainer = ({ children, ...props }) => (
+  <Container {...props}>
     <Wrapper>{children}</Wrapper>
   </Container>
 );

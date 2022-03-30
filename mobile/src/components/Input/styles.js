@@ -9,7 +9,8 @@ export const InputWrapper = styled.View`
   background: ${({ theme }) => theme.color.lightBlueGrey};
   padding-left: 10px;
   border-radius: 8px;
-  height: 55px;
+  height: ${({ height }) => height};
+  padding: ${({ paddingWrapper }) => paddingWrapper};
   border: 1.5px solid
     ${({ theme, error }) => (error ? 'red' : theme.color.fill)};
 `;
