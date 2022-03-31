@@ -23,7 +23,9 @@ class CreateStudentService {
       throw error;
     }
 
-    if (await this.studentRepository.find({ where: { email: data.email } })) {
+    if (
+      await this.studentRepository.findOne({ where: { email: data.email } })
+    ) {
       const error = new Error();
       error.status = 403;
       error.response = 'E-mail já cadastrado!';

@@ -12,7 +12,7 @@ class ClassController {
       const { idImage } = req;
 
       const { values } = req.body;
-      console.log('VALUES', values);
+
       const { title, description, visibility } = JSON.parse(values);
 
       const classCreated = await CreateClassService.execute({

@@ -30,9 +30,7 @@ import {
 
 const Login = ({ navigation }) => {
   const loginValidationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Informe um e-mail válido')
-      .required('Obrigatório'),
+    ra: Yup.string().required('Obrigatório'),
     password: Yup.string()
       .min(8, ({ min }) => `O mínimo são ${min} caracteres`)
       .required('Obrigatório'),
@@ -57,7 +55,7 @@ const Login = ({ navigation }) => {
       <Container>
         <Formik
           initialValues={{
-            email: '',
+            ra: '',
             password: '',
           }}
           validationSchema={loginValidationSchema}
@@ -96,10 +94,10 @@ const Login = ({ navigation }) => {
                     />
                     <InputWrapper>
                       <Input
-                        error={errors.email && touched.email}
-                        errorMessage={errors.email}
+                        error={errors.ra && touched.ra}
+                        errorMessage={errors.ra}
                         fill="black"
-                        placeholder="Digite seu e-mail"
+                        placeholder="Digite seu RA"
                         icon={
                           <FontAwesome5
                             name="user-alt"
@@ -107,10 +105,10 @@ const Login = ({ navigation }) => {
                             color={theme.color.darkGrey}
                           />
                         }
-                        label="E-mail"
-                        onChangeText={handleChange('email')}
-                        onBlur={handleBlur('email')}
-                        value={values.email}
+                        label="RA"
+                        onChangeText={handleChange('ra')}
+                        onBlur={handleBlur('ra')}
+                        value={values.ra}
                         keyboardType="email-address"
                         autoCapitalize="none"
                       />

@@ -44,8 +44,6 @@ class PINClassService {
       ],
     });
 
-    console.log(await getMethod(classInstance), studentId);
-
     if (!classInstance) {
       const error = new Error();
       error.status = 404;

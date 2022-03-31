@@ -71,13 +71,23 @@ const StudentAuth = ({ children }) => {
 
   const login = async (values) => {
     try {
-      const { email, password } = values;
-      const response = await api.post('/student/login', { email, password });
+      const { ra, password } = values;
+      const response = await api.post('/student/loginLDAP', {
+        ra,
+        password,
+      });
 
-      const { student, token, refreshToken: RefreshToken } = response.data;
+      const {
+        student,
+        token,
+        refreshToken: RefreshToken,
+        isFirstLogin,
+      } = response.data;
+
       const studentValues = {
         student,
         token,
+        isFirstLogin,
       };
       setStudentInfo(studentValues);
       saveOnLocalStorage(studentStorageItem, studentValues);
@@ -86,6 +96,39 @@ const StudentAuth = ({ children }) => {
 
       setLoggedIn(true);
       return response;
+    } catch (error) {
+      console.log('ERROR', error.response.data.response);
+      return {
+        status: error.response.status,
+        message: error.response.data.response,
+      };
+    }
+  };
+
+  const update = async (values) => {
+    try {
+      const { name } = values;
+
+      const { data } = await api.post('/student/update', {
+        id: studentInfo.student.id,
+        name,
+      });
+
+      const isFirstLogin = !data.name;
+
+      const studentValues = {
+        ...studentInfo,
+        student: {
+          ...studentInfo.student,
+          name,
+        },
+        isFirstLogin,
+      };
+
+      setStudentInfo(studentValues);
+      saveOnLocalStorage(studentStorageItem, studentValues);
+
+      return data;
     } catch (error) {
       console.log('ERROR', error.response.data.response);
       return {
@@ -118,6 +161,7 @@ const StudentAuth = ({ children }) => {
         isLoggedIn,
         setLoggedIn,
         initialValue,
+        update,
       }}
     >
       {children}

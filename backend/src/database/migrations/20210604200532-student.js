@@ -7,10 +7,14 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      ra: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: true,
+      },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: 'Sem Nome',
+        allowNull: true,
       },
       email: {
         type: Sequelize.STRING,
@@ -19,7 +23,7 @@ module.exports = {
       },
       password_hash: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       id_image: {
         type: Sequelize.INTEGER,

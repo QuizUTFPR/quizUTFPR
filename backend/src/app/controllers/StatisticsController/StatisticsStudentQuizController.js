@@ -8,7 +8,6 @@ class StatisticsQuizController {
     try {
       let statistics;
       const { quizId, classId } = req.body;
-      console.log('CLASS ID', classId);
 
       if (classId) {
         statistics = await GetFilteredStudentQuizStatisticsService.execute({

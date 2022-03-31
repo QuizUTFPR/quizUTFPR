@@ -12,8 +12,6 @@ class DeleteQuizFromClassService {
 
   async execute(data) {
     const { idClass, idQuiz } = data;
-    console.log(idClass);
-    console.log(idQuiz);
 
     const schema = Yup.object().shape({
       idClass: Yup.string().required(),
