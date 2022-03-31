@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { useNavigation } from '@react-navigation/native';
 import api from '@api';
+import { API_URL } from '@env';
 
 // Components
 import Input from '@components/Input';
@@ -85,9 +86,7 @@ const ChooseNicknameAndAvatar = () => {
             isActive={idx === selectedAvatar}
             onPress={() => setSelectedAvatar(idx)}
           >
-            <AvatarImage
-              source={{ uri: `http://192.168.1.7:3333/avatars/${item}` }}
-            />
+            <AvatarImage source={{ uri: `${API_URL}/avatars/${item}` }} />
           </AvatarWrapper>
         ))}
       </MiddleWrapper>

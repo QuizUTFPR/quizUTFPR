@@ -1,13 +1,12 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URL } from '@env';
 import { navigate } from './rootNavigation';
 
-// const ip = '10.0.0.103:3333';
-// const ip = '10.0.2.2:3333'; // Android Studio ********NÃO APAGAR********
-const ip = '192.168.1.7:3333';
+console.log('env', API_URL);
 
 const api = axios.create({
-  baseURL: `http://${ip}`,
+  baseURL: API_URL,
 });
 
 // USADO PARA CANCELAR REQUEST QUANDO COMPONENTE DESMONTAR
