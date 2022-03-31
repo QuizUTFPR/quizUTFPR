@@ -31,10 +31,10 @@ const InitialScreen = ({ navigation }) => (
           onPress={() => navigation.navigate('Login')}
           icon="login-variant"
         >
-          ENTRAR
+          LOGIN UTFPR
         </ButtonGradient>
       </WrapperButton>
-      <WrapperButton>
+      {/* <WrapperButton>
         <ButtonGradient
           variant="primary"
           colors={theme.color.gradients.orange}
@@ -43,7 +43,7 @@ const InitialScreen = ({ navigation }) => (
         >
           CRIAR CONTA
         </ButtonGradient>
-      </WrapperButton>
+      </WrapperButton> */}
     </ImageView>
   </Container>
 );

@@ -51,14 +51,14 @@ export const AvatarWrapper = styled.TouchableOpacity.attrs({
   width: 85px;
   align-items: center;
   justify-content: center;
-  border-radius: 2px;
-  border: ${({ isActive, theme }) =>
-    isActive ? `6px solid ${theme.color.purple}` : '0px'};
+  border-radius: 6px;
+  background: ${({ isActive, theme }) =>
+    isActive ? `${theme.color.purple}` : 'transparent'};
 `;
 
 export const AvatarImage = styled.Image.attrs({
   borderRadius: 2,
 })`
-  height: 80px;
-  width: 80px;
+  height: 75px;
+  width: 75px;
 `;

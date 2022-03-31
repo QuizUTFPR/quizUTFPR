@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import { useNavigation } from '@react-navigation/native';
+import api from '@api';
 
 // Components
 import Input from '@components/Input';
@@ -24,7 +25,7 @@ import {
 const ChooseNicknameAndAvatar = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(0);
   const [name, setName] = useState('');
-  const teste = [1, 2, 3, 4];
+  const [images, setImages] = useState([]);
 
   const { update } = useStudentAuth();
 
@@ -34,11 +35,27 @@ const ChooseNicknameAndAvatar = () => {
 
   const handleNext = async () => {
     try {
-      await update({ name });
+      await update({
+        name,
+        avatar: images[selectedAvatar],
+      });
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getAllAvailablesAvatars = async () => {
+    try {
+      const { data } = await api.get('/getAvatars');
+      setImages(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllAvailablesAvatars();
+  }, []);
 
   return (
     // const navigation = useNavigation();
@@ -55,23 +72,21 @@ const ChooseNicknameAndAvatar = () => {
             label="Nickname"
             placeholder="Digite seu nickname..."
             textAlignVertical="center"
-            paddingWrapper="10px 0"
+            // paddingWrapper="10px 0"
             value={name}
             onChangeText={handleSetName}
           />
         </InputWrapper>
       </TopWrapper>
       <MiddleWrapper>
-        {teste.map((item, idx) => (
+        {images.map((item, idx) => (
           <AvatarWrapper
             key={item}
             isActive={idx === selectedAvatar}
             onPress={() => setSelectedAvatar(idx)}
           >
             <AvatarImage
-              source={{
-                uri: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
-              }}
+              source={{ uri: `http://192.168.1.7:3333/avatars/${item}` }}
             />
           </AvatarWrapper>
         ))}

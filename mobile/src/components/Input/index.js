@@ -65,7 +65,7 @@ const Input = ({
 Input.defaultProps = {
   secureTextEntry: false,
   height: '55px',
-  paddingWrapper: '0px',
+  paddingWrapper: '0 10px',
 };
 
 Input.propTypes = {

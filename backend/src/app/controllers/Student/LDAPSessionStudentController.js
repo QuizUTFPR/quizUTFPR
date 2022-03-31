@@ -1,4 +1,5 @@
 // SERVICES
+
 import LDAPStudentSessionService from '../../services/Student/LDAPStudentSession';
 import LDAPUpdateStudentService from '../../services/Student/LDAPUpdateStudent';
 
@@ -25,11 +26,12 @@ class LDAPSessionStudentController {
 
   async update(req, res) {
     try {
-      const { name, id } = req.body;
+      const { name, id, avatar } = req.body;
 
       const student = await LDAPUpdateStudentService.execute({
         name,
         id,
+        avatar,
       });
 
       return res.status(200).json(student);

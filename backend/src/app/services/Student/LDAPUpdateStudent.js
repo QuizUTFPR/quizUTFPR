@@ -1,5 +1,13 @@
 import * as Yup from 'yup';
+import { extname, resolve } from 'path';
+import fs from 'fs';
+import crypto from 'crypto';
+
+// Repositories
 import StudentRepository from '../../repositories/Student';
+
+// Models
+import File from '../../models/FileModel';
 
 class LDAPUpdateStudentService {
   constructor() {
@@ -10,6 +18,7 @@ class LDAPUpdateStudentService {
     const schema = Yup.object().shape({
       id: Yup.number().required(),
       name: Yup.string().required(),
+      avatar: Yup.string(),
     });
 
     if (!(await schema.isValid(data))) {
@@ -19,7 +28,7 @@ class LDAPUpdateStudentService {
       throw error;
     }
 
-    const { id, name } = data;
+    const { id, name, avatar } = data;
 
     const student = await this.studentRepository.findOne({ where: { id } });
 
@@ -31,6 +40,25 @@ class LDAPUpdateStudentService {
     }
 
     student.name = name;
+
+    let image;
+    // Avatar
+    if (avatar) {
+      const path = crypto.randomBytes(16).toString('hex') + extname(avatar);
+
+      fs.copyFileSync(
+        resolve('avatars', avatar),
+        resolve('tmp', 'uploads', path)
+      );
+
+      image = await File.create({
+        name: avatar,
+        path,
+      });
+
+      student.idImage = image.id;
+    }
+
     await student.save();
 
     const { email, id_image } = student;
@@ -40,6 +68,7 @@ class LDAPUpdateStudentService {
       email,
       name,
       id_image,
+      image: image?.url,
     };
   }
 }

@@ -1,5 +1,7 @@
 // Importo apenas Router do pacote Express;
 import { Router } from 'express';
+import fs from 'fs';
+import path from 'path';
 
 // ROUTES ONLY DASHBOARD
 import Teacher from './OnlyDashboard/Teacher/teacher';
@@ -34,5 +36,15 @@ router.use('/tag', verifyJWT, Tag);
 router.use('/statistics', verifyJWT, Statistics);
 router.use('/class', verifyJWT, Classes);
 router.use('/class', verifyJWT, ClassesMobile);
+
+router.get('/getAvatars', (req, res) => {
+  try {
+    const files = fs.readdirSync(path.join(__dirname, '..', '..', 'avatars'));
+
+    return res.status(200).json(files);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
 
 export default router;

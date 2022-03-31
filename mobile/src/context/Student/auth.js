@@ -107,11 +107,12 @@ const StudentAuth = ({ children }) => {
 
   const update = async (values) => {
     try {
-      const { name } = values;
+      const { name, avatar } = values;
 
       const { data } = await api.post('/student/update', {
         id: studentInfo.student.id,
         name,
+        avatar,
       });
 
       const isFirstLogin = !data.name;
@@ -121,6 +122,7 @@ const StudentAuth = ({ children }) => {
         student: {
           ...studentInfo.student,
           name,
+          image: data.image,
         },
         isFirstLogin,
       };
