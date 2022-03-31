@@ -44,3 +44,17 @@ export const GoBackButtonWrapper = styled(StyledButton).attrs({
 `;
 
 export const StyledIconButton = styled.Text``;
+
+export const TopWrapper = styled.View``;
+
+export const MiddleWrapper = styled.View`
+  width: ${`${widthPercentageToDp('85%')}px`};
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const BottomWrapper = styled.View`
+  margin-bottom: 30px;
+`;

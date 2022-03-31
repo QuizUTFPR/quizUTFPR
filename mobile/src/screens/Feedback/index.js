@@ -15,6 +15,9 @@ import {
   Description,
   GoBackButtonWrapper,
   StyledIconButton,
+  TopWrapper,
+  MiddleWrapper,
+  BottomWrapper,
 } from './style';
 
 const Feedback = () => {
@@ -30,26 +33,34 @@ const Feedback = () => {
         </GoBackButtonWrapper>
       </WrapperHeader>
 
-      <Title>Feedback</Title>
-      <Description>
-        Digite na caixa abaixo sugestões de melhorias e problemas encontrados
-        durante a utilização do aplicativo.
-      </Description>
-      <InputWrapper>
-        <Input
-          fill="black"
-          label="Mensagem"
-          placeholder="Escreva um bug encontrado ou um sugestão de melhoria..."
-          multiline
-          height="auto"
-          textAlignVertical="center"
-          paddingWrapper="10px 0"
-          // blurOnSubmit={false}
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <ButtonGradient variant="primary">ENVIAR</ButtonGradient>
-      </InputWrapper>
+      <TopWrapper>
+        <Title>Feedback</Title>
+        <Description>
+          Digite na caixa abaixo sugestões de melhorias e problemas encontrados
+          durante a utilização do aplicativo.
+        </Description>
+      </TopWrapper>
+
+      <MiddleWrapper>
+        <InputWrapper>
+          <Input
+            fill="black"
+            label="Mensagem"
+            placeholder="Escreva um bug encontrado ou um sugestão de melhoria..."
+            multiline
+            height="100%"
+            textAlignVertical="top"
+            paddingWrapper="10px 0"
+            // blurOnSubmit={false}
+          />
+        </InputWrapper>
+      </MiddleWrapper>
+
+      <BottomWrapper>
+        <InputWrapper>
+          <ButtonGradient variant="primary">ENVIAR</ButtonGradient>
+        </InputWrapper>
+      </BottomWrapper>
     </StyledContainer>
   );
 };
