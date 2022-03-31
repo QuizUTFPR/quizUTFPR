@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { Animated } from 'react-native';
 
 // DIMENSION TRANSFORMERS
-import { heightPercentageToDp } from '@styles/dimensions';
+import { heightPercentageToDp, widthPercentageToDp } from '@styles/dimensions';
 
 const correctColor = (toastType, theme) => {
   if (toastType === 'error') return theme.color.red;
@@ -21,6 +21,7 @@ export const StyledView = styled(Animated.View)`
   flex-direction: row;
   align-items: center;
   min-height: ${heightPercentageToDp('7%')}px;
+  max-width: ${widthPercentageToDp('90%')}px;
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 10px;
