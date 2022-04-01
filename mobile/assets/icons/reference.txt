@@ -1,0 +1,8 @@
+MEDALS
+
+1 = https://icons8.com.br/icon/tFuEh0r7pbxB/medal
+2 = https://icons8.com.br/icon/693lxP0HJ6hr/medal
+3 = https://icons8.com.br/icon/T5jpwtcP2Gxo/medal
+
+
+TROFEU = https://icons8.com.br/icon/kyDfpVNWBg3k/trophy

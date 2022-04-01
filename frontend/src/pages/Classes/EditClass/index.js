@@ -11,6 +11,7 @@ import {
   Typography,
   Divider,
   TextField,
+  MenuItem,
 } from '@mui/material';
 
 // ASSETS
@@ -28,12 +29,13 @@ const EditPreferences = forwardRef((props, _) => {
       title: classObj.title,
       description: classObj.description,
       imageUrl: classObj?.imageClass?.url,
+      visibility: classObj.visibility,
       imageObj: null,
     },
     onSubmit: async (values) => {
-      const { id, imageObj, title, tags, description } = values;
+      const { id, imageObj, title, tags, description, visibility } = values;
 
-      const body = { id, title, tags, description };
+      const body = { id, title, tags, description, visibility };
 
       const file = new FormData();
       file.append('file', imageObj);
@@ -118,6 +120,25 @@ const EditPreferences = forwardRef((props, _) => {
             minRows={5}
             maxRows={5}
           />
+        </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Visibilidade"
+            id="visibility"
+            name="visibility"
+            variant="outlined"
+            value={formik.values.visibility}
+            onChange={(event) =>
+              formik.setFieldValue('visibility', event.target.value)
+            }
+            required
+            select
+          >
+            <MenuItem value="private">Privada</MenuItem>
+            <MenuItem value="public">Pública</MenuItem>
+          </TextField>
         </Grid>
 
         <Grid item xs={12}>

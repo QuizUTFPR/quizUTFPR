@@ -22,7 +22,6 @@
     "babel-plugin-module-resolver": "4.1.0",
     "expo": "^44.0.0",
     "expo-blur": "~11.0.0",
-    "expo-cli": "^5.1.1",
     "expo-clipboard": "~2.1.0",
     "expo-constants": "~13.0.1",
     "expo-font": "~10.0.4",

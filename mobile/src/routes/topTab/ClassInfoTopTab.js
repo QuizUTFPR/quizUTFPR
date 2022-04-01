@@ -10,6 +10,7 @@ import theme from '@theme';
 const InfoOfClass = lazy(() => import('@screens/Class/Info'));
 const QuizzesOfClass = lazy(() => import('@screens/Class/Quizzes'));
 const MessagesOfClass = lazy(() => import('@screens/Class/Messages'));
+const Ranking = lazy(() => import('@screens/Class/Ranking'));
 
 // STACK
 const TopTab = createMaterialTopTabNavigator();
@@ -64,6 +65,13 @@ const SearchQuizByTagTopTab = () => {
               component={QuizzesOfClass}
               options={{
                 tabBarLabel: 'Quizzes',
+              }}
+            />
+            <TopTab.Screen
+              name="RankingOfClass"
+              component={Ranking}
+              options={{
+                tabBarLabel: 'Ranking',
               }}
             />
             <TopTab.Screen

@@ -80,7 +80,7 @@ class ClassController {
   async update(req, res) {
     try {
       const { values } = req.body;
-      const { id, title, description } = JSON.parse(values);
+      const { id, title, description, visibility } = JSON.parse(values);
       const { idImage } = req;
 
       const updatedClass = await UpdateClassService.execute({
@@ -88,6 +88,7 @@ class ClassController {
         idImage,
         title,
         description,
+        visibility,
       });
 
       return res.status(200).json(updatedClass);

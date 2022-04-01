@@ -56,7 +56,7 @@ const ClassPage = () => {
                   subscribed: false,
                 });
 
-                return navigation.navigate('ClassStack', {
+                navigation.navigate('ClassStack', {
                   screen: 'InfoOfClass',
                   params: {
                     id: item.id,

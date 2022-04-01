@@ -31,7 +31,7 @@ const TopTabClassInfo = lazy(() => import('../topTab/ClassInfoTopTab'));
 // STACK
 const Stack = createStackNavigator();
 
-const TokenStack = () => {
+const TokenRequiredStack = () => {
   const { studentInfo } = useStudentAuth();
   const navigation = useNavigation();
 
@@ -89,4 +89,4 @@ const TokenStack = () => {
   );
 };
 
-export default TokenStack;
+export default TokenRequiredStack;
