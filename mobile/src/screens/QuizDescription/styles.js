@@ -2,6 +2,8 @@ import styled from 'styled-components/native';
 import { StyledButton } from '@components/ButtonGradient/style';
 import Constants from 'expo-constants';
 
+import PodiumImage from '@assets/icons/podium.png';
+
 // COMPONENTS
 import { Container } from '@components/Container/style';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
@@ -158,4 +160,11 @@ export const PinWrapper = styled.TouchableOpacity.attrs({
 })`
   flex-direction: row;
   align-items: center;
+`;
+
+export const PodiumIcon = styled.Image.attrs({
+  source: PodiumImage,
+})`
+  height: 50px;
+  width: 50px;
 `;
