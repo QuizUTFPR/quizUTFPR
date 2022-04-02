@@ -1,11 +1,6 @@
 /* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
-import {
-  Ionicons,
-  Feather,
-  MaterialIcons,
-  MaterialCommunityIcons,
-} from '@expo/vector-icons';
+import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import * as Clipboard from 'expo-clipboard';
@@ -310,7 +305,11 @@ const QuizDescription = ({ route }) => {
       <FabButton
         icon={<PodiumIcon />}
         variant="primary"
-        onPress={() => console.log('teset')}
+        onPress={() =>
+          navigation.navigate('QuizRanking', {
+            quizTitle: title,
+          })
+        }
       />
 
       <Toast handleClose={handleCloseToast} open={showToast.open}>

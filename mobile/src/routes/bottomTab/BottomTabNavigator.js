@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBar from '@components/TabBar';
 import HeaderHome from '@components/Headers/HeaderHome';
 import HeaderClassPage from '@components/Headers/HeaderClassPage';
+import HeaderRanking from '@components/Headers/HeaderRanking';
 
 // ICONS
 import {
@@ -12,11 +13,14 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from '@expo/vector-icons';
+import { Image, View } from 'react-native';
+import PodiumIcon from '../../../assets/icons/podium.png';
 
 // STACKS
 import SearchQuizByTagStack from '../stacks/SearchQuizByTagStack';
 import QuizListTopTabStack from '../topTab/QuizListTopTabNavigator';
 import ClassListTopTabStack from '../topTab/ClassListTopTabNavigator';
+import RankingTopTabStack from '../topTab/RankingTopTabStack';
 
 // TAB CREATION
 const Tab = createBottomTabNavigator();
@@ -55,6 +59,29 @@ const TabNavigator = () => (
       }}
       name="ClassListTopTabStack"
       component={ClassListTopTabStack}
+    />
+    <Tab.Screen
+      options={{
+        Icon: MaterialCommunityIcons,
+        name: 'google-classroom',
+        size: 32,
+        tabBarLabel: 'Ranking',
+        header: () => <HeaderRanking />,
+        // tabBarIcon: () => (
+        //   <View>
+        //     <Image
+        //       source={PodiumIcon}
+        //       resizeMode="cover"
+        //       style={{
+        //         width: 22,
+        //         height: 22,
+        //       }}
+        //     />
+        //   </View>
+        // ),
+      }}
+      name="RankingTopTabStack"
+      component={RankingTopTabStack}
     />
   </Tab.Navigator>
 );

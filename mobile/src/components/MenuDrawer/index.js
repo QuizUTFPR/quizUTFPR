@@ -8,17 +8,18 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 // STYLES
 import Feedback from '@screens/Feedback';
+import BottomTabNavigator from '@routes/bottomTab/BottomTabNavigator';
 import { DrawerLabelStyled } from './styles';
 
 // COMPONENT
 import MyDrawer from './myDrawer';
 
-const Drawer = createDrawerNavigator();
-
 // Screens
-const BottomTabNavigator = lazy(() =>
-  import('@routes/bottomTab/BottomTabNavigator')
-);
+
+const Drawer = createDrawerNavigator();
+// const BottomTabNavigator = lazy(() =>
+//   import('@routes/bottomTab/BottomTabNavigator')
+// );
 
 // const HomeStack = lazy(() => import('@routes/stacks/home'));
 

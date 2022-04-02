@@ -41,6 +41,9 @@ export const WrapperProgress = styled.View`
 export const PositionOnRank = styled.View`
   align-items: center;
   justify-content: center;
+`;
+
+export const PositionOnRankText = styled(PositionOnRank)`
   margin-bottom: -15px; // Colocado porque a fonte Poppins tem uma margem em baixo
 `;
 
@@ -51,4 +54,13 @@ export const PositionText = styled.Text`
   text-align: center;
   height: 50px;
   width: 50px;
+`;
+
+export const NameOfPlayer = styled.Text.attrs({ numberOfLines: 1 })`
+  font-family: 'PoppinsBold';
+`;
+
+export const PontuationOfPlayer = styled.Text.attrs({ numberOfLines: 1 })`
+  font-family: 'PoppinsBold';
+  align-self: flex-end;
 `;

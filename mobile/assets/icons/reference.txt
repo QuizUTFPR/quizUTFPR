@@ -9,3 +9,7 @@ TROFEU = https://icons8.com.br/icon/kyDfpVNWBg3k/trophy
 
 RANK = https://icons8.com.br/icon/efLjAVvSK5Y6/podium
 https://icons8.com.br/icons/set/podium--static
+
+
+BOTTOM MENU =
+PODIUM = https://uxwing.com/leaderboard-icon/

@@ -20,13 +20,15 @@ import Question from '@screens/Question';
 import Statistics from '@screens/Statistics';
 import Logout from '@screens/Logout';
 import ChooseNicknameAndAvatar from '@screens/ChooseNicknameAndAvatar';
+import QuizRanking from '@screens/QuizRanking';
+
+// Components
+import HeaderInfoClassPage from '@components/Headers/HeaderInfoClassPage';
+import HeaderQuizRanking from '@components/Headers/HeaderQuizRanking';
 
 // Stack
 import InfinityScrollStack from '../stacks/QuizInifinityScroll';
 import TopTabClassInfo from '../topTab/ClassInfoTopTab';
-
-// Components
-import HeaderInfoClassPage from '../../components/Headers/HeaderInfoClassPage';
 
 // Screens
 const Attempt = lazy(() => import('@screens/AttemptsOfQuiz'));
@@ -60,6 +62,7 @@ const TokenRequiredStack = () => {
             >
               <Stack.Screen name="HomeMenuDrawer" component={MenuDrawer} />
               <Stack.Screen name="AttempsOfQuiz" component={Attempt} />
+
               <Stack.Screen name="Descricao" component={QuizDescription} />
               <Stack.Screen name="CountDown" component={CountDown} />
               <Stack.Screen name="Question" component={Question} />
@@ -84,6 +87,14 @@ const TokenRequiredStack = () => {
                 }}
                 name="ClassStack"
                 component={TopTabClassInfo}
+              />
+              <Stack.Screen
+                options={{
+                  headerShown: true,
+                  header: (props) => <HeaderQuizRanking {...props} />,
+                }}
+                name="QuizRanking"
+                component={QuizRanking}
               />
             </Stack.Navigator>
           </SearchQuizByTagProvider>

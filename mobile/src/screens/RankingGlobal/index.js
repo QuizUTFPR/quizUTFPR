@@ -4,13 +4,11 @@ import React, { useRef } from 'react';
 import RankingStudentItem from '@components/RankingLine';
 import FabButton from '@components/FabButton';
 
-// Styles
+// Style
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { RankingContainer, StyledFlatList } from './style';
+import { StyledContainer, StyledFlatList } from './style';
 
-// Assets
-
-const RankingClass = () => {
+const Ranking = () => {
   const students = [
     { rank: 1, name: 'Lala' },
     { rank: 2, name: 'Lala' },
@@ -29,7 +27,7 @@ const RankingClass = () => {
   const myIdx = 4;
 
   return (
-    <RankingContainer fill="white">
+    <StyledContainer fill="white">
       <StyledFlatList
         ref={refList}
         data={students}
@@ -48,8 +46,8 @@ const RankingClass = () => {
           })
         }
       />
-    </RankingContainer>
+    </StyledContainer>
   );
 };
 
-export default RankingClass;
+export default Ranking;

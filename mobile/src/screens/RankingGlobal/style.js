@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
+
 import { widthPercentageToDp } from '@styles/dimensions';
 
-export const RankingContainer = styled.View`
+export const StyledContainer = styled.View`
   background: ${({ theme }) => theme.color.fill};
   padding-top: ${({ theme }) => theme.size.padding + 5}px;
   flex: 1;
