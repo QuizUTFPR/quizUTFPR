@@ -32,7 +32,9 @@ const ClassPage = () => {
   useFocusEffect(
     useCallback(() => {
       getClasses();
-      return () => setClassList([]);
+      return () => {
+        setClassList([]);
+      };
     }, [])
   );
 
@@ -58,16 +60,6 @@ const ClassPage = () => {
 
                 navigation.navigate('ClassStack', {
                   screen: 'InfoOfClass',
-                  params: {
-                    id: item.id,
-                    teacher: item.teacher,
-                    title: item.title,
-                    image: item?.image?.url,
-                    description: item.description,
-                    pin: item.pin,
-                    amountOfQuizzes: item.amountOfQuizzes,
-                    subscribed: false,
-                  },
                 });
               }}
               color={theme.color.purple}

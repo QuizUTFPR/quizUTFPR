@@ -8,7 +8,6 @@ import HeaderResultSearchQuizByTag from '@components/Headers/HeaderResultSearchQ
 
 // Screens
 const SearchTag = lazy(() => import('@screens/SearchQuizByTag'));
-
 const ResultSearchTag = lazy(() =>
   import('@screens/SearchQuizByTag/ResultSearchQuizByTag')
 );

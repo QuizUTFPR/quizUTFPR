@@ -11,22 +11,26 @@ import SearchQuizByTagProvider from '@context/SearchQuizByTag';
 // HOOKS
 import useStudentAuth from '@hook/useStudentAuth';
 
-// Screens
+// Components
+import MenuDrawer from '@components/MenuDrawer';
+
+// Stack
 import CountDown from '@screens/CountDown';
 import Question from '@screens/Question';
 import Statistics from '@screens/Statistics';
 import Logout from '@screens/Logout';
 import ChooseNicknameAndAvatar from '@screens/ChooseNicknameAndAvatar';
-import HeaderInfoClassPage from '../../components/Headers/HeaderInfoClassPage';
 
 // Stack
-const InfinityScrollStack = lazy(() => import('../stacks/QuizInifinityScroll'));
-const MenuDrawer = lazy(() => import('@components/MenuDrawer'));
-const QuizDescription = lazy(() => import('@screens/QuizDescription'));
-const Attempt = lazy(() => import('@screens/AttemptsOfQuiz'));
+import InfinityScrollStack from '../stacks/QuizInifinityScroll';
+import TopTabClassInfo from '../topTab/ClassInfoTopTab';
 
-// TOP TAB STACK
-const TopTabClassInfo = lazy(() => import('../topTab/ClassInfoTopTab'));
+// Components
+import HeaderInfoClassPage from '../../components/Headers/HeaderInfoClassPage';
+
+// Screens
+const Attempt = lazy(() => import('@screens/AttemptsOfQuiz'));
+const QuizDescription = lazy(() => import('@screens/QuizDescription'));
 
 // STACK
 const Stack = createStackNavigator();
@@ -45,8 +49,8 @@ const TokenRequiredStack = () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <QuestionProvider>
-        <ClassContextProvider>
+      <ClassContextProvider>
+        <QuestionProvider>
           <SearchQuizByTagProvider>
             <Stack.Navigator
               screenOptions={{
@@ -83,8 +87,8 @@ const TokenRequiredStack = () => {
               />
             </Stack.Navigator>
           </SearchQuizByTagProvider>
-        </ClassContextProvider>
-      </QuestionProvider>
+        </QuestionProvider>
+      </ClassContextProvider>
     </Suspense>
   );
 };

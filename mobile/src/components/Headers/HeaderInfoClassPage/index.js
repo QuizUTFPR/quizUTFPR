@@ -1,7 +1,10 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import api from '@api';
+
+// HOOKS
+import useClass from '@hook/useClass';
 
 // STYLES
 import {
@@ -17,8 +20,8 @@ import {
 
 const HeaderInfoClassPage = () => {
   const navigation = useNavigation();
-  const route = useRoute();
-  const { subscribed, id } = route.params.params;
+  const { classData, handleSetClassData } = useClass();
+  const { subscribed, id } = classData;
 
   const registerStudentInClass = async () => {
     try {
@@ -26,12 +29,10 @@ const HeaderInfoClassPage = () => {
         idClass: id,
       });
 
-      navigation.setParams({
-        params: {
-          ...route.params.params,
-          subscribed: true,
-        },
-      });
+      handleSetClassData((prevState) => ({
+        ...prevState,
+        subscribed: true,
+      }));
     } catch (error) {
       console.log(error);
     }
