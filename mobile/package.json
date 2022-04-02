@@ -46,7 +46,8 @@
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.5",
     "styled-theming": "2.2.0",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "react-native-svg-transformer": "0.14.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -62,8 +63,7 @@
     "eslint-plugin-react": "7.26.0",
     "eslint-plugin-react-hooks": "4.2.0",
     "prettier": "2.4.1",
-    "react-devtools": "4.24.1",
-    "react-native-svg-transformer": "0.14.3"
+    "react-devtools": "4.24.1"
   },
   "private": true
 }

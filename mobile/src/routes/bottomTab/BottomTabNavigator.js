@@ -13,8 +13,7 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from '@expo/vector-icons';
-import { Image, View } from 'react-native';
-import PodiumIcon from '../../../assets/icons/podium.png';
+import PodiumIcon from '@assets/icons/podium_menu_bottom.svg';
 
 // STACKS
 import SearchQuizByTagStack from '../stacks/SearchQuizByTagStack';
@@ -62,23 +61,20 @@ const TabNavigator = () => (
     />
     <Tab.Screen
       options={{
-        Icon: MaterialCommunityIcons,
-        name: 'google-classroom',
-        size: 32,
         tabBarLabel: 'Ranking',
+        Icon: ({ color }) => (
+          <PodiumIcon
+            fill={color}
+            style={{
+              width: 32,
+              height: 32,
+            }}
+          />
+        ),
         header: () => <HeaderRanking />,
-        // tabBarIcon: () => (
-        //   <View>
-        //     <Image
-        //       source={PodiumIcon}
-        //       resizeMode="cover"
-        //       style={{
-        //         width: 22,
-        //         height: 22,
-        //       }}
-        //     />
-        //   </View>
-        // ),
+        tabBarIcon: ({ color, size }) => (
+          <Ionicons name="ios-filing" color={color} size={size} />
+        ),
       }}
       name="RankingTopTabStack"
       component={RankingTopTabStack}
