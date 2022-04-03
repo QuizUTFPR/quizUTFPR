@@ -1,24 +1,14 @@
-import React, { lazy, Suspense, useEffect } from 'react';
-// import { createStackNavigator } from '@react-navigation/stack';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Loading from '@components/Loading';
 import useStudentAuth from '@hook/useStudentAuth';
 import { navigationRef } from '../services/rootNavigation';
-
-// HOOKS
 
 // THEME
 import { navigationTheme } from '../styles/theme';
 
 // ROUTES
-const RoutesTokenNotRequired = lazy(() =>
-  import('./category/tokenNotRequired')
-);
-const RoutesTokenIsRequired = lazy(() => import('./category/tokenIsRequired'));
-
-// const Stack = createStackNavigator();
-
-// CRIAÇÃO DE UM CONTAINER CONTENDO A STACK DE NAVEGAÇÃO DO APP
+import RoutesTokenNotRequired from './category/tokenNotRequired';
+import RoutesTokenIsRequired from './category/tokenIsRequired';
 
 const routes = () => {
   const {
@@ -39,17 +29,15 @@ const routes = () => {
   }, [isLoggedIn]);
 
   return (
-    <Suspense fallback={<Loading />}>
-      <NavigationContainer theme={navigationTheme} ref={navigationRef}>
-        {!isLoggedIn &&
-        studentInfo.token === null &&
-        studentInfo.student === null ? (
-          <RoutesTokenNotRequired />
-        ) : (
-          <RoutesTokenIsRequired />
-        )}
-      </NavigationContainer>
-    </Suspense>
+    <NavigationContainer theme={navigationTheme} ref={navigationRef}>
+      {!isLoggedIn &&
+      studentInfo.token === null &&
+      studentInfo.student === null ? (
+        <RoutesTokenNotRequired />
+      ) : (
+        <RoutesTokenIsRequired />
+      )}
+    </NavigationContainer>
   );
 };
 

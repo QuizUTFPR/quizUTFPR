@@ -1,9 +1,11 @@
 import React from 'react';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { useNavigation, useRoute } from '@react-navigation/native';
 
 import api from '@api';
 import theme from '@theme';
+
+// HOOKS
+import useClass from '@hook/useClass';
 
 // STYLES
 import {
@@ -20,32 +22,34 @@ import {
 } from './style';
 
 const InfoOfClass = () => {
-  const route = useRoute();
+  const { classData, handleSetClassData } = useClass();
 
   const { teacher, title, description, pin, amountOfQuizzes, subscribed } =
-    route.params;
+    classData;
   const { name } = teacher;
-  const navigation = useNavigation();
 
   const unSubscribeStudent = async () => {
     try {
       await api.delete('/class/dettachStudent', {
         params: {
-          idClass: route.params.id,
+          idClass: classData.id,
         },
       });
 
-      navigation.replace('ClassStack', {
-        screen: 'InfoOfClass',
-        params: {
-          ...route.params,
-          subscribed: false,
-        },
-      });
+      handleSetClassData((prevState) => ({
+        ...prevState,
+        subscribed: false,
+      }));
     } catch (error) {
       console.log(error);
     }
   };
+
+  React.useEffect(() => {
+    console.log('montou');
+
+    return () => console.log('desmontou');
+  }, []);
 
   return (
     <ClassContainer fill="white">

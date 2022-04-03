@@ -7,9 +7,10 @@ export const Wrapper = styled.View`
 export const InputWrapper = styled.View`
   flex-direction: row;
   background: ${({ theme }) => theme.color.lightBlueGrey};
-  padding-left: 10px;
   border-radius: 8px;
-  height: 55px;
+  height: ${({ height }) => height};
+  padding-left: 40px;
+  padding: ${({ paddingWrapper }) => paddingWrapper};
   border: 1.5px solid
     ${({ theme, error }) => (error ? 'red' : theme.color.fill)};
 `;

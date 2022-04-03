@@ -6,6 +6,7 @@ class Student extends Model {
     super.init(
       {
         name: Sequelize.STRING,
+        ra: Sequelize.STRING,
         email: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
         passwordHash: Sequelize.STRING,

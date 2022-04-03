@@ -5,7 +5,7 @@ class StudentRepository {
     return Student.create(student);
   }
 
-  async find(where) {
+  async findOne(where) {
     return Student.findOne(where);
   }
 

@@ -34,6 +34,7 @@ const ClassPage = () => {
       return () => setClassList([]);
     }, [])
   );
+
   return (
     <Container>
       <StyledScrollView>
@@ -54,7 +55,7 @@ const ClassPage = () => {
                   subscribed: true,
                 });
 
-                return navigation.navigate('ClassStack', {
+                navigation.navigate('ClassStack', {
                   screen: 'InfoOfClass',
                   params: {
                     id: item.id,

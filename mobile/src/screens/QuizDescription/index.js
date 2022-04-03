@@ -11,6 +11,7 @@ import api from '@api';
 // COMPONENTS
 import Dialog from '@components/Dialog';
 import Toast from '@components/Toast';
+import FabButton from '@components/FabButton';
 
 // LOTTIE
 import SadAnimation from '@assets/lottie/sad_emote.json';
@@ -45,6 +46,7 @@ import {
   PinWrapper,
   Favorite,
   TopWrapperButtons,
+  PodiumIcon,
 } from './styles';
 
 const QuizDescription = ({ route }) => {
@@ -298,6 +300,16 @@ const QuizDescription = ({ route }) => {
         }
         childrenText="Seu score será calculado parcialmente de acordo com as questões já
         respondidas!"
+      />
+
+      <FabButton
+        icon={<PodiumIcon />}
+        variant="primary"
+        onPress={() =>
+          navigation.navigate('QuizRanking', {
+            quizTitle: title,
+          })
+        }
       />
 
       <Toast handleClose={handleCloseToast} open={showToast.open}>

@@ -1,8 +1,9 @@
-module.exports = function (api) {
+module.exports = (api) => {
   api.cache(true);
   return {
     presets: ['babel-preset-expo'],
     plugins: [
+      'react-native-reanimated/plugin',
       [
         'module-resolver',
         {
@@ -16,13 +17,14 @@ module.exports = function (api) {
             '@routes': './src/routes/',
             '@api': './src/services/api.js',
             '@theme': './src/styles/theme.js',
+            '@env': './env.js',
           },
         },
       ],
     ],
     env: {
       production: {
-        plugins: [],
+        plugins: ['react-native-paper/babel'],
       },
     },
   };

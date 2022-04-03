@@ -26,11 +26,12 @@ class UpdateClass {
       throw error;
     }
 
-    const { id, idImage, title, description } = data;
+    const { id, idImage, title, description, visibility } = data;
 
     const classInstance = await this.classRepository.findById(id);
     classInstance.title = title;
     classInstance.description = description;
+    classInstance.visibility = visibility;
 
     // Image
     let oldImageId = false;

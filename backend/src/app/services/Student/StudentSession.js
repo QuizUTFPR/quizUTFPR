@@ -25,7 +25,7 @@ class StudentSessionService {
 
     const { email, password } = data;
 
-    const student = await this.studentRepository.find({ where: { email } });
+    const student = await this.studentRepository.finOne({ where: { email } });
     if (!student) {
       const error = new Error();
       error.status = 403;

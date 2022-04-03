@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBar from '@components/TabBar';
 import HeaderHome from '@components/Headers/HeaderHome';
 import HeaderClassPage from '@components/Headers/HeaderClassPage';
+import HeaderRanking from '@components/Headers/HeaderRanking';
 
 // ICONS
 import {
@@ -12,11 +13,13 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from '@expo/vector-icons';
+import PodiumIcon from '@assets/icons/podium_menu_bottom.svg';
 
 // STACKS
 import SearchQuizByTagStack from '../stacks/SearchQuizByTagStack';
 import QuizListTopTabStack from '../topTab/QuizListTopTabNavigator';
 import ClassListTopTabStack from '../topTab/ClassListTopTabNavigator';
+import RankingTopTabStack from '../topTab/RankingTopTabStack';
 
 // TAB CREATION
 const Tab = createBottomTabNavigator();
@@ -55,6 +58,26 @@ const TabNavigator = () => (
       }}
       name="ClassListTopTabStack"
       component={ClassListTopTabStack}
+    />
+    <Tab.Screen
+      options={{
+        tabBarLabel: 'Ranking',
+        Icon: ({ color }) => (
+          <PodiumIcon
+            fill={color}
+            style={{
+              width: 32,
+              height: 32,
+            }}
+          />
+        ),
+        header: () => <HeaderRanking />,
+        tabBarIcon: ({ color, size }) => (
+          <Ionicons name="ios-filing" color={color} size={size} />
+        ),
+      }}
+      name="RankingTopTabStack"
+      component={RankingTopTabStack}
     />
   </Tab.Navigator>
 );

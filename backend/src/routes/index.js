@@ -1,5 +1,7 @@
 // Importo apenas Router do pacote Express;
 import { Router } from 'express';
+import fs from 'fs';
+import path from 'path';
 
 // ROUTES ONLY DASHBOARD
 import Teacher from './OnlyDashboard/Teacher/teacher';
@@ -15,6 +17,7 @@ import PublishedQuiz from './OnlyMobile/PublishedQuiz/quiz';
 import StudentQuiz from './OnlyMobile/Student/studentQuiz';
 import QuizMobile from './OnlyMobile/Quiz';
 import ClassesMobile from './OnlyMobile/Class';
+import Feedback from './OnlyMobile/Feedback';
 
 // MIDDLEWARES
 import verifyJWT from '../app/middlewares/jwtVerify';
@@ -34,5 +37,16 @@ router.use('/tag', verifyJWT, Tag);
 router.use('/statistics', verifyJWT, Statistics);
 router.use('/class', verifyJWT, Classes);
 router.use('/class', verifyJWT, ClassesMobile);
+router.use('/feedback', verifyJWT, Feedback);
+
+router.get('/getAvatars', (req, res) => {
+  try {
+    const files = fs.readdirSync(path.join(__dirname, '..', '..', 'avatars'));
+
+    return res.status(200).json(files);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+});
 
 export default router;

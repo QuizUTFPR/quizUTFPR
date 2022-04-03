@@ -10,6 +10,7 @@ const SearchQuizByTag = ({ children }) => {
   const [quizzes, setQuizzes] = useState([]);
   const [tags, setTags] = useState([]);
   const [shouldUpdate, setShouldUpdate] = useState(false);
+  const [messageError, setMessageError] = useState(false);
 
   // eslint-disable-next-line consistent-return
   const getQuizByTags = async () => {
@@ -22,11 +23,13 @@ const SearchQuizByTag = ({ children }) => {
         });
 
         setQuizzes(data);
+        setMessageError(false);
 
         return false;
-      } catch (err) {
+      } catch (error) {
         setQuizzes([]);
-        console.log('error', { ...err });
+
+        setMessageError(error.response.data.response);
 
         return true;
       }
@@ -55,6 +58,8 @@ const SearchQuizByTag = ({ children }) => {
         setTags,
         tags,
         removeTagAndGetNewQuizzes,
+        messageError,
+        setMessageError,
       }}
     >
       {children}

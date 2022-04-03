@@ -27,7 +27,7 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
     <WrapperMyDrawer style={{ flex: 1 }}>
       <Avatar
         source={{
-          uri: 'https://image.flaticon.com/icons/png/512/147/147144.png',
+          uri: studentInfo.student.image,
         }}
       />
       <StudentName fill="purple">

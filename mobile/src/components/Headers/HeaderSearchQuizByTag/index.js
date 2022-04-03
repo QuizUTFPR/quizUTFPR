@@ -48,8 +48,9 @@ const Header = () => {
         colors={theme.color.gradients.orange}
         variant="primary"
         onPress={async () => {
-          const hasError = await getQuizByTags();
-          if (!hasError) {
+          const hasMessageError = await getQuizByTags();
+
+          if (!hasMessageError) {
             navigation.navigate('ResultSearchTag');
           }
         }}

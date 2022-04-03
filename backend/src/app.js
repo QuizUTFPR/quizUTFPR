@@ -34,6 +34,10 @@ class App {
       '/files',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
     );
+    this.server.use(
+      '/avatars',
+      express.static(path.resolve(__dirname, '..', 'avatars'))
+    );
   }
 
   routes() {

@@ -21,6 +21,7 @@ export const ImageView = styled.ImageBackground.attrs({
   padding-left: 30px;
   padding-right: 30px;
   flex: 1;
+  width: ${widthPercentageToDp('100%')}px;
 `;
 
 export const Logo = styled.Image.attrs({
