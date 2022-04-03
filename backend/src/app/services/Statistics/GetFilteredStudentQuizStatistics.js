@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
-// import getAllMethods from '../../utils/getMethodsOfAssociation';
+import getAllMethods from '../../utils/getMethodsOfAssociation';
 
 // MODELS
 import Answer from '../../models/AnswerModel';
@@ -10,6 +10,9 @@ import StudentQuestionChoice from '../../models/StudentQuestionChoice';
 // REPOSITORIES
 import ClassRepository from '../../repositories/Class';
 import QuizRepository from '../../repositories/Quiz';
+
+// SERVICES
+import FilteredByBestAttemptService from './StudentQuizFilteredByAttempt/BestAttempt';
 
 class GetFilteredStudentQuizStatisticsService {
   constructor() {
@@ -21,6 +24,7 @@ class GetFilteredStudentQuizStatisticsService {
     const schema = Yup.object().shape({
       quizId: Yup.string().required(),
       classId: Yup.string().required(),
+      orderBy: Yup.string().required(),
     });
 
     if (!(await schema.isValid(data))) {
@@ -30,7 +34,7 @@ class GetFilteredStudentQuizStatisticsService {
       throw error;
     }
 
-    const { quizId, classId } = data;
+    const { quizId, classId, orderBy } = data;
 
     const quiz = await this.quizRepository.findByPk(quizId, {
       attributes: [
@@ -98,7 +102,9 @@ class GetFilteredStudentQuizStatisticsService {
       throw error;
     }
 
-    const classStudents = await classInstance.getClass_students();
+    const classStudents = await classInstance.getClass_students({
+      attributes: ['id', 'createdAt'],
+    });
     const classStudentsId = classStudents.map(
       (classStudent) => classStudent.dataValues.id
     );
@@ -110,58 +116,90 @@ class GetFilteredStudentQuizStatisticsService {
           [Op.in]: classStudentsId,
         },
       },
-      attributes: ['studentId', 'quizId'],
+      attributes: ['id', 'studentId', 'quizId', 'createdAt'],
       group: ['studentId'],
     });
 
+    if (!studentsWhoAnswered.length) {
+      const error = new Error();
+      error.status = 404;
+      error.response = 'Não há estudantes';
+      throw error;
+    }
+
+    console.log('STUDENTSWHOANSWERED', studentsWhoAnswered);
+
+    let orderByQuery;
+    let orderByError;
+    switch (orderBy) {
+      case 'best':
+        orderByQuery = {
+          order: [
+            [{ model: StudentQuiz, as: 'studentQuiz' }, 'score', 'DESC'],
+            // [
+            //   { model: StudentQuiz, as: 'studentQuiz' },
+            //   { model: StudentQuestionChoice, as: 'quizQuestionChoice' },
+            //   'id',
+            //   'ASC',
+            // ],
+          ],
+        };
+        break;
+
+      default:
+        orderByError = new Error();
+        orderByError.status = 404;
+        orderByError.response = 'Opção de orderBy inexistente!';
+        throw orderByError;
+    }
+
     // GET ATTEMPTS FROM STUDENTS
-    const studentQuiz = await Promise.all(
-      studentsWhoAnswered.map(async (choice) => {
-        const student = await choice.getStudent({
-          attributes: ['id', 'name', 'email'],
-          include: [
-            {
-              model: StudentQuiz,
-              as: 'studentQuiz',
-              where: {
-                quizId,
-                isFinished: true,
-              },
-              attributes: ['id', 'score', 'studentId'],
+    let studentQuiz;
+    try {
+      studentQuiz = await Promise.all(
+        studentsWhoAnswered.map(async (choice) => {
+          const student = await FilteredByBestAttemptService.execute({
+            choice,
+            query: {
+              attributes: ['id', 'name', 'email'],
               include: [
                 {
-                  model: StudentQuestionChoice,
-                  as: 'quizQuestionChoice',
-                  attributes: [
-                    'id',
-                    'timeLeft',
-                    'questionId',
-                    'checked1',
-                    'checked2',
-                    'checked3',
-                    'checked4',
+                  model: StudentQuiz,
+                  as: 'studentQuiz',
+                  where: {
+                    quizId,
+                    isFinished: true,
+                  },
+                  attributes: ['id', 'score', 'studentId'],
+                  include: [
+                    {
+                      model: StudentQuestionChoice,
+                      as: 'quizQuestionChoice',
+                      attributes: [
+                        'id',
+                        'timeLeft',
+                        'questionId',
+                        'checked1',
+                        'checked2',
+                        'checked3',
+                        'checked4',
+                      ],
+                    },
                   ],
                 },
               ],
             },
-          ],
-          order: [
-            [{ model: StudentQuiz, as: 'studentQuiz' }, 'score', 'DESC'],
-            [
-              { model: StudentQuiz, as: 'studentQuiz' },
-              { model: StudentQuestionChoice, as: 'quizQuestionChoice' },
-              'id',
-              'ASC',
-            ],
-          ],
-        });
+            orderByQuery,
+            classCreationDate: classInstance.createdAt,
+          });
 
-        return {
-          ...student.dataValues,
-          studentQuiz: student.studentQuiz[0],
-        };
-      })
-    );
+          console.log(student);
+          return student;
+        })
+      );
+    } catch (error) {
+      console.log('ERROR', error);
+    }
 
     return { questions, studentQuiz };
   }
