@@ -5,6 +5,9 @@ import QuizRepository from '../../repositories/Quiz';
 import StudentQuestionChoiceRepository from '../../repositories/StudentQuestionChoice';
 import StudentQuizRepository from '../../repositories/StudentQuiz';
 
+// SERVICES
+import CreateOrUpdateStudentQuizRanking from '../Ranking/CreateOrUpdateStudentQuizRanking';
+
 class UpdateStudentQuizService {
   constructor() {
     this.quizRepository = new QuizRepository();
@@ -77,7 +80,7 @@ class UpdateStudentQuizService {
     let correctAnswerAmount = 1;
     let studentAnswerCorrect = 0;
     let studentAmountQuestionCorrect = 0;
-    let final = 0;
+    let finalScore = 0;
     await Promise.all(
       studentChoices.map(async (item) => {
         const studentAnswers = [
@@ -89,11 +92,12 @@ class UpdateStudentQuizService {
         const question = questionQuiz.find(
           (element) => element.id === item.questionId
         );
-        const answers = await question.getAnswer({ order: [['id', 'ASC']] });
+        const answers = await question.getAnswer({
+          order: [['id', 'ASC']],
+        });
 
         let hasWrongChoice = false;
-        // eslint-disable-next-line array-callback-return
-        answers.map((itemAnswers, index) => {
+        answers.forEach((itemAnswers, index) => {
           if (itemAnswers.isCorrect) {
             correctAnswerAmount += 1;
           }
@@ -123,7 +127,7 @@ class UpdateStudentQuizService {
         const bonus = noTime ? 1 : (timeLeft / timeOfQuestion) * (50 / 100);
 
         score += questionScore + questionScore * bonus;
-        final += (1 / correctAnswerAmount) * studentAnswerCorrect * score;
+        finalScore += (1 / correctAnswerAmount) * studentAnswerCorrect * score;
       })
     );
 
@@ -138,10 +142,18 @@ class UpdateStudentQuizService {
       throw error;
     }
 
-    studentQuizUpdated.score = final;
+    studentQuizUpdated.score = finalScore;
     studentQuizUpdated.hitAmount = studentAmountQuestionCorrect;
     studentQuizUpdated.isFinished = true;
     await studentQuizUpdated.save();
+
+    // Update ranking position of student
+    await CreateOrUpdateStudentQuizRanking.execute({
+      studentId,
+      quizId,
+      newStudentQuizId: idStudentQuiz,
+      newScore: finalScore,
+    });
 
     return studentQuizUpdated;
   }

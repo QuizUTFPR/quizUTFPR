@@ -15,6 +15,7 @@ import RefreshToken from '../app/models/RefreshTokenModel';
 import FavoriteStudentQuiz from '../app/models/FavoriteStudentQuiz';
 import Class from '../app/models/ClassModel';
 import Feedback from '../app/models/FeedbackModel';
+import Ranking from '../app/models/RankingModel';
 
 // Buffer
 const models = [
@@ -31,6 +32,7 @@ const models = [
   FavoriteStudentQuiz,
   Class,
   Feedback,
+  Ranking,
 ];
 
 class Database {

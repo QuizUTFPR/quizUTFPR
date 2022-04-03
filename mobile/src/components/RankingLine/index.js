@@ -28,38 +28,42 @@ const iconRank = {
   3: Medal3,
 };
 
-const ListOfStudents = ({ rank, isLoggedStudent, name, pontuation }) => {
-  console.log('rank', rank);
-  return (
-    <Wrapper>
-      <WrapperStudent key={rank} isLoggedStudent={!!isLoggedStudent}>
-        {rank < 4 ? (
-          <PositionOnRank>
-            <MedalImage source={iconRank[rank]} />
-          </PositionOnRank>
-        ) : (
-          <PositionOnRankText>
-            <PositionText>#{rank}</PositionText>
-          </PositionOnRankText>
-        )}
-        <StudentImage
-          source={{ uri: 'http://192.168.1.9:3333/avatars/avatar1.png' }}
-        />
-        <WrapperProgress>
-          <NameOfPlayer>{name}</NameOfPlayer>
-          <ProgressBar width="100px" />
-          <PontuationOfPlayer>{pontuation} pts.</PontuationOfPlayer>
-        </WrapperProgress>
-      </WrapperStudent>
-    </Wrapper>
-  );
-};
+const ListOfStudents = ({
+  rank,
+  isLoggedStudent,
+  name,
+  pontuation,
+  imageUrl,
+  porcentage,
+}) => (
+  <Wrapper>
+    <WrapperStudent key={rank} isLoggedStudent={!!isLoggedStudent}>
+      {rank < 4 ? (
+        <PositionOnRank>
+          <MedalImage source={iconRank[rank]} />
+        </PositionOnRank>
+      ) : (
+        <PositionOnRankText>
+          <PositionText>#{rank}</PositionText>
+        </PositionOnRankText>
+      )}
+      <StudentImage source={{ uri: imageUrl }} />
+      <WrapperProgress>
+        <NameOfPlayer>{name}</NameOfPlayer>
+        <ProgressBar porcentage={porcentage} />
+        <PontuationOfPlayer>{pontuation} pts.</PontuationOfPlayer>
+      </WrapperProgress>
+    </WrapperStudent>
+  </Wrapper>
+);
 
 ListOfStudents.defaultProps = {
   rank: 0,
   isLoggedStudent: false,
   name: '',
   pontuation: 0,
+  porcentage: 10,
+  imageUrl: 'http://192.168.1.9:3333/avatars/avatar1.png',
 };
 
 export default ListOfStudents;

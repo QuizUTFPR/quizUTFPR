@@ -308,6 +308,7 @@ const QuizDescription = ({ route }) => {
         onPress={() =>
           navigation.navigate('QuizRanking', {
             quizTitle: title,
+            quizId: id,
           })
         }
       />

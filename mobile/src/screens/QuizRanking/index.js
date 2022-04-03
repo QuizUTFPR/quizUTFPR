@@ -1,52 +1,124 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import api from '@api';
 
 // Components
 import RankingStudentItem from '@components/RankingLine';
 import FabButton from '@components/FabButton';
+import Toast from '@components/Toast';
+
+// HOOKS
+import useStudentAuth from '@hook/useStudentAuth';
 
 // Style
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StyledContainer, StyledFlatList } from './style';
 
-const Ranking = () => {
-  const students = [
-    { rank: 1, name: 'Lala' },
-    { rank: 2, name: 'Lala' },
-    { rank: 3, name: 'Lala' },
-    { rank: 4, name: 'Lala' },
-    { rank: 5, name: 'Lala' },
-    { rank: 6, name: 'Lala' },
-    { rank: 7, name: 'Lala' },
-    { rank: 8, name: 'Lala' },
-    { rank: 9, name: 'Lala' },
-    { rank: 10, name: 'Lala' },
-  ];
+const Ranking = ({ route }) => {
+  const { quizId } = route.params;
+  const {
+    studentInfo: { student },
+  } = useStudentAuth();
+  const [rankingQuizList, setRankingQuizList] = useState([]);
+  const [bestScore, setBestScore] = useState(1);
+  let myIdxToScroll = -1;
+
+  const [showToast, setShowToast] = useState({
+    open: false,
+    message: '',
+    type: 'success',
+  });
+
+  const handleCloseToast = () => {
+    setShowToast({
+      open: false,
+      message: '',
+    });
+  };
 
   const refList = useRef(null);
 
-  const myIdx = 4;
+  const getAllQuizRanking = async () => {
+    try {
+      const { data } = await api.post('/ranking/getAllQuizRanking', {
+        quizId,
+      });
+
+      const {
+        rankStudentQuiz: { score },
+      } = data[0];
+
+      setBestScore(score);
+      setRankingQuizList(data);
+    } catch (error) {
+      setShowToast({
+        open: true,
+        message: error.response.data.response,
+        type: 'error',
+      });
+    }
+  };
+
+  useEffect(() => {
+    getAllQuizRanking();
+
+    return () => {
+      setRankingQuizList([]);
+      setBestScore(1);
+    };
+  }, []);
 
   return (
-    <StyledContainer fill="white">
-      <StyledFlatList
-        ref={refList}
-        data={students}
-        renderItem={({ item, index }) => (
-          <RankingStudentItem isLoggedStudent={index === myIdx} {...item} />
-        )}
-        keyExtractor={({ rank }) => rank}
-      />
-      <FabButton
-        icon={<MaterialCommunityIcons name="target" size={28} color="white" />}
-        variant="primary"
-        onPress={() =>
-          refList.current.scrollToIndex({
-            animated: true,
-            index: myIdx,
-          })
-        }
-      />
-    </StyledContainer>
+    <>
+      <StyledContainer fill="white">
+        <StyledFlatList
+          ref={refList}
+          data={rankingQuizList}
+          renderItem={({ item, index }) => {
+            const name = item?.rankStudent?.name;
+            const pontuation = item?.rankStudentQuiz?.score;
+            const imageUrl = item?.rankStudent?.imageProfile?.url;
+
+            if (item.studentId === student.id) {
+              myIdxToScroll = index;
+            }
+
+            return (
+              <RankingStudentItem
+                isLoggedStudent={item.studentId === student.id}
+                rank={index + 1}
+                name={name}
+                porcentage={(pontuation * 100) / bestScore}
+                pontuation={pontuation}
+                imageUrl={imageUrl}
+              />
+            );
+          }}
+          keyExtractor={({ id }) => id}
+        />
+        <FabButton
+          icon={
+            <MaterialCommunityIcons name="target" size={28} color="white" />
+          }
+          variant="primary"
+          onPress={() => {
+            if (myIdxToScroll >= 0) {
+              refList.current.scrollToIndex({
+                animated: true,
+                index: myIdxToScroll,
+              });
+            }
+          }}
+        />
+      </StyledContainer>
+      <Toast
+        type={showToast.type}
+        handleClose={handleCloseToast}
+        open={showToast.open}
+        timeToErase={1000}
+      >
+        {showToast.message}
+      </Toast>
+    </>
   );
 };
 
