@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
-import getAllMethods from '../../utils/getMethodsOfAssociation';
+// import getAllMethods from '../../utils/getMethodsOfAssociation';
 
 // MODELS
 import Answer from '../../models/AnswerModel';

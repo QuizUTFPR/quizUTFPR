@@ -3,14 +3,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_URL } from '@env';
 import { navigate } from './rootNavigation';
 
-<<<<<<< HEAD
-// const ip = '10.0.0.103:3333';
-const ip = '10.0.2.2:3333'; // Android Studio ********NÃO APAGAR********
-// const ip = '192.168.1.4:3333';
-=======
-console.log('env', API_URL);
->>>>>>> 837be4e7f1e61eee757d1f2a51a90aec983284a2
-
 const api = axios.create({
   baseURL: API_URL,
 });
