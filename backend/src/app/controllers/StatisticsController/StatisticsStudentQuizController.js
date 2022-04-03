@@ -7,13 +7,13 @@ class StatisticsQuizController {
   async show(req, res) {
     try {
       let statistics;
-      const { quizId, classId } = req.body;
-      console.log('CLASS ID', classId);
+      const { quizId, classId, orderBy } = req.body;
 
       if (classId) {
         statistics = await GetFilteredStudentQuizStatisticsService.execute({
           quizId,
           classId,
+          orderBy,
         });
       } else {
         statistics = await GetStudentQuizStatisticsService.execute({
