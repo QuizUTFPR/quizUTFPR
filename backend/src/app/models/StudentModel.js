@@ -50,6 +50,11 @@ class Student extends Model {
       as: 'studentFavorite',
     });
 
+    this.hasMany(models.Ranking, {
+      foreignKey: 'studentId',
+      as: 'studentRank',
+    });
+
     this.belongsToMany(models.Class, {
       through: 'student_class',
       foreignKey: 'idStudent',
