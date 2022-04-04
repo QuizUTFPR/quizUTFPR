@@ -58,6 +58,7 @@ class GetAllClassRanking {
 
     const classStudentList = await classInstance.getClass_students({
       attributes: ['id', 'name', 'ra'],
+
       include: [
         {
           model: FileModel,
@@ -126,7 +127,9 @@ class GetAllClassRanking {
       })
     );
 
-    return returnedClassRanking;
+    return returnedClassRanking.sort(
+      (a, b) => b.rankStudentQuiz.score - a.rankStudentQuiz.score
+    );
   }
 }
 
