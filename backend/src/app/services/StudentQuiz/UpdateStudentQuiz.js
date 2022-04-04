@@ -153,6 +153,7 @@ class UpdateStudentQuizService {
       quizId,
       newStudentQuizId: idStudentQuiz,
       newScore: finalScore,
+      classId: studentQuizUpdated.classId,
     });
 
     return studentQuizUpdated;

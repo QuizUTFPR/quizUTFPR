@@ -25,6 +25,7 @@ class CreateOrUpdateStudentQuizRanking {
       newScore: Yup.number('Tipo number não válido para newScore').required(
         'Por favor, informe o novo score a ser comparado.'
       ),
+      classId: Yup.string('Tipo do ID da turma inválido').nullable(),
     });
 
     const validation = await schema.validate(data);
@@ -36,7 +37,9 @@ class CreateOrUpdateStudentQuizRanking {
       throw error;
     }
 
-    const { studentId, quizId, newStudentQuizId, newScore } = data;
+    const { studentId, quizId, newStudentQuizId, newScore, classId } = data;
+
+    console.log('data', data);
 
     let ranking;
 
@@ -49,6 +52,9 @@ class CreateOrUpdateStudentQuizRanking {
         {
           model: StudentQuiz,
           as: 'rankStudentQuiz',
+          where: {
+            classId: classId || null,
+          },
         },
       ],
     });

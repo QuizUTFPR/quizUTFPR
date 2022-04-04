@@ -14,7 +14,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StyledContainer, StyledFlatList } from './style';
 
 const Ranking = ({ route }) => {
-  const { quizId } = route.params;
+  const { quizId, classId } = route.params;
   const {
     studentInfo: { student },
   } = useStudentAuth();
@@ -41,6 +41,7 @@ const Ranking = ({ route }) => {
     try {
       const { data } = await api.post('/ranking/getAllQuizRanking', {
         quizId,
+        classId,
       });
 
       const {

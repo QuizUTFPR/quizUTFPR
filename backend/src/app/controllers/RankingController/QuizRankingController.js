@@ -4,10 +4,11 @@ import GetAllQuizRanking from '../../services/Ranking/GetAllQuizRanking';
 class QuizRankingController {
   async index(req, res) {
     try {
-      const { quizId } = req.body;
+      const { quizId, classId } = req.body;
 
       const quizRanking = await GetAllQuizRanking.execute({
         quizId,
+        classId,
       });
 
       return res.status(200).json(quizRanking);

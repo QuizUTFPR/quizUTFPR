@@ -18,6 +18,7 @@ class GetAllQuizRanking {
       quizId: Yup.string('Tipo de ID do quiz inválido.').required(
         'Por favor, informe o ID do quiz.'
       ),
+      classId: Yup.string('Tipo de ID da turma inválido.').nullable(),
     });
 
     const validation = await schema.validate(data);
@@ -29,7 +30,7 @@ class GetAllQuizRanking {
       throw error;
     }
 
-    const { quizId } = data;
+    const { quizId, classId } = data;
 
     const quizRanking = await this.rankingRepository.findAll({
       where: { quizId },
@@ -38,6 +39,9 @@ class GetAllQuizRanking {
           model: StudentQuiz,
           as: 'rankStudentQuiz',
           attributes: ['hitAmount', 'score'],
+          where: {
+            classId: classId || null, // A PESQUISA PODE SER FEITA COM OU SEM TURMAS
+          },
         },
         {
           model: StudentModel,

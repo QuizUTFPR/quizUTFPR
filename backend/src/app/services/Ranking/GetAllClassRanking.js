@@ -67,11 +67,8 @@ class GetAllClassRanking {
       throw error;
     }
 
-    // console.log(GetMethod(classIstance));
-
-    // const students = await classRepository.
-
     const classRanking = await this.rankingRepository.findAll({
+      attributes: ['studentId', 'quizId', 'studentQuizId'],
       where: {
         quizId: {
           [Op.in]: classQuizzesListOfId,
@@ -82,6 +79,9 @@ class GetAllClassRanking {
       },
       include: [
         {
+          where: {
+            classId: classId || null, // PEGA SOMENTE OS RANKING DA TURMA INFORMADA
+          },
           model: StudentQuiz,
           as: 'rankStudentQuiz',
           attributes: ['hitAmount', 'score'],
@@ -89,7 +89,7 @@ class GetAllClassRanking {
         {
           model: StudentModel,
           as: 'rankStudent',
-          attributes: ['id', 'name'],
+          attributes: ['name'],
           include: [
             {
               model: FileModel,
@@ -111,14 +111,14 @@ class GetAllClassRanking {
       ],
     });
 
-    // if (quizRanking.length === 0) {
-    //   const error = new Error();
-    //   error.status = 404;
-    //   error.response = 'Nenhuma tentativa encontrada!';
-    //   throw error;
-    // }
+    if (classRanking.length === 0) {
+      const error = new Error();
+      error.status = 404;
+      error.response = 'Nenhuma tentativa encontrada!';
+      throw error;
+    }
 
-    return { classRanking };
+    return classRanking;
   }
 }
 

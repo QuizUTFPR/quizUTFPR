@@ -51,7 +51,7 @@ import {
 
 const QuizDescription = ({ route }) => {
   // eslint-disable-next-line no-unused-vars
-  const { idStudentQuiz, questionAmount, studentChoicesAmount, quiz } =
+  const { idStudentQuiz, questionAmount, studentChoicesAmount, quiz, classId } =
     route.params;
   const { title, description, tags, id, pin, image, isFavorite, noTime } = quiz;
   const [visibleGiveUPModal, setVisibleGivUPModal] = useState(false);
@@ -67,7 +67,10 @@ const QuizDescription = ({ route }) => {
 
   const startQuizAndGetAllQuestions = async () => {
     try {
-      const { data } = await api.post('/studentQuiz/startQuiz', { quizId: id });
+      const { data } = await api.post('/studentQuiz/startQuiz', {
+        quizId: id,
+        classId,
+      });
       await getQuestionsOfQuizFromDatabase(id, data.id);
       navigation.navigate('CountDown');
     } catch (error) {
@@ -309,6 +312,7 @@ const QuizDescription = ({ route }) => {
           navigation.navigate('QuizRanking', {
             quizTitle: title,
             quizId: id,
+            classId,
           })
         }
       />

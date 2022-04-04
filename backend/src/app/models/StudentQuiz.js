@@ -9,6 +9,7 @@ class StudentQuiz extends Model {
         hitAmount: Sequelize.INTEGER,
         score: Sequelize.INTEGER,
         isFinished: Sequelize.BOOLEAN,
+        classId: Sequelize.UUID,
       },
       {
         sequelize,
@@ -24,6 +25,11 @@ class StudentQuiz extends Model {
     this.belongsTo(models.Student, {
       foreignKey: 'studentId',
       as: 'student',
+    });
+
+    this.belongsTo(models.Class, {
+      foreignKey: 'classId',
+      as: 'class',
     });
 
     this.belongsTo(models.Quiz, {

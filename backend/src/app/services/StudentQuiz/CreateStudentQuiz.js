@@ -10,9 +10,10 @@ class CreateStudentQuizService {
 
   async execute(data) {
     const schema = Yup.object().shape({
-      quizId: Yup.string('ID do quiz inválido!').required(
+      quizId: Yup.string('Tipo do ID do quiz inválido!').required(
         'Por favor, informe o id do quiz'
       ),
+      classId: Yup.string('Tipo do ID da turma inválido!'),
     });
 
     if (!(await schema.isValid(data.body))) {
@@ -24,7 +25,7 @@ class CreateStudentQuizService {
     }
 
     const studentId = data.userId;
-    const { quizId } = data.body;
+    const { quizId, classId } = data.body;
 
     const finished = await this.studentQuizRepository.create({
       studentId,
@@ -32,6 +33,7 @@ class CreateStudentQuizService {
       hitAmount: 0,
       score: 0,
       isFinished: false,
+      classId,
     });
 
     console.log('finished', finished);
