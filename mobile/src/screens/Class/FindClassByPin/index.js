@@ -33,7 +33,7 @@ const FindClassByPin = ({ hideDialog, visible }) => {
 
       handleSetClassData({
         id: data.id,
-        acher: data.teacher,
+        teacher: data.teacher,
         title: data.title,
         age: data?.image?.url,
         description: data.description,

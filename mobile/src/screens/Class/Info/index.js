@@ -24,6 +24,7 @@ import {
 const InfoOfClass = () => {
   const { classData, handleSetClassData } = useClass();
 
+  console.log('CLASS DATA', classData);
   const { teacher, title, description, pin, amountOfQuizzes, subscribed } =
     classData;
   const { name } = teacher;

@@ -12,7 +12,7 @@ import ClassRepository from '../../repositories/Class';
 import QuizRepository from '../../repositories/Quiz';
 
 // SERVICES
-import FilteredByBestAttemptService from './StudentQuizFilteredByAttempt/BestAttempt';
+import FilteredByAttemptService from './GetStudentQuizFilteredByAttempt';
 
 class GetFilteredStudentQuizStatisticsService {
   constructor() {
@@ -102,8 +102,9 @@ class GetFilteredStudentQuizStatisticsService {
       throw error;
     }
 
+    console.log(classInstance);
     const classStudents = await classInstance.getClass_students({
-      attributes: ['id', 'createdAt'],
+      attributes: ['id'],
     });
     const classStudentsId = classStudents.map(
       (classStudent) => classStudent.dataValues.id
@@ -115,19 +116,18 @@ class GetFilteredStudentQuizStatisticsService {
         studentId: {
           [Op.in]: classStudentsId,
         },
+        classId: classInstance.id,
       },
-      attributes: ['id', 'studentId', 'quizId', 'createdAt'],
+      attributes: ['studentId', 'quizId'],
       group: ['studentId'],
     });
 
-    if (!studentsWhoAnswered.length) {
-      const error = new Error();
-      error.status = 404;
-      error.response = 'Não há estudantes';
-      throw error;
-    }
-
-    console.log('STUDENTSWHOANSWERED', studentsWhoAnswered);
+    // if (!studentsWhoAnswered.length) {
+    //   const error = new Error();
+    //   error.status = 204;
+    //   error.response = 'Não há tentativas feitas dentro da turma!';
+    //   throw error;
+    // }
 
     let orderByQuery;
     let orderByError;
@@ -158,7 +158,7 @@ class GetFilteredStudentQuizStatisticsService {
     try {
       studentQuiz = await Promise.all(
         studentsWhoAnswered.map(async (choice) => {
-          const student = await FilteredByBestAttemptService.execute({
+          const student = await FilteredByAttemptService.execute({
             choice,
             query: {
               attributes: ['id', 'name', 'email'],
@@ -190,7 +190,6 @@ class GetFilteredStudentQuizStatisticsService {
               ],
             },
             orderByQuery,
-            classCreationDate: classInstance.createdAt,
           });
 
           console.log(student);
