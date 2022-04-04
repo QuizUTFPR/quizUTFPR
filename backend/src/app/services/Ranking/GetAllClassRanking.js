@@ -6,9 +6,9 @@ import RankingRepository from '../../repositories/Ranking';
 import ClassRepository from '../../repositories/Class';
 
 // MODELS
-import StudentModel from '../../models/StudentModel';
 import FileModel from '../../models/FileModel';
 import StudentQuiz from '../../models/StudentQuiz';
+import RankingModel from '../../models/RankingModel';
 
 // import GetMethod from '../../utils/getMethodsOfAssociation';
 
@@ -56,69 +56,77 @@ class GetAllClassRanking {
       throw error;
     }
 
-    const classStudentsListOfId = (await classInstance.getClass_students()).map(
-      (item) => item.id
-    );
-
-    if (!classStudentsListOfId) {
-      const error = new Error();
-      error.status = 404;
-      error.response = 'Nenhum estudante inscrito na turma!';
-      throw error;
-    }
-
-    const classRanking = await this.rankingRepository.findAll({
-      attributes: ['studentId', 'quizId', 'studentQuizId'],
-      where: {
-        quizId: {
-          [Op.in]: classQuizzesListOfId,
-        },
-        student_id: {
-          [Op.in]: classStudentsListOfId,
-        },
-      },
+    const classStudentList = await classInstance.getClass_students({
+      attributes: ['id', 'name', 'ra'],
       include: [
         {
-          where: {
-            classId: classId || null, // PEGA SOMENTE OS RANKING DA TURMA INFORMADA
-          },
-          model: StudentQuiz,
-          as: 'rankStudentQuiz',
-          attributes: ['hitAmount', 'score'],
+          model: FileModel,
+          as: 'imageProfile',
+          attributes: ['url', 'path'],
         },
         {
-          model: StudentModel,
-          as: 'rankStudent',
-          attributes: ['name'],
+          model: RankingModel,
+          as: 'studentRank',
+          where: {
+            quizId: {
+              [Op.in]: classQuizzesListOfId,
+            },
+          },
+          attributes: ['id'],
           include: [
             {
-              model: FileModel,
-              as: 'imageProfile',
-              attributes: ['url', 'path'],
+              where: {
+                classId,
+              },
+              model: StudentQuiz,
+              as: 'rankStudentQuiz',
+              attributes: ['hitAmount', 'score'],
             },
           ],
         },
       ],
-      order: [
-        [
-          {
-            model: StudentQuiz,
-            as: 'rankStudentQuiz',
-          },
-          'score',
-          'DESC',
-        ],
-      ],
     });
 
-    if (classRanking.length === 0) {
+    if (classStudentList.length === 0) {
       const error = new Error();
       error.status = 404;
       error.response = 'Nenhuma tentativa encontrada!';
       throw error;
     }
 
-    return classRanking;
+    const returnedClassRanking = await Promise.all(
+      classStudentList.map(async (props) => {
+        const {
+          id,
+          name,
+          ra,
+          imageProfile,
+          studentRank,
+          student_class: _,
+        } = props.dataValues;
+        let totalScore = 0;
+
+        studentRank.forEach((instance) => {
+          const { rankStudentQuiz } = instance;
+          const { score } = rankStudentQuiz;
+          totalScore += score;
+        });
+
+        return {
+          studentId: id,
+          rankStudent: {
+            name,
+            ra,
+            imageProfile,
+          },
+          rankStudentQuiz: {
+            score: totalScore,
+          },
+        };
+      })
+    );
+
+    return returnedClassRanking;
   }
 }
 
