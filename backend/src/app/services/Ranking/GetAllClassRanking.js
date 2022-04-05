@@ -103,14 +103,15 @@ class GetAllClassRanking {
           ra,
           imageProfile,
           studentRank,
+          // eslint-disable-next-line no-unused-vars
           student_class: _,
         } = props.dataValues;
         let totalScore = 0;
 
         studentRank.forEach((instance) => {
           const { rankStudentQuiz } = instance;
-          const { score } = rankStudentQuiz;
-          totalScore += score;
+          const { hitAmount } = rankStudentQuiz;
+          totalScore += hitAmount;
         });
 
         return {

@@ -92,7 +92,12 @@ class GetStudentQuizStatisticsService {
                 quizId,
                 isFinished: true,
               },
-              attributes: ['id', 'score', 'studentId'],
+              attributes: [
+                'id',
+                ['hit_amount', 'score'],
+                ['score', 'oldWayToCalculeteScore'],
+                'studentId',
+              ],
               include: [
                 {
                   model: StudentQuestionChoice,
