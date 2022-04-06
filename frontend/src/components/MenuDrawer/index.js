@@ -104,10 +104,7 @@ const MenuDrawer = () => {
                 horizontal: 'right',
               }}
             >
-              <Avatar
-                alt="Remy Sharp"
-                src="https://image.flaticon.com/icons/png/512/147/147144.png"
-              />
+              <Avatar alt={teacherInfo.teacher.name.toUpperCase()} src="" />
             </StyledBadge>
 
             <TextBox>

@@ -116,7 +116,7 @@ const Feedback = () => {
         type={showToast.type}
         handleClose={handleCloseToast}
         open={showToast.open}
-        timeToErase={1000}
+        timeToErase={3000}
       >
         {showToast.message}
       </Toast>

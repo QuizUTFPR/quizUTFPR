@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import api from '@api';
 
 // COMPONENTS
@@ -15,10 +15,12 @@ import AccordionStudentQuizStatistics from './AccordionStudentQuizStatistics';
 import { TitlePage } from './style';
 
 const Statistics = () => {
+  const { id } = useParams();
+  const { state: stateRoute } = useLocation();
+
   const [questionQuiz, setQuestionQuiz] = useState(false);
   const [studentQuiz, setStudentQuiz] = useState(false);
   const [quizPin, setQuizPin] = useState();
-  const { id } = useParams();
   const [teacherClasses, setTeacherClasses] = useState([]);
 
   const handleGetTeacherClasses = async () => {
@@ -85,6 +87,8 @@ const Statistics = () => {
     fetchData();
     handleGetTeacherClasses();
 
+    console.log('stateRoute', stateRoute);
+
     return () => setTeacherClasses([]);
   }, []);
 
@@ -121,15 +125,21 @@ const Statistics = () => {
         </TitlePage>
 
         <TextField
+          style={{ width: '100%' }}
           label="Turmas"
           id="turmas"
           name="turmas"
           variant="outlined"
-          onChange={(event) => handleGetStatistics(event.target.value)}
+          onChange={(event) => {
+            const arg =
+              event.target.value === 'all' ? null : event.target.value;
+            handleGetStatistics(arg);
+          }}
+          defaultValue={stateRoute?.idClass || 'all'}
           required
           select
         >
-          <MenuItem>Todos</MenuItem>
+          <MenuItem value="all">Todos</MenuItem>
           {teacherClasses.map((teacherClass) => (
             <MenuItem value={teacherClass.id} key={teacherClass.id}>
               {teacherClass.title}

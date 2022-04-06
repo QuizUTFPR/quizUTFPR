@@ -33,13 +33,13 @@ const CustomToolBar = () => {
         startIcon={<StyledExitIcon />}
         size="large"
       >
-        Sair
+        Voltar
       </StyledButton>
 
       {/* <ClassName>{location?.state?.title || 'Sem Título'}</ClassName> */}
 
       <WrapperTeacher>
-        <StyledAvatar src="https://image.flaticon.com/icons/png/512/147/147144.png" />
+        <StyledAvatar alt={teacherInfo.teacher.name} src="" />
         <NameTeacher>{teacherInfo.teacher.name}</NameTeacher>
       </WrapperTeacher>
     </ToolBar>

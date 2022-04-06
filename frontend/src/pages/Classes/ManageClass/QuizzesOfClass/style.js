@@ -28,7 +28,11 @@ export const ContainerContent = styled.div`
 `;
 
 export const WrapperQuiz = styled.div`
-  height: 200px;
+  height: 150px;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: space-between;
+
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   display: flex;
@@ -41,20 +45,20 @@ export const WrapperQuiz = styled.div`
 `;
 
 export const ImageQuiz = styled.img`
+  width: 200px;
   height: 100%;
-  width: 230px;
-  border-radius: 8px 0 0 8px;
 `;
 
 export const EmptyImage = styled.div`
-  height: 100%;
-  width: 230px;
   border-radius: 8px 0 0 8px;
+  flex-shrink: 0;
+  height: 100%;
+  width: 200px;
   background: ${({ theme }) => theme.palette.primary.main};
 
   @media (max-width: 768px) {
+    height: 70%;
     width: 100%;
-    height: 500px;
     border-radius: 8px 8px 0 0px;
   }
 `;
@@ -67,11 +71,7 @@ export const QuizInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  @media (max-width: 768px) {
-    width: 90%;
-    border-left: none;
-  }
+  overflow: hidden;
 `;
 
 export const QuizRightWrapper = styled.div`
@@ -79,6 +79,7 @@ export const QuizRightWrapper = styled.div`
   height: 100%;
   display: flex;
   border-radius: 0 8px 8px 0;
+  overflow: hidden;
 `;
 
 export const QuizTitle = styled.p`
@@ -99,16 +100,10 @@ export const QuizDescription = styled.p`
 export const WrapperActions = styled.div`
   height: 100%;
   flex-grow: 1;
-
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
-
-  @media (max-width: 768px) {
-    width: 20%;
-  }
 `;
 
 export const StyledIconButton = styled(IconButton)`

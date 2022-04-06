@@ -23,6 +23,7 @@ class GetAllQuizRanking {
         {
           model: RankingModel,
           as: 'studentRank',
+          required: true,
           attributes: ['id', 'quizId'],
           include: [
             {

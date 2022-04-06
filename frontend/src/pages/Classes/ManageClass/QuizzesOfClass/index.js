@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import api from '@api';
 
+// ROUTES
+import { STATISTICS_QUIZ } from '@routes';
+
 // Components
-import { Divider } from '@mui/material';
 import Tooltip from '@components/ToolTip';
-import { Delete } from '@mui/icons-material';
+import { Delete, BarChart } from '@mui/icons-material';
 import Modal from '@components/Modal';
+import { Divider } from '@mui/material';
 import ModalGetAvailableQuizzes from '../components/ModalGetAvailableQuizzes';
 
 // Style
@@ -29,6 +32,8 @@ import {
 import { ClassName } from '../style';
 
 const QuizzesOfClass = () => {
+  const navigate = useNavigate();
+
   const { state } = useLocation();
   const { idClass } = useParams();
   const [visibilityModal, setvisibilityModal] = useState(false);
@@ -102,9 +107,28 @@ const QuizzesOfClass = () => {
                       <QuizDescription>{quiz.description}</QuizDescription>
                     </QuizInfoWrapper>
 
-                    <WrapperActions onClick={() => handleRemoveQuiz(quiz.id)}>
+                    <WrapperActions>
+                      <Tooltip
+                        arrow
+                        ariaLabel="statistics"
+                        title="Visualizar estatisticas"
+                      >
+                        <StyledIconButton
+                          onClick={() =>
+                            navigate(`${STATISTICS_QUIZ}/${quiz.id}`, {
+                              state: {
+                                idClass,
+                              },
+                            })
+                          }
+                        >
+                          <BarChart />
+                        </StyledIconButton>
+                      </Tooltip>
                       <Tooltip arrow ariaLabel="deletar" title="Deletar">
-                        <StyledIconButton>
+                        <StyledIconButton
+                          onClick={() => handleRemoveQuiz(quiz.id)}
+                        >
                           <Delete />
                         </StyledIconButton>
                       </Tooltip>

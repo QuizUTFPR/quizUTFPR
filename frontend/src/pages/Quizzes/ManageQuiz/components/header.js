@@ -59,7 +59,7 @@ const Header = ({
             startIcon={<StyledExitIcon />}
             size="large"
           >
-            Sair
+            Voltar
           </StyledButton>
         </Grid>
 

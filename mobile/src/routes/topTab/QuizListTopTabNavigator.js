@@ -57,6 +57,13 @@ const TopTabNavigator = () => (
       }}
     >
       <TopTab.Screen
+        name="HomeRecentQuizzes"
+        component={HomeRecentQuizzes}
+        options={{
+          tabBarLabel: 'Novos',
+        }}
+      />
+      <TopTab.Screen
         name="QuizzesInProgress"
         component={HomeQuizInProgress}
         options={{ tabBarLabel: 'Em Andamento', headerShown: false }}
@@ -67,17 +74,10 @@ const TopTabNavigator = () => (
         options={{ tabBarLabel: 'Favoritos' }}
       />
       <TopTab.Screen
-        name="HomeRecentQuizzes"
-        component={HomeRecentQuizzes}
-        options={{
-          tabBarLabel: 'Novos',
-        }}
-      />
-      <TopTab.Screen
         name="HomeQuizzes"
         component={HomeQuizzes}
         options={{
-          tabBarLabel: 'Quizzes',
+          tabBarLabel: 'Todos',
         }}
       />
       <TopTab.Screen
