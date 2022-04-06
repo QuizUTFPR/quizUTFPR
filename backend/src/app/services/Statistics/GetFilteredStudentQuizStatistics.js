@@ -122,13 +122,6 @@ class GetFilteredStudentQuizStatisticsService {
       group: ['studentId'],
     });
 
-    // if (!studentsWhoAnswered.length) {
-    //   const error = new Error();
-    //   error.status = 204;
-    //   error.response = 'Não há tentativas feitas dentro da turma!';
-    //   throw error;
-    // }
-
     let orderByQuery;
     let orderByError;
     switch (orderBy) {
