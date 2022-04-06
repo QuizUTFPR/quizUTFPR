@@ -1,14 +1,16 @@
+// import StudentQuiz from '../../models/StudentQuiz';
+
 class FilteredByAttemptService {
   async execute(data) {
-    const { choice, query, orderBy } = data;
-    console.log('CREATED AT', choice);
+    const { choice, query, optionOrderBy } = data;
 
+    console.log('ORDER', optionOrderBy);
     const student = await choice.getStudent({
       ...query,
-      ...orderBy,
+      ...optionOrderBy,
     });
 
-    console.log('FILTER', student);
+    console.log('FILTER', student.studentQuiz);
     return { ...student.dataValues, studentQuiz: student.studentQuiz[0] };
   }
 }

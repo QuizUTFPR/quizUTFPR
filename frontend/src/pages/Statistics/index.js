@@ -38,7 +38,7 @@ const Statistics = () => {
         {
           quizId: id,
           classId,
-          orderBy: 'best',
+          orderBy: 'worst',
         }
       );
       setStudentQuiz(studentQuizStatistics);

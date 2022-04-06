@@ -122,11 +122,11 @@ class GetFilteredStudentQuizStatisticsService {
       group: ['studentId'],
     });
 
-    let orderByQuery;
-    let orderByError;
+    let optionOrderBy;
+    let errorOrderBy;
     switch (orderBy) {
       case 'best':
-        orderByQuery = {
+        optionOrderBy = {
           order: [
             [
               {
@@ -146,11 +146,41 @@ class GetFilteredStudentQuizStatisticsService {
         };
         break;
 
+      case 'worst':
+        optionOrderBy = {
+          order: [
+            [
+              {
+                model: StudentQuiz,
+                as: 'studentQuiz',
+              },
+              'score',
+              'ASC',
+            ],
+          ],
+        };
+        break;
+
+      case 'first':
+        optionOrderBy = {
+          order: [
+            [
+              {
+                model: StudentQuiz,
+                as: 'studentQuiz',
+              },
+              'createdAt',
+              'ASC',
+            ],
+          ],
+        };
+        break;
+
       default:
-        orderByError = new Error();
-        orderByError.status = 404;
-        orderByError.response = 'Opção de orderBy inexistente!';
-        throw orderByError;
+        errorOrderBy = new Error();
+        errorOrderBy.status = 404;
+        errorOrderBy.response = 'Opção de orderBy inexistente!';
+        throw errorOrderBy;
     }
 
     // GET ATTEMPTS FROM STUDENTS
@@ -194,10 +224,9 @@ class GetFilteredStudentQuizStatisticsService {
                 },
               ],
             },
-            orderByQuery,
+            optionOrderBy,
           });
 
-          console.log(student);
           return student;
         })
       );
