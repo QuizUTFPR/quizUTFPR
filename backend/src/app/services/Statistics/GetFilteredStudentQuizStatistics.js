@@ -128,7 +128,14 @@ class GetFilteredStudentQuizStatisticsService {
       case 'best':
         orderByQuery = {
           order: [
-            [{ model: StudentQuiz, as: 'studentQuiz' }, 'score', 'DESC'],
+            [
+              {
+                model: StudentQuiz,
+                as: 'studentQuiz',
+              },
+              'score',
+              'DESC',
+            ],
             // [
             //   { model: StudentQuiz, as: 'studentQuiz' },
             //   { model: StudentQuestionChoice, as: 'quizQuestionChoice' },
@@ -163,7 +170,12 @@ class GetFilteredStudentQuizStatisticsService {
                     quizId,
                     isFinished: true,
                   },
-                  attributes: ['id', 'score', 'studentId'],
+                  attributes: [
+                    'id',
+                    ['hit_amount', 'score'],
+                    ['score', 'oldWayToCalculeteScore'],
+                    'studentId',
+                  ],
                   include: [
                     {
                       model: StudentQuestionChoice,

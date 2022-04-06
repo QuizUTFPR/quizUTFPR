@@ -94,7 +94,7 @@ const Ranking = ({ route }) => {
               />
             );
           }}
-          keyExtractor={({ id }) => id}
+          keyExtractor={({ studentId }) => studentId}
         />
         <FabButton
           icon={

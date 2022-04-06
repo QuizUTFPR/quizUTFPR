@@ -38,7 +38,10 @@ class GetAllQuizRanking {
         {
           model: StudentQuiz,
           as: 'rankStudentQuiz',
-          attributes: ['hitAmount', 'score'],
+          attributes: [
+            ['hit_amount', 'score'],
+            ['score', 'oldWayToCalculeteScore'],
+          ],
           where: {
             classId: classId || null, // A PESQUISA PODE SER FEITA COM OU SEM TURMAS
           },
