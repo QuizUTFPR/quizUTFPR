@@ -6,13 +6,16 @@ import StudentQuestionChoice from '../../models/StudentQuestionChoice';
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
 
+// SERVICES
+import FilteredByAttemptService from './GetStudentQuizFilteredByAttempt';
+
 class GetStudentQuizStatisticsService {
   constructor() {
     this.quizRepository = new QuizRepository();
   }
 
   async execute(data) {
-    const { quizId } = data;
+    const { quizId, orderBy } = data;
 
     const quiz = await this.quizRepository.findByPk(quizId, {
       attributes: [
@@ -80,56 +83,109 @@ class GetStudentQuizStatisticsService {
       group: ['studentId'],
     });
 
-    const studentQuiz = await Promise.all(
-      studentQuizAttempt.map(async (choice) => {
-        const student = await choice.getStudent({
-          attributes: ['id', 'name', 'email'],
-          include: [
-            {
-              model: StudentQuiz,
-              as: 'studentQuiz',
-              where: {
-                quizId,
-                isFinished: true,
-              },
-              attributes: [
-                'id',
-                ['hit_amount', 'score'],
-                ['score', 'oldWayToCalculeteScore'],
-                'studentId',
-              ],
-              include: [
-                {
-                  model: StudentQuestionChoice,
-                  as: 'quizQuestionChoice',
-                  attributes: [
-                    'id',
-                    'timeLeft',
-                    'questionId',
-                    'checked1',
-                    'checked2',
-                    'checked3',
-                    'checked4',
-                  ],
-                },
-              ],
-            },
-          ],
+    let optionOrderBy;
+    let errorOrderBy;
+    switch (orderBy) {
+      case 'best':
+        optionOrderBy = {
           order: [
-            [{ model: StudentQuiz, as: 'studentQuiz' }, 'score', 'DESC'],
             [
-              { model: StudentQuiz, as: 'studentQuiz' },
-              { model: StudentQuestionChoice, as: 'quizQuestionChoice' },
-              'id',
+              {
+                model: StudentQuiz,
+                as: 'studentQuiz',
+              },
+              'score',
+              'DESC',
+            ],
+            // [
+            //   { model: StudentQuiz, as: 'studentQuiz' },
+            //   { model: StudentQuestionChoice, as: 'quizQuestionChoice' },
+            //   'id',
+            //   'ASC',
+            // ],
+          ],
+        };
+        break;
+
+      case 'worst':
+        optionOrderBy = {
+          order: [
+            [
+              {
+                model: StudentQuiz,
+                as: 'studentQuiz',
+              },
+              'score',
               'ASC',
             ],
           ],
+        };
+        break;
+
+      case 'first':
+        optionOrderBy = {
+          order: [
+            [
+              {
+                model: StudentQuiz,
+                as: 'studentQuiz',
+              },
+              'createdAt',
+              'ASC',
+            ],
+          ],
+        };
+        break;
+
+      default:
+        errorOrderBy = new Error();
+        errorOrderBy.status = 404;
+        errorOrderBy.response = 'Opção de orderBy inexistente!';
+        throw errorOrderBy;
+    }
+
+    const studentQuiz = await Promise.all(
+      studentQuizAttempt.map(async (choice) => {
+        const student = await FilteredByAttemptService.execute({
+          choice,
+          query: {
+            attributes: ['id', 'name', 'email'],
+            include: [
+              {
+                model: StudentQuiz,
+                as: 'studentQuiz',
+                where: {
+                  quizId,
+                  isFinished: true,
+                },
+                attributes: [
+                  'id',
+                  ['hit_amount', 'score'],
+                  ['score', 'oldWayToCalculeteScore'],
+                  'studentId',
+                ],
+                include: [
+                  {
+                    model: StudentQuestionChoice,
+                    as: 'quizQuestionChoice',
+                    attributes: [
+                      'id',
+                      'timeLeft',
+                      'questionId',
+                      'checked1',
+                      'checked2',
+                      'checked3',
+                      'checked4',
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          optionOrderBy,
         });
 
-        return {
-          ...student.dataValues,
-          studentQuiz: student.studentQuiz[0],
-        };
+        return student;
       })
     );
 

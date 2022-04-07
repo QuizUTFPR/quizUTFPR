@@ -9,6 +9,7 @@ class StatisticsQuizController {
       let statistics;
       const { quizId, classId, orderBy } = req.body;
 
+      console.log('BODY', req.body);
       if (classId) {
         statistics = await GetFilteredStudentQuizStatisticsService.execute({
           quizId,
@@ -18,6 +19,7 @@ class StatisticsQuizController {
       } else {
         statistics = await GetStudentQuizStatisticsService.execute({
           quizId,
+          orderBy,
         });
       }
 

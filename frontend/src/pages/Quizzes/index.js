@@ -144,7 +144,7 @@ const Quiz = () => {
               key={quiz.id}
               image={quiz.image?.url}
               imageTitle={quiz.title}
-              title={`${quiz.title}dawdawdwawdawdwadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd`}
+              title={`${quiz.title}`}
               description={quiz.description}
               to={`${QUESTION}${quiz.id}`}
               published={quiz.published}

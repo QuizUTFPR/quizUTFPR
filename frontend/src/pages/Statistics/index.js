@@ -22,6 +22,10 @@ const Statistics = () => {
   const [studentQuiz, setStudentQuiz] = useState(false);
   const [quizPin, setQuizPin] = useState();
   const [teacherClasses, setTeacherClasses] = useState([]);
+  const [filterData, setFilterData] = useState({
+    classId: null,
+    orderBy: 'best',
+  });
 
   const handleGetTeacherClasses = async () => {
     try {
@@ -33,14 +37,14 @@ const Statistics = () => {
     }
   };
 
-  const handleGetStatistics = async (classId) => {
+  const handleGetStatistics = async () => {
     try {
       const { data: studentQuizStatistics } = await api.post(
         '/statistics/getStudentQuizStatistics',
         {
           quizId: id,
-          classId,
-          orderBy: 'worst',
+          classId: filterData.classId,
+          orderBy: filterData.orderBy,
         }
       );
       setStudentQuiz(studentQuizStatistics);
@@ -59,35 +63,13 @@ const Statistics = () => {
     }
   };
 
-  const fetchData = async () => {
-    try {
-      const { data: studentQuizStatistics } = await api.post(
-        '/statistics/getStudentQuizStatistics',
-        {
-          quizId: id,
-        }
-      );
-      setStudentQuiz(studentQuizStatistics);
-
-      const { data: questionQuizStatistics } = await api.post(
-        '/statistics/getQuestionQuizStatistics',
-        {
-          quizId: id,
-        }
-      );
-
-      setQuestionQuiz(questionQuizStatistics);
-      setQuizPin(questionQuizStatistics.quiz.pin);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    handleGetStatistics();
+    console.log('FILTER CLASS', filterData);
+  }, [filterData]);
 
   useEffect(() => {
-    fetchData();
     handleGetTeacherClasses();
-
-    console.log('stateRoute', stateRoute);
 
     return () => setTeacherClasses([]);
   }, []);
@@ -124,6 +106,7 @@ const Statistics = () => {
           Estatisticas - {questionQuiz && questionQuiz.quiz.title}
         </TitlePage>
 
+        {/* CLASS FILTER */}
         <TextField
           style={{ width: '100%' }}
           label="Turmas"
@@ -133,7 +116,10 @@ const Statistics = () => {
           onChange={(event) => {
             const arg =
               event.target.value === 'all' ? null : event.target.value;
-            handleGetStatistics(arg);
+            setFilterData((prevState) => ({
+              ...prevState,
+              classId: arg,
+            }));
           }}
           defaultValue={stateRoute?.idClass || 'all'}
           required
@@ -145,6 +131,28 @@ const Statistics = () => {
               {teacherClass.title}
             </MenuItem>
           ))}
+        </TextField>
+
+        {/* ATTEMPT FILTER */}
+        <TextField
+          style={{ width: '100%' }}
+          label="Tentativa"
+          id="tentativas"
+          name="tentativa"
+          variant="outlined"
+          onChange={(event) => {
+            setFilterData((prevState) => ({
+              ...prevState,
+              orderBy: event.target.value,
+            }));
+          }}
+          defaultValue="best"
+          required
+          select
+        >
+          <MenuItem value="best">Melhor Tentativa</MenuItem>
+          <MenuItem value="worst">Pior Tentativa</MenuItem>
+          <MenuItem value="first">Primeira Tentativa</MenuItem>
         </TextField>
       </Grid>
       <Grid item>

@@ -184,55 +184,50 @@ class GetFilteredStudentQuizStatisticsService {
     }
 
     // GET ATTEMPTS FROM STUDENTS
-    let studentQuiz;
-    try {
-      studentQuiz = await Promise.all(
-        studentsWhoAnswered.map(async (choice) => {
-          const student = await FilteredByAttemptService.execute({
-            choice,
-            query: {
-              attributes: ['id', 'name', 'email'],
-              include: [
-                {
-                  model: StudentQuiz,
-                  as: 'studentQuiz',
-                  where: {
-                    quizId,
-                    isFinished: true,
-                  },
-                  attributes: [
-                    'id',
-                    ['hit_amount', 'score'],
-                    ['score', 'oldWayToCalculeteScore'],
-                    'studentId',
-                  ],
-                  include: [
-                    {
-                      model: StudentQuestionChoice,
-                      as: 'quizQuestionChoice',
-                      attributes: [
-                        'id',
-                        'timeLeft',
-                        'questionId',
-                        'checked1',
-                        'checked2',
-                        'checked3',
-                        'checked4',
-                      ],
-                    },
-                  ],
+    const studentQuiz = await Promise.all(
+      studentsWhoAnswered.map(async (choice) => {
+        const student = await FilteredByAttemptService.execute({
+          choice,
+          query: {
+            attributes: ['id', 'name', 'email'],
+            include: [
+              {
+                model: StudentQuiz,
+                as: 'studentQuiz',
+                where: {
+                  quizId,
+                  isFinished: true,
                 },
-              ],
-            },
-            optionOrderBy,
-          });
+                attributes: [
+                  'id',
+                  ['hit_amount', 'score'],
+                  ['score', 'oldWayToCalculeteScore'],
+                  'studentId',
+                ],
+                include: [
+                  {
+                    model: StudentQuestionChoice,
+                    as: 'quizQuestionChoice',
+                    attributes: [
+                      'id',
+                      'timeLeft',
+                      'questionId',
+                      'checked1',
+                      'checked2',
+                      'checked3',
+                      'checked4',
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          optionOrderBy,
+        });
 
-          return student;
-        })
-      );
-    } catch (error) {
-      console.log('ERROR', error);
-    }
+        return student;
+      })
+    );
 
     return { questions, studentQuiz };
   }
