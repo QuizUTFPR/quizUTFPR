@@ -3,6 +3,11 @@ module.exports = {
     browser: true,
     es2021: true,
   },
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+    DEV: 'readonly',
+  },
   extends: [
     'plugin:react/recommended',
     'airbnb',
@@ -36,6 +41,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/prop-types': 'off',
     'no-param-reassign': 'off',
+    'react/forbid-prop-types': 'off',
     'no-console': 'off',
     'react/function-component-definition': [
       2,

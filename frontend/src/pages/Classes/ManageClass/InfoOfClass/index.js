@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '@api';
 import { useParams } from 'react-router-dom';
+import Chart from 'react-apexcharts';
 
 // Style
 import { LibraryBooks, Person, LocationSearching } from '@mui/icons-material';
@@ -31,6 +32,23 @@ const InfoOfClass = () => {
     });
 
     setClassInstance(data);
+  };
+
+  const options = {
+    options: {
+      chart: {
+        id: 'basic-bar',
+      },
+      xaxis: {
+        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+      },
+    },
+    series: [
+      {
+        name: 'series-1',
+        data: [30, 40, 45, 50, 49, 60, 70, 91],
+      },
+    ],
   };
 
   useEffect(() => {
@@ -92,6 +110,13 @@ const InfoOfClass = () => {
           </ContentWrapperInformation>
         </WrapperInformation>
       </RightWrapper>
+
+      <Chart
+        options={options.options}
+        series={options.series}
+        type="bar"
+        width="500"
+      />
     </Wrapper>
   );
 };
