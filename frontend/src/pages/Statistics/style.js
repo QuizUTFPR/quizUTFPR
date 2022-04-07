@@ -4,6 +4,7 @@ import { Typography, AccordionSummary, Grid } from '@mui/material';
 
 export const TitlePage = styled(Typography)`
   overflow: hidden;
+  text-align: center;
 `;
 
 export const StyledAccordionSummary = styled(AccordionSummary)`
@@ -55,3 +56,15 @@ export const WrapperResumeQuestion = styled(Grid)`
 
 export const TextTitleResumeOfQuestion = styled(Typography)``;
 export const TextValueResumeOfQuestion = styled(Typography)``;
+
+export const TitleWrapper = styled.div`
+  flex-grow: 1;
+  padding-left: 16%;
+`;
+
+export const ContainerSelect = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 15%;
+`;

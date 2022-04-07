@@ -12,7 +12,7 @@ import AccordionQuizStatistics from './AccordionQuizStatistics';
 import AccordionStudentQuizStatistics from './AccordionStudentQuizStatistics';
 
 // STYLES
-import { TitlePage } from './style';
+import { TitlePage, ContainerSelect, TitleWrapper } from './style';
 
 const Statistics = () => {
   const { id } = useParams();
@@ -101,59 +101,68 @@ const Statistics = () => {
 
   return (
     <GridContainer container spacing={3}>
-      <Grid container align="center" justifyContent="center">
-        <TitlePage color="primary" component="p" variant="h4">
-          Estatisticas - {questionQuiz && questionQuiz.quiz.title}
-        </TitlePage>
+      <Grid
+        container
+        // align="center"
+        justifyContent="center"
+        style={{ width: '100%' }}
+      >
+        <TitleWrapper>
+          <TitlePage color="primary" component="p" variant="h4">
+            Estatísticas - {questionQuiz && questionQuiz.quiz.title}
+          </TitlePage>
+        </TitleWrapper>
 
         {/* CLASS FILTER */}
-        <TextField
-          style={{ width: '100%' }}
-          label="Turmas"
-          id="turmas"
-          name="turmas"
-          variant="outlined"
-          onChange={(event) => {
-            const arg =
-              event.target.value === 'all' ? null : event.target.value;
-            setFilterData((prevState) => ({
-              ...prevState,
-              classId: arg,
-            }));
-          }}
-          defaultValue={stateRoute?.idClass || 'all'}
-          required
-          select
-        >
-          <MenuItem value="all">Todos</MenuItem>
-          {teacherClasses.map((teacherClass) => (
-            <MenuItem value={teacherClass.id} key={teacherClass.id}>
-              {teacherClass.title}
-            </MenuItem>
-          ))}
-        </TextField>
+        <ContainerSelect>
+          <TextField
+            style={{ width: '100%' }}
+            label="Turmas"
+            id="turmas"
+            name="turmas"
+            variant="outlined"
+            onChange={(event) => {
+              const arg =
+                event.target.value === 'all' ? null : event.target.value;
+              setFilterData((prevState) => ({
+                ...prevState,
+                classId: arg,
+              }));
+            }}
+            defaultValue={stateRoute?.idClass || 'all'}
+            required
+            select
+          >
+            <MenuItem value="all">Todos</MenuItem>
+            {teacherClasses.map((teacherClass) => (
+              <MenuItem value={teacherClass.id} key={teacherClass.id}>
+                {teacherClass.title}
+              </MenuItem>
+            ))}
+          </TextField>
 
-        {/* ATTEMPT FILTER */}
-        <TextField
-          style={{ width: '100%' }}
-          label="Tentativa"
-          id="tentativas"
-          name="tentativa"
-          variant="outlined"
-          onChange={(event) => {
-            setFilterData((prevState) => ({
-              ...prevState,
-              orderBy: event.target.value,
-            }));
-          }}
-          defaultValue="best"
-          required
-          select
-        >
-          <MenuItem value="best">Melhor Tentativa</MenuItem>
-          <MenuItem value="worst">Pior Tentativa</MenuItem>
-          <MenuItem value="first">Primeira Tentativa</MenuItem>
-        </TextField>
+          {/* ATTEMPT FILTER */}
+          <TextField
+            style={{ width: '100%' }}
+            label="Tentativa"
+            id="tentativas"
+            name="tentativa"
+            variant="outlined"
+            onChange={(event) => {
+              setFilterData((prevState) => ({
+                ...prevState,
+                orderBy: event.target.value,
+              }));
+            }}
+            defaultValue="best"
+            required
+            select
+          >
+            <MenuItem value="best">Melhor Tentativa</MenuItem>
+            <MenuItem value="worst">Pior Tentativa</MenuItem>
+            <MenuItem value="first">Primeira Tentativa</MenuItem>
+          </TextField>
+        </ContainerSelect>
       </Grid>
       <Grid item>
         {/* {questionQuiz && studentQuiz && <TabMenu TabLabels={TabLabels} />} */}
