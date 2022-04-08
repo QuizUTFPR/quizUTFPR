@@ -11,6 +11,34 @@ class GetFilteredQuestionQuizStatisticsService {
     this.quizRepository = new QuizRepository();
   }
 
+  getPositionGraphObject(value) {
+    let result;
+
+    if (value <= 10) {
+      result = '0-10%';
+    } else if (value <= 20) {
+      result = '10%-20%';
+    } else if (value <= 30) {
+      result = '20%-30%';
+    } else if (value <= 40) {
+      result = '30%-40%';
+    } else if (value <= 50) {
+      result = '40%-50%';
+    } else if (value <= 60) {
+      result = '50%-60%';
+    } else if (value <= 70) {
+      result = '60%-70%';
+    } else if (value <= 80) {
+      result = '70%-80%';
+    } else if (value <= 90) {
+      result = '80%-90%';
+    } else {
+      result = '90%-100%';
+    }
+
+    return result;
+  }
+
   async execute(data) {
     const { quizId, classId, orderBy } = data;
 
@@ -158,7 +186,18 @@ class GetFilteredQuestionQuizStatisticsService {
     );
 
     let percentageOfQuizHit = 0; // % OF CORRECT ANSWERS CHOICES OF THE STUDENT
-    const countOfEachPorcentage = {};
+    const countOfEachPorcentage = {
+      '0-10%': 0,
+      '10%-20%': 0,
+      '20%-30%': 0,
+      '30%-40%': 0,
+      '40%-50%': 0,
+      '50%-60%': 0,
+      '60%-70%': 0,
+      '70%-80%': 0,
+      '80%-90%': 0,
+      '90%-100%': 0,
+    };
 
     // INCLUDING IN THE QUESTION ALL THE CHOICES OF THE STUDENT
     // WE ONLY CONSIDER THE CHOICE ABOUT THE BEST SCORE
@@ -240,9 +279,13 @@ class GetFilteredQuestionQuizStatisticsService {
         const percentageOfHit = (hitAmount * 100) / questionChoice.length;
         percentageOfQuizHit += percentageOfHit;
 
-        if (countOfEachPorcentage[percentageOfHit])
-          countOfEachPorcentage[percentageOfHit] += 1;
-        else countOfEachPorcentage[percentageOfHit] = 1;
+        const roundedPercentageOfHit = Math.floor(percentageOfHit);
+
+        const position = this.getPositionGraphObject(roundedPercentageOfHit);
+
+        if (countOfEachPorcentage[position])
+          countOfEachPorcentage[position] += 1;
+        else countOfEachPorcentage[position] = 1;
 
         return {
           avgOfTimeSpentToAnswer: avgOfTimeSpentToAnswer.toFixed(2),
@@ -260,8 +303,8 @@ class GetFilteredQuestionQuizStatisticsService {
       quiz,
       percentageOfQuizHit,
       questions: returnedQuestions,
-      countOfEachPorcentage: Object.fromEntries(
-        Object.entries(countOfEachPorcentage).sort()
+      countOfEachPorcentage: Object.entries(countOfEachPorcentage).sort(
+        (a, b) => a[0] - b[0]
       ),
     };
   }

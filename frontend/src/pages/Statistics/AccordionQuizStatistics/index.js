@@ -101,18 +101,32 @@ const AccordionWrapper = ({ quizData, quizPin }) => {
     questions = [],
     percentageOfQuizHit,
     quiz,
-    countOfEachPorcentage = {},
+    countOfEachPorcentage = [],
   } = quizData;
 
   const options = {
+    series: [
+      {
+        name: 'Quantidade de Alunos',
+        type: 'column',
+        data: countOfEachPorcentage.map((item) => item[1]),
+      },
+    ],
     options: {
       chart: {
         id: 'basic-bar',
+        type: 'bar',
+      },
+      legend: {
+        show: false,
       },
       xaxis: {
-        categories: Object.keys(countOfEachPorcentage).map(
-          (item) => `${item}%`
-        ),
+        categories: countOfEachPorcentage.map((item) => `${item[0]}%`),
+        labels: {
+          style: {
+            fontSize: '12px',
+          },
+        },
       },
       yaxis: [
         {
@@ -121,14 +135,23 @@ const AccordionWrapper = ({ quizData, quizPin }) => {
           },
         },
       ],
-    },
-    series: [
-      {
-        name: 'Quantidade de Alunos',
-        type: 'column',
-        data: Object.entries(countOfEachPorcentage).map((item) => item[1]),
+      dataLabels: {
+        enabled: true,
       },
-    ],
+      colors: ['#d4526e'],
+      stroke: {
+        show: false,
+      },
+
+      plotOptions: {
+        bar: {
+          borderRadius: 5,
+          dataLabels: {
+            position: 'center', // top, center, bottom
+          },
+        },
+      },
+    },
   };
 
   return (
@@ -154,7 +177,6 @@ const AccordionWrapper = ({ quizData, quizPin }) => {
           <Chart
             options={options.options}
             series={options.series}
-            type="bar"
             width="500"
           />
 
