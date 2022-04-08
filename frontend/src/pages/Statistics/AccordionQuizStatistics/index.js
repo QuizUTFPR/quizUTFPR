@@ -96,18 +96,18 @@ const checkStudentChoice = (answer, choices) => {
 };
 
 const AccordionWrapper = ({ quizData, quizPin }) => {
-  const { questions, percentageOfQuizHit, quiz } = quizData;
+  const { questions = [], percentageOfQuizHit, quiz } = quizData;
 
   return (
     <>
-      {!percentageOfQuizHit && (
+      {questions[0]?.questionChoice.length === 0 && (
         <QuizPercentageHitDescription>
           Seu Quiz não foi respondido por nenhum aluno até o momento. <br />
           Compartilhe seu Quiz utilizando o seguinte PIN {quizPin}
         </QuizPercentageHitDescription>
       )}
 
-      {percentageOfQuizHit && (
+      {questions[0]?.questionChoice.length > 0 && (
         <QuizPercentageHit>
           <CircularProgressWithLabel
             size={100}
@@ -127,7 +127,7 @@ const AccordionWrapper = ({ quizData, quizPin }) => {
         </QuizPercentageHit>
       )}
 
-      {percentageOfQuizHit &&
+      {questions[0]?.questionChoice.length > 0 &&
         questions.map((question, index) => (
           <Accordion
             key={question.id}

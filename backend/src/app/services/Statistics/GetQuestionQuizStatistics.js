@@ -63,7 +63,7 @@ class GetQuestionQuizStatisticsService {
       throw error;
     }
 
-    //  GETTING ALL THE STUDENT THAT ANSWERED THE QUIZ
+    // GETTING ALL THE STUDENT THAT ANSWERED THE QUIZ
     const studentQuizAttempt = await quiz.getQuizStudent({
       where: {
         isFinished: true,

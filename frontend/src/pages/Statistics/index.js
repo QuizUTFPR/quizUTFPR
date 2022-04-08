@@ -53,6 +53,8 @@ const Statistics = () => {
         '/statistics/getQuestionQuizStatistics',
         {
           quizId: id,
+          classId: filterData.classId,
+          orderBy: filterData.orderBy,
         }
       );
 
@@ -65,7 +67,6 @@ const Statistics = () => {
 
   useEffect(() => {
     handleGetStatistics();
-    console.log('FILTER CLASS', filterData);
   }, [filterData]);
 
   useEffect(() => {
