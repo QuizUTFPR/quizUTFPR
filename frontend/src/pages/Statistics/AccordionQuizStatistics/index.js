@@ -1,4 +1,5 @@
 import React from 'react';
+import Chart from 'react-apexcharts';
 
 // COMPONENTS
 import {
@@ -96,7 +97,39 @@ const checkStudentChoice = (answer, choices) => {
 };
 
 const AccordionWrapper = ({ quizData, quizPin }) => {
-  const { questions = [], percentageOfQuizHit, quiz } = quizData;
+  const {
+    questions = [],
+    percentageOfQuizHit,
+    quiz,
+    countOfEachPorcentage = {},
+  } = quizData;
+
+  const options = {
+    options: {
+      chart: {
+        id: 'basic-bar',
+      },
+      xaxis: {
+        categories: Object.keys(countOfEachPorcentage).map(
+          (item) => `${item}%`
+        ),
+      },
+      yaxis: [
+        {
+          title: {
+            text: 'Quantidade de Alunos',
+          },
+        },
+      ],
+    },
+    series: [
+      {
+        name: 'Quantidade de Alunos',
+        type: 'column',
+        data: Object.entries(countOfEachPorcentage).map((item) => item[1]),
+      },
+    ],
+  };
 
   return (
     <>
@@ -109,18 +142,25 @@ const AccordionWrapper = ({ quizData, quizPin }) => {
 
       {questions[0]?.questionChoice.length > 0 && (
         <QuizPercentageHit>
-          <CircularProgressWithLabel
+          {/* <CircularProgressWithLabel
             size={100}
             styleText={{
               fontSize: '2em',
               fontWeight: 'bolder',
             }}
             value={parseInt(percentageOfQuizHit, 10)}
+          /> */}
+
+          <Chart
+            options={options.options}
+            series={options.series}
+            type="bar"
+            width="500"
           />
 
           <QuizPercentageHitDescription>
-            Esta porcentagem é relacionada a quantidade de acertos que os
-            estudantes obterem em sua tentativa de maior score. <br />
+            O gráfico acima mostra a quantidade de alunos que atingiram
+            determinadas porcentagem de acerto. <br />
             Compartilhe o PIN ({quiz.pin}) para mais alunos responderem seu
             quiz.
           </QuizPercentageHitDescription>

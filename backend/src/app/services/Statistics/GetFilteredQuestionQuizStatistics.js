@@ -158,6 +158,7 @@ class GetFilteredQuestionQuizStatisticsService {
     );
 
     let percentageOfQuizHit = 0; // % OF CORRECT ANSWERS CHOICES OF THE STUDENT
+    const countOfEachPorcentage = {};
 
     // INCLUDING IN THE QUESTION ALL THE CHOICES OF THE STUDENT
     // WE ONLY CONSIDER THE CHOICE ABOUT THE BEST SCORE
@@ -239,6 +240,10 @@ class GetFilteredQuestionQuizStatisticsService {
         const percentageOfHit = (hitAmount * 100) / questionChoice.length;
         percentageOfQuizHit += percentageOfHit;
 
+        if (countOfEachPorcentage[percentageOfHit])
+          countOfEachPorcentage[percentageOfHit] += 1;
+        else countOfEachPorcentage[percentageOfHit] = 1;
+
         return {
           avgOfTimeSpentToAnswer: avgOfTimeSpentToAnswer.toFixed(2),
           percentageOfHit: percentageOfHit.toFixed(2),
@@ -251,7 +256,14 @@ class GetFilteredQuestionQuizStatisticsService {
 
     percentageOfQuizHit /= questions.length;
 
-    return { quiz, percentageOfQuizHit, questions: returnedQuestions };
+    return {
+      quiz,
+      percentageOfQuizHit,
+      questions: returnedQuestions,
+      countOfEachPorcentage: Object.fromEntries(
+        Object.entries(countOfEachPorcentage).sort()
+      ),
+    };
   }
 }
 
