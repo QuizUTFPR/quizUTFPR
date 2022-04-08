@@ -1,6 +1,4 @@
 import * as Yup from 'yup';
-import { Op } from 'sequelize';
-// import getAllMethods from '../../utils/getMethodsOfAssociation';
 
 // MODELS
 import Answer from '../../models/AnswerModel';
@@ -11,9 +9,6 @@ import StudentQuestionChoice from '../../models/StudentQuestionChoice';
 import ClassRepository from '../../repositories/Class';
 import QuizRepository from '../../repositories/Quiz';
 
-// SERVICES
-import FilteredByAttemptService from './GetStudentQuizFilteredByAttempt';
-
 class GetFilteredStudentQuizStatisticsService {
   constructor() {
     this.quizRepository = new QuizRepository();
@@ -23,7 +18,7 @@ class GetFilteredStudentQuizStatisticsService {
   async execute(data) {
     const schema = Yup.object().shape({
       quizId: Yup.string().required(),
-      classId: Yup.string().required(),
+      classId: Yup.string().nullable(),
       orderBy: Yup.string().required(),
     });
 
@@ -93,31 +88,17 @@ class GetFilteredStudentQuizStatisticsService {
       throw error;
     }
 
-    const classInstance = await this.classRepository.findById(classId);
-
-    if (!classInstance) {
-      const error = new Error();
-      error.status = 204;
-      error.response = 'Esta turma não está cadastrada no banco.';
-      throw error;
-    }
-
-    console.log(classInstance);
-    const classStudents = await classInstance.getClass_students({
-      attributes: ['id'],
-    });
-    const classStudentsId = classStudents.map(
-      (classStudent) => classStudent.dataValues.id
-    );
+    const whereCondition = classId
+      ? {
+          where: {
+            isFinished: true,
+            classId,
+          },
+        }
+      : { where: { isFinished: true } };
 
     const studentsWhoAnswered = await quiz.getQuizStudent({
-      where: {
-        isFinished: true,
-        studentId: {
-          [Op.in]: classStudentsId,
-        },
-        classId: classInstance.id,
-      },
+      ...whereCondition,
       attributes: ['studentId', 'quizId'],
       group: ['studentId'],
     });
@@ -136,12 +117,6 @@ class GetFilteredStudentQuizStatisticsService {
               'score',
               'DESC',
             ],
-            // [
-            //   { model: StudentQuiz, as: 'studentQuiz' },
-            //   { model: StudentQuestionChoice, as: 'quizQuestionChoice' },
-            //   'id',
-            //   'ASC',
-            // ],
           ],
         };
         break;
@@ -186,46 +161,43 @@ class GetFilteredStudentQuizStatisticsService {
     // GET ATTEMPTS FROM STUDENTS
     const studentQuiz = await Promise.all(
       studentsWhoAnswered.map(async (choice) => {
-        const student = await FilteredByAttemptService.execute({
-          choice,
-          query: {
-            attributes: ['id', 'name', 'email'],
-            include: [
-              {
-                model: StudentQuiz,
-                as: 'studentQuiz',
-                where: {
-                  quizId,
-                  isFinished: true,
-                },
-                attributes: [
-                  'id',
-                  ['hit_amount', 'score'],
-                  ['score', 'oldWayToCalculeteScore'],
-                  'studentId',
-                ],
-                include: [
-                  {
-                    model: StudentQuestionChoice,
-                    as: 'quizQuestionChoice',
-                    attributes: [
-                      'id',
-                      'timeLeft',
-                      'questionId',
-                      'checked1',
-                      'checked2',
-                      'checked3',
-                      'checked4',
-                    ],
-                  },
-                ],
+        const student = await choice.getStudent({
+          attributes: ['id', 'name', 'email'],
+          include: [
+            {
+              model: StudentQuiz,
+              as: 'studentQuiz',
+              where: {
+                quizId,
+                isFinished: true,
               },
-            ],
-          },
-          optionOrderBy,
+              attributes: [
+                'id',
+                ['hit_amount', 'score'],
+                ['score', 'oldWayToCalculeteScore'],
+                'studentId',
+              ],
+              include: [
+                {
+                  model: StudentQuestionChoice,
+                  as: 'quizQuestionChoice',
+                  attributes: [
+                    'id',
+                    'timeLeft',
+                    'questionId',
+                    'checked1',
+                    'checked2',
+                    'checked3',
+                    'checked4',
+                  ],
+                },
+              ],
+            },
+          ],
+          ...optionOrderBy,
         });
 
-        return student;
+        return { ...student.dataValues, studentQuiz: student.studentQuiz[0] };
       })
     );
 

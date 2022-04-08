@@ -1,27 +1,17 @@
 // SERVICES
-import GetStudentQuizStatisticsService from '../../services/Statistics/GetStudentQuizStatistics';
 import GetFilteredStudentQuizStatisticsService from '../../services/Statistics/GetFilteredStudentQuizStatistics';
 
 class StatisticsQuizController {
   // Lista todos os registros
   async show(req, res) {
     try {
-      let statistics;
       const { quizId, classId, orderBy } = req.body;
 
-      console.log('BODY', req.body);
-      if (classId) {
-        statistics = await GetFilteredStudentQuizStatisticsService.execute({
-          quizId,
-          classId,
-          orderBy,
-        });
-      } else {
-        statistics = await GetStudentQuizStatisticsService.execute({
-          quizId,
-          orderBy,
-        });
-      }
+      const statistics = await GetFilteredStudentQuizStatisticsService.execute({
+        quizId,
+        classId,
+        orderBy,
+      });
 
       return res.status(200).json(statistics);
     } catch (error) {

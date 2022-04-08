@@ -1,7 +1,3 @@
-import * as Yup from 'yup';
-import { Op } from 'sequelize';
-import GetAllMethods from '../../utils/getMethodsOfAssociation';
-
 // MODELS
 import Answer from '../../models/AnswerModel';
 import StudentQuiz from '../../models/StudentQuiz';
@@ -87,7 +83,6 @@ class GetFilteredQuestionQuizStatisticsService {
     let errorOrderBy;
     switch (orderBy) {
       case 'best':
-        console.log('AQUI');
         optionOrderBy = {
           order: [
             [
