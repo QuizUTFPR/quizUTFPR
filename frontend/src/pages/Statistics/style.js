@@ -59,12 +59,12 @@ export const TextValueResumeOfQuestion = styled(Typography)``;
 
 export const TitleWrapper = styled.div`
   flex-grow: 1;
-  padding-left: 16%;
 `;
 
 export const ContainerSelect = styled.div`
   display: flex;
-  flex-direction: column;
+  width: 95%;
   gap: 15px;
-  width: 15%;
+  align-self: center;
+  margin-top: 20px;
 `;

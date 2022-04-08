@@ -104,7 +104,7 @@ const Statistics = () => {
     <GridContainer container spacing={3}>
       <Grid
         container
-        // align="center"
+        align="center"
         justifyContent="center"
         style={{ width: '100%' }}
       >
@@ -113,58 +113,58 @@ const Statistics = () => {
             Estatísticas - {questionQuiz && questionQuiz.quiz.title}
           </TitlePage>
         </TitleWrapper>
-
-        {/* CLASS FILTER */}
-        <ContainerSelect>
-          <TextField
-            style={{ width: '100%' }}
-            label="Turmas"
-            id="turmas"
-            name="turmas"
-            variant="outlined"
-            onChange={(event) => {
-              const arg =
-                event.target.value === 'all' ? null : event.target.value;
-              setFilterData((prevState) => ({
-                ...prevState,
-                classId: arg,
-              }));
-            }}
-            defaultValue={stateRoute?.idClass || 'all'}
-            required
-            select
-          >
-            <MenuItem value="all">Todos</MenuItem>
-            {teacherClasses.map((teacherClass) => (
-              <MenuItem value={teacherClass.id} key={teacherClass.id}>
-                {teacherClass.title}
-              </MenuItem>
-            ))}
-          </TextField>
-
-          {/* ATTEMPT FILTER */}
-          <TextField
-            style={{ width: '100%' }}
-            label="Tentativa"
-            id="tentativas"
-            name="tentativa"
-            variant="outlined"
-            onChange={(event) => {
-              setFilterData((prevState) => ({
-                ...prevState,
-                orderBy: event.target.value,
-              }));
-            }}
-            defaultValue="best"
-            required
-            select
-          >
-            <MenuItem value="best">Melhor Tentativa</MenuItem>
-            <MenuItem value="worst">Pior Tentativa</MenuItem>
-            <MenuItem value="first">Primeira Tentativa</MenuItem>
-          </TextField>
-        </ContainerSelect>
       </Grid>
+
+      {/* CLASS FILTER */}
+      <ContainerSelect>
+        <TextField
+          style={{ width: '100%' }}
+          label="Turmas"
+          id="turmas"
+          name="turmas"
+          variant="outlined"
+          onChange={(event) => {
+            const arg =
+              event.target.value === 'all' ? null : event.target.value;
+            setFilterData((prevState) => ({
+              ...prevState,
+              classId: arg,
+            }));
+          }}
+          defaultValue={stateRoute?.idClass || 'all'}
+          required
+          select
+        >
+          <MenuItem value="all">Todos</MenuItem>
+          {teacherClasses.map((teacherClass) => (
+            <MenuItem value={teacherClass.id} key={teacherClass.id}>
+              {teacherClass.title}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        {/* ATTEMPT FILTER */}
+        <TextField
+          style={{ width: '100%' }}
+          label="Tentativa"
+          id="tentativas"
+          name="tentativa"
+          variant="outlined"
+          onChange={(event) => {
+            setFilterData((prevState) => ({
+              ...prevState,
+              orderBy: event.target.value,
+            }));
+          }}
+          defaultValue="best"
+          required
+          select
+        >
+          <MenuItem value="best">Melhor Tentativa</MenuItem>
+          <MenuItem value="worst">Pior Tentativa</MenuItem>
+          <MenuItem value="first">Primeira Tentativa</MenuItem>
+        </TextField>
+      </ContainerSelect>
       <Grid item>
         {/* {questionQuiz && studentQuiz && <TabMenu TabLabels={TabLabels} />} */}
         {studentQuiz && <TabMenu TabLabels={TabLabels} />}
