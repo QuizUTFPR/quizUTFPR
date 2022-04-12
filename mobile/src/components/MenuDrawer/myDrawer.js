@@ -22,7 +22,7 @@ import {
 
 const CustomSidebarMenu = ({ colors, ...props }) => {
   const { studentInfo, logout } = useStudentAuth();
-
+  console.log('studentInfo', studentInfo);
   return (
     <WrapperMyDrawer style={{ flex: 1 }}>
       <Avatar

@@ -3,11 +3,11 @@ import styled from 'styled-components/native';
 export const WrapperMyDrawer = styled.SafeAreaView``;
 
 export const Avatar = styled.Image.attrs({
-  resizeMode: 'center',
+  resizeMode: 'cover',
 })`
-  width: 100%;
+  width: 60%;
   height: 20%;
-  border-radius: 100px;
+  border-radius: 30px;
   align-self: center;
   margin-top: 40px;
 `;

@@ -7,6 +7,9 @@ import DeleteRefreshTokenService from '../RefreshToken/DeleteRefreshToken';
 import StudentRepository from '../../repositories/Student';
 import LDAPCreateStudent from './LDAPCreateStudent';
 
+// Models
+import File from '../../models/FileModel';
+
 class LDAPStudentSessionService {
   constructor() {
     this.studentRepository = new StudentRepository();
@@ -55,7 +58,15 @@ class LDAPStudentSessionService {
 
     let student = await this.studentRepository.findOne({
       where: { ra },
+      include: [
+        {
+          model: File,
+          as: 'imageProfile',
+        },
+      ],
     });
+
+    console.log('student', student);
 
     if (!student) {
       student = await LDAPCreateStudent.execute({
@@ -64,7 +75,7 @@ class LDAPStudentSessionService {
       });
     }
 
-    const { id, email, name, id_image } = student;
+    const { id, email, name, id_image, imageProfile } = student;
 
     // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
     await DeleteRefreshTokenService.execute({
@@ -80,6 +91,7 @@ class LDAPStudentSessionService {
         email,
         name,
         id_image,
+        image: imageProfile?.url,
       },
       token,
       refreshToken: refreshToken.id,
