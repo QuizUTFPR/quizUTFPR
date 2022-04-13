@@ -21,6 +21,7 @@ import {
   MiddleWrapper,
   AvatarWrapper,
   AvatarImage,
+  StyledFlatList,
 } from './style';
 
 const ChooseNicknameAndAvatar = () => {
@@ -80,15 +81,20 @@ const ChooseNicknameAndAvatar = () => {
         </InputWrapper>
       </TopWrapper>
       <MiddleWrapper>
-        {images.map((item, idx) => (
-          <AvatarWrapper
-            key={item}
-            isActive={idx === selectedAvatar}
-            onPress={() => setSelectedAvatar(idx)}
-          >
-            <AvatarImage source={{ uri: `${API_URL}/avatars/${item}` }} />
-          </AvatarWrapper>
-        ))}
+        <StyledFlatList
+          // numColumns={3}
+          data={images}
+          renderItem={({ item, index }) => (
+            <AvatarWrapper
+              key={item}
+              isActive={index === selectedAvatar}
+              onPress={() => setSelectedAvatar(index)}
+            >
+              <AvatarImage source={{ uri: `${API_URL}/avatars/${item}` }} />
+            </AvatarWrapper>
+          )}
+          keyExtractor={(item) => item}
+        />
       </MiddleWrapper>
 
       <BottomWrapper>

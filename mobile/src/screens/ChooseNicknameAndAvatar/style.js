@@ -34,9 +34,8 @@ export const TopWrapper = styled.View``;
 export const MiddleWrapper = styled.View`
   width: ${`${widthPercentageToDp('85%')}px`};
   flex: 1;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+
+  flex-grow: 1;
 `;
 
 export const BottomWrapper = styled.View`
@@ -62,3 +61,11 @@ export const AvatarImage = styled.Image.attrs({
   height: 75px;
   width: 75px;
 `;
+
+export const StyledFlatList = styled.FlatList.attrs({
+  numColumns: 3,
+  contentContainerStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+})``;
