@@ -74,8 +74,6 @@ class GetQuizzesFromTagsService {
       throw error;
     }
 
-    console.log('filteredQuizzesByTag', filteredQuizzesByTag);
-
     return filteredQuizzesByTag;
   }
 }

@@ -66,8 +66,6 @@ class LDAPStudentSessionService {
       ],
     });
 
-    console.log('student', student);
-
     if (!student) {
       student = await LDAPCreateStudent.execute({
         ra,

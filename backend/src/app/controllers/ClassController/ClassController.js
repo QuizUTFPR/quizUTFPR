@@ -25,7 +25,6 @@ class ClassController {
 
       return res.status(200).json(classCreated);
     } catch (error) {
-      console.log(error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
@@ -54,7 +53,6 @@ class ClassController {
 
       return res.status(200).json(classSearched);
     } catch (error) {
-      console.log(error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)

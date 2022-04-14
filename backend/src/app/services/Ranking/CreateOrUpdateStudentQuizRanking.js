@@ -39,8 +39,6 @@ class CreateOrUpdateStudentQuizRanking {
 
     const { studentId, quizId, newStudentQuizId, newScore, classId } = data;
 
-    console.log('data', data);
-
     let ranking;
 
     ranking = await this.rankingRepository.findOne({

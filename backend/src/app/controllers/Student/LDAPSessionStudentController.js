@@ -16,7 +16,6 @@ class LDAPSessionStudentController {
 
       return res.status(200).json(student);
     } catch (error) {
-      console.log('error', error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
@@ -36,7 +35,6 @@ class LDAPSessionStudentController {
 
       return res.status(200).json(student);
     } catch (error) {
-      console.log('error', error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)

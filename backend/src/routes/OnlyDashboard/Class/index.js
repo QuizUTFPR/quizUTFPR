@@ -12,6 +12,7 @@ import ClassTeacherController from '../../../app/controllers/ClassController/Cla
 import ClassStudentController from '../../../app/controllers/ClassController/ClassStudentController';
 import ClassQuizController from '../../../app/controllers/ClassController/ClassQuizController';
 import AvailableQuizzesController from '../../../app/controllers/ClassController/AvailableQuizzesController';
+import ClassStatisticsController from '../../../app/controllers/StatisticsController/ClassStatisticsController';
 
 // Crio uma instância do método Router;
 const router = new Router();
@@ -47,5 +48,7 @@ router.post('/attachQuiz', ClassQuizController.store);
 router.post('/availableQuizzes', AvailableQuizzesController.index);
 router.get('/getAllClassQuiz/:idClass', ClassQuizController.index);
 router.delete('/dettachQuiz', ClassQuizController.delete);
+
+router.get('/getStatistics/:classId', ClassStatisticsController.show);
 
 export default router;

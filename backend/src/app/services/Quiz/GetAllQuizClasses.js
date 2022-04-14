@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import getAllMethods from '../../utils/getMethodsOfAssociation';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
@@ -29,8 +28,6 @@ class GetAllQuizClassesService {
       error.status = 404;
       error.response = 'Quiz inexistente!';
     }
-
-    console.log('TESTE', getAllMethods(quiz));
   }
 }
 

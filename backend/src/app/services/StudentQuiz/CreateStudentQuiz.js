@@ -17,7 +17,6 @@ class CreateStudentQuizService {
     });
 
     if (!(await schema.isValid(data.body))) {
-      console.log('error');
       const error = new Error();
       error.status = 400;
       error.response = 'Falha na validação!';
@@ -35,8 +34,6 @@ class CreateStudentQuizService {
       isFinished: false,
       classId,
     });
-
-    console.log('finished', finished);
 
     return finished;
   }

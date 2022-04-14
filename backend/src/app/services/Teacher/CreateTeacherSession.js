@@ -57,7 +57,6 @@ class CreateTeacherSessionService {
       name: teacherName,
       // dn: personCategory,
     } = responseLoginLDAP.data;
-    console.log(teacherEmail);
 
     // IMPEDIR ALUNOS DE SE CONECTAR NO 1 DE CONTROLE
     // if ((personCategory.indexOf('alunos') !== -1)){
@@ -70,8 +69,6 @@ class CreateTeacherSessionService {
     let teacher = await this.teacherRepository.findOne({
       where: { uid: username },
     });
-
-    console.log('TEACHER', teacher);
 
     // FORMATANDO NOME DO PROFESSOR
     const splittedName = teacherName.split(' ');

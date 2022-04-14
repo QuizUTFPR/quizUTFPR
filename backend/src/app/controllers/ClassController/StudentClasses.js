@@ -12,7 +12,6 @@ class StudentClassesController {
 
       return res.status(200).json(studentClasses);
     } catch (error) {
-      console.log('STUDENT CLASSES ERROR', error);
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
