@@ -13,6 +13,7 @@ import ClassStudentController from '../../../app/controllers/ClassController/Cla
 import ClassQuizController from '../../../app/controllers/ClassController/ClassQuizController';
 import AvailableQuizzesController from '../../../app/controllers/ClassController/AvailableQuizzesController';
 import ClassStatisticsController from '../../../app/controllers/StatisticsController/ClassStatisticsController';
+import CloneClassController from '../../../app/controllers/ClassController/CloneClassController';
 
 // Crio uma instância do método Router;
 const router = new Router();
@@ -33,6 +34,12 @@ router.put(
 );
 router.get('/getAllClasses', ClassController.index);
 router.post('/getClass', ClassController.show);
+router.post(
+  '/cloneClass',
+  multerInstance.single('file'),
+  uploadImage,
+  CloneClassController.store
+);
 router.delete('/delete', ClassController.destroy);
 
 // TEACHER REALATION

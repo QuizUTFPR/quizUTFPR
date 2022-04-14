@@ -12,13 +12,14 @@ import Tooltip from '@components/ToolTip';
 import { Button, IconButton } from '@mui/material';
 
 // MATERIAL-UI ICONS
-import { Edit } from '@mui/icons-material';
+import { Edit, FileCopy } from '@mui/icons-material';
 
 // ROUTES
 import { CREATE_CLASS, MANAGE_CLASSES } from '@routes';
 
 // MODALS
 import EditClass from './EditClass';
+import CloneCLass from './CloneClass';
 
 // STYLE
 import { TextPIN, HeaderTitle, HeaderTitleText, HeaderDivider } from './style';
@@ -42,6 +43,11 @@ const MyClasses = () => {
     classData: null,
   });
 
+  const [modalClone, setModalClone] = useState({
+    status: false,
+    classData: null,
+  });
+
   const handleCloseEditModal = () => {
     setModalEdit({ status: false, class: null });
     getClasses();
@@ -49,6 +55,18 @@ const MyClasses = () => {
 
   const handleOpenEditModal = (classData) => () => {
     setModalEdit({
+      status: true,
+      classData,
+    });
+  };
+
+  const handleCloseCloneModal = () => {
+    setModalClone({ status: false, class: null });
+    getClasses();
+  };
+
+  const handleOpenCloneModal = (classData) => () => {
+    setModalClone({
       status: true,
       classData,
     });
@@ -96,6 +114,11 @@ const MyClasses = () => {
                   <Edit />
                 </IconButton>
               </Tooltip>
+              <Tooltip arrow ariaLabel="clonar" title="Clonar Turma">
+                <IconButton onClick={handleOpenCloneModal(classInstance)}>
+                  <FileCopy />
+                </IconButton>
+              </Tooltip>
             </Card>
           ))
         )}
@@ -112,6 +135,19 @@ const MyClasses = () => {
         <EditClass
           classObj={modalEdit.classData}
           handleClose={handleCloseEditModal}
+        />
+      </Modal>
+
+      <Modal
+        open={modalClone.status}
+        modalTitle="Realizar clone da Turma"
+        modalDescription="Preencha os dados do clone de sua turma..."
+        style={{ overflow: 'scroll' }}
+        handleClose={handleCloseCloneModal}
+      >
+        <CloneCLass
+          classObj={modalClone.classData}
+          handleClose={handleCloseCloneModal}
         />
       </Modal>
     </>

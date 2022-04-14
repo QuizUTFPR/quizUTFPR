@@ -18,6 +18,10 @@ class ClassRepository {
     });
   }
 
+  async getAllQuizzes(classInstance, otherProps) {
+    return classInstance.getClass_quizzes({ ...otherProps });
+  }
+
   async getAllStudents(classInstance, otherProps) {
     return classInstance.getClass_students({ ...otherProps });
   }
