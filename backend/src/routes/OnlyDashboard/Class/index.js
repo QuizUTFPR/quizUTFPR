@@ -49,6 +49,34 @@ router.post('/availableQuizzes', AvailableQuizzesController.index);
 router.get('/getAllClassQuiz/:idClass', ClassQuizController.index);
 router.delete('/dettachQuiz', ClassQuizController.delete);
 
-router.get('/getStatistics/:classId', ClassStatisticsController.show);
+router.get(
+  '/getStatistics/:classId/StudentThatFinishedMoreQuizzes',
+  (req, res, next) => {
+    req.type = 'GetStudentThatFinishedMoreQuizzes';
+
+    return next();
+  },
+  ClassStatisticsController.show
+);
+
+router.get(
+  '/getStatistics/:classId/StudentWhoHitMostQuestions',
+  (req, res, next) => {
+    req.type = 'GetStudentWhoHitMostQuestions';
+
+    return next();
+  },
+  ClassStatisticsController.show
+);
+
+router.get(
+  '/getStatistics/:classId/StudentThatDidntAnsweredQuizzes',
+  (req, res, next) => {
+    req.type = 'GetStudentThatDidntAnsweredQuizzes';
+
+    return next();
+  },
+  ClassStatisticsController.show
+);
 
 export default router;

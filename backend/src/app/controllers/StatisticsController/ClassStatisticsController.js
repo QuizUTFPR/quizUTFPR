@@ -2,29 +2,39 @@
 // import GetFilteredQuestionQuizStatistics from '../../services/Statistics/GetFilteredQuestionQuizStatistics';
 // import GetQuestionQuizStatisticsService from '../../services/Statistics/GetQuestionQuizStatistics';
 import GetStudentThatFinishedMoreQuizzes from '../../services/Statistics/GetStudentThatFinishedMoreQuizzes';
+import GetStudentWhoHitMostQuestions from '../../services/Statistics/GetStudentWhoHitMostQuestions';
+import GetStudentThatDidntAnsweredQuizzes from '../../services/Statistics/GetStudentThatDidntAnsweredQuizzes';
 
 class ClassStatisticsController {
   // Lista todos os registros
   async show(req, res) {
     try {
+      const { type } = req;
       const { classId } = req.params;
 
-      // const statistics = await GetQuestionQuizStatisticsService.execute({
-      //   quizId,
-      // });
+      let students;
 
-      const students = await GetStudentThatFinishedMoreQuizzes.execute({
-        classId,
+      if (type === 'GetStudentThatFinishedMoreQuizzes') {
+        students = await GetStudentThatFinishedMoreQuizzes.execute({
+          classId,
+        });
+      } else if (type === 'GetStudentWhoHitMostQuestions') {
+        students = await GetStudentWhoHitMostQuestions.execute({
+          classId,
+        });
+      } else if (type === 'GetStudentThatDidntAnsweredQuizzes') {
+        students = await GetStudentThatDidntAnsweredQuizzes.execute({
+          classId,
+        });
+      }
+
+      return res.status(200).json({
+        type,
+        students,
       });
-
-      // const statistics = await GetFilteredQuestionQuizStatistics.execute({
-      //   quizId,
-      //   classId,
-      //   orderBy,
-      // });
-
-      return res.status(200).json(students);
     } catch (error) {
+      console.log('error', error);
+
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)
