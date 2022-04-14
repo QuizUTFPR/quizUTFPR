@@ -6,6 +6,7 @@ import api from '@api';
 // Components
 import Tooltip from '@components/ToolTip';
 import { Send, Email } from '@mui/icons-material';
+import { MenuItem } from '@mui/material';
 
 // Style
 import {
@@ -18,25 +19,43 @@ import {
   TextBold,
   ActionsWrapper,
   StyledIconButton,
+  StyledTextField,
 } from './style';
+
+const selectOptions = {
+  1: 'Quem fez mais quizzes.',
+  2: 'Quem acertou mais questões.',
+  3: 'Quem não respondeu nenhum quiz.',
+};
+
+const selectOptionsRoutes = {
+  1: (idClass) =>
+    `/class/getStatistics/${idClass}/StudentThatFinishedMoreQuizzes`,
+  2: (idClass) => `/class/getStatistics/${idClass}/StudentWhoHitMostQuestions`,
+  3: (idClass) =>
+    `/class/getStatistics/${idClass}/StudentThatDidntAnsweredQuizzes`,
+};
 
 const StudentOfClass = () => {
   const [students, setStudents] = useState([]);
+  const [filterOption, setFilterOption] = useState(1);
   const { idClass } = useParams();
 
-  const getAllStudents = async () => {
+  const handleGetStatisticsOfClass = async (e) => {
     try {
-      const { data } = await api.get(`/class/getAllClassStudents/${idClass}`);
-      console.log('data', data);
-      setStudents(data);
+      const url = selectOptionsRoutes[filterOption](idClass);
+
+      const { data } = await api.get(url);
+      console.log('data.students', data.students);
+      setStudents(data.students);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getAllStudents();
-  }, []);
+    handleGetStatisticsOfClass();
+  }, [filterOption]);
 
   return (
     <Wrapper
@@ -46,6 +65,23 @@ const StudentOfClass = () => {
       exit={{ opacity: 0 }}
     >
       <StudentsWrapper>
+        <StyledTextField
+          style={{ width: '100%' }}
+          label="Ordenar por"
+          id="filterOption"
+          name="filterOption"
+          variant="outlined"
+          onChange={(e) => setFilterOption(e.target.value)}
+          value={filterOption}
+          required
+          select
+        >
+          {Object.entries(selectOptions).map((item) => (
+            <MenuItem key={item[0]} value={item[0]}>
+              {item[1]}
+            </MenuItem>
+          ))}
+        </StyledTextField>
         {students.map((item) => (
           <Student key={item.id}>
             <StyledAvatar src={item?.imageProfile?.url} />

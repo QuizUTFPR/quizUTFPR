@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 // REPOSITORIES
 import ClassRepository from '../../../repositories/Class';
+import File from '../../../models/FileModel';
 
 class GetAllStudentsFromClassService {
   constructor() {
@@ -30,7 +31,16 @@ class GetAllStudentsFromClassService {
       throw error;
     }
 
-    const students = await classInstance.getClass_students();
+    const students = await this.classRepository.getAllStudents(classInstance, {
+      attributes: ['id', 'name', 'ra', 'email'],
+      include: [
+        {
+          model: File,
+          as: 'imageProfile',
+          attributes: ['url', 'path'],
+        },
+      ],
+    });
 
     return students;
   }

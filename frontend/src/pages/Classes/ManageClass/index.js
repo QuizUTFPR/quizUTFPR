@@ -9,6 +9,7 @@ import Toolbaar from './components/Toolbar';
 import InfoOfClass from './InfoOfClass';
 import QuizzesOfClass from './QuizzesOfClass';
 import StudentOfClass from './StudentOfClass';
+import StatisticsOfClass from './StatisticsOfClass';
 
 // Style
 import { Container, Wrapper, WrapperMenu, ItemMenuContent } from './style';
@@ -25,6 +26,10 @@ const menu = [
   {
     label: 'Alunos',
     key: 2,
+  },
+  {
+    label: 'Estatística',
+    key: 3,
   },
 ];
 
@@ -53,6 +58,7 @@ const ManageClass = () => {
             {activeScreen === 0 && <InfoOfClass />}
             {activeScreen === 1 && <QuizzesOfClass />}
             {activeScreen === 2 && <StudentOfClass />}
+            {activeScreen === 3 && <StatisticsOfClass />}
           </AnimatePresence>
         </Wrapper>
       </Container>

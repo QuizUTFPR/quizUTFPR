@@ -27,7 +27,9 @@ class ClassStudentConstroller {
     try {
       const { idClass } = req.params;
 
-      const quizzes = await GetAllStudentsFromClassService.execute({ idClass });
+      const quizzes = await GetAllStudentsFromClassService.execute({
+        idClass,
+      });
 
       return res.status(200).json(quizzes);
     } catch (error) {

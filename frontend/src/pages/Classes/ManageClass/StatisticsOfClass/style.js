@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar, IconButton, TextField } from '@mui/material';
 import { motion } from 'framer-motion';
 
 export const Wrapper = styled(motion.div)``;
@@ -18,13 +18,14 @@ export const Student = styled.div`
   justify-content: space-between;
   border-radius: 8px;
   padding: 10px;
+  margin: 10px 0;
 `;
 
 export const StyledAvatar = styled(Avatar)`
   margin-right: 10px;
+  image-rendering: pixelated;
   width: 50px;
   height: 50px;
-  image-rendering: pixelated;
 
   @media (max-width: 450px) {
     width: 40px;
@@ -67,4 +68,8 @@ export const ActionsWrapper = styled.div`
 
 export const StyledIconButton = styled(IconButton)`
   width: fit-content;
+`;
+
+export const StyledTextField = styled(TextField)`
+  margin-bottom: 20px;
 `;
