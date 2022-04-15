@@ -7,12 +7,13 @@ import Card from '@components/Card';
 import Container from '@components/Container';
 import Modal from '@components/Modal';
 import Tooltip from '@components/ToolTip';
+import ConfirmRemove from '@components/ConfirmRemove';
 
 // MATERIAL-UI COMPONENTS
 import { Button, IconButton } from '@mui/material';
 
 // MATERIAL-UI ICONS
-import { Edit, FileCopy } from '@mui/icons-material';
+import { Edit, FileCopy, Delete } from '@mui/icons-material';
 
 // ROUTES
 import { CREATE_CLASS, MANAGE_CLASSES } from '@routes';
@@ -27,6 +28,21 @@ import { TextPIN, HeaderTitle, HeaderTitleText, HeaderDivider } from './style';
 const MyClasses = () => {
   const [classes, setClasses] = useState([]);
 
+  const [modalEdit, setModalEdit] = useState({
+    status: false,
+    classData: null,
+  });
+
+  const [modalClone, setModalClone] = useState({
+    status: false,
+    classData: null,
+  });
+
+  const [modalDelete, setModalDelete] = useState({
+    open: false,
+    idClass: null,
+  });
+
   const getClasses = async () => {
     try {
       const { data, status } = await api.get('/class/getAllTeacherClasses');
@@ -38,15 +54,26 @@ const MyClasses = () => {
       console.log(error);
     }
   };
-  const [modalEdit, setModalEdit] = useState({
-    status: false,
-    classData: null,
-  });
 
-  const [modalClone, setModalClone] = useState({
-    status: false,
-    classData: null,
-  });
+  const handleRemoveClass = async () => {
+    try {
+      await api.delete('/class/delete', {
+        data: {
+          id: modalDelete.idClass,
+        },
+      });
+
+      getClasses();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleOpenModalDelete = (idClass) => () =>
+    setModalDelete({ open: true, idClass });
+
+  const handleCloseModalDelete = () =>
+    setModalDelete({ open: false, idClass: null });
 
   const handleCloseEditModal = () => {
     setModalEdit({ status: false, class: null });
@@ -119,6 +146,11 @@ const MyClasses = () => {
                   <FileCopy />
                 </IconButton>
               </Tooltip>
+              <Tooltip arrow ariaLabel="deletar" title="Deletar Turma">
+                <IconButton onClick={handleOpenModalDelete(classInstance.id)}>
+                  <Delete />
+                </IconButton>
+              </Tooltip>
             </Card>
           ))
         )}
@@ -148,6 +180,15 @@ const MyClasses = () => {
         <CloneCLass
           classObj={modalClone.classData}
           handleClose={handleCloseCloneModal}
+        />
+      </Modal>
+
+      <Modal open={modalDelete.open} handleClose={handleCloseModalDelete}>
+        <ConfirmRemove
+          handleClose={handleCloseModalDelete}
+          onClick={handleRemoveClass}
+          title="Deseja mesmo excluir a Turma?"
+          description="Todos os dados referente turma serão excluídas."
         />
       </Modal>
     </>
