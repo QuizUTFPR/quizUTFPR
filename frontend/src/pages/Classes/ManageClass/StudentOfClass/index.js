@@ -5,7 +5,7 @@ import api from '@api';
 
 // Components
 import Tooltip from '@components/ToolTip';
-import { Send, Email } from '@mui/icons-material';
+import { Send, Email, Delete } from '@mui/icons-material';
 
 // Style
 import {
@@ -34,6 +34,14 @@ const StudentOfClass = () => {
     }
   };
 
+  const handleRemoveStudent = () => {
+    try {
+      console.log('teste');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getAllStudents();
   }, []);
@@ -54,15 +62,25 @@ const StudentOfClass = () => {
               <Text>{item.email}</Text>
             </WrapperText>
             <ActionsWrapper>
-              <Tooltip arrow ariaLabel="deletar" title="Enviar Notificação">
+              <Tooltip
+                arrow
+                ariaLabel="notification"
+                title="Enviar Notificação"
+              >
                 <StyledIconButton>
                   <Send />
                 </StyledIconButton>
               </Tooltip>
 
-              <Tooltip arrow ariaLabel="deletar" title="Enviar Email">
+              <Tooltip arrow ariaLabel="email" title="Enviar Email">
                 <StyledIconButton>
                   <Email />
+                </StyledIconButton>
+              </Tooltip>
+
+              <Tooltip arrow ariaLabel="deletar" title="Remover Aluno">
+                <StyledIconButton onClick={() => handleRemoveStudent(item.id)}>
+                  <Delete />
                 </StyledIconButton>
               </Tooltip>
             </ActionsWrapper>

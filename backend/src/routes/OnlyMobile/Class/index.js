@@ -14,6 +14,5 @@ router.get('/availableClasses', AvailableStudentClassesController.index);
 router.get('/studentClasses', StudentClassesController.index);
 router.get('/getAllClassQuizzes/:idClass', ClassQuizController.index);
 router.post('/attachStudent', ClassStudentController.store);
-router.delete('/dettachStudent', ClassStudentController.delete);
 
 export default router;

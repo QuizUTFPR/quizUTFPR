@@ -20,6 +20,9 @@ import ClassesMobile from './OnlyMobile/Class';
 import FeedbackMobile from './OnlyMobile/Feedback';
 import RankingMobile from './OnlyMobile/Ranking';
 
+// CONTROLLERS
+import ClassStudentController from '../app/controllers/ClassController/ClassStudentController';
+
 // MIDDLEWARES
 import verifyJWT from '../app/middlewares/jwtVerify';
 
@@ -40,6 +43,9 @@ router.use('/class', verifyJWT, Classes);
 router.use('/class', verifyJWT, ClassesMobile);
 router.use('/feedback', verifyJWT, FeedbackMobile);
 router.use('/ranking', verifyJWT, RankingMobile);
+
+// Other Routes
+router.delete('/class/dettachStudent', ClassStudentController.delete);
 
 router.get('/getAvatars', (req, res) => {
   try {
