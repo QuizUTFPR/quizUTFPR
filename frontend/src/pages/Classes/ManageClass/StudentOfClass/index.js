@@ -5,7 +5,11 @@ import api from '@api';
 
 // Components
 import Tooltip from '@components/ToolTip';
-import { Send, Email, Delete } from '@mui/icons-material';
+import {
+  // Send,
+  Email,
+  Delete,
+} from '@mui/icons-material';
 import ConfirmRemove from '@components/ConfirmRemove';
 import Modal from '@components/Modal';
 
@@ -83,7 +87,7 @@ const StudentOfClass = () => {
                 <Text>{item.email}</Text>
               </WrapperText>
               <ActionsWrapper>
-                <Tooltip
+                {/* <Tooltip
                   arrow
                   ariaLabel="notification"
                   title="Enviar Notificação"
@@ -91,10 +95,14 @@ const StudentOfClass = () => {
                   <StyledIconButton>
                     <Send />
                   </StyledIconButton>
-                </Tooltip>
+                </Tooltip> */}
 
                 <Tooltip arrow ariaLabel="email" title="Enviar Email">
-                  <StyledIconButton>
+                  <StyledIconButton
+                    onClick={() => {
+                      window.location = `mailto:${item.email}`;
+                    }}
+                  >
                     <Email />
                   </StyledIconButton>
                 </Tooltip>
