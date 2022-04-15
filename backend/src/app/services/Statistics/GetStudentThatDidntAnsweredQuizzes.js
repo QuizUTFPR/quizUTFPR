@@ -14,7 +14,7 @@ class GetStudentWhoHitMostQuestions {
 
   async execute(data) {
     const schema = Yup.object().shape({
-      classId: Yup.string().nullable(),
+      classId: Yup.string(),
     });
 
     if (!(await schema.isValid(data))) {

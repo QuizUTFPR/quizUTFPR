@@ -24,7 +24,7 @@ import {
 
 const selectOptions = {
   1: 'Quizzes respondidos.',
-  2: 'Questões respondidas.',
+  2: 'Questões acertadas.',
   3: 'Quem não respondeu nenhum quiz.',
 };
 
@@ -37,7 +37,8 @@ const selectOptionsRoutes = {
 };
 
 const StudentOfClass = () => {
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState([{}]);
+  const [type, setType] = useState('');
   const [filterOption, setFilterOption] = useState(1);
   const { idClass } = useParams();
 
@@ -46,8 +47,8 @@ const StudentOfClass = () => {
       const url = selectOptionsRoutes[filterOption](idClass);
 
       const { data } = await api.get(url);
-      console.log('data.students', data.students);
       setStudents(data.students);
+      setType(data.type);
     } catch (error) {
       console.log(error);
     }
@@ -89,19 +90,15 @@ const StudentOfClass = () => {
               <TextBold>{item.name}</TextBold>
               <Text>{item.email}</Text>
             </WrapperText>
-            <ActionsWrapper>
-              <Tooltip arrow ariaLabel="deletar" title="Enviar Notificação">
-                <StyledIconButton>
-                  <Send />
-                </StyledIconButton>
-              </Tooltip>
 
-              <Tooltip arrow ariaLabel="deletar" title="Enviar Email">
-                <StyledIconButton>
-                  <Email />
-                </StyledIconButton>
-              </Tooltip>
-            </ActionsWrapper>
+            {type !== 'GetStudentThatDidntAnsweredQuizzes' && (
+              <Text>
+                {item.totalHit}/{item.total}{' '}
+                {type === 'GetStudentThatFinishedMoreQuizzes'
+                  ? 'quizzes respondidos'
+                  : 'questões acertadas'}
+              </Text>
+            )}
           </Student>
         ))}
       </StudentsWrapper>

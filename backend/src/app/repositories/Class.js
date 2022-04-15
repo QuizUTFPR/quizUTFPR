@@ -26,6 +26,10 @@ class ClassRepository {
     return classInstance.getClass_students({ ...otherProps });
   }
 
+  async getCountClassQuizzes(classInstance, otherProps) {
+    return classInstance.countClass_quizzes({ ...otherProps });
+  }
+
   async removeStudentFromClass(classInstance, student) {
     classInstance.removeClass_student(student);
   }
