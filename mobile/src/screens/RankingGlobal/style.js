@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { widthPercentageToDp } from '@styles/dimensions';
 
 export const StyledContainer = styled.View`
-  background: ${({ theme }) => theme.color.fill};
+  /* background: ${({ theme }) => theme.color.fill}; */
   padding-top: ${({ theme }) => theme.size.padding + 5}px;
   flex: 1;
 `;

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import theme from '@theme';
 
 // ICONS
 
@@ -12,8 +11,7 @@ import {
   TextWrapper,
   Title,
   Paragraph,
-  GoBackButtonWrapper,
-  StyledIconButton,
+  HeaderButton,
 } from './style';
 
 const HeaderRanking = () => {
@@ -23,15 +21,9 @@ const HeaderRanking = () => {
     <HeaderWrapper>
       <BackgroundHeader>
         <HeaderInformations>
-          <GoBackButtonWrapper>
-            <StyledIconButton onPress={() => navigation.goBack()}>
-              <Ionicons
-                name="chevron-back"
-                size={32}
-                color={theme.color.purple}
-              />
-            </StyledIconButton>
-          </GoBackButtonWrapper>
+          <HeaderButton onPress={() => navigation.openDrawer()}>
+            <AntDesign name="menu-fold" size={32} color="white" />
+          </HeaderButton>
           <TextWrapper>
             <Title fill="white">Ranking Geral,</Title>
             <Paragraph fill="white">

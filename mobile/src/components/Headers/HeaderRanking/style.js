@@ -45,12 +45,6 @@ export const Paragraph = styled.Text.attrs({ numberOfLines: 2 })`
   width: 100%;
 `;
 
-export const GoBackButtonWrapper = styled(StyledButton).attrs({
-  colors: ['white', 'white'],
-})`
-  align-items: center;
-  width: 40px;
-  height: 40px;
-`;
-
-export const StyledIconButton = styled.Text``;
+export const HeaderButton = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.7,
+})``;

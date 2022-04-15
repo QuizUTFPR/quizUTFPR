@@ -3,6 +3,10 @@ import styled from 'styled-components/native';
 // DIMENSIONS
 import { heightPercentageToDp } from '@styles/dimensions';
 
+export const BackgroundWrapper = styled.View`
+  /* background: white; */
+`;
+
 export const StyledView = styled.View.attrs({ elevation: 5 })`
   flex-direction: row;
   height: ${`${heightPercentageToDp('10%')}px`};
