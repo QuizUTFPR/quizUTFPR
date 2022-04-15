@@ -1,5 +1,4 @@
 import * as Yup from 'yup';
-import getAllMethods from '../../utils/getMethodsOfAssociation';
 
 // MODELS
 import StudentQuiz from '../../models/StudentQuiz';
