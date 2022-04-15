@@ -14,7 +14,7 @@ class GetStudentWhoHitMostQuestions {
 
   async execute(data) {
     const schema = Yup.object().shape({
-      classId: Yup.string().nullable(),
+      classId: Yup.string(),
     });
 
     if (!(await schema.isValid(data))) {
@@ -34,6 +34,18 @@ class GetStudentWhoHitMostQuestions {
       error.response = 'Turma inexistente!';
       throw error;
     }
+
+    const classQuizzes = await this.classRepository.getAllQuizzes(
+      classInstance
+    );
+
+    let amountOfQuizzesQuestions = 0;
+    await Promise.all(
+      classQuizzes.map(async (quiz) => {
+        const amount = await quiz.countQuestions();
+        amountOfQuizzesQuestions += amount;
+      })
+    );
 
     const studentsFromClass = await this.classRepository.getAllStudents(
       classInstance,
@@ -88,7 +100,8 @@ class GetStudentWhoHitMostQuestions {
       );
       return {
         ...rest,
-        totalHitAmount: arrayOfHitAmount.length
+        total: amountOfQuizzesQuestions,
+        totalHit: arrayOfHitAmount.length
           ? arrayOfHitAmount.reduce((a, b) => a + b)
           : 0,
       };

@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import getAllMethods from '../../utils/getMethodsOfAssociation';
 
 // MODELS
 import StudentQuiz from '../../models/StudentQuiz';
@@ -14,7 +15,7 @@ class GetFilteredStudentQuizStatisticsService {
 
   async execute(data) {
     const schema = Yup.object().shape({
-      classId: Yup.string().nullable(),
+      classId: Yup.string(),
     });
 
     if (!(await schema.isValid(data))) {
@@ -65,6 +66,10 @@ class GetFilteredStudentQuizStatisticsService {
       throw error;
     }
 
+    const amountOfQuizzes = await this.classRepository.getCountClassQuizzes(
+      classInstance
+    );
+
     const formattedData = studentsFromClass.map((attemptFinished) => {
       const hashTableThatContainsAllTheIdQuizzesAnswered = {};
       const { studentQuiz, student_class, ...rest } =
@@ -80,9 +85,9 @@ class GetFilteredStudentQuizStatisticsService {
 
       return {
         ...rest,
-        amountOfQuizzesFinished: Object.keys(
-          hashTableThatContainsAllTheIdQuizzesAnswered
-        ).length,
+        total: amountOfQuizzes,
+        totalHit: Object.keys(hashTableThatContainsAllTheIdQuizzesAnswered)
+          .length,
       };
     });
 

@@ -1,6 +1,4 @@
 // SERVICES
-// import GetFilteredQuestionQuizStatistics from '../../services/Statistics/GetFilteredQuestionQuizStatistics';
-// import GetQuestionQuizStatisticsService from '../../services/Statistics/GetQuestionQuizStatistics';
 import GetStudentThatFinishedMoreQuizzes from '../../services/Statistics/GetStudentThatFinishedMoreQuizzes';
 import GetStudentWhoHitMostQuestions from '../../services/Statistics/GetStudentWhoHitMostQuestions';
 import GetStudentThatDidntAnsweredQuizzes from '../../services/Statistics/GetStudentThatDidntAnsweredQuizzes';
