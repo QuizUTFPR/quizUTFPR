@@ -23,8 +23,8 @@ import {
 } from './style';
 
 const selectOptions = {
-  1: 'Quem fez mais quizzes.',
-  2: 'Quem acertou mais questões.',
+  1: 'Quizzes respondidos.',
+  2: 'Questões respondidas.',
   3: 'Quem não respondeu nenhum quiz.',
 };
 
