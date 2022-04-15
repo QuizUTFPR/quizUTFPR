@@ -6,6 +6,7 @@ import api from '@api';
 
 // COMPONENTS
 import Container from '@components/Container';
+import NoContent from '@components/NoContent';
 
 // THEME
 import theme from '@theme';
@@ -53,6 +54,12 @@ const HomeQuizInProgress = () => {
 
   return (
     <Container>
+      {!isRefreshing && allQuizzesInProgress.length === 0 && (
+        <NoContent
+          title="Opps..."
+          subtitle="Você não possui nenhum quiz em andamento."
+        />
+      )}
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />

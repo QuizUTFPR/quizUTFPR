@@ -3,6 +3,7 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Text } from 'react-native';
 import api from '@api';
 import useClass from '@hook/useClass';
+import NoContent from '@components/NoContent';
 
 // THEME
 import theme from '@theme';
@@ -19,10 +20,14 @@ import {
 const QuizzesOfClass = () => {
   const navigation = useNavigation();
   const [classQuizzes, setClassQuizzes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const { classData } = useClass();
 
   const getClassQuizzes = async () => {
     try {
+      setLoading(true);
+
       const { data } = await api.get(
         `/class/getAllClassQuizzes/${classData.id}`
       );
@@ -30,22 +35,36 @@ const QuizzesOfClass = () => {
       setClassQuizzes(data);
     } catch (error) {
       console.log('quizzes class', { ...error });
+    } finally {
+      setLoading(false);
     }
   };
 
   useFocusEffect(
     useCallback(() => {
       getClassQuizzes();
+
+      return () => {
+        setLoading(true);
+      };
     }, [])
   );
 
   return (
     <ClassContainer fill="white">
+      {!loading && classQuizzes.length === 0 && (
+        <NoContent
+          title="Opps..."
+          subtitle="Você não se inscreveu em nenhuma turma."
+        />
+      )}
       <StyledScrollView>
-        <Title>Quizzes da Turma</Title>
+        {!loading && <Title>Quizzes da Turma</Title>}
 
         <QuizContainer>
-          {classQuizzes.length <= 0 && <Text>Nenhum quiz cadastrado...</Text>}
+          {classQuizzes.length <= 0 && !loading && (
+            <Text>Nenhum quiz cadastrado...</Text>
+          )}
           {classQuizzes.map((quiz) => (
             <StyledCardQuizBasic
               key={quiz.id}

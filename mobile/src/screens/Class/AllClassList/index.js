@@ -8,6 +8,7 @@ import api from '@api';
 // Components
 import Container from '@components/Container';
 import CardWithTeacherName from '@components/Card/WithTeacherName';
+import NoContent from '@components/NoContent';
 
 // HOOKS
 import useClass from '@hook/useClass';
@@ -17,15 +18,21 @@ import { StyledScrollView, ClassContainer } from './style';
 
 const ClassPage = () => {
   const [classList, setClassList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const navigation = useNavigation();
   const { handleSetClassData } = useClass();
 
   const getClasses = async () => {
     try {
+      setLoading(true);
       const { data } = await api.get('/class/availableClasses');
+
       setClassList(data.length ? data : []);
     } catch (error) {
       console.log('allclasslist', { ...error });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -33,6 +40,7 @@ const ClassPage = () => {
     useCallback(() => {
       getClasses();
       return () => {
+        setLoading(true);
         setClassList([]);
       };
     }, [])
@@ -40,18 +48,29 @@ const ClassPage = () => {
 
   return (
     <Container>
+      {!loading && classList.length === 0 && (
+        <NoContent
+          title="Opps..."
+          subtitle="Não encontramos nenhuma turma pública."
+        />
+      )}
       <StyledScrollView>
         <ClassContainer>
           {classList.map((item) => (
             <CardWithTeacherName
               key={item.id}
-              data={item}
+              data={{
+                ...item,
+                image: {
+                  url: item?.imageClass?.url,
+                },
+              }}
               navigate={() => {
                 handleSetClassData({
                   id: item.id,
                   teacher: item.teacher,
                   title: item.title,
-                  image: item?.image?.url,
+                  image: item?.imageClass?.url,
                   description: item.description,
                   pin: item.pin,
                   amountOfQuizzes: item.amountOfQuizzes,

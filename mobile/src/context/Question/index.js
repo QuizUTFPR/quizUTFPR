@@ -27,7 +27,6 @@ const Question = ({ children }) => {
   );
 
   const handleFinishQuizAnswering = async () => {
-    console.log('indo finalizr o quiz');
     const { data } = await api.put('/studentQuiz/finishQuiz', {
       idStudentQuiz: StudentQuizID,
       quizId: quizID,

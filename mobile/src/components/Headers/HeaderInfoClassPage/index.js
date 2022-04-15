@@ -40,7 +40,15 @@ const HeaderInfoClassPage = () => {
 
   return (
     <ClassInfoHeader>
-      <StyledImageBackground source={null}>
+      <StyledImageBackground
+        source={
+          classData?.image
+            ? {
+                uri: classData.image,
+              }
+            : null
+        }
+      >
         <GoBackButtonWrapper>
           <StyledIconButton onPress={() => navigation.goBack()}>
             <Ionicons name="chevron-back" size={32} color="white" />

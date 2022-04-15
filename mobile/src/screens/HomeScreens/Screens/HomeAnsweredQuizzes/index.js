@@ -5,6 +5,7 @@ import { RefreshControl } from 'react-native';
 
 // COMPONENTS
 import Container from '@components/Container';
+import NoContent from '@components/NoContent';
 
 // THEME
 import theme from '@theme';
@@ -53,6 +54,9 @@ const Home = () => {
 
   return (
     <Container>
+      {!isRefreshing && quizzes.length === 0 && (
+        <NoContent title="Opps..." subtitle="Você não respondeu nenhum quiz." />
+      )}
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />

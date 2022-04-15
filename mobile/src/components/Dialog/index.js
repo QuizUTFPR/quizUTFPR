@@ -32,7 +32,6 @@ const Dialog = ({
   const getSize = (event) => {
     const { nativeEvent } = event;
     const { layout } = nativeEvent;
-    console.log('nativeEvent', layout);
     setWidth(layout.width);
     setHeight(layout.height);
   };

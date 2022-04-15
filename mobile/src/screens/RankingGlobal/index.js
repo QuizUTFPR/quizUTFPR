@@ -5,6 +5,7 @@ import api from '@api';
 import RankingStudentItem from '@components/RankingLine';
 import FabButton from '@components/FabButton';
 import Toast from '@components/Toast';
+import NoContent from '@components/NoContent';
 
 // HOOKS
 import useStudentAuth from '@hook/useStudentAuth';
@@ -21,6 +22,7 @@ const Ranking = () => {
   const [bestScore, setBestScore] = useState(1);
   const [rankingList, setRankingList] = useState([]);
   let myIdxToScroll = -1;
+  const [loading, setLoading] = useState(true);
 
   const [showToast, setShowToast] = useState({
     open: false,
@@ -37,6 +39,7 @@ const Ranking = () => {
 
   const getGlobalRanking = async () => {
     try {
+      setLoading(true);
       const { data } = await api.get('/ranking/getGlobalRanking');
 
       const {
@@ -51,6 +54,8 @@ const Ranking = () => {
         message: error.response.data.response,
         type: 'error',
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,12 +65,19 @@ const Ranking = () => {
     return () => {
       setRankingList([]);
       setBestScore(1);
+      setLoading(true);
     };
   }, []);
 
   return (
     <>
       <StyledContainer fill="white">
+        {!loading && rankingList.length === 0 && (
+          <NoContent
+            title="Opps..."
+            subtitle="Nenhuma tentativa de resposta para os quizzes foi encontrada."
+          />
+        )}
         <StyledFlatList
           ref={refList}
           data={rankingList}
@@ -90,20 +102,22 @@ const Ranking = () => {
           }}
           keyExtractor={({ studentId }) => studentId}
         />
-        <FabButton
-          icon={
-            <MaterialCommunityIcons name="target" size={28} color="white" />
-          }
-          variant="primary"
-          onPress={() => {
-            if (myIdxToScroll >= 0) {
-              refList.current.scrollToIndex({
-                animated: true,
-                index: myIdxToScroll,
-              });
+        {rankingList.length > 0 && (
+          <FabButton
+            icon={
+              <MaterialCommunityIcons name="target" size={28} color="white" />
             }
-          }}
-        />
+            variant="primary"
+            onPress={() => {
+              if (myIdxToScroll >= 0) {
+                refList.current.scrollToIndex({
+                  animated: true,
+                  index: myIdxToScroll,
+                });
+              }
+            }}
+          />
+        )}
       </StyledContainer>
       <Toast
         type={showToast.type}

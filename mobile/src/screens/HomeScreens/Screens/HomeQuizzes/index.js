@@ -8,6 +8,7 @@ import api from '@api';
 import Container from '@components/Container';
 import theme from '@theme';
 import CardQuizBasic from '@components/Card/Basic';
+import NoContent from '@components/NoContent';
 
 // THEME
 import SeeMoreButton from '../../components/SeeMoreButton';
@@ -53,6 +54,9 @@ const HomeQuizzes = () => {
 
   return (
     <Container>
+      {!isRefreshing && allQuizzes.length === 0 && (
+        <NoContent title="Opps..." subtitle="Nenhum quiz encontrado." />
+      )}
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />

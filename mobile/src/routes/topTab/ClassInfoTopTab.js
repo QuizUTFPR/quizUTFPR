@@ -11,7 +11,7 @@ import useClass from '@hook/useClass';
 // Screens
 const InfoOfClass = lazy(() => import('@screens/Class/Info'));
 const QuizzesOfClass = lazy(() => import('@screens/Class/Quizzes'));
-const MessagesOfClass = lazy(() => import('@screens/Class/Messages'));
+// const MessagesOfClass = lazy(() => import('@screens/Class/Messages'));
 const Ranking = lazy(() => import('@screens/Class/Ranking'));
 
 // STACK
@@ -77,13 +77,13 @@ const SearchQuizByTagTopTab = () => {
                 tabBarLabel: 'Ranking',
               }}
             />
-            <TopTab.Screen
+            {/* <TopTab.Screen
               name="MessagesOfClass"
               component={MessagesOfClass}
               options={{
                 tabBarLabel: 'Mensagens',
               }}
-            />
+            /> */}
           </>
         )}
       </TopTab.Navigator>

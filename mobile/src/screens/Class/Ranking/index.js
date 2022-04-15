@@ -5,6 +5,7 @@ import api from '@api';
 import RankingStudentItem from '@components/RankingLine';
 import FabButton from '@components/FabButton';
 import Toast from '@components/Toast';
+import NoContent from '@components/NoContent';
 
 // HOOKS
 import useClass from '@hook/useClass';
@@ -26,6 +27,8 @@ const RankingClass = () => {
 
   const [rankingQuizList, setRankingClassList] = useState([]);
   const [bestScore, setBestScore] = useState(1);
+  const [loading, setLoading] = useState(true);
+
   let myIdxToScroll = -1;
 
   const refList = useRef(null);
@@ -45,11 +48,11 @@ const RankingClass = () => {
 
   const getAllClassRanking = async () => {
     try {
+      setLoading(true);
+
       const { data } = await api.post('/ranking/getAllClassRanking', {
         classId,
       });
-
-      console.log('data', data);
 
       const {
         rankStudentQuiz: { score },
@@ -63,6 +66,8 @@ const RankingClass = () => {
         message: error.response.data.response,
         type: 'error',
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -72,12 +77,19 @@ const RankingClass = () => {
     return () => {
       setRankingClassList([]);
       setBestScore(1);
+      setLoading(true);
     };
   }, []);
 
   return (
     <>
       <RankingContainer fill="white">
+        {!loading && rankingQuizList.length === 0 && (
+          <NoContent
+            title="Opps..."
+            subtitle="Você não se inscreveu em nenhuma turma."
+          />
+        )}
         <StyledFlatList
           ref={refList}
           data={rankingQuizList}
@@ -102,20 +114,22 @@ const RankingClass = () => {
           }}
           keyExtractor={({ id }) => id}
         />
-        <FabButton
-          icon={
-            <MaterialCommunityIcons name="target" size={28} color="white" />
-          }
-          variant="primary"
-          onPress={() => {
-            if (myIdxToScroll >= 0) {
-              refList.current.scrollToIndex({
-                animated: true,
-                index: myIdxToScroll,
-              });
+        {rankingQuizList.length > 0 && (
+          <FabButton
+            icon={
+              <MaterialCommunityIcons name="target" size={28} color="white" />
             }
-          }}
-        />
+            variant="primary"
+            onPress={() => {
+              if (myIdxToScroll >= 0) {
+                refList.current.scrollToIndex({
+                  animated: true,
+                  index: myIdxToScroll,
+                });
+              }
+            }}
+          />
+        )}
       </RankingContainer>
       <Toast
         type={showToast.type}

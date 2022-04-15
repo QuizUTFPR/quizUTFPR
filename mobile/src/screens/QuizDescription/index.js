@@ -144,7 +144,6 @@ const QuizDescription = ({ route }) => {
   useEffect(() => {
     const fetch = async () => {
       const hasError = await getQuizByTags();
-      // console.log('hasError', hasError);
 
       if (!hasError) {
         navigation.navigate('SearchQuizByTagStack', {
@@ -180,7 +179,6 @@ const QuizDescription = ({ route }) => {
                     // Atualizar favorito quando vier de uma tela anterior
                     // que nao realiza uma requisição para atualizar os estados
                     if (route.params?.shouldUpdateFavoriteStatus) {
-                      console.log('Atualizando estado do favorito!!');
                       route.params?.setIsFavoriteUpdatable(favorite);
                     }
                   }}

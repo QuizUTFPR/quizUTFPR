@@ -5,6 +5,7 @@ import api from '@api';
 import RankingStudentItem from '@components/RankingLine';
 import FabButton from '@components/FabButton';
 import Toast from '@components/Toast';
+import NoContent from '@components/NoContent';
 
 // HOOKS
 import useStudentAuth from '@hook/useStudentAuth';
@@ -21,6 +22,7 @@ const Ranking = ({ route }) => {
   const [rankingQuizList, setRankingQuizList] = useState([]);
   const [bestScore, setBestScore] = useState(1);
   let myIdxToScroll = -1;
+  const [loading, setLoading] = useState(true);
 
   const [showToast, setShowToast] = useState({
     open: false,
@@ -39,6 +41,7 @@ const Ranking = ({ route }) => {
 
   const getAllQuizRanking = async () => {
     try {
+      setLoading(true);
       const { data } = await api.post('/ranking/getAllQuizRanking', {
         quizId,
         classId,
@@ -56,6 +59,8 @@ const Ranking = ({ route }) => {
         message: error.response.data.response,
         type: 'error',
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,12 +70,19 @@ const Ranking = ({ route }) => {
     return () => {
       setRankingQuizList([]);
       setBestScore(1);
+      setLoading(true);
     };
   }, []);
 
   return (
     <>
       <StyledContainer fill="white">
+        {!loading && rankingQuizList.length === 0 && (
+          <NoContent
+            title="Opps..."
+            subtitle="Nenhuma tentativa de resposta para os quizzes foi encontrada."
+          />
+        )}
         <StyledFlatList
           ref={refList}
           data={rankingQuizList}
