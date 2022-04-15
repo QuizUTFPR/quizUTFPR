@@ -26,6 +26,10 @@ class ClassRepository {
     return classInstance.getClass_students({ ...otherProps });
   }
 
+  async removeStudentFromClass(classInstance, student) {
+    classInstance.removeClass_student(student);
+  }
+
   async findAll(props = {}) {
     return Class.findAll({ ...props });
   }

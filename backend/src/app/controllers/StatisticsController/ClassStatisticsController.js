@@ -33,8 +33,6 @@ class ClassStatisticsController {
         students,
       });
     } catch (error) {
-      console.log('error', error);
-
       return (
         (!!error.status && res.status(error.status).json(error)) ||
         res.status(500).json(error)

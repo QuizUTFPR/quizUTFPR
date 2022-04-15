@@ -24,6 +24,7 @@ class DeleteStudentFromClassService {
     }
 
     const { idClass, studentId } = data;
+
     const classInstance = await this.classRepository.findById(idClass);
 
     if (!classInstance) {
@@ -42,8 +43,13 @@ class DeleteStudentFromClassService {
       throw error;
     }
 
-    classInstance.removeClass_student(student);
+    await this.classRepository.removeStudentFromClass(classInstance, student);
 
+    // Removing all the informations about the relation student <-> class
+    await this.studentRepository.removeInformationsOfStudentAboutOneClass(
+      studentId,
+      idClass
+    );
     return student;
   }
 }
