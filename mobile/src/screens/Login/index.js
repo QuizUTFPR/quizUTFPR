@@ -25,7 +25,7 @@ import {
   BackgroundImage,
   InputWrapper,
   WrapperButton,
-  StyledTextButton,
+  // StyledTextButton,
 } from './styles';
 
 const Login = ({ navigation }) => {
@@ -146,12 +146,12 @@ const Login = ({ navigation }) => {
                   ENTRAR
                 </ButtonGradient>
               </WrapperButton>
-              <StyledTextButton
+              {/* <StyledTextButton
                 variant="secondary"
                 onPress={() => navigation.navigate('Register')}
               >
                 Não possui uma conta? Cadastre-se
-              </StyledTextButton>
+              </StyledTextButton> */}
             </>
           )}
         </Formik>

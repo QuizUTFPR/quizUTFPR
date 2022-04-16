@@ -5,7 +5,8 @@ import { widthPercentageToDp } from '@styles/dimensions';
 
 // SVG's AS REACT COMPONENTS
 import Pattern from '@assets/patterns/halftone.png';
-import LogoUTFPR from '@assets/utfpr/utfpr-transparente-branco.png';
+// import LogoUTFPR from '@assets/utfpr/utfpr-transparente-branco.png';
+import LogoUTFPR from '@assets/logo.png';
 
 export const Container = styled.View`
   align-items: center;
