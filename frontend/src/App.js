@@ -57,26 +57,20 @@ const App = () => {
 
   return (
     <Suspense fallback={<LinearProgress />}>
-      <Routes>
-        <Route path={TOKENEXPIRED} exact element={<ExpiredToken />} />
-        <Route path={LOGIN} exact element={<Login />} />
+      <QuestionQuizProvider>
+        <Routes>
+          <Route path={TOKENEXPIRED} exact element={<ExpiredToken />} />
+          <Route path={LOGIN} exact element={<Login />} />
 
-        <Route
-          path={`${QUESTION}:idQuiz`}
-          exact
-          element={
-            <QuestionQuizProvider>
-              <ManageQuiz />
-            </QuestionQuizProvider>
-          }
-        />
-        <Route
-          path={`${MANAGE_CLASSES}/:idClass`}
-          exact
-          element={<ManageClass />}
-        />
-        <Route path="*" element={<MainPage />} />
-      </Routes>
+          <Route path={`${QUESTION}:idQuiz`} exact element={<ManageQuiz />} />
+          <Route
+            path={`${MANAGE_CLASSES}/:idClass`}
+            exact
+            element={<ManageClass />}
+          />
+          <Route path="*" element={<MainPage />} />
+        </Routes>
+      </QuestionQuizProvider>
     </Suspense>
   );
 };

@@ -5,9 +5,7 @@ import Button from '@components/Button';
 import SnackBar from '@components/SnackBar';
 import { Container } from './style';
 
-const maxSize = 734003;
-
-const StyledDropzone = ({ handleChange }) => {
+const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize }) => {
   const [openSnackBar, setOpenSnackBar] = useState({
     message: '',
     open: false,
@@ -44,8 +42,8 @@ const StyledDropzone = ({ handleChange }) => {
     isDragAccept,
     isDragReject,
   } = useDropzone({
-    accept: 'image/*',
-    maxFiles: 1,
+    accept,
+    maxFiles,
     maxSize,
     onDropAccepted: (files) => {
       handleChange(files);
@@ -77,6 +75,12 @@ const StyledDropzone = ({ handleChange }) => {
       />
     </div>
   );
+};
+
+StyledDropzone.defaultProps = {
+  accept: 'image/*',
+  maxFiles: 1,
+  maxSize: 734003,
 };
 
 export default StyledDropzone;

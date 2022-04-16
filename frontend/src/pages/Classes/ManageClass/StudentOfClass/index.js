@@ -51,8 +51,6 @@ const StudentOfClass = () => {
 
   const handleRemoveStudent = async () => {
     try {
-      console.log('modalDelete', modalDelete);
-
       await api.delete('/class/dettachStudent', {
         params: {
           idClass,

@@ -5,13 +5,14 @@ import Modal from '@components/Modal';
 import Button from '@components/Button';
 import { IconButton, Grid, Typography, Divider } from '@mui/material';
 import Wrapper from '@components/RefferedContainer';
-
-// ASSETS
 import { Save, Search, Close } from '@mui/icons-material/';
 
 // HOOKS
 import useQuestionQuiz from '@hooks/QuestionQuiz';
+
+// MODALS
 import QuestionDatabase from '../ModalQuestionDatabase';
+import SheetQuestions from '../SheetQuestionModal';
 
 const TypeOfQuestion = forwardRef((props, ref) => {
   const {
@@ -19,6 +20,8 @@ const TypeOfQuestion = forwardRef((props, ref) => {
     handleClose,
     isModalQuestionDatabaseOpen,
     toogleModalQuestionDB,
+    isModalSheetQuestionOpen,
+    toogleModalSheetQuestionOpen,
   } = props;
 
   const {
@@ -91,6 +94,17 @@ const TypeOfQuestion = forwardRef((props, ref) => {
                 Verdadeiro ou Falso
               </Button>
             </Grid>
+            <Grid item xs={12}>
+              <Button
+                fullWidth
+                startIcon={<Save />}
+                color="secondary"
+                variant="outlined"
+                onClick={toogleModalSheetQuestionOpen}
+              >
+                Importar Planilha de Questões
+              </Button>
+            </Grid>
           </Grid>
         </Wrapper>
       )}
@@ -105,6 +119,22 @@ const TypeOfQuestion = forwardRef((props, ref) => {
           handleaddQuestion={addQuestion}
           handleRemoveQuestion={removeQuestion}
           handleClose={toogleModalQuestionDB}
+        />
+      </Modal>
+
+      <Modal
+        open={isModalSheetQuestionOpen}
+        modalTitle="Importar questões a planilha"
+        modalDescription="teste"
+        style={{ overflow: 'scroll' }}
+      >
+        <SheetQuestions
+          modalDescription="teste"
+          modalTitle="Importar questões a planilha"
+          handleClose={() => {
+            toogleModalSheetQuestionOpen();
+            handleClose();
+          }}
         />
       </Modal>
     </>

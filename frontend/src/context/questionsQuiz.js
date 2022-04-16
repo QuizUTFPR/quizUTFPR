@@ -1,6 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 import React, { createContext, useState } from 'react';
 import api from '@api';
 import * as yup from 'yup';
+import { read, utils } from 'xlsx';
 
 import {
   TrueOrFalseAnswer,
@@ -9,6 +11,9 @@ import {
   MockupQuestionMultipleChoice,
   initialValue,
   initialValueErrors,
+  OptionsOfTime,
+  optionsOfDifficultyLevel,
+  excelTypeOfQuestion,
 } from './mockupsQuestionQuiz';
 
 export const QuestionQuizContext = createContext();
@@ -219,6 +224,95 @@ const QuestionQuiz = ({ children }) => {
     handleChangeQuestion(targetQuestion, index - 1)();
   };
 
+  const handleAddQuestionFromExcelFile = (questionsFromExcel) => {
+    try {
+      const cells = {
+        title: (data) => data.__EMPTY_1,
+        type: (data) => data.__EMPTY_2,
+        answer1: (data) => data.__EMPTY_3,
+        answer2: (data) => data.__EMPTY_4,
+        answer3: (data) => data.__EMPTY_5,
+        answer4: (data) => data.__EMPTY_6,
+        correctAnswers: (data) => data.__EMPTY_7,
+        timer: (data) => data.__EMPTY_8,
+        difficultyLevel: (data) => data.__EMPTY_9,
+        availableOnQuestionsDB: (data) => data.__EMPTY_10,
+        tags: (data) => data.__EMPTY_11,
+      };
+
+      questionsFromExcel.forEach((item) => {
+        const lengthOfRow = Object.keys(item).length;
+
+        if (lengthOfRow > 1) {
+          const type = excelTypeOfQuestion[cells.type(item)];
+          let mockup = MockupQuestionTrueOrFalse;
+          let correctAnswer = cells.correctAnswers(item);
+
+          if (correctAnswer.length > 1) {
+            correctAnswer = correctAnswer.split(',').map(Number);
+          }
+
+          if (type === 'multipleChoice') {
+            mockup = MockupQuestionMultipleChoice;
+          } else if (correctAnswer.length > 1) {
+            throw new Error('erro v ou f');
+          }
+
+          const hasMoreThanOneCorrectAnswer = Array.isArray(correctAnswer);
+          mockup.answer.forEach((answerItem, idx) => {
+            answerItem.title = cells[`answer${idx + 1}`](item);
+            answerItem.isCorrect = hasMoreThanOneCorrectAnswer
+              ? correctAnswer.includes(idx + 1)
+              : correctAnswer - 1 === idx;
+          });
+
+          const newQuestion = {
+            ...mockup,
+            type,
+            title: cells.title(item),
+            timer: OptionsOfTime[cells.timer(item)],
+            difficultyLevel:
+              optionsOfDifficultyLevel[cells.difficultyLevel(item)],
+            availableOnQuestionsDB:
+              cells.availableOnQuestionsDB(item) === 'SIM',
+            tags: cells.tags(item).split(','),
+          };
+
+          addQuestion(newQuestion);
+        }
+      });
+
+      return true;
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const handleReadExcelFile = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+
+      fileReader.readAsArrayBuffer(file[0]);
+
+      fileReader.onload = (e) => {
+        const bufferArray = e.target.result;
+
+        const sheet = read(bufferArray, {
+          type: 'buffer',
+        });
+
+        const sheetName = sheet.SheetNames[0];
+        const targetSheet = sheet.Sheets[sheetName];
+
+        const dataJson = utils.sheet_to_json(targetSheet);
+
+        resolve(handleAddQuestionFromExcelFile(dataJson.slice(5)));
+      };
+
+      fileReader.onerror = (e) => reject(e);
+    });
+  };
+
   const validationSchemeArrayQuestion = yup.array().of(
     yup.object().shape({
       id: yup.number().required(),
@@ -315,6 +409,9 @@ const QuestionQuiz = ({ children }) => {
         initialValueErrors,
         questionToDown,
         questionToUp,
+        handleReadExcelFile,
+        OptionsOfTime,
+        optionsOfDifficultyLevel,
       }}
     >
       {children}

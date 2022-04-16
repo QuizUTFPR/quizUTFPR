@@ -47,6 +47,8 @@ const Question = () => {
     initialValueErrors,
     questionToDown,
     questionToUp,
+    OptionsOfTime,
+    optionsOfDifficultyLevel,
   } = useQuestionQuiz();
 
   const [openChangeTypeQuestionModal, setTypeQuestionModal] = useState({
@@ -60,6 +62,7 @@ const Question = () => {
   const [openDragImage, setOpenDragImage] = useState(false);
   const [isModalQuestionDatabaseOpen, setModalQuestionDatabaseOpen] =
     useState(false);
+  const [isModalSheetQuestionOpen, setModalSheetQuestion] = useState(false);
 
   const [onScreen, setOnScreen] = useState({
     index: 0,
@@ -89,6 +92,9 @@ const Question = () => {
   const handleCloseModalTypeQuestion = () => setOpenTypeOfQuestion(false);
   const toogleModalQuestionDB = () =>
     setModalQuestionDatabaseOpen((prevState) => !prevState);
+
+  const toogleModalSheetQuestionOpen = () =>
+    setModalSheetQuestion((prevState) => !prevState);
 
   const handleOpenGetOutAlert = () => setOpenGetOutAlert(true);
   const handleCloseGetOutAlert = () => setOpenGetOutAlert(false);
@@ -217,6 +223,8 @@ const Question = () => {
           updateQuestion={updateQuestion}
           questions={questions}
           handleOpenChangeTypeQuestion={handleOpenChangeTypeQuestion}
+          optionsOfTime={OptionsOfTime}
+          optionsOfDifficultyLevel={optionsOfDifficultyLevel}
         />
       </ContainerGrid>
       {/* MODALS */}
@@ -232,6 +240,8 @@ const Question = () => {
           handleClose={handleCloseModalTypeQuestion}
           toogleModalQuestionDB={toogleModalQuestionDB}
           isModalQuestionDatabaseOpen={isModalQuestionDatabaseOpen}
+          isModalSheetQuestionOpen={isModalSheetQuestionOpen}
+          toogleModalSheetQuestionOpen={toogleModalSheetQuestionOpen}
         />
       </Modal>
 

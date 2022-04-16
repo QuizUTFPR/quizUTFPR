@@ -84,3 +84,27 @@ export const initialValueErrors = {
   isCorrect: false,
   answer: false,
 };
+
+export const OptionsOfTime = {
+  '4 minutos': 240,
+  '3 minutos': 180,
+  '1 minuto': 120,
+  '60 segundos': 60,
+  '45 segundos': 45,
+  '30 segundos': 30,
+  '15 segundos': 15,
+  '10 segundos': 10,
+};
+
+export const optionsOfDifficultyLevel = {
+  'Muito Fácil': 'Muito Fácil',
+  Fácil: 'Fácil',
+  Médio: 'Médio',
+  Difícil: 'Difícil',
+  'Muito Difícil': 'Muito Difícil',
+};
+
+export const excelTypeOfQuestion = {
+  'MÚLTIPLA ESCOLHA': 'multipleChoice',
+  'V OU F': 'singleChoice',
+};

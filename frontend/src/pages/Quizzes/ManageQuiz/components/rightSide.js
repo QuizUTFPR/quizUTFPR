@@ -22,6 +22,8 @@ const RightSide = ({
   questions,
   handleOpenChangeTypeQuestion,
   location,
+  optionsOfTime,
+  optionsOfDifficultyLevel,
 }) => (
   <Grid item xs={3}>
     <StyledRightGrid container align="center" direction="column">
@@ -77,14 +79,11 @@ const RightSide = ({
                 }}
                 required
               >
-                <option value={240}>4 minutos</option>
-                <option value={180}>3 minutos</option>
-                <option value={120}>2 minutos</option>
-                <option value={60}>1 minuto</option>
-                <option value={45}>45 segundos</option>
-                <option value={30}>30 segundos</option>
-                <option value={15}>15 segundos</option>
-                <option value={10}>10 segundos</option>
+                {Object.entries(optionsOfTime).map((item) => (
+                  <option key={item[1]} value={item[1]}>
+                    {item[0]}
+                  </option>
+                ))}
               </SelectInput>
             </GridItemStyledRight>
           )}
@@ -122,11 +121,11 @@ const RightSide = ({
               }}
               required
             >
-              <option value="Muito Fácil">Muito Fácil</option>
-              <option value="Fácil">Fácil</option>
-              <option value="Médio">Médio</option>
-              <option value="Difícil">Difícil</option>
-              <option value="Muito Difícil">Muito Difícil</option>
+              {Object.entries(optionsOfDifficultyLevel).map((item) => (
+                <option key={item[0]} value={item[0]}>
+                  {item[1]}
+                </option>
+              ))}
             </SelectInput>
           </GridItemStyledRight>
 
