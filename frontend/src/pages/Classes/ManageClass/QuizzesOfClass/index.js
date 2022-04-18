@@ -10,6 +10,7 @@ import Tooltip from '@components/ToolTip';
 import { Delete, BarChart } from '@mui/icons-material';
 import Modal from '@components/Modal';
 import { Divider } from '@mui/material';
+import AlertRemoveMessage from '@components/ConfirmRemove';
 import ModalGetAvailableQuizzes from '../components/ModalGetAvailableQuizzes';
 
 // Style
@@ -38,6 +39,17 @@ const QuizzesOfClass = () => {
   const { state } = useLocation();
   const { idClass } = useParams();
   const [visibilityModal, setvisibilityModal] = useState(false);
+
+  const [modalDettachQuiz, setmodalDettachQuiz] = useState({
+    open: false,
+    idQuiz: null,
+  });
+
+  const handleOpenModelDettachQuiz = (idQuiz) =>
+    setmodalDettachQuiz({ open: true, idQuiz });
+  const handleCloseModelDettachQuiz = () =>
+    setmodalDettachQuiz({ open: false, idQuiz: null });
+
   const [quizzes, setQuizzes] = useState([]);
 
   const getAttachedQuizzes = async () => {
@@ -58,10 +70,10 @@ const QuizzesOfClass = () => {
 
   const toogleModal = () => setvisibilityModal((prevState) => !prevState);
 
-  const handleRemoveQuiz = async (idQuiz) => {
+  const handleRemoveQuiz = async () => {
     try {
       await api.delete('/class/dettachQuiz', {
-        data: { idClass, idQuiz },
+        data: { idClass, idQuiz: modalDettachQuiz.idQuiz },
       });
 
       getAttachedQuizzes();
@@ -133,7 +145,7 @@ const QuizzesOfClass = () => {
                       </Tooltip>
                       <Tooltip arrow ariaLabel="deletar" title="Deletar">
                         <StyledIconButton
-                          onClick={() => handleRemoveQuiz(quiz.id)}
+                          onClick={() => handleOpenModelDettachQuiz(quiz.id)}
                         >
                           <Delete />
                         </StyledIconButton>
@@ -156,6 +168,18 @@ const QuizzesOfClass = () => {
         <ModalGetAvailableQuizzes
           handleUpdateQuizzes={getAttachedQuizzes}
           handleClose={toogleModal}
+        />
+      </Modal>
+
+      <Modal
+        open={modalDettachQuiz.open}
+        handleClose={handleCloseModelDettachQuiz}
+      >
+        <AlertRemoveMessage
+          handleClose={handleCloseModelDettachQuiz}
+          onClick={handleRemoveQuiz}
+          title="Deseja mesmo desvincular o Quiz?"
+          description="O vínculo entre turma e o quiz será excluida e todas suas informações serão perdidas."
         />
       </Modal>
     </>
