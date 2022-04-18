@@ -1,8 +1,15 @@
 import styled from 'styled-components';
-import { Avatar, IconButton, TextField } from '@mui/material';
+import { Avatar, IconButton, TextField, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 
 export const Wrapper = styled(motion.div)``;
+
+export const NoStudentsWarning = styled(Typography)`
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  text-align: center;
+`;
 
 export const StudentsWrapper = styled.div`
   box-shadow: 1px 1px 8px -3px rgb(54 48 48 / 49%);

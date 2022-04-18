@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Avatar, IconButton } from '@mui/material';
+import { Avatar, IconButton, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 
 export const Wrapper = styled(motion.div)``;
@@ -11,6 +11,13 @@ export const StudentsWrapper = styled.div`
   padding: 20px;
 `;
 
+export const NoStudentsWarning = styled(Typography)`
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  text-align: center;
+`;
+
 export const Student = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.12);
   display: flex;
@@ -18,6 +25,11 @@ export const Student = styled.div`
   justify-content: space-between;
   border-radius: 8px;
   padding: 10px;
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-top: 0px;
+  }
 `;
 
 export const StyledAvatar = styled(Avatar)`

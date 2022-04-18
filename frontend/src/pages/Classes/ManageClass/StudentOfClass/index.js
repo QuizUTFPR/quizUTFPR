@@ -5,11 +5,7 @@ import api from '@api';
 
 // Components
 import Tooltip from '@components/ToolTip';
-import {
-  // Send,
-  Email,
-  Delete,
-} from '@mui/icons-material';
+import { Email, Delete } from '@mui/icons-material';
 import ConfirmRemove from '@components/ConfirmRemove';
 import Modal from '@components/Modal';
 
@@ -17,6 +13,7 @@ import Modal from '@components/Modal';
 import {
   Wrapper,
   StudentsWrapper,
+  NoStudentsWarning,
   Student,
   StyledAvatar,
   WrapperText,
@@ -77,6 +74,13 @@ const StudentOfClass = () => {
         exit={{ opacity: 0 }}
       >
         <StudentsWrapper>
+          {!students.length && (
+            <NoStudentsWarning>
+              Não há estudantes cadastrados na turma, ou eles ainda não
+              responderam nenhum quiz vinculado na turma!
+            </NoStudentsWarning>
+          )}
+
           {students.map((item) => (
             <Student key={item.id}>
               <StyledAvatar src={item?.imageProfile?.url} />
@@ -85,16 +89,6 @@ const StudentOfClass = () => {
                 <Text>{item.email}</Text>
               </WrapperText>
               <ActionsWrapper>
-                {/* <Tooltip
-                  arrow
-                  ariaLabel="notification"
-                  title="Enviar Notificação"
-                >
-                  <StyledIconButton>
-                    <Send />
-                  </StyledIconButton>
-                </Tooltip> */}
-
                 <Tooltip arrow ariaLabel="email" title="Enviar Email">
                   <StyledIconButton
                     onClick={() => {

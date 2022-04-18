@@ -96,7 +96,7 @@ const checkStudentChoice = (answer, choices) => {
   // );
 };
 
-const AccordionWrapper = ({ quizData, quizPin }) => {
+const AccordionWrapper = ({ quizData, pin }) => {
   const {
     questions = [],
     percentageOfQuizHit,
@@ -159,7 +159,7 @@ const AccordionWrapper = ({ quizData, quizPin }) => {
       {questions[0]?.questionChoice.length === 0 && (
         <QuizPercentageHitDescription>
           Seu Quiz não foi respondido por nenhum aluno até o momento. <br />
-          Compartilhe seu Quiz utilizando o seguinte PIN {quizPin}
+          Compartilhe seu Quiz utilizando o seguinte PIN {pin}
         </QuizPercentageHitDescription>
       )}
 
