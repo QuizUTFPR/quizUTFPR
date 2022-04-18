@@ -32,31 +32,7 @@ import {
   TextValueResumeOfQuestion,
 } from '../style';
 
-const AccordionWrapperStudent = ({ quizData }) => {
-  const { questions, studentQuiz } = quizData;
-  const [teacherClasses, setTeacherClasses] = useState([]);
-  // const [quizData, setQuizData] = useState({
-  //   questions: initialQuestions,
-  //   studentQuiz: initialStudentQuiz,
-  // });
-  const pin = 123;
-
-  // const handleGetTeacherClasses = async () => {
-  //   try {
-  //     const { data } = await api.get('/class/getAllTeacherClasses');
-
-  //     setTeacherClasses(data);
-  //   } catch (error) {
-  //     console.log('ERROR', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   handleGetTeacherClasses();
-
-  //   return () => setTeacherClasses([]);
-  // }, []);
-
+const AccordionWrapperStudent = ({ quizData, pin }) => {
   return (
     <>
       {!quizData.studentQuiz.length && (
@@ -65,23 +41,6 @@ const AccordionWrapperStudent = ({ quizData }) => {
           Compartilhe seu Quiz utilizando o seguinte PIN {pin}
         </StyledTypography>
       )}
-
-      {/* <TextField
-        label="Turmas"
-        id="turmas"
-        name="turmas"
-        variant="outlined"
-        onChange={(event) => handleGetStatistics(quizId, event.target.value)}
-        required
-        select
-      >
-        <MenuItem>Todos</MenuItem>
-        {teacherClasses.map((teacherClass) => (
-          <MenuItem value={teacherClass.id} key={teacherClass.id}>
-            {teacherClass.title}
-          </MenuItem>
-        ))}
-      </TextField> */}
 
       {quizData.studentQuiz.map((student, studentIndex) => (
         <Accordion key={student.id} TransitionProps={{ unmountOnExit: true }}>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import Button from '@components/Button';
-import { IconButton } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 
 export const Wrapper = styled(motion.div)``;
 
@@ -17,6 +17,12 @@ export const HeaderWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
+`;
+
+export const NoStudentsWarning = styled(Typography)`
+  margin-top: 40px;
+  font-weight: 400;
+  text-align: center;
 `;
 
 export const StyledButton = styled(Button)`

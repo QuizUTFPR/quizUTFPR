@@ -17,6 +17,7 @@ import {
   Wrapper,
   QuizzesWrapper,
   HeaderWrapper,
+  NoStudentsWarning,
   StyledButton,
   WrapperQuiz,
   ImageQuiz,
@@ -91,6 +92,11 @@ const QuizzesOfClass = () => {
             </StyledButton>
           </HeaderWrapper>
           <Divider />
+
+          <NoStudentsWarning>
+            Não há estudantes cadastrados na turma, ou eles ainda não
+            responderam nenhum quiz vinculado na turma!
+          </NoStudentsWarning>
 
           <ContainerContent>
             {quizzes.map((quiz) => {

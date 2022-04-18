@@ -11,6 +11,7 @@ import { MenuItem } from '@mui/material';
 // Style
 import {
   Wrapper,
+  NoStudentsWarning,
   StudentsWrapper,
   Student,
   StyledAvatar,
@@ -66,25 +67,36 @@ const StudentOfClass = () => {
       exit={{ opacity: 0 }}
     >
       <StudentsWrapper>
-        <StyledTextField
-          style={{ width: '100%' }}
-          label="Ordenar por"
-          id="filterOption"
-          name="filterOption"
-          variant="outlined"
-          onChange={(e) => setFilterOption(e.target.value)}
-          value={filterOption}
-          required
-          select
-        >
-          {Object.entries(selectOptions).map((item) => (
-            <MenuItem key={item[0]} value={item[0]}>
-              {item[1]}
-            </MenuItem>
-          ))}
-        </StyledTextField>
-        {students.map((item) => (
-          <Student key={item.id}>
+        {!students.length && (
+          <NoStudentsWarning>
+            Não há estudantes cadastrados na turma, ou eles ainda não
+            responderam nenhum quiz vinculado na turma!
+          </NoStudentsWarning>
+        )}
+
+        {!!students.length && (
+          <StyledTextField
+            style={{ width: '100%' }}
+            label="Ordenar por"
+            id="filterOption"
+            name="filterOption"
+            variant="outlined"
+            onChange={(e) => setFilterOption(e.target.value)}
+            value={filterOption}
+            required
+            select
+          >
+            {Object.entries(selectOptions).map((item) => (
+              <MenuItem key={item[0]} value={item[0]}>
+                {item[1]}
+              </MenuItem>
+            ))}
+          </StyledTextField>
+        )}
+
+        {students.map((item, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Student key={index}>
             <StyledAvatar src={item?.imageProfile?.url} />
             <WrapperText>
               <TextBold>{item.name}</TextBold>
