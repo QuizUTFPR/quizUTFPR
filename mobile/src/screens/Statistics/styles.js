@@ -79,5 +79,4 @@ export const RedoButtonText = styled.Text`
   font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};
   text-align: center;
-  opacity: 0.2;
 `;

@@ -49,6 +49,11 @@ const Question = () => {
     questionToUp,
     OptionsOfTime,
     optionsOfDifficultyLevel,
+    setQuestions,
+    initialValue,
+    setSaved,
+    setTyping,
+    setQuestionToRemove,
   } = useQuestionQuiz();
 
   const [openChangeTypeQuestionModal, setTypeQuestionModal] = useState({
@@ -107,7 +112,18 @@ const Question = () => {
   useEffect(() => {
     fetchQuestions();
 
-    return () => console.log('unmounting question page');
+    return () => {
+      console.log('unmounting question page');
+      setQuestions(initialValue);
+      setSaved(true);
+      setTyping(false);
+      setErrors(initialValueErrors);
+      setQuestionToRemove([]);
+      setOnScreen({
+        index: 0,
+        question: initialValue,
+      });
+    };
   }, []);
 
   const handleChangeQuestion = (question, index) => () => {

@@ -125,11 +125,11 @@ const TypeOfQuestion = forwardRef((props, ref) => {
       <Modal
         open={isModalSheetQuestionOpen}
         modalTitle="Importar questões a planilha"
-        modalDescription="teste"
+        modalDescription=""
         style={{ overflow: 'scroll' }}
       >
         <SheetQuestions
-          modalDescription="teste"
+          modalDescription=""
           modalTitle="Importar questões a planilha"
           handleClose={() => {
             toogleModalSheetQuestionOpen();

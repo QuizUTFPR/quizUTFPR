@@ -59,7 +59,8 @@ const QuizDescription = ({ route }) => {
   const [ableToSearchQuizByTag, setAbleToSearchQuizByTag] = useState(false);
 
   const [studentQuizID, setStudentQuizID] = useState(idStudentQuiz);
-  const { getQuestionsOfQuizFromDatabase, setNoTime } = useQuestions();
+  const { getQuestionsOfQuizFromDatabase, setNoTime, setQuizInfo } =
+    useQuestions();
 
   const navigation = useNavigation();
 
@@ -72,6 +73,7 @@ const QuizDescription = ({ route }) => {
         classId,
       });
       await getQuestionsOfQuizFromDatabase(id, data.id);
+      setQuizInfo(quiz);
       navigation.navigate('CountDown');
     } catch (error) {
       console.log('erro', error);
@@ -80,6 +82,7 @@ const QuizDescription = ({ route }) => {
 
   const continueQuizAndGetAllQuestions = async () => {
     await getQuestionsOfQuizFromDatabase(id, studentQuizID);
+    setQuizInfo(quiz);
     navigation.navigate('CountDown');
   };
 

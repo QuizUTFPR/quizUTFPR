@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Animated, Dimensions, ImageBackground } from 'react-native';
+import { Animated, Dimensions, ImageBackground, View } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { useNavigation, StackActions } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
@@ -102,7 +102,7 @@ const Question = () => {
 
       if (responseFinished) {
         clearInterval(timer.interval);
-        navigation.navigate('Statistics', responseFinished);
+        navigation.navigate('Statistics', { ...responseFinished });
       }
       setWidthAnimation(new Animated.Value(Dimensions.get('screen').width));
     }
@@ -199,17 +199,19 @@ const Question = () => {
             <InformationsWrapper>
               <ScrollWrapper>
                 <QuestionDescription>
-                  <QuestionImage
-                    source={
-                      quizData.questions[quizData.indexOnScreen]?.image?.url
-                        .length
-                        ? {
-                            uri: quizData.questions[quizData.indexOnScreen]
-                              ?.image?.url,
-                          }
-                        : null
-                    }
-                  />
+                  {quizData?.questions[quizData.indexOnScreen]?.imageQuestion
+                    ?.url.length && (
+                    <QuestionImage
+                      source={{
+                        uri: quizData.questions[quizData.indexOnScreen]
+                          ?.imageQuestion?.url,
+                      }}
+                    />
+                  )}
+
+                  {!quizData.questions[quizData.indexOnScreen]?.imageQuestion
+                    ?.url.length && <View style={{ paddingTop: 25 }} />}
+
                   <MathJaxSvg
                     fontSize={theme.fontSize.normal}
                     color="black"
@@ -222,7 +224,9 @@ const Question = () => {
                       font-family: PoppinsBold;
                       text-align: center;
                       margin-top: 20px;
-                    ">${quizData.questions[quizData.indexOnScreen].title}</p>`}
+                    ">${quizData.questions[quizData.indexOnScreen].title
+                      .replace('>', '&#62;')
+                      .replace('<', '&#60;')}</p>`}
                   </MathJaxSvg>
                 </QuestionDescription>
 
@@ -249,7 +253,10 @@ const Question = () => {
                           font-family: PoppinsSemiBold;
                           text-align: center;
                           padding: 5px 0;
-                        ">${`${answer.title}`}</p>`}
+                          height: auto;
+                        ">${`${answer.title
+                          .replace('>', '&#62;')
+                          .replace('<', '&#60;')}`}</p>`}
                       </MathJaxSvg>
                     </AnswerContainer>
                   )

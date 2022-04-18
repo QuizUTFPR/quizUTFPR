@@ -51,8 +51,8 @@ const informationsBasedOnHits = {
 const Statistics = ({ route }) => {
   const navigation = useNavigation();
 
-  const { amountOfQuestion } = useQuestions();
-  const { hitAmount, score } = route.params;
+  const { amountOfQuestion, quizInfo } = useQuestions();
+  const { hitAmount } = route.params;
 
   const hitsPercentage = (hitAmount * 100) / amountOfQuestion;
 
@@ -93,11 +93,31 @@ const Statistics = ({ route }) => {
             <StyledText>
               Questões corretas: {hitAmount}/{amountOfQuestion}
             </StyledText>
-            <StyledText>Pontuação: {score.toFixed(2)}</StyledText>
+            <StyledText>Pontuação: {hitAmount}</StyledText>
           </Body>
           <Footer>
             <RedoButton>
-              <RedoButtonText fill="black">REFAZER</RedoButtonText>
+              <RedoButtonText
+                fill="purple"
+                onPress={() =>
+                  navigation.dispatch(
+                    CommonActions.reset({
+                      index: 0,
+                      routes: [
+                        { name: 'HomeMenuDrawer' },
+                        {
+                          name: 'Descricao',
+                          params: {
+                            quiz: quizInfo,
+                          },
+                        },
+                      ],
+                    })
+                  )
+                }
+              >
+                REFAZER
+              </RedoButtonText>
             </RedoButton>
             <ButtonGradient
               variant="primary"

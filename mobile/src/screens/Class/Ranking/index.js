@@ -112,7 +112,7 @@ const RankingClass = () => {
               />
             );
           }}
-          keyExtractor={({ id }) => id}
+          keyExtractor={({ studentId }) => studentId}
         />
         {rankingQuizList.length > 0 && (
           <FabButton

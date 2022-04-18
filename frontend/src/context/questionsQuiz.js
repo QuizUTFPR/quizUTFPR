@@ -240,12 +240,14 @@ const QuestionQuiz = ({ children }) => {
         tags: (data) => data.__EMPTY_11,
       };
 
+      let actualSizeOfQuestions = questions.length;
+      const arrayOfQuestions = [];
+
       questionsFromExcel.forEach((item) => {
         const lengthOfRow = Object.keys(item).length;
-
         if (lengthOfRow > 1) {
           const type = excelTypeOfQuestion[cells.type(item)];
-          let mockup = MockupQuestionTrueOrFalse;
+          let mockup = JSON.parse(JSON.stringify(MockupQuestionTrueOrFalse));
           let correctAnswer = cells.correctAnswers(item);
 
           if (correctAnswer.length > 1) {
@@ -253,7 +255,7 @@ const QuestionQuiz = ({ children }) => {
           }
 
           if (type === 'multipleChoice') {
-            mockup = MockupQuestionMultipleChoice;
+            mockup = JSON.parse(JSON.stringify(MockupQuestionMultipleChoice));
           } else if (correctAnswer.length > 1) {
             throw new Error('erro v ou f');
           }
@@ -275,12 +277,28 @@ const QuestionQuiz = ({ children }) => {
               optionsOfDifficultyLevel[cells.difficultyLevel(item)],
             availableOnQuestionsDB:
               cells.availableOnQuestionsDB(item) === 'SIM',
-            tags: cells.tags(item).split(','),
+            tags: [
+              ...new Set(
+                cells
+                  .tags(item)
+                  .split(',')
+                  .map((element) => element.toLowerCase())
+              ),
+            ],
           };
 
-          addQuestion(newQuestion);
+          arrayOfQuestions.push({
+            ...newQuestion,
+            index: actualSizeOfQuestions,
+          });
+          actualSizeOfQuestions += 1;
         }
       });
+
+      const updatedQuestions = [...questions, ...arrayOfQuestions];
+      setQuestions(updatedQuestions);
+      setSaved(false);
+      setErrors(initialValueErrors);
 
       return true;
     } catch (error) {
@@ -406,12 +424,14 @@ const QuestionQuiz = ({ children }) => {
         validationSchemeArrayQuestion,
         errors,
         setErrors,
+        initialValue,
         initialValueErrors,
         questionToDown,
         questionToUp,
         handleReadExcelFile,
         OptionsOfTime,
         optionsOfDifficultyLevel,
+        setQuestionToRemove,
       }}
     >
       {children}

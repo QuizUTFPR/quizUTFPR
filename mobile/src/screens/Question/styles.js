@@ -80,7 +80,7 @@ export const AnswerContainer = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: ${`${heightPercentageToDp('8%')}px`};
+  min-height: ${`${heightPercentageToDp('8%')}px`};
   margin-top: ${`${heightPercentageToDp('1.5%')}px`};
   border-radius: 30px;
   background: ${({ checked }) => (checked ? '#4F26C0' : 'white')};

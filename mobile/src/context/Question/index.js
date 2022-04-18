@@ -17,7 +17,7 @@ const Question = ({ children }) => {
   };
 
   const [noTime, setNoTime] = useState(false);
-  const [quizData, setQuizData] = useState(initialValue);
+  const [quizData, setQuizData] = useState(initialValue); // save the quiz data about the question on screen
   const [quizID, setQuizID] = useState(-1);
   const [amountOfQuestion, setAmountOfQuestion] = useState(0);
   const [amountAlreadyAnswered, setAlreadyAnswered] = useState(0);
@@ -25,6 +25,7 @@ const Question = ({ children }) => {
   const [requestQuestion, setRequestQuestion] = useState(
     initialRequestQuestion
   );
+  const [quizInfo, setQuizInfo] = useState(null); // save only the quiz info
 
   const handleFinishQuizAnswering = async () => {
     const { data } = await api.put('/studentQuiz/finishQuiz', {
@@ -109,6 +110,8 @@ const Question = ({ children }) => {
         amountAlreadyAnswered,
         noTime,
         setNoTime,
+        setQuizInfo,
+        quizInfo,
       }}
     >
       {children}
