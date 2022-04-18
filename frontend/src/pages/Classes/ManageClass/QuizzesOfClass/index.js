@@ -105,10 +105,12 @@ const QuizzesOfClass = () => {
           </HeaderWrapper>
           <Divider />
 
-          <NoStudentsWarning>
-            Não há estudantes cadastrados na turma, ou eles ainda não
-            responderam nenhum quiz vinculado na turma!
-          </NoStudentsWarning>
+          {!quizzes.length && (
+            <NoStudentsWarning>
+              Não há estudantes cadastrados na turma, ou eles ainda não
+              responderam nenhum quiz vinculado na turma!
+            </NoStudentsWarning>
+          )}
 
           <ContainerContent>
             {quizzes.map((quiz) => {
