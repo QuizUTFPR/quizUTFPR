@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '@api';
+import Chart from 'react-apexcharts';
 
 // COMPONENTS
 import {
@@ -19,7 +20,13 @@ import { ExpandMore } from '@mui/icons-material';
 import getStringTypeOfQuestion from '@utils/getStringTypeOfQuestion';
 
 // STYLES
-import { StudentBar, StyledTypography } from './style';
+import {
+  StudentBar,
+  StyledTypography,
+  QuizPercentageHit,
+  QuizPercentageHitDescription,
+} from './style';
+
 import {
   StyledAccordionSummary,
   AnswerItem,
@@ -33,29 +40,57 @@ import {
 } from '../style';
 
 const AccordionWrapperStudent = ({ quizData }) => {
-  const { questions, studentQuiz } = quizData;
-  const [teacherClasses, setTeacherClasses] = useState([]);
-  // const [quizData, setQuizData] = useState({
-  //   questions: initialQuestions,
-  //   studentQuiz: initialStudentQuiz,
-  // });
-  const pin = 123;
+  const { countOfEachPorcentage = [], pin, quiz } = quizData;
 
-  // const handleGetTeacherClasses = async () => {
-  //   try {
-  //     const { data } = await api.get('/class/getAllTeacherClasses');
+  const options = {
+    series: [
+      {
+        name: 'Quantidade de Alunos',
+        type: 'column',
+        data: countOfEachPorcentage.map((item) => item[1]),
+      },
+    ],
+    options: {
+      chart: {
+        id: 'basic-bar',
+        type: 'bar',
+      },
+      legend: {
+        show: false,
+      },
+      xaxis: {
+        categories: countOfEachPorcentage.map((item) => `${item[0]}`),
+        labels: {
+          style: {
+            fontSize: '12px',
+          },
+        },
+      },
+      yaxis: [
+        {
+          title: {
+            text: 'Quantidade de Alunos',
+          },
+        },
+      ],
+      dataLabels: {
+        enabled: true,
+      },
+      colors: ['#d4526e'],
+      stroke: {
+        show: false,
+      },
 
-  //     setTeacherClasses(data);
-  //   } catch (error) {
-  //     console.log('ERROR', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   handleGetTeacherClasses();
-
-  //   return () => setTeacherClasses([]);
-  // }, []);
+      plotOptions: {
+        bar: {
+          borderRadius: 5,
+          dataLabels: {
+            position: 'center', // top, center, bottom
+          },
+        },
+      },
+    },
+  };
 
   return (
     <>
@@ -66,22 +101,22 @@ const AccordionWrapperStudent = ({ quizData }) => {
         </StyledTypography>
       )}
 
-      {/* <TextField
-        label="Turmas"
-        id="turmas"
-        name="turmas"
-        variant="outlined"
-        onChange={(event) => handleGetStatistics(quizId, event.target.value)}
-        required
-        select
-      >
-        <MenuItem>Todos</MenuItem>
-        {teacherClasses.map((teacherClass) => (
-          <MenuItem value={teacherClass.id} key={teacherClass.id}>
-            {teacherClass.title}
-          </MenuItem>
-        ))}
-      </TextField> */}
+      {quizData.studentQuiz.length > 0 && (
+        <QuizPercentageHit>
+          <Chart
+            options={options.options}
+            series={options.series}
+            width="500"
+          />
+
+          <QuizPercentageHitDescription>
+            O gráfico acima mostra a quantidade de alunos que atingiram
+            determinadas porcentagem de acerto. <br />
+            Compartilhe o PIN ({quiz.pin}) para mais alunos responderem seu
+            quiz.
+          </QuizPercentageHitDescription>
+        </QuizPercentageHit>
+      )}
 
       {quizData.studentQuiz.map((student, studentIndex) => (
         <Accordion key={student.id} TransitionProps={{ unmountOnExit: true }}>

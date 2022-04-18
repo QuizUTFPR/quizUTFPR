@@ -107,7 +107,7 @@ const AccordionWrapper = ({ quizData, quizPin }) => {
   const options = {
     series: [
       {
-        name: 'Quantidade de Alunos',
+        name: 'Quantidade de Questões',
         type: 'column',
         data: countOfEachPorcentage.map((item) => item[1]),
       },
@@ -121,7 +121,7 @@ const AccordionWrapper = ({ quizData, quizPin }) => {
         show: false,
       },
       xaxis: {
-        categories: countOfEachPorcentage.map((item) => `${item[0]}%`),
+        categories: countOfEachPorcentage.map((item) => `${item[0]}`),
         labels: {
           style: {
             fontSize: '12px',
@@ -131,7 +131,7 @@ const AccordionWrapper = ({ quizData, quizPin }) => {
       yaxis: [
         {
           title: {
-            text: 'Quantidade de Alunos',
+            text: 'Quantidade de Questões',
           },
         },
       ],
