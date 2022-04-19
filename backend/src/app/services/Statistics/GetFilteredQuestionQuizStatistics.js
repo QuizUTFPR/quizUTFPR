@@ -283,9 +283,7 @@ class GetFilteredQuestionQuizStatisticsService {
 
         const position = this.getPositionGraphObject(roundedPercentageOfHit);
 
-        if (countOfEachPorcentage[position])
-          countOfEachPorcentage[position] += 1;
-        else countOfEachPorcentage[position] = 1;
+        countOfEachPorcentage[position] += 1;
 
         return {
           avgOfTimeSpentToAnswer: avgOfTimeSpentToAnswer.toFixed(2),

@@ -61,8 +61,11 @@ const MemoizedTagInput = ({
       id={formikID}
       onChange={(_, tags) => {
         setTyping(true);
-        handleFormikChange('question.tags', tags);
-        handleUpdateContext({ value: tags, ...handlePropsChange });
+        const formatedTags = [
+          ...new Set(tags.map((element) => element.toLowerCase().trim())),
+        ];
+        handleFormikChange('question.tags', formatedTags);
+        handleUpdateContext({ value: formatedTags, ...handlePropsChange });
       }}
       {...props}
     />

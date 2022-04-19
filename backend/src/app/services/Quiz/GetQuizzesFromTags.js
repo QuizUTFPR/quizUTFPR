@@ -14,7 +14,11 @@ class GetQuizzesFromTagsService {
   }
 
   async execute(data) {
-    const { aimedTags, studentId } = data;
+    const { aimedTags: propsTags, studentId } = data;
+
+    const aimedTags = [
+      ...new Set(propsTags.map((element) => element.toLowerCase().trim())),
+    ];
 
     const quizzes = await this.quizRepository.findAll({
       where: {

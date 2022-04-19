@@ -4,7 +4,6 @@ import api from '@api';
 // Components
 import RankingStudentItem from '@components/RankingLine';
 import FabButton from '@components/FabButton';
-import Toast from '@components/Toast';
 import NoContent from '@components/NoContent';
 
 // HOOKS
@@ -24,19 +23,6 @@ const Ranking = () => {
   let myIdxToScroll = -1;
   const [loading, setLoading] = useState(true);
 
-  const [showToast, setShowToast] = useState({
-    open: false,
-    message: '',
-    type: 'success',
-  });
-
-  const handleCloseToast = () => {
-    setShowToast({
-      open: false,
-      message: '',
-    });
-  };
-
   const getGlobalRanking = async () => {
     try {
       setLoading(true);
@@ -49,11 +35,7 @@ const Ranking = () => {
       setBestScore(score);
       setRankingList(data);
     } catch (error) {
-      setShowToast({
-        open: true,
-        message: error.response.data.response,
-        type: 'error',
-      });
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -119,14 +101,6 @@ const Ranking = () => {
           />
         )}
       </StyledContainer>
-      <Toast
-        type={showToast.type}
-        handleClose={handleCloseToast}
-        open={showToast.open}
-        timeToErase={1000}
-      >
-        {showToast.message}
-      </Toast>
     </>
   );
 };

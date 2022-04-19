@@ -5,13 +5,20 @@ import { StyledButton } from '@components/ButtonGradient/style';
 // DIMENSION TRANSFORMERS
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
+export const StyledScrollView = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    alignItems: 'center',
+  },
+})`
+  background: ${({ theme }) => theme.color.lightBlueGrey};
+  width: ${widthPercentageToDp('100%')}px;
+`;
+
 export const QuizAttemptsHeader = styled.View`
   width: ${widthPercentageToDp('100%')}px;
-  height: ${heightPercentageToDp('46%')}px;
 `;
 
 export const StyledImageBackground = styled.ImageBackground`
-  flex: 1;
   justify-content: space-between;
   background: ${({ theme }) => theme.color.red};
 `;
@@ -37,8 +44,7 @@ export const BottomDecoration = styled.View`
 `;
 
 export const Description = styled.View`
-  width: ${widthPercentageToDp('100%')}px;
-  margin-left: 22px;
+  padding: 0 20px;
 `;
 
 export const StyledText = styled.Text`
@@ -90,6 +96,7 @@ export const PlayButtonWrapper = styled.View`
   margin-bottom: ${heightPercentageToDp('-5%')}px;
   margin-right: ${widthPercentageToDp('4%')}px;
   justify-content: flex-end;
+  margin-bottom: 20px;
 `;
 
 export const ButtonStyled = styled.TouchableOpacity.attrs({
@@ -110,13 +117,4 @@ export const StyledButtonText = styled.Text`
   font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.white};
   margin-left: ${widthPercentageToDp('1%')}px;
-`;
-
-export const StyledScrollView = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    alignItems: 'center',
-  },
-})`
-  background: ${({ theme }) => theme.color.lightBlueGrey};
-  width: ${widthPercentageToDp('100%')}px;
 `;

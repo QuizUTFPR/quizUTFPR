@@ -15,6 +15,34 @@ class GetFilteredStudentQuizStatisticsService {
     this.classRepository = new ClassRepository();
   }
 
+  getPositionGraphObject(value) {
+    let result;
+
+    if (value <= 10) {
+      result = '0-10%';
+    } else if (value <= 20) {
+      result = '10%-20%';
+    } else if (value <= 30) {
+      result = '20%-30%';
+    } else if (value <= 40) {
+      result = '30%-40%';
+    } else if (value <= 50) {
+      result = '40%-50%';
+    } else if (value <= 60) {
+      result = '50%-60%';
+    } else if (value <= 70) {
+      result = '60%-70%';
+    } else if (value <= 80) {
+      result = '70%-80%';
+    } else if (value <= 90) {
+      result = '80%-90%';
+    } else {
+      result = '90%-100%';
+    }
+
+    return result;
+  }
+
   async execute(data) {
     const schema = Yup.object().shape({
       quizId: Yup.string().required(),
@@ -158,6 +186,19 @@ class GetFilteredStudentQuizStatisticsService {
         throw errorOrderBy;
     }
 
+    const countOfEachPorcentage = {
+      '0-10%': 0,
+      '10%-20%': 0,
+      '20%-30%': 0,
+      '30%-40%': 0,
+      '40%-50%': 0,
+      '50%-60%': 0,
+      '60%-70%': 0,
+      '70%-80%': 0,
+      '80%-90%': 0,
+      '90%-100%': 0,
+    };
+
     // GET ATTEMPTS FROM STUDENTS
     const studentQuiz = await Promise.all(
       studentsWhoAnswered.map(async (choice) => {
@@ -197,11 +238,29 @@ class GetFilteredStudentQuizStatisticsService {
           ...optionOrderBy,
         });
 
-        return { ...student.dataValues, studentQuiz: student.studentQuiz[0] };
+        const { studentQuiz: itemStudentQuiz } = student.dataValues;
+        const { score } = itemStudentQuiz[0].dataValues;
+
+        const key = this.getPositionGraphObject(
+          (score * 100) / questions.length
+        );
+        countOfEachPorcentage[key] += 1;
+
+        return {
+          ...student.dataValues,
+          studentQuiz: student.studentQuiz[0],
+        };
       })
     );
 
-    return { questions, studentQuiz };
+    return {
+      quiz,
+      questions,
+      studentQuiz,
+      countOfEachPorcentage: Object.entries(countOfEachPorcentage).sort(
+        (a, b) => a[0] - b[0]
+      ),
+    };
   }
 }
 

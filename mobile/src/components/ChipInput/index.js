@@ -15,10 +15,14 @@ const ChipInput = ({ chips, setChips, placeholder }) => {
   const ref = useRef();
 
   const handleAddChip = () => {
-    const newValue = value.trim();
+    if (!value.trim()) return;
 
-    if (newValue.length > 0) {
-      setChips((prevState) => [...prevState, newValue]);
+    const newChips = [...chips, value].filter(Boolean);
+
+    if (newChips.length > 0) {
+      setChips([
+        ...new Set(newChips.map((element) => element.toLowerCase().trim())),
+      ]);
       setValue('');
     }
   };

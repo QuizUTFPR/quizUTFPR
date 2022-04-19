@@ -22,7 +22,7 @@ class CreateRefreshTokenService {
       // eslint-disable-next-line no-throw-literal
       throw {
         status: 401,
-        error: 'Invalid refresh token1!',
+        error: 'Refresh Token inválido!',
         refreshTokenExpired: true,
       };
 
@@ -34,7 +34,7 @@ class CreateRefreshTokenService {
       // eslint-disable-next-line no-throw-literal
       throw {
         status: 401,
-        error: 'Invalid refresh token!',
+        error: 'Refresh Token inválido!',
         refreshTokenExpired: true,
       };
 

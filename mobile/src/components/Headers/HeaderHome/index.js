@@ -27,6 +27,10 @@ const Header = () => {
 
   const getQuizByPIN = async () => {
     try {
+      if (!pin) {
+        return;
+      }
+
       const { data } = await api.post('/quiz/getByPIN', { pin });
 
       navigation.navigate('Descricao', {

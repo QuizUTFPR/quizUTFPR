@@ -187,7 +187,13 @@ const QuestionDatabase = forwardRef((props, ref) => {
               id="tag"
               value={formik.values.tag}
               suggestions={formik.values.suggestions}
-              onChange={(e, value) => formik.setFieldValue('tag', value)}
+              onChange={(e, value) => {
+                formik.setFieldValue('tag', [
+                  ...new Set(
+                    value.map((element) => element.toLowerCase().trim())
+                  ),
+                ]);
+              }}
               variant="outlined"
               label="Tag"
               placeholder="Digite a Tag de questões que você deseja pesquisar..."

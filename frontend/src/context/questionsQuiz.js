@@ -282,7 +282,7 @@ const QuestionQuiz = ({ children }) => {
                 cells
                   .tags(item)
                   .split(',')
-                  .map((element) => element.toLowerCase())
+                  .map((element) => element.toLowerCase().trim())
               ),
             ],
           };

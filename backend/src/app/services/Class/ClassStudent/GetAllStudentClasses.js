@@ -47,6 +47,7 @@ class GetAllStudentClassesService {
           attributes: ['name', 'email'],
         },
       ],
+      order: [['createdAt', 'DESC']],
     });
 
     if (!studentClasses.length) {

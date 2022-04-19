@@ -148,7 +148,7 @@ class QuizController {
             as: 'tagsQuiz',
             attributes: ['name'],
             where: {
-              name: tag,
+              name: tag.toLowerCase().trim(),
             },
             through: {
               attributes: [],
@@ -160,7 +160,16 @@ class QuizController {
             attributes: ['id', 'path', 'url'],
           },
         ],
-        order: [[{ model: Answer, as: 'answer' }, 'id', 'ASC']],
+        order: [
+          [
+            {
+              model: Answer,
+              as: 'answer',
+            },
+            'id',
+            'ASC',
+          ],
+        ],
       });
 
       return res.status(200).json(quizzes);

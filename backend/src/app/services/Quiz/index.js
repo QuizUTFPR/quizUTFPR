@@ -41,7 +41,15 @@ class QuizService {
 
     const quiz = await this.quizRepository.create(data);
 
-    const { tags } = data;
+    const { tags: propsTags } = data;
+
+    console.log('propsTags', propsTags);
+
+    const tags = [
+      ...new Set(propsTags.map((element) => element.toLowerCase().trim())),
+    ];
+
+    console.log('tags', tags);
 
     tags.map(async (tagObject) => {
       const [tag] = await this.tagRepository.findOrCreate({
@@ -82,7 +90,19 @@ class QuizService {
       throw error;
     }
 
-    const { id, tags, title, description, visibility, idImage, noTime } = data;
+    const {
+      id,
+      tags: propsTags,
+      title,
+      description,
+      visibility,
+      idImage,
+      noTime,
+    } = data;
+
+    const tags = [
+      ...new Set(propsTags.map((element) => element.toLowerCase().trim())),
+    ];
 
     const quiz = await this.quizRepository.findByPk(id);
     quiz.title = title;

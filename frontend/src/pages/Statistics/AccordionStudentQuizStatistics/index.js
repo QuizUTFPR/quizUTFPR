@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '@api';
+import Chart from 'react-apexcharts';
 
 // COMPONENTS
 import {
@@ -19,7 +20,13 @@ import { ExpandMore } from '@mui/icons-material';
 import getStringTypeOfQuestion from '@utils/getStringTypeOfQuestion';
 
 // STYLES
-import { StudentBar, StyledTypography } from './style';
+import {
+  StudentBar,
+  StyledTypography,
+  QuizPercentageHit,
+  QuizPercentageHitDescription,
+} from './style';
+
 import {
   StyledAccordionSummary,
   AnswerItem,
@@ -32,7 +39,59 @@ import {
   TextValueResumeOfQuestion,
 } from '../style';
 
-const AccordionWrapperStudent = ({ quizData, pin }) => {
+const AccordionWrapperStudent = ({ quizData }) => {
+  const { countOfEachPorcentage = [], pin, quiz } = quizData;
+
+  const options = {
+    series: [
+      {
+        name: 'Quantidade de Alunos',
+        type: 'column',
+        data: countOfEachPorcentage.map((item) => item[1]),
+      },
+    ],
+    options: {
+      chart: {
+        id: 'basic-bar',
+        type: 'bar',
+      },
+      legend: {
+        show: false,
+      },
+      xaxis: {
+        categories: countOfEachPorcentage.map((item) => `${item[0]}`),
+        labels: {
+          style: {
+            fontSize: '12px',
+          },
+        },
+      },
+      yaxis: [
+        {
+          title: {
+            text: 'Quantidade de Alunos',
+          },
+        },
+      ],
+      dataLabels: {
+        enabled: true,
+      },
+      colors: ['#d4526e'],
+      stroke: {
+        show: false,
+      },
+
+      plotOptions: {
+        bar: {
+          borderRadius: 5,
+          dataLabels: {
+            position: 'center', // top, center, bottom
+          },
+        },
+      },
+    },
+  };
+
   return (
     <>
       {!quizData.studentQuiz.length && (
@@ -40,6 +99,23 @@ const AccordionWrapperStudent = ({ quizData, pin }) => {
           Seu Quiz não foi respondido por nenhum aluno até o momento. <br />
           Compartilhe seu Quiz utilizando o seguinte PIN {pin}
         </StyledTypography>
+      )}
+
+      {quizData.studentQuiz.length > 0 && (
+        <QuizPercentageHit>
+          <Chart
+            options={options.options}
+            series={options.series}
+            width="500"
+          />
+
+          <QuizPercentageHitDescription>
+            O gráfico acima mostra a quantidade de alunos que atingiram
+            determinadas porcentagem de acerto. <br />
+            Compartilhe o PIN ({quiz.pin}) para mais alunos responderem seu
+            quiz.
+          </QuizPercentageHitDescription>
+        </QuizPercentageHit>
       )}
 
       {quizData.studentQuiz.map((student, studentIndex) => (
