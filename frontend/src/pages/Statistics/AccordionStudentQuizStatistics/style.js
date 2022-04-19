@@ -7,8 +7,8 @@ export const StudentBar = styled(Grid).attrs({
 })`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
-  padding: 0 20px;
 `;
 
 export const StyledTypography = styled(Typography)`
@@ -32,4 +32,12 @@ export const QuizPercentageHitDescription = styled(Typography)`
   margin-top: 20px;
   font-weight: 400;
   text-align: center;
+`;
+
+export const WrapperScore = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-right: 10px;
 `;
