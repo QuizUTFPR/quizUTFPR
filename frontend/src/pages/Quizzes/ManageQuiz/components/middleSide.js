@@ -27,7 +27,6 @@ import {
   PreviewImageButton,
   TitleQuestionMathJax,
   AnswerQuestionMathJax,
-  OptionWrapper,
 } from '../style';
 
 const MiddleSide = ({
@@ -144,90 +143,87 @@ const MiddleSide = ({
 
           <Grid container align="center" justifyContent="center" spacing={2}>
             {formik.values.question.answer.map((item, index) => (
-              <Grid item md={6} style={{ minHeight: '59px' }}>
-                <Grid
-                  item
-                  md={12}
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={index}
-                  style={{
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginBottom: '20px',
-                    marginTop: '20px',
-                  }}
-                >
-                  <>
-                    <ShowOption
-                      disabled={location.state.published}
-                      checked={Boolean(item.isCorrect)}
-                    >
-                      <Check />
-                    </ShowOption>
-                    {formik.values.question.type === 'multipleChoice' ? (
-                      <HiddenCheckBox
-                        disabled={location.state.published}
-                        style={{ width: '50px', height: '50px' }}
-                        checked={Boolean(item.isCorrect)}
-                        formikID={`question.answer[${index}].isCorrect`}
-                        handleFormikChange={formik.handleChange}
-                        handlePropsChange={{
-                          handleUpdate: updateAnswer,
-                          key: 'isCorrect',
-                          indexQuestion: formik.values.index,
-                          indexAnswer: index,
-                        }}
-                      />
-                    ) : (
-                      <HiddenRadio
-                        disabled={location.state.published}
-                        style={{ width: '50px', height: '50px' }}
-                        value={item.isCorrect}
-                        formikID={`question.answer[${index}].isCorrect`}
-                        formikOtherID={`question.answer[${
-                          index === 0 ? 1 : 0
-                        }].isCorrect`}
-                        handleFormikChange={formik.setFieldValue}
-                        handlePropsChange={{
-                          handleUpdate: updateAnswer,
-                          key: 'isCorrect',
-                          indexQuestion: formik.values.index,
-                          indexAnswer: index,
-                          indexOtherAnswer: index === 0 ? 1 : 0,
-                        }}
-                      />
-                    )}
-                  </>
-
-                  <InputOrLatexContent
+              <Grid
+                item
+                md={6}
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginBottom: '20px',
+                  marginTop: '20px',
+                }}
+              >
+                <>
+                  <ShowOption
                     disabled={location.state.published}
-                    latexComponent={{
-                      component: AnswerQuestionMathJax,
-                      propsLatex: {
-                        placeholder: `DIGITE A ALTERNATIVA ${index + 1}`,
+                    checked={Boolean(item.isCorrect)}
+                  >
+                    <Check />
+                  </ShowOption>
+                  {formik.values.question.type === 'multipleChoice' ? (
+                    <HiddenCheckBox
+                      disabled={location.state.published}
+                      style={{ width: '50px', height: '50px' }}
+                      checked={Boolean(item.isCorrect)}
+                      formikID={`question.answer[${index}].isCorrect`}
+                      handleFormikChange={formik.handleChange}
+                      handlePropsChange={{
+                        handleUpdate: updateAnswer,
+                        key: 'isCorrect',
+                        indexQuestion: formik.values.index,
+                        indexAnswer: index,
+                      }}
+                    />
+                  ) : (
+                    <HiddenRadio
+                      disabled={location.state.published}
+                      style={{ width: '50px', height: '50px' }}
+                      value={item.isCorrect}
+                      formikID={`question.answer[${index}].isCorrect`}
+                      formikOtherID={`question.answer[${
+                        index === 0 ? 1 : 0
+                      }].isCorrect`}
+                      handleFormikChange={formik.setFieldValue}
+                      handlePropsChange={{
+                        handleUpdate: updateAnswer,
+                        key: 'isCorrect',
+                        indexQuestion: formik.values.index,
+                        indexAnswer: index,
+                        indexOtherAnswer: index === 0 ? 1 : 0,
+                      }}
+                    />
+                  )}
+                </>
+
+                <InputOrLatexContent
+                  disabled={location.state.published}
+                  latexComponent={{
+                    component: AnswerQuestionMathJax,
+                    propsLatex: {
+                      placeholder: `DIGITE A ALTERNATIVA ${index + 1}`,
+                    },
+                  }}
+                  inputComponent={{
+                    component: StyledAnswerInput,
+                    propsInput: {
+                      type: 'text',
+                      disabled: location.state.published,
+                      placeholder: `DIGITE A ALTERNATIVA ${index + 1}`,
+                      formikID: `question.answer[${index}].title`,
+                      value: item.title,
+                      handleFormikChange: formik.handleChange,
+                      handlePropsChange: {
+                        handleUpdate: updateAnswer,
+                        key: 'title',
+                        indexQuestion: formik.values.index,
+                        indexAnswer: index,
                       },
-                    }}
-                    inputComponent={{
-                      component: StyledAnswerInput,
-                      propsInput: {
-                        type: 'text',
-                        disabled: location.state.published,
-                        placeholder: `DIGITE A ALTERNATIVA ${index + 1}`,
-                        formikID: `question.answer[${index}].title`,
-                        value: item.title,
-                        handleFormikChange: formik.handleChange,
-                        handlePropsChange: {
-                          handleUpdate: updateAnswer,
-                          key: 'title',
-                          indexQuestion: formik.values.index,
-                          indexAnswer: index,
-                        },
-                        required: true,
-                      },
-                    }}
-                  />
-                </Grid>
+                      required: true,
+                    },
+                  }}
+                />
               </Grid>
             ))}
           </Grid>

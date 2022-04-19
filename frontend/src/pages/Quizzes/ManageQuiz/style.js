@@ -88,8 +88,12 @@ export const StyledButtonsContainer = styled(Grid)`
 export const GridButton = styled(Grid)`
   align-self: flex-end;
 `;
+
 export const StyledAnswerInput = styled(QuestionInput)`
   width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   padding: 20px 10px;
   background: white;
   border-radius: 0 5px 5px 0;
@@ -247,7 +251,7 @@ export const ShowOption = styled.span`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  /* min-height: 100%; */
+  height: 59px;
   width: 70px;
   border: 2px solid ${({ theme }) => theme.palette.primary.main};
   border-radius: 5px 0 0 5px;
@@ -259,8 +263,4 @@ export const ShowOption = styled.span`
     fill: white;
     font-size: 2.5em;
   }
-`;
-
-export const OptionWrapper = styled.div`
-  height: 100%;
 `;

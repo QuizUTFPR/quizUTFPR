@@ -19,6 +19,7 @@ const InputOrLatexContent = ({ inputComponent, latexComponent, disabled }) => {
       {...propsInput}
       autoFocus
       onBlur={() => changeComponent(false)}
+      style={{ height: '59px' }}
     />
   ) : (
     <LatexContent
@@ -27,6 +28,7 @@ const InputOrLatexContent = ({ inputComponent, latexComponent, disabled }) => {
       propsLatex={propsLatex}
       onClick={() => changeComponent(true)}
       value={value}
+      style={{ height: '59px' }}
     />
   );
 };
