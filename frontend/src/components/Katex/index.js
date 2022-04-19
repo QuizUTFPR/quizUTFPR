@@ -29,7 +29,15 @@ const Katex = ({ children, ...props }) => {
 
   return (
     <div ref={ref} {...props}>
-      {children}
+      <p
+        style={{
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {children}
+      </p>
     </div>
   );
 };

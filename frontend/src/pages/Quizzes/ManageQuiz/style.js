@@ -116,6 +116,7 @@ export const AnswerQuestionMathJax = styled(Katex)`
   border-left: none;
   outline: none;
   transition: border 0.3s linear;
+  overflow: hidden;
 `;
 
 export const StyledTitleInput = styled(QuestionInput)`
