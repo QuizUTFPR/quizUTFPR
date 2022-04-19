@@ -76,7 +76,7 @@ const QuizDescription = ({ route }) => {
       setQuizInfo(quiz);
       navigation.navigate('CountDown');
     } catch (error) {
-      console.log('erro', error);
+      console.log('erro', { ...error });
     }
   };
 
@@ -87,12 +87,16 @@ const QuizDescription = ({ route }) => {
   };
 
   const giveUPQuiz = async () => {
-    await api.put('/studentQuiz/finishQuiz', {
-      quizId: id,
-      idStudentQuiz: studentQuizID,
-    });
-
-    setStudentQuizID(null);
+    try {
+      const teste = await api.put('/studentQuiz/finishQuiz', {
+        quizId: id,
+        idStudentQuiz: studentQuizID,
+      });
+      console.log('teste', teste);
+      setStudentQuizID(null);
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
   const [showToast, setShowToast] = useState({

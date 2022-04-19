@@ -61,7 +61,7 @@ class UpdateStudentQuizService {
     // CASO EXISTA QUESTÕES NÃO RESPONDIDAS, EU CADASTO AS MESMAS SEM MARCAR NENHUM ALTERNATIVA
     await Promise.all(
       questionNotAnswered.map(async (question) => {
-        await this.studentQuestionChoice.create({
+        await this.studentQuestionChoiceRepository.create({
           questionId: question.id,
           studentId,
           quizId,
