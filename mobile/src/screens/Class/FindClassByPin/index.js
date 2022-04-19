@@ -26,6 +26,8 @@ const FindClassByPin = ({ hideDialog, visible }) => {
 
   const getClassByPIN = async () => {
     try {
+      if (!pin.length) return;
+
       const { data } = await api.get(`/class/getByPIN/${pin}`);
 
       setPin('');
@@ -35,27 +37,15 @@ const FindClassByPin = ({ hideDialog, visible }) => {
         id: data.id,
         teacher: data.teacher,
         title: data.title,
-        age: data?.image?.url,
+        image: data?.imageClass?.url,
         description: data.description,
-        n: data.pin,
+        pin: data.pin,
         amountOfQuizzes: data.amountOfQuizzes,
-        bscribed: data.subscribed,
-        imageURL: data?.imageClass?.url,
+        subscribed: data.subscribed,
       });
 
       navigation.navigate('ClassStack', {
         screen: 'InfoOfClass',
-        params: {
-          id: data.id,
-          teacher: data.teacher,
-          title: data.title,
-          image: data?.image?.url,
-          description: data.description,
-          pin: data.pin,
-          amountOfQuizzes: data.amountOfQuizzes,
-          subscribed: data.subscribed,
-          imageURL: data?.imageClass?.url,
-        },
       });
     } catch (err) {
       console.log('findclassbypin', { ...err });

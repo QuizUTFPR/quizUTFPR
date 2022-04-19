@@ -7,8 +7,6 @@ import Teacher from '../../models/TeacherModel';
 // REPOSITORIES
 import ClassRepository from '../../repositories/Class';
 
-import getMethod from '../../utils/getMethodsOfAssociation';
-
 class PINClassService {
   constructor() {
     this.classRepository = new ClassRepository();

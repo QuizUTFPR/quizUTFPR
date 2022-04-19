@@ -1,5 +1,4 @@
 // MODELS
-import { restart } from 'nodemon';
 import Question from '../../models/QuestionModel';
 
 // SERVICES

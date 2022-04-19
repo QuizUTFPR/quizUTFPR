@@ -38,7 +38,9 @@ class QuestionController {
     try {
       const { tag } = req.params;
 
-      const questions = await QuestionService.show({ tag });
+      const questions = await QuestionService.show({
+        tag,
+      });
 
       return res.status(200).json(questions);
     } catch (error) {

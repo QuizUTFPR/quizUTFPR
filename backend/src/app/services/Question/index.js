@@ -86,12 +86,16 @@ class QuestionService {
       difficultyLevel,
       quizId,
       answer,
-      tags,
+      tags: newTags,
       type,
       idImage,
       index,
       imageUrl,
     } = data;
+
+    const tags = [
+      ...new Set(newTags.map((element) => element.toLowerCase().trim())),
+    ];
 
     const quiz = await this.quizRepository.findByPk(quizId);
 
@@ -235,7 +239,16 @@ class QuestionService {
           },
         },
       ],
-      order: [[{ model: Answer, as: 'answer' }, 'id', 'ASC']],
+      order: [
+        [
+          {
+            model: Answer,
+            as: 'answer',
+          },
+          'id',
+          'ASC',
+        ],
+      ],
     });
 
     if (!questions.length) {
@@ -269,7 +282,7 @@ class QuestionService {
           model: Tag,
           as: 'tagsQuestion',
           where: {
-            name: tag,
+            name: tag.toLowerCase().trim(),
           },
           attributes: ['name'],
           through: {

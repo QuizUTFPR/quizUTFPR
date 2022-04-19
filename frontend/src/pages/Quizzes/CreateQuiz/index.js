@@ -37,7 +37,7 @@ const CriarQuiz = () => {
       visibility: 'public',
       imageObj: null,
       imageUrl: '',
-      tags: ['UTFPR', 'QUIZ'],
+      tags: ['utfpr', 'quiz'],
       published: false,
       noTime: false,
     },
@@ -170,7 +170,13 @@ const CriarQuiz = () => {
             fullWidth
             value={formik.values.tags}
             suggestions={['Aprenda', 'JavaScript']}
-            onChange={(_, value) => formik.setFieldValue('tags', value)}
+            onChange={(_, value) => {
+              formik.setFieldValue('tags', [
+                ...new Set(
+                  value.map((element) => element.toLowerCase().trim())
+                ),
+              ]);
+            }}
           />
         </Grid>
 

@@ -4,7 +4,6 @@ import api from '@api';
 // Components
 import RankingStudentItem from '@components/RankingLine';
 import FabButton from '@components/FabButton';
-import Toast from '@components/Toast';
 import NoContent from '@components/NoContent';
 
 // HOOKS
@@ -33,19 +32,6 @@ const RankingClass = () => {
 
   const refList = useRef(null);
 
-  const [showToast, setShowToast] = useState({
-    open: false,
-    message: '',
-    type: 'success',
-  });
-
-  const handleCloseToast = () => {
-    setShowToast({
-      open: false,
-      message: '',
-    });
-  };
-
   const getAllClassRanking = async () => {
     try {
       setLoading(true);
@@ -61,11 +47,7 @@ const RankingClass = () => {
       setBestScore(score);
       setRankingClassList(data);
     } catch (error) {
-      setShowToast({
-        open: true,
-        message: error.response.data.response,
-        type: 'error',
-      });
+      console.log('error', error);
     } finally {
       setLoading(false);
     }
@@ -131,14 +113,6 @@ const RankingClass = () => {
           />
         )}
       </RankingContainer>
-      <Toast
-        type={showToast.type}
-        handleClose={handleCloseToast}
-        open={showToast.open}
-        timeToErase={1000}
-      >
-        {showToast.message}
-      </Toast>
     </>
   );
 };

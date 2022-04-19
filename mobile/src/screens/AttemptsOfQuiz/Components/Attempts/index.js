@@ -26,7 +26,7 @@ const Attempts = ({ attempts, amountOfQuestions }) => (
       const hours = `${date.getHours()}`;
       const minutes = `${date.getMinutes()}`;
 
-      const { id, score, hitAmount } = attempt;
+      const { id, hitAmount } = attempt;
 
       return (
         <AttemptCard key={id}>
@@ -35,7 +35,9 @@ const Attempts = ({ attempts, amountOfQuestions }) => (
             <AttemptNumber>{id}</AttemptNumber>
           </AttemptNumberWrapper>
           <AttemptInformations>
-            <Score>{score === 1 ? `${score} pt.` : `${score} pts.`}</Score>
+            <Score>
+              {hitAmount === 1 ? `${hitAmount} pt.` : `${hitAmount} pts.`}
+            </Score>
 
             <AttemptDateAndHits>
               <SytledDateTime>

@@ -13,7 +13,10 @@ class QuestionsByTagsService {
 
   // Retorna as questões que possuem as tags passadas
   async index(props) {
-    const { aimedTagQuestions } = props;
+    const { aimedTagQuestions: propsTags } = props;
+    const aimedTagQuestions = [
+      ...new Set(propsTags.map((element) => element.toLowerCase().trim())),
+    ];
 
     const questions = await this.questionRepository.findAll({
       where: {

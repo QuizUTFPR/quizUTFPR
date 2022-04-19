@@ -32,12 +32,12 @@ export const StyledView = styled.View`
 
 export const Description = styled.View`
   flex: 1;
+  justify-content: space-around;
 `;
 
 export const QuizTitle = styled.Text.attrs({
   ellipsizeMode: 'tail',
-  numberOfLines: 1,
-  adjustsFontSizeToFit: true,
+  numberOfLines: 2,
 })`
   font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};

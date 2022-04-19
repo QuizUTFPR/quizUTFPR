@@ -26,7 +26,6 @@ class GetAllQuizzesFromClassService {
     const { idClass } = data;
     const classInstance = await this.classRepository.findById(idClass);
 
-
     if (!classInstance) {
       const error = new Error();
       error.status = 404;

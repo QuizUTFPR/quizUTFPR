@@ -106,6 +106,7 @@ const Home = ({ route }) => {
           </PlayButtonWrapper>
           <BottomDecoration />
         </StyledImageBackground>
+
         <Description>
           <StyledText title>{title}</StyledText>
           <StyledText>By: {teacher.name}</StyledText>

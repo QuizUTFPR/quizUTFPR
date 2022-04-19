@@ -171,7 +171,13 @@ const EditPreferences = forwardRef((props, _) => {
             fullWidth
             value={formik.values.tags}
             suggestions={['Aprenda', 'JavaScript']}
-            onChange={(__, value) => formik.setFieldValue('tags', value)}
+            onChange={(__, value) =>
+              formik.setFieldValue('tags', [
+                ...new Set(
+                  value.map((element) => element.toLowerCase().trim())
+                ),
+              ])
+            }
           />
         </Grid>
 
