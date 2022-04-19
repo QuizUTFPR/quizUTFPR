@@ -131,6 +131,7 @@ const Quiz = () => {
             color="primary"
             component={Link}
             to={CREATE_QUIZ}
+            loading={false}
           >
             Criar Quiz
           </Button>

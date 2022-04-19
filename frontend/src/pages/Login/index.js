@@ -32,6 +32,7 @@ import {
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const { login } = useAuth();
 
@@ -82,12 +83,14 @@ const LoginPage = () => {
             component="form"
             onSubmit={async (e) => {
               e.preventDefault();
+              setLoading(true);
               const response = await login(values.username, values.password);
               if (response.status === 200) {
                 navigate(HOME);
               } else {
                 setError(response.response.data.error);
               }
+              setLoading(false);
             }}
           >
             <StyledInput
@@ -140,7 +143,12 @@ const LoginPage = () => {
               </ErrorMessage>
             )}
             <Grid item align="center">
-              <StyledButton type="submit" color="primary" variant="contained">
+              <StyledButton
+                loading={loading}
+                type="submit"
+                color="primary"
+                variant="contained"
+              >
                 ENTRAR
               </StyledButton>
             </Grid>

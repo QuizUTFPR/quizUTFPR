@@ -29,13 +29,19 @@ const GetOutAlert = forwardRef((props, _) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary" variant="outlined">
+        <Button
+          loading={false}
+          onClick={handleClose}
+          color="primary"
+          variant="outlined"
+        >
           Cancelar
         </Button>
         <Button
           style={{ marginLeft: '10px' }}
           component={Link}
           to={QUIZ}
+          loading={false}
           color="primary"
           variant="contained"
         >

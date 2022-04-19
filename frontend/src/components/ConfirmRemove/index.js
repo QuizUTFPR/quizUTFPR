@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 // COMPONENTS
 import {
@@ -13,8 +13,12 @@ import Button from '@components/Button';
 const AlertRemoveQuestion = forwardRef((props, _) => {
   const { onClick, handleClose, title, description } = props;
 
+  const [loading, setLoading] = useState(false);
+
   const handleRemove = () => {
+    setLoading(true);
     onClick();
+    setLoading(false);
     handleClose();
   };
 
@@ -27,10 +31,16 @@ const AlertRemoveQuestion = forwardRef((props, _) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary" variant="outlined">
+        <Button
+          loading={false}
+          onClick={handleClose}
+          color="primary"
+          variant="outlined"
+        >
           Cancelar
         </Button>
         <Button
+          loading={loading}
           onClick={handleRemove}
           color="primary"
           variant="contained"

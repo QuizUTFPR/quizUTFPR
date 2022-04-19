@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { useFormik } from 'formik';
 import api from '@api';
 
@@ -27,6 +27,7 @@ import { PreviewImage, FormWrapper, GridContainerModal } from './style';
 
 const EditPreferences = forwardRef((props, _) => {
   const { quiz, handleClose } = props;
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -40,6 +41,7 @@ const EditPreferences = forwardRef((props, _) => {
       noTime: quiz.noTime,
     },
     onSubmit: async (values) => {
+      setLoading(false);
       const { id, imageObj, title, tags, description, visibility, noTime } =
         values;
 
@@ -50,6 +52,8 @@ const EditPreferences = forwardRef((props, _) => {
       file.append('values', JSON.stringify(body));
 
       const responseQuiz = await api.put('/quiz/update', file);
+
+      setLoading(true);
       if (responseQuiz.status === 200) handleClose();
     },
   });
@@ -182,7 +186,13 @@ const EditPreferences = forwardRef((props, _) => {
         </Grid>
 
         <Grid item xs={12}>
-          <Button fullWidth variant="contained" color="primary" type="submit">
+          <Button
+            loading={loading}
+            fullWidth
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
             SALVAR ALTERAÇÔES
           </Button>
         </Grid>

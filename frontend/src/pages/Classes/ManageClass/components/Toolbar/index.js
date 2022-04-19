@@ -32,6 +32,7 @@ const CustomToolBar = () => {
         color="primary"
         startIcon={<StyledExitIcon />}
         size="large"
+        loading={false}
       >
         Voltar
       </StyledButton>

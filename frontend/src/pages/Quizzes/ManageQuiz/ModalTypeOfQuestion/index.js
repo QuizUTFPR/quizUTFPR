@@ -68,6 +68,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
                 variant="contained"
                 startIcon={<Search />}
                 color="primary"
+                loading={false}
               >
                 USAR QUESTÃO DO BANCO
               </Button>
@@ -79,6 +80,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
                 color="secondary"
                 variant="outlined"
                 onClick={handleAddMockupQuestion(MockupQuestionMultipleChoice)}
+                loading={false}
               >
                 Multipla Escolha
               </Button>
@@ -90,6 +92,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
                 color="secondary"
                 variant="outlined"
                 onClick={handleAddMockupQuestion(MockupQuestionTrueOrFalse)}
+                loading={false}
               >
                 Verdadeiro ou Falso
               </Button>
@@ -101,6 +104,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
                 color="secondary"
                 variant="outlined"
                 onClick={toogleModalSheetQuestionOpen}
+                loading={false}
               >
                 Importar Planilha de Questões
               </Button>
