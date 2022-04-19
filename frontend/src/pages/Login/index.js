@@ -45,11 +45,31 @@ const LoginPage = () => {
   const [error, setError] = useState(false);
 
   const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+    setValues({
+      ...values,
+      [prop]: event.target.value,
+    });
   };
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const { response } = await login(values.username, values.password);
+
+    if (response.status === 200) {
+      navigate(HOME);
+    } else {
+      setError(response.data.response);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -77,22 +97,7 @@ const LoginPage = () => {
             </Subtitle>
           </DescriptionsGrid>
 
-          <GridForm
-            item
-            xs={12}
-            component="form"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              setLoading(true);
-              const response = await login(values.username, values.password);
-              if (response.status === 200) {
-                navigate(HOME);
-              } else {
-                setError(response.response.data.error);
-              }
-              setLoading(false);
-            }}
-          >
+          <GridForm item xs={12} component="form" onSubmit={handleLogin}>
             <StyledInput
               id="username"
               label="Nome de Usuário"
