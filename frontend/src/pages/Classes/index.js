@@ -223,7 +223,7 @@ const MyClasses = () => {
               </ClassBar>
             </AccordionSummary>
             <AccordionDetails>
-              {classes?.private.map((classInstance, index) => (
+              {classes?.private.map((classInstance) => (
                 <Card
                   key={classInstance.id}
                   image={classInstance?.imageClass?.url}
