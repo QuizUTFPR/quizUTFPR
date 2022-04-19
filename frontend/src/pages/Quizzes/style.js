@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Grid, Typography, Divider } from '@mui/material';
+import { Grid, Typography, Divider, Accordion } from '@mui/material';
 
 export const TextPIN = styled.p`
   color: ${({ theme }) => theme.palette.primary.main};
@@ -23,3 +23,37 @@ export const HeaderTitleText = styled(Typography)`
 export const HeaderDivider = styled(Divider)`
   margin-bottom: 20px;
 `;
+
+export const CategoryTitle = styled.p`
+  font-weight: 500;
+  font-size: 1.3rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: left;
+`;
+
+export const WarningText = styled.p`
+  font-weight: 400;
+  font-size: 1.1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: left;
+  padding-left: 15px;
+`;
+
+export const StyledAccordion = styled(Accordion)`
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid gray;
+`;
+
+export const QuizBar = styled(Grid).attrs({ item: true })`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
+export const QuizzesQuantity = styled.p``;
