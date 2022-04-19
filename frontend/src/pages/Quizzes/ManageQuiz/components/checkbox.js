@@ -65,7 +65,10 @@ const MemoizedCheckbox = ({
       onChange={(e) => {
         setTyping(true);
         handleFormikChange(formikID)(e);
-        handleUpdateContext({ value: e.target.checked, ...handlePropsChange });
+        handleUpdateContext({
+          value: e.target.checked,
+          ...handlePropsChange,
+        });
       }}
       {...props}
     />

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 // HOOKS
@@ -13,8 +13,9 @@ const QuestionInput = ({
 }) => {
   const [timer, setTimer] = useState(null);
   const { setTyping, isTyping } = useQuestionQuiz();
+  const [text, setText] = useState(value);
 
-  const handleUpdateContext = ({ handleUpdate, ...params }) => {
+  useEffect(() => {
     if (timer) {
       clearTimeout(timer);
       setTimer(null);
@@ -22,52 +23,23 @@ const QuestionInput = ({
 
     setTimer(
       setTimeout(() => {
-        handleUpdate({ ...params });
-        setTyping(false);
+        const { handleUpdate, ...params } = handlePropsChange;
+        handleUpdate({ ...params, value: text });
+        handleFormikChange(formikID)(text);
       }, 500)
     );
-  };
+  }, [text]);
 
-  const myInput = useMemo(
-    () => (
-      <MemoizedInput
-        formikID={formikID}
-        handleFormikChange={handleFormikChange}
-        handlePropsChange={handlePropsChange}
-        handleUpdateContext={handleUpdateContext}
-        isTyping={isTyping}
-        setTyping={setTyping}
-        value={value}
-        {...props}
-      />
-    ),
-    [value, handlePropsChange]
-  );
-
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <>{myInput}</>;
-};
-
-const MemoizedInput = ({
-  value,
-  formikID,
-  isTyping,
-  setTyping,
-  handleFormikChange,
-  handleUpdateContext,
-  handlePropsChange,
-  ...props
-}) => {
   return (
     <input
-      value={value}
+      value={text}
       id={formikID}
       onChange={(e) => {
         if (!isTyping) {
           setTyping(true);
         }
-        handleFormikChange(formikID)(e);
-        handleUpdateContext({ value: e.target.value, ...handlePropsChange });
+        setText(e.target.value);
+        setTyping(false);
       }}
       {...props}
     />

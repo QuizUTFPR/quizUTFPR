@@ -134,7 +134,6 @@ const RightSide = ({
               <FormControlLabel
                 control={
                   <CheckBox
-                    type="multipleChoice"
                     disabled={
                       Boolean(formik.values.question.copy) ||
                       location.state.published

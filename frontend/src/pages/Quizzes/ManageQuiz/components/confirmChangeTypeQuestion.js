@@ -26,11 +26,17 @@ const ChangeQuestionType = forwardRef((props, _) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary" variant="outlined">
+        <Button
+          onClick={handleClose}
+          color="primary"
+          variant="outlined"
+          loading={false}
+        >
           Cancelar
         </Button>
         <Button
           onClick={() => handleChange({ ...modalState, handleClose })}
+          loading={false}
           color="primary"
           variant="contained"
         >

@@ -76,8 +76,6 @@ const Quiz = () => {
     try {
       const response = await api.get('/quiz');
 
-      console.log(response.data);
-
       if (response.status !== 200) setQuizzes(false);
       else setQuizzes(response.data);
     } catch (err) {
