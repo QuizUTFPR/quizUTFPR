@@ -104,8 +104,8 @@ export const AnswerQuestionMathJax = styled(Katex)`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 59px;
-  padding: 20px 10px;
+  min-height: 59px;
+  padding: 17px 10px;
   background: white;
   border-radius: 0 5px 5px 0;
   border: 2px solid ${({ theme }) => theme.palette.primary.main};
@@ -116,9 +116,10 @@ export const AnswerQuestionMathJax = styled(Katex)`
 
 export const StyledTitleInput = styled(QuestionInput)`
   width: 100%;
+  min-height: 59px;
   border: none;
   outline: none;
-  padding: 20px 10px;
+  padding: 15px 10px;
   background: white;
   text-align: center;
   font-weight: bolder;
@@ -246,7 +247,7 @@ export const ShowOption = styled.span`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  height: 59px;
+  /* min-height: 100%; */
   width: 70px;
   border: 2px solid ${({ theme }) => theme.palette.primary.main};
   border-radius: 5px 0 0 5px;
@@ -258,4 +259,8 @@ export const ShowOption = styled.span`
     fill: white;
     font-size: 2.5em;
   }
+`;
+
+export const OptionWrapper = styled.div`
+  height: 100%;
 `;
