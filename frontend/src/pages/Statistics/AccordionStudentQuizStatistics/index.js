@@ -12,6 +12,7 @@ import {
   MenuItem,
   Grid,
 } from '@mui/material';
+import CircularProgressWithLabel from '@components/CircularProgressWithLabel';
 
 // ICONS
 import { ExpandMore } from '@mui/icons-material';
@@ -25,6 +26,7 @@ import {
   StyledTypography,
   QuizPercentageHit,
   QuizPercentageHitDescription,
+  WrapperScore,
 } from './style';
 
 import {
@@ -129,7 +131,16 @@ const AccordionWrapperStudent = ({ quizData }) => {
               <Typography>
                 {studentIndex + 1}.{`  ${student.name}`}
               </Typography>
-              <Typography>Score: {student.studentQuiz.score}</Typography>
+              <WrapperScore>
+                <Typography>Score: {student.studentQuiz.score}</Typography>
+                <CircularProgressWithLabel
+                  value={parseInt(
+                    (student.studentQuiz.score * 100) /
+                      student.studentQuiz.quizQuestionChoice.length,
+                    10
+                  )}
+                />
+              </WrapperScore>
             </StudentBar>
           </StyledAccordionSummary>
           <AccordionDetails>
