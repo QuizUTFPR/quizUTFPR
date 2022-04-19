@@ -32,15 +32,15 @@ class GetAllTeacherClasses {
       throw error;
     }
 
-    const returnedClasses = {};
+    const returnedClasses = {
+      public: [],
+      private: [],
+    };
 
     classes.forEach((item) => {
       const { visibility } = item;
-      if (!returnedClasses[visibility]) {
-        returnedClasses[visibility] = [item];
-      } else {
-        returnedClasses[visibility].push(item);
-      }
+
+      returnedClasses[visibility].push(item);
     });
 
     return returnedClasses;

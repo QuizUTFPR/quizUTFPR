@@ -31,7 +31,7 @@ const Statistics = () => {
     try {
       const { data } = await api.get('/class/getAllTeacherClasses');
 
-      setTeacherClasses(data);
+      setTeacherClasses([...data.private, ...data.public]);
     } catch (error) {
       console.log('ERROR', error);
     }

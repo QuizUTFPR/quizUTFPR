@@ -10,10 +10,16 @@ import Tooltip from '@components/ToolTip';
 import ConfirmRemove from '@components/ConfirmRemove';
 
 // MATERIAL-UI COMPONENTS
-import { Button, IconButton } from '@mui/material';
+import {
+  Button,
+  IconButton,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from '@mui/material';
 
 // MATERIAL-UI ICONS
-import { Edit, FileCopy, Delete } from '@mui/icons-material';
+import { Edit, FileCopy, Delete, ExpandMore } from '@mui/icons-material';
 
 // ROUTES
 import { CREATE_CLASS, MANAGE_CLASSES } from '@routes';
@@ -23,10 +29,21 @@ import EditClass from './EditClass';
 import CloneCLass from './CloneClass';
 
 // STYLE
-import { TextPIN, HeaderTitle, HeaderTitleText, HeaderDivider } from './style';
+import {
+  TextPIN,
+  HeaderTitle,
+  HeaderTitleText,
+  HeaderDivider,
+  CategoryTitle,
+  WarningText,
+  StyledAccordion,
+  ClassesQuantity,
+  ClassBar,
+} from './style';
 
 const MyClasses = () => {
-  const [classes, setClasses] = useState([]);
+  const [classes, setClasses] = useState({});
+  console.log('CLASSES', classes);
 
   const [modalEdit, setModalEdit] = useState({
     status: false,
@@ -121,74 +138,128 @@ const MyClasses = () => {
 
         <HeaderDivider />
 
-        <p>Turmas Públicas</p>
-        {!classes?.public ? (
-          <p>Nenhuma turma pública encontrada!</p>
+        {!classes?.public?.length ? (
+          <StyledAccordion TransitionProps={{ unmountOnExit: true }}>
+            <AccordionSummary expandIcon={<ExpandMore />}>
+              <ClassBar>
+                <CategoryTitle>Turmas Privadas</CategoryTitle>
+                <ClassesQuantity>(0 turmas)</ClassesQuantity>
+              </ClassBar>
+            </AccordionSummary>
+            <AccordionDetails>
+              <WarningText>Nenhuma turma pública encontrada!</WarningText>
+            </AccordionDetails>
+          </StyledAccordion>
         ) : (
-          classes?.public.map((classInstance) => (
-            <Card
-              key={classInstance.id}
-              image={classInstance?.imageClass?.url}
-              imageTitle={classInstance.title}
-              title={classInstance.title}
-              description={classInstance.description}
-              to={`${MANAGE_CLASSES}/${classInstance.id}`}
-            >
-              <Tooltip arrow ariaLabel="pin" title="PIN utilizado pelo aluno">
-                <TextPIN>{classInstance.pin}</TextPIN>
-              </Tooltip>
-              <Tooltip arrow ariaLabel="editar" title="Editar">
-                <IconButton onClick={handleOpenEditModal(classInstance)}>
-                  <Edit />
-                </IconButton>
-              </Tooltip>
-              <Tooltip arrow ariaLabel="clonar" title="Clonar Turma">
-                <IconButton onClick={handleOpenCloneModal(classInstance)}>
-                  <FileCopy />
-                </IconButton>
-              </Tooltip>
-              <Tooltip arrow ariaLabel="deletar" title="Deletar Turma">
-                <IconButton onClick={handleOpenModalDelete(classInstance.id)}>
-                  <Delete />
-                </IconButton>
-              </Tooltip>
-            </Card>
-          ))
+          <StyledAccordion TransitionProps={{ unmountOnExit: true }}>
+            <AccordionSummary expandIcon={<ExpandMore />}>
+              <ClassBar>
+                <CategoryTitle>Turmas Públicas</CategoryTitle>
+                <ClassesQuantity>
+                  ({classes.public.length} turmas)
+                </ClassesQuantity>
+              </ClassBar>
+            </AccordionSummary>
+            <AccordionDetails>
+              {classes?.public.map((classInstance, index) => (
+                <Card
+                  key={classInstance.id}
+                  image={classInstance?.imageClass?.url}
+                  imageTitle={classInstance.title}
+                  title={classInstance.title}
+                  description={classInstance.description}
+                  to={`${MANAGE_CLASSES}/${classInstance.id}`}
+                >
+                  <Tooltip
+                    arrow
+                    ariaLabel="pin"
+                    title="PIN utilizado pelo aluno"
+                  >
+                    <TextPIN>{classInstance.pin}</TextPIN>
+                  </Tooltip>
+                  <Tooltip arrow ariaLabel="editar" title="Editar">
+                    <IconButton onClick={handleOpenEditModal(classInstance)}>
+                      <Edit />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip arrow ariaLabel="clonar" title="Clonar Turma">
+                    <IconButton onClick={handleOpenCloneModal(classInstance)}>
+                      <FileCopy />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip arrow ariaLabel="deletar" title="Deletar Turma">
+                    <IconButton
+                      onClick={handleOpenModalDelete(classInstance.id)}
+                    >
+                      <Delete />
+                    </IconButton>
+                  </Tooltip>
+                </Card>
+              ))}
+            </AccordionDetails>
+          </StyledAccordion>
         )}
 
-        <p>Turmas Privadas</p>
-        {!classes?.private ? (
-          <p>Nenhuma turma privada encontrada!</p>
+        {!classes?.private?.length ? (
+          <StyledAccordion TransitionProps={{ unmountOnExit: true }}>
+            <AccordionSummary expandIcon={<ExpandMore />}>
+              <ClassBar>
+                <CategoryTitle>Turmas Privadas</CategoryTitle>
+                <ClassesQuantity>(0 turmas)</ClassesQuantity>
+              </ClassBar>
+            </AccordionSummary>
+            <AccordionDetails>
+              <WarningText>Nenhuma turma privada encontrada!</WarningText>
+            </AccordionDetails>
+          </StyledAccordion>
         ) : (
-          classes?.private.map((classInstance) => (
-            <Card
-              key={classInstance.id}
-              image={classInstance?.imageClass?.url}
-              imageTitle={classInstance.title}
-              title={classInstance.title}
-              description={classInstance.description}
-              to={`${MANAGE_CLASSES}/${classInstance.id}`}
-            >
-              <Tooltip arrow ariaLabel="pin" title="PIN utilizado pelo aluno">
-                <TextPIN>{classInstance.pin}</TextPIN>
-              </Tooltip>
-              <Tooltip arrow ariaLabel="editar" title="Editar">
-                <IconButton onClick={handleOpenEditModal(classInstance)}>
-                  <Edit />
-                </IconButton>
-              </Tooltip>
-              <Tooltip arrow ariaLabel="clonar" title="Clonar Turma">
-                <IconButton onClick={handleOpenCloneModal(classInstance)}>
-                  <FileCopy />
-                </IconButton>
-              </Tooltip>
-              <Tooltip arrow ariaLabel="deletar" title="Deletar Turma">
-                <IconButton onClick={handleOpenModalDelete(classInstance.id)}>
-                  <Delete />
-                </IconButton>
-              </Tooltip>
-            </Card>
-          ))
+          <StyledAccordion TransitionProps={{ unmountOnExit: true }}>
+            <AccordionSummary expandIcon={<ExpandMore />}>
+              <ClassBar>
+                <CategoryTitle>Turmas Privadas</CategoryTitle>
+                <ClassesQuantity>
+                  ({classes.private.length} turmas)
+                </ClassesQuantity>
+              </ClassBar>
+            </AccordionSummary>
+            <AccordionDetails>
+              {classes?.private.map((classInstance, index) => (
+                <Card
+                  key={classInstance.id}
+                  image={classInstance?.imageClass?.url}
+                  imageTitle={classInstance.title}
+                  title={classInstance.title}
+                  description={classInstance.description}
+                  to={`${MANAGE_CLASSES}/${classInstance.id}`}
+                >
+                  <Tooltip
+                    arrow
+                    ariaLabel="pin"
+                    title="PIN utilizado pelo aluno"
+                  >
+                    <TextPIN>{classInstance.pin}</TextPIN>
+                  </Tooltip>
+                  <Tooltip arrow ariaLabel="editar" title="Editar">
+                    <IconButton onClick={handleOpenEditModal(classInstance)}>
+                      <Edit />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip arrow ariaLabel="clonar" title="Clonar Turma">
+                    <IconButton onClick={handleOpenCloneModal(classInstance)}>
+                      <FileCopy />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip arrow ariaLabel="deletar" title="Deletar Turma">
+                    <IconButton
+                      onClick={handleOpenModalDelete(classInstance.id)}
+                    >
+                      <Delete />
+                    </IconButton>
+                  </Tooltip>
+                </Card>
+              ))}
+            </AccordionDetails>
+          </StyledAccordion>
         )}
       </Container>
 

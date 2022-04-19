@@ -107,8 +107,7 @@ const QuizzesOfClass = () => {
 
           {!quizzes.length && (
             <NoStudentsWarning>
-              Não há estudantes cadastrados na turma, ou eles ainda não
-              responderam nenhum quiz vinculado na turma!
+              Não há quizzes vinculados na turma!
             </NoStudentsWarning>
           )}
 
