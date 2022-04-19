@@ -94,6 +94,7 @@ const LeftSide = ({
           startIcon={<AddCircle />}
           size="large"
           disabled={location.state.published}
+          loading={false}
         >
           CRIAR
         </StyledButton>

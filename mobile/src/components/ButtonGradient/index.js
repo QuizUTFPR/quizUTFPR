@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ActivityIndicator } from 'react-native';
 
 import { WrapperButton, StyledButton, StyledText } from './style';
 
@@ -14,14 +15,23 @@ const WrapperStyledButton = ({
   variant,
   activeOpacity,
   underlayColor,
+  loading,
   ...props
 }) => (
   <WrapperButton
     onPress={onPress}
     underlayColor={underlayColor}
     activeOpacity={activeOpacity}
+    disabled={loading}
   >
     <StyledButton colors={colors} {...props}>
+      {loading && (
+        <ActivityIndicator
+          style={{ marginRight: 20 }}
+          size="small"
+          color="white"
+        />
+      )}
       <StyledText fill="white">{children}</StyledText>
     </StyledButton>
   </WrapperButton>
@@ -32,6 +42,7 @@ WrapperStyledButton.defaultProps = {
   activeOpacity: 0.7,
   underlayColor: theme.color.whiteGrey,
   colors: theme.color.gradients.purple,
+  loading: false,
 };
 
 WrapperStyledButton.propTypes = {
@@ -40,6 +51,7 @@ WrapperStyledButton.propTypes = {
   activeOpacity: PropTypes.number,
   underlayColor: PropTypes.string,
   colors: PropTypes.arrayOf(PropTypes.string),
+  loading: PropTypes.bool,
 };
 
 export default WrapperStyledButton;

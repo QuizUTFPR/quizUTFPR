@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
@@ -20,6 +20,7 @@ import { PreviewImage } from './style';
 
 const CriarQuiz = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -30,6 +31,7 @@ const CriarQuiz = () => {
       visibility: 'private',
     },
     onSubmit: async (values) => {
+      setLoading(true);
       const { title, description, imageObj, visibility } = values;
 
       const body = { title, description, visibility };
@@ -40,6 +42,7 @@ const CriarQuiz = () => {
 
       const { data, status } = await api.post('/class/create', file);
 
+      setLoading(false);
       if (status === 200) {
         navigate(`${MANAGE_CLASSES}/${data.id}`, {
           state: { title: data.title },
@@ -128,7 +131,13 @@ const CriarQuiz = () => {
         </Grid>
 
         <Grid item xs={6}>
-          <Button fullWidth variant="contained" color="primary" type="submit">
+          <Button
+            loading={loading}
+            fullWidth
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
             CRIAR TURMA
           </Button>
         </Grid>

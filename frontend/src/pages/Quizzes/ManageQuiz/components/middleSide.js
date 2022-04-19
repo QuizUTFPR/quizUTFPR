@@ -121,6 +121,7 @@ const MiddleSide = ({
                 disabled={location.state.published}
                 startIcon={<AttachFile />}
                 size="large"
+                loading={false}
               >
                 Adicionar Imagem
               </StyledButton>
@@ -233,6 +234,7 @@ const MiddleSide = ({
 
           <GridButton item xs={6}>
             <StyledButton
+              loading={false}
               type="submit"
               disabled={location.state.published}
               style={{ width: '80%' }}

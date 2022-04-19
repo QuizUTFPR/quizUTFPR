@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import theme from '@theme';
@@ -21,6 +21,8 @@ import {
 
 const Header = () => {
   const navigation = useNavigation();
+
+  const [loading, setLoading] = useState(false);
 
   const { getQuizByTags, tags, setTags } = useSearchQuizByTag();
 
@@ -45,14 +47,18 @@ const Header = () => {
         />
       </BackgroundHeader>
       <StyledButton
+        loading={loading}
         colors={theme.color.gradients.orange}
         variant="primary"
         onPress={async () => {
+          setLoading(true);
+
           const hasMessageError = await getQuizByTags();
 
           if (!hasMessageError) {
             navigation.navigate('ResultSearchTag');
           }
+          setLoading(false);
         }}
       >
         Pesquisar

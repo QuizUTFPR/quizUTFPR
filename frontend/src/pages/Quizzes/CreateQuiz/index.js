@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
@@ -29,6 +29,7 @@ import { PreviewImage } from './style';
 
 const CriarQuiz = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -42,6 +43,7 @@ const CriarQuiz = () => {
       noTime: false,
     },
     onSubmit: async (values) => {
+      setLoading(true);
       const {
         imageObj,
         title,
@@ -60,6 +62,8 @@ const CriarQuiz = () => {
 
       const responseQuiz = await api.post('/quiz/create', file);
       const { data } = responseQuiz;
+
+      setLoading(false);
 
       if (responseQuiz.status === 200) {
         navigate(`${QUESTION}${data.id}`, {
@@ -181,7 +185,13 @@ const CriarQuiz = () => {
         </Grid>
 
         <Grid item xs={6}>
-          <Button fullWidth variant="contained" color="primary" type="submit">
+          <Button
+            loading={loading}
+            fullWidth
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
             CRIAR QUIZ
           </Button>
         </Grid>

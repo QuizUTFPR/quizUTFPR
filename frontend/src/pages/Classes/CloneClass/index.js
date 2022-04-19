@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { useFormik } from 'formik';
 import api from '@api';
 
@@ -22,6 +22,7 @@ import { PreviewImage, FormWrapper, GridContainerModal } from './style';
 
 const CloneClass = forwardRef((props, _) => {
   const { handleClose, classObj } = props;
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -33,6 +34,7 @@ const CloneClass = forwardRef((props, _) => {
       imageObj: null,
     },
     onSubmit: async (values) => {
+      setLoading(true);
       const { idClass, imageObj, title, tags, description, visibility } =
         values;
 
@@ -43,6 +45,7 @@ const CloneClass = forwardRef((props, _) => {
       file.append('values', JSON.stringify(body));
 
       const clonedClass = await api.post('/class/cloneClass', file);
+      setLoading(false);
       if (clonedClass.status === 200) handleClose();
     },
   });
@@ -143,7 +146,13 @@ const CloneClass = forwardRef((props, _) => {
         </Grid>
 
         <Grid item xs={12}>
-          <Button fullWidth variant="contained" color="primary" type="submit">
+          <Button
+            loading={loading}
+            fullWidth
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
             SALVAR CLONE
           </Button>
         </Grid>

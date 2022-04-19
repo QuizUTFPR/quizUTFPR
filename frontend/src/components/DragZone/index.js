@@ -61,7 +61,7 @@ const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize }) => {
         <input {...getInputProps()} />
         <p> Você pode arrastar e soltar imagens aqui para adicioná-las.</p>
         <p>Tamanho máximo: {maxSize / 1000} kB</p>
-        <Button color="secondary" variant="outlined">
+        <Button loading={false} color="secondary" variant="outlined">
           BROWSE
         </Button>
       </Container>

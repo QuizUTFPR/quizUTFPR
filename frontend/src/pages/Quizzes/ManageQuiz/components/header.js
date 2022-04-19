@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // ICONS
@@ -25,6 +25,9 @@ const Header = ({
   isTyping,
 }) => {
   let statusOfQuestions;
+
+  const [loadingSave, setLoadingSave] = useState(false);
+  const [loadingFinish, setLoadingFinish] = useState(false);
 
   if (isSaved && !isTyping) {
     statusOfQuestions = (
@@ -58,6 +61,7 @@ const Header = ({
             onClick={handleGetOut}
             startIcon={<StyledExitIcon />}
             size="large"
+            loading={false}
           >
             Voltar
           </StyledButton>
@@ -75,10 +79,17 @@ const Header = ({
             style={{ marginRight: '20px' }}
             color="primary"
             variant="outlined"
-            onClick={handleSave}
+            onClick={async () => {
+              setLoadingSave(true);
+              await handleSave();
+              setLoadingSave(false);
+            }}
             startIcon={<Save />}
             size="large"
-            disabled={isSaved || isTyping || location.state.published}
+            loading={loadingSave}
+            disabled={
+              isSaved || isTyping || location.state.published || loadingSave
+            }
           >
             Salvar
           </StyledButton>
@@ -86,7 +97,12 @@ const Header = ({
             disabled={location.state.published}
             color="primary"
             variant="contained"
-            onClick={handleFinish}
+            loading={loadingFinish}
+            onClick={async () => {
+              setLoadingFinish(true);
+              await handleFinish();
+              setLoadingFinish(false);
+            }}
             startIcon={<CheckCircle />}
             size="large"
           >

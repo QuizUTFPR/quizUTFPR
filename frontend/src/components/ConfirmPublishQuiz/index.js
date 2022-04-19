@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 // COMPONENTS
 import {
@@ -12,9 +12,12 @@ import Button from '@components/Button';
 
 const PublishQuizAlert = forwardRef((props, _) => {
   const { onClick, handleClose, title, description } = props;
+  const [loading, setLoading] = useState(false);
 
-  const handlePublish = () => {
-    onClick();
+  const handlePublish = async () => {
+    setLoading(true);
+    await onClick();
+    setLoading(false);
     handleClose();
   };
 
@@ -27,7 +30,12 @@ const PublishQuizAlert = forwardRef((props, _) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary" variant="outlined">
+        <Button
+          loading={false}
+          onClick={handleClose}
+          color="primary"
+          variant="outlined"
+        >
           Cancelar
         </Button>
         <Button
@@ -35,6 +43,7 @@ const PublishQuizAlert = forwardRef((props, _) => {
           color="primary"
           variant="contained"
           autoFocus
+          loading={loading}
         >
           Publicar
         </Button>

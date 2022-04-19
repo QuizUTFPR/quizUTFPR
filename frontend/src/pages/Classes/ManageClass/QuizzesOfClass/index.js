@@ -97,8 +97,7 @@ const QuizzesOfClass = () => {
               variant="contained"
               color="primary"
               onClick={toogleModal}
-              // component={Link}
-              // to={CREATE_QUIZ}
+              loading={false}
             >
               Anexar Quiz
             </StyledButton>

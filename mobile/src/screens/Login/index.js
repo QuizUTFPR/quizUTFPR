@@ -37,6 +37,7 @@ const Login = ({ navigation }) => {
   });
 
   const { login } = useStudentAuth();
+  const [loading, setLoading] = useState(false);
 
   const [showToast, setShowToast] = useState({
     open: false,
@@ -60,6 +61,7 @@ const Login = ({ navigation }) => {
           }}
           validationSchema={loginValidationSchema}
           onSubmit={async (values) => {
+            setLoading(true);
             const response = await login(values);
             if (response.status !== 200) {
               setShowToast({
@@ -67,6 +69,8 @@ const Login = ({ navigation }) => {
                 message: response.message,
               });
             }
+
+            setLoading(false);
           }}
         >
           {({
@@ -142,6 +146,7 @@ const Login = ({ navigation }) => {
                   variant="primary"
                   onPress={handleSubmit}
                   icon="login-variant"
+                  loading={loading}
                 >
                   ENTRAR
                 </ButtonGradient>
