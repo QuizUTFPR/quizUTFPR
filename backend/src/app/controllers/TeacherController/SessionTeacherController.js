@@ -10,15 +10,16 @@ class SessionTeacherController {
       );
 
       return res.status(200).json(teacherSession);
-    } catch (err) {
-      console.log('ERROR', err);
-      if (err.response === 401) {
-        return res
-          .status(403)
-          .json({ error: 'Dados de usuário ou senha incorretos' });
+    } catch (error) {
+      if (error.response.data.status === 401) {
+        const RAOrPasswordErrorLdap = new Error();
+        RAOrPasswordErrorLdap.status = 403;
+        RAOrPasswordErrorLdap.response =
+          'Dados de usuário ou senha incorretos!';
+        return res.status(403).json(RAOrPasswordErrorLdap);
       }
 
-      return res.status(500).json(err);
+      return res.status(500).json(error);
     }
   }
 }
