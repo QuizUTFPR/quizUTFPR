@@ -28,6 +28,7 @@ import {
 const Feedback = () => {
   const navigation = useNavigation();
   const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState({
     open: false,
     message: '',
@@ -47,6 +48,7 @@ const Feedback = () => {
 
   const handleSendFeedback = async () => {
     try {
+      setLoading(true);
       await api.post('/feedback/create', {
         message,
         studentId: studentInfo.student.id,
@@ -65,6 +67,8 @@ const Feedback = () => {
         message: error.response.data.message,
         type: 'error',
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -106,7 +110,11 @@ const Feedback = () => {
 
         <BottomWrapper>
           <InputWrapper>
-            <ButtonGradient onPress={handleSendFeedback} variant="primary">
+            <ButtonGradient
+              loading={loading}
+              onPress={handleSendFeedback}
+              variant="primary"
+            >
               ENVIAR
             </ButtonGradient>
           </InputWrapper>

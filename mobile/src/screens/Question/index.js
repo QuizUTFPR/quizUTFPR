@@ -55,6 +55,8 @@ const Question = () => {
 
   const navigation = useNavigation();
 
+  const [loading, setLoading] = useState(false);
+
   const [widthAnimation, setWidthAnimation] = useState(
     new Animated.Value(Dimensions.get('screen').width)
   );
@@ -97,8 +99,12 @@ const Question = () => {
         message: 'Marque ao menos uma alternativa!',
       });
     } else {
+      setLoading(true);
+
       await handleSaveRequestQuestionOnDatabase(timer.seconds);
       const responseFinished = await changeToNextQuestion();
+
+      setLoading(false);
 
       if (responseFinished) {
         clearInterval(timer.interval);
@@ -263,7 +269,10 @@ const Question = () => {
                 )}
               </ScrollWrapper>
               <Footer>
-                <ConfirmButton onPress={handleGoToNextQuestionAndSave}>
+                <ConfirmButton
+                  loading={loading}
+                  onPress={handleGoToNextQuestionAndSave}
+                >
                   CONFIRMAR
                 </ConfirmButton>
               </Footer>

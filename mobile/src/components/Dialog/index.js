@@ -28,6 +28,7 @@ const Dialog = ({
 }) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const getSize = (event) => {
     const { nativeEvent } = event;
@@ -58,7 +59,14 @@ const Dialog = ({
           </StyledWrapperChildren>
           <StyledWrapperButtons>
             {firstButtonLabel && (
-              <FirstButton onPress={firstButtonOnPress}>
+              <FirstButton
+                loading={loading}
+                onPress={async () => {
+                  setLoading(true);
+                  await firstButtonOnPress();
+                  setLoading(false);
+                }}
+              >
                 {firstButtonLabel}
               </FirstButton>
             )}

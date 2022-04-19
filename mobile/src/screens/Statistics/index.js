@@ -121,6 +121,7 @@ const Statistics = ({ route }) => {
             </RedoButton>
             <ButtonGradient
               variant="primary"
+              loading={false}
               onPress={() =>
                 navigation.dispatch(
                   CommonActions.reset({
