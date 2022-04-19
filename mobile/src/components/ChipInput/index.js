@@ -15,7 +15,9 @@ const ChipInput = ({ chips, setChips, placeholder }) => {
   const ref = useRef();
 
   const handleAddChip = () => {
-    const newChips = [...chips, value];
+    if (!value.trim()) return;
+
+    const newChips = [...chips, value].filter(Boolean);
 
     if (newChips.length > 0) {
       setChips([

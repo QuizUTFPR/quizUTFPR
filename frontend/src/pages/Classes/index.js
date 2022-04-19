@@ -121,10 +121,46 @@ const MyClasses = () => {
 
         <HeaderDivider />
 
-        {!classes ? (
-          <p>Vazio!</p>
+        <p>Turmas Públicas</p>
+        {!classes?.public ? (
+          <p>Nenhuma turma pública encontrada!</p>
         ) : (
-          classes.map((classInstance) => (
+          classes?.public.map((classInstance) => (
+            <Card
+              key={classInstance.id}
+              image={classInstance?.imageClass?.url}
+              imageTitle={classInstance.title}
+              title={classInstance.title}
+              description={classInstance.description}
+              to={`${MANAGE_CLASSES}/${classInstance.id}`}
+            >
+              <Tooltip arrow ariaLabel="pin" title="PIN utilizado pelo aluno">
+                <TextPIN>{classInstance.pin}</TextPIN>
+              </Tooltip>
+              <Tooltip arrow ariaLabel="editar" title="Editar">
+                <IconButton onClick={handleOpenEditModal(classInstance)}>
+                  <Edit />
+                </IconButton>
+              </Tooltip>
+              <Tooltip arrow ariaLabel="clonar" title="Clonar Turma">
+                <IconButton onClick={handleOpenCloneModal(classInstance)}>
+                  <FileCopy />
+                </IconButton>
+              </Tooltip>
+              <Tooltip arrow ariaLabel="deletar" title="Deletar Turma">
+                <IconButton onClick={handleOpenModalDelete(classInstance.id)}>
+                  <Delete />
+                </IconButton>
+              </Tooltip>
+            </Card>
+          ))
+        )}
+
+        <p>Turmas Privadas</p>
+        {!classes?.private ? (
+          <p>Nenhuma turma privada encontrada!</p>
+        ) : (
+          classes?.private.map((classInstance) => (
             <Card
               key={classInstance.id}
               image={classInstance?.imageClass?.url}

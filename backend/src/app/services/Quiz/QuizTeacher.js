@@ -47,6 +47,7 @@ class QuizTeacherService {
           attributes: ['id', 'url', 'path'],
         },
       ],
+      order: [['createdAt', 'DESC']],
     });
 
     if (!quizzes.length) {
@@ -56,7 +57,18 @@ class QuizTeacherService {
       throw error;
     }
 
-    return quizzes;
+    const returnedQuizzes = {};
+
+    quizzes.forEach((item) => {
+      const { visibility } = item;
+      if (!returnedQuizzes[visibility]) {
+        returnedQuizzes[visibility] = [item];
+      } else {
+        returnedQuizzes[visibility].push(item);
+      }
+    });
+
+    return returnedQuizzes;
   }
 }
 

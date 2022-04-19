@@ -41,6 +41,7 @@ class LDAPStudentSessionService {
     const { token: ldapToken } = responseLDAP.data;
 
     // VERIFICANDO SE DADOS ESTÃO CORRETOS DE ACORDO COM O LDAP
+
     const responseLoginLDAP = await axios.post(
       `${process.env.LDAP_URL}/ldap/doLogin`,
       {

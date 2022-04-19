@@ -32,7 +32,6 @@ router.put(
   uploadImage,
   ClassController.update
 );
-router.get('/getAllClasses', ClassController.index);
 router.post('/getClass', ClassController.show);
 router.post(
   '/cloneClass',

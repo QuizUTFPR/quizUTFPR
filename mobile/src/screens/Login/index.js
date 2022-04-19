@@ -160,7 +160,7 @@ const Login = ({ navigation }) => {
         type="error"
         handleClose={handleCloseToast}
         open={showToast.open}
-        timeToErase={1000}
+        timeToErase={2000}
       >
         {showToast.message}
       </Toast>

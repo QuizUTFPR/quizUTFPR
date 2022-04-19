@@ -57,6 +57,7 @@ class GetAllAvailableQuizzesService {
           attributes: ['url', 'path'],
         },
       ],
+      order: [['createdAt', 'DESC']],
     });
 
     if (!availableQuizzes.length) {

@@ -55,6 +55,7 @@ class GetAvailableStudentClassesService {
           attributes: ['name', 'email'],
         },
       ],
+      order: [['createdAt', 'DESC']],
     });
 
     const availableClassesWithStatistics = await Promise.all(

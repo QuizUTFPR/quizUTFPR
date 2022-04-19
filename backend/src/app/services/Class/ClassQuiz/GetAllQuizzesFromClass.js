@@ -40,6 +40,7 @@ class GetAllQuizzesFromClassService {
           as: 'image',
         },
       ],
+      order: [['createdAt', 'DESC']],
     });
 
     return quizzes;

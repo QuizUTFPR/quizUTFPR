@@ -3,7 +3,6 @@ import CreateClassService from '../../services/Class/CreateClass';
 import FindByPkClassService from '../../services/Class/FindByPkClass';
 import DeleteClassService from '../../services/Class/DeleteClass';
 import UpdateClassService from '../../services/Class/UpdateClass';
-import GetAllClasses from '../../services/Class/GetAllClasses';
 
 class ClassController {
   async store(req, res) {
@@ -24,19 +23,6 @@ class ClassController {
       });
 
       return res.status(200).json(classCreated);
-    } catch (error) {
-      return (
-        (!!error.status && res.status(error.status).json(error)) ||
-        res.status(500).json(error)
-      );
-    }
-  }
-
-  async index(req, res) {
-    try {
-      const allClasses = await GetAllClasses.execute();
-
-      return res.status(200).json(allClasses);
     } catch (error) {
       return (
         (!!error.status && res.status(error.status).json(error)) ||

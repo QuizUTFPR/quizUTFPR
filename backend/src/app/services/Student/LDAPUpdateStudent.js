@@ -17,13 +17,15 @@ class LDAPUpdateStudentService {
   async execute(data) {
     const schema = Yup.object().shape({
       id: Yup.number().required(),
-      name: Yup.string().required(),
-      avatar: Yup.string(),
+      name: Yup.string().required('Nickname é obrigatorio!'),
+      avatar: Yup.string().required('Avatar é obrigatorio!'),
     });
 
-    if (!(await schema.isValid(data))) {
+    const validation = await schema.validate(data);
+
+    if (!validation) {
       const error = new Error();
-      error.response = 'Falha na validação!';
+      error.response = validation.errors;
       error.status = 403;
       throw error;
     }

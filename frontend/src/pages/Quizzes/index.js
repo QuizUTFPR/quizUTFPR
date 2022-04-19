@@ -66,6 +66,8 @@ const Quiz = () => {
     try {
       const response = await api.get('/quiz');
 
+      console.log(response.data);
+
       if (response.status !== 200) setQuizzes(false);
       else setQuizzes(response.data);
     } catch (err) {
@@ -136,10 +138,72 @@ const Quiz = () => {
 
         <HeaderDivider />
 
-        {!quizzes ? (
-          <p>Vazio!</p>
+        <p>publicos</p>
+        {!quizzes?.public ? (
+          <p>Não existe nenhum quiz público!</p>
         ) : (
-          quizzes.map((quiz) => (
+          quizzes?.public.map((quiz) => (
+            <Card
+              key={quiz.id}
+              image={quiz.image?.url}
+              imageTitle={quiz.title}
+              title={`${quiz.title}`}
+              description={quiz.description}
+              to={`${QUESTION}${quiz.id}`}
+              published={quiz.published}
+              noTime={quiz.noTime}
+            >
+              {!quiz.published && (
+                <Tooltip arrow ariaLabel="publicar" title="Publicar">
+                  <IconButton onClick={() => handleClickOpenPublish(quiz.id)}>
+                    <Publish />
+                  </IconButton>
+                </Tooltip>
+              )}
+
+              {quiz.published && (
+                <>
+                  <Tooltip
+                    arrow
+                    ariaLabel="pin"
+                    title="PIN utilizado pelo aluno"
+                  >
+                    <TextPIN>{quiz.pin}</TextPIN>
+                  </Tooltip>
+                  <Tooltip
+                    arrow
+                    ariaLabel="statistics"
+                    title="Visualizar estatisticas"
+                  >
+                    <IconButton
+                      onClick={() => navigate(`${STATISTICS_QUIZ}/${quiz.id}`)}
+                    >
+                      <BarChart />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              )}
+              <Tooltip arrow ariaLabel="editar" title="Editar">
+                <IconButton onClick={handleOpenModal(quiz)}>
+                  <Edit />
+                </IconButton>
+              </Tooltip>
+              {!quiz.published && (
+                <Tooltip arrow ariaLabel="deletar" title="Deletar">
+                  <IconButton onClick={() => handleClickOpenAlert(quiz.id)}>
+                    <Delete />
+                  </IconButton>
+                </Tooltip>
+              )}
+            </Card>
+          ))
+        )}
+
+        <p>Privados</p>
+        {!quizzes?.private ? (
+          <p>Não existe nenhum quiz privados!</p>
+        ) : (
+          quizzes?.private.map((quiz) => (
             <Card
               key={quiz.id}
               image={quiz.image?.url}

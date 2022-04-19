@@ -28,6 +28,10 @@ const ChooseNicknameAndAvatar = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(0);
   const [name, setName] = useState('');
   const [images, setImages] = useState([]);
+  const [errorRequest, setErrorRequest] = useState({
+    status: false,
+    message: 'false',
+  });
 
   const { update } = useStudentAuth();
 
@@ -36,13 +40,21 @@ const ChooseNicknameAndAvatar = () => {
   };
 
   const handleNext = async () => {
-    try {
-      await update({
-        name,
-        avatar: images[selectedAvatar],
+    setErrorRequest({
+      status: false,
+      message: '',
+    });
+
+    const response = await update({
+      name,
+      avatar: images[selectedAvatar],
+    });
+
+    if (response.status === 500) {
+      setErrorRequest({
+        status: true,
+        message: response.message,
       });
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -61,50 +73,53 @@ const ChooseNicknameAndAvatar = () => {
 
   return (
     // const navigation = useNavigation();
-
-    <StyledContainer>
-      <TopWrapper>
-        <Title>Informações</Title>
-        <Description>
-          Escolha um nickname e um avatar para sua conta.
-        </Description>
-        <InputWrapper>
-          <Input
-            fill="black"
-            label="Nickname"
-            placeholder="Digite seu nickname..."
-            textAlignVertical="center"
-            // paddingWrapper="10px 0"
-            value={name}
-            onChangeText={handleSetName}
+    <>
+      <StyledContainer>
+        <TopWrapper>
+          <Title>Informações</Title>
+          <Description>
+            Escolha um nickname e um avatar para sua conta.
+          </Description>
+          <InputWrapper>
+            <Input
+              error={errorRequest.status}
+              errorMessage={errorRequest.message}
+              fill="black"
+              label="Nickname"
+              placeholder="Digite seu nickname..."
+              textAlignVertical="center"
+              // paddingWrapper="10px 0"
+              value={name}
+              onChangeText={handleSetName}
+            />
+          </InputWrapper>
+        </TopWrapper>
+        <MiddleWrapper>
+          <StyledFlatList
+            // numColumns={3}
+            data={images}
+            renderItem={({ item, index }) => (
+              <AvatarWrapper
+                key={item}
+                isActive={index === selectedAvatar}
+                onPress={() => setSelectedAvatar(index)}
+              >
+                <AvatarImage source={{ uri: `${API_URL}/avatars/${item}` }} />
+              </AvatarWrapper>
+            )}
+            keyExtractor={(item) => item}
           />
-        </InputWrapper>
-      </TopWrapper>
-      <MiddleWrapper>
-        <StyledFlatList
-          // numColumns={3}
-          data={images}
-          renderItem={({ item, index }) => (
-            <AvatarWrapper
-              key={item}
-              isActive={index === selectedAvatar}
-              onPress={() => setSelectedAvatar(index)}
-            >
-              <AvatarImage source={{ uri: `${API_URL}/avatars/${item}` }} />
-            </AvatarWrapper>
-          )}
-          keyExtractor={(item) => item}
-        />
-      </MiddleWrapper>
+        </MiddleWrapper>
 
-      <BottomWrapper>
-        <InputWrapper>
-          <ButtonGradient onPress={handleNext} variant="primary">
-            AVANÇAR
-          </ButtonGradient>
-        </InputWrapper>
-      </BottomWrapper>
-    </StyledContainer>
+        <BottomWrapper>
+          <InputWrapper>
+            <ButtonGradient onPress={handleNext} variant="primary">
+              AVANÇAR
+            </ButtonGradient>
+          </InputWrapper>
+        </BottomWrapper>
+      </StyledContainer>
+    </>
   );
 };
 export default ChooseNicknameAndAvatar;

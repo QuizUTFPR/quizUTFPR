@@ -97,7 +97,6 @@ const StudentAuth = ({ children }) => {
       setLoggedIn(true);
       return response;
     } catch (error) {
-      console.log('ERROR', error.response.data.response);
       return {
         status: error.response.status,
         message: error.response.data.response,
@@ -132,10 +131,9 @@ const StudentAuth = ({ children }) => {
 
       return data;
     } catch (error) {
-      console.log('ERROR', error.response.data.response);
       return {
         status: error.response.status,
-        message: error.response.data.response,
+        message: error.response.data.message,
       };
     }
   };
