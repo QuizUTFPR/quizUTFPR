@@ -153,7 +153,7 @@ const Quiz = () => {
           <StyledAccordion>
             <AccordionSummary>
               <QuizBar>
-                <CategoryTitle>Quizzes públicos</CategoryTitle>
+                <CategoryTitle>Quizzes Públicos</CategoryTitle>
                 <QuizzesQuantity>(0 quizzes)</QuizzesQuantity>
               </QuizBar>
             </AccordionSummary>
@@ -165,7 +165,7 @@ const Quiz = () => {
           <StyledAccordion TransitionProps={{ unmountOnExit: true }}>
             <AccordionSummary>
               <QuizBar>
-                <CategoryTitle>Quizzes públicos</CategoryTitle>
+                <CategoryTitle>Quizzes Públicos</CategoryTitle>
                 <QuizzesQuantity>
                   ({quizzes.public.length} quizzes)
                 </QuizzesQuantity>
@@ -239,7 +239,7 @@ const Quiz = () => {
           <StyledAccordion>
             <AccordionSummary>
               <QuizBar>
-                <CategoryTitle>Quizzes privados</CategoryTitle>
+                <CategoryTitle>Quizzes Privados</CategoryTitle>
                 <QuizzesQuantity>(0 quizzes)</QuizzesQuantity>
               </QuizBar>
             </AccordionSummary>
@@ -251,8 +251,10 @@ const Quiz = () => {
           <StyledAccordion>
             <AccordionSummary>
               <QuizBar>
-                <CategoryTitle>Quizzes privados</CategoryTitle>
-                <QuizzesQuantity>(0 quizzes)</QuizzesQuantity>
+                <CategoryTitle>Quizzes Privados</CategoryTitle>
+                <QuizzesQuantity>
+                  ({quizzes.private.length} quizzes)
+                </QuizzesQuantity>
               </QuizBar>
             </AccordionSummary>
             <AccordionDetails>
