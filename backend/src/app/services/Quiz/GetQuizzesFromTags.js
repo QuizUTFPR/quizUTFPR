@@ -23,6 +23,7 @@ class GetQuizzesFromTagsService {
     const quizzes = await this.quizRepository.findAll({
       where: {
         published: true,
+        visibility: 'public',
       },
       include: [
         {
@@ -42,6 +43,7 @@ class GetQuizzesFromTagsService {
       ],
     });
 
+    console.log('QUIZZES', quizzes);
     const filteredQuizzesByTag = [];
 
     await Promise.all(
@@ -74,7 +76,7 @@ class GetQuizzesFromTagsService {
     if (!filteredQuizzesByTag.length) {
       const error = new Error();
       error.status = 404;
-      error.response = 'Não existe nenhum quiz cadastrado!';
+      error.response = 'Nenhum quiz encontrado!';
       throw error;
     }
 
