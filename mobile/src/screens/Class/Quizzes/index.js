@@ -55,7 +55,7 @@ const QuizzesOfClass = () => {
       {!loading && classQuizzes.length === 0 && (
         <NoContent
           title="Opps..."
-          subtitle="Você não se inscreveu em nenhuma turma."
+          subtitle="A turma não possui nenhum quiz vinculado."
         />
       )}
       <StyledScrollView>

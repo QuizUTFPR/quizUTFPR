@@ -69,7 +69,7 @@ const RankingClass = () => {
         {!loading && rankingQuizList.length === 0 && (
           <NoContent
             title="Opps..."
-            subtitle="Você não se inscreveu em nenhuma turma."
+            subtitle="Nenhum aluno respondeu algum quiz até o momento."
           />
         )}
         <StyledFlatList
