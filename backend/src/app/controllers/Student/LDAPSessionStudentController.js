@@ -7,7 +7,6 @@ class LDAPSessionStudentController {
   // Cadastra um único registro
   async store(req, res) {
     const { ra, password } = req.body;
-    console.log('veio fazer login');
     try {
       const student = await LDAPStudentSessionService.execute({
         ra,

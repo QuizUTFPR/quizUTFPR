@@ -6,8 +6,8 @@ class StudentQuiz extends Model {
       {
         studentId: Sequelize.INTEGER,
         quizId: Sequelize.UUID,
-        hitAmount: Sequelize.INTEGER,
-        score: Sequelize.INTEGER,
+        hitAmount: Sequelize.FLOAT,
+        score: Sequelize.FLOAT,
         isFinished: Sequelize.BOOLEAN,
         classId: Sequelize.UUID,
       },

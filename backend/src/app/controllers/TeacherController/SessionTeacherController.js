@@ -11,7 +11,9 @@ class SessionTeacherController {
 
       return res.status(200).json(teacherSession);
     } catch (error) {
-      if (error.response.data.status === 401) {
+      console.log(error);
+
+      if (error?.response?.data?.status === 401) {
         const RAOrPasswordErrorLdap = new Error();
         RAOrPasswordErrorLdap.status = 403;
         RAOrPasswordErrorLdap.response =

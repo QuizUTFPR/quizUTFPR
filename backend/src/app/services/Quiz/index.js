@@ -43,13 +43,9 @@ class QuizService {
 
     const { tags: propsTags } = data;
 
-    console.log('propsTags', propsTags);
-
     const tags = [
       ...new Set(propsTags.map((element) => element.toLowerCase().trim())),
     ];
-
-    console.log('tags', tags);
 
     tags.map(async (tagObject) => {
       const [tag] = await this.tagRepository.findOrCreate({

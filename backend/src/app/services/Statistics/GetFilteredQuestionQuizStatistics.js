@@ -242,33 +242,40 @@ class GetFilteredQuestionQuizStatisticsService {
         if (answer[3]) answer[3].dataValues.numberOfChoices = 0;
 
         let hitAmount = 0; // SUM OF HIT (CORRECT ANSWER)
+        let amountOfCorrectOptions = 0;
         // eslint-disable-next-line array-callback-return
         questionChoice.map((choice) => {
           const { checked1, checked2, checked3, checked4 } = choice;
           let hasWrongChoice = false;
           let hitAmountChoice = 0;
 
+          // necessario if's abaxo pq se estudante não marcar nenhum correta temos q calcular a quantidade de alternativas corretas
+          if (answer[0].dataValues.isCorrect) amountOfCorrectOptions += 1;
+          if (answer[1].dataValues.isCorrect) amountOfCorrectOptions += 1;
+          if (answer[2].dataValues.isCorrect) amountOfCorrectOptions += 1;
+          if (answer[3].dataValues.isCorrect) amountOfCorrectOptions += 1;
+
           if (checked1) {
             answer[0].dataValues.numberOfChoices += 1;
-            if (checked1 && answer[0].dataValues.isCorrect && !hasWrongChoice)
+            if (answer[0].dataValues.isCorrect && !hasWrongChoice)
               hitAmountChoice += 1;
             else hasWrongChoice = true;
           }
           if (checked2) {
             answer[1].dataValues.numberOfChoices += 1;
-            if (checked2 && answer[1].dataValues.isCorrect && !hasWrongChoice)
+            if (answer[1].dataValues.isCorrect && !hasWrongChoice)
               hitAmountChoice += 1;
             else hasWrongChoice = true;
           }
           if (checked3) {
             answer[2].dataValues.numberOfChoices += 1;
-            if (checked3 && answer[2].dataValues.isCorrect && !hasWrongChoice)
+            if (answer[2].dataValues.isCorrect && !hasWrongChoice)
               hitAmountChoice += 1;
             else hasWrongChoice = true;
           }
           if (checked4) {
             answer[3].dataValues.numberOfChoices += 1;
-            if (checked4 && answer[3].dataValues.isCorrect && !hasWrongChoice)
+            if (answer[3].dataValues.isCorrect && !hasWrongChoice)
               hitAmountChoice += 1;
             else hasWrongChoice = true;
           }
@@ -276,7 +283,7 @@ class GetFilteredQuestionQuizStatisticsService {
           if (!hasWrongChoice) hitAmount += hitAmountChoice;
         });
 
-        const percentageOfHit = (hitAmount * 100) / questionChoice.length;
+        const percentageOfHit = (hitAmount * 100) / amountOfCorrectOptions;
         percentageOfQuizHit += percentageOfHit;
 
         const roundedPercentageOfHit = Math.floor(percentageOfHit);

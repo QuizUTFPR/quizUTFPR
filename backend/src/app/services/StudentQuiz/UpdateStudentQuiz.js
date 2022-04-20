@@ -77,7 +77,7 @@ class UpdateStudentQuizService {
 
     // CALCULANDO SCORE
     let score = 0;
-    let correctAnswerAmount = 1;
+    let correctAnswerAmount = 0;
     let studentAnswerCorrect = 0;
     let studentAmountQuestionCorrect = 0;
     let finalScore = 0;
@@ -116,9 +116,8 @@ class UpdateStudentQuizService {
           }
         });
 
-        if (studentAnswerCorrect > 0) {
-          studentAmountQuestionCorrect += 1;
-        }
+        studentAmountQuestionCorrect +=
+          studentAnswerCorrect / correctAnswerAmount;
 
         const { noTime } = quiz;
         const questionScore = question.score;
