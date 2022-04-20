@@ -33,6 +33,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
   } = useQuestionQuiz();
 
   const handleAddMockupQuestion = (mockup) => () => {
+    console.log('mockup', mockup, questions.length);
     addQuestion(mockup);
     updateScreen(mockup, questions.length)();
     handleClose();
@@ -79,7 +80,9 @@ const TypeOfQuestion = forwardRef((props, ref) => {
                 startIcon={<Save />}
                 color="secondary"
                 variant="outlined"
-                onClick={handleAddMockupQuestion(MockupQuestionMultipleChoice)}
+                onClick={handleAddMockupQuestion(
+                  JSON.parse(JSON.stringify(MockupQuestionMultipleChoice))
+                )}
                 loading={false}
               >
                 Multipla Escolha
@@ -91,7 +94,9 @@ const TypeOfQuestion = forwardRef((props, ref) => {
                 startIcon={<Save />}
                 color="secondary"
                 variant="outlined"
-                onClick={handleAddMockupQuestion(MockupQuestionTrueOrFalse)}
+                onClick={handleAddMockupQuestion(
+                  JSON.parse(JSON.stringify(MockupQuestionTrueOrFalse))
+                )}
                 loading={false}
               >
                 Verdadeiro ou Falso

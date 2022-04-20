@@ -110,6 +110,10 @@ const Question = () => {
   };
 
   useEffect(() => {
+    console.log('onScreen', onScreen);
+  }, [onScreen]);
+
+  useEffect(() => {
     fetchQuestions();
 
     return () => {

@@ -105,7 +105,7 @@ const Quiz = () => {
       getQuizzes();
     } catch (error) {
       console.log(error);
-      handleClickSnackBar(error.response.data.error, 'error');
+      handleClickSnackBar(error.response.data.response, 'error');
     }
   };
 
@@ -120,7 +120,7 @@ const Quiz = () => {
       handleClickSnackBar('Quiz publicado com sucesso!', 'success');
       getQuizzes();
     } catch (error) {
-      handleClickSnackBar(error.response.data.error, 'error');
+      handleClickSnackBar(error.response.data.response, 'error');
     }
   }, [openPublish]);
 

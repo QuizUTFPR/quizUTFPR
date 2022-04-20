@@ -44,7 +44,7 @@ export const MockupQuestionTrueOrFalse = {
   imageUrl: '',
   difficultyLevel: 'Fácil',
   availableOnQuestionsDB: false,
-  answer: TrueOrFalseAnswer,
+  answer: JSON.parse(JSON.stringify(TrueOrFalseAnswer)),
   tags: [],
 };
 
@@ -58,7 +58,7 @@ export const MockupQuestionMultipleChoice = {
   imageObj: null,
   imageUrl: '',
   availableOnQuestionsDB: false,
-  answer: MultipleChoiceAnswer,
+  answer: JSON.parse(JSON.stringify(MultipleChoiceAnswer)),
   tags: [],
 };
 
@@ -73,7 +73,7 @@ export const initialValue = [
     imageUrl: '',
     difficultyLevel: 'Fácil',
     availableOnQuestionsDB: false,
-    answer: MultipleChoiceAnswer,
+    answer: JSON.parse(JSON.stringify(MultipleChoiceAnswer)),
     tags: [],
     index: 0,
   },

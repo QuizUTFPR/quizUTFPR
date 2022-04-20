@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import api from '@api';
 import * as yup from 'yup';
 import { read, utils } from 'xlsx';
@@ -24,6 +24,10 @@ const QuestionQuiz = ({ children }) => {
   const [isTyping, setTyping] = useState(false);
   const [errors, setErrors] = useState(initialValueErrors);
   const [questionToRemove, setQuestionToRemove] = useState([]);
+
+  useEffect(() => {
+    console.log('TrueOrFalseAnswer', TrueOrFalseAnswer);
+  }, [TrueOrFalseAnswer]);
 
   const getAllQuestionOfTheQuiz = async (id) => {
     try {
@@ -122,7 +126,12 @@ const QuestionQuiz = ({ children }) => {
       index: questions.length,
     };
 
-    const updatedQuestions = [...questions, { ...newQuestion }];
+    const updatedQuestions = [
+      ...questions,
+      {
+        ...newQuestion,
+      },
+    ];
     setQuestions(updatedQuestions);
     setSaved(false);
     setErrors(initialValueErrors);
@@ -178,7 +187,10 @@ const QuestionQuiz = ({ children }) => {
     formikAnswerID,
   }) => {
     const choosedType =
-      type === 'multipleChoice' ? MultipleChoiceAnswer : TrueOrFalseAnswer;
+      type === 'multipleChoice'
+        ? JSON.parse(JSON.stringify(MultipleChoiceAnswer))
+        : JSON.parse(JSON.stringify(TrueOrFalseAnswer));
+
     formikUpdate(formikTypeID, type);
     formikUpdate(formikAnswerID, choosedType);
 

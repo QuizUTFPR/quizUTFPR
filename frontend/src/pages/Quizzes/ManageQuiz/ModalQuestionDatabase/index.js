@@ -109,7 +109,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
           formik.setFieldValue('questions', []);
         }
       } catch (error) {
-        handleClickSnackBar(error.response.data.error, 'error');
+        handleClickSnackBar(error.response.data.response, 'error');
       }
       setLoading(false);
     },

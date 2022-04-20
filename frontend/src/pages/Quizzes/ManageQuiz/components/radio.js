@@ -65,7 +65,7 @@ const MemoizedRadio = ({
       id={formikID}
       name="alternativa"
       value={value}
-      onChange={() => {
+      onClick={() => {
         const {
           handleUpdate,
           key,
