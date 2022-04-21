@@ -76,11 +76,9 @@ class UpdateStudentQuizService {
     const studentChoices = await studentQuiz.getQuizQuestionChoice();
 
     // CALCULANDO SCORE
-    let score = 0;
-    let correctAnswerAmount = 0;
-    let studentAnswerCorrect = 0;
     let studentAmountQuestionCorrect = 0;
     let finalScore = 0;
+
     await Promise.all(
       studentChoices.map(async (item) => {
         const studentAnswers = [
@@ -97,6 +95,10 @@ class UpdateStudentQuizService {
         });
 
         let hasWrongChoice = false;
+        let correctAnswerAmount = 0;
+        let amountStudentAnswerCorrect = 0;
+        let score = 0;
+
         answers.forEach((itemAnswers, index) => {
           if (itemAnswers.isCorrect) {
             correctAnswerAmount += 1;
@@ -104,7 +106,7 @@ class UpdateStudentQuizService {
 
           if (!itemAnswers.isCorrect && studentAnswers[index]) {
             hasWrongChoice = true;
-            studentAnswerCorrect = 0;
+            amountStudentAnswerCorrect = 0;
           }
 
           if (
@@ -112,12 +114,12 @@ class UpdateStudentQuizService {
             studentAnswers[index] &&
             !hasWrongChoice
           ) {
-            studentAnswerCorrect += 1;
+            amountStudentAnswerCorrect += 1;
           }
         });
 
         studentAmountQuestionCorrect +=
-          studentAnswerCorrect / correctAnswerAmount;
+          amountStudentAnswerCorrect / correctAnswerAmount;
 
         const { noTime } = quiz;
         const questionScore = question.score;
@@ -126,7 +128,8 @@ class UpdateStudentQuizService {
         const bonus = noTime ? 1 : (timeLeft / timeOfQuestion) * (50 / 100);
 
         score += questionScore + questionScore * bonus;
-        finalScore += (1 / correctAnswerAmount) * studentAnswerCorrect * score;
+        finalScore +=
+          (1 / correctAnswerAmount) * amountStudentAnswerCorrect * score;
       })
     );
 
@@ -141,8 +144,8 @@ class UpdateStudentQuizService {
       throw error;
     }
 
-    studentQuizUpdated.score = finalScore;
-    studentQuizUpdated.hitAmount = studentAmountQuestionCorrect;
+    studentQuizUpdated.score = finalScore.toFixed(2);
+    studentQuizUpdated.hitAmount = studentAmountQuestionCorrect.toFixed(2);
     studentQuizUpdated.isFinished = true;
     await studentQuizUpdated.save();
 

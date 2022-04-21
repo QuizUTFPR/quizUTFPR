@@ -26,6 +26,7 @@ const HomeQuizInProgress = () => {
       const { data } = await api.post('/studentQuiz/getQuizInProgress', {
         page: 1,
       });
+
       setQuizzesInProgress(data);
     } catch (error) {
       // console.log(error);
@@ -75,30 +76,37 @@ const HomeQuizInProgress = () => {
               }}
             />
             <QuizContainer>
-              {allQuizzesInProgress.map((item) => (
-                <CardQuizInProgress
-                  key={item.quiz.id}
-                  data={item}
-                  color={theme.color.purple}
-                  navigate={() =>
-                    navigation.navigate('Descricao', {
-                      idStudentQuiz: item.idStudentQuiz,
-                      questionAmount: item.questionAmount,
-                      studentChoicesAmount: item.studentChoicesAmount,
-                      quiz: {
-                        id: item.quiz.id,
-                        title: item.quiz.title,
-                        description: item.quiz.description,
-                        pin: item.quiz.pin,
-                        image: item.quiz?.image?.url,
-                        tags: item.quiz.tagsQuiz.map((tag) => tag.name),
-                        isFavorite: item.quiz.isFavorite,
-                        noTime: item.quiz.noTime,
-                      },
-                    })
-                  }
-                />
-              ))}
+              {allQuizzesInProgress.map((item) => {
+                const key = item?.classInstance
+                  ? item?.classInstance.id + item.quiz.id
+                  : item.quiz.id;
+
+                return (
+                  <CardQuizInProgress
+                    key={key}
+                    data={item}
+                    color={theme.color.purple}
+                    navigate={() =>
+                      navigation.navigate('Descricao', {
+                        idStudentQuiz: item.idStudentQuiz,
+                        questionAmount: item.questionAmount,
+                        studentChoicesAmount: item.studentChoicesAmount,
+                        quiz: {
+                          id: item.quiz.id,
+                          title: item.quiz.title,
+                          description: item.quiz.description,
+                          pin: item.quiz.pin,
+                          image: item.quiz?.image?.url,
+                          tags: item.quiz.tagsQuiz.map((tag) => tag.name),
+                          isFavorite: item.quiz.isFavorite,
+                          noTime: item.quiz.noTime,
+                        },
+                        classInstance: item?.classInstance,
+                      })
+                    }
+                  />
+                );
+              })}
             </QuizContainer>
           </>
         )}

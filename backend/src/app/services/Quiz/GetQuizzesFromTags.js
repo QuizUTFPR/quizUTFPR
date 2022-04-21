@@ -43,7 +43,6 @@ class GetQuizzesFromTagsService {
       ],
     });
 
-    console.log('QUIZZES', quizzes);
     const filteredQuizzesByTag = [];
 
     await Promise.all(

@@ -17,6 +17,7 @@ import {
   QuizProgressBarBackground,
   QuizProgressBar,
   QuizProgressText,
+  ClassTitle,
 } from './style';
 
 const CardInProgress = ({ navigate, data, color, ...props }) => (
@@ -33,6 +34,11 @@ const CardInProgress = ({ navigate, data, color, ...props }) => (
     <StyledView>
       <Description>
         <QuizTitle fill="black">{data.quiz.title}</QuizTitle>
+        {data?.classInstance && (
+          <ClassTitle fill="black">
+            Turma {data.classInstance?.title}
+          </ClassTitle>
+        )}
       </Description>
       <QuizProgressBarBackground fill="lightGrey">
         <QuizProgressBar

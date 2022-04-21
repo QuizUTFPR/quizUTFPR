@@ -51,8 +51,14 @@ import {
 
 const QuizDescription = ({ route }) => {
   // eslint-disable-next-line no-unused-vars
-  const { idStudentQuiz, questionAmount, studentChoicesAmount, quiz, classId } =
-    route.params;
+  const {
+    idStudentQuiz,
+    questionAmount,
+    studentChoicesAmount,
+    quiz,
+    classId,
+    classInstance = null,
+  } = route.params;
   const { title, description, tags, id, pin, image, isFavorite, noTime } = quiz;
   const [visibleGiveUPModal, setVisibleGivUPModal] = useState(false);
   const [favorite, setFavorite] = useState(isFavorite);
@@ -273,6 +279,16 @@ const QuizDescription = ({ route }) => {
                 </StyledTag>
               ))}
             </TagsContainer>
+
+            {classInstance && (
+              <>
+                <StyledTitle>Tentativa da Turma</StyledTitle>
+
+                <StyledDescriptionText>
+                  {classInstance?.title}
+                </StyledDescriptionText>
+              </>
+            )}
           </BodyDescription>
         </StyledScrollView>
         {studentQuizID && (
@@ -317,7 +333,7 @@ const QuizDescription = ({ route }) => {
           navigation.navigate('QuizRanking', {
             quizTitle: title,
             quizId: id,
-            classId,
+            classId: classId || classInstance?.id,
           })
         }
       />

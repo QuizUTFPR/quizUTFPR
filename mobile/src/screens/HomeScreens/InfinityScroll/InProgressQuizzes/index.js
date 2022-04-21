@@ -52,14 +52,17 @@ const QuizzesInfinityScroll = () => {
       <GoBackHeader />
       <FlatList
         data={allQuizzes}
-        keyExtractor={(item) => item.quiz.id.toString()}
+        keyExtractor={(item) =>
+          item?.classInstance
+            ? `${item?.classInstance.id + item.quiz.id}`
+            : item.quiz.id.toString()
+        }
         refreshing={isRefreshing}
         onRefresh={getAllFavoriteQuizzes}
         onEndReached={getAllFavoriteQuizzes}
         onEndReachedThreshold={0.1}
         renderItem={({ item }) => (
           <CardQuizInProgress
-            key={item.quiz.id}
             data={item}
             color={theme.color.purple}
             navigate={() =>
@@ -77,6 +80,7 @@ const QuizzesInfinityScroll = () => {
                   isFavorite: item.quiz.isFavorite,
                   noTime: item.quiz.noTime,
                 },
+                classInstance: item?.classInstance,
               })
             }
           />

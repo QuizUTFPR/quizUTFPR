@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { QuizTitle } from '../style';
+
 export const QuizProgressBarBackground = styled.View`
   width: 100%;
   height: 15px;
@@ -23,4 +25,10 @@ export const QuizProgressText = styled.Text`
   color: ${({ theme }) => theme.color.fill};
   font-size: ${({ theme }) => theme.fontSize.normal}px;
   font-family: 'PoppinsBold';
+`;
+
+export const ClassTitle = styled(QuizTitle).attrs({
+  numberOfLines: 1,
+})`
+  font-size: ${({ theme }) => theme.fontSize.normal - 4}px;
 `;

@@ -3,6 +3,7 @@ import Quiz from '../../models/QuizModel';
 import Teacher from '../../models/TeacherModel';
 import File from '../../models/FileModel';
 import Tag from '../../models/TagModel';
+import Class from '../../models/ClassModel';
 
 // REPOSITORIES
 import StudentRepository from '../../repositories/Student';
@@ -33,6 +34,11 @@ class GetQuizzesInProgressService {
         isFinished: false,
       },
       include: [
+        {
+          model: Class,
+          as: 'class',
+          attributes: ['id', 'title', 'pin', 'description'],
+        },
         {
           model: Quiz,
           as: 'quiz',
@@ -73,6 +79,7 @@ class GetQuizzesInProgressService {
 
     const studentQuizInProgress = await Promise.all(
       quizzesInProgress.map(async (item) => {
+        const { class: classInstance } = item.dataValues;
         const questionAmount = await item.quiz.countQuestions();
         const studentChoicesAmount = await item.countQuizQuestionChoice();
         const isFavorite = await this.favoriteStudentQuizRepository.findOne({
@@ -86,6 +93,7 @@ class GetQuizzesInProgressService {
           idStudentQuiz: item.id,
           studentChoicesAmount,
           questionAmount,
+          classInstance,
           quiz: {
             ...item.quiz.dataValues,
             isFavorite: !!isFavorite,
