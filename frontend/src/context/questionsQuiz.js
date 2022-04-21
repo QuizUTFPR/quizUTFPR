@@ -19,15 +19,15 @@ import {
 export const QuestionQuizContext = createContext();
 
 const QuestionQuiz = ({ children }) => {
-  const [questions, setQuestions] = useState(initialValue);
+  const [questions, setQuestions] = useState(
+    JSON.parse(JSON.stringify(initialValue))
+  );
   const [isSaved, setSaved] = useState(true);
   const [isTyping, setTyping] = useState(false);
-  const [errors, setErrors] = useState(initialValueErrors);
+  const [errors, setErrors] = useState(
+    JSON.parse(JSON.stringify(initialValueErrors))
+  );
   const [questionToRemove, setQuestionToRemove] = useState([]);
-
-  useEffect(() => {
-    console.log('TrueOrFalseAnswer', TrueOrFalseAnswer);
-  }, [TrueOrFalseAnswer]);
 
   const getAllQuestionOfTheQuiz = async (id) => {
     try {

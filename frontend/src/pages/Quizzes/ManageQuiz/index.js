@@ -118,14 +118,14 @@ const Question = () => {
 
     return () => {
       console.log('unmounting question page');
-      setQuestions(initialValue);
+      setQuestions(JSON.parse(JSON.stringify(initialValue)));
       setSaved(true);
       setTyping(false);
-      setErrors(initialValueErrors);
+      setErrors(JSON.parse(JSON.stringify(initialValueErrors)));
       setQuestionToRemove([]);
       setOnScreen({
         index: 0,
-        question: initialValue,
+        question: JSON.parse(JSON.stringify(initialValue)),
       });
     };
   }, []);
@@ -137,7 +137,7 @@ const Question = () => {
       index,
       question,
     });
-    setErrors(initialValueErrors);
+    setErrors(JSON.parse(JSON.stringify(initialValueErrors)));
   };
 
   const handleRemoveQuestion = async () => {

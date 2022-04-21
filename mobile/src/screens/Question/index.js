@@ -91,7 +91,6 @@ const Question = () => {
     if (
       JSON.stringify(initialRequestQuestion) ===
         JSON.stringify(requestQuestion) &&
-      !noTime &&
       timer.seconds > 0
     ) {
       setShowToast({

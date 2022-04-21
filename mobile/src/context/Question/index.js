@@ -17,13 +17,15 @@ const Question = ({ children }) => {
   };
 
   const [noTime, setNoTime] = useState(false);
-  const [quizData, setQuizData] = useState(initialValue); // save the quiz data about the question on screen
+  const [quizData, setQuizData] = useState(
+    JSON.parse(JSON.stringify(initialValue))
+  ); // save the quiz data about the question on screen
   const [quizID, setQuizID] = useState(-1);
   const [amountOfQuestion, setAmountOfQuestion] = useState(0);
   const [amountAlreadyAnswered, setAlreadyAnswered] = useState(0);
   const [StudentQuizID, setStudentQuizID] = useState(-1);
   const [requestQuestion, setRequestQuestion] = useState(
-    initialRequestQuestion
+    JSON.parse(JSON.stringify(initialRequestQuestion))
   );
   const [quizInfo, setQuizInfo] = useState(null); // save only the quiz info
 
@@ -49,7 +51,7 @@ const Question = ({ children }) => {
       ...requestData,
     });
 
-    setRequestQuestion(initialRequestQuestion);
+    setRequestQuestion(JSON.parse(JSON.stringify(initialRequestQuestion)));
   };
 
   // eslint-disable-next-line camelcase
