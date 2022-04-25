@@ -17,3 +17,5 @@ COPY --chown=node:node . .
 ENV NODE_ENV production
 
 CMD yarn sequelize db:migrate && yarn start:prod
+
+EXPOSE 3334
