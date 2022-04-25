@@ -18,6 +18,7 @@ import {
   MenuItem,
   FormControlLabel,
   Checkbox,
+  Tooltip,
 } from '@mui/material';
 
 // ASSETS
@@ -139,20 +140,25 @@ const EditPreferences = forwardRef((props, _) => {
         </Grid>
 
         <Grid item xs={3}>
-          <FormControlLabel
-            label="Sem limite de tempo"
-            control={
-              <Checkbox
-                id="noTime"
-                name="noTime"
-                variant="outlined"
-                checked={formik.values.noTime}
-                onChange={(event) =>
-                  formik.setFieldValue('noTime', event.target.checked)
-                }
-              />
-            }
-          />
+          <Tooltip
+            title="Cada pergunta possui um tempo para o aluno responder.
+           Ativando essa opção as questões do quiz não teram tempo para serem respondidas."
+          >
+            <FormControlLabel
+              label="Questões sem tempo (cronômetro) de resposta."
+              control={
+                <Checkbox
+                  id="noTime"
+                  name="noTime"
+                  variant="outlined"
+                  checked={formik.values.noTime}
+                  onChange={(event) =>
+                    formik.setFieldValue('noTime', event.target.checked)
+                  }
+                />
+              }
+            />
+          </Tooltip>
         </Grid>
 
         <Grid item xs={12}>

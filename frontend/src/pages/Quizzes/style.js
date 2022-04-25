@@ -57,3 +57,7 @@ export const QuizBar = styled(Grid).attrs({ item: true })`
 `;
 
 export const QuizzesQuantity = styled.p``;
+
+export const QuestionsQuantitty = styled.p`
+  text-align: center;
+`;

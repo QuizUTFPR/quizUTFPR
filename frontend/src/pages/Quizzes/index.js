@@ -35,6 +35,7 @@ import {
   StyledAccordion,
   QuizBar,
   QuizzesQuantity,
+  QuestionsQuantitty,
 } from './style';
 
 const Quiz = () => {
@@ -181,6 +182,9 @@ const Quiz = () => {
                   published={quiz.published}
                   noTime={quiz.noTime}
                 >
+                  <QuestionsQuantitty>
+                    {quiz.amountOfQuestions} <br /> questões
+                  </QuestionsQuantitty>
                   {!quiz.published && (
                     <Tooltip arrow ariaLabel="publicar" title="Publicar">
                       <IconButton
@@ -267,6 +271,9 @@ const Quiz = () => {
                   published={quiz.published}
                   noTime={quiz.noTime}
                 >
+                  <QuestionsQuantitty>
+                    {quiz.amountOfQuestions} <br /> questões
+                  </QuestionsQuantitty>
                   {!quiz.published && (
                     <Tooltip arrow ariaLabel="publicar" title="Publicar">
                       <IconButton

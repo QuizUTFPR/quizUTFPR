@@ -6,6 +6,8 @@ import File from '../../models/FileModel';
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
 
+import getMethodsOfAssociation from '../../utils/getMethodsOfAssociation';
+
 class QuizTeacherService {
   constructor() {
     this.quizRepository = new QuizRepository();
@@ -59,14 +61,22 @@ class QuizTeacherService {
 
     const returnedQuizzes = {};
 
-    quizzes.forEach((item) => {
-      const { visibility } = item;
-      if (!returnedQuizzes[visibility]) {
-        returnedQuizzes[visibility] = [item];
-      } else {
-        returnedQuizzes[visibility].push(item);
-      }
-    });
+    await Promise.all(
+      // eslint-disable-next-line consistent-return
+      quizzes.map(async (item) => {
+        const { visibility } = item;
+        const itemQuiz = {
+          ...item.dataValues,
+          amountOfQuestions: await this.quizRepository.countQuestions(item),
+        };
+
+        if (!returnedQuizzes[visibility]) {
+          returnedQuizzes[visibility] = [itemQuiz];
+        } else {
+          return returnedQuizzes[visibility].push(itemQuiz);
+        }
+      })
+    );
 
     return returnedQuizzes;
   }

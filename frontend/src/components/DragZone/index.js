@@ -3,9 +3,9 @@ import { useDropzone } from 'react-dropzone';
 import Button from '@components/Button';
 
 import SnackBar from '@components/SnackBar';
-import { Container } from './style';
+import { Container, Wrapper, Label } from './style';
 
-const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize }) => {
+const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize, label }) => {
   const [openSnackBar, setOpenSnackBar] = useState({
     message: '',
     open: false,
@@ -53,16 +53,24 @@ const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize }) => {
     },
   });
 
+  console.log('maxSize', maxSize);
+
   return (
-    <div className="container">
+    <Wrapper className="container" label={label}>
+      <Label>Imagem</Label>
       <Container
         {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
       >
         <input {...getInputProps()} />
         <p> Você pode arrastar e soltar imagens aqui para adicioná-las.</p>
-        <p>Tamanho máximo: {maxSize / 1000} kB</p>
-        <Button loading={false} color="secondary" variant="outlined">
-          BROWSE
+        <p>Tamanho máximo: {maxSize / 1e6} Mb</p>
+        <Button
+          style={{ marginTop: 10 }}
+          loading={false}
+          color="secondary"
+          variant="outlined"
+        >
+          BUSCAR
         </Button>
       </Container>
 
@@ -73,7 +81,7 @@ const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize }) => {
         text={openSnackBar.message}
         severity="error"
       />
-    </div>
+    </Wrapper>
   );
 };
 
@@ -81,6 +89,7 @@ StyledDropzone.defaultProps = {
   accept: 'image/*',
   maxFiles: 1,
   maxSize: 734003,
+  label: 'Imagem',
 };
 
 export default StyledDropzone;

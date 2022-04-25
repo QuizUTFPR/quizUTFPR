@@ -16,6 +16,10 @@ class QuizRepository {
   async findOne(props) {
     return Quiz.findOne({ ...props });
   }
+
+  async countQuestions(quizInstance, props = {}) {
+    return quizInstance.countQuestions({ ...props });
+  }
 }
 
 export default QuizRepository;

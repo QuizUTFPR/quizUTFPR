@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Typography } from '@mui/material';
+
 const getColor = (props) => {
   if (props.isDragAccept) {
     return '#00e676';
@@ -28,4 +30,19 @@ export const Container = styled.div`
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
+`;
+
+export const Wrapper = styled.div`
+  padding: 10px;
+  border: 2px solid ${({ theme }) => theme.palette.primary.main};
+  border-radius: 4px;
+  position: relative;
+`;
+
+export const Label = styled(Typography)`
+  position: absolute;
+  top: -0.8em;
+  left: 10px;
+  background: white;
+  padding: 0 5px;
 `;
