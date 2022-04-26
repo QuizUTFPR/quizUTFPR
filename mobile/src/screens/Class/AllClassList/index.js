@@ -51,7 +51,7 @@ const ClassPage = () => {
       {!loading && classList.length === 0 && (
         <NoContent
           title="Opps..."
-          subtitle="Não encontramos nenhuma turma pública."
+          subtitle="Ainda não encontramos turmas públicas."
         />
       )}
       <StyledScrollView>
