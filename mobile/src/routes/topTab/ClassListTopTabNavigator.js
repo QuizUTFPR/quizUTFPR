@@ -47,17 +47,17 @@ const ClassListTopTabNavigator = () => {
         }}
       >
         <TopTab.Screen
+          name="MyClassesListTopTab"
+          component={MyClassesList}
+          options={{ tabBarLabel: 'Minhas Turmas' }}
+        />
+        <TopTab.Screen
           name="AllClassListTopTab"
           component={AllClassList}
           options={{
             tabBarLabel: 'Turmas Disponíveis',
             headerShown: false,
           }}
-        />
-        <TopTab.Screen
-          name="MyClassesListTopTab"
-          component={MyClassesList}
-          options={{ tabBarLabel: 'Minhas Turmas' }}
         />
       </TopTab.Navigator>
 
