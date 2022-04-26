@@ -173,7 +173,7 @@ const MyClasses = () => {
                   <Tooltip
                     arrow
                     ariaLabel="pin"
-                    title="PIN utilizado pelo aluno"
+                    title="PIN para acessar a turma"
                   >
                     <TextPIN>{classInstance.pin}</TextPIN>
                   </Tooltip>
@@ -235,7 +235,7 @@ const MyClasses = () => {
                   <Tooltip
                     arrow
                     ariaLabel="pin"
-                    title="PIN utilizado pelo aluno"
+                    title="PIN para acessar a turma"
                   >
                     <TextPIN>{classInstance.pin}</TextPIN>
                   </Tooltip>
