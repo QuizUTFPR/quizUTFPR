@@ -33,7 +33,7 @@ const NoContent = ({ fill, title, subtitle, sourceLottie, imageType }) => (
 NoContent.defaultProps = {
   fill: 'black',
   title: 'Opps...',
-  subtitle: 'Não encontramos nenhuma turma pública.',
+  subtitle: 'Ainda não encontramos turmas públicas.',
   sourceLottie: NoContentFile,
   imageType: false,
 };

@@ -42,7 +42,13 @@ const TypeOfQuestion = forwardRef((props, ref) => {
   return (
     <>
       {!isModalQuestionDatabaseOpen && (
-        <Wrapper container spacing={3}>
+        <Wrapper
+          width="45vw"
+          container
+          spacing={3}
+          justifyContent="center"
+          alignItems="center"
+        >
           <Grid container justifyContent="center" alignItems="center">
             <Grid item xs={3} md={1}>
               <IconButton aria-label="closeModal" onClick={handleClose}>
@@ -133,13 +139,14 @@ const TypeOfQuestion = forwardRef((props, ref) => {
 
       <Modal
         open={isModalSheetQuestionOpen}
-        modalTitle="Importar questões a planilha"
+        modalTitle="Importar questões da planilha"
         modalDescription=""
         style={{ overflow: 'scroll' }}
       >
         <SheetQuestions
+          width="45vw"
           modalDescription=""
-          modalTitle="Importar questões a planilha"
+          modalTitle="Importar questões da planilha"
           handleClose={() => {
             toogleModalSheetQuestionOpen();
             handleClose();

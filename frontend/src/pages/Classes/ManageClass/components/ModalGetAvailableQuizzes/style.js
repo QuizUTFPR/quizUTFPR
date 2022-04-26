@@ -7,6 +7,7 @@ export const GridContainerModal = styled(Wrapper)`
   max-height: 90vh;
   flex-wrap: nowrap;
   overflow-y: scroll;
+  width: 40vw;
 `;
 
 export const PreviewImage = styled.img`

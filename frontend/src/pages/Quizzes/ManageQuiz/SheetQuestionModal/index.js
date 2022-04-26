@@ -14,7 +14,7 @@ const SheetQuestionModal = forwardRef((props, ref) => {
   const { handleReadExcelFile } = useQuestion();
 
   return (
-    <Wrapper container spacing={3}>
+    <Wrapper width={props.width} container spacing={3}>
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={3} md={1}>
           <IconButton aria-label="closeModal" onClick={props.handleClose}>

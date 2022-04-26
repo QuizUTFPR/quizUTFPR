@@ -9,7 +9,7 @@ export const GridContainer = styled(Grid)`
   margin-top: 40px;
   background: ${({ theme }) => theme.palette.background.bgContainer};
   border-radius: 5px;
-  width: calc(100vw - 340px);
+  width: ${({ width }) => width || 'calc(100vw - 340px)'};
   overflow-wrap: break-word;
   overflow: hidden;
 `;
