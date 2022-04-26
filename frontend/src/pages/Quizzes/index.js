@@ -200,7 +200,7 @@ const Quiz = () => {
                       <Tooltip
                         arrow
                         ariaLabel="pin"
-                        title="PIN utilizado pelo aluno"
+                        title="PIN para acessar o quiz"
                       >
                         <TextPIN>{quiz.pin}</TextPIN>
                       </Tooltip>
@@ -289,7 +289,7 @@ const Quiz = () => {
                       <Tooltip
                         arrow
                         ariaLabel="pin"
-                        title="PIN utilizado pelo aluno"
+                        title="PIN para acessar o quiz"
                       >
                         <TextPIN>{quiz.pin}</TextPIN>
                       </Tooltip>
