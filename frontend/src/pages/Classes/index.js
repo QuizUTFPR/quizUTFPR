@@ -142,7 +142,7 @@ const MyClasses = () => {
           <StyledAccordion TransitionProps={{ unmountOnExit: true }}>
             <AccordionSummary expandIcon={<ExpandMore />}>
               <ClassBar>
-                <CategoryTitle>Turmas Privadas</CategoryTitle>
+                <CategoryTitle>Turmas Públicas</CategoryTitle>
                 <ClassesQuantity>(0 turmas)</ClassesQuantity>
               </ClassBar>
             </AccordionSummary>
