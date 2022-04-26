@@ -63,12 +63,14 @@ const GetImageFromPexels = forwardRef((props, __) => {
 
   return (
     <GridContainerModal container spacing={3}>
-      <Grid item xs={3} md={1}>
+      <Grid
+        item
+        xs={12}
+        style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
+      >
         <IconButton aria-label="closeModal" onClick={handleClose}>
           <Close />
         </IconButton>
-      </Grid>
-      <Grid container align="center" justifyContent="center">
         <Typography color="primary" component="h4" variant="h4">
           Busca de Imagens na Internet
         </Typography>

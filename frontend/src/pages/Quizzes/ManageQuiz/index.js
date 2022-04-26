@@ -267,6 +267,7 @@ const Question = () => {
 
       <Modal open={openAlert} handleClose={handleCloseAlert}>
         <AlertRemoveMessage
+          width="35vw"
           handleClose={handleCloseAlert}
           onClick={handleRemoveQuestion}
           title="Deseja mesmo excluir a questão?"

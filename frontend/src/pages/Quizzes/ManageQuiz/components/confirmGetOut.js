@@ -20,7 +20,7 @@ const GetOutAlert = forwardRef((props, _) => {
   const { handleClose } = props;
 
   return (
-    <Wrapper>
+    <Wrapper width="40vw">
       <DialogTitle id="id-dialog-title">Deseja mesmo sair?</DialogTitle>
       <DialogContent>
         <DialogContentText id="id-dialog-description">

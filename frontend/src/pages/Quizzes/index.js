@@ -353,6 +353,7 @@ const Quiz = () => {
 
       <Modal open={openPublish.open} handleClose={handleClosePublish}>
         <PublishQuizMessage
+          width="35vw"
           handleClose={handleClosePublish}
           onClick={publishQuiz}
           title="Deseja mesmo publicar o Quiz?"

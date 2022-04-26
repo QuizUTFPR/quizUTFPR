@@ -13,7 +13,7 @@ const DragImageContainer = forwardRef((props, _) => {
   const { handleClose, updateQuestion, formik } = props;
 
   return (
-    <Wrapper container spacing={3} style={{ width: '70vw' }}>
+    <Wrapper width="45vw" container spacing={3}>
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={3} md={1}>
           <IconButton aria-label="closeModal" onClick={handleClose}>

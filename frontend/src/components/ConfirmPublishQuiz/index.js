@@ -22,7 +22,7 @@ const PublishQuizAlert = forwardRef((props, _) => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper width={props.width}>
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
