@@ -5,6 +5,7 @@ import { Grid } from '@mui/material';
 
 export const GridContainerModal = styled(Wrapper)`
   max-height: 90vh;
+  width: 55vw;
   flex-wrap: nowrap;
   overflow-y: scroll;
 `;

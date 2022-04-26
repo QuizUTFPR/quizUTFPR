@@ -159,7 +159,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
 
   return (
     <>
-      <Wrapper container spacing={3}>
+      <Wrapper container spacing={3} width="45vw">
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={3} md={1}>
             <IconButton aria-label="closeModal" onClick={handleClose}>

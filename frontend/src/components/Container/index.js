@@ -7,16 +7,18 @@ import AnimatedContainer from '@components/WrapperAnimatedPage';
 // Styles
 import { GridContainer } from './style';
 
-const Container = ({ slide, slideUp, children, ...props }) => {
+const Container = ({ width, slide, slideUp, children, ...props }) => {
   return (
     <AnimatedContainer>
-      <GridContainer {...props}>{children}</GridContainer>
+      <GridContainer width={width} {...props}>
+        {children}
+      </GridContainer>
     </AnimatedContainer>
   );
 };
 
 Container.defaultProps = {
-  children: 'Conteudo aqui',
+  children: 'Conteúdo aqui',
   slide: true,
   slideUp: false,
 };

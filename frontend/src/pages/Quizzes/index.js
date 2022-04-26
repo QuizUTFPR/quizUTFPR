@@ -183,7 +183,7 @@ const Quiz = () => {
                   noTime={quiz.noTime}
                 >
                   <QuestionsQuantitty>
-                    {quiz.amountOfQuestions} <br /> questões
+                    {quiz.amountOfQuestions} questões
                   </QuestionsQuantitty>
                   {!quiz.published && (
                     <Tooltip arrow ariaLabel="publicar" title="Publicar">
@@ -272,7 +272,7 @@ const Quiz = () => {
                   noTime={quiz.noTime}
                 >
                   <QuestionsQuantitty>
-                    {quiz.amountOfQuestions} <br /> questões
+                    {quiz.amountOfQuestions} questões
                   </QuestionsQuantitty>
                   {!quiz.published && (
                     <Tooltip arrow ariaLabel="publicar" title="Publicar">
@@ -347,6 +347,7 @@ const Quiz = () => {
           onClick={handleRemoveQuiz}
           title="Deseja mesmo excluir o Quiz?"
           description="O Quiz será excluido e todas suas questões também serão excluídas."
+          width="25vw"
         />
       </Modal>
 
