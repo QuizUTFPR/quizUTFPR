@@ -8,7 +8,7 @@ import api from '@api';
 // COMPONENTS
 import Button from '@components/Button';
 import ChipInput from '@components/ChipInput';
-import DragImageInput from '@components/DragZone';
+import DragImageInput from '@components/DragZoneImageOrSearch';
 import {
   IconButton,
   Grid,
@@ -145,7 +145,7 @@ const EditPreferences = forwardRef((props, _) => {
            Ativando essa opção as questões do quiz não teram tempo para serem respondidas."
           >
             <FormControlLabel
-              label="Questões sem tempo (cronômetro) de resposta."
+              label="Desabilitar limite de tempo para respostas."
               control={
                 <Checkbox
                   id="noTime"

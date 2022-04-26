@@ -4,7 +4,7 @@ import api from '@api';
 
 // COMPONENTS
 import Button from '@components/Button';
-import DragImageInput from '@components/DragZone';
+import DragImageInput from '@components/DragZoneImageOrSearch';
 import {
   IconButton,
   Grid,

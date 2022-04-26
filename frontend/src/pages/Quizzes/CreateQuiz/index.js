@@ -15,7 +15,7 @@ import GridContainer from '@components/Container';
 import ChipInput from '@components/ChipInput';
 import Button from '@components/Button';
 
-import DragImageInput from '@components/DragZone';
+import DragImageInput from '@components/DragZoneImageOrSearch';
 import {
   Grid,
   Typography,
@@ -144,7 +144,7 @@ const CriarQuiz = () => {
            Ativando essa opção as questões do quiz não teram tempo para serem respondidas."
           >
             <FormControlLabel
-              label="Questões sem tempo (cronômetro) de resposta."
+              label="Desabilitar limite de tempo para respostas."
               control={
                 <Checkbox
                   id="noTime"

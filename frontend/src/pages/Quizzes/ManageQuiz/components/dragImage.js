@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import useQuestionQuiz from '@hooks/QuestionQuiz';
 
 // COMPONENTS
-import DragZone from '@components/DragZone';
+import DragZone from '@components/DragZoneImageOrSearch';
 
 // UTILS
 // import getBase64 from '@utils/getBase64OfImage';

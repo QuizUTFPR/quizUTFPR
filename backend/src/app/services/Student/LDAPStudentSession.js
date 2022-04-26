@@ -33,29 +33,29 @@ class LDAPStudentSessionService {
 
     // OBTENDO TOKEN PARA CONSEGUIR UTILIZAR API DO LDAP
 
-    const responseLDAP = await axios.post(`${process.env.LDAP_URL}/login`, {
-      username: process.env.LDAP_USERNAME,
-      password: process.env.LDAP_PASSWORD,
-    });
+    // const responseLDAP = await axios.post(`${process.env.LDAP_URL}/login`, {
+    //   username: process.env.LDAP_USERNAME,
+    //   password: process.env.LDAP_PASSWORD,
+    // });
 
-    const { token: ldapToken } = responseLDAP.data;
+    // const { token: ldapToken } = responseLDAP.data;
 
     // VERIFICANDO SE DADOS ESTÃO CORRETOS DE ACORDO COM O LDAP
 
-    const responseLoginLDAP = await axios.post(
-      `${process.env.LDAP_URL}/ldap/doLogin`,
-      {
-        username: ra,
-        password,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${ldapToken}`,
-        },
-      }
-    );
+    // const responseLoginLDAP = await axios.post(
+    //   `${process.env.LDAP_URL}/ldap/doLogin`,
+    //   {
+    //     username: ra,
+    //     password,
+    //   },
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${ldapToken}`,
+    //     },
+    //   }
+    // );
 
-    const { email: studentEmail } = responseLoginLDAP.data;
+    // const { email: studentEmail } = responseLoginLDAP.data;
 
     let student = await this.studentRepository.findOne({
       where: { ra },
@@ -70,7 +70,7 @@ class LDAPStudentSessionService {
     if (!student) {
       student = await LDAPCreateStudent.execute({
         ra,
-        email: studentEmail,
+        // email: studentEmail,
       });
     }
 

@@ -15,9 +15,38 @@ const getColor = (props) => {
   return '#eeeeee';
 };
 
-export const Container = styled.div`
+export const Wrapper = styled.div`
+  padding: 10px;
+  border: 2px solid ${({ theme }) => theme.palette.primary.main};
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ContainerDragZone = styled.div`
   cursor: pointer;
-  flex: 1;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-width: 2px;
+  border-radius: 2px;
+  border-color: ${(props) => getColor(props)};
+  border-style: dashed;
+  background-color: #fafafa;
+  color: #bdbdbd;
+  outline: none;
+  flex: 0.5;
+  transition: border 0.24s ease-in-out;
+`;
+
+export const ContainerPexelsImage = styled.div`
+  cursor: pointer;
+  width: 50%;
+  flex: 0.5;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,17 +61,14 @@ export const Container = styled.div`
   transition: border 0.24s ease-in-out;
 `;
 
-export const Wrapper = styled.div`
-  padding: 10px;
-  border: 2px solid ${({ theme }) => theme.palette.primary.main};
-  border-radius: 4px;
-  position: relative;
-`;
-
 export const Label = styled(Typography)`
   position: absolute;
   top: -0.8em;
   left: 10px;
   background: white;
   padding: 0 5px;
+`;
+
+export const TextOR = styled.p`
+  margin: 0 20px;
 `;

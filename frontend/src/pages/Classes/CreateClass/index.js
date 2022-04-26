@@ -14,7 +14,7 @@ import { MANAGE_CLASSES } from '@routes';
 import GridContainer from '@components/Container';
 import Button from '@components/Button';
 
-import DragImageInput from '@components/DragZone';
+import DragImageInput from '@components/DragZoneImageOrSearch';
 import { Grid, Typography, Divider, TextField, MenuItem } from '@mui/material';
 import { PreviewImage } from './style';
 

@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 
 // COMPONENTS
 import Wrapper from '@components/RefferedContainer';
-import Dragzone from '@components/DragZone';
+import Dragzone from '@components/DragZoneImageOrSearch';
 import useQuestion from '@hooks/QuestionQuiz';
 
 import { IconButton, Grid, Typography } from '@mui/material';
