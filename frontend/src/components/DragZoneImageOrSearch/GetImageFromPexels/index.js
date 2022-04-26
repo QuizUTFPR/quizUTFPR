@@ -1,11 +1,6 @@
 import React, { useState, forwardRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-// ROTAS
-import { QUESTION } from '@routes';
 
 // COMPONENTS
-import GridContainer from '@components/Container';
 import ChipInput from '@components/ChipInput';
 import Button from '@components/Button';
 import { Close } from '@mui/icons-material';
