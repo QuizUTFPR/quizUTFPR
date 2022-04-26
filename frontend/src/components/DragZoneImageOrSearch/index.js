@@ -5,6 +5,7 @@ import { useDropzone } from 'react-dropzone';
 import Button from '@components/Button';
 import Modal from '@components/Modal';
 import SnackBar from '@components/SnackBar';
+import getFileFromUrl from '@utils/getFileFromUrl';
 import GetImageFromPexels from './GetImageFromPexels';
 
 // Style
@@ -68,7 +69,13 @@ const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize, label }) => {
 
   const tooglePexelsModal = () => setOpenPexelsModal((prevState) => !prevState);
 
-  console.log('openPexelsModal', openPexelsModal);
+  const handleSelectImage = async (image) => {
+    const objImage = await getFileFromUrl(image?.src?.large);
+    const files = [objImage];
+    handleChange(files);
+  };
+
+  // console.log('openPexelsModal', openPexelsModal);
 
   return (
     <>
@@ -90,7 +97,7 @@ const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize, label }) => {
           </Button>
         </ContainerDragZone>
         <TextOR>ou</TextOR>
-        <ContainerPexelsImage>
+        <ContainerPexelsImage onClick={tooglePexelsModal}>
           <p> Pesquise imagens da internet</p>
           <p>Utilize palavras-chave para realizar sua busca</p>
           <Button
@@ -120,7 +127,10 @@ const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize, label }) => {
         style={{ overflow: 'scroll' }}
         handleClose={tooglePexelsModal}
       >
-        <GetImageFromPexels handleClose={tooglePexelsModal} />
+        <GetImageFromPexels
+          handleSelectImage={handleSelectImage}
+          handleClose={tooglePexelsModal}
+        />
       </Modal>
     </>
   );

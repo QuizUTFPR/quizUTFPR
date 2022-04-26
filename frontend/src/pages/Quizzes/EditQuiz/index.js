@@ -60,15 +60,7 @@ const EditPreferences = forwardRef((props, _) => {
   });
 
   return (
-    <GridContainerModal
-      container
-      spacing={3}
-      style={{
-        maxHeight: '90vh',
-        flexWrap: 'nowrap',
-        overflow: 'auto',
-      }}
-    >
+    <GridContainerModal container spacing={3}>
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={3} md={1}>
           <IconButton aria-label="closeModal" onClick={handleClose}>

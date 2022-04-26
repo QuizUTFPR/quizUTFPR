@@ -15,19 +15,20 @@ import {
 } from '@mui/material';
 import { Close, Search } from '@mui/icons-material';
 import SnackBar from '@components/SnackBar';
+import getFileFromUrl from '@utils/getFileFromUrl';
 import Question from './question';
 
 // ICONS
 import { StyledSearchTagButton } from './style';
 
-async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
-  const response = await fetch(url);
-  const data = await response.blob();
+// async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
+//   const response = await fetch(url);
+//   const data = await response.blob();
 
-  return new File([data], name, {
-    type: response.headers.get('content-type') || defaultType,
-  });
-}
+//   return new File([data], name, {
+//     type: response.headers.get('content-type') || defaultType,
+//   });
+// }
 
 const QuestionDatabase = forwardRef((props, ref) => {
   const { handleClose, handleaddQuestion, handleRemoveQuestion } = props;

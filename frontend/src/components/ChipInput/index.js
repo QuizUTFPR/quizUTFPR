@@ -11,6 +11,8 @@ const ChipsArray = ({
   onChange,
   id,
   suggestions,
+  label,
+  placeholder,
   ...props
 }) => {
   return (
@@ -36,8 +38,8 @@ const ChipsArray = ({
         <TextField
           {...params}
           variant={variant}
-          label="Tag's"
-          placeholder="Digite aqui as tag's desejadas"
+          label={label}
+          placeholder={placeholder}
         />
       )}
     />
@@ -48,6 +50,8 @@ ChipsArray.defaultProps = {
   onChange: () => {},
   variant: 'outlined',
   id: 'tags-filled',
+  label: 'Tags',
+  placeholder: 'Digite aqui as tags desejadas',
 };
 
 ChipsArray.propTypes = {
@@ -56,6 +60,8 @@ ChipsArray.propTypes = {
   onChange: PropTypes.func,
   suggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
   variant: PropTypes.string,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 export default ChipsArray;
