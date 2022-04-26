@@ -17,7 +17,7 @@ import {
 
 const Attempts = ({ attempts, amountOfQuestions }) => (
   <>
-    {attempts.map((attempt) => {
+    {attempts.map((attempt, idx) => {
       const date = new Date(attempt.createdAt);
       const day = `${date.getDay()}`;
       const month = `${date.getMonth()}`;
@@ -32,7 +32,7 @@ const Attempts = ({ attempts, amountOfQuestions }) => (
         <AttemptCard key={id}>
           <AttemptNumberWrapper>
             <StyledHashtag>#</StyledHashtag>
-            <AttemptNumber>{id}</AttemptNumber>
+            <AttemptNumber>{idx + 1}</AttemptNumber>
           </AttemptNumberWrapper>
           <AttemptInformations>
             <Score>

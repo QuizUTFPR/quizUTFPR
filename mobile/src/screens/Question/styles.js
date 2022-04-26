@@ -73,7 +73,7 @@ export const QuestionImage = styled.Image.attrs({
   width: ${`${widthPercentageToDp('100%')}px`};
   height: ${`${heightPercentageToDp('25%')}px`};
   margin-top: ${`${heightPercentageToDp('2%')}px`};
-  border-radius: 5px;
+  border-radius: 40px;
 `;
 
 export const AnswerContainer = styled.TouchableOpacity`

@@ -48,7 +48,7 @@ const ClassPage = () => {
       {!loading && classList.length === 0 && (
         <NoContent
           title="Opps..."
-          subtitle="Você não se inscreveu turma alguma."
+          subtitle="Você não se inscreveu em turma alguma."
         />
       )}
       <StyledScrollView>
