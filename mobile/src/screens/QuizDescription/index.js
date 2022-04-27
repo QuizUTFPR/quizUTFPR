@@ -94,11 +94,11 @@ const QuizDescription = ({ route }) => {
 
   const giveUPQuiz = async () => {
     try {
-      const teste = await api.put('/studentQuiz/finishQuiz', {
+      await api.put('/studentQuiz/finishQuiz', {
         quizId: id,
         idStudentQuiz: studentQuizID,
       });
-      console.log('teste', teste);
+
       setStudentQuizID(null);
     } catch (error) {
       console.log('error', error);

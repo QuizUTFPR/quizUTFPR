@@ -85,15 +85,34 @@ const Question = ({ children }) => {
   };
 
   const handleSetCheckedAnswer = (index) => {
-    setRequestQuestion((prevState) => {
-      const newCheckedAnswer = prevState.checkedAnswer;
-      newCheckedAnswer[index] = !newCheckedAnswer[index];
+    const { type } = quizData.questions[quizData.indexOnScreen];
 
-      return {
-        ...prevState,
-        checkedAnswer: newCheckedAnswer,
-      };
-    });
+    if (type === 'singleChoice') {
+      setRequestQuestion((prevState) => {
+        const newCheckedAnswer = prevState.checkedAnswer;
+        if (index === 0) {
+          newCheckedAnswer[1] = false;
+        } else {
+          newCheckedAnswer[0] = false;
+        }
+        newCheckedAnswer[index] = true;
+
+        return {
+          ...prevState,
+          checkedAnswer: newCheckedAnswer,
+        };
+      });
+    } else {
+      setRequestQuestion((prevState) => {
+        const newCheckedAnswer = prevState.checkedAnswer;
+        newCheckedAnswer[index] = !newCheckedAnswer[index];
+
+        return {
+          ...prevState,
+          checkedAnswer: newCheckedAnswer,
+        };
+      });
+    }
   };
 
   return (
@@ -114,6 +133,12 @@ const Question = ({ children }) => {
         setNoTime,
         setQuizInfo,
         quizInfo,
+        initialValue,
+        setQuizID,
+        setAmountOfQuestion,
+        setAlreadyAnswered,
+        setStudentQuizID,
+        setRequestQuestion,
       }}
     >
       {children}

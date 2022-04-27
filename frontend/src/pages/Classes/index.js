@@ -43,7 +43,6 @@ import {
 
 const MyClasses = () => {
   const [classes, setClasses] = useState({});
-  console.log('CLASSES', classes);
 
   const [modalEdit, setModalEdit] = useState({
     status: false,

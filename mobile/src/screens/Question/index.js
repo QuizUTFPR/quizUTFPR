@@ -51,6 +51,12 @@ const Question = () => {
     amountOfQuestion,
     amountAlreadyAnswered,
     noTime,
+    setQuizID,
+    setAmountOfQuestion,
+    setAlreadyAnswered,
+    setStudentQuizID,
+    setRequestQuestion,
+    setQuizInfo,
   } = useQuestions();
 
   const navigation = useNavigation();
@@ -135,7 +141,9 @@ const Question = () => {
       );
     }
 
-    return () => clearInterval(timer.interval);
+    return () => {
+      clearInterval(timer.interval);
+    };
   }, [quizData]);
 
   useEffect(() => {
@@ -147,7 +155,9 @@ const Question = () => {
       }).start();
     }
 
-    return () => clearInterval(timer.interval);
+    return () => {
+      clearInterval(timer.interval);
+    };
   }, [widthAnimation]);
 
   useEffect(() => {
@@ -162,13 +172,26 @@ const Question = () => {
       navigation.addListener('beforeRemove', (e) => {
         if (e.data.action.type === 'POP' || e.data.action.type === 'RESET') {
           hideConfirmExit();
+
+          console.log('saindo');
+          setQuizID(-1);
+          setAmountOfQuestion(0);
+          setAlreadyAnswered(0);
+          setStudentQuizID(-1);
+          setRequestQuestion(
+            JSON.parse(JSON.stringify(initialRequestQuestion))
+          );
+          setQuizInfo(null);
+
           navigation.dispatch(e.data.action);
         } else {
           e.preventDefault();
           showConfirmExit();
         }
 
-        return () => clearInterval(timer.interval);
+        return () => {
+          clearInterval(timer.interval);
+        };
       }),
     [navigation]
   );
@@ -310,6 +333,7 @@ const Question = () => {
         firstButtonOnPress={hideConfirmExit}
         secondButtonOnPress={() => {
           clearInterval(timer.interval);
+
           navigation.dispatch(StackActions.pop(3));
         }}
         firstButtonLabel="VOLTAR"

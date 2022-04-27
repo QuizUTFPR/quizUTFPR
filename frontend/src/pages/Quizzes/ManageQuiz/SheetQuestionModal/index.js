@@ -40,8 +40,6 @@ const SheetQuestionModal = forwardRef((props, ref) => {
 
               if (response) {
                 props.handleClose();
-              } else {
-                console.log('e', response);
               }
             }}
             accept=".xlsx, .xls, .ods, application/vnd.oasis.opendocument.spreadsheet, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"

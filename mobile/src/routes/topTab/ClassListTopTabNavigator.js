@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useState } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Loading from '@components/Loading';
 import theme from '@theme';
+import { FontAwesome } from '@expo/vector-icons';
 
 // Components
 import FabButton from '@components/FabButton';
@@ -19,7 +20,10 @@ const ClassListTopTabNavigator = () => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <FabButton onPress={() => setOpenModal(true)} />
+      <FabButton
+        icon={<FontAwesome name="search-plus" size={23} color="white" />}
+        onPress={() => setOpenModal(true)}
+      />
       <TopTab.Navigator
         screenOptions={{
           tabBarStyle: {

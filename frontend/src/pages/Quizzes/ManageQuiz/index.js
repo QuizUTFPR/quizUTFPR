@@ -110,14 +110,9 @@ const Question = () => {
   };
 
   useEffect(() => {
-    console.log('onScreen', onScreen);
-  }, [onScreen]);
-
-  useEffect(() => {
     fetchQuestions();
 
     return () => {
-      console.log('unmounting question page');
       setQuestions(JSON.parse(JSON.stringify(initialValue)));
       setSaved(true);
       setTyping(false);
