@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { TextField } from '@mui/material';
@@ -15,6 +15,7 @@ const ChipsArray = ({
   placeholder,
   ...props
 }) => {
+  const [valueInput, setValueInput] = useState('');
   return (
     <Autocomplete
       {...props}
@@ -24,7 +25,12 @@ const ChipsArray = ({
       value={value}
       variant={variant}
       freeSolo
-      onChange={onChange}
+      onChange={(e, newTags) => {
+        if (e.code !== 'Backspace') {
+          onChange(e, newTags);
+          setValueInput('');
+        }
+      }}
       renderTags={(valueTags, getTagProps) =>
         valueTags.map((option, index) => (
           <ChipStyled
@@ -34,14 +40,38 @@ const ChipsArray = ({
           />
         ))
       }
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          variant={variant}
-          label={label}
-          placeholder={placeholder}
-        />
-      )}
+      renderInput={(params) => {
+        return (
+          <TextField
+            {...params}
+            variant={variant}
+            label={label}
+            placeholder={placeholder}
+            inputProps={{
+              ...params.inputProps,
+              value: valueInput,
+              onBlur: (e) => {
+                if (valueInput.length > 0) {
+                  onChange(valueInput, [...value, valueInput]);
+                }
+                setValueInput('');
+                params.inputProps.onBlur(e);
+              },
+            }}
+            onChange={(e) => {
+              setValueInput(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.code === 'Backspace') {
+                if (e.target.value.length === 0) {
+                  const newTags = value.slice(0, -1);
+                  onChange(e, newTags);
+                }
+              }
+            }}
+          />
+        );
+      }}
     />
   );
 };
