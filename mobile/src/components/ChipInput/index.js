@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import {
   StyledInput,
@@ -10,8 +10,8 @@ import {
   ChipWrapper,
 } from './style';
 
-const ChipInput = ({ chips, setChips, placeholder }) => {
-  const [value, setValue] = useState();
+const ChipInput = ({ chips, setChips, placeholder, refInput }) => {
+  const [value, setValue] = useState('');
   const ref = useRef();
 
   const handleAddChip = () => {
@@ -24,6 +24,9 @@ const ChipInput = ({ chips, setChips, placeholder }) => {
         ...new Set(newChips.map((element) => element.toLowerCase().trim())),
       ]);
       setValue('');
+      if (refInput?.current) {
+        refInput.current.value = '';
+      }
     }
   };
 
@@ -36,6 +39,16 @@ const ChipInput = ({ chips, setChips, placeholder }) => {
       removeChip(chips.length - 1)();
     }
   };
+
+  useEffect(() => {
+    if (refInput?.current) {
+      refInput.current.value = value;
+      refInput.current.clearInput = () => {
+        setValue('');
+        refInput.current.value = '';
+      };
+    }
+  }, []);
 
   return (
     <Wrapper>
@@ -57,9 +70,13 @@ const ChipInput = ({ chips, setChips, placeholder }) => {
         </ChipWrapper>
       )}
       <StyledInput
+        ref={refInput}
         value={value}
         onSubmitEditing={handleAddChip}
-        onChangeText={(text) => setValue(text)}
+        onChangeText={(text) => {
+          refInput.current.value = text;
+          setValue(text);
+        }}
         placeholder={placeholder}
         keyboardType="default"
         returnKeyType="done"
@@ -72,6 +89,10 @@ const ChipInput = ({ chips, setChips, placeholder }) => {
       />
     </Wrapper>
   );
+};
+
+ChipInput.defaultProps = {
+  refInput: null,
 };
 
 export default ChipInput;

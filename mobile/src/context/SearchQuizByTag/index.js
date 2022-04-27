@@ -13,13 +13,16 @@ const SearchQuizByTag = ({ children }) => {
   const [messageError, setMessageError] = useState(false);
 
   // eslint-disable-next-line consistent-return
-  const getQuizByTags = async () => {
-    const hasTagsInContext = tags.length > 0;
+  const getQuizByTags = async (remainingTag = '') => {
+    const hasTagsInContext = tags.length > 0 || remainingTag.trim().length > 0;
 
     if (hasTagsInContext) {
       try {
+        const queryTags =
+          remainingTag.trim().length > 0 ? [...tags, remainingTag] : tags;
+
         const { data } = await api.post('/quiz/quizzesByTags', {
-          aimedTags: tags,
+          aimedTags: queryTags,
         });
 
         setQuizzes(data);

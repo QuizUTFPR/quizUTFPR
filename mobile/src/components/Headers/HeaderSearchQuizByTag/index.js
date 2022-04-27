@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import theme from '@theme';
@@ -21,6 +21,7 @@ import {
 
 const Header = () => {
   const navigation = useNavigation();
+  const refInput = useRef();
 
   const [loading, setLoading] = useState(false);
 
@@ -44,6 +45,7 @@ const Header = () => {
           placeholder="Digite as tags aqui..."
           chips={tags}
           setChips={setTags}
+          refInput={refInput}
         />
       </BackgroundHeader>
       <StyledButton
@@ -53,7 +55,14 @@ const Header = () => {
         onPress={async () => {
           setLoading(true);
 
-          const hasMessageError = await getQuizByTags();
+          const remainingTag = refInput.current.value;
+
+          if (remainingTag.trim().length > 0) {
+            setTags((prevState) => [...prevState, remainingTag]);
+          }
+
+          refInput.current.clearInput();
+          const hasMessageError = await getQuizByTags(remainingTag);
 
           if (!hasMessageError) {
             navigation.navigate('ResultSearchTag');
