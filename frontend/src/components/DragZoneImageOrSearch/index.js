@@ -95,7 +95,7 @@ const StyledDropzone = ({
   return (
     <>
       <Wrapper className="container">
-        <Label>{label}</Label>
+        {/* <Label>{label}</Label> */}
         <ContainerDragZone
           {...getRootProps({
             isDragActive,

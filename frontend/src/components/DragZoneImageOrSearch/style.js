@@ -17,7 +17,7 @@ const getColor = (props) => {
 
 export const Wrapper = styled.div`
   padding: 10px;
-  border: 2px solid ${({ theme }) => theme.palette.primary.main};
+  /* border: 2px solid ${({ theme }) => theme.palette.primary.main}; */
   border-radius: 4px;
   position: relative;
   display: flex;
