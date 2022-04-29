@@ -28,11 +28,13 @@ const QuestionQuiz = ({ children }) => {
     JSON.parse(JSON.stringify(initialValueErrors))
   );
   const [questionToRemove, setQuestionToRemove] = useState([]);
+  const [quizInfo, setQuizInfo] = useState({});
 
   const getAllQuestionOfTheQuiz = async (id) => {
     try {
       const { data } = await api.get(`/question/quiz/${id}`);
-      const initialQuestions = data.map((question) => ({
+
+      const initialQuestions = data.questionsOfQuiz.map((question) => ({
         index: question.index,
         id: question.id,
         type: question.type,
@@ -48,8 +50,14 @@ const QuestionQuiz = ({ children }) => {
         answer: question.answer,
       }));
 
-      setQuestions(initialQuestions);
-      return initialQuestions[0];
+      setQuizInfo(data.info);
+
+      if (initialQuestions.length) {
+        setQuestions(initialQuestions);
+        return initialQuestions[0];
+      }
+
+      return initialValue[0];
     } catch (error) {
       return initialValue[0];
     }
@@ -458,6 +466,8 @@ const QuestionQuiz = ({ children }) => {
         OptionsOfTime,
         optionsOfDifficultyLevel,
         setQuestionToRemove,
+        quizInfo,
+        setQuizInfo,
       }}
     >
       {children}

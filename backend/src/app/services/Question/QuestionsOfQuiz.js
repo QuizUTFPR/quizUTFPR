@@ -64,14 +64,21 @@ class QuestionsOfQuizService {
       ],
     });
 
-    if (!questionsOfQuiz.length) {
-      const error = new Error();
-      error.status = 204;
-      error.response = 'Não existe nenhuma questão cadastrada';
-      throw error;
-    }
+    // if (!questionsOfQuiz.length) {
+    // const error = new Error();
+    //   error.status = 204;
+    //   error.response = 'Não existe nenhuma questão cadastrada';
+    //   throw error;
+    // }
 
-    return questionsOfQuiz;
+    return {
+      info: {
+        title: quiz.title,
+        noTime: quiz.noTime,
+        published: quiz.published,
+      },
+      questionsOfQuiz,
+    };
   }
 }
 

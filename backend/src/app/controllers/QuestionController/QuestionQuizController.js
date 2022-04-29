@@ -7,6 +7,7 @@ class QuestionQuizController {
       const { id } = req.params;
 
       const questionsOfQuiz = await QuestionsOfQuizService.index({ id });
+      console.log(questionsOfQuiz);
 
       return res.status(200).json(questionsOfQuiz);
     } catch (error) {

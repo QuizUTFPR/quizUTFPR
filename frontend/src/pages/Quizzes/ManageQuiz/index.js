@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 // ROUTES
@@ -26,7 +26,6 @@ import DragImageContainer from './components/dragImageContainer';
 import TypeOfQuestion from './ModalTypeOfQuestion';
 
 const Question = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
   const { idQuiz } = useParams();
@@ -54,6 +53,8 @@ const Question = () => {
     setSaved,
     setTyping,
     setQuestionToRemove,
+    setQuizInfo,
+    quizInfo,
   } = useQuestionQuiz();
 
   const [openChangeTypeQuestionModal, setTypeQuestionModal] = useState({
@@ -122,6 +123,7 @@ const Question = () => {
         index: 0,
         question: JSON.parse(JSON.stringify(initialValue)),
       });
+      setQuizInfo(false);
     };
   }, []);
 
@@ -205,7 +207,7 @@ const Question = () => {
     <AnimatedContainer>
       <Header
         handleGetOut={handleGetOut}
-        location={location}
+        quizInfo={quizInfo}
         handleSave={handleSave}
         isSaved={isSaved}
         isTyping={isTyping}
@@ -214,7 +216,7 @@ const Question = () => {
       <ContainerGrid container>
         {/* LEFT */}
         <LeftSide
-          location={location}
+          quizInfo={quizInfo}
           questions={questions}
           questionOnScreen={onScreen}
           handleOpenModalTypeQuestion={handleOpenModalTypeQuestion}
@@ -225,7 +227,7 @@ const Question = () => {
 
         {/* MIDDLE */}
         <MiddleSide
-          location={location}
+          quizInfo={quizInfo}
           errors={errors}
           questions={questions}
           formik={formik}
@@ -237,7 +239,7 @@ const Question = () => {
 
         {/* RIGHT */}
         <RightSide
-          location={location}
+          quizInfo={quizInfo}
           formik={formik}
           errors={errors}
           updateQuestion={updateQuestion}

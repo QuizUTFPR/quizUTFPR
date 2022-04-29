@@ -23,7 +23,7 @@ const RightSide = ({
   questions,
   errors,
   handleOpenChangeTypeQuestion,
-  location,
+  quizInfo,
   optionsOfTime,
   optionsOfDifficultyLevel,
 }) => (
@@ -44,7 +44,7 @@ const RightSide = ({
               name="type"
               variant="outlined"
               formikID=""
-              disabled={location.state.published}
+              disabled={quizInfo.published}
               value={formik.values.question.type}
               handleFormikChange={() => (e) => {
                 handleOpenChangeTypeQuestion({
@@ -63,11 +63,11 @@ const RightSide = ({
             </SelectInput>
           </GridItemStyledRight>
 
-          {!location.state.noTime && (
+          {!quizInfo.noTime && (
             <GridItemStyledRight item>
               <SelectInput
                 fullWidth
-                disabled={location.state.published}
+                disabled={quizInfo.published}
                 label="Tempo"
                 name="time"
                 variant="outlined"
@@ -93,7 +93,7 @@ const RightSide = ({
           <GridItemStyledRight item>
             <SelectInput
               fullWidth
-              disabled={location.state.published}
+              disabled={quizInfo.published}
               label="Nível de Dificuldade"
               name="difficultyLevel"
               variant="outlined"
@@ -126,7 +126,7 @@ const RightSide = ({
               fullWidth
               suggestions={[]}
               required={formik.values.question.availableOnQuestionsDB}
-              disabled={location.state.published}
+              disabled={quizInfo.published}
               value={formik.values.question.tags}
               formikID="question.tags"
               handleFormikChange={formik.setFieldValue}
@@ -144,8 +144,7 @@ const RightSide = ({
                 control={
                   <CheckBox
                     disabled={
-                      Boolean(formik.values.question.copy) ||
-                      location.state.published
+                      Boolean(formik.values.question.copy) || quizInfo.published
                     }
                     style={{ width: '50px', height: '50px' }}
                     inputProps={{
@@ -187,6 +186,9 @@ RightSide.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleOpenChangeTypeQuestion: PropTypes.func.isRequired,
   updateQuestion: PropTypes.func.isRequired,
+  quizInfo: PropTypes.shape({
+    published: PropTypes.bool,
+  }).isRequired,
 };
 
 export default RightSide;

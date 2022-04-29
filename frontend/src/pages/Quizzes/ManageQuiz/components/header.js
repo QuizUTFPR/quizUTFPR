@@ -18,7 +18,7 @@ import {
 
 const Header = ({
   handleGetOut,
-  location,
+  quizInfo,
   handleSave,
   handleFinish,
   isSaved,
@@ -51,6 +51,7 @@ const Header = ({
       </WrapperMessage>
     );
   }
+
   return (
     <StyledAppBar position="static" color="transparent">
       <StyledToolBar>
@@ -69,7 +70,7 @@ const Header = ({
 
         {/* <Grid item> */}
         <Typography noWrap component="h4" variant="h4" color="primary">
-          {location.state ? location.state.title : 'Sem Título'}
+          {quizInfo ? quizInfo.title : 'Sem Título'}
         </Typography>
         {/* </Grid> */}
 
@@ -87,14 +88,12 @@ const Header = ({
             startIcon={<Save />}
             size="large"
             loading={loadingSave}
-            disabled={
-              isSaved || isTyping || location.state.published || loadingSave
-            }
+            disabled={isSaved || isTyping || quizInfo.published || loadingSave}
           >
             Salvar
           </StyledButton>
           <StyledButton
-            disabled={location.state.published}
+            disabled={quizInfo.published}
             color="primary"
             variant="contained"
             loading={loadingFinish}
@@ -121,10 +120,8 @@ Header.defaultProps = {
 
 Header.propTypes = {
   handleGetOut: PropTypes.func.isRequired,
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      title: PropTypes.string,
-    }),
+  quizInfo: PropTypes.shape({
+    title: PropTypes.string,
   }).isRequired,
   handleSave: PropTypes.func.isRequired,
   isSaved: PropTypes.bool,

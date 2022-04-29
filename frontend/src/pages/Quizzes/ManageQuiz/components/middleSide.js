@@ -37,7 +37,7 @@ const MiddleSide = ({
   handleClickOpenAlert,
   handleOpenDragImage,
   errors,
-  location,
+  quizInfo,
 }) => (
   <Grid item xs={6}>
     <StyledGrid container justifyContent="center" align="center">
@@ -50,7 +50,7 @@ const MiddleSide = ({
           )}
           <Grid item xs={12}>
             <InputOrLatexContent
-              disabled={location.state.published}
+              disabled={quizInfo.published}
               latexComponent={{
                 component: TitleQuestionMathJax,
                 propsLatex: {
@@ -60,7 +60,7 @@ const MiddleSide = ({
               inputComponent={{
                 component: StyledTitleInput,
                 propsInput: {
-                  disabled: location.state.published,
+                  disabled: quizInfo.published,
                   placeholder: 'DIGITE O ENUNCIADO AQUI',
                   formikID: 'question.title',
                   handleFormikChange: formik.handleChange,
@@ -79,7 +79,7 @@ const MiddleSide = ({
 
           {formik.values.question.imageUrl && (
             <ContainerImage style={{ marginTop: '10px' }}>
-              {!location.state.published && (
+              {!quizInfo.published && (
                 <StackImageButton>
                   <Tooltip arrow ariaLabel="editar" title="Editar">
                     <PreviewImageButton
@@ -110,14 +110,14 @@ const MiddleSide = ({
               <PreviewImage src={formik.values.question.imageUrl} />
             </ContainerImage>
           )}
-          {!location.state.published && !formik.values.question.imageUrl && (
+          {!quizInfo.published && !formik.values.question.imageUrl && (
             <Grid item xs={12} style={{ marginTop: '20px' }}>
               <StyledButton
                 style={{ width: '50%' }}
                 color="secondary"
                 variant="outlined"
                 onClick={handleOpenDragImage}
-                disabled={location.state.published}
+                disabled={quizInfo.published}
                 startIcon={<AttachFile />}
                 size="large"
                 loading={false}
@@ -157,14 +157,14 @@ const MiddleSide = ({
               >
                 <>
                   <ShowOption
-                    disabled={location.state.published}
+                    disabled={quizInfo.published}
                     checked={Boolean(item.isCorrect)}
                   >
                     <Check />
                   </ShowOption>
                   {formik.values.question.type === 'multipleChoice' ? (
                     <HiddenCheckBox
-                      disabled={location.state.published}
+                      disabled={quizInfo.published}
                       style={{ width: '50px', height: '50px' }}
                       checked={Boolean(item.isCorrect)}
                       formikID={`question.answer[${index}].isCorrect`}
@@ -178,7 +178,7 @@ const MiddleSide = ({
                     />
                   ) : (
                     <HiddenRadio
-                      disabled={location.state.published}
+                      disabled={quizInfo.published}
                       style={{ width: '50px', height: '50px' }}
                       value={item.isCorrect}
                       formikID={`question.answer[${index}].isCorrect`}
@@ -198,7 +198,7 @@ const MiddleSide = ({
                 </>
 
                 <InputOrLatexContent
-                  disabled={location.state.published}
+                  disabled={quizInfo.published}
                   latexComponent={{
                     component: AnswerQuestionMathJax,
                     propsLatex: {
@@ -209,7 +209,7 @@ const MiddleSide = ({
                     component: StyledAnswerInput,
                     propsInput: {
                       type: 'text',
-                      disabled: location.state.published,
+                      disabled: quizInfo.published,
                       placeholder: `DIGITE A ALTERNATIVA ${index + 1}`,
                       formikID: `question.answer[${index}].title`,
                       value: item.title,
@@ -232,7 +232,7 @@ const MiddleSide = ({
             <StyledButton
               loading={false}
               type="submit"
-              disabled={location.state.published}
+              disabled={quizInfo.published}
               style={{ width: '80%' }}
               color="secondary"
               variant="outlined"
@@ -262,6 +262,9 @@ MiddleSide.propTypes = {
     title: PropTypes.bool,
     isCorrect: PropTypes.bool,
     answer: PropTypes.bool,
+  }).isRequired,
+  quizInfo: PropTypes.shape({
+    published: PropTypes.bool,
   }).isRequired,
 };
 
