@@ -97,7 +97,15 @@ const LoginPage = () => {
             </Subtitle>
           </DescriptionsGrid>
 
-          <GridForm item xs={12} component="form" onSubmit={handleLogin}>
+          <GridForm
+            item
+            xs={12}
+            sm={12}
+            md={12}
+            lg={9}
+            component="form"
+            onSubmit={handleLogin}
+          >
             <StyledInput
               id="username"
               label="Nome de Usuário"
