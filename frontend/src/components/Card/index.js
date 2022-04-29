@@ -37,6 +37,8 @@ const Card = ({
         component={Link}
         to={to}
         state={{ title, ...props }}
+        onContextMenu={(e) => e.preventDefault()}
+        onAuxClick={(e) => e.preventDefault()}
       >
         <TitleCard color="primary">{title}</TitleCard>
         <DescriptionCard color="textSecondary">{description}</DescriptionCard>
