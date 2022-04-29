@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 // ICONS
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 // COMPONENTS
 import Attempts from './Components/Attempts';
@@ -98,9 +98,13 @@ const Home = ({ route }) => {
             >
               <IconButtonWrapper>
                 <StyledIconButton>
-                  <Ionicons name="ios-play-circle" size={32} color="white" />
+                  <MaterialCommunityIcons
+                    name="information"
+                    size={30}
+                    color="white"
+                  />
                 </StyledIconButton>
-                <StyledButtonText fill="white">JOGAR</StyledButtonText>
+                <StyledButtonText fill="white">Ver Quiz</StyledButtonText>
               </IconButtonWrapper>
             </ButtonStyled>
           </PlayButtonWrapper>
