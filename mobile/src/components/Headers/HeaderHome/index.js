@@ -3,7 +3,8 @@ import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import api from '@api';
 import theme from '@theme';
-
+import LottieView from 'lottie-react-native';
+import NotFound from '@assets/lottie/not_found.json';
 // ICONS
 
 import {
@@ -17,6 +18,7 @@ import {
   InputWrapper,
   SearchInput,
 } from './style';
+import Dialog from '../../Dialog';
 
 // import
 
@@ -24,6 +26,10 @@ const Header = () => {
   const navigation = useNavigation();
 
   const [pin, setPin] = useState();
+  const [showDialog, setShowDialog] = useState(false);
+
+  const handleShowDialog = () => setShowDialog(true);
+  const handleHideDialog = () => setShowDialog(false);
 
   const getQuizByPIN = async () => {
     try {
@@ -47,8 +53,9 @@ const Header = () => {
           isFavorite: data?.quiz?.isFavorite,
         },
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log('ERROR', error.response.status);
+      if (error.response.status === 404) handleShowDialog();
     }
   };
 
@@ -77,6 +84,25 @@ const Header = () => {
           />
         </InputWrapper>
       </BackgroundHeader>
+
+      <Dialog
+        title="JÁ VAI? ESTÁ CEDO!"
+        visible={showDialog}
+        hideDialog={handleHideDialog}
+        firstButtonOnPress={handleHideDialog}
+        firstButtonLabel="VOLTAR"
+        lottieAnimation={
+          <LottieView
+            autoPlay
+            loop
+            style={{ width: 200 }}
+            resizeMode="cover"
+            speed={1}
+            source={NotFound}
+          />
+        }
+        childrenText="Não encontramos um quiz com este PIN."
+      />
     </HeaderWrapper>
   );
 };
