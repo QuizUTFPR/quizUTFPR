@@ -27,26 +27,7 @@ export const Wrapper = styled.div`
 
 export const ContainerDragZone = styled.div`
   cursor: pointer;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  border-width: 2px;
-  border-radius: 2px;
-  border-color: ${(props) => getColor(props)};
-  border-style: dashed;
-  background-color: #fafafa;
-  color: #bdbdbd;
-  outline: none;
-  flex: 0.5;
-  transition: border 0.24s ease-in-out;
-`;
-
-export const ContainerPexelsImage = styled.div`
-  cursor: pointer;
-  width: 50%;
-  flex: 0.5;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,6 +50,13 @@ export const Label = styled(Typography)`
   padding: 0 5px;
 `;
 
-export const TextOR = styled.p`
-  margin: 0 20px;
+export const WrapperButton = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+`;
+
+export const Description = styled.p`
+  text-align: center;
+  line-height: 1rem;
 `;

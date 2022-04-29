@@ -14,15 +14,10 @@ class TagQuestionController {
             model: Question,
             as: 'questions',
             required: true,
-            attributes: [
-              'id',
-              'title',
-              'timer',
-              'difficultyLevel',
-              'copy',
-              'availableOnQuestionsDb',
-              'type',
-            ],
+            attributes: ['availableOnQuestionsDb'],
+            where: {
+              availableOnQuestionsDb: true,
+            },
             through: {
               attributes: [],
             },

@@ -33,7 +33,6 @@ const TypeOfQuestion = forwardRef((props, ref) => {
   } = useQuestionQuiz();
 
   const handleAddMockupQuestion = (mockup) => () => {
-    console.log('mockup', mockup, questions.length);
     addQuestion(mockup);
     updateScreen(mockup, questions.length)();
     handleClose();

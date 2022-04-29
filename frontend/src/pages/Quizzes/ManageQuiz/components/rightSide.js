@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { FileCopy } from '@mui/icons-material/';
 
 // COMPONENTS
+import ErrorMessage from '@components/Messages/error';
 import { Grid, Typography, FormControlLabel } from '@mui/material';
 import {
   StyledRightGrid,
@@ -20,6 +21,7 @@ const RightSide = ({
   formik,
   updateQuestion,
   questions,
+  errors,
   handleOpenChangeTypeQuestion,
   location,
   optionsOfTime,
@@ -89,22 +91,6 @@ const RightSide = ({
           )}
 
           <GridItemStyledRight item>
-            <TagInput
-              fullWidth
-              suggestions={[]}
-              disabled={location.state.published}
-              value={formik.values.question.tags}
-              formikID="question.tags"
-              handleFormikChange={formik.setFieldValue}
-              handlePropsChange={{
-                handleUpdate: updateQuestion,
-                key: 'tags',
-                index: formik.values.index,
-              }}
-            />
-          </GridItemStyledRight>
-
-          <GridItemStyledRight item>
             <SelectInput
               fullWidth
               disabled={location.state.published}
@@ -127,6 +113,29 @@ const RightSide = ({
                 </option>
               ))}
             </SelectInput>
+          </GridItemStyledRight>
+
+          {errors.tags && (
+            <ErrorMessage style={{ marginBottom: 20 }}>
+              Por favor, informe ao menos uma tag.
+            </ErrorMessage>
+          )}
+
+          <GridItemStyledRight item>
+            <TagInput
+              fullWidth
+              suggestions={[]}
+              required={formik.values.question.availableOnQuestionsDB}
+              disabled={location.state.published}
+              value={formik.values.question.tags}
+              formikID="question.tags"
+              handleFormikChange={formik.setFieldValue}
+              handlePropsChange={{
+                handleUpdate: updateQuestion,
+                key: 'tags',
+                index: formik.values.index,
+              }}
+            />
           </GridItemStyledRight>
 
           <WrapperCheckBoxRight item>

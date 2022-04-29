@@ -13,6 +13,7 @@ const ChipsArray = ({
   suggestions,
   label,
   placeholder,
+  required,
   ...props
 }) => {
   const [valueInput, setValueInput] = useState('');
@@ -44,6 +45,7 @@ const ChipsArray = ({
         return (
           <TextField
             {...params}
+            required={required}
             variant={variant}
             label={label}
             placeholder={placeholder}
@@ -82,6 +84,7 @@ ChipsArray.defaultProps = {
   id: 'tags-filled',
   label: 'Tags',
   placeholder: 'Digite aqui as tags desejadas',
+  required: false,
 };
 
 ChipsArray.propTypes = {
@@ -92,6 +95,7 @@ ChipsArray.propTypes = {
   variant: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
+  required: PropTypes.bool,
 };
 
 export default ChipsArray;

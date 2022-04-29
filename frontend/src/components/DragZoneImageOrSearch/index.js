@@ -6,18 +6,32 @@ import Button from '@components/Button';
 import Modal from '@components/Modal';
 import SnackBar from '@components/SnackBar';
 import getFileFromUrl from '@utils/getFileFromUrl';
-import GetImageFromPexels from './GetImageFromPexels';
+import { Tooltip } from '@mui/material';
 
+// Assets
+import { Image, Upload, Search } from '@mui/icons-material';
+
+import GetImageFromPexels from './GetImageFromPexels';
 // Style
 import {
   ContainerDragZone,
   Wrapper,
   Label,
-  ContainerPexelsImage,
-  TextOR,
+  Description,
+  // ContainerPexelsImage,
+  WrapperButton,
+  // StyledImageIcon,
 } from './style';
 
-const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize, label }) => {
+const StyledDropzone = ({
+  handleChange,
+  accept,
+  maxFiles,
+  maxSize,
+  label,
+  description,
+  canSearchOnInternet,
+}) => {
   const [openSnackBar, setOpenSnackBar] = useState({
     message: '',
     open: false,
@@ -61,13 +75,16 @@ const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize, label }) => {
       handleChange(files);
     },
     onDropRejected: () => {
-      handleOpenErrorSnackBar('Imagem Inválida');
+      handleOpenErrorSnackBar('Arquivo Inválida');
     },
   });
 
   const [openPexelsModal, setOpenPexelsModal] = useState(false);
 
-  const tooglePexelsModal = () => setOpenPexelsModal((prevState) => !prevState);
+  const tooglePexelsModal = (e) => {
+    e.stopPropagation();
+    setOpenPexelsModal((prevState) => !prevState);
+  };
 
   const handleSelectImage = async (image) => {
     const objImage = await getFileFromUrl(image?.src?.large);
@@ -75,40 +92,40 @@ const StyledDropzone = ({ handleChange, accept, maxFiles, maxSize, label }) => {
     handleChange(files);
   };
 
-  // console.log('openPexelsModal', openPexelsModal);
-
   return (
     <>
-      <Wrapper className="container" label={label}>
-        <Label>Imagem</Label>
+      <Wrapper className="container">
+        <Label>{label}</Label>
         <ContainerDragZone
-          {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
+          {...getRootProps({
+            isDragActive,
+            isDragAccept,
+            isDragReject,
+          })}
         >
           <input {...getInputProps()} />
-          <p> Você pode arrastar e soltar imagens aqui para adicioná-las</p>
-          <p>Tamanho máximo: {maxSize / 1e6} Mb</p>
-          <Button
-            style={{ marginTop: 10 }}
-            loading={false}
-            variant="contained"
-            color="primary"
-          >
-            BUSCAR
-          </Button>
+          <Image sx={{ fontSize: 200 }} />
+          <Description>{description}</Description>
+          <WrapperButton>
+            <Tooltip title="Realizar Upload">
+              <Button loading={false} variant="contained" color="primary">
+                <Upload />
+              </Button>
+            </Tooltip>
+            {canSearchOnInternet && (
+              <Tooltip title="Pesquisar na Internet">
+                <Button
+                  onClick={tooglePexelsModal}
+                  variant="contained"
+                  color="primary"
+                  loading={false}
+                >
+                  <Search />
+                </Button>
+              </Tooltip>
+            )}
+          </WrapperButton>
         </ContainerDragZone>
-        <TextOR>ou</TextOR>
-        <ContainerPexelsImage onClick={tooglePexelsModal}>
-          <p> Pesquise imagens da internet</p>
-          <p>Utilize palavras-chave para realizar sua busca</p>
-          <Button
-            style={{ marginTop: 10 }}
-            variant="contained"
-            color="primary"
-            loading={false}
-          >
-            Pesquisar Imagem
-          </Button>
-        </ContainerPexelsImage>
 
         <SnackBar
           openSnackBar={openSnackBar.open}
@@ -141,6 +158,9 @@ StyledDropzone.defaultProps = {
   maxFiles: 1,
   maxSize: 734003,
   label: 'Imagem',
+  description:
+    'Arraste e solte os arquivos aqui ou pesquise uma imagem na internet.',
+  canSearchOnInternet: true,
 };
 
 export default StyledDropzone;

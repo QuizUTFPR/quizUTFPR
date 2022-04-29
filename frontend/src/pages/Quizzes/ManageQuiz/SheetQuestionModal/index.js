@@ -42,7 +42,10 @@ const SheetQuestionModal = forwardRef((props, ref) => {
                 props.handleClose();
               }
             }}
+            label="Planilha de Questões"
             accept=".xlsx, .xls, .ods, application/vnd.oasis.opendocument.spreadsheet, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            canSearchOnInternet={false}
+            description="Arraste e solte a planilha aqui ou clique no botão abaixo."
           />
         </Grid>
       </Grid>

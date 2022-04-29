@@ -162,17 +162,21 @@ const Question = () => {
     // PROCURO QUAL QUESTÃO É INVALIDA E QUAIS SEUS ERROS
     questions.forEach(async (question, index) => {
       await validationSchemeQuestion
-        .validate(question, { abortEarly: false })
+        .validate(question, {
+          abortEarly: false,
+        })
         .catch((error) => {
           let newErrors = {};
           // eslint-disable-next-line prefer-const
-
           error.inner.forEach(({ path }) => {
             // eslint-disable-next-line prefer-const
             let key = path;
             if (key.includes('answer')) key = 'answer';
 
-            newErrors = { ...newErrors, [key]: true };
+            newErrors = {
+              ...newErrors,
+              [key]: true,
+            };
           });
 
           handleChangeQuestion(question, index)();
@@ -235,6 +239,7 @@ const Question = () => {
         <RightSide
           location={location}
           formik={formik}
+          errors={errors}
           updateQuestion={updateQuestion}
           questions={questions}
           handleOpenChangeTypeQuestion={handleOpenChangeTypeQuestion}

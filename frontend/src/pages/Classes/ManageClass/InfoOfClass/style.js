@@ -38,6 +38,7 @@ export const InfoClassWrapper = styled.div`
 
 export const ImageClass = styled.img`
   width: 100%;
+  /* height: 300px; */
   border-radius: 8px;
 `;
 

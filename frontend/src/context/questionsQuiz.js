@@ -355,7 +355,14 @@ const QuestionQuiz = ({ children }) => {
       title: yup.string().min(1).required(),
       timer: yup.number().required(),
       difficultyLevel: yup.string().required(),
-      tags: yup.array().of(yup.string()).required(),
+      tags: yup
+        .array()
+        .of(yup.string().required())
+        .required()
+        .when('availableOnQuestionsDB', {
+          is: true,
+          then: yup.array().of(yup.string().required()).min(1).required(),
+        }),
       answer: yup
         .array()
         .of(
@@ -390,7 +397,14 @@ const QuestionQuiz = ({ children }) => {
     title: yup.string().min(1).required(),
     timer: yup.number().required(),
     difficultyLevel: yup.string().required(),
-    tags: yup.array().of(yup.string()).required(),
+    tags: yup
+      .array()
+      .of(yup.string().required())
+      .required()
+      .when('availableOnQuestionsDB', {
+        is: true,
+        then: yup.array().of(yup.string().required()).min(1).required(),
+      }),
     answer: yup
       .array()
       .of(

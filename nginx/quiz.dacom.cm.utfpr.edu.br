@@ -1,8 +1,12 @@
 
 server {
-    server_name localhost;
+    server_name quiz.dacom.cm.utfpr.edu.br;
     listen 80;
     listen [::]:80;
+
+    location ~ /.well-known {
+        allow all;
+    }
 
     location / {
         root /usr/share/nginx/html;
