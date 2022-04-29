@@ -74,8 +74,13 @@ const StyledDropzone = ({
     onDropAccepted: (files) => {
       handleChange(files);
     },
-    onDropRejected: () => {
-      handleOpenErrorSnackBar('Arquivo Inválida');
+    onDropRejected: (e) => {
+      console.log(e);
+      if (e[0]?.errors[0]?.code === 'file-too-large') {
+        handleOpenErrorSnackBar('Tamanho máximo de arquivo excedido!');
+      } else {
+        handleOpenErrorSnackBar('Arquivo Inválido');
+      }
     },
   });
 
@@ -95,7 +100,7 @@ const StyledDropzone = ({
   return (
     <>
       <Wrapper className="container">
-        <Label>{label}</Label>
+        {/* <Label>{label}</Label> */}
         <ContainerDragZone
           {...getRootProps({
             isDragActive,
@@ -130,7 +135,7 @@ const StyledDropzone = ({
         <SnackBar
           openSnackBar={openSnackBar.open}
           handleCloseSnackBar={handleCloseSnackBar}
-          autoHideDuration={1000}
+          autoHideDuration={2000}
           text={openSnackBar.message}
           severity="error"
         />
@@ -156,7 +161,7 @@ const StyledDropzone = ({
 StyledDropzone.defaultProps = {
   accept: 'image/*',
   maxFiles: 1,
-  maxSize: 734003,
+  maxSize: 3000000,
   label: 'Imagem',
   description:
     'Arraste e solte os arquivos aqui ou pesquise uma imagem na internet.',
