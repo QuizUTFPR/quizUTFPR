@@ -10,6 +10,7 @@ import NoContent from '@components/NoContent';
 
 // THEME
 import theme from '@theme';
+import CardQuizInProgress from '@components/Card/InProgress';
 import CardQuizBasic from '@components/Card/Basic';
 import SeeMoreButton from '../../components/SeeMoreButton';
 
@@ -29,7 +30,7 @@ const FavoriteQuizzes = () => {
 
       setAllQuizzes(data);
     } catch (error) {
-      // console.error(error);
+      console.error({ ...error });
     }
   };
 
@@ -74,27 +75,57 @@ const FavoriteQuizzes = () => {
             />
             <QuizContainer>
               {/* <QuizTitle>Quizes</QuizTitle> */}
-              {allQuizzes.map((quiz) => (
-                <CardQuizBasic
-                  key={quiz.id}
-                  data={quiz}
-                  color={theme.color.purple}
-                  navigate={() =>
-                    navigation.navigate('Descricao', {
-                      quiz: {
-                        id: quiz.id,
-                        title: quiz.title,
-                        description: quiz.description,
-                        pin: quiz.pin,
-                        image: quiz?.image?.url,
-                        tags: quiz.tagsQuiz.map((tag) => tag.name),
-                        isFavorite: quiz.isFavorite,
-                        noTime: quiz.noTime,
-                      },
-                    })
-                  }
-                />
-              ))}
+              {allQuizzes.map((item) => {
+                const key = item?.classInstance
+                  ? item?.classInstance.id + item.quiz.id
+                  : item.quiz.id;
+
+                return item?.isInProgress ? (
+                  <CardQuizInProgress
+                    key={key}
+                    data={item}
+                    color={theme.color.purple}
+                    navigate={() =>
+                      navigation.navigate('Descricao', {
+                        idStudentQuiz: item.idStudentQuiz,
+                        questionAmount: item.questionAmount,
+                        studentChoicesAmount: item.studentChoicesAmount,
+                        quiz: {
+                          id: item.quiz.id,
+                          title: item.quiz.title,
+                          description: item.quiz.description,
+                          pin: item.quiz.pin,
+                          image: item.quiz?.image?.url,
+                          tags: item.quiz.tagsQuiz.map((tag) => tag.name),
+                          isFavorite: item.quiz.isFavorite,
+                          noTime: item.quiz.noTime,
+                        },
+                        classInstance: item?.classInstance,
+                      })
+                    }
+                  />
+                ) : (
+                  <CardQuizBasic
+                    key={key}
+                    data={item.quiz}
+                    color={theme.color.purple}
+                    navigate={() =>
+                      navigation.navigate('Descricao', {
+                        quiz: {
+                          id: item.quiz.id,
+                          title: item.quiz.title,
+                          description: item.quiz.description,
+                          pin: item.quiz.pin,
+                          image: item.quiz?.image?.url,
+                          tags: item.quiz.tagsQuiz.map((tag) => tag.name),
+                          isFavorite: item.quiz.isFavorite,
+                          noTime: item.quiz.noTime,
+                        },
+                      })
+                    }
+                  />
+                );
+              })}
             </QuizContainer>
           </>
         )}

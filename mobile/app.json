@@ -11,6 +11,7 @@
     ],
     "splash": {
       "image": "./assets/splash.png",
+      "backgroundColor": "#EEBB24",
       "resizeMode": "cover"
     },
     "updates": {

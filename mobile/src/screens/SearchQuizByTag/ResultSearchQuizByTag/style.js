@@ -3,7 +3,7 @@ import Constants from 'expo-constants';
 
 import { Feather } from '@expo/vector-icons';
 
-export const QuizContainer = styled.View`
+export const QuizContainer = styled.ScrollView`
   margin-top: 10px;
 `;
 

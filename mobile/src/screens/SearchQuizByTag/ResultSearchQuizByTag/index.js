@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import theme from '@theme';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 // HOOKS
 import useSearchQuizByTag from '@hook/useSearchQuizByTag';
@@ -8,6 +8,7 @@ import useSearchQuizByTag from '@hook/useSearchQuizByTag';
 // Components
 import Container from '@components/Container';
 import CardWithTeacherName from '@components/Card/WithTeacherName';
+import CardQuizInProgress from '@components/Card/InProgress';
 
 // STYLES
 import {
@@ -22,8 +23,15 @@ import {
 } from './style';
 
 const ResultSearchTag = () => {
-  const { quizzes, tags, removeTagAndGetNewQuizzes } = useSearchQuizByTag();
+  const { quizzes, tags, removeTagAndGetNewQuizzes, getQuizByTags } =
+    useSearchQuizByTag();
   const navigation = useNavigation();
+
+  useFocusEffect(
+    useCallback(() => {
+      getQuizByTags();
+    }, [])
+  );
 
   useEffect(() => {
     if (quizzes.length === 0) {
@@ -48,27 +56,53 @@ const ResultSearchTag = () => {
         <TextBolder>Resultados</TextBolder>
 
         <QuizContainer>
-          {quizzes.map((quiz) => (
-            <CardWithTeacherName
-              key={quiz.id}
-              data={quiz}
-              navigate={() =>
-                navigation.navigate('Descricao', {
-                  quiz: {
-                    id: quiz.id,
-                    title: quiz.title,
-                    description: quiz.description,
-                    pin: quiz.pin,
-                    image: quiz?.image?.url,
-                    tags: quiz.tagsQuiz.map((tag) => tag.name),
-                    isFavorite: quiz.isFavorite,
-                    noTime: quiz.noTime,
-                  },
-                })
-              }
-              color={theme.color.purple}
-            />
-          ))}
+          {quizzes.map((item) =>
+            item?.isInProgress ? (
+              <CardQuizInProgress
+                key={item.quiz.id}
+                data={item}
+                color={theme.color.purple}
+                navigate={() =>
+                  navigation.navigate('Descricao', {
+                    idStudentQuiz: item.idStudentQuiz,
+                    questionAmount: item.questionAmount,
+                    studentChoicesAmount: item.studentChoicesAmount,
+                    quiz: {
+                      id: item.quiz.id,
+                      title: item.quiz.title,
+                      description: item.quiz.description,
+                      pin: item.quiz.pin,
+                      image: item.quiz?.image?.url,
+                      tags: item.quiz.tagsQuiz.map((tag) => tag.name),
+                      isFavorite: item.quiz.isFavorite,
+                      noTime: item.quiz.noTime,
+                    },
+                    classInstance: item?.classInstance,
+                  })
+                }
+              />
+            ) : (
+              <CardWithTeacherName
+                key={item.quiz.id}
+                data={item.quiz}
+                navigate={() =>
+                  navigation.navigate('Descricao', {
+                    quiz: {
+                      id: item.quiz.id,
+                      title: item.quiz.title,
+                      description: item.quiz.description,
+                      pin: item.quiz.pin,
+                      image: item.quiz?.image?.url,
+                      tags: item.quiz.tagsQuiz.map((tag) => tag.name),
+                      isFavorite: item.quiz.isFavorite,
+                      noTime: item.quiz.noTime,
+                    },
+                  })
+                }
+                color={theme.color.purple}
+              />
+            )
+          )}
         </QuizContainer>
       </SafeArea>
     </Container>

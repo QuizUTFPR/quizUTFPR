@@ -2,6 +2,7 @@
 import Teacher from '../../models/TeacherModel';
 import File from '../../models/FileModel';
 import Tag from '../../models/TagModel';
+import StudentQuiz from '../../models/StudentQuiz';
 
 // REPOSITORIES
 import QuizRepository from '../../repositories/Quiz';
@@ -26,6 +27,16 @@ class GetQuizzesFromTagsService {
         visibility: 'public',
       },
       include: [
+        {
+          model: StudentQuiz,
+          as: 'quizStudent',
+          where: {
+            isFinished: false,
+            studentId,
+            classId: null,
+          },
+          required: false,
+        },
         {
           model: Teacher,
           as: 'teacher',
@@ -64,9 +75,25 @@ class GetQuizzesFromTagsService {
               },
             });
 
+          const { quizStudent } = quiz.dataValues;
+
+          const questionAmount = await quiz.countQuestions();
+          let studentChoicesAmount = 0;
+
+          if (quizStudent.length > 0) {
+            studentChoicesAmount =
+              await quizStudent[0].countQuizQuestionChoice();
+          }
+
           filteredQuizzesByTag.push({
-            ...quiz.dataValues,
-            isFavorite: !!didStudentFavoritedThisQuiz,
+            isInProgress: !!quizStudent.length,
+            idStudentQuiz: quizStudent.length > 0 ? quizStudent[0].id : null,
+            studentChoicesAmount,
+            questionAmount,
+            quiz: {
+              ...quiz.dataValues,
+              isFavorite: !!didStudentFavoritedThisQuiz,
+            },
           });
         }
       })

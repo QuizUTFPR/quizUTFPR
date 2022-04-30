@@ -86,7 +86,7 @@ const Header = () => {
       </BackgroundHeader>
 
       <Dialog
-        title="JÁ VAI? ESTÁ CEDO!"
+        title="Quiz não encontrado!"
         visible={showDialog}
         hideDialog={handleHideDialog}
         firstButtonOnPress={handleHideDialog}

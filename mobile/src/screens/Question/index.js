@@ -173,7 +173,6 @@ const Question = () => {
         if (e.data.action.type === 'POP' || e.data.action.type === 'RESET') {
           hideConfirmExit();
 
-          console.log('saindo');
           setQuizID(-1);
           setAmountOfQuestion(0);
           setAlreadyAnswered(0);

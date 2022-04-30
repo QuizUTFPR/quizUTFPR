@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 // REPOSITORIES
 import ClassRepository from '../../../repositories/Class';
+import FavoriteStudentQuizRepository from '../../../repositories/FavoriteStudentQuiz';
 
 // MODELS
 import File from '../../../models/FileModel';
@@ -9,11 +10,13 @@ import File from '../../../models/FileModel';
 class GetAllQuizzesFromClassService {
   constructor() {
     this.classRepository = new ClassRepository();
+    this.favoriteStudentQuizRepository = new FavoriteStudentQuizRepository();
   }
 
   async execute(data) {
     const schema = Yup.object().shape({
       idClass: Yup.string().required(),
+      idStudent: Yup.number().required(),
     });
 
     if (!(await schema.isValid(data))) {
@@ -23,7 +26,7 @@ class GetAllQuizzesFromClassService {
       throw error;
     }
 
-    const { idClass } = data;
+    const { idClass, idStudent } = data;
     const classInstance = await this.classRepository.findById(idClass);
 
     if (!classInstance) {
@@ -43,7 +46,25 @@ class GetAllQuizzesFromClassService {
       order: [['createdAt', 'DESC']],
     });
 
-    return quizzes;
+    const verifyingFavoriteQuizzes = await Promise.all(
+      quizzes.map(async (quiz) => {
+        const isFavorite = await this.favoriteStudentQuizRepository.findOne({
+          where: {
+            quizId: quiz.id,
+            studentId: idStudent,
+          },
+        });
+
+        return {
+          ...quiz.dataValues,
+          isFavorite: !!isFavorite,
+        };
+      })
+    );
+
+    console.log('verifyingFavoriteQuizzes', verifyingFavoriteQuizzes);
+
+    return verifyingFavoriteQuizzes;
   }
 }
 

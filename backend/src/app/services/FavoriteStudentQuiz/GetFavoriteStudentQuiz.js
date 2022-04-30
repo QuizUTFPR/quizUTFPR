@@ -2,6 +2,7 @@
 import Quiz from '../../models/QuizModel';
 import Tag from '../../models/TagModel';
 import File from '../../models/FileModel';
+import StudentQuiz from '../../models/StudentQuiz';
 
 // REPOSITORIES
 import FavoriteStudentQuizRepository from '../../repositories/FavoriteStudentQuiz';
@@ -15,6 +16,8 @@ class GetFavoriteStudentQuizService {
     const { studentId } = data;
     const { page } = data || false;
     const { limit } = data || 3;
+
+    console.log('studentId', studentId);
 
     const favorites = await this.favoriteStudentQuizRepository.findAll({
       where: {
@@ -35,6 +38,16 @@ class GetFavoriteStudentQuizService {
             'idImage',
           ],
           include: [
+            {
+              model: StudentQuiz,
+              as: 'quizStudent',
+              where: {
+                isFinished: false,
+                studentId,
+                classId: null,
+              },
+              required: false,
+            },
             {
               model: Tag,
               as: 'tagsQuiz',
@@ -62,10 +75,29 @@ class GetFavoriteStudentQuizService {
       throw error;
     }
 
-    const returnedFavorites = favorites.map((item) => ({
-      ...item.dataValues.quiz.dataValues,
-      isFavorite: true,
-    }));
+    const returnedFavorites = await Promise.all(
+      favorites.map(async (item) => {
+        const { quiz } = item.dataValues;
+        const { quizStudent, ...restOfQuiz } = quiz.dataValues;
+        let studentChoicesAmount = 0;
+        const questionAmount = await quiz.countQuestions();
+
+        if (quizStudent.length > 0) {
+          studentChoicesAmount = await quizStudent[0].countQuizQuestionChoice();
+        }
+
+        return {
+          isInProgress: !!quizStudent.length,
+          idStudentQuiz: quizStudent.length > 0 ? quizStudent[0].id : null,
+          studentChoicesAmount,
+          questionAmount,
+          quiz: {
+            ...restOfQuiz,
+            isFavorite: true,
+          },
+        };
+      })
+    );
 
     return returnedFavorites;
   }
