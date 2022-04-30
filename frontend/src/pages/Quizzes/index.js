@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import api from '@api';
 
 // COMPONENTS
@@ -171,68 +172,72 @@ const Quiz = () => {
               </QuizBar>
             </AccordionSummary>
             <AccordionDetails>
-              {quizzes?.public.map((quiz) => (
-                <Card
-                  key={quiz.id}
-                  image={quiz.image?.url}
-                  imageTitle={quiz.title}
-                  title={`${quiz.title}`}
-                  description={quiz.description}
-                  to={`${QUESTION}${quiz.id}`}
-                  published={quiz.published}
-                  noTime={quiz.noTime}
-                >
-                  <QuestionsQuantitty>
-                    {quiz.amountOfQuestions} questões
-                  </QuestionsQuantitty>
-                  {!quiz.published && (
-                    <Tooltip arrow ariaLabel="publicar" title="Publicar">
-                      <IconButton
-                        onClick={() => handleClickOpenPublish(quiz.id)}
-                      >
-                        <Publish />
-                      </IconButton>
-                    </Tooltip>
-                  )}
-
-                  {quiz.published && (
-                    <>
-                      <Tooltip
-                        arrow
-                        ariaLabel="pin"
-                        title="PIN para acessar o quiz"
-                      >
-                        <TextPIN>{quiz.pin}</TextPIN>
-                      </Tooltip>
-                      <Tooltip
-                        arrow
-                        ariaLabel="statistics"
-                        title="Visualizar estatisticas"
-                      >
+              {quizzes?.public.map((quiz) => {
+                return (
+                  <Card
+                    key={quiz.id}
+                    image={quiz.image?.url}
+                    imageTitle={quiz.title}
+                    title={`${quiz.title}`}
+                    description={quiz.description}
+                    to={`${QUESTION}${quiz.id}`}
+                    published={quiz.published}
+                    noTime={quiz.noTime}
+                  >
+                    <QuestionsQuantitty>
+                      {quiz.amountOfQuestions} questões
+                    </QuestionsQuantitty>
+                    {!quiz.published && (
+                      <Tooltip arrow ariaLabel="publicar" title="Publicar">
                         <IconButton
-                          onClick={() =>
-                            navigate(`${STATISTICS_QUIZ}/${quiz.id}`)
-                          }
+                          onClick={() => handleClickOpenPublish(quiz.id)}
                         >
-                          <BarChart />
+                          <Publish />
                         </IconButton>
                       </Tooltip>
-                    </>
-                  )}
-                  <Tooltip arrow ariaLabel="editar" title="Editar">
-                    <IconButton onClick={handleOpenModal(quiz)}>
-                      <Edit />
-                    </IconButton>
-                  </Tooltip>
-                  {!quiz.published && (
-                    <Tooltip arrow ariaLabel="deletar" title="Deletar">
-                      <IconButton onClick={() => handleClickOpenAlert(quiz.id)}>
-                        <Delete />
+                    )}
+
+                    {quiz.published && (
+                      <>
+                        <Tooltip
+                          arrow
+                          ariaLabel="pin"
+                          title="PIN para acessar o quiz"
+                        >
+                          <TextPIN>{quiz.pin}</TextPIN>
+                        </Tooltip>
+                        <Tooltip
+                          arrow
+                          ariaLabel="statistics"
+                          title="Visualizar estatisticas"
+                        >
+                          <IconButton
+                            onClick={() =>
+                              navigate(`${STATISTICS_QUIZ}/${quiz.id}`)
+                            }
+                          >
+                            <BarChart />
+                          </IconButton>
+                        </Tooltip>
+                      </>
+                    )}
+                    <Tooltip arrow ariaLabel="editar" title="Editar">
+                      <IconButton onClick={handleOpenModal(quiz)}>
+                        <Edit />
                       </IconButton>
                     </Tooltip>
-                  )}
-                </Card>
-              ))}
+                    {!quiz.published && (
+                      <Tooltip arrow ariaLabel="deletar" title="Deletar">
+                        <IconButton
+                          onClick={() => handleClickOpenAlert(quiz.id)}
+                        >
+                          <Delete />
+                        </IconButton>
+                      </Tooltip>
+                    )}
+                  </Card>
+                );
+              })}
             </AccordionDetails>
           </StyledAccordion>
         )}

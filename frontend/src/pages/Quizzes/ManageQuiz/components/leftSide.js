@@ -24,7 +24,7 @@ const LeftSide = ({
   handleChangeQuestion,
   handleToDown,
   handleToUp,
-  location,
+  quizInfo,
 }) => (
   <Grid item xs={3}>
     <StyledLeftGrid container align="center">
@@ -55,14 +55,14 @@ const LeftSide = ({
                 <IconButton
                   onClick={() => handleToUp(index, handleChangeQuestion)}
                   size="small"
-                  disabled={location.state.published}
+                  disabled={quizInfo.published}
                 >
                   <ArrowUpward />
                 </IconButton>
               )}
               {index !== questions.length - 1 && (
                 <IconButton
-                  disabled={location.state.published}
+                  disabled={quizInfo.published}
                   onClick={() => handleToDown(index, handleChangeQuestion)}
                   size="small"
                 >
@@ -93,7 +93,7 @@ const LeftSide = ({
           color="secondary"
           startIcon={<AddCircle />}
           size="large"
-          disabled={location.state.published}
+          disabled={quizInfo.published}
           loading={false}
         >
           CRIAR
@@ -114,6 +114,9 @@ LeftSide.propTypes = {
   handleChangeQuestion: PropTypes.func.isRequired,
   handleToDown: PropTypes.func.isRequired,
   handleToUp: PropTypes.func.isRequired,
+  quizInfo: PropTypes.shape({
+    published: PropTypes.bool,
+  }).isRequired,
 };
 
 export default LeftSide;

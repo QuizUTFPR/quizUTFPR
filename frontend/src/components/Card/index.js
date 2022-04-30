@@ -25,28 +25,28 @@ const Card = ({
   to,
   children,
   ...props
-}) => (
-  <StyledCard>
-    {image ? (
-      <StyledCardMedia component="img" image={image} title={imageTitle} />
-    ) : (
-      <EmptyImage />
-    )}
-    <WrapperContentCard>
-      <StyledCardActionArea
-        component={Link}
-        to={to}
-        state={{ title, ...props }}
-        onContextMenu={(e) => e.preventDefault()}
-        onAuxClick={(e) => e.preventDefault()}
-      >
-        <TitleCard color="primary">{title}</TitleCard>
-        <DescriptionCard color="textSecondary">{description}</DescriptionCard>
-      </StyledCardActionArea>
-    </WrapperContentCard>
-    <StyledCardActions>{children}</StyledCardActions>
-  </StyledCard>
-);
+}) => {
+  return (
+    <StyledCard>
+      {image ? (
+        <StyledCardMedia component="img" image={image} title={imageTitle} />
+      ) : (
+        <EmptyImage />
+      )}
+      <WrapperContentCard>
+        <StyledCardActionArea
+          component={Link}
+          to={to}
+          state={{ title, ...props }}
+        >
+          <TitleCard color="primary">{title}</TitleCard>
+          <DescriptionCard color="textSecondary">{description}</DescriptionCard>
+        </StyledCardActionArea>
+      </WrapperContentCard>
+      <StyledCardActions>{children}</StyledCardActions>
+    </StyledCard>
+  );
+};
 
 Card.defaultProps = {
   imageTitle: 'Título da Image',
