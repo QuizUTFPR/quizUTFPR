@@ -42,6 +42,10 @@ class App {
       '/avatars',
       express.static(path.resolve(__dirname, '..', 'avatars'))
     );
+    this.server.use(
+      '/getQuestionModelSheet',
+      express.static(path.resolve(__dirname, '..', './modelo_questoes.ods'))
+    );
   }
 
   routes() {

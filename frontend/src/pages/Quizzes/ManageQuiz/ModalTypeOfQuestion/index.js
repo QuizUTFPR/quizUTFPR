@@ -14,6 +14,9 @@ import useQuestionQuiz from '@hooks/QuestionQuiz';
 import QuestionDatabase from '../ModalQuestionDatabase';
 import SheetQuestions from '../SheetQuestionModal';
 
+// STYLE
+import { DownloadButton } from './style';
+
 const TypeOfQuestion = forwardRef((props, ref) => {
   const {
     updateScreen,
@@ -120,6 +123,13 @@ const TypeOfQuestion = forwardRef((props, ref) => {
               </Button>
             </Grid>
           </Grid>
+          <DownloadButton
+            href={`${process.env.REACT_APP_BASE_URL}/getQuestionModelSheet`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Realize o download do modelo da planilha de questoes clicando aqui.
+          </DownloadButton>
         </Wrapper>
       )}
 
