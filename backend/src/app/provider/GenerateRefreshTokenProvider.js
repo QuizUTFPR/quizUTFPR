@@ -12,7 +12,7 @@ class GenerateRefreshTokenProvider {
     try {
       const expiresIn = dayjs
         .utc()
-        .add(parseInt(authConfig.refreshExpiration, 10), 'm')
+        .add(parseInt(authConfig.refreshExpiration, 10), 'M')
         .format();
 
       const refreshTokenRepository = new RefreshTokenRepository();

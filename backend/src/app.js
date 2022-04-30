@@ -29,7 +29,11 @@ class App {
     this.server.use(helmet());
     this.server.use(express.json({ limit: '50mb' }));
     // this.server.use(express.urlencoded({ extended: true }));
-    this.server.use(cors());
+    this.server.use(
+      cors({
+        origin: '*',
+      })
+    );
     this.server.use(
       '/files',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
