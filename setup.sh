@@ -8,7 +8,7 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 rm get-docker.sh
 sudo apt install docker-compose -y
-newgrp docker <<EONG
+sudo newgrp docker <<EONG
 
 
 echo "Criando pasta para upload de arquivos..."
@@ -34,8 +34,13 @@ echo "Iniciando processo de build do painel de controle"
 
 npm install --global yarn
 cd frontend
+sudo rm -r node_modules
+sudo rm yarn.lock
 yarn
 
+
+
+sudo rm -r build
 yarn build
 cd ..
 
@@ -48,6 +53,14 @@ sudo apt install nginx certbot python3-certbot-nginx -y
 
 sudo rm -r /usr/share/nginx/html/*
 sudo cp -r ./frontend/build/* /usr/share/nginx/html
+
+
+sudo rm /etc/nginx/sites-available/quizapi.dacom.cm.utfpr.edu.br
+sudo rm /etc/nginx/sites-available/quiz.dacom.cm.utfpr.edu.br
+sudo rm /etc/nginx/sites-enabled/quizapi.dacom.cm.utfpr.edu.br
+sudo rm /etc/nginx/sites-enabled/quiz.dacom.cm.utfpr.edu.br
+sudo rm /etc/nginx/nginx.conf
+
 
 sudo cp nginx/quizapi.dacom.cm.utfpr.edu.br /etc/nginx/sites-available
 sudo cp nginx/quiz.dacom.cm.utfpr.edu.br /etc/nginx/sites-available

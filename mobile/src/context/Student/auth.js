@@ -131,6 +131,8 @@ const StudentAuth = ({ children }) => {
 
       return data;
     } catch (error) {
+      console.log('error', error.response, { ...error });
+
       return {
         status: error.response.status,
         message: error.response.data.message,

@@ -47,6 +47,9 @@ services:
       - EXPIRE_IN=DIAS_PARA_EXPIRAR_TOKEN
       - REFRESH_EXPIRATION=   
       - TIMEZONE=+03:00
+      - LDAP_URL=
+      - LDAP_USERNAME=
+      - LDAP_PASSWORD=
     networks:
       - app-tier
 

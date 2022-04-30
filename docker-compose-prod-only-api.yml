@@ -41,12 +41,15 @@ services:
       - DB_PASS=123456
       - DB_NAME=db_quiz
       - DB_DIALECT=mysql
-      - APP_URL=http://localhost:3334
+      - APP_URL=http://quizapi.dacom.cm.utfpr.edu.br
       - PORT=3334
       - SECRET=SECRET_AQUI
       - EXPIRE_IN=2d
       - REFRESH_EXPIRATION=380
       - TIMEZONE=+03:00
+      - LDAP_URL=
+      - LDAP_USERNAME=
+      - LDAP_PASSWORD=
     networks:
       - app-tier
 
