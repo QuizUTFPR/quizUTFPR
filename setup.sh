@@ -5,9 +5,21 @@ read -p "Digite um e-mail (necessário para gerar os certificados): " email
 echo "Instalando o Docker..."
 
 curl -fsSL https://get.docker.com -o get-docker.sh
+
+echo "executando get-docker"
+
 sudo sh get-docker.sh
+
+echo "executando rm get-docker"
+
 rm get-docker.sh
+
+echo "instalando docker-compose"
+
 sudo apt install docker-compose -y
+
+echo "criando grupo do docker"
+
 sudo newgrp docker <<EONG
 
 
@@ -38,8 +50,6 @@ sudo rm -r node_modules
 sudo rm yarn.lock
 yarn
 
-
-
 sudo rm -r build
 yarn build
 cd ..
@@ -54,13 +64,11 @@ sudo apt install nginx certbot python3-certbot-nginx -y
 sudo rm -r /usr/share/nginx/html/*
 sudo cp -r ./frontend/build/* /usr/share/nginx/html
 
-
 sudo rm /etc/nginx/sites-available/quizapi.dacom.cm.utfpr.edu.br
 sudo rm /etc/nginx/sites-available/quiz.dacom.cm.utfpr.edu.br
 sudo rm /etc/nginx/sites-enabled/quizapi.dacom.cm.utfpr.edu.br
 sudo rm /etc/nginx/sites-enabled/quiz.dacom.cm.utfpr.edu.br
 sudo rm /etc/nginx/nginx.conf
-
 
 sudo cp nginx/quizapi.dacom.cm.utfpr.edu.br /etc/nginx/sites-available
 sudo cp nginx/quiz.dacom.cm.utfpr.edu.br /etc/nginx/sites-available
@@ -96,3 +104,4 @@ sudo systemctl restart nginx
 # crontab /etc/cron.d/certbot-renew
 
 EONG
+
