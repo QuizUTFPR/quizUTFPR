@@ -46,6 +46,7 @@ echo "Instalando e configurando o Nginx..."
 sudo apt install nginx certbot python3-certbot-nginx -y
 
 
+sudo rm -r /usr/share/nginx/html/*
 sudo cp -r ./frontend/build/* /usr/share/nginx/html
 
 sudo cp nginx/quizapi.dacom.cm.utfpr.edu.br /etc/nginx/sites-available
