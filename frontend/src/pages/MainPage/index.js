@@ -9,6 +9,7 @@ import {
   CLASSES,
   STATISTICS_QUIZ,
   CREATE_CLASS,
+  FAQ,
 } from '@routes';
 
 // Styles
@@ -26,6 +27,7 @@ const CreateQuiz = lazy(() => import('../Quizzes/CreateQuiz'));
 const Classes = lazy(() => import('../Classes'));
 const Statistics = lazy(() => import('../Statistics'));
 const CreateClass = lazy(() => import('../Classes/CreateClass'));
+const FaqPage = lazy(() => import('../FAQ'));
 
 const MainPage = () => (
   <Suspense fallback={<LinearProgress />}>
@@ -38,6 +40,7 @@ const MainPage = () => (
           <Route path={CREATE_QUIZ} element={<CreateQuiz />} exact />
           <Route path={CREATE_CLASS} element={<CreateClass />} exact />
           <Route path={CLASSES} element={<Classes />} exact />
+          <Route path={FAQ} element={<FaqPage />} exact />
           <Route
             path={`${STATISTICS_QUIZ}/:id`}
             element={<Statistics />}

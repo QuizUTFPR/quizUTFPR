@@ -29,6 +29,7 @@ const ConfirmExpireOfToken = () => {
           variant="contained"
           color="primary"
           onClick={() => navigate(HOME)}
+          loading={false}
         >
           Logar Novamente
         </Button>

@@ -8,3 +8,4 @@ export const TOKENEXPIRED = '/expire';
 export const CLASSES = '/turmas';
 export const MANAGE_CLASSES = '/geranciar-turmas';
 export const CREATE_CLASS = '/turmas/criar';
+export const FAQ = '/faq';

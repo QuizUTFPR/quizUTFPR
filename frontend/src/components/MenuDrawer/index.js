@@ -17,7 +17,7 @@ import {
 import useAuth from '@hooks/Auth';
 
 // ROTAS
-import { QUIZ, HOME, CLASSES } from '@routes';
+import { QUIZ, HOME, CLASSES, FAQ } from '@routes';
 
 // STYLES
 import {
@@ -66,7 +66,7 @@ const MenuDrawer = () => {
     {
       text: 'FAQ',
       icon: <Help />,
-      onClick: () => console.log('FAQ'),
+      to: FAQ,
     },
     {
       text: 'Desconectar',
@@ -134,20 +134,31 @@ const MenuDrawer = () => {
       </List>
       <Divider />
       <List>
-        {SecondMenu.map((option) => (
-          <Tooltip
-            key={option.text}
-            title={open ? '' : option.text}
-            placement="right"
-          >
-            <WrapperLine as="div" onClick={option.onClick}>
-              <Line open={open}>
-                <IconLine open={open}>{option.icon}</IconLine>
-                {open && <TextLine color="primary">{option.text}</TextLine>}
-              </Line>
-            </WrapperLine>
-          </Tooltip>
-        ))}
+        {SecondMenu.map((option) => {
+          let options = { ...option };
+
+          if (option?.onClick) {
+            options = {
+              ...option,
+              as: 'div',
+            };
+          }
+
+          return (
+            <Tooltip
+              key={option.text}
+              title={open ? '' : option.text}
+              placement="right"
+            >
+              <WrapperLine {...options}>
+                <Line open={open}>
+                  <IconLine open={open}>{option.icon}</IconLine>
+                  {open && <TextLine color="primary">{option.text}</TextLine>}
+                </Line>
+              </WrapperLine>
+            </Tooltip>
+          );
+        })}
       </List>
     </StyledDrawer>
   );
