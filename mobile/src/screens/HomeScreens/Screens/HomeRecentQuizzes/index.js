@@ -41,6 +41,7 @@ const HomeRecentQuizzes = () => {
 
   useFocusEffect(
     useCallback(() => {
+      console.log('teste');
       onRefresh();
     }, [])
   );

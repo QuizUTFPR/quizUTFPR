@@ -46,14 +46,6 @@ const FavoriteQuizzes = () => {
     }, [])
   );
 
-  useEffect(() => {
-    const unsubscribeListenTabPress = navigation.addListener('tabPress', () => {
-      onRefresh();
-    });
-
-    return unsubscribeListenTabPress;
-  }, [navigation]);
-
   return (
     <Container>
       {!isRefreshing && allQuizzes.length === 0 && (

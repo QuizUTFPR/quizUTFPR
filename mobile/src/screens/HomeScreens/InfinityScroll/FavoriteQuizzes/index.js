@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import api from '@api';
 
 // COMPONENTS
@@ -17,6 +17,7 @@ const QuizzesInfinityScroll = () => {
   const [page, setPage] = useState(1);
   const [isRefreshing, setRefreshing] = useState(false);
   const [allQuizzes, setAllQuizzes] = useState([]);
+  const [shouldReset, setShouldReset] = useState(false);
 
   const getAllFavoriteQuizzes = async () => {
     try {
@@ -25,10 +26,12 @@ const QuizzesInfinityScroll = () => {
 
       const { data } = await api.post('/studentQuiz/favorites', {
         page,
-        limit: 7,
+        limit: 15,
       });
 
-      setAllQuizzes((prevState) => [...prevState, ...data]);
+      if (allQuizzes.length > 0)
+        setAllQuizzes((prevState) => [...prevState, ...data]);
+      else setAllQuizzes(data);
 
       if (data.length > 0) {
         setPage((prevPage) => prevPage + 1);
@@ -40,13 +43,29 @@ const QuizzesInfinityScroll = () => {
     }
   };
 
-  useEffect(() => {
-    const fetch = async () => {
-      await getAllFavoriteQuizzes();
-    };
+  const resetPagination = () => {
+    setAllQuizzes([]);
+    setPage(1);
+    setShouldReset((prevState) => !prevState);
+  };
 
-    fetch();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      console.log('buscando todos');
+      getAllFavoriteQuizzes();
+
+      return () => {
+        console.log('reset');
+        setPage(1);
+        setRefreshing(false);
+        setAllQuizzes([]);
+      };
+    }, [shouldReset])
+  );
+
+  const handleRefresh = () => {
+    resetPagination();
+  };
 
   return (
     <Container>
@@ -59,9 +78,9 @@ const QuizzesInfinityScroll = () => {
             : item.quiz.id.toString()
         }
         refreshing={isRefreshing}
-        onRefresh={getAllFavoriteQuizzes}
+        onRefresh={handleRefresh}
         onEndReached={getAllFavoriteQuizzes}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.3}
         renderItem={({ item }) =>
           item?.isInProgress ? (
             <CardQuizInProgress
