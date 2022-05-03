@@ -11,6 +11,7 @@ import { ExpandMore } from '@mui/icons-material';
 import { BarQuestion } from './style';
 import { StyledAccordionSummary } from '../style';
 import GeneralInfo from './components/GeneralInfo';
+import HowToCreate from './components/HowToCreate';
 
 const QuizFAQ = () => {
   return (
@@ -40,7 +41,9 @@ const QuizFAQ = () => {
             <Typography>Como faço para criar um quiz?</Typography>
           </BarQuestion>
         </StyledAccordionSummary>
-        <AccordionDetails>teste</AccordionDetails>
+        <AccordionDetails>
+          <HowToCreate />
+        </AccordionDetails>
       </Accordion>
 
       <Accordion TransitionProps={{ unmountOnExit: true }}>

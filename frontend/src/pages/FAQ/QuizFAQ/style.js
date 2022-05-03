@@ -21,3 +21,9 @@ export const StyledTypography = styled(Typography).attrs({
     margin-top: 0px;
   }
 `;
+
+export const TextBold = styled.span`
+  font-weight: 500;
+`;
+
+export const StyledImg = styled.img``;
