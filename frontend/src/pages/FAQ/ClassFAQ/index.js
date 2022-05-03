@@ -20,7 +20,7 @@ const QuestionFAQ = () => {
         id="panel-bh-header"
       >
         <BarQuestion>
-          <Typography>Como faço para criar uma questão?</Typography>
+          <Typography>Como faço para criar uma turma?</Typography>
         </BarQuestion>
       </StyledAccordionSummary>
       <AccordionDetails>teste</AccordionDetails>

@@ -11,7 +11,7 @@ import { ExpandMore } from '@mui/icons-material';
 import { BarQuestion } from './style';
 import { StyledAccordionSummary } from '../style';
 
-const StatisticsFAQ = () => {
+const QuizStatisticsFAQ = () => {
   return (
     <Accordion TransitionProps={{ unmountOnExit: true }}>
       <StyledAccordionSummary
@@ -20,7 +20,7 @@ const StatisticsFAQ = () => {
         id="panel-bh-header"
       >
         <BarQuestion>
-          <Typography>titulo estatisticas</Typography>
+          <Typography>Como posso ver as estatísticas dos Quizzes?</Typography>
         </BarQuestion>
       </StyledAccordionSummary>
       <AccordionDetails>teste</AccordionDetails>
@@ -28,4 +28,4 @@ const StatisticsFAQ = () => {
   );
 };
 
-export default StatisticsFAQ;
+export default QuizStatisticsFAQ;
