@@ -42,6 +42,7 @@ const QuizzesOfClass = () => {
 
   useFocusEffect(
     useCallback(() => {
+      console.log('focou quizzes');
       getClassQuizzes();
 
       return () => {

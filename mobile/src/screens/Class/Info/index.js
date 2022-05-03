@@ -65,12 +65,6 @@ const InfoOfClass = () => {
     }
   };
 
-  React.useEffect(() => {
-    console.log('montou');
-
-    return () => console.log('desmontou');
-  }, []);
-
   return (
     <>
       <ClassContainer fill="white">
