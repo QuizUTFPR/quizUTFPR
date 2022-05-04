@@ -3,7 +3,8 @@ import React from 'react';
 // ASSETS
 import InitialScreen from '@assets/FAQ/TurmasFAQ/initial_screen.png';
 import MyClasses from '@assets/FAQ/TurmasFAQ/my_classes.png';
-import OpenClassSection from '@assets/FAQ/TurmasFAQ/HowToEdit/open_class_section.png';
+import ClickButtonEditClass from '@assets/FAQ/TurmasFAQ/HowToEdit/click_button_edit_class.png';
+import EditClass from '@assets/FAQ/TurmasFAQ/HowToEdit/edit_class.png';
 
 // STYLES
 import {
@@ -39,26 +40,28 @@ const HowToEdit = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, preencha as informações necessárias para a criação da turma.
-        Para adicionar a imagem, clique na área de adição da imagem ou apenas
-        arraste uma até tal área. Título, visibilidade e descrição são campos
-        obrigatórios.
+        Feito isso, clique no ícone correspondente a edição da turma.
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg
-          src={OpenClassSection}
-          alt="Seção de turmas públicas aberta."
-        />
-        <StyledFigureCaption>
-          Seção de turmas públicas aberta.
-        </StyledFigureCaption>
+        <StyledImg src={ClickButtonEditClass} alt="Botão de edição da Turma." />
+        <StyledFigureCaption>Botão de edição da Turma.</StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>
-        Preenchidas as informações necessárias, basta clicar no botão{' '}
-        <TextBold>{`"CRIAR TURMA"`}</TextBold> e pronto, sua Turma foi criada e
-        você será redirecionado(a) para a tela de gerenciamento de turmas.
+        Uma janela será aberta, possibilitando a alterações de informações sobre
+        a Turma.
+      </StyledParagraph>
+
+      <StyledFigure>
+        <StyledImg src={EditClass} alt="Modal de edição da Turma." />
+        <StyledFigureCaption>Modal de edição da Turma.</StyledFigureCaption>
+      </StyledFigure>
+
+      <StyledParagraph>
+        Após preencher as informações que deseja alterar, basta clicar no botão{' '}
+        <TextBold>{`"SALVAR ALTERAÇÕES"`}</TextBold> e pronto, sua Turma será
+        editada.
       </StyledParagraph>
     </Wrapper>
   );
