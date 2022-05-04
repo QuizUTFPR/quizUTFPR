@@ -14,6 +14,9 @@ import { StyledAccordionSummary } from '../style';
 // COMPONENTS
 import GeneralInfo from './components/GeneralInfo';
 import HowToCreate from './components/HowToCreate';
+import HowToEdit from './components/HowToEdit';
+import HowToDelete from './components/HowToDelete';
+import HowToPublish from './components/HowToPublish';
 
 const QuizFAQ = () => {
   return (
@@ -58,7 +61,9 @@ const QuizFAQ = () => {
             <Typography>Como editar um quiz?</Typography>
           </BarQuestion>
         </StyledAccordionSummary>
-        <AccordionDetails>teste</AccordionDetails>
+        <AccordionDetails>
+          <HowToEdit />
+        </AccordionDetails>
       </Accordion>
 
       <Accordion TransitionProps={{ unmountOnExit: true }}>
@@ -71,7 +76,9 @@ const QuizFAQ = () => {
             <Typography>Como deletar um quiz?</Typography>
           </BarQuestion>
         </StyledAccordionSummary>
-        <AccordionDetails>teste</AccordionDetails>
+        <AccordionDetails>
+          <HowToDelete />
+        </AccordionDetails>
       </Accordion>
 
       <Accordion TransitionProps={{ unmountOnExit: true }}>
@@ -84,7 +91,9 @@ const QuizFAQ = () => {
             <Typography>Como publicar um quiz?</Typography>
           </BarQuestion>
         </StyledAccordionSummary>
-        <AccordionDetails>teste</AccordionDetails>
+        <AccordionDetails>
+          <HowToPublish />
+        </AccordionDetails>
       </Accordion>
     </>
   );
