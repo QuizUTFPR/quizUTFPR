@@ -3,7 +3,7 @@ import React from 'react';
 // ASSETS
 import InitialScreen from '@assets/FAQ/TurmasFAQ/initial_screen.png';
 import MyClasses from '@assets/FAQ/TurmasFAQ/my_classes.png';
-import CreateClass from '@assets/FAQ/TurmasFAQ/HowToCreate/create_class.png';
+import OpenClassSection from '@assets/FAQ/TurmasFAQ/HowToEdit/open_class_section.png';
 
 // STYLES
 import {
@@ -15,7 +15,7 @@ import {
   StyledFigureCaption,
 } from '../style';
 
-const HowToCreate = () => {
+const HowToEdit = () => {
   return (
     <Wrapper>
       <StyledParagraph>
@@ -29,8 +29,8 @@ const HowToCreate = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, no canto superior direito da tela de turmas, clique no botão{' '}
-        <TextBold>{`"CRIAR TURMA"`}</TextBold>.
+        Feito isso, abra a seção onde se encontra a turma que deseja editar
+        (pública ou privada).
       </StyledParagraph>
 
       <StyledFigure>
@@ -46,8 +46,13 @@ const HowToCreate = () => {
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg src={CreateClass} alt="Tela de criação de turmas." />
-        <StyledFigureCaption>Tela de criação de turmas.</StyledFigureCaption>
+        <StyledImg
+          src={OpenClassSection}
+          alt="Seção de turmas públicas aberta."
+        />
+        <StyledFigureCaption>
+          Seção de turmas públicas aberta.
+        </StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>
@@ -59,4 +64,4 @@ const HowToCreate = () => {
   );
 };
 
-export default HowToCreate;
+export default HowToEdit;

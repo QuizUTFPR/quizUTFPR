@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Grid, Typography } from '@mui/material';
 
-export const BarQuestion = styled(Grid).attrs({
+export const AccordionGrid = styled(Grid).attrs({
   item: true,
 })`
   display: flex;

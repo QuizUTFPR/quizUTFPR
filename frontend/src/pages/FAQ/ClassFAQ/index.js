@@ -8,12 +8,13 @@ import Tooltip from '@components/ToolTip';
 import { ExpandMore } from '@mui/icons-material';
 
 // STYLES
-import { BarQuestion } from './style';
+import { AccordionGrid, TextStrongBold } from './style';
 import { StyledAccordionSummary } from '../style';
 
 // COMPONENTS
 import GeneralInfo from './components/GeneralInfo';
 import HowToCreate from './components/HowToCreate';
+import HowToEdit from './components/HowToEdit';
 
 const QuestionFAQ = () => {
   return (
@@ -24,9 +25,9 @@ const QuestionFAQ = () => {
           aria-controls="panel-bh-content"
           id="panel-bh-header"
         >
-          <BarQuestion>
+          <AccordionGrid>
             <Typography>Informações gerais</Typography>
-          </BarQuestion>
+          </AccordionGrid>
         </StyledAccordionSummary>
         <AccordionDetails>
           <GeneralInfo />
@@ -39,12 +40,31 @@ const QuestionFAQ = () => {
           aria-controls="panel-bh-content"
           id="panel-bh-header"
         >
-          <BarQuestion>
-            <Typography>Como faço para criar uma Turma?</Typography>
-          </BarQuestion>
+          <AccordionGrid>
+            <Typography>
+              Como faço para <TextStrongBold>criar</TextStrongBold> uma Turma?
+            </Typography>
+          </AccordionGrid>
         </StyledAccordionSummary>
         <AccordionDetails>
           <HowToCreate />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <AccordionGrid>
+            <Typography>
+              Como faço para <TextStrongBold>editar</TextStrongBold> uma Turma?
+            </Typography>
+          </AccordionGrid>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <HowToEdit />
         </AccordionDetails>
       </Accordion>
     </>

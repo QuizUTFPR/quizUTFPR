@@ -1,7 +1,7 @@
 import React from 'react';
 
 // ASSETS
-import InitialScreen from '../../../../assets/FAQ/QuizFAQ/HowToCreate/initial_screen.png';
+import InitialScreen from '@assets/FAQ/QuizFAQ/HowToCreate/initial_screen.png';
 
 // STYLES
 import { TextBold, StyledImg } from '../style';
