@@ -23,7 +23,13 @@ import { AccordionDetails, AccordionSummary, IconButton } from '@mui/material';
 import Button from '@components/Button';
 
 // MATERIAL-UI ICONS
-import { Edit, Delete, Publish, BarChart, Style } from '@mui/icons-material';
+import {
+  Edit,
+  Delete,
+  Publish,
+  BarChart,
+  ExpandMore,
+} from '@mui/icons-material';
 
 // STYLE
 import {
@@ -151,7 +157,7 @@ const Quiz = () => {
 
         {!quizzes?.public ? (
           <StyledAccordion>
-            <AccordionSummary>
+            <AccordionSummary expandIcon={<ExpandMore />}>
               <QuizBar>
                 <CategoryTitle>Quizzes Públicos</CategoryTitle>
                 <QuizzesQuantity>(0 quizzes)</QuizzesQuantity>
@@ -163,7 +169,7 @@ const Quiz = () => {
           </StyledAccordion>
         ) : (
           <StyledAccordion TransitionProps={{ unmountOnExit: true }}>
-            <AccordionSummary>
+            <AccordionSummary expandIcon={<ExpandMore />}>
               <QuizBar>
                 <CategoryTitle>Quizzes Públicos</CategoryTitle>
                 <QuizzesQuantity>
@@ -244,7 +250,7 @@ const Quiz = () => {
 
         {!quizzes?.private ? (
           <StyledAccordion>
-            <AccordionSummary>
+            <AccordionSummary expandIcon={<ExpandMore />}>
               <QuizBar>
                 <CategoryTitle>Quizzes Privados</CategoryTitle>
                 <QuizzesQuantity>(0 quizzes)</QuizzesQuantity>
@@ -256,7 +262,7 @@ const Quiz = () => {
           </StyledAccordion>
         ) : (
           <StyledAccordion>
-            <AccordionSummary>
+            <AccordionSummary expandIcon={<ExpandMore />}>
               <QuizBar>
                 <CategoryTitle>Quizzes Privados</CategoryTitle>
                 <QuizzesQuantity>

@@ -10,6 +10,8 @@ import { ExpandMore } from '@mui/icons-material';
 // STYLES
 import { BarQuestion } from './style';
 import { StyledAccordionSummary } from '../style';
+
+// COMPONENTS
 import GeneralInfo from './components/GeneralInfo';
 import HowToCreate from './components/HowToCreate';
 
