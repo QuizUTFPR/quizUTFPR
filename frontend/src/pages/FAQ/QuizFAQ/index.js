@@ -9,7 +9,7 @@ import { ExpandMore } from '@mui/icons-material';
 
 // STYLES
 import { BarQuestion } from './style';
-import { StyledAccordionSummary } from '../style';
+import { StyledAccordionSummary, TextStrongBold } from '../style';
 
 // COMPONENTS
 import GeneralInfo from './components/GeneralInfo';
@@ -43,7 +43,9 @@ const QuizFAQ = () => {
           id="panel-bh-header"
         >
           <BarQuestion>
-            <Typography>Como faço para criar um quiz?</Typography>
+            <Typography>
+              Como faço para <TextStrongBold>criar</TextStrongBold> um quiz?
+            </Typography>
           </BarQuestion>
         </StyledAccordionSummary>
         <AccordionDetails>
@@ -58,7 +60,9 @@ const QuizFAQ = () => {
           id="panel-bh-header"
         >
           <BarQuestion>
-            <Typography>Como editar um quiz?</Typography>
+            <Typography>
+              Como <TextStrongBold>editar</TextStrongBold> um quiz?
+            </Typography>
           </BarQuestion>
         </StyledAccordionSummary>
         <AccordionDetails>
@@ -73,7 +77,9 @@ const QuizFAQ = () => {
           id="panel-bh-header"
         >
           <BarQuestion>
-            <Typography>Como deletar um quiz?</Typography>
+            <Typography>
+              Como <TextStrongBold>deletar</TextStrongBold> um quiz?
+            </Typography>
           </BarQuestion>
         </StyledAccordionSummary>
         <AccordionDetails>
@@ -88,7 +94,9 @@ const QuizFAQ = () => {
           id="panel-bh-header"
         >
           <BarQuestion>
-            <Typography>Como publicar um quiz?</Typography>
+            <Typography>
+              Como <TextStrongBold>publicar</TextStrongBold> um quiz?
+            </Typography>
           </BarQuestion>
         </StyledAccordionSummary>
         <AccordionDetails>
