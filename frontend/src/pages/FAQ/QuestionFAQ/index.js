@@ -2,29 +2,55 @@ import React from 'react';
 
 // COMPONENTS
 import { Accordion, AccordionDetails, Typography } from '@mui/material';
-import Tooltip from '@components/ToolTip';
 
 // ICONS
 import { ExpandMore } from '@mui/icons-material';
 
+// COMPONENTS
+import HowToCreate from './components/HowToCreate';
+import HowToUseLatex from './components/HowToUseLatex';
+
 // STYLES
 import { BarQuestion } from './style';
-import { StyledAccordionSummary } from '../style';
+import { StyledAccordionSummary, TextStrongBold } from '../style';
 
 const QuestionFAQ = () => {
   return (
-    <Accordion TransitionProps={{ unmountOnExit: true }}>
-      <StyledAccordionSummary
-        expandIcon={<ExpandMore />}
-        aria-controls="panel-bh-content"
-        id="panel-bh-header"
-      >
-        <BarQuestion>
-          <Typography>Como faço para criar uma questão?</Typography>
-        </BarQuestion>
-      </StyledAccordionSummary>
-      <AccordionDetails>teste</AccordionDetails>
-    </Accordion>
+    <>
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <BarQuestion>
+            <Typography>
+              Como faço para <TextStrongBold>criar</TextStrongBold> uma questão?
+            </Typography>
+          </BarQuestion>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <HowToCreate />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <BarQuestion>
+            <Typography>
+              Como usar <TextStrongBold>LaTex</TextStrongBold> nas questões?
+            </Typography>
+          </BarQuestion>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <HowToUseLatex />
+        </AccordionDetails>
+      </Accordion>
+    </>
   );
 };
 
