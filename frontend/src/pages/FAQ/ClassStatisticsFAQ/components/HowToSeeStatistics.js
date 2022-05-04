@@ -4,10 +4,8 @@ import React from 'react';
 import InitialScreen from '@assets/FAQ/TurmasFAQ/initial_screen.png';
 import MyClasses from '@assets/FAQ/TurmasFAQ/my_classes.png';
 import OpenManageClass from '@assets/FAQ/TurmasFAQ/HowToAppendQuiz/open_manage_class.png';
-
 import InitialPageManageClass from '@assets/FAQ/ClassStatisticsFAQ/HowToSeeStatistics/initial_page_manage_class.png';
 import ListStatisticsInClass from '@assets/FAQ/ClassStatisticsFAQ/HowToSeeStatistics/list_statistics_in_class.png';
-
 import OrderStatisticsClass from '@assets/FAQ/ClassStatisticsFAQ/HowToSeeStatistics/order_statistics_class.png';
 
 // STYLES

@@ -64,7 +64,7 @@ const MenuDrawer = () => {
 
   const SecondMenu = [
     {
-      text: 'FAQ',
+      text: 'Dúvidas Frequentes',
       icon: <Help />,
       to: FAQ,
     },

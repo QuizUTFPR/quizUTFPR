@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { CircularProgress, Typography, Box } from '@mui/material';
 
-const CircularProgressWithLabel = ({ value, styleText, ...props }) => {
+const CircularProgressWithLabel = forwardRef((props, ref) => {
+  const { value, styleText, ...rest } = props;
+
   let color = 'success';
   if (value < 50) {
     color = 'inherit';
@@ -13,10 +15,11 @@ const CircularProgressWithLabel = ({ value, styleText, ...props }) => {
   return (
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
       <CircularProgress
+        {...rest}
         value={value}
         variant="determinate"
         color={color}
-        {...props}
+        ref={ref}
       />
       <Box
         sx={{
@@ -41,7 +44,7 @@ const CircularProgressWithLabel = ({ value, styleText, ...props }) => {
       </Box>
     </Box>
   );
-};
+});
 
 CircularProgressWithLabel.defaultProps = {
   styleText: {},

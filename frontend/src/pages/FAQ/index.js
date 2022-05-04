@@ -61,7 +61,7 @@ const FAQ = () => {
       >
         <TitleWrapper>
           <TitlePage color="primary" component="p" variant="h4">
-            FAQ
+            Dúvidas Frequentes
           </TitlePage>
         </TitleWrapper>
       </Grid>

@@ -181,8 +181,8 @@ const AccordionWrapper = ({ quizData, pin }) => {
           />
 
           <QuizPercentageHitDescription>
-            O gráfico acima mostra a quantidade de alunos que atingiram
-            determinadas porcentagem de acerto. <br />
+            O gráfico acima mostra a quantidade de questões que atingiram
+            determinadas médias de porcentagem de acerto. <br />
             Compartilhe o PIN ({quiz.pin}) para mais alunos responderem seu
             quiz.
           </QuizPercentageHitDescription>
@@ -204,9 +204,16 @@ const AccordionWrapper = ({ quizData, pin }) => {
                 <Typography>
                   {index + 1}.{`  ${question.title}`}
                 </Typography>
-                <CircularProgressWithLabel
-                  value={parseInt(question.percentageOfHit, 10)}
-                />
+                <Tooltip
+                  placement="bottom"
+                  title="Média da porcentagem de acertos da questão."
+                >
+                  <div>
+                    <CircularProgressWithLabel
+                      value={parseInt(question.percentageOfHit, 10)}
+                    />
+                  </div>
+                </Tooltip>
               </BarQuestion>
             </StyledAccordionSummary>
             <AccordionDetails>
@@ -230,6 +237,7 @@ const AccordionWrapper = ({ quizData, pin }) => {
                   <TextTitleResumeOfQuestion>
                     Percentual de acerto
                   </TextTitleResumeOfQuestion>
+
                   <CircularProgressWithLabel
                     value={parseInt(question.percentageOfHit, 10)}
                   />
