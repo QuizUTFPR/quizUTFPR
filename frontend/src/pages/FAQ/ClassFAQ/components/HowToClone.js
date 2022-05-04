@@ -3,7 +3,8 @@ import React from 'react';
 // ASSETS
 import InitialScreen from '@assets/FAQ/TurmasFAQ/initial_screen.png';
 import MyClasses from '@assets/FAQ/TurmasFAQ/my_classes.png';
-import CreateClass from '@assets/FAQ/TurmasFAQ/HowToCreate/create_class.png';
+import ClickButtonCloneClass from '@assets/FAQ/TurmasFAQ/HowToClone/click_button_clone_class.png';
+import CloneClass from '@assets/FAQ/TurmasFAQ/HowToClone/clone_class.png';
 
 // STYLES
 import {
@@ -15,7 +16,7 @@ import {
   StyledFigureCaption,
 } from '../style';
 
-const HowToCreate = () => {
+const HowToClone = () => {
   return (
     <Wrapper>
       <StyledParagraph>
@@ -29,8 +30,8 @@ const HowToCreate = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, no canto superior direito da tela de turmas, clique no botão{' '}
-        <TextBold>{`"CRIAR TURMA"`}</TextBold>.
+        Feito isso, abra a seção onde se encontra a turma que deseja clonar
+        (pública ou privada).
       </StyledParagraph>
 
       <StyledFigure>
@@ -39,24 +40,31 @@ const HowToCreate = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, preencha as informações necessárias para a criação da turma.
-        Para adicionar a imagem, clique na área de adição da imagem ou apenas
-        arraste uma até tal área. Nome da Turma, descrição e visibilidade são
-        campos obrigatórios.
+        Feito isso, clique no ícone correspondente a ação de clonar turma.
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg src={CreateClass} alt="Tela de criação de turmas." />
-        <StyledFigureCaption>Tela de criação de turmas.</StyledFigureCaption>
+        <StyledImg src={ClickButtonCloneClass} alt="Botão de clonar Turma." />
+        <StyledFigureCaption>Botão de clonar Turma.</StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>
-        Preenchidas as informações necessárias, basta clicar no botão{' '}
-        <TextBold>{`"CRIAR TURMA"`}</TextBold> e pronto, sua Turma foi criada e
-        você será redirecionado(a) para a tela de gerenciamento de turmas.
+        Uma janela será aberta, possibilitando a alterações de informações da
+        Turma clonada.
+      </StyledParagraph>
+
+      <StyledFigure>
+        <StyledImg src={CloneClass} alt="Modal de clonar Turma." />
+        <StyledFigureCaption>Modal de clonar Turma.</StyledFigureCaption>
+      </StyledFigure>
+
+      <StyledParagraph>
+        Após preencher as informações necessárias, basta clicar no botão{' '}
+        <TextBold>{`"CLONAR TURMA"`}</TextBold> e pronto, sua Turma será
+        clonada.
       </StyledParagraph>
     </Wrapper>
   );
 };
 
-export default HowToCreate;
+export default HowToClone;

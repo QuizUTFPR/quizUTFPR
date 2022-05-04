@@ -3,7 +3,9 @@ import React from 'react';
 // ASSETS
 import InitialScreen from '@assets/FAQ/TurmasFAQ/initial_screen.png';
 import MyClasses from '@assets/FAQ/TurmasFAQ/my_classes.png';
-import CreateClass from '@assets/FAQ/TurmasFAQ/HowToCreate/create_class.png';
+import EditClass from '@assets/FAQ/TurmasFAQ/HowToEdit/edit_class.png';
+import ClickButtonDeleteClass from '@assets/FAQ/TurmasFAQ/HowToDelete/click_button_delete_class.png';
+import OpenModalDeleteClass from '@assets/FAQ/TurmasFAQ/HowToDelete/modal_remove_class.png';
 
 // STYLES
 import {
@@ -15,7 +17,7 @@ import {
   StyledFigureCaption,
 } from '../style';
 
-const HowToCreate = () => {
+const HowToDelete = () => {
   return (
     <Wrapper>
       <StyledParagraph>
@@ -29,8 +31,8 @@ const HowToCreate = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, no canto superior direito da tela de turmas, clique no botão{' '}
-        <TextBold>{`"CRIAR TURMA"`}</TextBold>.
+        Feito isso, abra a seção onde se encontra a turma que deseja remover
+        (pública ou privada).
       </StyledParagraph>
 
       <StyledFigure>
@@ -39,24 +41,31 @@ const HowToCreate = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, preencha as informações necessárias para a criação da turma.
-        Para adicionar a imagem, clique na área de adição da imagem ou apenas
-        arraste uma até tal área. Nome da Turma, descrição e visibilidade são
-        campos obrigatórios.
+        Feito isso, clique no ícone correspondente a remoção da turma.
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg src={CreateClass} alt="Tela de criação de turmas." />
-        <StyledFigureCaption>Tela de criação de turmas.</StyledFigureCaption>
+        <StyledImg
+          src={ClickButtonDeleteClass}
+          alt="Botão de remoção da Turma."
+        />
+        <StyledFigureCaption>Botão de remoção da Turma.</StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>
-        Preenchidas as informações necessárias, basta clicar no botão{' '}
-        <TextBold>{`"CRIAR TURMA"`}</TextBold> e pronto, sua Turma foi criada e
-        você será redirecionado(a) para a tela de gerenciamento de turmas.
+        Uma janela será aberta, possibilitando a confirmação da remoção ou o
+        cancelamento da ação.
       </StyledParagraph>
+
+      <StyledFigure>
+        <StyledImg
+          src={OpenModalDeleteClass}
+          alt="Modal de remoção da Turma."
+        />
+        <StyledFigureCaption>Modal de remoção da Turma.</StyledFigureCaption>
+      </StyledFigure>
     </Wrapper>
   );
 };
 
-export default HowToCreate;
+export default HowToDelete;

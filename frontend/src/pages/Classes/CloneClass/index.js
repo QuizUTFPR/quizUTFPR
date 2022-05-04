@@ -153,7 +153,7 @@ const CloneClass = forwardRef((props, _) => {
             color="primary"
             type="submit"
           >
-            SALVAR CLONE
+            CLONAR TURMA
           </Button>
         </Grid>
       </FormWrapper>
