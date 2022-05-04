@@ -113,8 +113,8 @@ const QuestionFAQ = () => {
         >
           <AccordionGrid>
             <Typography>
-              Como faço para <TextStrongBold>anexar quizzes</TextStrongBold> em
-              uma Turma?
+              Como faço para <TextStrongBold>vincular quizzes</TextStrongBold>{' '}
+              em uma Turma?
             </Typography>
           </AccordionGrid>
         </StyledAccordionSummary>

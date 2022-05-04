@@ -99,7 +99,7 @@ const QuizzesOfClass = () => {
               onClick={toogleModal}
               loading={false}
             >
-              Anexar Quiz
+              Vincular Quiz
             </StyledButton>
           </HeaderWrapper>
           <Divider />
@@ -143,7 +143,11 @@ const QuizzesOfClass = () => {
                           <BarChart />
                         </StyledIconButton>
                       </Tooltip>
-                      <Tooltip arrow ariaLabel="deletar" title="Deletar">
+                      <Tooltip
+                        arrow
+                        ariaLabel="deletar"
+                        title="Desvincular Quiz"
+                      >
                         <StyledIconButton
                           onClick={() => handleOpenModelDettachQuiz(quiz.id)}
                         >
@@ -162,7 +166,7 @@ const QuizzesOfClass = () => {
       <Modal
         open={visibilityModal}
         handleClose={toogleModal}
-        modalTitle="Anexar Quizzes"
+        modalTitle="Vincular Quizzes"
         modalDescription="Adicione quizzes em sua turma..."
       >
         <ModalGetAvailableQuizzes

@@ -32,7 +32,7 @@ const HowToAppendQuiz = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, abra a seção onde se encontra a turma que deseja anexar
+        Feito isso, abra a seção onde se encontra a turma que deseja vincular
         quizzes (pública ou privada).
       </StyledParagraph>
 
@@ -53,7 +53,7 @@ const HowToAppendQuiz = () => {
 
       <StyledParagraph>
         Uma página será aberta, possibilitando o gerenciamento da Turma. Para
-        anexar novos quizzes a turma, clique em{' '}
+        vincular novos quizzes a turma, clique em{' '}
         <TextBold>{`"Quizzes"`}</TextBold>.
       </StyledParagraph>
 
@@ -69,8 +69,8 @@ const HowToAppendQuiz = () => {
 
       <StyledParagraph>
         Após isso, uma nova página será mostrada, contendo todos os quizzes já
-        anexados em sua Turma. Para anexar um novo quiz, clique em
-        <TextBold>{` "ANEXAR QUIZ"`}</TextBold>.
+        anexados em sua Turma. Para vincular um novo quiz, clique em
+        <TextBold>{` "VINCULAR QUIZ"`}</TextBold>.
       </StyledParagraph>
 
       <StyledFigure>
@@ -85,18 +85,18 @@ const HowToAppendQuiz = () => {
 
       <StyledParagraph>
         Após isso, uma janela será aberta contendo todos os seus quizzes
-        públicados. Para anexar quizzes, basta clicar em cima do mesmo.
+        públicados. Para vincular quizzes, basta clicar em cima do mesmo.
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg src={ModalAppendQuiz} alt="Modal para anexar quizzes." />
+        <StyledImg src={ModalAppendQuiz} alt="Modal para vincular quizzes." />
         <StyledFigureCaption>
-          Modal para anexar quizzes na Turma.
+          Modal para vincular quizzes na Turma.
         </StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>
-        Após isso, os quizzes selecionados já estarão anexados em sua Turma.
+        Após isso, os quizzes selecionados já estarão vinculados em sua Turma.
       </StyledParagraph>
     </Wrapper>
   );
