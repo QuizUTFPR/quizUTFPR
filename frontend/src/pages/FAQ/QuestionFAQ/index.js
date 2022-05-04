@@ -11,6 +11,7 @@ import HowToCreate from './components/HowToCreate';
 import HowToUseLatex from './components/HowToUseLatex';
 import GeneralInfo from './components/GeneralInfo';
 import HowToChangeOrder from './components/HowToChangeOrder';
+import HowToImportSheet from './components/HowToImportSheet';
 
 // STYLES
 import { BarQuestion } from './style';
@@ -65,6 +66,24 @@ const QuestionFAQ = () => {
         </StyledAccordionSummary>
         <AccordionDetails>
           <HowToUseLatex />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <BarQuestion>
+            <Typography>
+              Como criar novas questões baseadas em uma{' '}
+              <TextStrongBold> planilha de questões</TextStrongBold>?
+            </Typography>
+          </BarQuestion>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <HowToImportSheet />
         </AccordionDetails>
       </Accordion>
 
