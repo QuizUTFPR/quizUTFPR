@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Divider } from '@mui/material';
+import { Divider } from '@mui/material';
 
 // STYLES
 import { StyledTypography, TextStrongBold } from '../../style';

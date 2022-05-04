@@ -10,6 +10,9 @@ import { ExpandMore } from '@mui/icons-material';
 import HowToCreate from './components/HowToCreate';
 import HowToUseLatex from './components/HowToUseLatex';
 import HowToUseQuestionDatabase from './components/HowToUseQuestionDatabase';
+import GeneralInfo from './components/GeneralInfo';
+import HowToChangeOrder from './components/HowToChangeOrder';
+import HowToImportSheet from './components/HowToImportSheet';
 
 // STYLES
 import { BarQuestion } from './style';
@@ -18,6 +21,21 @@ import { StyledAccordionSummary, TextStrongBold } from '../style';
 const QuestionFAQ = () => {
   return (
     <>
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <BarQuestion>
+            <Typography>Informações gerais</Typography>
+          </BarQuestion>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <GeneralInfo />
+        </AccordionDetails>
+      </Accordion>
+
       <Accordion TransitionProps={{ unmountOnExit: true }}>
         <StyledAccordionSummary
           expandIcon={<ExpandMore />}
@@ -67,6 +85,41 @@ const QuestionFAQ = () => {
         </StyledAccordionSummary>
         <AccordionDetails>
           <HowToUseQuestionDatabase />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <BarQuestion>
+            <Typography>
+              Como criar novas questões baseadas em uma{' '}
+              <TextStrongBold> planilha de questões</TextStrongBold>?
+            </Typography>
+          </BarQuestion>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <HowToImportSheet />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <BarQuestion>
+            <Typography>
+              Como <TextStrongBold>mudar a ordem</TextStrongBold> das questões?
+            </Typography>
+          </BarQuestion>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <HowToChangeOrder />
         </AccordionDetails>
       </Accordion>
     </>
