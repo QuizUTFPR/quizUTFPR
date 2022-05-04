@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material';
 import React from 'react';
+import { Typography, Divider } from '@mui/material';
 
 // STYLES
 import { StyledTypography } from '../style';
@@ -15,6 +15,8 @@ const GeneralInfo = () => {
         privados.
       </p>
 
+      <Divider style={{ margin: '20px 0' }} />
+
       <StyledTypography>O que é um Quiz Privado?</StyledTypography>
       <p>
         Um quiz privado é aquele que não será exibido nas listagens de quizzes
@@ -23,12 +25,16 @@ const GeneralInfo = () => {
         respeito de quem está respondendo um determinado quiz.
       </p>
 
+      <Divider style={{ margin: '20px 0' }} />
+
       <StyledTypography>O que é um Quiz Público?</StyledTypography>
       <p>
         Um quiz público é aquele que pode ser listado para os alunos. Qualquer
         aluno pode vê-lo, acessá-lo e respondê-lo sem a necessidade de saber o
         PIN do mesmo.
       </p>
+
+      <Divider style={{ margin: '20px 0' }} />
 
       <StyledTypography>O que é uma Tag do Quiz?</StyledTypography>
       <p>
@@ -37,6 +43,8 @@ const GeneralInfo = () => {
         um determinado assunto. Ela funciona como uma palavra-chave que fornece
         um contexto para o quiz que a possui.
       </p>
+
+      <Divider style={{ margin: '20px 0' }} />
 
       <StyledTypography>
         O que é o Limite de tempo para as respostas?

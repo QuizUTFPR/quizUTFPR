@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material';
 import React from 'react';
+import { Typography, Divider } from '@mui/material';
 
 // STYLES
 import { StyledTypography, TextStrongBold } from '../../style';
@@ -17,6 +17,8 @@ const GeneralInfo = () => {
         </TextStrongBold>
       </p>
 
+      <Divider style={{ margin: '20px 0' }} />
+
       <StyledTypography>O que é uma Turma Privada?</StyledTypography>
       <p>
         Uma turma privada é aquela que não será exibida nas listagens de turmas
@@ -25,12 +27,16 @@ const GeneralInfo = () => {
         respeito de quem está realizando inscrições em suas turmas.
       </p>
 
+      <Divider style={{ margin: '20px 0' }} />
+
       <StyledTypography>O que é uma Turma Pública?</StyledTypography>
       <p>
         Uma turma pública é aquela que pode ser listada para os alunos. Qualquer
         aluno pode vê-la, acessá-la e inscrever-se na mesma, sem a necessidade
         de saber o seu PIN.
       </p>
+
+      <Divider style={{ margin: '20px 0' }} />
 
       <StyledTypography>O que é a função de clonar Turma?</StyledTypography>
       <p>

@@ -1,5 +1,5 @@
-import { Typography } from '@mui/material';
 import React from 'react';
+import { Divider } from '@mui/material';
 
 // ASSETS
 import OrderStatisticsClass from '@assets/FAQ/ClassStatisticsFAQ/HowToSeeStatistics/order_statistics_class.png';
@@ -22,6 +22,8 @@ const GeneralInfo = () => {
         processo de resposta dos alunos em relação aos quizzes anexados em sua
         turma.
       </p>
+
+      <Divider style={{ margin: '20px 0' }} />
 
       <StyledTypography>
         Quais são as formas de ordenação das estatísticas?
