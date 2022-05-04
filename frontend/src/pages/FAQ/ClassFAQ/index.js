@@ -17,6 +17,7 @@ import HowToCreate from './components/HowToCreate';
 import HowToEdit from './components/HowToEdit';
 import HowToClone from './components/HowToClone';
 import HowToAppendQuiz from './components/HowToAppendQuiz';
+import HowToDelete from './components/HowToDelete';
 
 const QuestionFAQ = () => {
   return (
@@ -84,6 +85,23 @@ const QuestionFAQ = () => {
         </StyledAccordionSummary>
         <AccordionDetails>
           <HowToClone />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <AccordionGrid>
+            <Typography>
+              Como faço para <TextStrongBold>remover</TextStrongBold> uma Turma?
+            </Typography>
+          </AccordionGrid>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <HowToDelete />
         </AccordionDetails>
       </Accordion>
 
