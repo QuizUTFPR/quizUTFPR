@@ -24,7 +24,7 @@ const GeneralInfo = () => {
       </p>
 
       <StyledTypography>
-        Quais são as formas de ordenação para a listagem?
+        Quais são as formas de ordenação das estatísticas?
       </StyledTypography>
 
       <StyledFigure>
