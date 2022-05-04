@@ -1,7 +1,6 @@
 import React from 'react';
 
-import GeneralKnowledge from '@assets/FAQ/QuestionFAQ/HowToCreate/general_knowledge.png';
-import Latex from '@assets/FAQ/QuestionFAQ/HowToCreate/latex.png';
+import Latex from '@assets/FAQ/QuestionFAQ/latex.png';
 
 // STYLES
 import {
@@ -20,8 +19,8 @@ const HowToUseLatex = () => {
       <StyledParagraph>
         É possível utilzar LaTex na criação das questões, o que pode ser
         interessante para inserção de notações matemáticas. Para tanto, basta
-        adicionar <TextStrongBold>$$</TextStrongBold> no campo em que se deseja
-        adicionar o LaTex.
+        adicionar <TextStrongBold>$$</TextStrongBold> e escrever entre os dois
+        caraceteres no campo em que se deseja adicionar o LaTex.
       </StyledParagraph>
 
       <StyledFigure>

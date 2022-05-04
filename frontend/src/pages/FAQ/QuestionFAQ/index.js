@@ -9,6 +9,7 @@ import { ExpandMore } from '@mui/icons-material';
 // COMPONENTS
 import HowToCreate from './components/HowToCreate';
 import HowToUseLatex from './components/HowToUseLatex';
+import HowToUseQuestionDatabase from './components/HowToUseQuestionDatabase';
 
 // STYLES
 import { BarQuestion } from './style';
@@ -48,6 +49,24 @@ const QuestionFAQ = () => {
         </StyledAccordionSummary>
         <AccordionDetails>
           <HowToUseLatex />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <BarQuestion>
+            <Typography>
+              Como <TextStrongBold>adicionar</TextStrongBold> uma questão do{' '}
+              <TextStrongBold>banco de questões</TextStrongBold>?
+            </Typography>
+          </BarQuestion>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <HowToUseQuestionDatabase />
         </AccordionDetails>
       </Accordion>
     </>

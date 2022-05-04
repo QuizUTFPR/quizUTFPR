@@ -1,9 +1,9 @@
 import React from 'react';
 
-import GeneralKnowledge from '@assets/FAQ/QuestionFAQ/HowToCreate/general_knowledge.png';
-import Example from '@assets/FAQ/QuestionFAQ/HowToCreate/example.png';
-import Save from '@assets/FAQ/QuestionFAQ/HowToCreate/save.png';
-import Adding from '@assets/FAQ/QuestionFAQ/HowToCreate/adding.png';
+import GeneralKnowledge from '@assets/FAQ/QuestionFAQ/general_knowledge.png';
+import Example from '@assets/FAQ/QuestionFAQ/example.png';
+import Save from '@assets/FAQ/QuestionFAQ/save.png';
+import Adding from '@assets/FAQ/QuestionFAQ/adding.png';
 
 // STYLES
 import {
