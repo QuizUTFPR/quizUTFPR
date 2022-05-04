@@ -14,7 +14,7 @@ import {
   StyledParagraph,
   StyledFigure,
   StyledFigureCaption,
-} from '../style';
+} from '../../style';
 
 const HowToClone = () => {
   return (

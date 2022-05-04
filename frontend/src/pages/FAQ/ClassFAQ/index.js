@@ -8,8 +8,11 @@ import Tooltip from '@components/ToolTip';
 import { ExpandMore } from '@mui/icons-material';
 
 // STYLES
-import { AccordionGrid, TextStrongBold } from './style';
-import { StyledAccordionSummary } from '../style';
+import {
+  AccordionGrid,
+  TextStrongBold,
+  StyledAccordionSummary,
+} from '../style';
 
 // COMPONENTS
 import GeneralInfo from './components/GeneralInfo';
