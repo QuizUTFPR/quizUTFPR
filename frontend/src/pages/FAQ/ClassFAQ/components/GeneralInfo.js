@@ -22,7 +22,7 @@ const GeneralInfo = () => {
         Uma turma privada é aquela que não será exibida nas listagens de turmas
         disponíveis para o aluno. Ela só pode ser acessada através do seu PIN.
         Isso é feito caso o professor queira ter um pouco mais de controle a
-        respeito de quem está se inscrevendo em suas turmas.
+        respeito de quem está realizando inscrições em suas turmas.
       </p>
 
       <StyledTypography>O que é uma Turma Pública?</StyledTypography>
@@ -30,6 +30,13 @@ const GeneralInfo = () => {
         Uma turma pública é aquela que pode ser listada para os alunos. Qualquer
         aluno pode vê-la, acessá-la e inscrever-se na mesma, sem a necessidade
         de saber o seu PIN.
+      </p>
+
+      <StyledTypography>O que é a função de clonar Turma?</StyledTypography>
+      <p>
+        A função de clonar turmas é uma forma do professor reaproveitar quizzes
+        associados a uma turma já existente, sem a necessidade de realizar todo
+        o processo de anexar quizzes a turmas novamente.
       </p>
     </>
   );
