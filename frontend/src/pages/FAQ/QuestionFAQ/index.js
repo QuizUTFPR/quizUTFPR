@@ -9,6 +9,7 @@ import { ExpandMore } from '@mui/icons-material';
 // COMPONENTS
 import HowToCreate from './components/HowToCreate';
 import HowToUseLatex from './components/HowToUseLatex';
+import GeneralInfo from './components/GeneralInfo';
 
 // STYLES
 import { BarQuestion } from './style';
@@ -17,6 +18,21 @@ import { StyledAccordionSummary, TextStrongBold } from '../style';
 const QuestionFAQ = () => {
   return (
     <>
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <BarQuestion>
+            <Typography>Informações gerais</Typography>
+          </BarQuestion>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <GeneralInfo />
+        </AccordionDetails>
+      </Accordion>
+
       <Accordion TransitionProps={{ unmountOnExit: true }}>
         <StyledAccordionSummary
           expandIcon={<ExpandMore />}
