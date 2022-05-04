@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import React from 'react';
 
 // STYLES
-import { StyledTypography, TextStrongBold } from '../style';
+import { StyledTypography, TextStrongBold } from '../../style';
 
 const GeneralInfo = () => {
   return (

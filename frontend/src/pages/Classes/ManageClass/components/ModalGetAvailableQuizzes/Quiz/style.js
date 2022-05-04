@@ -36,6 +36,7 @@ export const CheckBox = styled.input.attrs({
 export const ImageQuiz = styled.img`
   width: 220px;
   border-radius: 8px 0 0 8px;
+  height: 100%;
 `;
 
 export const EmptyImage = styled.div`

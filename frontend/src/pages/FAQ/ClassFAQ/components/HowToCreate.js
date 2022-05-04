@@ -13,7 +13,7 @@ import {
   StyledParagraph,
   StyledFigure,
   StyledFigureCaption,
-} from '../style';
+} from '../../style';
 
 const HowToCreate = () => {
   return (

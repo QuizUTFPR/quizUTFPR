@@ -132,7 +132,7 @@ const ModalGetAvailableQuizzes = forwardRef((props, _) => {
 
           <Grid item xs={9} md={11}>
             <Typography variant="h5" color="primary">
-              Anexar Quizzes
+              Vincular Quizzes
             </Typography>
           </Grid>
         </Grid>

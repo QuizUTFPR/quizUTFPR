@@ -15,7 +15,7 @@ import {
   StyledParagraph,
   StyledFigure,
   StyledFigureCaption,
-} from '../style';
+} from '../../style';
 
 const HowToDelete = () => {
   return (

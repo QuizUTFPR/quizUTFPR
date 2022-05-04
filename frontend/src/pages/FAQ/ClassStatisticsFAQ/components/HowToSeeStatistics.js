@@ -4,9 +4,11 @@ import React from 'react';
 import InitialScreen from '@assets/FAQ/TurmasFAQ/initial_screen.png';
 import MyClasses from '@assets/FAQ/TurmasFAQ/my_classes.png';
 import OpenManageClass from '@assets/FAQ/TurmasFAQ/HowToAppendQuiz/open_manage_class.png';
-import InitialPageManageClass from '@assets/FAQ/TurmasFAQ/HowToAppendQuiz/initial_page_manage_class.png';
-import ListQuizInClass from '@assets/FAQ/TurmasFAQ/HowToAppendQuiz/list_quiz_in_class.png';
-import ModalAppendQuiz from '@assets/FAQ/TurmasFAQ/HowToAppendQuiz/modal_append_quiz.png';
+
+import InitialPageManageClass from '@assets/FAQ/ClassStatisticsFAQ/HowToSeeStatistics/initial_page_manage_class.png';
+import ListStatisticsInClass from '@assets/FAQ/ClassStatisticsFAQ/HowToSeeStatistics/list_statistics_in_class.png';
+
+import OrderStatisticsClass from '@assets/FAQ/ClassStatisticsFAQ/HowToSeeStatistics/order_statistics_class.png';
 
 // STYLES
 import {
@@ -18,7 +20,7 @@ import {
   StyledFigureCaption,
 } from '../../style';
 
-const HowToAppendQuiz = () => {
+const HowToSeeStatistics = () => {
   return (
     <Wrapper>
       <StyledParagraph>
@@ -54,7 +56,7 @@ const HowToAppendQuiz = () => {
       <StyledParagraph>
         Uma página será aberta, possibilitando o gerenciamento da Turma. Para
         vincular novos quizzes a turma, clique em{' '}
-        <TextBold>{`"Quizzes"`}</TextBold>.
+        <TextBold>{`"Estatística"`}</TextBold>.
       </StyledParagraph>
 
       <StyledFigure>
@@ -68,38 +70,37 @@ const HowToAppendQuiz = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Após isso, uma nova página será mostrada, contendo todos os quizzes já
-        anexados em sua Turma. Para vincular um novo quiz, clique em
-        <TextBold>{` "VINCULAR QUIZ"`}</TextBold>.
+        Após isso, uma nova página será mostrada, contendo informações sobre as
+        respostas dos alunos em relação a todos os quizzes vinculados na Turma.
       </StyledParagraph>
 
       <StyledFigure>
         <StyledImg
-          src={ListQuizInClass}
-          alt="Tela de gerenciamento de Turmas."
+          src={ListStatisticsInClass}
+          alt="Tela de estatísticas de Turmas."
         />
         <StyledFigureCaption>
-          Tela de gerenciamento de Turmas.
+          Tela de estatísticas de Turmas.
         </StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>
-        Após isso, uma janela será aberta contendo todos os seus quizzes
-        públicados. Para vincular quizzes, basta clicar em cima do mesmo.
+        Existe a possibilitade de mudar a listagem exibida na tela mostrada.
+        Para isso, utilizamos o campo <TextBold>{`"Ordenar por" `}</TextBold>
+        para selecionar a forma de ordenação:
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg src={ModalAppendQuiz} alt="Modal para vincular quizzes." />
+        <StyledImg
+          src={OrderStatisticsClass}
+          alt="Ordenar estatísticas de Turmas."
+        />
         <StyledFigureCaption>
-          Modal para vincular quizzes na Turma.
+          Ordenar estatísticas de Turmas.
         </StyledFigureCaption>
       </StyledFigure>
-
-      <StyledParagraph>
-        Após isso, os quizzes selecionados já estarão vinculados em sua Turma.
-      </StyledParagraph>
     </Wrapper>
   );
 };
 
-export default HowToAppendQuiz;
+export default HowToSeeStatistics;
