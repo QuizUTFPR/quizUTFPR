@@ -82,6 +82,7 @@ class LDAPStudentSessionService {
     });
 
     const token = await GenerateTokenProvider.execute(id);
+    console.log('\n\nSTUDENT TOKEN\n\n', token);
     const refreshToken = await GenerateRefreshTokenProvider.execute(id);
 
     return {
