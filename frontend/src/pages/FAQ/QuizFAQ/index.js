@@ -17,6 +17,7 @@ import HowToCreate from './components/HowToCreate';
 import HowToEdit from './components/HowToEdit';
 import HowToDelete from './components/HowToDelete';
 import HowToPublish from './components/HowToPublish';
+import HowStudentAccessQuizViaPin from './components/HowStudentAccessQuizViaPin';
 
 const QuizFAQ = () => {
   return (
@@ -101,6 +102,23 @@ const QuizFAQ = () => {
         </StyledAccordionSummary>
         <AccordionDetails>
           <HowToPublish />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <BarQuestion>
+            <Typography>
+              Como os alunos os alunos acessam o quiz via PIN?
+            </Typography>
+          </BarQuestion>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <HowStudentAccessQuizViaPin />
         </AccordionDetails>
       </Accordion>
     </>
