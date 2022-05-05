@@ -20,7 +20,7 @@ const QuestionAnalyses = () => {
   return (
     <Wrapper>
       <StyledParagraph>
-        O gráfico mostrado nesta página é uma forma visual de mostrar a
+        O gráfico apresentado nesta página é uma forma visual de mostrar a
         quantidade de questões que atingiram determinadas médias de porcentagem
         de acerto. Com isso o professor consegue ter noção de quais questões
         estão sendo mais (ou menos) acertadas pelos alunos.

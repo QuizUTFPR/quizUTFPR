@@ -17,16 +17,16 @@ const HowToUseLatex = () => {
   return (
     <Wrapper>
       <StyledParagraph>
-        É possível utilzar LaTex na criação das questões, o que pode ser
+        É possível utilzar LaTeX na criação das questões, o que pode ser
         interessante para inserção de notações matemáticas. Para tanto, basta
         adicionar <TextStrongBold>$$</TextStrongBold> e escrever entre os dois
-        caraceteres no campo em que se deseja adicionar o LaTex.
+        caraceteres no campo em que se deseja adicionar o LaTeX.
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg src={Latex} alt="Usando LaTex para criação de questão." />
+        <StyledImg src={Latex} alt="Usando LaTeX para criação de questão." />
         <StyledFigureCaption>
-          Usando LaTex para criação de questão.
+          Usando LaTeX para criação de questão.
         </StyledFigureCaption>
       </StyledFigure>
     </Wrapper>

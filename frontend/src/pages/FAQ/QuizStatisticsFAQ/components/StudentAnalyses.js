@@ -20,7 +20,7 @@ const StudentAnalyses = () => {
   return (
     <Wrapper>
       <StyledParagraph>
-        O gráfico mostrado nesta página é uma forma visual de mostrar a
+        O gráfico apresentado nesta página é uma forma visual de mostrar a
         quantidade de alunos que atingiram determinadas porcentagem de acerto
         para o quiz. Com isso o professor consegue ter noção se os alunos estão
         bem (ou mal) no processo resposta do quiz.

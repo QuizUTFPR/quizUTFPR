@@ -21,8 +21,8 @@ const HowToImportSheet = () => {
   return (
     <Wrapper>
       <StyledParagraph>
-        É possível utilzar preencher uma planilha eletrônica para a criação de
-        novas questões do Quiz.
+        É possível utilizar uma planilha eletrônica para a criação de novas
+        questões do Quiz.
       </StyledParagraph>
 
       <StyledParagraph
@@ -31,15 +31,16 @@ const HowToImportSheet = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Para realizar o download do modelo de planilha eletrônica para criação
-        de questões clique qui.
+        Para realizar o download do modelo de planilha eletrônica, para a
+        criação de questões, clique aqui.
       </StyledParagraph>
 
       <Divider style={{ margin: '20px 0', width: '100%' }} />
 
       <StyledParagraph>
-        Para realizar a importação, primeiramente clique no botão criar presente
-        no canto inferior esquerda da tela de gerenciamento de questões do quiz.
+        Para realizar a importação, primeiramente clique no botão{' '}
+        <TextStrongBold>{`"CRIAR"`}</TextStrongBold> presente no canto inferior
+        esquerda da tela de gerenciamento de questões do quiz.
       </StyledParagraph>
 
       <StyledFigure>

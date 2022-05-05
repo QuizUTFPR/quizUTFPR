@@ -61,7 +61,7 @@ const QuestionFAQ = () => {
         >
           <BarQuestion>
             <Typography>
-              Como usar <TextStrongBold>LaTex</TextStrongBold> nas questões?
+              Como usar <TextStrongBold>LaTeX</TextStrongBold> nas questões?
             </Typography>
           </BarQuestion>
         </StyledAccordionSummary>

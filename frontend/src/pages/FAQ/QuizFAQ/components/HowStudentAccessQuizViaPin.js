@@ -20,7 +20,7 @@ const HowStudentAccessQuizViaPin = () => {
   return (
     <Wrapper>
       <StyledParagraph>
-        Primeiramente, obtenha o pin do Quiz na tela de listagem de Quizzes.
+        Primeiramente, obtenha o PIN do Quiz na tela de listagem de Quizzes.
         Observe na Figura abaixo a localização do PIN do Quiz alvo.
       </StyledParagraph>
 
@@ -31,7 +31,7 @@ const HowStudentAccessQuizViaPin = () => {
 
       <StyledParagraph>
         Desta forma, o professor deverá repassar aos alunos o PIN do quiz para o
-        mesmo inserir na tela <TextBold>{`"HOME"`}</TextBold> do aplicativo.
+        mesmo inserir na tela <TextBold>{`"Início"`}</TextBold> do aplicativo.
       </StyledParagraph>
 
       <StyledFigure>
@@ -40,8 +40,8 @@ const HowStudentAccessQuizViaPin = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        O aluno com o PIN em mãos deverá inserir o mesmo no campo de busca de
-        Quizzes por PIN
+        O aluno com o PIN em mãos, deverá inserir o mesmo no campo de busca de
+        Quizzes por PIN.
       </StyledParagraph>
 
       <StyledFigure>

@@ -21,6 +21,7 @@ import HowToEdit from './components/HowToEdit';
 import HowToClone from './components/HowToClone';
 import HowToAppendQuiz from './components/HowToAppendQuiz';
 import HowToDelete from './components/HowToDelete';
+import HowStudentAccessClassViaPin from './components/HowStudentAccessClassViaPin';
 
 const QuestionFAQ = () => {
   return (
@@ -123,6 +124,23 @@ const QuestionFAQ = () => {
         </StyledAccordionSummary>
         <AccordionDetails>
           <HowToAppendQuiz />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMore />}
+          aria-controls="panel-bh-content"
+          id="panel-bh-header"
+        >
+          <AccordionGrid>
+            <Typography>
+              Como os alunos se inscrevem em turmas via PIN?
+            </Typography>
+          </AccordionGrid>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <HowStudentAccessClassViaPin />
         </AccordionDetails>
       </Accordion>
     </>
