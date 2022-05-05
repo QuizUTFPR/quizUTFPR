@@ -62,8 +62,6 @@ class GetAllQuizzesFromClassService {
       })
     );
 
-    console.log('verifyingFavoriteQuizzes', verifyingFavoriteQuizzes);
-
     return verifyingFavoriteQuizzes;
   }
 }

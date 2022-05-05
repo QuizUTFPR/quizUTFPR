@@ -42,7 +42,7 @@ router.post(
 router.delete('/delete', ClassController.destroy);
 
 // TEACHER REALATION
-router.get('/getAllTeacherClasses', ClassTeacherController.index);
+router.post('/getAllTeacherClasses', ClassTeacherController.index);
 
 // STUDENT RELATION
 router.post('/attachStudent', ClassStudentController.store);

@@ -61,7 +61,7 @@ const MyClasses = () => {
 
   const getClasses = async () => {
     try {
-      const { data, status } = await api.get('/class/getAllTeacherClasses');
+      const { data, status } = await api.post('/class/getAllTeacherClasses');
 
       if (status !== 200) setClasses(false);
 

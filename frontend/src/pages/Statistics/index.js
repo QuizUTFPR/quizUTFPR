@@ -29,7 +29,9 @@ const Statistics = () => {
 
   const handleGetTeacherClasses = async () => {
     try {
-      const { data } = await api.get('/class/getAllTeacherClasses');
+      const { data } = await api.post('/class/getAllTeacherClasses', {
+        quizId: id,
+      });
 
       setTeacherClasses([...data.private, ...data.public]);
     } catch (error) {

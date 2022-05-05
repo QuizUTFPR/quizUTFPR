@@ -17,8 +17,6 @@ class GetFavoriteStudentQuizService {
     const { page } = data || false;
     const { limit } = data || 3;
 
-    console.log('studentId', studentId);
-
     const favorites = await this.favoriteStudentQuizRepository.findAll({
       where: {
         studentId,

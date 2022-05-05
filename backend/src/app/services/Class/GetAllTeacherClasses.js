@@ -9,7 +9,7 @@ class GetAllTeacherClasses {
   }
 
   async execute(data) {
-    const { idTeacher } = data;
+    const { idTeacher, quizId } = data;
 
     const classes = await this.classRepository.findAll({
       where: {
@@ -37,11 +37,25 @@ class GetAllTeacherClasses {
       private: [],
     };
 
-    classes.forEach((item) => {
-      const { visibility } = item;
+    await Promise.all(
+      classes.map(async (item) => {
+        const { visibility } = item;
 
-      returnedClasses[visibility].push(item);
-    });
+        let countQuizzes;
+
+        if (quizId) {
+          countQuizzes = await this.classRepository.getCountClassQuizzes(item, {
+            where: {
+              id: quizId,
+            },
+          });
+
+          if (countQuizzes > 0) returnedClasses[visibility].push(item);
+        } else {
+          returnedClasses[visibility].push(item);
+        }
+      })
+    );
 
     return returnedClasses;
   }
