@@ -22,7 +22,7 @@ const HowStudentAccessClassViaPin = () => {
   return (
     <Wrapper>
       <StyledParagraph>
-        Primeiramente, obtenha o pin da Turma na tela de listagem de Turmas.
+        Primeiramente, obtenha o PIN da Turma na tela de listagem de Turmas.
         Observe na Figura abaixo a localização do PIN da Turma alvo.
       </StyledParagraph>
 

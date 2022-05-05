@@ -63,7 +63,7 @@ const GeneralInfo = () => {
 
       <p>
         <TextBold>Disponível no Banco de Questões: </TextBold> usado para
-        informar que aquela questão poderá reutilizada em outros quizzes, ou
+        informar que aquela questão poderá ser reutilizada em outros quizzes, ou
         seja, a mesma estará presente no banco de questões..
       </p>
     </>
