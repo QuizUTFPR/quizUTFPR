@@ -28,7 +28,7 @@ class GetAllTeacherClasses {
     if (!classes.length) {
       const error = new Error();
       error.status = 404;
-      error.response = 'Não existe nenhum turma cadastrado.';
+      error.response = 'Não existe nenhuma turma cadastrada.';
       throw error;
     }
 

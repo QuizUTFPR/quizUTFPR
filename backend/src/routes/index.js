@@ -25,6 +25,7 @@ import ClassStudentController from '../app/controllers/ClassController/ClassStud
 
 // MIDDLEWARES
 import verifyJWT from '../app/middlewares/jwtVerify';
+import isTeacherVerify from '../app/middlewares/isTeacherVerify';
 
 // Crio uma instância do método Router;
 const router = new Router();
@@ -34,12 +35,12 @@ router.use('/student', Student);
 
 router.use('/studentQuiz', verifyJWT, StudentQuiz);
 router.use('/publishedQuiz', verifyJWT, PublishedQuiz);
-router.use('/quiz', verifyJWT, QuizDashboard);
+router.use('/quiz', isTeacherVerify, QuizDashboard);
 router.use('/quiz', verifyJWT, QuizMobile);
-router.use('/question', verifyJWT, Question);
-router.use('/tag', verifyJWT, Tag);
-router.use('/statistics', verifyJWT, Statistics);
-router.use('/class', verifyJWT, Classes);
+router.use('/question', isTeacherVerify, Question);
+router.use('/tag', isTeacherVerify, Tag);
+router.use('/statistics', isTeacherVerify, Statistics);
+router.use('/class', isTeacherVerify, Classes);
 router.use('/class', verifyJWT, ClassesMobile);
 router.use('/feedback', verifyJWT, FeedbackMobile);
 router.use('/ranking', verifyJWT, RankingMobile);
