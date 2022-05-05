@@ -49,11 +49,9 @@ const QuizzesInfinityScroll = () => {
 
   useFocusEffect(
     useCallback(() => {
-      console.log('buscando todos');
       getAllRecentQuizzes();
 
       return () => {
-        console.log('reset');
         setPage(1);
         setRefreshing(false);
         setAllQuizzes([]);

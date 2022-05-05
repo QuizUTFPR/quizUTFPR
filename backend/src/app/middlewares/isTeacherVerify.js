@@ -7,8 +7,6 @@ import TeacherRepository from '../repositories/Teacher';
 export default async (req, res, next) => {
   const { authorization } = req.headers;
 
-  console.log('\n\nisTeacherVerify\n\n');
-
   if (!authorization) {
     return res.status(401).json({
       error: 'Falha na autenticação. Token não informado',
@@ -23,7 +21,6 @@ export default async (req, res, next) => {
     const teacherRepository = new TeacherRepository();
 
     const teacher = await teacherRepository.findOne({ where: { id } });
-    console.log(teacher);
 
     if (!teacher) {
       return res.status(401).json({ error: 'O usuário não é um professor!' });
