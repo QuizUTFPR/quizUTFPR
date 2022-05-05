@@ -32,7 +32,7 @@ const TabNavigator = () => (
         name: 'md-home',
         size: 32,
         header: () => <HeaderHome />,
-        tabBarLabel: 'Inicio',
+        tabBarLabel: 'Início',
       }}
       name="HomeStack"
       component={QuizListTopTabStack}

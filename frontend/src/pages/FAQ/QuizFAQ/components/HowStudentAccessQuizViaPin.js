@@ -31,7 +31,7 @@ const HowStudentAccessQuizViaPin = () => {
 
       <StyledParagraph>
         Desta forma, o professor deverá repassar aos alunos o PIN do quiz para o
-        mesmo inserir na tela <TextBold>{`"HOME"`}</TextBold> do aplicativo.
+        mesmo inserir na tela <TextBold>{`"Início"`}</TextBold> do aplicativo.
       </StyledParagraph>
 
       <StyledFigure>
