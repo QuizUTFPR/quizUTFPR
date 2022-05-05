@@ -135,7 +135,8 @@ const QuestionFAQ = () => {
         >
           <AccordionGrid>
             <Typography>
-              Como os alunos se inscrevem em turmas via PIN?
+              Como os <TextStrongBold>alunos se inscrevem</TextStrongBold> em
+              turmas via PIN?
             </Typography>
           </AccordionGrid>
         </StyledAccordionSummary>

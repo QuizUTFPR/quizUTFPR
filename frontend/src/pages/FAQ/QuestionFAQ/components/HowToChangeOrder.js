@@ -20,7 +20,7 @@ const HowToChangeOrder = () => {
     <Wrapper>
       <StyledParagraph>
         Durante a criação do quiz, o professor pode desejar que determinada
-        questão seja respondida antes de outra. Sendo assim, mesmo necessitará
+        questão seja respondida antes de outra. Sendo assim, o mesmo necessitará
         definir a ordem correta para as mesmas.
       </StyledParagraph>
 
@@ -40,7 +40,7 @@ const HowToChangeOrder = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Caso o professor queira mudar a ordem das questões para: 2, 1, 3. O
+        Caso o professor queira mudar a ordem das questões para: 2, 1, 3, o
         mesmo deverá clicar na seta ao lado da questão que deseja alterar a
         ordem. Se deseja mover para cima, deverá clicar na seta virada para
         cima. Caso contrário, deverá criar na seta virada para baixo. Veja na

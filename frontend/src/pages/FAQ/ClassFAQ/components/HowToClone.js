@@ -49,7 +49,7 @@ const HowToClone = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Uma janela será aberta, possibilitando a alterações de informações da
+        Uma janela será aberta, possibilitando a alteração de informações da
         Turma clonada.
       </StyledParagraph>
 

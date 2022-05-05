@@ -16,6 +16,7 @@ import {
   StyledFigure,
   StyledFigureCaption,
 } from '../style';
+import { TextStrongBold } from '../../style';
 
 const HowToCreate = () => {
   return (
@@ -73,7 +74,8 @@ const HowToCreate = () => {
 
       <StyledParagraph>
         Para desabilitar o tempo máximo para resposta da questão, basta clicar
-        na opção {`"Desabilitar limite de tempo para respostas"`}.
+        na opção{' '}
+        <TextBold>{`"Desabilitar limite de tempo para respostas"`}</TextBold>.
       </StyledParagraph>
 
       <StyledFigure>

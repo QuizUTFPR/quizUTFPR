@@ -112,7 +112,10 @@ const QuizFAQ = () => {
           id="panel-bh-header"
         >
           <BarQuestion>
-            <Typography>Como os alunos acessam o quiz via PIN?</Typography>
+            <Typography>
+              Como os alunos{' '}
+              <TextStrongBold>acessam o quiz via PIN?</TextStrongBold>
+            </Typography>
           </BarQuestion>
         </StyledAccordionSummary>
         <AccordionDetails>

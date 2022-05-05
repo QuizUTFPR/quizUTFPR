@@ -19,8 +19,11 @@ const HowToDelete = () => {
     <Wrapper>
       <StyledParagraph>
         Na tela de listagem de quizzes, no canto direito do quiz, clique no
-        ícone de deleção. Lembre-se que só é possível apagar um quiz antes de
-        sua publicação.
+        ícone de deleção.{' '}
+        <TextBold>
+          Lembre-se que só é possível apagar um quiz antes de sua publicação
+        </TextBold>
+        .
       </StyledParagraph>
 
       <StyledFigure>

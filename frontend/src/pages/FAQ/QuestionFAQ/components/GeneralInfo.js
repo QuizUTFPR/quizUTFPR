@@ -32,14 +32,14 @@ const GeneralInfo = () => {
         <TextBold>Tipo da Questão: </TextBold>
         permite o professor mudar o tipo da questão criada, podendo escolher
         entre: múltipla escolha (pode haver mais de um correta) ou
-        verdadeiro/falso (somenta uma correta).
+        verdadeiro/falso (somente uma correta).
       </p>
 
       <Divider style={{ margin: '20px 0' }} />
 
       <p>
         <TextBold>Tempo: </TextBold>é o tempo máximo que o aluno terá para
-        resposder a questão.
+        responder a questão.
       </p>
 
       <Divider style={{ margin: '20px 0' }} />
@@ -64,7 +64,7 @@ const GeneralInfo = () => {
       <p>
         <TextBold>Disponível no Banco de Questões: </TextBold> usado para
         informar que aquela questão poderá ser reutilizada em outros quizzes, ou
-        seja, a mesma estará presente no banco de questões..
+        seja, a mesma estará presente no banco de questões.
       </p>
     </>
   );
