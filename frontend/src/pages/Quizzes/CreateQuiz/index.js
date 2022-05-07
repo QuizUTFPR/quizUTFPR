@@ -61,7 +61,7 @@ const CriarQuiz = () => {
       file.append('file', imageObj);
       file.append('values', JSON.stringify(body));
 
-      const responseQuiz = await api.post('/quiz/create', file);
+      const responseQuiz = await api.post('/teacherQuiz/create', file);
       const { data } = responseQuiz;
 
       setLoading(false);

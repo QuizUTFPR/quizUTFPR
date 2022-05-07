@@ -185,6 +185,8 @@ class QuizController {
     try {
       const { idImage } = req;
 
+      console.log('idImage', idImage);
+
       const { values } = req.body;
       const { id, title, tags, description, visibility, noTime } =
         JSON.parse(values);

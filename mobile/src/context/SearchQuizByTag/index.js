@@ -21,7 +21,7 @@ const SearchQuizByTag = ({ children }) => {
         const queryTags =
           remainingTag.trim().length > 0 ? [...tags, remainingTag] : tags;
 
-        const { data } = await api.post('/quiz/quizzesByTags', {
+        const { data } = await api.post('/studentQuiz/quizzesByTags', {
           aimedTags: queryTags,
         });
 

@@ -82,7 +82,7 @@ const Quiz = () => {
 
   const getQuizzes = async () => {
     try {
-      const response = await api.get('/quiz');
+      const response = await api.get('/teacherQuiz');
 
       if (response.status !== 200) setQuizzes(false);
       else setQuizzes(response.data);
@@ -104,7 +104,7 @@ const Quiz = () => {
 
   const handleRemoveQuiz = async () => {
     try {
-      await api.delete('/quiz/delete', {
+      await api.delete('/teacherQuiz/delete', {
         data: { idQuiz: openAlert.idQuiz },
       });
 
@@ -124,7 +124,7 @@ const Quiz = () => {
         published: true,
       };
 
-      await api.post('/quiz/publish', quizUpdated);
+      await api.post('/teacherQuiz/publish', quizUpdated);
       handleClickSnackBar('Quiz publicado com sucesso!', 'success');
       getQuizzes();
     } catch (error) {

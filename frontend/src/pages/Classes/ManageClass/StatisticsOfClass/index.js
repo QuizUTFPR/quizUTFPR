@@ -31,10 +31,11 @@ const selectOptions = {
 
 const selectOptionsRoutes = {
   1: (idClass) =>
-    `/class/getStatistics/${idClass}/StudentThatFinishedMoreQuizzes`,
-  2: (idClass) => `/class/getStatistics/${idClass}/StudentWhoHitMostQuestions`,
+    `/teacherClass/getStatistics/${idClass}/StudentThatFinishedMoreQuizzes`,
+  2: (idClass) =>
+    `/teacherClass/getStatistics/${idClass}/StudentWhoHitMostQuestions`,
   3: (idClass) =>
-    `/class/getStatistics/${idClass}/StudentThatDidntAnsweredQuizzes`,
+    `/teacherClass/getStatistics/${idClass}/StudentThatDidntAnsweredQuizzes`,
 };
 
 const StudentOfClass = () => {

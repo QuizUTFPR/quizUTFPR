@@ -52,7 +52,7 @@ const EditPreferences = forwardRef((props, _) => {
       file.append('file', imageObj);
       file.append('values', JSON.stringify(body));
 
-      const responseQuiz = await api.put('/quiz/update', file);
+      const responseQuiz = await api.put('/teacherQuiz/update', file);
 
       setLoading(true);
       if (responseQuiz.status === 200) handleClose();

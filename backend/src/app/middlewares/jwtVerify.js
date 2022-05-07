@@ -13,7 +13,7 @@ export default async (req, res, next) => {
 
   // Desestruturação de vetor (Bearer, ...token)
   const [, token] = authorization.split(' ');
-
+  console.log('token', token);
   try {
     /**
      * É usado o promisify podemos usar o async/await

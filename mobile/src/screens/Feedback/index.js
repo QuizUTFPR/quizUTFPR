@@ -49,7 +49,7 @@ const Feedback = () => {
   const handleSendFeedback = async () => {
     try {
       setLoading(true);
-      await api.post('/feedback/create', {
+      await api.post('/studentFeedback/create', {
         message,
         studentId: studentInfo.student.id,
       });

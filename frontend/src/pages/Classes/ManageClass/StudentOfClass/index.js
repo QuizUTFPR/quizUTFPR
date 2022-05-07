@@ -33,7 +33,9 @@ const StudentOfClass = () => {
 
   const getAllStudents = async () => {
     try {
-      const { data } = await api.get(`/class/getAllClassStudents/${idClass}`);
+      const { data } = await api.get(
+        `/teacherClass/getAllClassStudents/${idClass}`
+      );
       setStudents(data);
     } catch (error) {
       console.log(error);

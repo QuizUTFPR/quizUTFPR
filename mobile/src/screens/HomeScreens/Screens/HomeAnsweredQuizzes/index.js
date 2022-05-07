@@ -22,9 +22,12 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const { data } = await api.post('/studentQuiz/getAllFinishedQuizzes', {
-        page: 1,
-      });
+      const { data } = await api.post(
+        '/studentGameInfo/getAllFinishedQuizzes',
+        {
+          page: 1,
+        }
+      );
 
       setQuizzes(data);
     } catch (error) {

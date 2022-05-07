@@ -74,7 +74,7 @@ class LDAPStudentSessionService {
       });
     }
 
-    const { id, email, name, id_image, imageProfile } = student;
+    const { id, email, name, imageProfile } = student;
 
     // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
     await DeleteRefreshTokenService.execute({
@@ -90,7 +90,6 @@ class LDAPStudentSessionService {
         id,
         email,
         name,
-        id_image,
         image: imageProfile?.url,
       },
       token,

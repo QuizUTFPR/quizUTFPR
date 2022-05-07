@@ -28,7 +28,7 @@ const Ranking = ({ route }) => {
   const getAllQuizRanking = async () => {
     try {
       setLoading(true);
-      const { data } = await api.post('/ranking/getAllQuizRanking', {
+      const { data } = await api.post('/studentRanking/getAllQuizRanking', {
         quizId,
         classId,
       });

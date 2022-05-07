@@ -23,7 +23,7 @@ const QuizzesInfinityScroll = () => {
       if (isRefreshing) return;
       setRefreshing(true);
 
-      const { data } = await api.post('/publishedQuiz/getAll', {
+      const { data } = await api.post('/studentPublishedQuiz/getAll', {
         page,
         limit: 15,
       });

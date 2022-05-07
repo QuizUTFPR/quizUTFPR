@@ -23,10 +23,13 @@ const QuizzesInfinityScroll = () => {
       if (isRefreshing) return;
       setRefreshing(true);
 
-      const { data } = await api.post('/studentQuiz/getAllFinishedQuizzes', {
-        page,
-        limit: 15,
-      });
+      const { data } = await api.post(
+        '/studentGameInfo/getAllFinishedQuizzes',
+        {
+          page,
+          limit: 15,
+        }
+      );
 
       if (allQuizzes.length > 0)
         setAllQuizzes((prevState) => [...prevState, ...data]);

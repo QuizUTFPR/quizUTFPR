@@ -76,7 +76,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
     onSubmit: async ({ tag }) => {
       try {
         setLoading(true);
-        const { data } = await api.post(`question/getFromTags`, {
+        const { data } = await api.post(`/teacherQuestion/getFromTags`, {
           aimedTagQuestions: tag,
         });
 
@@ -119,7 +119,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
   useEffect(() => {
     const getTags = async () => {
       try {
-        const response = await api.get('/tag/question');
+        const response = await api.get('/teacherTag/question');
         if (response.data) {
           const newSuggestions = response.data.map((tag) => tag.name);
           formik.setFieldValue('suggestions', newSuggestions);

@@ -50,19 +50,24 @@ import {
 const getStudentChoice = (answer, choice) => {
   const studentChoice = [];
 
-  if (choice.checked1) studentChoice.push(answer[0].title);
-  if (choice.checked2) studentChoice.push(answer[1].title);
-  if (choice.checked3) studentChoice.push(answer[2].title);
-  if (choice.checked4) studentChoice.push(answer[3].title);
+  if (choice.checked1)
+    studentChoice.push({ id: answer[0].id, title: answer[0].title });
+  if (choice.checked2)
+    studentChoice.push({ id: answer[1].id, title: answer[1].title });
+  if (choice.checked3)
+    studentChoice.push({ id: answer[2].id, title: answer[2].title });
+  if (choice.checked4)
+    studentChoice.push({ id: answer[3].id, title: answer[3].title });
 
-  if (!studentChoice.length) return ['Sem Escolha'];
+  if (!studentChoice.length)
+    return [{ title: 'Sem Escolha', id: crypto.randomUUID() }];
   return studentChoice;
 };
 
 const checkStudentChoice = (answer, choices) => {
   const studentChoice = getStudentChoice(answer, choices);
 
-  if (studentChoice[0] === 'Sem Escolha')
+  if (studentChoice[0].title === 'Sem Escolha')
     return (
       <Tooltip arrow ariaLabel="errada" title="Questão errada">
         <Cancel color="error" fontSize="large" />
@@ -70,11 +75,11 @@ const checkStudentChoice = (answer, choices) => {
     );
 
   const correctAnswer = answer
-    .map((item) => (item.isCorrect ? item.title : null))
+    .map((item) => (item.isCorrect ? item.id : null))
     .filter(Boolean);
 
   const wrongStudentChoices = studentChoice.filter(
-    (item) => !correctAnswer.includes(item)
+    (item) => !correctAnswer.includes(item.id)
   );
 
   if (wrongStudentChoices.length === 0)
@@ -273,8 +278,10 @@ const AccordionWrapper = ({ quizData, pin }) => {
                         <BoldText>Alternativas Escolhidas</BoldText>
                         {getStudentChoice(question.answer, choice).map(
                           (item) => (
-                            <BadgeStudentChoice key={item}>
-                              {item}
+                            <BadgeStudentChoice
+                              key={choice.studentQuizId + item.id}
+                            >
+                              {item.title}
                             </BadgeStudentChoice>
                           )
                         )}

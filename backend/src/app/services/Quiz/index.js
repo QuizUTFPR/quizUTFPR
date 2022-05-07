@@ -112,8 +112,6 @@ class QuizService {
     if (idImage) {
       oldImageId = quiz.idImage;
       quiz.idImage = idImage;
-    } else {
-      quiz.idImage = null;
     }
 
     await quiz.save();

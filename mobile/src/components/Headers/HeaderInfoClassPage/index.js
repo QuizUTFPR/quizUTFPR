@@ -25,7 +25,7 @@ const HeaderInfoClassPage = () => {
 
   const registerStudentInClass = async () => {
     try {
-      await api.post('/class/attachStudent', {
+      await api.post('/studentClass/attachStudent', {
         idClass: id,
       });
 

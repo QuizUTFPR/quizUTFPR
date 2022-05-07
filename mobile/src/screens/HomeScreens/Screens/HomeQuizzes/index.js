@@ -23,7 +23,7 @@ const HomeQuizzes = () => {
 
   const getAllPublishedQuizzes = async () => {
     try {
-      const { data } = await api.post('/publishedQuiz/getAll', {
+      const { data } = await api.post('/studentPublishedQuiz/getAll', {
         page: 1,
       });
       setAllQuizzes(data);

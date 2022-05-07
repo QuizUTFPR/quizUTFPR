@@ -11,7 +11,7 @@ const router = new Router();
 
 router.get('/getByPIN/:pin', PINClassController.index);
 router.get('/availableClasses', AvailableStudentClassesController.index);
-router.get('/studentClasses', StudentClassesController.index);
+router.get('/getAllMyClasses', StudentClassesController.index);
 router.get('/getAllClassQuizzes/:idClass', ClassQuizController.index);
 router.post('/attachStudent', ClassStudentController.store);
 

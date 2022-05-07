@@ -37,9 +37,11 @@ const RankingClass = () => {
     try {
       setLoading(true);
 
-      const { data } = await api.post('/ranking/getAllClassRanking', {
+      const { data } = await api.post('/studentRanking/getAllClassRanking', {
         classId,
       });
+
+      console.log('data', data);
 
       const {
         rankStudentQuiz: { score },

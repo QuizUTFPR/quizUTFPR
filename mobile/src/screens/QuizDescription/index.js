@@ -74,7 +74,7 @@ const QuizDescription = ({ route }) => {
 
   const startQuizAndGetAllQuestions = async () => {
     try {
-      const { data } = await api.post('/studentQuiz/startQuiz', {
+      const { data } = await api.post('/studentGameInfo/startQuiz', {
         quizId: id,
         classId,
       });
@@ -94,7 +94,7 @@ const QuizDescription = ({ route }) => {
 
   const giveUPQuiz = async () => {
     try {
-      await api.put('/studentQuiz/finishQuiz', {
+      await api.put('/studentGameInfo/finishQuiz', {
         quizId: id,
         idStudentQuiz: studentQuizID,
       });
@@ -129,14 +129,14 @@ const QuizDescription = ({ route }) => {
   const handleFavorite = async () => {
     try {
       if (favorite) {
-        await api.delete('/quiz/deleteFavorite', {
+        await api.delete('/studentQuiz/deleteFavorite', {
           params: {
             quizId: id,
           },
         });
         setFavorite(false);
       } else {
-        await api.post('/quiz/favorite', {
+        await api.post('/studentQuiz/favorite', {
           quizId: id,
         });
         setFavorite(true);

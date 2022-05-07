@@ -44,7 +44,7 @@ const CloneClass = forwardRef((props, _) => {
       file.append('file', imageObj);
       file.append('values', JSON.stringify(body));
 
-      const clonedClass = await api.post('/class/cloneClass', file);
+      const clonedClass = await api.post('/teacherClass/cloneClass', file);
       setLoading(false);
       if (clonedClass.status === 200) handleClose();
     },

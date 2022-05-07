@@ -45,7 +45,6 @@ router.delete('/delete', ClassController.destroy);
 router.post('/getAllTeacherClasses', ClassTeacherController.index);
 
 // STUDENT RELATION
-router.post('/attachStudent', ClassStudentController.store);
 router.get('/getAllClassStudents/:idClass', ClassStudentController.index);
 
 // QUIZ RELATION

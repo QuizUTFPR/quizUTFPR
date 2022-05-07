@@ -43,7 +43,7 @@ const EditPreferences = forwardRef((props, _) => {
       file.append('file', imageObj);
       file.append('values', JSON.stringify(body));
 
-      const responseQuiz = await api.put('/class/update', file);
+      const responseQuiz = await api.put('/teacherClass/update', file);
 
       setLoading(false);
       if (responseQuiz.status === 200) handleClose();

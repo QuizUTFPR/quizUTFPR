@@ -54,7 +54,9 @@ const QuizzesOfClass = () => {
 
   const getAttachedQuizzes = async () => {
     try {
-      const { data } = await api.get(`/class/getAllClassQuiz/${idClass}`);
+      const { data } = await api.get(
+        `/teacherClass/getAllClassQuiz/${idClass}`
+      );
 
       setQuizzes(data);
     } catch (error) {
@@ -72,7 +74,7 @@ const QuizzesOfClass = () => {
 
   const handleRemoveQuiz = async () => {
     try {
-      await api.delete('/class/dettachQuiz', {
+      await api.delete('/teacherClass/dettachQuiz', {
         data: { idClass, idQuiz: modalDettachQuiz.idQuiz },
       });
 

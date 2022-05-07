@@ -29,7 +29,7 @@ const QuizzesOfClass = () => {
       setLoading(true);
 
       const { data } = await api.get(
-        `/class/getAllClassQuizzes/${classData.id}`
+        `/studentClass/getAllClassQuizzes/${classData.id}`
       );
 
       setClassQuizzes(data);

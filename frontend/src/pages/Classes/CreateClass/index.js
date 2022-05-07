@@ -40,7 +40,7 @@ const CriarQuiz = () => {
       file.append('file', imageObj);
       file.append('values', JSON.stringify(body));
 
-      const { data, status } = await api.post('/class/create', file);
+      const { data, status } = await api.post('/teacherClass/create', file);
 
       setLoading(false);
       if (status === 200) {

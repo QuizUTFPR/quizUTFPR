@@ -37,7 +37,7 @@ const Header = () => {
         return;
       }
 
-      const { data } = await api.post('/quiz/getByPIN', { pin });
+      const { data } = await api.post('/studentQuiz/getByPIN', { pin });
 
       navigation.navigate('Descricao', {
         idStudentQuiz: data.idStudentQuiz,

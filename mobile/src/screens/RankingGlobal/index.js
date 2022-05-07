@@ -26,7 +26,7 @@ const Ranking = () => {
   const getGlobalRanking = async () => {
     try {
       setLoading(true);
-      const { data } = await api.get('/ranking/getGlobalRanking');
+      const { data } = await api.get('/studentRanking/getGlobalRanking');
 
       const {
         rankStudentQuiz: { score },

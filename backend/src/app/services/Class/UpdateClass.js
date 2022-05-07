@@ -39,8 +39,6 @@ class UpdateClass {
     if (idImage) {
       oldImageId = classInstance.idImage;
       classInstance.idImage = idImage;
-    } else {
-      classInstance.idImage = null;
     }
 
     await classInstance.save();

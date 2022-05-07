@@ -32,7 +32,7 @@ const QuestionQuiz = ({ children }) => {
 
   const getAllQuestionOfTheQuiz = async (id) => {
     try {
-      const { data } = await api.get(`/question/quiz/${id}`);
+      const { data } = await api.get(`/teacherQuestion/quiz/${id}`);
 
       const initialQuestions = data.questionsOfQuiz.map((question) => ({
         index: question.index,
@@ -67,15 +67,17 @@ const QuestionQuiz = ({ children }) => {
     try {
       // REMOVING QUESTIONS
       if (questionToRemove.length) {
-        questionToRemove.forEach(async (removed) => {
-          if (removed.id !== -1) {
-            await api.delete('/question/delete', {
-              data: {
-                id: removed.id,
-              },
-            });
-          }
-        });
+        await Promise.all(
+          questionToRemove.map(async (removed) => {
+            if (removed.id !== -1) {
+              await api.delete('/teacherQuestion/delete', {
+                data: {
+                  id: removed.id,
+                },
+              });
+            }
+          })
+        );
       }
       // SAVING QUESTIONS
       await Promise.all(
@@ -114,7 +116,7 @@ const QuestionQuiz = ({ children }) => {
           file.append('file', imageObj);
           file.append('values', JSON.stringify(body));
 
-          const response = await api.post('/question/create', file);
+          const response = await api.post('/teacherQuestion/create', file);
 
           if (response.status !== 200) throw new Error('questao nao criada');
         })

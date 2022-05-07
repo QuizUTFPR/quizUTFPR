@@ -26,7 +26,7 @@ const ModalGetAvailableQuizzes = forwardRef((props, _) => {
 
   const getAvailableQuizzes = async () => {
     try {
-      const response = await api.post('/class/availableQuizzes', {
+      const response = await api.post('/teacherClass/availableQuizzes', {
         idClass,
       });
 
@@ -62,7 +62,7 @@ const ModalGetAvailableQuizzes = forwardRef((props, _) => {
 
   const handleAddQuiz = async (idQuiz) => {
     try {
-      await api.post('/class/attachQuiz', {
+      await api.post('/teacherClass/attachQuiz', {
         idClass,
         idQuiz,
       });
@@ -79,7 +79,7 @@ const ModalGetAvailableQuizzes = forwardRef((props, _) => {
 
   const handleRemoveQuiz = async (idQuiz) => {
     try {
-      await api.delete('/class/dettachQuiz', {
+      await api.delete('/teacherClass/dettachQuiz', {
         data: {
           idClass,
           idQuiz,

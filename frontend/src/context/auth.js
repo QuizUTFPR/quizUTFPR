@@ -15,7 +15,7 @@ const Auth = ({ children }) => {
   const login = async (username, password) => {
     if (!username || !password) return 404;
     try {
-      const response = await api.post('/login', { username, password });
+      const response = await api.post('/teacher/login', { username, password });
 
       const { data } = response;
       setTeacherInfo({
@@ -27,7 +27,7 @@ const Auth = ({ children }) => {
       localStorage.setItem('@TEACHER', JSON.stringify(data.teacher));
       localStorage.setItem('@REFRESH_TOKEN', data.refreshToken);
 
-      return response;
+      return { response };
     } catch (err) {
       return err;
     }

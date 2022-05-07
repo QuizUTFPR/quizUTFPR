@@ -28,7 +28,7 @@ const FindClassByPin = ({ hideDialog, visible }) => {
     try {
       if (!pin.length) return;
 
-      const { data } = await api.get(`/class/getByPIN/${pin}`);
+      const { data } = await api.get(`/studentClass/getByPIN/${pin}`);
 
       setPin('');
       hideDialog();

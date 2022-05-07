@@ -30,7 +30,7 @@ const Question = ({ children }) => {
   const [quizInfo, setQuizInfo] = useState(null); // save only the quiz info
 
   const handleFinishQuizAnswering = async () => {
-    const { data } = await api.put('/studentQuiz/finishQuiz', {
+    const { data } = await api.put('/studentGameInfo/finishQuiz', {
       idStudentQuiz: StudentQuizID,
       quizId: quizID,
     });
@@ -47,7 +47,7 @@ const Question = ({ children }) => {
       arrayOfChecked: requestQuestion.checkedAnswer,
     };
 
-    await api.post('/studentQuiz/createChoice', {
+    await api.post('/studentGameInfo/createChoice', {
       ...requestData,
     });
 
@@ -56,7 +56,7 @@ const Question = ({ children }) => {
 
   // eslint-disable-next-line camelcase
   const getQuestionsOfQuizFromDatabase = async (quizId, idStudentQuiz) => {
-    const { data } = await api.post('/studentQuiz/getQuestionQuiz', {
+    const { data } = await api.post('/studentGameInfo/getQuestionQuiz', {
       quizId,
       idStudentQuiz,
     });

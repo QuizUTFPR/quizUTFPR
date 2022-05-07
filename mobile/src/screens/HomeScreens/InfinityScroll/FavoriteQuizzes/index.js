@@ -24,7 +24,7 @@ const QuizzesInfinityScroll = () => {
       if (isRefreshing) return;
       setRefreshing(true);
 
-      const { data } = await api.post('/studentQuiz/favorites', {
+      const { data } = await api.post('/studentGameInfo/favorites', {
         page,
         limit: 15,
       });

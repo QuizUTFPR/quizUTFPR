@@ -26,7 +26,7 @@ const InfoOfClass = () => {
   const { idClass } = useParams();
 
   const getClass = async () => {
-    const { data } = await api.post('/class/getClass', {
+    const { data } = await api.post('/teacherClass/getClass', {
       id: idClass,
     });
 

@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { RefreshControl } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import api from '@api';
@@ -24,7 +24,7 @@ const FavoriteQuizzes = () => {
 
   const getAllFavoriteQuizzes = async () => {
     try {
-      const { data } = await api.post('/studentQuiz/favorites', {
+      const { data } = await api.post('/studentGameInfo/favorites', {
         page: 1,
       });
 

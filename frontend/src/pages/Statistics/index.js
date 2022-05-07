@@ -29,7 +29,7 @@ const Statistics = () => {
 
   const handleGetTeacherClasses = async () => {
     try {
-      const { data } = await api.post('/class/getAllTeacherClasses', {
+      const { data } = await api.post('/teacherClass/getAllTeacherClasses', {
         quizId: id,
       });
 
@@ -42,7 +42,7 @@ const Statistics = () => {
   const handleGetStatistics = async () => {
     try {
       const { data: studentQuizStatistics } = await api.post(
-        '/statistics/getStudentQuizStatistics',
+        '/teacherStatistics/getStudentQuizStatistics',
         {
           quizId: id,
           classId: filterData.classId,
@@ -52,7 +52,7 @@ const Statistics = () => {
       setStudentQuiz(studentQuizStatistics);
 
       const { data: questionQuizStatistics } = await api.post(
-        '/statistics/getQuestionQuizStatistics',
+        '/teacherStatistics/getQuestionQuizStatistics',
         {
           quizId: id,
           classId: filterData.classId,

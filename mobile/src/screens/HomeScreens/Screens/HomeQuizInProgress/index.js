@@ -23,7 +23,7 @@ const HomeQuizInProgress = () => {
 
   const getAllQuizzesInProgress = async () => {
     try {
-      const { data } = await api.post('/studentQuiz/getQuizInProgress', {
+      const { data } = await api.post('/studentGameInfo/getQuizInProgress', {
         page: 1,
       });
 
