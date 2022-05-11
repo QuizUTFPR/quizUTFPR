@@ -51,7 +51,9 @@ const GeneralInfo = () => {
       </StyledTypography>
       <p>
         Limite de tempo, como sugere o nome, informa se as questões do quiz
-        possuirão ou não um tempo máximo para serem respondidas.
+        possuirão ou não um tempo máximo para serem respondidas. Vale ressaltar
+        que o tempo das questões é desconsiderado caso o tempo máximo seja
+        desconsiderado na criação do quiz.
       </p>
 
       <Divider style={{ margin: '20px 0' }} />
