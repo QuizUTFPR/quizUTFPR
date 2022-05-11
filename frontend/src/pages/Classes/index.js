@@ -296,7 +296,7 @@ const MyClasses = () => {
           handleClose={handleCloseModalDelete}
           onClick={handleRemoveClass}
           title="Deseja mesmo excluir a Turma?"
-          description="Todos os dados referente turma serão excluídas."
+          description="Todos os dados referentes à turma serão excluídos."
           width="25vw"
         />
       </Modal>
