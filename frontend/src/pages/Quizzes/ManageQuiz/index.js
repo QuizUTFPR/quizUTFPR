@@ -75,6 +75,7 @@ const Question = () => {
     index: 0,
     question: questions[0],
   });
+  const [tagSuggestions, setTagSuggestions] = useState([]);
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: onScreen,
@@ -110,23 +111,6 @@ const Question = () => {
     const firstQuestion = await getAllQuestionOfTheQuiz(idQuiz);
     setOnScreen({ index: 0, question: firstQuestion });
   };
-
-  useEffect(() => {
-    fetchQuestions();
-
-    return () => {
-      setQuestions(JSON.parse(JSON.stringify(initialValue)));
-      setSaved(true);
-      setTyping(false);
-      setErrors(JSON.parse(JSON.stringify(initialValueErrors)));
-      setQuestionToRemove([]);
-      setOnScreen({
-        index: 0,
-        question: JSON.parse(JSON.stringify(initialValue)),
-      });
-      setQuizInfo(false);
-    };
-  }, []);
 
   const handleChangeQuestion = (question, index) => () => {
     if (index < 0) return;
@@ -205,15 +189,32 @@ const Question = () => {
   };
 
   useEffect(() => {
+    fetchQuestions();
+
+    return () => {
+      setQuestions(JSON.parse(JSON.stringify(initialValue)));
+      setSaved(true);
+      setTyping(false);
+      setErrors(JSON.parse(JSON.stringify(initialValueErrors)));
+      setQuestionToRemove([]);
+      setOnScreen({
+        index: 0,
+        question: JSON.parse(JSON.stringify(initialValue)),
+      });
+      setQuizInfo(false);
+    };
+  }, []);
+
+  useEffect(() => {
     const getTags = async () => {
       try {
-        const response = await api.get('/teacherTag/question');
+        const response = await api.get('/teacherTag');
         if (response.data) {
           const newSuggestions = response.data.map((tag) => tag.name);
-          formik.setFieldValue('suggestions', newSuggestions);
+          setTagSuggestions(newSuggestions);
         }
       } catch (error) {
-        handleClickSnackBar(error.response.data.response, 'error');
+        setTagSuggestions([]);
       }
     };
 
@@ -264,6 +265,7 @@ const Question = () => {
           handleOpenChangeTypeQuestion={handleOpenChangeTypeQuestion}
           optionsOfTime={OptionsOfTime}
           optionsOfDifficultyLevel={optionsOfDifficultyLevel}
+          tagSuggestions={tagSuggestions}
         />
       </ContainerGrid>
       {/* MODALS */}

@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import api from '@api';
 
@@ -29,6 +29,7 @@ import { PreviewImage, FormWrapper, GridContainerModal } from './style';
 const EditPreferences = forwardRef((props, _) => {
   const { quiz, handleClose } = props;
   const [loading, setLoading] = useState(false);
+  const [tagSuggestions, setTagSuggestions] = useState([]);
 
   const formik = useFormik({
     initialValues: {
@@ -58,6 +59,22 @@ const EditPreferences = forwardRef((props, _) => {
       if (responseQuiz.status === 200) handleClose();
     },
   });
+
+  useEffect(() => {
+    const getTags = async () => {
+      try {
+        const response = await api.get('/teacherTag');
+        if (response.data) {
+          const newSuggestions = response.data.map((tag) => tag.name);
+          setTagSuggestions(newSuggestions);
+        }
+      } catch (error) {
+        setTagSuggestions([]);
+      }
+    };
+
+    getTags();
+  }, []);
 
   return (
     <GridContainerModal container spacing={3}>
@@ -172,7 +189,7 @@ const EditPreferences = forwardRef((props, _) => {
           <ChipInput
             fullWidth
             value={formik.values.tags}
-            suggestions={['Aprenda', 'JavaScript']}
+            suggestions={tagSuggestions}
             onChange={(__, value) =>
               formik.setFieldValue('tags', [
                 ...new Set(

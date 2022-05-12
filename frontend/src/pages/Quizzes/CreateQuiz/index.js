@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
@@ -31,6 +31,7 @@ import { PreviewImage } from './style';
 const CriarQuiz = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [tagSuggestions, setTagSuggestions] = useState([]);
 
   const formik = useFormik({
     initialValues: {
@@ -73,6 +74,22 @@ const CriarQuiz = () => {
       }
     },
   });
+
+  useEffect(() => {
+    const getTags = async () => {
+      try {
+        const response = await api.get('/teacherTag');
+        if (response.data) {
+          const newSuggestions = response.data.map((tag) => tag.name);
+          setTagSuggestions(newSuggestions);
+        }
+      } catch (error) {
+        setTagSuggestions([]);
+      }
+    };
+
+    getTags();
+  }, []);
 
   return (
     <GridContainer container spacing={3}>
@@ -179,7 +196,7 @@ const CriarQuiz = () => {
           <ChipInput
             fullWidth
             value={formik.values.tags}
-            suggestions={['Aprenda', 'JavaScript']}
+            suggestions={tagSuggestions}
             onChange={(_, value) => {
               formik.setFieldValue('tags', [
                 ...new Set(

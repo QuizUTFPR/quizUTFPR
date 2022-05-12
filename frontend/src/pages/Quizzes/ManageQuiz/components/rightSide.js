@@ -26,6 +26,7 @@ const RightSide = ({
   quizInfo,
   optionsOfTime,
   optionsOfDifficultyLevel,
+  tagSuggestions,
 }) => (
   <Grid item xs={3}>
     <StyledRightGrid container align="center" direction="column">
@@ -124,7 +125,7 @@ const RightSide = ({
           <GridItemStyledRight item>
             <TagInput
               fullWidth
-              suggestions={[]}
+              suggestions={tagSuggestions}
               required={formik.values.question.availableOnQuestionsDB}
               disabled={quizInfo.published}
               value={formik.values.question.tags}
@@ -180,7 +181,9 @@ const RightSide = ({
   </Grid>
 );
 
-RightSide.defaultProps = {};
+RightSide.defaultProps = {
+  tagSuggestions: [],
+};
 
 RightSide.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -189,6 +192,7 @@ RightSide.propTypes = {
   quizInfo: PropTypes.shape({
     published: PropTypes.bool,
   }).isRequired,
+  tagSuggestions: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default RightSide;
