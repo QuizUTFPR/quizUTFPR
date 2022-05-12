@@ -51,7 +51,21 @@ const GeneralInfo = () => {
       </StyledTypography>
       <p>
         Limite de tempo, como sugere o nome, informa se as questões do quiz
-        possuirão ou não um tempo máximo para serem respondidas.
+        possuirão ou não um tempo máximo para serem respondidas. Vale ressaltar
+        que o tempo das questões é desconsiderado caso o tempo máximo seja
+        desconsiderado na criação do quiz.
+      </p>
+
+      <Divider style={{ margin: '20px 0' }} />
+
+      <StyledTypography>O que é Publicar um Quiz?</StyledTypography>
+      <p>
+        Ao finalizar a criação de um quiz, ele ainda não está acessível pelos
+        usuários (seja ele público ou privado). Além disso, o quiz ainda está
+        editável, podendo ter questões adicionadas, removidas e editadas, bem
+        como ser possível a exclusão do quiz. O ato de publicar um quiz implica
+        em torná-lo acessível e não permitir mais as alterações informadas
+        acima.
       </p>
     </>
   );
