@@ -32,8 +32,9 @@ const HowStudentAccessClassViaPin = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Desta forma, o professor deverá repassar aos alunos o PIN da turma para
-        o mesmo inserir na tela <TextBold>{`"Turmas"`}</TextBold> do aplicativo.
+        O professor deverá repassar aos alunos o PIN da turma para o mesmo
+        inserir na tela <TextBold>{`"Turmas"`}</TextBold> do aplicativo. O aluno
+        deverá clicar no botão da lupa no canto inferior direito com o ícone.
       </StyledParagraph>
 
       <StyledFigure>
@@ -42,9 +43,8 @@ const HowStudentAccessClassViaPin = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Por conseguinte, o aluno deverá clicar no botão flutuante no canto
-        inferior direito com o ícone da lupa. Após isso uma nova janela será
-        aberta para a inserção do PIN referente a Turma.
+        Após isso uma nova janela será aberta para a inserção do PIN referente a
+        Turma.
       </StyledParagraph>
 
       <StyledFigure>
@@ -68,9 +68,8 @@ const HowStudentAccessClassViaPin = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Doravante, após o aluno clicar no botão{' '}
-        <TextBold>{`"PESQUISAR"`}</TextBold>, o mesmo será redirecionado para a
-        tela da Turma referente ao PIN.
+        Após o aluno clicar no botão <TextBold>{`"PESQUISAR"`}</TextBold>, o
+        mesmo será redirecionado para a tela da Turma referente ao PIN.
       </StyledParagraph>
 
       <StyledFigure>
@@ -79,8 +78,8 @@ const HowStudentAccessClassViaPin = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Por fim, o aluno poderá realizar sua inscrição na Turma ao clicar no
-        botão <TextBold>{`"ENTRAR"`}</TextBold>.
+        O aluno poderá realizar sua inscrição na Turma ao clicar no botão{' '}
+        <TextBold>{`"ENTRAR"`}</TextBold>.
       </StyledParagraph>
 
       <StyledFigure>

@@ -12,6 +12,11 @@ import {
   Typography,
   Divider,
   CircularProgress,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
 } from '@mui/material';
 import { Close, Search } from '@mui/icons-material';
 import SnackBar from '@components/SnackBar';
@@ -39,6 +44,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
     tag: [],
     questions: [],
     suggestions: [],
+    typeOfFilter: 'and',
   };
 
   const [stateSnackBar, setStateSnackBar] = useState({
@@ -73,11 +79,12 @@ const QuestionDatabase = forwardRef((props, ref) => {
 
   const formik = useFormik({
     initialValues: initialState,
-    onSubmit: async ({ tag }) => {
+    onSubmit: async ({ tag, typeOfFilter }) => {
       try {
         setLoading(true);
         const { data } = await api.post(`/teacherQuestion/getFromTags`, {
           aimedTagQuestions: tag,
+          typeOfFilter,
         });
 
         if (data) {
@@ -110,6 +117,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
           formik.setFieldValue('questions', []);
         }
       } catch (error) {
+        formik.setFieldValue('questions', []);
         handleClickSnackBar(error.response.data.response, 'error');
       }
       setLoading(false);
@@ -160,7 +168,12 @@ const QuestionDatabase = forwardRef((props, ref) => {
 
   return (
     <>
-      <Wrapper container spacing={3} width="45vw">
+      <Wrapper
+        container
+        spacing={3}
+        width="45vw"
+        style={{ maxHeight: '80vh', flexWrap: 'nowrap' }}
+      >
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={3} md={1}>
             <IconButton aria-label="closeModal" onClick={handleClose}>
@@ -182,6 +195,30 @@ const QuestionDatabase = forwardRef((props, ref) => {
           alignItems="center"
           spacing={2}
         >
+          <Grid item xs={12}>
+            <FormControl>
+              <FormLabel id="choose_filter">Filtragem</FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="choose_filter"
+                name="typeOfFilter"
+                id="typeOfFilter"
+                value={formik.values.typeOfFilter}
+                onChange={formik.handleChange}
+              >
+                <FormControlLabel
+                  value="and"
+                  control={<Radio />}
+                  label="Todas as tags"
+                />
+                <FormControlLabel
+                  value="or"
+                  control={<Radio />}
+                  label="Qualquer combinação de tags"
+                />
+              </RadioGroup>
+            </FormControl>
+          </Grid>
           <Grid item xs={9}>
             <TagInput
               fullWidth
@@ -231,7 +268,9 @@ const QuestionDatabase = forwardRef((props, ref) => {
           style={{
             overflow: 'auto',
             minHeight: '40px',
-            maxHeight: 'calc(100vh - 25px - 72px - 48px - 60px)',
+            paddingTop: '5px',
+            paddingBottom: '20px',
+            // maxHeight: 'calc(100vh - 25px - 72px - 48px - 60px)',
           }}
         >
           {formik.values.questions.map((question, index) => (

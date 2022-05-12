@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '@api';
 
 import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -202,6 +203,22 @@ const Question = () => {
       navigate(QUIZ);
     }
   };
+
+  useEffect(() => {
+    const getTags = async () => {
+      try {
+        const response = await api.get('/teacherTag/question');
+        if (response.data) {
+          const newSuggestions = response.data.map((tag) => tag.name);
+          formik.setFieldValue('suggestions', newSuggestions);
+        }
+      } catch (error) {
+        handleClickSnackBar(error.response.data.response, 'error');
+      }
+    };
+
+    getTags();
+  }, []);
 
   return (
     <AnimatedContainer>

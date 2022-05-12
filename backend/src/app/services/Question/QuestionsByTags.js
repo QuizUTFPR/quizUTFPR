@@ -13,7 +13,8 @@ class QuestionsByTagsService {
 
   // Retorna as questões que possuem as tags passadas
   async index(props) {
-    const { aimedTagQuestions: propsTags } = props;
+    const { aimedTagQuestions: propsTags, typeOfFilter } = props;
+
     const aimedTagQuestions = [
       ...new Set(propsTags.map((element) => element.toLowerCase().trim())),
     ];
@@ -43,7 +44,16 @@ class QuestionsByTagsService {
           },
         },
       ],
-      order: [[{ model: Answer, as: 'answer' }, 'id', 'ASC']],
+      order: [
+        [
+          {
+            model: Answer,
+            as: 'answer',
+          },
+          'id',
+          'ASC',
+        ],
+      ],
     });
 
     const filteredQuestionByTag = await Promise.all(
@@ -52,10 +62,24 @@ class QuestionsByTagsService {
         const questionTags = (await item.getTagsQuestion()).map(
           (element) => element.name
         );
-        const intersection = questionTags.filter((element) =>
+
+        const arrayResult = questionTags.filter((element) =>
           aimedTagQuestions.includes(element)
         );
-        if (intersection.length === aimedTagQuestions.length) {
+
+        // Verificando operação lógica AND (intersecção)
+        if (
+          arrayResult.length === aimedTagQuestions.length &&
+          typeOfFilter.toLowerCase().trim() === 'and'
+        ) {
+          return item;
+        }
+
+        // Verificando operação lógica OR (conjunção)
+        if (
+          arrayResult.length > 0 &&
+          typeOfFilter.toLowerCase().trim() === 'or'
+        ) {
           return item;
         }
       })
