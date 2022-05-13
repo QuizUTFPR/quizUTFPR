@@ -15,9 +15,7 @@ api.interceptors.request.use(async (config) => {
   const data = await AsyncStorage.getItem('@TOKEN');
   if (data) {
     // const token = data != null ? JSON.parse(data) : null;
-    config.headers.common.Authorization = data
-      ? `Bearer ${JSON.parse(data)}`
-      : '';
+    config.headers.common.Authorization = data ? `Bearer ${data}` : '';
   }
 
   return config;
@@ -30,8 +28,6 @@ api.interceptors.response.use(
     const requestStatus = error?.response?.status || null;
     const refreshTokenExpired =
       error?.response?.data?.refreshTokenExpired || false;
-
-    console.log('refreshTokenExpired', { ...error });
 
     if (requestStatus === 401 && !refreshTokenExpired) {
       const refreshToken = await AsyncStorage.getItem('@REFRESH_TOKEN');

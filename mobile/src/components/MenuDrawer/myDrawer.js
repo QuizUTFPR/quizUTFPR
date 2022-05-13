@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -6,7 +8,7 @@ import {
 } from '@react-navigation/drawer';
 
 // ICONS
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 // HOOKS
 import useStudentAuth from '@hook/useStudentAuth';
@@ -21,7 +23,9 @@ import {
 } from './styles';
 
 const CustomSidebarMenu = ({ colors, ...props }) => {
+  const navigation = useNavigation();
   const { studentInfo, logout } = useStudentAuth();
+
   return (
     <WrapperMyDrawer style={{ flex: 1 }}>
       <Avatar
@@ -36,6 +40,25 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
       <Divider fill="purple" />
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
+        <DrawerItem
+          icon={({ focused, size }) => (
+            <MaterialIcons
+              name="verified"
+              size={size}
+              color={focused ? colors.purple : 'grey'}
+            />
+          )}
+          label={({ color }) => (
+            <DrawerLabelStyled color={color}>
+              Quizzes Concluídos
+            </DrawerLabelStyled>
+          )}
+          onPress={() =>
+            navigation.navigate('InfinityScrollQuizzesStack', {
+              screen: 'InfinityScrollAnsweredQuizzes',
+            })
+          }
+        />
         <DrawerItem
           icon={({ focused, size }) => (
             <MaterialCommunityIcons
