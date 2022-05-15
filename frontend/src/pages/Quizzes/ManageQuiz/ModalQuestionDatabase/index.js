@@ -24,7 +24,7 @@ import getFileFromUrl from '@utils/getFileFromUrl';
 import Question from './question';
 
 // ICONS
-import { StyledSearchTagButton } from './style';
+import { StyledSearchTagButton, TagWrapper, TagItem } from './style';
 
 // async function getFileFromUrl(url, name, defaultType = 'image/jpeg') {
 //   const response = await fetch(url);
@@ -35,8 +35,11 @@ import { StyledSearchTagButton } from './style';
 //   });
 // }
 
+const AMOUNT_OF_MOST_USED_TAG = 10;
+
 const QuestionDatabase = forwardRef((props, ref) => {
   const { handleClose, handleaddQuestion, handleRemoveQuestion } = props;
+  const [mostUsedTags, setMostUsedTags] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [checkboxes, setCheckboxes] = useState([]);
 
@@ -130,6 +133,9 @@ const QuestionDatabase = forwardRef((props, ref) => {
         const response = await api.get('/teacherTag/question');
         if (response.data) {
           const newSuggestions = response.data.map((tag) => tag.name);
+          if (newSuggestions.length > 0) {
+            setMostUsedTags(newSuggestions.slice(0, AMOUNT_OF_MOST_USED_TAG));
+          }
           formik.setFieldValue('suggestions', newSuggestions);
         } else {
           handleClickSnackBar(
@@ -195,9 +201,39 @@ const QuestionDatabase = forwardRef((props, ref) => {
           alignItems="center"
           spacing={2}
         >
+          {mostUsedTags.length > 0 && (
+            <Grid item xs={12}>
+              <FormLabel id="choose_filter">Tags mais utilizadas</FormLabel>
+              <TagWrapper>
+                {mostUsedTags.map((tag) => (
+                  <TagItem
+                    key={tag}
+                    onClick={() => {
+                      formik.setFieldValue('tag', [
+                        ...new Set([
+                          ...formik.values.tag,
+                          tag.toLowerCase().trim(),
+                        ]),
+                      ]);
+
+                      handleClickSnackBar(
+                        'Tag selecionada.',
+                        'success',
+                        false,
+                        2000
+                      );
+                    }}
+                  >
+                    {tag}
+                  </TagItem>
+                ))}
+              </TagWrapper>
+            </Grid>
+          )}
           <Grid item xs={12}>
             <FormControl>
               <FormLabel id="choose_filter">Filtragem</FormLabel>
+
               <RadioGroup
                 row
                 aria-labelledby="choose_filter"
@@ -279,13 +315,16 @@ const QuestionDatabase = forwardRef((props, ref) => {
               key={index}
               item
               xs={12}
-              onClick={() =>
+              onClick={() => {
+                const text = checkboxes[question.title]
+                  ? 'Questão removida com sucesso!'
+                  : 'Questão adicionada com sucesso!';
                 handleClickSnackBar(
-                  'Questão adicionada com sucesso!',
+                  text,
                   'success',
                   checkboxes[question.title]
-                )
-              }
+                );
+              }}
             >
               <Question
                 question={question}

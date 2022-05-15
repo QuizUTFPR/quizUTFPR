@@ -1,3 +1,4 @@
+import { fn, col } from 'sequelize';
 // MODELS
 import Question from '../../models/QuestionModel';
 
@@ -9,24 +10,27 @@ class TagQuestionController {
   async index(req, res) {
     try {
       const tags = await TagService.execute({
+        attributes: {
+          include: [[fn('COUNT', col('questions.id')), 'questionAmount']],
+          exclude: ['createdAt', 'updatedAt'],
+        },
         include: [
           {
             model: Question,
             as: 'questions',
             required: true,
-            attributes: ['availableOnQuestionsDb'],
+
             where: {
               availableOnQuestionsDb: true,
             },
+            attributes: [],
             through: {
               attributes: [],
             },
           },
         ],
-        attributes: ['name'],
-        through: {
-          attributes: [],
-        },
+        group: ['name'],
+        order: [[col('questionAmount'), 'DESC']],
       });
 
       return res.status(200).json(tags);

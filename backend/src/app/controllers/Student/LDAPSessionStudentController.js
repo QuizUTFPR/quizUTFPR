@@ -16,7 +16,6 @@ class LDAPSessionStudentController {
       return res.status(200).json(student);
     } catch (error) {
       // Verificando erro de usuario ou seha do usuario pelo ldap
-      console.log('ERROR', error.response);
       if (error.response.data.status === 401) {
         const RAOrPasswordErrorLdap = new Error();
         RAOrPasswordErrorLdap.status = 403;
