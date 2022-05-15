@@ -136,7 +136,7 @@ const TypeOfQuestion = forwardRef((props, ref) => {
       <Modal
         open={isModalQuestionDatabaseOpen}
         modalTitle="Utilizar questões do banco de dados"
-        modalDescription="As questões são buscadas utilizando tag's"
+        modalDescription="As questões são buscadas utilizando tags"
         style={{ overflow: 'scroll' }}
       >
         <QuestionDatabase

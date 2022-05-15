@@ -188,7 +188,7 @@ const QuestionDatabase = forwardRef((props, ref) => {
           </Grid>
           <Grid item xs={9} md={11}>
             <Typography variant="h5" color="primary">
-              Banco de Questões via Tag‘s
+              Banco de Questões via Tags
             </Typography>
           </Grid>
         </Grid>
