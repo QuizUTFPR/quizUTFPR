@@ -3,6 +3,12 @@
 # Quiz UTFPR
 ![image info](./capa.png)
 
+<p align="center">
+<img src="https://img.shields.io/github/repo-size/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge" alt="">
+<img src="https://img.shields.io/github/contributors/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge" alt="">
+</p>
+
+
 O projeto é uma plataforma web e móvel para criação e análise de avaliações digitais. O sistema está sendo criado sob orientação dos professores Juliano Henrique Foleis e Marcos Silvano Almeida. O mesmo é composto por um painel de controle utilizado para criação de quizzes, bem como um aplicativo móvel gamificado para que os alunos possam acessá-los e respondê-los. 
 
 Além disso, o painel de controle também possui uma seção de análise das repostas com algumas opções de filtragem das informações. Tal filtragem visa dar mais opções de visualização dos dados, permitindo a extração de mais informações. 
