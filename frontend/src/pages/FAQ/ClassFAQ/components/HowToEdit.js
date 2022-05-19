@@ -54,8 +54,8 @@ const HowToEdit = () => {
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg src={EditClass} alt="Modal de edição da Turma." />
-        <StyledFigureCaption>Modal de edição da Turma.</StyledFigureCaption>
+        <StyledImg src={EditClass} alt="Janela de edição da Turma." />
+        <StyledFigureCaption>Janela de edição da Turma.</StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>

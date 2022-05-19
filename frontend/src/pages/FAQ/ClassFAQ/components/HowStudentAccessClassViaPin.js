@@ -43,8 +43,8 @@ const HowStudentAccessClassViaPin = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Após isso uma nova janela será aberta para a inserção do PIN referente a
-        Turma.
+        Após isso, uma nova janela será aberta para a inserção do PIN referente
+        a Turma.
       </StyledParagraph>
 
       <StyledFigure>
@@ -53,7 +53,7 @@ const HowStudentAccessClassViaPin = () => {
           alt="Janela para inserção do PIN da turma."
         />
         <StyledFigureCaption>
-          AJanela para inserção do PIN da turma.
+          Janela para inserção do PIN da turma.
         </StyledFigureCaption>
       </StyledFigure>
 

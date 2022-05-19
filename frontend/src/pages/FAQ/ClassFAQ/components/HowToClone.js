@@ -30,8 +30,8 @@ const HowToClone = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, abra a seção onde se encontra a turma que deseja clonar
-        (pública ou privada).
+        Abra a seção onde se encontra a turma que deseja clonar (pública ou
+        privada).
       </StyledParagraph>
 
       <StyledFigure>
@@ -40,7 +40,7 @@ const HowToClone = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, clique no ícone correspondente a ação de clonar turma.
+        Clique no ícone correspondente a ação de clonar turma.
       </StyledParagraph>
 
       <StyledFigure>

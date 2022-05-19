@@ -29,7 +29,7 @@ const HowToCreate = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, no canto superior direito da tela de turmas, clique no botão{' '}
+        No canto superior direito da tela de turmas, clique no botão{' '}
         <TextBold>{`"CRIAR TURMA"`}</TextBold>.
       </StyledParagraph>
 
@@ -39,10 +39,10 @@ const HowToCreate = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, preencha as informações necessárias para a criação da turma.
-        Para adicionar a imagem, clique na área de adição da imagem ou apenas
-        arraste uma até tal área. Nome da Turma, descrição e visibilidade são
-        campos obrigatórios.
+        Preencha as informações necessárias para a criação da turma. Para
+        adicionar a imagem, clique na área de adição da imagem ou apenas arraste
+        uma até tal área. Nome da Turma, descrição e visibilidade são campos
+        obrigatórios.
       </StyledParagraph>
 
       <StyledFigure>

@@ -46,14 +46,14 @@ const GeneralInfo = () => {
 
       <p>
         <TextBold>Nível de Dificuldade: </TextBold> permite o professor escolher
-        o quão díficil é a questao (no momento não tem impacto no cálculo do
+        o quão díficil é a questão (no momento não tem impacto no cálculo do
         score do aluno).
       </p>
 
       <Divider style={{ margin: '20px 0' }} />
 
       <p>
-        <TextBold>Tags: </TextBold> são palavras-chaves pelo qual a questão pode
+        <TextBold>Tags: </TextBold> são palavras-chave pelo qual a questão pode
         ser buscada no banco de questões. O campo é obrigatorio caso o professor
         marque a opção{' '}
         <TextBold>{`"Disponível no Banco de Questões"`}</TextBold>.

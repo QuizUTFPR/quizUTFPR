@@ -31,8 +31,8 @@ const HowToDelete = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, abra a seção onde se encontra a turma que deseja remover
-        (pública ou privada).
+        Abra a seção onde se encontra a turma que deseja remover (pública ou
+        privada).
       </StyledParagraph>
 
       <StyledFigure>
@@ -41,7 +41,7 @@ const HowToDelete = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, clique no ícone correspondente a remoção da turma.
+        Clique no ícone correspondente a remoção da turma.
       </StyledParagraph>
 
       <StyledFigure>

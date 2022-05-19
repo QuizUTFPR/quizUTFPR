@@ -37,11 +37,10 @@ const StudentAnalyses = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Nesta tela, também conseguimos visualizar as respostas de forma
-        separada. Para cada aluno, é exibido as informações de respostas para
-        cada questão do quiz, por exemplo, percentual de acerto, tempo de
-        resposta e tipo da questão. Assim como, a alternativa escolhida pelo
-        aluno.
+        Nesta tela também conseguimos visualizar as respostas de forma separada.
+        Para cada aluno, é exibido as informações de respostas para cada questão
+        do quiz, por exemplo, percentual de acerto, tempo de resposta e tipo da
+        questão. Assim como, a alternativa escolhida pelo aluno.
       </StyledParagraph>
 
       <StyledFigure>

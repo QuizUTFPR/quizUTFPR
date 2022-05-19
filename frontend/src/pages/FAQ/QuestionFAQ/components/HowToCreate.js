@@ -49,8 +49,8 @@ const HowToCreate = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Após criar a questão, para garantir que suas alterações não serão
-        perdidas, clique em <TextStrongBold>{`"SALVAR"`}</TextStrongBold>.
+        Para garantir que suas alterações não serão perdidas, clique em{' '}
+        <TextStrongBold>{`"SALVAR"`}</TextStrongBold>.
       </StyledParagraph>
 
       <StyledFigure>

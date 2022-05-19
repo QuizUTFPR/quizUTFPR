@@ -34,8 +34,8 @@ const HowToCreate = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, no canto superior direito da tela de listagem de quizzes,
-        clique no botão <TextBold>{`"CRIAR QUIZ"`}</TextBold>.
+        No canto superior direito da tela de listagem de quizzes, clique no
+        botão <TextBold>{`"CRIAR QUIZ"`}</TextBold>.
       </StyledParagraph>
 
       <StyledFigure>

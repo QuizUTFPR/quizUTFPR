@@ -32,8 +32,8 @@ const HowToAppendQuiz = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, abra a seção onde se encontra a turma que deseja vincular
-        quizzes (pública ou privada).
+        Abra a seção onde se encontra a turma que deseja vincular quizzes
+        (pública ou privada).
       </StyledParagraph>
 
       <StyledFigure>
@@ -42,8 +42,8 @@ const HowToAppendQuiz = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, clique na área de título e descrição da Turma para abrir o
-        gerenciador de turmas.
+        Clique na área de título e descrição da Turma para abrir o gerenciador
+        de turmas.
       </StyledParagraph>
 
       <StyledFigure>
@@ -84,8 +84,8 @@ const HowToAppendQuiz = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Após isso, uma janela será aberta contendo todos os seus quizzes
-        públicados. Para vincular quizzes, basta clicar em cima do mesmo.
+        A próxima janela a ser aberta irá conter todos os seus quizzes
+        publicados. Para vincular quizzes, basta clicar em cima do mesmo.
       </StyledParagraph>
 
       <StyledFigure>
@@ -96,7 +96,8 @@ const HowToAppendQuiz = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Após isso, os quizzes selecionados já estarão vinculados em sua Turma.
+        Finalizado o processo, os quizzes selecionados já estarão vinculados em
+        sua Turma.
       </StyledParagraph>
     </Wrapper>
   );

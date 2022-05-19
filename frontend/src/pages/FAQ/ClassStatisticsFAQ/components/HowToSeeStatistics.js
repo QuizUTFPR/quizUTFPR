@@ -32,8 +32,8 @@ const HowToSeeStatistics = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, abra a seção onde se encontra a turma que deseja vincular
-        quizzes (pública ou privada).
+        Abra a seção onde se encontra a turma que deseja vincular quizzes
+        (pública ou privada).
       </StyledParagraph>
 
       <StyledFigure>
@@ -42,8 +42,8 @@ const HowToSeeStatistics = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, clique na área de título e descrição da Turma para abrir o
-        gerenciador de turmas.
+        Clique na área de título e descrição da Turma para abrir o gerenciador
+        de turmas.
       </StyledParagraph>
 
       <StyledFigure>

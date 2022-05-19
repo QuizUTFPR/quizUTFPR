@@ -19,6 +19,15 @@ const GeneralInfo = () => {
 
       <Divider style={{ margin: '20px 0' }} />
 
+      <StyledTypography>O que é uma Turma?</StyledTypography>
+      <p>
+        Uma turma é um agrupamento de alunos onde quizzes podem ser associados e
+        pode-se realizar o acompanhamento do desempenho dos alunos por meio de
+        estatísticas.
+      </p>
+
+      <Divider style={{ margin: '20px 0' }} />
+
       <StyledTypography>O que é uma Turma Privada?</StyledTypography>
       <p>
         Uma turma privada é aquela que não será exibida nas listagens de turmas
@@ -31,9 +40,9 @@ const GeneralInfo = () => {
 
       <StyledTypography>O que é uma Turma Pública?</StyledTypography>
       <p>
-        Uma turma pública é aquela que pode ser listada para os alunos. Qualquer
-        aluno pode vê-la, acessá-la e inscrever-se na mesma, sem a necessidade
-        de saber o seu PIN.
+        Uma turma pública é aquela que pode ser listada para os usuários.
+        Qualquer usuário pode vê-la, acessá-la e inscrever-se na mesma, sem a
+        necessidade de saber o seu PIN.
       </p>
 
       <Divider style={{ margin: '20px 0' }} />

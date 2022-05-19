@@ -33,7 +33,7 @@ const HowToSeeStatistics = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Feito isso, clique no ícone correspondente a estatística do Quiz.
+        Clique no ícone correspondente a estatística do Quiz.
       </StyledParagraph>
 
       <StyledFigure>

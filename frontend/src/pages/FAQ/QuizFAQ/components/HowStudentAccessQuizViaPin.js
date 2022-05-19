@@ -50,7 +50,7 @@ const HowStudentAccessQuizViaPin = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Após o aluno clicar no botão de confirmar no teclado, o mesmo será
+        Após o aluno clicar no botão de confirmar no teclado, ele será
         redirecionado para a página do Quiz referente ao PIN.
       </StyledParagraph>
 

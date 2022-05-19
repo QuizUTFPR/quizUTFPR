@@ -39,7 +39,8 @@ export const StyledParagraph = styled.p`
 
 export const StyledFigure = styled.figure`
   margin: 30px 0;
-  border: thin #c0c0c0 solid;
+  border: 4px #c0c0c0 solid;
+  border-radius: 3px;
   display: flex;
   flex-flow: column;
   padding: 5px;
