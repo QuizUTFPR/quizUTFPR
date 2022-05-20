@@ -54,7 +54,7 @@ const GeneralInfo = () => {
       <p>
         <TextBold>Quem não respondeu nenhum quiz:</TextBold> é exibido o nome
         dos alunos inscritos na turma que não responderam nenhum quiz vinculado
-        a turma.
+        à turma.
       </p>
     </>
   );

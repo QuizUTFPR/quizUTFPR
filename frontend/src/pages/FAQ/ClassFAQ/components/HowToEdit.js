@@ -49,8 +49,8 @@ const HowToEdit = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Uma janela será aberta, possibilitando a alterações de informações sobre
-        a Turma.
+        Uma janela será aberta, possibilitando as alterações de informações
+        sobre a Turma.
       </StyledParagraph>
 
       <StyledFigure>
@@ -59,7 +59,7 @@ const HowToEdit = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Após preencher as informações que deseja alterar, basta clicar no botão{' '}
+        Após fazer as alterações desejadas, basta clicar no botão{' '}
         <TextBold>{`"SALVAR ALTERAÇÕES"`}</TextBold> e pronto, sua Turma será
         editada.
       </StyledParagraph>

@@ -47,8 +47,8 @@ const HowToSeeStatistics = () => {
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg src={OpenManageClass} alt="Abrir gerenciador de turms." />
-        <StyledFigureCaption>Abrir gerenciador de turms.</StyledFigureCaption>
+        <StyledImg src={OpenManageClass} alt="Abrir gerenciador de turmas." />
+        <StyledFigureCaption>Abrir gerenciador de turmas.</StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>

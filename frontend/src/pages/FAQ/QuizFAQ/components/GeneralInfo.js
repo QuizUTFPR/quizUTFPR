@@ -29,9 +29,9 @@ const GeneralInfo = () => {
 
       <StyledTypography>O que é um Quiz Público?</StyledTypography>
       <p>
-        Um quiz público é aquele que pode ser listado para os alunos. Qualquer
-        aluno pode vê-lo, acessá-lo e respondê-lo sem a necessidade de saber o
-        PIN do mesmo.
+        Um quiz público é aquele que pode ser listado para todos os usuários.
+        Qualquer usuário pode vê-lo, acessá-lo e respondê-lo sem a necessidade
+        de saber o seu PIN.
       </p>
 
       <Divider style={{ margin: '20px 0' }} />

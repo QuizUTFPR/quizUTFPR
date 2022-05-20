@@ -19,17 +19,17 @@ import {
 const GeneralInfo = () => {
   return (
     <>
-      <StyledTypography>O que é Estatísticas da Quiz?</StyledTypography>
+      <StyledTypography>O que é {`"Estatísticas do Quiz?"`}</StyledTypography>
       <p>
         É uma página que reune dados sobre as respostas dos alunos a um quiz
-        específico. Esta possibilita o professor a realizar análises mais
+        específico. Esta possibilita ao professor realizar análises mais
         detalhadas para cada questão ou aluno.
       </p>
 
       <Divider style={{ margin: '20px 0' }} />
 
       <StyledTypography>
-        Quais são as formas de filtragem das estatísticas?
+        Quais são as formas de filtragem de estatísticas?
       </StyledTypography>
       <p>
         A filtragem das estatísticas do quiz é feita pela combinação de duas
@@ -60,11 +60,11 @@ const GeneralInfo = () => {
 
       <p>
         <TextStrongBold>Filtrar por Tentativa:</TextStrongBold> é a forma como
-        será selecionado a tentativa de resposta dos alunos.
+        será selecionada a tentativa de resposta dos alunos.
       </p>
 
       <StyledFigure>
-        <StyledImg src={FilterAttempt} alt="Filtragem por Tentativas." />
+        <StyledImg src={FilterAttempt} alt="Filtrar por Tentativas." />
         <StyledFigureCaption>Filtrar por Tentativas.</StyledFigureCaption>
       </StyledFigure>
 

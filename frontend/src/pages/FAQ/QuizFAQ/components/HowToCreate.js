@@ -40,9 +40,7 @@ const HowToCreate = () => {
 
       <StyledFigure>
         <StyledImg src={MyQuizzes} alt="Tela de listagem dos quizzes." />
-        <StyledFigureCaption>
-          Card com o botão {`"CRIAR QUIZ"`}.
-        </StyledFigureCaption>
+        <StyledFigureCaption>Botão {`"CRIAR QUIZ"`}.</StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>

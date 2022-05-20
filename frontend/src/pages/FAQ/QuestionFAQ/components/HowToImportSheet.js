@@ -40,7 +40,7 @@ const HowToImportSheet = () => {
       <StyledParagraph>
         Para realizar a importação, primeiramente clique no botão{' '}
         <TextStrongBold>{`"CRIAR"`}</TextStrongBold> presente no canto inferior
-        esquerda da tela de gerenciamento de questões do quiz.
+        esquerdo da tela de gerenciamento de questões do quiz.
       </StyledParagraph>
 
       <StyledFigure>

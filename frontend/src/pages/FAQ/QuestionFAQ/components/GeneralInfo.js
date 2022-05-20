@@ -53,9 +53,9 @@ const GeneralInfo = () => {
       <Divider style={{ margin: '20px 0' }} />
 
       <p>
-        <TextBold>Tags: </TextBold> são palavras-chave pelo qual a questão pode
-        ser buscada no banco de questões. O campo é obrigatorio caso o professor
-        marque a opção{' '}
+        <TextBold>Tags: </TextBold> são palavras-chave pelas quais a questão
+        pode ser buscada no banco de questões. O campo é obrigatorio caso o
+        professor marque a opção{' '}
         <TextBold>{`"Disponível no Banco de Questões"`}</TextBold>.
       </p>
 
@@ -63,8 +63,8 @@ const GeneralInfo = () => {
 
       <p>
         <TextBold>Disponível no Banco de Questões: </TextBold> usado para
-        informar que aquela questão poderá ser reutilizada em outros quizzes, ou
-        seja, a mesma estará presente no banco de questões.
+        informar que a questão poderá ser reutilizada em outros quizzes. Ou
+        seja, ela estará presente no banco de questões.
       </p>
     </>
   );

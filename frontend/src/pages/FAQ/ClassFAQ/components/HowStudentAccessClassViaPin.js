@@ -32,9 +32,10 @@ const HowStudentAccessClassViaPin = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        O professor deverá repassar aos alunos o PIN da turma para o mesmo
-        inserir na tela <TextBold>{`"Turmas"`}</TextBold> do aplicativo. O aluno
-        deverá clicar no botão da lupa no canto inferior direito com o ícone.
+        O professor deverá repassar aos alunos o PIN da turma para que eles
+        possam inserir na tela <TextBold>{`"Turmas"`}</TextBold> do aplicativo.
+        O aluno deverá clicar no botão da lupa no canto inferior direito com o
+        ícone.
       </StyledParagraph>
 
       <StyledFigure>

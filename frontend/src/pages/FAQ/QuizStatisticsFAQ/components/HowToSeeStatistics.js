@@ -28,8 +28,10 @@ const HowToSeeStatistics = () => {
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg src={InitialScreen} alt="Menu com botao meus quizzes." />
-        <StyledFigureCaption>Menu com botao meus quizzes.</StyledFigureCaption>
+        <StyledImg src={InitialScreen} alt={`Menu com botão "meus quizzes".`} />
+        <StyledFigureCaption>
+          Menu com botão {`"meus quizzes"`}.
+        </StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>

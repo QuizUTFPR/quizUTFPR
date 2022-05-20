@@ -60,9 +60,9 @@ const HowToDelete = () => {
       <StyledFigure>
         <StyledImg
           src={OpenModalDeleteClass}
-          alt="Modal de remoção da Turma."
+          alt="Janela de remoção da Turma."
         />
-        <StyledFigureCaption>Modal de remoção da Turma.</StyledFigureCaption>
+        <StyledFigureCaption>Janela de remoção da Turma.</StyledFigureCaption>
       </StyledFigure>
     </Wrapper>
   );

@@ -26,7 +26,7 @@ const HowToClone = () => {
 
       <StyledFigure>
         <StyledImg src={InitialScreen} alt="Menu com botao minhas turmas." />
-        <StyledFigureCaption>Menu com botao minhas turmas.</StyledFigureCaption>
+        <StyledFigureCaption>Menu com botão minhas turmas.</StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>
@@ -54,8 +54,8 @@ const HowToClone = () => {
       </StyledParagraph>
 
       <StyledFigure>
-        <StyledImg src={CloneClass} alt="Modal de clonar Turma." />
-        <StyledFigureCaption>Modal de clonar Turma.</StyledFigureCaption>
+        <StyledImg src={CloneClass} alt="Janela de clonar Turma." />
+        <StyledFigureCaption>Janela de clonar Turma.</StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>

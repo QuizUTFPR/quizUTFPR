@@ -33,18 +33,18 @@ const HowToUseQuestionDatabase = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Um modal será aberto lhe dando opção de escolher como quer criar a nova
-        questão. Clique em{' '}
+        Uma janela será aberta lhe dando opção de escolher como quer criar a
+        nova questão. Clique em{' '}
         <TextStrongBold>{`"USAR QUESTÃO DO BANCO"`}</TextStrongBold>.
       </StyledParagraph>
 
       <StyledFigure>
         <StyledImg
           src={Options}
-          alt="Modal com opções para criação das questões."
+          alt="Janela com opções para criação das questões."
         />
         <StyledFigureCaption>
-          Modal com opções para criação das questões.
+          Janela com opções para criação das questões.
         </StyledFigureCaption>
       </StyledFigure>
 
@@ -57,9 +57,9 @@ const HowToUseQuestionDatabase = () => {
       <StyledFigure>
         <StyledImg
           src={SearchByTagsExample}
-          alt="Modal para informar as tags."
+          alt="Janela para informar as tags."
         />
-        <StyledFigureCaption>Modal para informar as tags.</StyledFigureCaption>
+        <StyledFigureCaption>Janela para informar as tags.</StyledFigureCaption>
       </StyledFigure>
 
       <StyledParagraph>
@@ -71,10 +71,10 @@ const HowToUseQuestionDatabase = () => {
       <StyledFigure>
         <StyledImg
           src={QuestionsOfDatabase}
-          alt="Modal com listagem das questões que possuem a tag informada."
+          alt="Janela com listagem das questões que possuem a tag informada."
         />
         <StyledFigureCaption>
-          Modal com listagem das questões que possuem a tag informada.
+          Janela com listagem das questões que possuem a tag informada.
         </StyledFigureCaption>
       </StyledFigure>
 

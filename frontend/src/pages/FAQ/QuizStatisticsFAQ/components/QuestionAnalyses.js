@@ -20,7 +20,7 @@ const QuestionAnalyses = () => {
   return (
     <Wrapper>
       <StyledParagraph>
-        O gráfico apresentado nesta página é uma forma visual de mostrar a
+        O gráfico apresentado nesta página é uma forma mostrar visualmente a
         quantidade de questões que atingiram determinadas médias de porcentagem
         de acerto. Com isso o professor consegue ter noção de quais questões
         estão sendo mais (ou menos) acertadas pelos alunos.
@@ -37,10 +37,10 @@ const QuestionAnalyses = () => {
       </StyledFigure>
 
       <StyledParagraph>
-        Nesta tela, também conseguimos visualizar as respostas de forma
-        separada. Para cada questão, é exibido as informações como percentual de
-        acerto, tempo médio de resposta e quantidade de jogadores (alunos que
-        responderam a questão). Assim como, as alternativas escolhidas por cada
+        Nesta tela, também consegue-se visualizar as respostas de forma
+        separada. Para cada questão, são exibidas as informações como percentual
+        de acerto, tempo médio de resposta e quantidade de jogadores (alunos que
+        responderam a questão). Além disso, as alternativas escolhidas por cada
         aluno são mostradas na listagem de Respostas.
       </StyledParagraph>
 
