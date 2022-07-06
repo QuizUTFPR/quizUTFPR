@@ -2,60 +2,9 @@ read -p "Digite o domínio do frontend (ex: meudominio.com): " domain_front
 read -p "Digite o domínio da api (ex: meudominio.com): " domain_api
 read -p "Digite um e-mail (necessário para gerar os certificados): " email
 
-echo "Instalando o Docker..."
 
-curl -fsSL https://get.docker.com -o get-docker.sh
-
-echo "executando get-docker"
-
-sudo sh get-docker.sh
-
-echo "executando rm get-docker"
-
-rm get-docker.sh
-
-echo "instalando docker-compose"
-
-sudo apt install docker-compose -y
-
-echo "criando grupo do docker"
 
 sudo newgrp docker <<EONG
-
-
-echo "Criando pasta para upload de arquivos..."
-
-sudo mkdir -p ./backend/tmp/uploads
-
-echo "Configurando Verão do Node"
-
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-source ~/.bashrc
-
-nvm install v16.13.2
-nvm use v16.13.2
-
-echo "Versão do node instalada:"
-node -v
-
-echo "Iniciando processo de build do painel de controle"
-
-npm install --global yarn
-cd frontend
-sudo rm -r node_modules
-sudo rm yarn.lock
-yarn
-
-sudo rm -r build
-yarn build
-cd ..
-
-docker-compose -f docker-compose-prod-only-api.yml up -d --build
-
 echo "Instalando e configurando o Nginx..."
 
 sudo apt install nginx certbot python3-certbot-nginx -y
