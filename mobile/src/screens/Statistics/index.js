@@ -130,7 +130,7 @@ const Statistics = ({ route }) => {
                   })
                 )
               }
-              colors={theme.color.gradients.orange}
+              colors={theme.color.gradients.secondary}
             >
               CONCLUIR
             </ButtonGradient>

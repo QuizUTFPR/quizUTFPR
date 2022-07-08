@@ -27,7 +27,7 @@ const InitialScreen = ({ navigation }) => (
       <WrapperButton>
         <ButtonGradient
           variant="primary"
-          colors={theme.color.gradients.orange}
+          colors={theme.color.gradients.secondary}
           onPress={() => navigation.navigate('Login')}
           icon="login-variant"
         >
@@ -37,7 +37,7 @@ const InitialScreen = ({ navigation }) => (
       {/* <WrapperButton>
         <ButtonGradient
           variant="primary"
-          colors={theme.color.gradients.orange}
+          colors={theme.color.gradients.secondary}
           onPress={() => navigation.navigate('Register')}
           icon="account-plus"
         >

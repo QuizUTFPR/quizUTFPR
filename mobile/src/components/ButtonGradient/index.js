@@ -41,7 +41,7 @@ WrapperStyledButton.defaultProps = {
   onPress: () => {},
   activeOpacity: 0.7,
   underlayColor: theme.color.whiteGrey,
-  colors: theme.color.gradients.purple,
+  colors: theme.color.gradients.primary,
   loading: false,
 };
 

@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import theme from '../../styles/theme';
 
 export const QuestionContainer = styled(LinearGradient).attrs({
-  colors: theme.color.gradients.purple,
+  colors: theme.color.gradients.primary,
 })`
   flex: 1;
   flex-direction: column;

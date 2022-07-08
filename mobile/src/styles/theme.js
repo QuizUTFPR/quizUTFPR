@@ -10,16 +10,17 @@ export function normalize(size) {
   }
   return Math.round(PixelRatio.roundToNearestPixel(size)) - 2;
 }
+
 let FONT_BACK_LABEL = normalize(14);
 
 const backgroundColorButton = theming.variants('mode', 'variant', {
-  primary: { light: '#4B24B1' },
-  secondary: { light: '#FFFFFF' },
+  primary: { light: '#4B24B1' }, // Cor principal do fundo do botão
+  secondary: { light: '#FFFFFF' }, // Cor secundaria do fundo do botão
 });
 
 const textColorButton = theming.variants('mode', 'variant', {
-  primary: { light: '#FFFFFF' },
-  secondary: { light: 'black' },
+  primary: { light: '#FFFFFF' }, // Cor principal do texto do botão
+  secondary: { light: 'black' }, // Cor secundaria do texto do botão
 });
 
 const fillColor = theming.variants('mode', 'fill', {
@@ -35,9 +36,6 @@ if (PixelRatio.get() <= 2) {
 } else {
   FONT_BACK_LABEL = normalize(13);
 }
-
-console.log('SCREEN_HEIGHT', SCREEN_HEIGHT);
-console.log('SCREEN_WIDTH', SCREEN_WIDTH);
 
 // FONTES
 const FONT_SIZE_NORMAL = normalize(FONT_BACK_LABEL + 5);
@@ -82,8 +80,8 @@ const theme = {
     green: '#3CB371',
     blue: '#1e90FF',
     gradients: {
-      orange: ['#fdb646', '#f99f4c'],
-      purple: ['#4B24B1', '#3b1b96'],
+      primary: ['#4B24B1', '#3b1b96'], // Fundo gradiente primário para botões
+      secondary: ['#fdb646', '#f99f4c'], // Fundo gradiente secundario para botões
     },
   },
   size: {
@@ -96,11 +94,7 @@ export const navigationTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    black: '#222222',
-    orange: '#f99f4c',
-    purple: '#4B24B1',
-    white: '#fff',
-    background: '#eaeaf5',
+    activeColorDrawer: '#4B24B1', // Cor usada para status selecionado no menu drawer
   },
 };
 

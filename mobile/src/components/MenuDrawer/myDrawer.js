@@ -26,6 +26,7 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
   const navigation = useNavigation();
   const { studentInfo, logout } = useStudentAuth();
 
+
   return (
     <WrapperMyDrawer style={{ flex: 1 }}>
       <Avatar
@@ -45,7 +46,7 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
             <MaterialIcons
               name="verified"
               size={size}
-              color={focused ? colors.purple : 'grey'}
+              color={focused ? colors.activeColorDrawer : 'grey'}
             />
           )}
           label={({ color }) => (
@@ -64,7 +65,7 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
             <MaterialCommunityIcons
               name="logout-variant"
               size={size}
-              color={focused ? colors.purple : 'grey'}
+              color={focused ? colors.activeColorDrawer : 'grey'}
             />
           )}
           label={({ color }) => (

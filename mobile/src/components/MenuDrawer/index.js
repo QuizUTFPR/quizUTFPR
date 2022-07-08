@@ -30,7 +30,7 @@ const DrawerComponent = () => {
     <Suspense fallback={<Loading />}>
       <Drawer.Navigator
         screenOptions={{
-          activeTintColor: colors.purple,
+          activeTintColor: colors.activeColorDrawer,
           itemStyle: {},
           labelStyle: {
             fontFamily: 'PoppinsSemiBold',
@@ -49,7 +49,7 @@ const DrawerComponent = () => {
               <Ionicons
                 name="md-home"
                 size={size}
-                color={focused ? colors.purple : 'grey'}
+                color={focused ? colors.activeColorDrawer : 'grey'}
               />
             ),
           }}
@@ -65,7 +65,7 @@ const DrawerComponent = () => {
               <MaterialIcons
                 name="feedback"
                 size={size}
-                color={focused ? colors.purple : 'grey'}
+                color={focused ? colors.activeColorDrawer : 'grey'}
               />
             ),
           }}

@@ -15,8 +15,6 @@ export default async (req, res, next) => {
 
   const [, token] = authorization.split(' ');
 
-  console.log('token professor', token);
-
   try {
     const { id } = await promisify(jwt.verify)(token, authConfig.secret);
     req.userId = id;

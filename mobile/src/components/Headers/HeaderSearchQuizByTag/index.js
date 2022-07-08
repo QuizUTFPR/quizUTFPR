@@ -50,7 +50,7 @@ const Header = () => {
       </BackgroundHeader>
       <StyledButton
         loading={loading}
-        colors={theme.color.gradients.orange}
+        colors={theme.color.gradients.secondary}
         variant="primary"
         onPress={async () => {
           setLoading(true);
