@@ -6,28 +6,24 @@ echo "Instalando o Docker..."
 
 curl -fsSL https://get.docker.com -o get-docker.sh
 
-echo "executando get-docker"
+echo "Executando get-docker"
 
 sudo sh get-docker.sh
 
-echo "executando rm get-docker"
+echo "Executando rm get-docker"
 
 rm get-docker.sh
 
-echo "instalando docker-compose"
+echo "Instalando docker-compose"
 
 sudo apt install docker-compose -y
-
-echo "criando grupo do docker"
-
-sudo newgrp docker <<EONG
 
 
 echo "Criando pasta para upload de arquivos..."
 
 sudo mkdir -p ./backend/tmp/uploads
 
-echo "Configurando Verão do Node"
+echo "Configurando versão do Node"
 
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
@@ -36,8 +32,9 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 source ~/.bashrc
 
-nvm install v16.13.2
-nvm use v16.13.2
+nvm install v16.16.0
+nvm use v16.16.0
+nvm alias default 16.16.0
 
 echo "Versão do node instalada:"
 node -v
@@ -48,11 +45,14 @@ npm install --global yarn
 cd frontend
 sudo rm -r node_modules
 sudo rm yarn.lock
-yarn
+yarn --production=true
 
 sudo rm -r build
 yarn build
 cd ..
+
+
+echo "Iniciando container do backend"
 
 docker-compose -f docker-compose-prod-only-api.yml up -d --build
 
@@ -61,21 +61,23 @@ echo "Instalando e configurando o Nginx..."
 sudo apt install nginx certbot python3-certbot-nginx -y
 
 
-sudo rm -r /usr/share/nginx/html/*
-sudo cp -r ./frontend/build/* /usr/share/nginx/html
+sudo rm -r /var/www/html/quiz
+sudo mkdir /var/www/html/quiz
+sudo cp -r ./frontend/build/* /var/www/html/quiz
 
-sudo rm /etc/nginx/sites-available/quizapi.dacom.cm.utfpr.edu.br
-sudo rm /etc/nginx/sites-available/quiz.dacom.cm.utfpr.edu.br
-sudo rm /etc/nginx/sites-enabled/quizapi.dacom.cm.utfpr.edu.br
-sudo rm /etc/nginx/sites-enabled/quiz.dacom.cm.utfpr.edu.br
+
+sudo rm /etc/nginx/sites-available/$domain_api
+sudo rm /etc/nginx/sites-available/$domain_front
+sudo rm /etc/nginx/sites-enabled/$domain_api
+sudo rm /etc/nginx/sites-enabled/$domain_front
 sudo rm /etc/nginx/nginx.conf
 
-sudo cp nginx/quizapi.dacom.cm.utfpr.edu.br /etc/nginx/sites-available
-sudo cp nginx/quiz.dacom.cm.utfpr.edu.br /etc/nginx/sites-available
+sudo cp nginx/$domain_api /etc/nginx/sites-available
+sudo cp nginx/$domain_front /etc/nginx/sites-available
 sudo cp nginx/nginx.conf /etc/nginx/nginx.conf
 
-sudo ln -s /etc/nginx/sites-available/quizapi.dacom.cm.utfpr.edu.br /etc/nginx/sites-enabled/quizapi.dacom.cm.utfpr.edu.br
-sudo ln -s /etc/nginx/sites-available/quiz.dacom.cm.utfpr.edu.br /etc/nginx/sites-enabled/quiz.dacom.cm.utfpr.edu.br
+sudo ln -s /etc/nginx/sites-available/$domain_api /etc/nginx/sites-enabled/$domain_api
+sudo ln -s /etc/nginx/sites-available/$domain_front /etc/nginx/sites-enabled/$domain_front
 
 echo "Reiniciando nginx"
 
@@ -102,6 +104,3 @@ echo "PATH=$PATH" > /etc/cron.d/certbot-renew
 echo "@monthly certbot renew --nginx >> /var/log/cron.log 2>&1" >>/etc/cron.d/certbot-renew
 
 crontab /etc/cron.d/certbot-renew
-
-EONG
-

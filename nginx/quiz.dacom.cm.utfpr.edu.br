@@ -9,7 +9,7 @@ server {
     }
 
     location / {
-        root /usr/share/nginx/html;
+        root /var/www/html/quiz;
         index index.html index.htm;
         try_files $uri $uri/ /index.html;
     }

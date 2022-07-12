@@ -14,10 +14,8 @@ services:
       - '3307:3306'
     volumes:
       - ./mysql_dev:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=SENHA_DO_USUARIO_MYSQL_AQUI
-      - MYSQL_PASSWORD=SENHA_DO_BANCO
-      - MYSQL_DATABASE=NOME_DO_BANCO
+    env_file:
+      - ./mysql.env
     networks:
       - app-tier 
 
@@ -34,22 +32,8 @@ services:
     depends_on:
       - db
     restart: on-failure
-    environment:
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_USER=root
-      - DB_PASS=SENHA_DO_BANCO
-      - DB_NAME=NOME_DO_BANCO
-      - DB_DIALECT=mysql
-      - APP_URL=http://localhost:3333
-      - PORT=3333
-      - SECRET=SECRET_AQUI
-      - EXPIRE_IN=DIAS_PARA_EXPIRAR_TOKEN
-      - REFRESH_EXPIRATION=    
-      - TIMEZONE=+03:00
-      - LDAP_URL=
-      - LDAP_USERNAME=
-      - LDAP_PASSWORD=
+    env_file:
+      - ./backend/.env
     networks:
       - app-tier
 
@@ -59,8 +43,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    environment:
-        - REACT_APP_BASE_URL=http://localhost:3333
+    env_file:
+      - ./frontend/.env
     volumes:
       - ./frontend:/home/node/react
       - /home/node/react/node_modules
