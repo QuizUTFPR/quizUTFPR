@@ -5,13 +5,43 @@ import theming from 'styled-theming';
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export function normalize(size) {
-  if (Platform.OS === 'ios') {
+  if (Platform.OS === 'ios')
     return Math.round(PixelRatio.roundToNearestPixel(size));
-  }
+
   return Math.round(PixelRatio.roundToNearestPixel(size)) - 2;
 }
 
 let FONT_BACK_LABEL = normalize(14);
+
+if (PixelRatio.get() <= 2) {
+  FONT_BACK_LABEL = normalize(12);
+} else {
+  FONT_BACK_LABEL = normalize(13);
+}
+
+// ****************************
+// FONTES
+// ****************************
+
+const FONT_SIZE_NORMAL = normalize(FONT_BACK_LABEL + 5);
+let FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 5);
+let FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 10);
+const FONT_SIZE_EXTRA_LARGE = normalize(FONT_BACK_LABEL + 20);
+
+if (SCREEN_HEIGHT < 1000 && SCREEN_WIDTH > 400) {
+  FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 7);
+  FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 20);
+} else if (SCREEN_HEIGHT < 1000) {
+  FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 14);
+  FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 20);
+} else {
+  FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 15);
+  FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 40);
+}
+
+// ****************************
+// CORES
+// ****************************
 
 const backgroundColorButton = theming.variants('mode', 'variant', {
   primary: { light: '#4B24B1' }, // Cor principal do fundo do botão
@@ -30,29 +60,6 @@ const fillColor = theming.variants('mode', 'fill', {
   orange: { light: '#f99f4c' },
   lightGrey: { light: '#cecece' },
 });
-
-if (PixelRatio.get() <= 2) {
-  FONT_BACK_LABEL = normalize(12);
-} else {
-  FONT_BACK_LABEL = normalize(13);
-}
-
-// FONTES
-const FONT_SIZE_NORMAL = normalize(FONT_BACK_LABEL + 5);
-let FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 5);
-let FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 10);
-const FONT_SIZE_EXTRA_LARGE = normalize(FONT_BACK_LABEL + 20);
-
-if (SCREEN_HEIGHT < 1000 && SCREEN_WIDTH > 400) {
-  FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 7);
-  FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 20);
-} else if (SCREEN_HEIGHT < 1000) {
-  FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 14);
-  FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 20);
-} else {
-  FONT_SIZE_MEDIUM = normalize(FONT_BACK_LABEL + 15);
-  FONT_SIZE_LARGE = normalize(FONT_BACK_LABEL + 40);
-}
 
 const theme = {
   mode: 'light',
