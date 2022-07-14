@@ -53,6 +53,7 @@ export const StyledAccordion = styled(Accordion)`
   margin-bottom: 15px;
   border-radius: 5px;
   border: 1px solid gray;
+  width: 100%;
 `;
 
 export const ClassBar = styled(Grid).attrs({ item: true })`

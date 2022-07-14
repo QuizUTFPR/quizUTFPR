@@ -39,8 +39,12 @@ const Card = ({
           to={to}
           state={{ title, ...props }}
         >
-          <TitleCard color="primary">{title}</TitleCard>
-          <DescriptionCard color="textSecondary">{description}</DescriptionCard>
+          <TitleCard noWrap color="primary">
+            {title}
+          </TitleCard>
+          <DescriptionCard noWrap color="textSecondary">
+            {description}
+          </DescriptionCard>
         </StyledCardActionArea>
       </WrapperContentCard>
       <StyledCardActions>{children}</StyledCardActions>
