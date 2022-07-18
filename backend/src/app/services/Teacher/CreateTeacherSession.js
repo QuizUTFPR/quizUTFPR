@@ -59,7 +59,7 @@ class CreateTeacherSessionService {
     } = responseLoginLDAP.data;
 
     // IMPEDIR ALUNOS DE SE CONECTAR NO 1 DE CONTROLE
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV.toLowerCase() === 'production') {
       if (personCategory.indexOf('alunos') !== -1) {
         const error = new Error();
         error.status = 403;
