@@ -7,7 +7,6 @@
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge">
   <img src="https://img.shields.io/github/stars/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge" alt="Quantidade de Estrelas">
   <img src="https://img.shields.io/github/forks/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge" alt="Quantidade de Forks!">
-  <img src="https://img.shields.io/github/package-json/v/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge" alt="Versão do Projeto.">
 </p>
 
 O projeto é uma plataforma web e móvel para criação e análise de avaliações digitais. O sistema está sendo criado sob orientação dos professores Juliano Henrique Foleis e Marcos Silvano Almeida. O mesmo é composto por um painel de controle utilizado para criação de quizzes, bem como um aplicativo móvel gamificado para que os alunos possam acessá-los e respondê-los.
