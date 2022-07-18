@@ -55,15 +55,18 @@ class CreateTeacherSessionService {
     const {
       email: teacherEmail,
       name: teacherName,
-      // dn: personCategory,
+      dn: personCategory,
     } = responseLoginLDAP.data;
 
     // IMPEDIR ALUNOS DE SE CONECTAR NO 1 DE CONTROLE
-    // if (personCategory.indexOf('alunos') !== -1) {
-    //   return res
-    //     .status(403)
-    //     .json({ error: 'Painel de Controle não permitido para alunos.' });
-    // }
+    if (process.env.NODE_ENV === 'production') {
+      if (personCategory.indexOf('alunos') !== -1) {
+        const error = new Error();
+        error.status = 403;
+        error.response = 'Painel de Controle não permitido para alunos.';
+        throw error;
+      }
+    }
 
     // PROCURO SE JÁ EXISTE CADASTRO DO PROFESSOR NO BANCO
     let teacher = await this.teacherRepository.findOne({
@@ -85,18 +88,7 @@ class CreateTeacherSessionService {
         email: teacherEmail,
       });
 
-    if (!teacher)
-      teacher = await this.teacherRepository.create({
-        uid: username,
-        name: formatedName,
-        email: teacherEmail,
-      });
-
-    // if (!(await teacher.checkPassword(password))) {
-    //   return res.status(403).json({ error: 'Senha Incorreta!' });
-    // }
-
-    const { id, name, uid } = teacher;
+    const { id, name, uid, email } = teacher;
 
     // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
     await this.refreshTokenRepository.delete({
@@ -109,7 +101,7 @@ class CreateTeacherSessionService {
     return {
       teacher: {
         name,
-        email: 'teacherEmail',
+        email,
         uid,
       },
       token,

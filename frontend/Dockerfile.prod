@@ -22,4 +22,6 @@ ENV REACT_APP_BASE_URL $API_URL
 
 ENV GENERATE_SOURCEMAP false
 
+ENV NODE_ENV production
+
 RUN yarn build
