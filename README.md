@@ -1,60 +1,58 @@
-
-
 # Quiz UTFPR
+
 ![image info](./capa.png)
 
 <p align="center">
-<img src="https://img.shields.io/github/repo-size/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge" alt="">
-<img src="https://img.shields.io/github/contributors/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge" alt="">
+  <img alt="Licença" src="https://img.shields.io/github/license/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge">
+  <img src="https://img.shields.io/github/stars/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge" alt="Quantidade de Estrelas">
+  <img src="https://img.shields.io/github/forks/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge" alt="Quantidade de Forks!">
+  <img src="https://img.shields.io/github/package-json/v/jhonatancunha/quizUTFPR?color=%23372775&style=for-the-badge" alt="Versão do Projeto.">
 </p>
 
+O projeto é uma plataforma web e móvel para criação e análise de avaliações digitais. O sistema está sendo criado sob orientação dos professores Juliano Henrique Foleis e Marcos Silvano Almeida. O mesmo é composto por um painel de controle utilizado para criação de quizzes, bem como um aplicativo móvel gamificado para que os alunos possam acessá-los e respondê-los.
 
-O projeto é uma plataforma web e móvel para criação e análise de avaliações digitais. O sistema está sendo criado sob orientação dos professores Juliano Henrique Foleis e Marcos Silvano Almeida. O mesmo é composto por um painel de controle utilizado para criação de quizzes, bem como um aplicativo móvel gamificado para que os alunos possam acessá-los e respondê-los. 
-
-Além disso, o painel de controle também possui uma seção de análise das repostas com algumas opções de filtragem das informações. Tal filtragem visa dar mais opções de visualização dos dados, permitindo a extração de mais informações. 
+Além disso, o painel de controle também possui uma seção de análise das repostas com algumas opções de filtragem das informações. Tal filtragem visa dar mais opções de visualização dos dados, permitindo a extração de mais informações.
 
 A plataforma web conta com um sistema de turmas tanto públicas quanto privadas. Isso para que o criador do quiz tenha um controle sobre as pessoas que o estão respondendo. Na aplicação móvel, é possível que o usuário se inscreva na turma e responda os quizzes que estão anexados nela.
 
 Os estudantes, na aplicação móvel, possuem acesso a um sistema de ranqueamento. Este último oferece uma gamificação como forma de motivação para um maior empenho na reposta dos quizzes.
 
-Outra funcionalidade existente na plataforma web é a criação de um banco de questões. Nele é possível que o usuário adicione sua questão criada a este banco, permitindo que ele as reutilize em outros quizzes. 
+Outra funcionalidade existente na plataforma web é a criação de um banco de questões. Nele é possível que o usuário adicione sua questão criada a este banco, permitindo que ele as reutilize em outros quizzes.
 
 ## Resumo de Features
 
-#### 🧑‍🏫 Professor 
+#### 🧑‍🏫 Professor
 
-* Login via LDAP (*Lightweight Directory Access Protocol*).
-* Gerenciamento de Turmas.
-* Gerenciamento de Quizzes.
-* Banco de Questões Pessoal Disponíveis para Criação dos Quizzes.
-* Busca Personalizada de Questões por Tags.
-* Disponibilização de PIN para Quizzes/Turmas.
-* Estatísticas dos Quizzes:
-    * Visualização por meio de Gráficos.
-    * Filtragem por Turmas:
-        * Turma Especifica.
-        * Geral.
-    * Filtragem dos Scores:
-        * Melhor Tentativa.
-        * Pior Tentativa.
-        * Primeira Tentativa.
-
-
-
+- Login via LDAP (_Lightweight Directory Access Protocol_).
+- Gerenciamento de Turmas.
+- Gerenciamento de Quizzes.
+- Banco de Questões Pessoal Disponíveis para Criação dos Quizzes.
+- Busca Personalizada de Questões por Tags.
+- Disponibilização de PIN para Quizzes/Turmas.
+- Estatísticas dos Quizzes:
+  - Visualização por meio de Gráficos.
+  - Filtragem por Turmas:
+    - Turma Especifica.
+    - Geral.
+  - Filtragem dos Scores:
+    - Melhor Tentativa.
+    - Pior Tentativa.
+    - Primeira Tentativa.
 
 #### 🧑‍🎓 Aluno
 
-* Login via LDAP.
-* Busca Personalizada de Quizzes por Tags.
-* Acesso a Turmas por meio do PIN.
-* Busca de Quizzes por meio de PIN.
-* Escolha de Nickname e Avatares.
-* Marcação de Quiz como Favorito.
-* Pesquisa de Turmas Públicas.
-* Ranqueamento de Respostas dos Quizzes para Gamificação.
-    * Ranking por Turma.
-    * Ranking por Quiz.
-    * Ranking Geral.
+- Login via LDAP.
+- Busca Personalizada de Quizzes por Tags.
+- Acesso a Turmas por meio do PIN.
+- Busca de Quizzes por meio de PIN.
+- Escolha de Nickname e Avatares.
+- Marcação de Quiz como Favorito.
+- Pesquisa de Turmas Públicas.
+- Ranqueamento de Respostas dos Quizzes para Gamificação.
+  - Ranking por Turma.
+  - Ranking por Quiz.
+  - Ranking Geral.
 
 ## ⚙️ Como configurar ambiente de produção?
 
@@ -62,13 +60,13 @@ Outra funcionalidade existente na plataforma web é a criação de um banco de q
 - Renomeie a cópia para docker-compose-prod-only-api.yml
 - Altere as variáveis de ambiente presentes no arquivo
 - Execute o arquivo setup.sh
-  - Informe o domínio do paínel de  controle
+  - Informe o domínio do paínel de controle
   - Informe o domínio da API
   - Informe um e-mail válido
 
 ## :checkered_flag: Como configurar ambiente de desenvolvimento?
 
-#### 📚	Criação do Banco de Dados:
+#### 📚 Criação do Banco de Dados:
 
 Esta aplicação utiliza o SGBD [MySQL](https://www.mysql.com/). É necessário apenas criar o banco, o Sequelize fará todo o resto.
 
@@ -77,7 +75,7 @@ $ mysql -u root -p
 $ create database NOME_DO_BANCO;
 ```
 
-#### ⚙️ Para a API: 
+#### ⚙️ Para a API:
 
 ##### 🖥️ Configurando .env
 
@@ -105,14 +103,15 @@ PORT=PORTA_USADA_PELO_BACKEND
 ```
 
 ##### :checkered_flag: Inicializando
+
 ```
 cd backend
 npm install
-npx sequelize-cli db:migrate 
+npx sequelize-cli db:migrate
 npm run dev
 ```
 
-#### :computer: Para o frontend: 
+#### :computer: Para o frontend:
 
 ##### 🖥️ Configurando .env
 
@@ -128,7 +127,7 @@ npm install
 npm run start
 ```
 
-#### :iphone: Para o mobile: 
+#### :iphone: Para o mobile:
 
 ##### 🖥️ Configurando env.js
 
@@ -137,6 +136,7 @@ export const API_URL = 'URL_DA_API';
 ```
 
 ##### :checkered_flag: Inicializando
+
 ```
 cd mobile
 npm install
@@ -147,22 +147,20 @@ expo start
 
 #### :computer: Painel de Controle
 
-* [React JS](https://reactjs.org)
-* [Material UI](https://mui.com/pt/)
+- [React JS](https://reactjs.org)
+- [Material UI](https://mui.com/pt/)
 
 #### :iphone: Aplicativo Móvel
 
-* [React Native](https://reactnative.dev/)
-* [Expo](https://docs.expo.dev/)
+- [React Native](https://reactnative.dev/)
+- [Expo](https://docs.expo.dev/)
 
 #### ⚙️ API
 
-* [Node.js](https://nodejs.org/en/)
-* [Express.js](https://expressjs.com/pt-br/)
-* [Sequelize](https://sequelize.org/)
-* [MySQL](https://www.mysql.com/)
-
-
+- [Node.js](https://nodejs.org/en/)
+- [Express.js](https://expressjs.com/pt-br/)
+- [Sequelize](https://sequelize.org/)
+- [MySQL](https://www.mysql.com/)
 
 ## :bug: Bugs e Sugestões
 
@@ -171,8 +169,8 @@ Encontrou algum problema ou possui alguma sugestão para a melhoria do projeto? 
 1. Pesquise se já existe alguma issue fechada ou aberta sobre o assunto na ferramenta de [Issue Tracker](https://github.com/jhonatancunha/quizUTFPR/issues).
 2. Caso não encontrar nenhuma issue sobre o assunto, por favor, crie uma [issue](https://github.com/jhonatancunha/quizUTFPR/issues/new) sobre o bug ou sugestão.
 3. Inclua na issue as tags referentes ao assunto abordado:
-    * **feature** - Utilizada para indicar uma sugestão de melhoria para o projeto.
-    *  **bug** - Discussão aberta para informar sobre um possivel bug presente na aplicação.
+   - **feature** - Utilizada para indicar uma sugestão de melhoria para o projeto.
+   - **bug** - Discussão aberta para informar sobre um possivel bug presente na aplicação.
 
 ## :interrobang: Como contribuir?
 
@@ -198,8 +196,7 @@ $ git commit -m "titulo do commit" -m "descrição das alterações"
 $ git push origin <nome-da-branch>
 ```
 
-4. Abra um [Pull Request](https://help.github.com/articles/about-pull-requests/) para a branch *development*. O mesmo deverá com um título claro e uma descrição contendo todas as alterações feitas.
-
+4. Abra um [Pull Request](https://help.github.com/articles/about-pull-requests/) para a branch _development_. O mesmo deverá com um título claro e uma descrição contendo todas as alterações feitas.
 
 ## :mortar_board: Autores
 
@@ -220,6 +217,6 @@ $ git push origin <nome-da-branch>
  </a> <a href="https://github.com/JessePires" title="Repositorio Jessé"></a>
 
 [![Gmail Badge](https://img.shields.io/badge/-jesserocha@alunos.utfpr.edu.br-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:jesserocha@alunos.utfpr.edu.br)](mailto:jesserocha@alunos.utfpr.edu.br)</td>
+
 </tr></table>
 </center>
-
