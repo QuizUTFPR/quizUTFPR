@@ -32,7 +32,7 @@ export const StyledInput = styled.TextInput`
 export const Chip = styled.View`
   min-width: 60px;
   height: 30px;
-  background: ${({ theme }) => theme.color.purple};
+  background: ${({ theme }) => theme.color.primary};
   margin: 3px;
   padding: 0 5px;
   align-items: center;

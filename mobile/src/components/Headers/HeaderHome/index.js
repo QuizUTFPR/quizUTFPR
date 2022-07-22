@@ -75,7 +75,7 @@ const Header = () => {
         </HeaderInformations>
 
         <InputWrapper>
-          <FontAwesome name="search" size={25} color={theme.color.purple} />
+          <FontAwesome name="search" size={25} color={theme.color.primary} />
           <SearchInput
             defaultValue={pin}
             onSubmitEditing={getQuizByPIN}

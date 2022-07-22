@@ -29,7 +29,7 @@ const HeaderQuizRanking = ({ route }) => {
               <Ionicons
                 name="chevron-back"
                 size={32}
-                color={theme.color.purple}
+                color={theme.color.primary}
               />
             </StyledIconButton>
           </GoBackButtonWrapper>

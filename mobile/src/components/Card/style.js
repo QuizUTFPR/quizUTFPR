@@ -22,7 +22,7 @@ export const StyledImage = styled.Image.attrs({
   height: 100%;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  background: ${({ theme }) => theme.color.purple};
+  background: ${({ theme }) => theme.color.primary};
 `;
 
 export const StyledView = styled.View`

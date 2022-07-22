@@ -55,7 +55,7 @@ const TabBar = ({ state, descriptors, navigation }) => (
             <options.Icon
               name={options.name}
               size={options.size}
-              color={isFocused ? theme.color.purple : 'grey'}
+              color={isFocused ? theme.color.primary : 'grey'}
             />
             <StyledText isFocused={isFocused}>{label}</StyledText>
           </StyledTabButton>

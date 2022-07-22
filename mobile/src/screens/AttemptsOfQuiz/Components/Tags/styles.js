@@ -21,7 +21,7 @@ export const TagContainer = styled.TouchableOpacity.attrs({
 export const TagText = styled.Text`
   font-family: PoppinsSemiBold;
   font-size: ${({ theme }) => theme.fontSize.normal}px;
-  color: ${({ theme }) => theme.color.purple};
+  color: ${({ theme }) => theme.color.primary};
   margin-bottom: ${heightPercentageToDp('-0.5%')}px;
 `;
 

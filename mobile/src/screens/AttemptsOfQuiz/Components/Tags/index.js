@@ -49,7 +49,7 @@ const Tags = ({ tags }) => {
         >
           <TagText>{tag}</TagText>
           <IconButtonWrapper>
-            <AntDesign name="arrowright" size={24} color={theme.color.purple} />
+            <AntDesign name="arrowright" size={24} color={theme.color.primary} />
           </IconButtonWrapper>
         </TagContainer>
       ))}

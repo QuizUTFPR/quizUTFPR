@@ -26,7 +26,7 @@ export const StyledTabButton = styled.TouchableOpacity`
 `;
 
 export const StyledText = styled.Text`
-  color: ${({ theme, isFocused }) => (isFocused ? theme.color.purple : 'grey')};
+  color: ${({ theme, isFocused }) => (isFocused ? theme.color.primary : 'grey')};
   font-family: 'PoppinsBold';
   font-size: ${({ theme }) => theme.fontSize.normal}px;
 `;

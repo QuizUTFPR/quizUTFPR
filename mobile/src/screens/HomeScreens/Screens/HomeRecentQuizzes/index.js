@@ -78,7 +78,7 @@ const HomeRecentQuizzes = () => {
                 <CardQuizBasic
                   key={quiz.id}
                   data={quiz}
-                  color={theme.color.purple}
+                  color={theme.color.primary}
                   navigate={() =>
                     navigation.navigate('Descricao', {
                       quiz: {

@@ -20,13 +20,13 @@ export const AttemptCard = styled.View`
 export const Score = styled.Text`
   font-size: ${({ theme }) => theme.fontSize.normal}px;
   font-family: PoppinsSemiBold;
-  color: ${({ theme }) => theme.color.purple};
+  color: ${({ theme }) => theme.color.primary};
 `;
 
 export const StyledHashtag = styled.Text`
   font-size: ${({ theme }) => theme.fontSize.medium}px;
   font-family: PoppinsBold;
-  color: ${({ theme }) => theme.color.lightPurple};
+  color: ${({ theme }) => theme.color.darkPrimary};
   margin-bottom: ${heightPercentageToDp('-1%')}px;
   margin-top: ${heightPercentageToDp('1%')}px;
 `;
@@ -47,7 +47,7 @@ export const AttemptNumberWrapper = styled.View`
 export const AttemptNumber = styled.Text`
   font-size: ${({ theme }) => theme.fontSize.large}px;
   font-family: PoppinsBold;
-  color: ${({ theme }) => theme.color.lightPurple};
+  color: ${({ theme }) => theme.color.darkPrimary};
   margin-bottom: ${heightPercentageToDp('-1%')}px;
 `;
 

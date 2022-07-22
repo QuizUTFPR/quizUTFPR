@@ -94,7 +94,7 @@ const Home = () => {
                       pin: quiz.pin,
                     })
                   }
-                  color={theme.color.purple}
+                  color={theme.color.primary}
                 />
               ))}
             </QuizContainer>

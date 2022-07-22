@@ -61,7 +61,7 @@ const ResultSearchTag = () => {
               <CardQuizInProgress
                 key={item.quiz.id}
                 data={item}
-                color={theme.color.purple}
+                color={theme.color.primary}
                 navigate={() =>
                   navigation.navigate('Descricao', {
                     idStudentQuiz: item.idStudentQuiz,
@@ -99,7 +99,7 @@ const ResultSearchTag = () => {
                     },
                   })
                 }
-                color={theme.color.purple}
+                color={theme.color.primary}
               />
             )
           )}

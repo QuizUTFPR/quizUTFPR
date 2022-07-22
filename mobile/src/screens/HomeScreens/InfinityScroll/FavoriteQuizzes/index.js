@@ -83,7 +83,7 @@ const QuizzesInfinityScroll = () => {
           item?.isInProgress ? (
             <CardQuizInProgress
               data={item}
-              color={theme.color.purple}
+              color={theme.color.primary}
               navigate={() =>
                 navigation.navigate('Descricao', {
                   idStudentQuiz: item.idStudentQuiz,
@@ -106,7 +106,7 @@ const QuizzesInfinityScroll = () => {
           ) : (
             <CardQuizBasic
               data={item.quiz}
-              color={theme.color.purple}
+              color={theme.color.primary}
               navigate={() =>
                 navigation.navigate('Descricao', {
                   quiz: {

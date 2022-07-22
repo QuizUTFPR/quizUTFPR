@@ -78,7 +78,7 @@ const ClassPage = () => {
                   screen: 'InfoOfClass',
                 });
               }}
-              color={theme.color.purple}
+              color={theme.color.primary}
             />
           ))}
         </ClassContainer>

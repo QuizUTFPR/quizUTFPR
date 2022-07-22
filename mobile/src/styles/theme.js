@@ -73,8 +73,8 @@ const theme = {
     fill: fillColor,
     backgroundButton: backgroundColorButton,
     textButton: textColorButton,
-    purple: '#4B24B1',
-    lightPurple: '#4c24b22f',
+    primary: '#4B24B1', // Cor principal do aplicativo
+    darkPrimary: '#4c24b22f', // Versão escura da cor principal
     white: '#fff',
     grey: '#d3d3d3',
     whiteGrey: '#DDDDDD',
@@ -101,7 +101,7 @@ export const navigationTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    activeColorDrawer: '#4B24B1', // Cor usada para status selecionado no menu drawer
+    activeColorDrawer: theme.color.primary, // Cor usada para status selecionado no menu drawer
   },
 };
 

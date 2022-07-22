@@ -34,7 +34,7 @@ const SearchQuizByTagTopTab = () => {
             borderBottomLeftRadius: 30,
             borderBottomStartRadius: 30,
           },
-          tabBarActiveTintColor: theme.color.purple,
+          tabBarActiveTintColor: theme.color.primary,
           tabBarInactiveTintColor: theme.color.grey,
           tabBarIndicatorStyle: {
             backgroundColor: 'transparent',

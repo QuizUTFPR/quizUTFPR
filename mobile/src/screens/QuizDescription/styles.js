@@ -131,7 +131,7 @@ export const StyledTag = styled.Text`
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 20px;
-  background: ${({ theme }) => theme.color.purple};
+  background: ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.white};
 `;
 

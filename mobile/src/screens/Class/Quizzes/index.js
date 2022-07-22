@@ -69,7 +69,7 @@ const QuizzesOfClass = () => {
             <StyledCardQuizBasic
               key={quiz.id}
               data={quiz}
-              color={theme.color.purple}
+              color={theme.color.primary}
               navigate={() => {
                 navigation.navigate('Descricao', {
                   classId: classData.id,

@@ -54,7 +54,7 @@ export const StyledText = styled.Text`
       title ? theme.fontSize.medium : theme.fontSize.normal}px;
   color: ${({ title }) =>
     ({ theme }) =>
-      title ? theme.color.purple : theme.color.black};
+      title ? theme.color.primary : theme.color.black};
 `;
 
 export const Divider = styled.View`
@@ -76,7 +76,7 @@ export const ButtonsContainer = styled.View`
 `;
 
 export const ButtonWrapper = styled.View`
-  border-bottom-color: ${({ theme }) => theme.color.purple};
+  border-bottom-color: ${({ theme }) => theme.color.primary};
   border-bottom-width: ${({ selected }) => (selected ? '3' : '0')}px;
   margin-top: ${({ selected }) => (selected ? '3' : '0')}px;
   margin-right: ${widthPercentageToDp('5%')}px;
@@ -87,7 +87,7 @@ export const StyledButtonNavigation = styled.Text`
   font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ selected }) =>
     ({ theme }) =>
-      selected ? theme.color.purple : theme.color.lightGrey};
+      selected ? theme.color.primary : theme.color.lightGrey};
 `;
 
 export const PlayButtonWrapper = styled.View`

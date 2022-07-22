@@ -85,7 +85,7 @@ const HomeQuizInProgress = () => {
                   <CardQuizInProgress
                     key={key}
                     data={item}
-                    color={theme.color.purple}
+                    color={theme.color.primary}
                     navigate={() =>
                       navigation.navigate('Descricao', {
                         idStudentQuiz: item.idStudentQuiz,

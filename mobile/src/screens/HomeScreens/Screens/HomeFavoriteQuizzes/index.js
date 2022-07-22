@@ -76,7 +76,7 @@ const FavoriteQuizzes = () => {
                   <CardQuizInProgress
                     key={key}
                     data={item}
-                    color={theme.color.purple}
+                    color={theme.color.primary}
                     navigate={() =>
                       navigation.navigate('Descricao', {
                         idStudentQuiz: item.idStudentQuiz,
@@ -100,7 +100,7 @@ const FavoriteQuizzes = () => {
                   <CardQuizBasic
                     key={key}
                     data={item.quiz}
-                    color={theme.color.purple}
+                    color={theme.color.primary}
                     navigate={() =>
                       navigation.navigate('Descricao', {
                         quiz: {

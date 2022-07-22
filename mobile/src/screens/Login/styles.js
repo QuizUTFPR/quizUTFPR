@@ -5,7 +5,7 @@ import Waves from '@assets/purpleWaves.svg';
 import { widthPercentageToDp, heightPercentageToDp } from '@styles/dimensions';
 
 export const BackgroundImage = styled(Waves).attrs(({ theme }) => ({
-  fill: theme.color.purple,
+  fill: theme.color.primary,
 }))`
   margin-left: -32px;
   margin-top: -80px;

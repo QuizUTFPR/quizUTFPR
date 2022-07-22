@@ -25,7 +25,7 @@ export const TextBolder = styled.Text`
 export const TagWrapper = styled.View`
   min-width: 60px;
   height: 30px;
-  background: ${({ theme }) => theme.color.purple};
+  background: ${({ theme }) => theme.color.primary};
   margin: 0 3px;
   padding: 0 10px;
   border-radius: 30px;
