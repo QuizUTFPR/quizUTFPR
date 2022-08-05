@@ -3,6 +3,10 @@ import styled from 'styled-components/native';
 // DIMENSIONS
 import { heightPercentageToDp } from '@styles/dimensions';
 
+export const BackgroundWrapper = styled.View`
+  /* background: white; */
+`;
+
 export const StyledView = styled.View.attrs({ elevation: 5 })`
   flex-direction: row;
   height: ${`${heightPercentageToDp('10%')}px`};
@@ -18,12 +22,11 @@ export const StyledView = styled.View.attrs({ elevation: 5 })`
 export const StyledTabButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
+  margin: 0 10px;
 `;
 
 export const StyledText = styled.Text`
-  color: ${({ theme }) =>
-    (isFocused) =>
-      isFocused ? theme.color.purple : theme.color.grey};
+  color: ${({ theme, isFocused }) => (isFocused ? theme.color.primary : 'grey')};
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize - 4}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
 `;

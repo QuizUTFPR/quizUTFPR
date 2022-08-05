@@ -11,6 +11,11 @@ import Tag from '../app/models/TagModel';
 import Student from '../app/models/StudentModel';
 import StudentQuestionChoice from '../app/models/StudentQuestionChoice';
 import StudentQuiz from '../app/models/StudentQuiz';
+import RefreshToken from '../app/models/RefreshTokenModel';
+import FavoriteStudentQuiz from '../app/models/FavoriteStudentQuiz';
+import Class from '../app/models/ClassModel';
+import Feedback from '../app/models/FeedbackModel';
+import Ranking from '../app/models/RankingModel';
 
 // Buffer
 const models = [
@@ -23,6 +28,11 @@ const models = [
   Student,
   StudentQuestionChoice,
   StudentQuiz,
+  RefreshToken,
+  FavoriteStudentQuiz,
+  Class,
+  Feedback,
+  Ranking,
 ];
 
 class Database {

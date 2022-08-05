@@ -1,4 +1,5 @@
 import React from 'react';
+import Chart from 'react-apexcharts';
 
 // COMPONENTS
 import {
@@ -6,7 +7,7 @@ import {
   AccordionDetails,
   Typography,
   Divider,
-} from '@material-ui/core';
+} from '@mui/material';
 import Tooltip from '@components/ToolTip';
 import CircularProgressWithLabel from '@components/CircularProgressWithLabel';
 
@@ -16,15 +17,17 @@ import {
   CheckCircle,
   Cancel,
   // SentimentSatisfied,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 // STYLES
 import {
   StudentWrapper,
   StudentInformation,
   AnswerNumberOfChoices,
-  NameStudent,
-  ChoiceStudent,
+  BoldText,
+  WrapperStudentChoice,
+  StudentName,
+  BadgeStudentChoice,
   IsStudentChoiceCorrect,
   BoxStudent,
   QuizPercentageHit,
@@ -44,20 +47,27 @@ import {
   TextValueResumeOfQuestion,
 } from '../style';
 
-const getStudentChoice = (choice) => {
+const getStudentChoice = (answer, choice) => {
   const studentChoice = [];
-  if (choice.checked1) studentChoice.push(1);
-  if (choice.checked2) studentChoice.push(2);
-  if (choice.checked3) studentChoice.push(3);
-  if (choice.checked4) studentChoice.push(4);
 
-  if (!studentChoice.length) return ['Sem Escolha'];
+  if (choice.checked1)
+    studentChoice.push({ id: answer[0].id, title: answer[0].title });
+  if (choice.checked2)
+    studentChoice.push({ id: answer[1].id, title: answer[1].title });
+  if (choice.checked3)
+    studentChoice.push({ id: answer[2].id, title: answer[2].title });
+  if (choice.checked4)
+    studentChoice.push({ id: answer[3].id, title: answer[3].title });
+
+  if (!studentChoice.length)
+    return [{ title: 'Sem Escolha', id: crypto.randomUUID() }];
   return studentChoice;
 };
 
 const checkStudentChoice = (answer, choices) => {
-  const studentChoice = getStudentChoice(choices);
-  if (studentChoice[0] === 'Sem Escolha')
+  const studentChoice = getStudentChoice(answer, choices);
+
+  if (studentChoice[0].title === 'Sem Escolha')
     return (
       <Tooltip arrow ariaLabel="errada" title="Questão errada">
         <Cancel color="error" fontSize="large" />
@@ -65,11 +75,11 @@ const checkStudentChoice = (answer, choices) => {
     );
 
   const correctAnswer = answer
-    .map((item, index) => (item.is_correct ? index + 1 : null))
+    .map((item) => (item.isCorrect ? item.id : null))
     .filter(Boolean);
 
   const wrongStudentChoices = studentChoice.filter(
-    (item) => !correctAnswer.includes(item)
+    (item) => !correctAnswer.includes(item.id)
   );
 
   if (wrongStudentChoices.length === 0)
@@ -91,39 +101,100 @@ const checkStudentChoice = (answer, choices) => {
   // );
 };
 
-const AccordionWrapper = ({ quizData }) => {
-  const { questions, percentageOfQuizHit, quiz } = quizData;
+const AccordionWrapper = ({ quizData, pin }) => {
+  const {
+    questions = [],
+    percentageOfQuizHit,
+    quiz,
+    countOfEachPorcentage = [],
+  } = quizData;
+
+  const options = {
+    series: [
+      {
+        name: 'Quantidade de Questões',
+        type: 'column',
+        data: countOfEachPorcentage.map((item) => item[1]),
+      },
+    ],
+    options: {
+      chart: {
+        id: 'basic-bar',
+        type: 'bar',
+      },
+      legend: {
+        show: false,
+      },
+      xaxis: {
+        categories: countOfEachPorcentage.map((item) => `${item[0]}`),
+        labels: {
+          style: {
+            fontSize: '12px',
+          },
+        },
+      },
+      yaxis: [
+        {
+          title: {
+            text: 'Quantidade de Questões',
+          },
+        },
+      ],
+      dataLabels: {
+        enabled: true,
+      },
+      colors: ['#d4526e'],
+      stroke: {
+        show: false,
+      },
+
+      plotOptions: {
+        bar: {
+          borderRadius: 5,
+          dataLabels: {
+            position: 'center', // top, center, bottom
+          },
+        },
+      },
+    },
+  };
+
   return (
     <>
-      {!percentageOfQuizHit && (
+      {questions[0]?.questionChoice.length === 0 && (
         <QuizPercentageHitDescription>
           Seu Quiz não foi respondido por nenhum aluno até o momento. <br />
-          Compartilhe seu Quiz utilizando o seguinte PIN {quiz.pin}
+          Compartilhe seu Quiz utilizando o seguinte PIN {pin}
         </QuizPercentageHitDescription>
       )}
 
-      {percentageOfQuizHit && (
+      {questions[0]?.questionChoice.length > 0 && (
         <QuizPercentageHit>
-          <CircularProgressWithLabel
+          {/* <CircularProgressWithLabel
             size={100}
             styleText={{
               fontSize: '2em',
               fontWeight: 'bolder',
             }}
-            color="yellow"
             value={parseInt(percentageOfQuizHit, 10)}
+          /> */}
+
+          <Chart
+            options={options.options}
+            series={options.series}
+            width="500"
           />
-          )
+
           <QuizPercentageHitDescription>
-            Esta porcentagem é relacionada a quantidade de acertos que os
-            estudantes obterem em sua tentativa de maior score. <br />
+            O gráfico acima mostra a quantidade de questões que atingiram
+            determinadas médias de porcentagem de acerto. <br />
             Compartilhe o PIN ({quiz.pin}) para mais alunos responderem seu
             quiz.
           </QuizPercentageHitDescription>
         </QuizPercentageHit>
       )}
 
-      {percentageOfQuizHit &&
+      {questions[0]?.questionChoice.length > 0 &&
         questions.map((question, index) => (
           <Accordion
             key={question.id}
@@ -138,16 +209,22 @@ const AccordionWrapper = ({ quizData }) => {
                 <Typography>
                   {index + 1}.{`  ${question.title}`}
                 </Typography>
-                <CircularProgressWithLabel
-                  color="yellow"
-                  value={parseInt(question.percentageOfHit, 10)}
-                />
+                <Tooltip
+                  placement="bottom"
+                  title="Média da porcentagem de acertos da questão."
+                >
+                  <div>
+                    <CircularProgressWithLabel
+                      value={parseInt(question.percentageOfHit, 10)}
+                    />
+                  </div>
+                </Tooltip>
               </BarQuestion>
             </StyledAccordionSummary>
             <AccordionDetails>
               <AnswerWrapper>
                 {question.answer.map((answer, i) => (
-                  <AnswerItem correct={answer.is_correct} key={answer.id}>
+                  <AnswerItem correct={answer.isCorrect} key={answer.id}>
                     <AnswerTitle>
                       {i + 1}.{`  ${answer.title}`}
                     </AnswerTitle>
@@ -165,8 +242,8 @@ const AccordionWrapper = ({ quizData }) => {
                   <TextTitleResumeOfQuestion>
                     Percentual de acerto
                   </TextTitleResumeOfQuestion>
+
                   <CircularProgressWithLabel
-                    color="yellow"
                     value={parseInt(question.percentageOfHit, 10)}
                   />
                 </WrapperResumeQuestion>
@@ -185,21 +262,30 @@ const AccordionWrapper = ({ quizData }) => {
                     Quantidade de jogadores
                   </TextTitleResumeOfQuestion>
                   <TextValueResumeOfQuestion>
-                    {question.question_choice.length}
+                    {question.questionChoice.length}
                   </TextValueResumeOfQuestion>
                 </WrapperResumeQuestion>
               </WrapperResumeOfQuestion>
 
               <StudentWrapper>
                 <HeaderTitle>Respostas</HeaderTitle>
-                {question.question_choice.map((choice) => (
-                  <StudentInformation key={choice.student_quiz_id}>
+                {question.questionChoice.map((choice) => (
+                  <StudentInformation key={choice.studentQuizId}>
                     <BoxStudent>
-                      <NameStudent>{choice.student.name}</NameStudent>
-                      <ChoiceStudent>
-                        Alternativas escolhidas:{' '}
-                        {getStudentChoice(choice).map((item) => `${item}   `)}
-                      </ChoiceStudent>
+                      <BoldText>Aluno: </BoldText>
+                      <StudentName>{choice.student.name}</StudentName>
+                      <WrapperStudentChoice>
+                        <BoldText>Alternativas Escolhidas</BoldText>
+                        {getStudentChoice(question.answer, choice).map(
+                          (item) => (
+                            <BadgeStudentChoice
+                              key={choice.studentQuizId + item.id}
+                            >
+                              {item.title}
+                            </BadgeStudentChoice>
+                          )
+                        )}
+                      </WrapperStudentChoice>
                     </BoxStudent>
                     <IsStudentChoiceCorrect>
                       {checkStudentChoice(question.answer, choice)}

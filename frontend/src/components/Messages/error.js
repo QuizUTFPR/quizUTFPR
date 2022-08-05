@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Error } from '@material-ui/icons/';
+import { Error } from '@mui/icons-material/';
 import { ErrorMessage, ErrorWrapper } from './style';
 
 const ErrorComponent = ({ children, color, ...props }) => (
@@ -13,6 +13,7 @@ const ErrorComponent = ({ children, color, ...props }) => (
 
 ErrorComponent.defaultProps = {
   color: 'inherit',
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   children: <></>,
 };
 

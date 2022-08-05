@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+
+import { useNavigate } from 'react-router-dom';
 
 // COMPONENTS
-import { Grid, InputAdornment, IconButton } from '@material-ui/core';
+import { Grid, InputAdornment, IconButton } from '@mui/material';
 import ErrorMessage from '@components/Messages/error';
 
 import {
@@ -10,15 +11,14 @@ import {
   Visibility,
   VisibilityOff,
   Lock,
-} from '@material-ui/icons';
-
-// ASSETS
-// import { ReactComponent as Illustration } from '@assets/login_illustration.svg';
+} from '@mui/icons-material';
 
 // HOOKS
 import useAuth from '@hooks/Auth';
 
+// ROTAS
 import { HOME } from '@routes';
+
 import {
   StyledContainer,
   DescriptionsGrid,
@@ -30,9 +30,10 @@ import {
   LogoUTFPR,
 } from './style';
 
-// ROTAS
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-const LoginPage = ({ history }) => {
   const { login } = useAuth();
 
   const [values, setValues] = useState({
@@ -44,11 +45,31 @@ const LoginPage = ({ history }) => {
   const [error, setError] = useState(false);
 
   const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+    setValues({
+      ...values,
+      [prop]: event.target.value,
+    });
   };
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const { response } = await login(values.username, values.password);
+
+    if (response.status === 200) {
+      navigate(HOME);
+    } else {
+      setError(response.data.response);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -79,16 +100,11 @@ const LoginPage = ({ history }) => {
           <GridForm
             item
             xs={12}
+            sm={12}
+            md={12}
+            lg={9}
             component="form"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              const response = await login(values.username, values.password);
-              if (response.status === 200) {
-                history.push(HOME);
-              } else {
-                setError(response.response.data.error);
-              }
-            }}
+            onSubmit={handleLogin}
           >
             <StyledInput
               id="username"
@@ -140,7 +156,12 @@ const LoginPage = ({ history }) => {
               </ErrorMessage>
             )}
             <Grid item align="center">
-              <StyledButton type="submit" color="primary" variant="contained">
+              <StyledButton
+                loading={loading}
+                type="submit"
+                color="primary"
+                variant="contained"
+              >
                 ENTRAR
               </StyledButton>
             </Grid>
@@ -149,14 +170,6 @@ const LoginPage = ({ history }) => {
       </Grid>
     </StyledContainer>
   );
-};
-
-LoginPage.defaultProps = {};
-
-LoginPage.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
 export default LoginPage;

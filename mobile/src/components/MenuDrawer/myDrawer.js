@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -6,24 +8,32 @@ import {
 } from '@react-navigation/drawer';
 
 // ICONS
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 // HOOKS
 import useStudentAuth from '@hook/useStudentAuth';
 
 // STYLES
-import { WrapperMyDrawer, StudentName, Divider } from './styles';
+import {
+  WrapperMyDrawer,
+  StudentName,
+  Divider,
+  DrawerLabelStyled,
+  Avatar,
+} from './styles';
 
 const CustomSidebarMenu = ({ colors, ...props }) => {
+  const navigation = useNavigation();
   const { studentInfo, logout } = useStudentAuth();
+
 
   return (
     <WrapperMyDrawer style={{ flex: 1 }}>
-      {/* <Avatar
+      <Avatar
         source={{
-          uri: 'https://image.flaticon.com/icons/png/512/147/147144.png',
+          uri: studentInfo.student.image,
         }}
-      /> */}
+      />
       <StudentName fill="purple">
         {studentInfo.student && studentInfo.student.name}
       </StudentName>
@@ -33,13 +43,34 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
         <DrawerItemList {...props} />
         <DrawerItem
           icon={({ focused, size }) => (
+            <MaterialIcons
+              name="verified"
+              size={size}
+              color={focused ? colors.activeColorDrawer : 'grey'}
+            />
+          )}
+          label={({ color }) => (
+            <DrawerLabelStyled color={color}>
+              Quizzes Concluídos
+            </DrawerLabelStyled>
+          )}
+          onPress={() =>
+            navigation.navigate('InfinityScrollQuizzesStack', {
+              screen: 'InfinityScrollAnsweredQuizzes',
+            })
+          }
+        />
+        <DrawerItem
+          icon={({ focused, size }) => (
             <MaterialCommunityIcons
               name="logout-variant"
               size={size}
-              color={focused ? colors.purple : 'grey'}
+              color={focused ? colors.activeColorDrawer : 'grey'}
             />
           )}
-          label="Sair"
+          label={({ color }) => (
+            <DrawerLabelStyled color={color}>Sair</DrawerLabelStyled>
+          )}
           onPress={() => logout()}
         />
       </DrawerContentScrollView>

@@ -13,6 +13,7 @@ class Tag extends Model {
       {
         sequelize,
         tableName: 'tag',
+        underscored: true,
       }
     );
 
@@ -22,14 +23,14 @@ class Tag extends Model {
   static associate(models) {
     this.belongsToMany(models.Quiz, {
       through: 'quiz_tags',
-      foreignKey: 'tag_name',
+      foreignKey: 'tagName',
       as: 'quizzes',
       onDelete: 'CASCADE',
     });
 
     this.belongsToMany(models.Question, {
       through: 'question_tags',
-      foreignKey: 'tag_name',
+      foreignKey: 'tagName',
       as: 'questions',
       onDelete: 'CASCADE',
     });

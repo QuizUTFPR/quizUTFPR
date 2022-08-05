@@ -4,18 +4,25 @@ class Quiz extends Model {
   static init(sequelize) {
     super.init(
       {
-        id_teacher: Sequelize.INTEGER,
+        id: {
+          type: Sequelize.UUID,
+          defaultValue: Sequelize.UUIDV4,
+          primaryKey: true,
+        },
+        idTeacher: Sequelize.INTEGER,
         title: Sequelize.STRING,
         description: Sequelize.STRING,
         visibility: Sequelize.STRING,
-        id_image: Sequelize.INTEGER,
+        idImage: Sequelize.INTEGER,
         published: Sequelize.BOOLEAN,
         pin: Sequelize.STRING,
-        image_base64: Sequelize.TEXT('medium'),
+        publishDate: Sequelize.DATE,
+        noTime: Sequelize.BOOLEAN,
       },
       {
         sequelize,
         tableName: 'quiz',
+        underscored: true,
       }
     );
 
@@ -24,42 +31,51 @@ class Quiz extends Model {
 
   static associate(models) {
     this.belongsTo(models.Teacher, {
-      foreignKey: 'id_teacher',
+      foreignKey: 'idTeacher',
       as: 'teacher',
-    });
-
-    this.belongsTo(models.File, {
-      foreignKey: 'id_image',
-      as: 'image_quiz',
     });
 
     this.belongsToMany(models.Question, {
       through: 'question_quiz',
-      foreignKey: 'quiz_id',
+      foreignKey: 'quizId',
       as: 'questions',
       onDelete: 'CASCADE',
     });
 
     this.belongsToMany(models.Tag, {
       through: 'quiz_tags',
-      foreignKey: 'quiz_id',
-      as: 'tags_quiz',
+      foreignKey: 'quizId',
+      as: 'tagsQuiz',
       onDelete: 'CASCADE',
     });
 
     this.belongsTo(models.File, {
-      foreignKey: 'id_image',
+      foreignKey: 'idImage',
       as: 'image',
+      onDelete: 'CASCADE',
+      hooks: true,
     });
 
     this.hasMany(models.StudentQuestionChoice, {
-      foreignKey: 'quiz_id',
-      as: 'quiz_student_choice',
+      foreignKey: 'quizId',
+      as: 'quizStudentChoice',
     });
 
     this.hasMany(models.StudentQuiz, {
-      foreignKey: 'quiz_id',
-      as: 'quiz_student',
+      foreignKey: 'quizId',
+      as: 'quizStudent',
+    });
+
+    this.hasMany(models.FavoriteStudentQuiz, {
+      foreignKey: 'quizId',
+      as: 'quizFavorite',
+    });
+
+    this.belongsToMany(models.Class, {
+      through: 'quizz_class',
+      foreignKey: 'idQuiz',
+      as: 'quiz_classes',
+      onDelete: 'CASCADE',
     });
   }
 }

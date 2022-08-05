@@ -1,43 +1,44 @@
+import { fn, col } from 'sequelize';
 // MODELS
-import Tag from '../../models/TagModel';
 import Question from '../../models/QuestionModel';
+
+// SERVICES
+import TagService from '../../services/Tag';
 
 class TagQuestionController {
   // Lista todos os registros
   async index(req, res) {
     try {
-      const tags = await Tag.findAll({
+      const tags = await TagService.execute({
+        attributes: {
+          include: [[fn('COUNT', col('questions.id')), 'questionAmount']],
+          exclude: ['createdAt', 'updatedAt'],
+        },
         include: [
           {
             model: Question,
             as: 'questions',
             required: true,
-            attributes: [
-              'id',
-              'title',
-              'timer',
-              'difficulty_level',
-              'copy',
-              'available_on_questions_db',
-              'type',
-            ],
+
+            where: {
+              availableOnQuestionsDb: true,
+            },
+            attributes: [],
             through: {
               attributes: [],
             },
           },
         ],
-        attributes: ['name'],
-        through: {
-          attributes: [],
-        },
+        group: ['name'],
+        order: [[col('questionAmount'), 'DESC']],
       });
 
-      if (!tags.length) 
-        return res.status(204).send("Não existe nenhuma tag com questões cadastrada.");
-
       return res.status(200).json(tags);
-    } catch (err) {
-      return res.status(500).json(err);
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
     }
   }
 }

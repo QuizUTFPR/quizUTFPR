@@ -1,12 +1,14 @@
 // MODELS
-import Tag from '../../models/TagModel';
 import Quiz from '../../models/QuizModel';
+
+// SERVICE
+import TagService from '../../services/Tag';
 
 class TagQuizController {
   // Lista todos os registros
   async index(req, res) {
     try {
-      const tags = await Tag.findAll({
+      const tags = await TagService.execute({
         include: [
           {
             model: Quiz,
@@ -17,7 +19,8 @@ class TagQuizController {
               'title',
               'description',
               'visibility',
-              'id_image',
+              'idImage',
+              'noTime',
             ],
             through: {
               attributes: [],
@@ -30,14 +33,12 @@ class TagQuizController {
         },
       });
 
-      if (!tags.length)
-        return res
-          .status(404)
-          .json({ error: 'Não existe nenhuma tag com quizzes cadastrada.' });
-
       return res.status(200).json(tags);
-    } catch (err) {
-      return res.status(500).json(err);
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
+      );
     }
   }
 }

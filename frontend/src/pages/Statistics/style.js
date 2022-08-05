@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 
-import { Typography, AccordionSummary, Grid } from '@material-ui/core';
+import { Typography, AccordionSummary, Grid } from '@mui/material';
 
 export const TitlePage = styled(Typography)`
   overflow: hidden;
+  text-align: center;
 `;
 
 export const StyledAccordionSummary = styled(AccordionSummary)`
-  background: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  /* background: rgba(0, 0, 0, 0.03); */
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.125); */
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid gray;
 `;
 
 export const AnswerWrapper = styled(Grid)``;
@@ -55,3 +59,15 @@ export const WrapperResumeQuestion = styled(Grid)`
 
 export const TextTitleResumeOfQuestion = styled(Typography)``;
 export const TextValueResumeOfQuestion = styled(Typography)``;
+
+export const TitleWrapper = styled.div`
+  flex-grow: 1;
+`;
+
+export const ContainerSelect = styled.div`
+  display: flex;
+  width: 95%;
+  gap: 15px;
+  align-self: center;
+  margin-top: 20px;
+`;

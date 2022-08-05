@@ -4,16 +4,23 @@ import Loading from '@components/Loading';
 import { useTheme } from '@react-navigation/native';
 
 // ICONS
-import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+
+// STYLES
+import Feedback from '@screens/Feedback';
+import BottomTabNavigator from '@routes/bottomTab/BottomTabNavigator';
+import { DrawerLabelStyled } from './styles';
 
 // COMPONENT
 import MyDrawer from './myDrawer';
 
-const Drawer = createDrawerNavigator();
+// Screens
 
-// PAGES
-const TabNavigator = lazy(() => import('@routes/TabNavigator'));
-const AnsweredQuizzes = lazy(() => import('@pages/AnsweredQuizzes'));
+const Drawer = createDrawerNavigator();
+// const BottomTabNavigator = lazy(() =>
+//   import('@routes/bottomTab/BottomTabNavigator')
+// );
+
 // const HomeStack = lazy(() => import('@routes/stacks/home'));
 
 const DrawerComponent = () => {
@@ -22,42 +29,47 @@ const DrawerComponent = () => {
   return (
     <Suspense fallback={<Loading />}>
       <Drawer.Navigator
-        drawerContentOptions={{
-          activeTintColor: colors.purple,
+        screenOptions={{
+          activeTintColor: colors.activeColorDrawer,
           itemStyle: {},
           labelStyle: {
             fontFamily: 'PoppinsSemiBold',
           },
+          headerShown: false,
         }}
         drawerContent={(props) => <MyDrawer colors={colors} {...props} />}
       >
         <Drawer.Screen
-          name="Home"
+          name="HomeDrawer"
           options={{
-            drawerLabel: 'Inicio',
+            drawerLabel: ({ color }) => (
+              <DrawerLabelStyled color={color}>Inicio</DrawerLabelStyled>
+            ),
             drawerIcon: ({ focused, size }) => (
               <Ionicons
                 name="md-home"
                 size={size}
-                color={focused ? colors.purple : 'grey'}
+                color={focused ? colors.activeColorDrawer : 'grey'}
               />
             ),
           }}
-          component={TabNavigator}
+          component={BottomTabNavigator}
         />
         <Drawer.Screen
-          name="AnsweredQuizzes"
+          name="Feedback"
           options={{
-            drawerLabel: 'Quizzes Respondidos',
+            drawerLabel: ({ color }) => (
+              <DrawerLabelStyled color={color}>Feedback</DrawerLabelStyled>
+            ),
             drawerIcon: ({ focused, size }) => (
-              <FontAwesome5
-                name="book"
+              <MaterialIcons
+                name="feedback"
                 size={size}
-                color={focused ? colors.purple : 'grey'}
+                color={focused ? colors.activeColorDrawer : 'grey'}
               />
             ),
           }}
-          component={AnsweredQuizzes}
+          component={Feedback}
         />
       </Drawer.Navigator>
     </Suspense>

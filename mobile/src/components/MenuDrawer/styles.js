@@ -3,11 +3,11 @@ import styled from 'styled-components/native';
 export const WrapperMyDrawer = styled.SafeAreaView``;
 
 export const Avatar = styled.Image.attrs({
-  resizeMode: 'center',
+  resizeMode: 'cover',
 })`
-  width: 100%;
+  width: 60%;
   height: 20%;
-  border-radius: 100px;
+  border-radius: 30px;
   align-self: center;
   margin-top: 40px;
 `;
@@ -15,10 +15,10 @@ export const Avatar = styled.Image.attrs({
 export const StudentName = styled.Text`
   text-align: center;
   font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize}px;
+  font-size: ${({ theme }) => theme.fontSize.normal}px;
   color: ${({ theme }) => theme.color.fill};
   margin-bottom: 10px;
-  margin-top: 100px;
+  margin-top: 10px;
 `;
 
 export const Divider = styled.View`
@@ -29,4 +29,11 @@ export const Divider = styled.View`
   border-radius: 10px;
   opacity: 0.1;
   margin-bottom: -20px;
+`;
+
+export const DrawerLabelStyled = styled.Text.attrs({
+  adjustsFontSizeToFit: true,
+})`
+  color: ${({ color }) => color};
+  font-weight: bold;
 `;

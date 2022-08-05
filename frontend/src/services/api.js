@@ -18,12 +18,31 @@ api.interceptors.response.use(
   (response) =>
     // Do something with response data
     response,
-  (error) => {
-    if (error.response.status === 401) {
+  async (error) => {
+    const originalRequest = error.config;
+    const requestStatus = error.response.status;
+    const refreshTokenExpired =
+      error?.response?.data?.refreshTokenExpired || false;
+
+    if (requestStatus === 401 && !refreshTokenExpired) {
+      const refreshToken = localStorage.getItem('@REFRESH_TOKEN');
+      const response = await api.post('/refresh-token', {
+        refreshToken,
+      });
+      const { token } = response.data;
+
+      localStorage.setItem('@TOKEN', token);
+
+      originalRequest.headers.Authorization = token ? `Bearer ${token}` : '';
+      return api.request(originalRequest);
+    }
+
+    if (requestStatus === 401 && refreshTokenExpired) {
       localStorage.clear('@TOKEN');
       localStorage.clear('@TEACHER');
       window.location = TOKENEXPIRED;
     }
+
     return Promise.reject(error);
   }
 );

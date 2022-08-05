@@ -1,8 +1,11 @@
-import { createTheme } from '@material-ui/core';
+import { createTheme } from '@mui/material';
 
 const theme = createTheme({
   typography: {
     useNextVarients: true,
+    allVariants: {
+      fontFamily: 'Inter',
+    },
   },
   palette: {
     primary: {

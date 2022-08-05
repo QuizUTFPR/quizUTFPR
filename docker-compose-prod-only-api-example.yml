@@ -1,0 +1,42 @@
+version: '3'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  db_prod:
+    container_name: 'db_prod'
+    image: mysql:8.0.27
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - '3308:3308'
+    volumes:
+      - ./mysql_prod:/var/lib/mysql
+    env_file:
+      - ./mysql.env
+    networks:
+      - app-tier 
+
+  backend_prod:
+    container_name: 'backend_prod'
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    volumes:
+      - ./backend:/home/node/api_prod
+      - /home/node/api_prod/node_modules
+    ports:
+      - '3334:3334'
+    depends_on:
+      - db_prod
+    restart: on-failure
+    env_file:
+      - ./backend/.env
+    networks:
+      - app-tier
+
+    
+  
+  

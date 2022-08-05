@@ -29,6 +29,7 @@ ModalWrapper.defaultProps = {
   handleClose: () => {},
   modalTitle: 'Título do Modal',
   modalDescription: 'Descrição do Modal',
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   children: <></>,
 };
 ModalWrapper.propTypes = {

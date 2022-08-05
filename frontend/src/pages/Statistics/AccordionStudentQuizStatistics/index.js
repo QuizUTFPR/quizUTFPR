@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '@api';
+import Chart from 'react-apexcharts';
 
 // COMPONENTS
 import {
@@ -6,23 +8,27 @@ import {
   AccordionDetails,
   Divider,
   Typography,
-} from '@material-ui/core';
-// import Tooltip from '@components/ToolTip';
-// import CircularProgressWithLabel from '@components/CircularProgressWithLabel';
+  TextField,
+  MenuItem,
+  Grid,
+} from '@mui/material';
+import CircularProgressWithLabel from '@components/CircularProgressWithLabel';
 
 // ICONS
-import {
-  ExpandMore,
-  // CheckCircle,
-  // Cancel,
-  // SentimentSatisfied,
-} from '@material-ui/icons';
+import { ExpandMore } from '@mui/icons-material';
 
 // UTILS
 import getStringTypeOfQuestion from '@utils/getStringTypeOfQuestion';
 
 // STYLES
-import { StudentBar, StyledTypography } from './style';
+import {
+  StudentBar,
+  StyledTypography,
+  QuizPercentageHit,
+  QuizPercentageHitDescription,
+  WrapperScore,
+} from './style';
+
 import {
   StyledAccordionSummary,
   AnswerItem,
@@ -35,18 +41,86 @@ import {
   TextValueResumeOfQuestion,
 } from '../style';
 
-const AccordionWrapper = ({ quizData, pin }) => {
-  const { questions, studentQuiz } = quizData;
+const AccordionWrapperStudent = ({ quizData }) => {
+  const { countOfEachPorcentage = [], pin, quiz } = quizData;
+
+  const options = {
+    series: [
+      {
+        name: 'Quantidade de Alunos',
+        type: 'column',
+        data: countOfEachPorcentage.map((item) => item[1]),
+      },
+    ],
+    options: {
+      chart: {
+        id: 'basic-bar',
+        type: 'bar',
+      },
+      legend: {
+        show: false,
+      },
+      xaxis: {
+        categories: countOfEachPorcentage.map((item) => `${item[0]}`),
+        labels: {
+          style: {
+            fontSize: '12px',
+          },
+        },
+      },
+      yaxis: [
+        {
+          title: {
+            text: 'Quantidade de Alunos',
+          },
+        },
+      ],
+      dataLabels: {
+        enabled: true,
+      },
+      colors: ['#d4526e'],
+      stroke: {
+        show: false,
+      },
+
+      plotOptions: {
+        bar: {
+          borderRadius: 5,
+          dataLabels: {
+            position: 'center', // top, center, bottom
+          },
+        },
+      },
+    },
+  };
 
   return (
     <>
-      {!studentQuiz.length && (
+      {!quizData.studentQuiz.length && (
         <StyledTypography>
           Seu Quiz não foi respondido por nenhum aluno até o momento. <br />
           Compartilhe seu Quiz utilizando o seguinte PIN {pin}
         </StyledTypography>
       )}
-      {studentQuiz.map((student, studentIndex) => (
+
+      {quizData.studentQuiz.length > 0 && (
+        <QuizPercentageHit>
+          <Chart
+            options={options.options}
+            series={options.series}
+            width="500"
+          />
+
+          <QuizPercentageHitDescription>
+            O gráfico acima mostra a quantidade de alunos que atingiram
+            determinadas porcentagem de acerto. <br />
+            Compartilhe o PIN ({quiz.pin}) para mais alunos responderem seu
+            quiz.
+          </QuizPercentageHitDescription>
+        </QuizPercentageHit>
+      )}
+
+      {quizData.studentQuiz.map((student, studentIndex) => (
         <Accordion key={student.id} TransitionProps={{ unmountOnExit: true }}>
           <StyledAccordionSummary
             expandIcon={<ExpandMore />}
@@ -57,11 +131,20 @@ const AccordionWrapper = ({ quizData, pin }) => {
               <Typography>
                 {studentIndex + 1}.{`  ${student.name}`}
               </Typography>
-              <Typography>Score: {student.student_quiz.score}</Typography>
+              <WrapperScore>
+                <Typography>Score: {student.studentQuiz.score}</Typography>
+                <CircularProgressWithLabel
+                  value={parseInt(
+                    (student.studentQuiz.score * 100) /
+                      student.studentQuiz.quizQuestionChoice.length,
+                    10
+                  )}
+                />
+              </WrapperScore>
             </StudentBar>
           </StyledAccordionSummary>
           <AccordionDetails>
-            {questions.map((question, questionIndex) => (
+            {quizData.questions.map((question, questionIndex) => (
               <Accordion
                 key={question.id}
                 TransitionProps={{ unmountOnExit: true }}
@@ -84,7 +167,7 @@ const AccordionWrapper = ({ quizData, pin }) => {
                         Dificuldade
                       </TextTitleResumeOfQuestion>
                       <TextValueResumeOfQuestion>
-                        {question.difficulty_level}
+                        {question.difficultyLevel}
                       </TextValueResumeOfQuestion>
                     </WrapperResumeQuestion>
                     <Divider />
@@ -110,17 +193,17 @@ const AccordionWrapper = ({ quizData, pin }) => {
                   <AnswerWrapper>
                     {question.answer.map((answer, i) => (
                       <AnswerItem
-                        correct={answer.is_correct}
+                        correct={answer.isCorrect}
                         studentChecked={
-                          student.student_quiz.quiz_question_choice[
-                            questionIndex
-                          ][`checked${i + 1}`]
+                          student.studentQuiz.quizQuestionChoice[questionIndex][
+                            `checked${i + 1}`
+                          ]
                         }
                         key={answer.id}
                       >
                         <AnswerTitle
                           studentChecked={
-                            student.student_quiz.quiz_question_choice[
+                            student.studentQuiz.quizQuestionChoice[
                               questionIndex
                             ][`checked${i + 1}`]
                           }
@@ -140,4 +223,4 @@ const AccordionWrapper = ({ quizData, pin }) => {
   );
 };
 
-export default AccordionWrapper;
+export default AccordionWrapperStudent;

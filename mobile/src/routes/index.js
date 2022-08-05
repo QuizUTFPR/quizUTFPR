@@ -1,60 +1,43 @@
-import React, { lazy, Suspense, useEffect } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Loading from '@components/Loading';
-
-// HOOKS
 import useStudentAuth from '@hook/useStudentAuth';
+import { navigationRef } from '../services/rootNavigation';
 
 // THEME
 import { navigationTheme } from '../styles/theme';
 
 // ROUTES
-const RoutesTokenNotRequired = lazy(() =>
-  import('./category/tokenNotRequired')
-);
-const RoutesTokenIsRequired = lazy(() => import('./category/tokenIsRequired'));
-
-const Stack = createStackNavigator();
-
-// CRIAÇÃO DE UM CONTAINER CONTENDO A STACK DE NAVEGAÇÃO DO APP
+import RoutesTokenNotRequired from './category/tokenNotRequired';
+import RoutesTokenIsRequired from './category/tokenIsRequired';
 
 const routes = () => {
-  const { studentInfo, setStudentInfo, getOnLocalStorage } = useStudentAuth();
+  const {
+    isLoggedIn,
+    studentInfo,
+    setStudentInfo,
+    getOnLocalStorage,
+    studentStorageItem,
+  } = useStudentAuth();
 
   useEffect(() => {
     const fetchData = async () => {
-      const studentData = await getOnLocalStorage();
+      const studentData = await getOnLocalStorage(studentStorageItem);
       if (studentData) setStudentInfo(studentData);
     };
 
     fetchData();
-  }, []);
+  }, [isLoggedIn]);
 
   return (
-    <Suspense fallback={<Loading />}>
-      <NavigationContainer theme={navigationTheme}>
-        <Stack.Navigator>
-          {studentInfo.token === null && studentInfo.student === null ? (
-            <>
-              <Stack.Screen
-                options={{ headerShown: false }}
-                name="InitialScreen"
-                component={RoutesTokenNotRequired}
-              />
-            </>
-          ) : (
-            <>
-              <Stack.Screen
-                options={{ headerShown: false }}
-                name="Home"
-                component={RoutesTokenIsRequired}
-              />
-            </>
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Suspense>
+    <NavigationContainer theme={navigationTheme} ref={navigationRef}>
+      {!isLoggedIn &&
+      studentInfo.token === null &&
+      studentInfo.student === null ? (
+        <RoutesTokenNotRequired />
+      ) : (
+        <RoutesTokenIsRequired />
+      )}
+    </NavigationContainer>
   );
 };
 

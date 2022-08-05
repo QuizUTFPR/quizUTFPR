@@ -1,34 +1,27 @@
 import React from 'react';
-import styled from 'styled-components';
-
-// LOGO UTFPR
-import { ReactComponent as UTFPR } from '@assets/marcaUTFPR/logoUTFPR.svg';
-
-import { Typography, Grid } from '@material-ui/core';
+// import { createClient } from 'pexels';
 
 // COMPONENTS
-import GridContainer from '@components/Container';
+import { Typography, Grid } from '@mui/material';
 
-const LogoUTFPR = styled(UTFPR)`
-  width: 450px;
-  height: 100%;
-`;
+// STYLE
+import { LogoUTFPR, StyledHomeGrid } from './style';
 
-const StyledHomeGrid = styled(GridContainer)`
-  flex-direction: row;
-`;
+const Home = () => {
+  // const client = createClient(process.env.REACT_APP_TOKEN_PEXELS);
 
-const Home = () => (
-  <StyledHomeGrid container justifyContent="center" align="center">
-    <Grid item xs={12}>
-      <LogoUTFPR />
-    </Grid>
-    <Grid item xs={12}>
-      <Typography color="primary">
-        Seja Bem-Vindo ao Painel de Controle
-      </Typography>
-    </Grid>
-  </StyledHomeGrid>
-);
+  return (
+    <StyledHomeGrid justifyContent="center" align="center">
+      <Grid item xs={12}>
+        <LogoUTFPR />
+      </Grid>
+      <Grid item>
+        <Typography color="primary">
+          Seja Bem-Vindo ao Painel de Controle
+        </Typography>
+      </Grid>
+    </StyledHomeGrid>
+  );
+};
 
 export default Home;

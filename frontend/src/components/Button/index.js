@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import styled from 'styled-components';
-import { Button } from '@material-ui/core';
+import { StyledButton } from './style';
 
-const StyledButton = styled(Button)`
-  height: 50px;
-`;
+const WrapperButton = forwardRef((props, ref) => {
+  const { children, loading, ...params } = props;
 
-const WrapperButton = ({ children, ...props }) => (
-  <StyledButton {...props}>{children}</StyledButton>
-);
+  return (
+    <StyledButton disabled={loading} {...params} ref={ref}>
+      {loading && (
+        <CircularProgress
+          style={{ marginRight: 20 }}
+          size={30}
+          thickness={4}
+          color="inherit"
+        />
+      )}
+      {children}
+    </StyledButton>
+  );
+});
 
-WrapperButton.defaultProps = {};
+WrapperButton.defaultProps = {
+  loading: true,
+};
 
 WrapperButton.propTypes = {
   children: PropTypes.node.isRequired,
+  loading: PropTypes.bool,
 };
 
 export default WrapperButton;

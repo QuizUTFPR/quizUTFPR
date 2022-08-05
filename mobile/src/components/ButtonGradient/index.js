@@ -1,22 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components/native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { ActivityIndicator } from 'react-native';
 
-export const WrapperButton = styled.TouchableOpacity``;
+import { WrapperButton, StyledButton, StyledText } from './style';
 
-export const StyledButton = styled(LinearGradient)`
-  height: 60px;
-  justify-content: center;
-  border-radius: 30px;
-`;
-
-export const StyledText = styled.Text`
-  font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize}px;
-  color: ${({ theme }) => theme.color.fill};
-  text-align: center;
-`;
+// THEME
+import theme from '../../styles/theme';
 
 const WrapperStyledButton = ({
   children,
@@ -26,14 +15,23 @@ const WrapperStyledButton = ({
   variant,
   activeOpacity,
   underlayColor,
+  loading,
   ...props
 }) => (
   <WrapperButton
     onPress={onPress}
     underlayColor={underlayColor}
     activeOpacity={activeOpacity}
+    disabled={loading}
   >
     <StyledButton colors={colors} {...props}>
+      {loading && (
+        <ActivityIndicator
+          style={{ marginRight: 20 }}
+          size="small"
+          color="white"
+        />
+      )}
       <StyledText fill="white">{children}</StyledText>
     </StyledButton>
   </WrapperButton>
@@ -42,8 +40,9 @@ const WrapperStyledButton = ({
 WrapperStyledButton.defaultProps = {
   onPress: () => {},
   activeOpacity: 0.7,
-  underlayColor: '#DDDDDD',
-  colors: ['#4B24B1', '#3b1b96'],
+  underlayColor: theme.color.whiteGrey,
+  colors: theme.color.gradients.primary,
+  loading: false,
 };
 
 WrapperStyledButton.propTypes = {
@@ -52,6 +51,7 @@ WrapperStyledButton.propTypes = {
   activeOpacity: PropTypes.number,
   underlayColor: PropTypes.string,
   colors: PropTypes.arrayOf(PropTypes.string),
+  loading: PropTypes.bool,
 };
 
 export default WrapperStyledButton;

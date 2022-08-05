@@ -3,7 +3,8 @@ import App from './app';
 require('dotenv').config();
 
 // Inicio o servidor na porta 3333;
-App.listen(process.env.PORT, () => {
+// eslint-disable-next-line import/prefer-default-export
+const server = App.listen(process.env.PORT, () => {
   console.log(
     'RUNNING IN MODE: ',
     process.env.NODE_ENV,
@@ -11,3 +12,5 @@ App.listen(process.env.PORT, () => {
     process.env.PORT
   );
 });
+
+module.exports = server;

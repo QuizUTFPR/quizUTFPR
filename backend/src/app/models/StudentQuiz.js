@@ -4,15 +4,17 @@ class StudentQuiz extends Model {
   static init(sequelize) {
     super.init(
       {
-        student_id: Sequelize.INTEGER,
-        quiz_id: Sequelize.INTEGER,
-        hit_amount: Sequelize.INTEGER,
-        score: Sequelize.INTEGER,
-        is_finished: Sequelize.BOOLEAN,
+        studentId: Sequelize.INTEGER,
+        quizId: Sequelize.UUID,
+        hitAmount: Sequelize.FLOAT,
+        score: Sequelize.FLOAT,
+        isFinished: Sequelize.BOOLEAN,
+        classId: Sequelize.UUID,
       },
       {
         sequelize,
         tableName: 'student_quiz',
+        underscored: true,
       }
     );
 
@@ -21,18 +23,23 @@ class StudentQuiz extends Model {
 
   static associate(models) {
     this.belongsTo(models.Student, {
-      foreignKey: 'student_id',
+      foreignKey: 'studentId',
       as: 'student',
     });
 
+    this.belongsTo(models.Class, {
+      foreignKey: 'classId',
+      as: 'class',
+    });
+
     this.belongsTo(models.Quiz, {
-      foreignKey: 'quiz_id',
+      foreignKey: 'quizId',
       as: 'quiz',
     });
 
     this.hasMany(models.StudentQuestionChoice, {
-      foreignKey: 'student_quiz_id',
-      as: 'quiz_question_choice',
+      foreignKey: 'studentQuizId',
+      as: 'quizQuestionChoice',
     });
   }
 }

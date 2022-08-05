@@ -1,72 +1,26 @@
-// MODELS
-import Student from '../../models/StudentModel';
-import Quiz from '../../models/QuizModel';
-import Teacher from '../../models/TeacherModel';
-import Tag from '../../models/TagModel';
-import File from '../../models/FileModel';
+// SERVICES
+import QuizPublishedService from '../../services/Quiz/QuizPublished';
 
 class QuizPublishedController {
   // Lista todos os registros
   async index(req, res) {
     try {
-      const student_id = req.userId;
+      const studentId = req.userId;
+      const page = req.body.page || false;
+      const limit = req.body.limit || 3;
 
-      const quizzes = await Quiz.findAll({
-        where: {
-          published: true,
-          visibility: 'public',
-        },
-        attributes: [
-          'id',
-          'title',
-          'description',
-          'visibility',
-          'id_image',
-          'pin',
-          'image_base64',
-        ],
-        include: [
-          {
-            model: Teacher,
-            as: 'teacher',
-            attributes: ['name', 'email'],
-          },
-          {
-            model: File,
-            as: 'image_quiz',
-            attributes: ['url', 'path', 'name'],
-          },
-          {
-            model: Tag,
-            as: 'tags_quiz',
-            attributes: ['name'],
-            through: {
-              attributes: [],
-            },
-          },
-        ],
+      const quizzes = await QuizPublishedService.execute({
+        studentId,
+        page,
+        limit,
       });
 
-      const quizzesInProgress = (
-        await (
-          await Student.findByPk(student_id)
-        ).getStudent_quiz({
-          where: {
-            is_finished: false,
-          },
-        })
-      ).map((item) => item.quiz_id);
-
-      const returnedQuizzes = quizzes.filter(
-        (quiz) => !quizzesInProgress.includes(quiz.id)
+      return res.status(200).json(quizzes);
+    } catch (error) {
+      return (
+        (!!error.status && res.status(error.status).json(error)) ||
+        res.status(500).json(error)
       );
-
-      // if(!quizzes.length)
-      //   return res.status(404).json({error: "Não existe nenhum quiz cadastrado."});
-
-      return res.status(200).json(returnedQuizzes);
-    } catch (err) {
-      return res.status(500).json(err);
     }
   }
 }

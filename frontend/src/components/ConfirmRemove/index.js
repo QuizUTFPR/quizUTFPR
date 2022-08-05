@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 // COMPONENTS
 import {
@@ -6,25 +6,24 @@ import {
   DialogContentText,
   DialogContent,
   DialogTitle,
-} from '@material-ui/core';
-import GridContainer from '@components/Container';
+} from '@mui/material';
+import Wrapper from '@components/RefferedContainer';
 import Button from '@components/Button';
 
-const Wrapper = forwardRef((props, ref) => (
-  <GridContainer ref={ref} {...props} />
-));
-
-// eslint-disable-next-line no-unused-vars
-const AlertRemoveQuestion = forwardRef((props, ref) => {
+const AlertRemoveQuestion = forwardRef((props, _) => {
   const { onClick, handleClose, title, description } = props;
 
+  const [loading, setLoading] = useState(false);
+
   const handleRemove = () => {
+    setLoading(true);
     onClick();
+    setLoading(false);
     handleClose();
   };
 
   return (
-    <Wrapper>
+    <Wrapper width={props.width}>
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
@@ -32,10 +31,16 @@ const AlertRemoveQuestion = forwardRef((props, ref) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary" variant="outlined">
+        <Button
+          loading={false}
+          onClick={handleClose}
+          color="primary"
+          variant="outlined"
+        >
           Cancelar
         </Button>
         <Button
+          loading={loading}
           onClick={handleRemove}
           color="primary"
           variant="contained"

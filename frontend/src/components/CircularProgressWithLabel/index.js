@@ -1,33 +1,50 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { CircularProgress, Typography, Box } from '@material-ui/core';
+import { CircularProgress, Typography, Box } from '@mui/material';
 
-const CircularProgressWithLabel = ({ value, styleText, ...props }) => (
-  <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-    <CircularProgress value={value} variant="determinate" {...props} />
-    <Box
-      sx={{
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        position: 'absolute',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Typography
-        style={styleText}
-        variant="caption"
-        component="div"
-        color="text.secondary"
+const CircularProgressWithLabel = forwardRef((props, ref) => {
+  const { value, styleText, ...rest } = props;
+
+  let color = 'success';
+  if (value < 50) {
+    color = 'inherit';
+  } else if (value < 80) {
+    color = 'yellow';
+  }
+
+  return (
+    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+      <CircularProgress
+        {...rest}
+        value={value}
+        variant="determinate"
+        color={color}
+        ref={ref}
+      />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
       >
-        {`${Math.round(value)}%`}
-      </Typography>
+        <Typography
+          style={styleText}
+          variant="caption"
+          component="div"
+          color="text.secondary"
+        >
+          {`${Math.round(value)}%`}
+        </Typography>
+      </Box>
     </Box>
-  </Box>
-);
+  );
+});
 
 CircularProgressWithLabel.defaultProps = {
   styleText: {},

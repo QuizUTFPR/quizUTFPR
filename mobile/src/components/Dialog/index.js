@@ -1,5 +1,4 @@
-import * as React from 'react';
-import Button from '@components/Button';
+import React, { useState } from 'react';
 import { BlurView } from 'expo-blur';
 import { StyleSheet } from 'react-native';
 
@@ -15,7 +14,7 @@ import {
   SecondButtonText,
 } from './style';
 
-const ConfirmExitDialog = ({
+const Dialog = ({
   title,
   visible,
   firstButtonOnPress,
@@ -24,38 +23,70 @@ const ConfirmExitDialog = ({
   secondButtonLabel,
   lottieAnimation,
   hideDialog,
-  children,
-}) => (
-  <StyledModal
-    transparent
-    animationType="fade"
-    visible={visible}
-    onRequestClose={hideDialog}
-  >
-    <BlurView intensity={100} tint="dark" style={StyleSheet.absoluteFill}>
-      <Wrapper fill="white">
-        <StyledTitle fill="purple">{title}</StyledTitle>
-        <StyledWrapperChildren>
-          {lottieAnimation}
-          <StyledText>{children}</StyledText>
-        </StyledWrapperChildren>
-        <StyledWrapperButtons>
-          {firstButtonLabel && (
-            <FirstButton onPress={firstButtonOnPress}>
-              {firstButtonLabel}
-            </FirstButton>
-          )}
-          {secondButtonLabel && (
-            <SecondButton>
-              <SecondButtonText onPress={secondButtonOnPress} fill="purple">
-                {secondButtonLabel}
-              </SecondButtonText>
-            </SecondButton>
-          )}
-        </StyledWrapperButtons>
-      </Wrapper>
-    </BlurView>
-  </StyledModal>
-);
+  childrenNode,
+  childrenText,
+}) => {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-export default ConfirmExitDialog;
+  const getSize = (event) => {
+    const { nativeEvent } = event;
+    const { layout } = nativeEvent;
+    setWidth(layout.width);
+    setHeight(layout.height);
+  };
+
+  return (
+    <StyledModal
+      transparent
+      animationType="fade"
+      visible={visible}
+      onRequestClose={hideDialog}
+    >
+      <BlurView intensity={100} tint="dark" style={[StyleSheet.absoluteFill]}>
+        <Wrapper
+          fill="white"
+          onLayout={getSize}
+          propWidth={width}
+          propHeight={height}
+        >
+          <StyledTitle fill="purple">{title}</StyledTitle>
+          <StyledWrapperChildren>
+            {lottieAnimation}
+            {!!childrenNode && childrenNode}
+            {!!childrenText && <StyledText>{childrenText}</StyledText>}
+          </StyledWrapperChildren>
+          <StyledWrapperButtons>
+            {firstButtonLabel && (
+              <FirstButton
+                loading={loading}
+                onPress={async () => {
+                  setLoading(true);
+                  await firstButtonOnPress();
+                  setLoading(false);
+                }}
+              >
+                {firstButtonLabel}
+              </FirstButton>
+            )}
+            {secondButtonLabel && (
+              <SecondButton>
+                <SecondButtonText onPress={secondButtonOnPress} fill="purple">
+                  {secondButtonLabel}
+                </SecondButtonText>
+              </SecondButton>
+            )}
+          </StyledWrapperButtons>
+        </Wrapper>
+      </BlurView>
+    </StyledModal>
+  );
+};
+
+Dialog.defaultProps = {
+  childrenNode: false,
+  childrenText: false,
+};
+
+export default Dialog;

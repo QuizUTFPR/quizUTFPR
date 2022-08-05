@@ -1,0 +1,16 @@
+
+server {
+    server_name quiz.dacom.cm.utfpr.edu.br;
+    listen 80;
+    listen [::]:80;
+
+    location ~ /.well-known {
+        allow all;
+    }
+
+    location / {
+        root /var/www/html/quiz;
+        index index.html index.htm;
+        try_files $uri $uri/ /index.html;
+    }
+}

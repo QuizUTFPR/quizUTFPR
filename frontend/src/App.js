@@ -1,27 +1,31 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
-import { LinearProgress } from '@material-ui/core';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
-// import PropTypes from 'prop-types'
+import { LinearProgress } from '@mui/material';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 // CONTEXT
-import QuestionQuizProvider from '@context/questions_quiz';
+import QuestionQuizProvider from '@context/questionsQuiz';
 
 // HOOKS
 import useAuth from '@hooks/Auth';
 
 // ROUTES
-import { LOGIN, QUESTION, HOME, TOKENEXPIRED } from '@routes';
+import { LOGIN, QUESTION, HOME, TOKENEXPIRED, MANAGE_CLASSES } from '@routes';
 
 // PAGES
 const MainPage = lazy(() => import('./pages/MainPage'));
 const Login = lazy(() => import('./pages/Login'));
-const Question = lazy(() => import('./pages/Question'));
+const ManageQuiz = lazy(() => import('./pages/Quizzes/ManageQuiz'));
 const ExpiredToken = lazy(() => import('./pages/ConfirmExpireOfToken'));
+const ManageClass = lazy(() => import('./pages/Classes/ManageClass'));
 
-function App({ location, history }) {
+const App = () => {
+  const location = useLocation();
   const [checkedToken, setCheckedToken] = useState(false);
-  const { teacherInfo, setTeacherInfo, logout } = useAuth();
+  const {
+    teacherInfo,
+    setTeacherInfo,
+    // logout
+  } = useAuth();
 
   useEffect(() => {
     const token = localStorage.getItem('@TOKEN');
@@ -35,25 +39,12 @@ function App({ location, history }) {
     }
     setCheckedToken(true);
   }, []);
-
-  // eslint-disable-next-line consistent-return
-  useEffect(() => {
-    if (teacherInfo.token) {
-      const { token } = teacherInfo;
-      const { payload } = jwt.decode(token, { complete: true });
-      const dateNow = new Date();
-
-      if (payload.exp < dateNow.getTime() / 1000) {
-        logout();
-        history.push(TOKENEXPIRED);
-      }
-    }
-  });
-
-  if (!checkedToken) return <LinearProgress />;
+  if (!checkedToken) {
+    return <LinearProgress />;
+  }
 
   if (teacherInfo.token && location.pathname === LOGIN) {
-    return <Redirect to={HOME} />;
+    return <Navigate to={HOME} />;
   }
 
   if (
@@ -61,27 +52,27 @@ function App({ location, history }) {
     location.pathname !== LOGIN &&
     location.pathname !== TOKENEXPIRED
   ) {
-    return <Redirect to={LOGIN} />;
+    return <Navigate to={LOGIN} />;
   }
 
   return (
     <Suspense fallback={<LinearProgress />}>
-      <Switch>
-        <Route path={TOKENEXPIRED} exact component={ExpiredToken} />
-        <Route path={LOGIN} exact component={Login} />
-        <Route
-          path={`${QUESTION}:id_quiz`}
-          exact
-          render={(props) => (
-            <QuestionQuizProvider>
-              <Question {...props} />
-            </QuestionQuizProvider>
-          )}
-        />
-        <Route exact component={MainPage} />
-      </Switch>
+      <QuestionQuizProvider>
+        <Routes>
+          <Route path={TOKENEXPIRED} exact element={<ExpiredToken />} />
+          <Route path={LOGIN} exact element={<Login />} />
+
+          <Route path={`${QUESTION}:idQuiz`} exact element={<ManageQuiz />} />
+          <Route
+            path={`${MANAGE_CLASSES}/:idClass`}
+            exact
+            element={<ManageClass />}
+          />
+          <Route path="*" element={<MainPage />} />
+        </Routes>
+      </QuestionQuizProvider>
     </Suspense>
   );
-}
+};
 
 export default App;

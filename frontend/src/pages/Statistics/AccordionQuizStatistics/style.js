@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Grid, Typography, Paper } from '@material-ui/core';
+import { Grid, Typography, Paper } from '@mui/material';
 
 export const BarQuestion = styled(Grid).attrs({
   item: true,
@@ -46,11 +46,23 @@ export const StudentInformation = styled(Grid)`
 
 export const BoxStudent = styled.div``;
 
-export const NameStudent = styled(Typography)`
+export const BoldText = styled.span`
   font-weight: 500;
 `;
 
-export const ChoiceStudent = styled(Typography)``;
+export const StudentName = styled.span``;
+
+export const WrapperStudentChoice = styled.div``;
+
+export const BadgeStudentChoice = styled.div`
+  background: ${({ theme }) => theme.palette.primary.main};
+  width: max-content;
+  padding: 6px 20px;
+  border-radius: 30px;
+  color: white;
+  font-weight: 400;
+  margin: 5px;
+`;
 
 export const IsStudentChoiceCorrect = styled(Typography)`
   align-self: center;

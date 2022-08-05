@@ -15,7 +15,8 @@ const Auth = ({ children }) => {
   const login = async (username, password) => {
     if (!username || !password) return 404;
     try {
-      const response = await api.post('/login', { username, password });
+      const response = await api.post('/teacher/login', { username, password });
+
       const { data } = response;
       setTeacherInfo({
         token: data.token,
@@ -24,8 +25,9 @@ const Auth = ({ children }) => {
 
       localStorage.setItem('@TOKEN', data.token);
       localStorage.setItem('@TEACHER', JSON.stringify(data.teacher));
+      localStorage.setItem('@REFRESH_TOKEN', data.refreshToken);
 
-      return response;
+      return { response };
     } catch (err) {
       return err;
     }
@@ -39,6 +41,7 @@ const Auth = ({ children }) => {
 
   return (
     <AuthContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{ teacherInfo, setTeacherInfo, login, logout }}
     >
       {children}

@@ -11,12 +11,15 @@ const StudentAuth = ({ children }) => {
     token: null,
   };
 
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [studentInfo, setStudentInfo] = useState(initialValue);
-  const localStorageItem = '@student';
+  const studentStorageItem = '@student';
+  const tokenStorageItem = '@TOKEN';
+  const refreshStorageItem = '@REFRESH_TOKEN';
 
-  const getOnLocalStorage = async () => {
+  const getOnLocalStorage = async (key) => {
     try {
-      const jsonValue = await AsyncStorage.getItem(localStorageItem);
+      const jsonValue = await AsyncStorage.getItem(key);
       return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch (error) {
       console.warn(error);
@@ -24,10 +27,11 @@ const StudentAuth = ({ children }) => {
     }
   };
 
-  const saveOnLocalStorage = async (values) => {
+  const saveOnLocalStorage = async (key, values) => {
     try {
       const jsonValue = JSON.stringify(values);
-      await AsyncStorage.setItem(localStorageItem, jsonValue);
+      await AsyncStorage.setItem(key, jsonValue);
+      return true;
     } catch (error) {
       console.warn(error);
       return error;
@@ -43,40 +47,95 @@ const StudentAuth = ({ children }) => {
         password,
       });
 
+      const { student, token, refreshToken: RefreshToken } = response.data;
+
       const studentValues = {
-        token: response.data.token,
-        student: response.data.student,
+        student,
+        token,
       };
 
       setStudentInfo(studentValues);
-      saveOnLocalStorage(studentValues);
+      setLoggedIn(true);
+      saveOnLocalStorage(studentStorageItem, { studentValues });
+      saveOnLocalStorage(tokenStorageItem, token);
+      saveOnLocalStorage(refreshStorageItem, RefreshToken);
       return response;
     } catch (error) {
-      return {
+      const err = {
         status: error.response.status,
-        message: error.response.data.error,
+        message: error.response.data.response,
       };
+      throw err;
     }
   };
 
   const login = async (values) => {
     try {
-      const { email, password } = values;
-      const response = await api.post('/student/login', { email, password });
+      const { ra, password } = values;
+      const response = await api.post('/student/loginLDAP', {
+        ra,
+        password,
+      });
+
+      const {
+        student,
+        token,
+        refreshToken: RefreshToken,
+        isFirstLogin,
+      } = response.data;
 
       const studentValues = {
-        token: response.data.token,
-        student: response.data.student,
+        student,
+        token,
+        isFirstLogin,
       };
-
       setStudentInfo(studentValues);
-      saveOnLocalStorage(studentValues);
+      saveOnLocalStorage(studentStorageItem, studentValues);
+      saveOnLocalStorage(tokenStorageItem, token);
+      saveOnLocalStorage(refreshStorageItem, RefreshToken);
 
+      setLoggedIn(true);
       return response;
     } catch (error) {
       return {
         status: error.response.status,
-        message: error.response.data.error,
+        message: error.response.data.response,
+      };
+    }
+  };
+
+  const update = async (values) => {
+    try {
+      const { name, avatar } = values;
+
+      const { data } = await api.post('/student/update', {
+        id: studentInfo.student.id,
+        name,
+        avatar,
+      });
+
+      const isFirstLogin = !data.name;
+
+      const studentValues = {
+        ...studentInfo,
+        student: {
+          ...studentInfo.student,
+          name,
+          image: data.image,
+        },
+        isFirstLogin,
+      };
+
+      setStudentInfo(studentValues);
+      saveOnLocalStorage(studentStorageItem, studentValues);
+
+      return data;
+    } catch (error) {
+      console.log('error', error.response, { ...error });
+
+      return {
+        status: error.response.status,
+        message: error.response.data.message,
       };
     }
   };
@@ -84,9 +143,10 @@ const StudentAuth = ({ children }) => {
   const logout = async () => {
     try {
       setStudentInfo(initialValue);
-      await AsyncStorage.removeItem(localStorageItem);
+      setLoggedIn(false);
+      await AsyncStorage.clear();
     } catch (error) {
-      console.warn(error);
+      // console.warn(error);
     }
   };
 
@@ -99,6 +159,11 @@ const StudentAuth = ({ children }) => {
         logout,
         register,
         getOnLocalStorage,
+        studentStorageItem,
+        isLoggedIn,
+        setLoggedIn,
+        initialValue,
+        update,
       }}
     >
       {children}

@@ -28,10 +28,23 @@ class App {
     this.server.use(compression({ threshold: 0 }));
     this.server.use(helmet());
     this.server.use(express.json({ limit: '50mb' }));
-    this.server.use(cors());
+    // this.server.use(express.urlencoded({ extended: true }));
+    this.server.use(
+      cors({
+        origin: '*',
+      })
+    );
     this.server.use(
       '/files',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
+    this.server.use(
+      '/avatars',
+      express.static(path.resolve(__dirname, '..', 'avatars'))
+    );
+    this.server.use(
+      '/getQuestionModelSheet',
+      express.static(path.resolve(__dirname, '..', './modelo_questoes.ods'))
     );
   }
 

@@ -1,34 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components/native';
+import { ActivityIndicator } from 'react-native';
 
-export const StyledButton = styled.TouchableOpacity`
-  height: 60px;
-  background: ${({ theme }) => theme.color.backgroundButton};
-  justify-content: center;
-  border-radius: 30px;
-`;
-
-export const StyledText = styled.Text`
-  font-family: 'PoppinsBold';
-  font-size: ${({ theme }) => theme.fontSize}px;
-  color: ${({ theme }) => theme.color.textButton};
-  text-align: center; ;
-`;
+import { StyledButton, StyledText } from './style';
 
 const WrapperStyledButton = ({
   children,
   onPress,
   variant,
   activeOpacity,
+  loading,
   ...props
 }) => (
   <StyledButton
     variant={variant}
     activeOpacity={activeOpacity}
     onPress={onPress}
+    disabled={loading}
     {...props}
   >
+    {loading && (
+      <ActivityIndicator
+        style={{ marginRight: 20 }}
+        size="small"
+        color="white"
+      />
+    )}
     <StyledText variant={variant}>{children}</StyledText>
   </StyledButton>
 );
@@ -36,12 +33,14 @@ const WrapperStyledButton = ({
 StyledButton.defaultProps = {
   onPress: () => {},
   activeOpacity: 0.9,
+  loading: false,
 };
 
 StyledButton.propTypes = {
   children: PropTypes.node.isRequired,
   onPress: PropTypes.func,
   activeOpacity: PropTypes.number,
+  loading: PropTypes.bool,
 };
 
 export default WrapperStyledButton;

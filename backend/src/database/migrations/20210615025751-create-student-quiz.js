@@ -16,8 +16,19 @@ module.exports = {
           key: 'id',
         },
       },
+      class_id: {
+        type: Sequelize.UUID,
+        foreignKey: true,
+        references: {
+          model: 'classes',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+        allowNull: true,
+      },
       quiz_id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         onDelete: 'CASCADE',
         references: {
           model: 'quiz',
@@ -29,11 +40,11 @@ module.exports = {
         defaultValue: false,
       },
       hit_amount: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       score: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
       created_at: {

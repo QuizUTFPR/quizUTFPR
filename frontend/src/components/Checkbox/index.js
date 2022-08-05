@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Checkbox = (children, ...props) => (
+const Checkbox = (...props) => (
   <Checkbox
     id={props.id}
     checked={props.checked}

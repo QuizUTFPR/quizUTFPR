@@ -16,19 +16,23 @@ const Question = ({ children }) => {
     checkedAnswer: [false, false, false, false],
   };
 
-  const [quizData, setQuizData] = useState(initialValue);
+  const [noTime, setNoTime] = useState(false);
+  const [quizData, setQuizData] = useState(
+    JSON.parse(JSON.stringify(initialValue))
+  ); // save the quiz data about the question on screen
   const [quizID, setQuizID] = useState(-1);
   const [amountOfQuestion, setAmountOfQuestion] = useState(0);
   const [amountAlreadyAnswered, setAlreadyAnswered] = useState(0);
   const [StudentQuizID, setStudentQuizID] = useState(-1);
   const [requestQuestion, setRequestQuestion] = useState(
-    initialRequestQuestion
+    JSON.parse(JSON.stringify(initialRequestQuestion))
   );
+  const [quizInfo, setQuizInfo] = useState(null); // save only the quiz info
 
   const handleFinishQuizAnswering = async () => {
-    const { data } = await api.put('/studentQuiz/finishQuiz', {
-      id_student_quiz: StudentQuizID,
-      quiz_id: quizID,
+    const { data } = await api.put('/studentGameInfo/finishQuiz', {
+      idStudentQuiz: StudentQuizID,
+      quizId: quizID,
     });
 
     return data;
@@ -36,30 +40,30 @@ const Question = ({ children }) => {
 
   const handleSaveRequestQuestionOnDatabase = async (timeLeft) => {
     const requestData = {
-      time_left: timeLeft,
-      student_quiz_id: StudentQuizID,
-      quiz_id: quizID,
-      question_id: quizData.questions[quizData.indexOnScreen].id,
+      timeLeft,
+      studentQuizId: StudentQuizID,
+      quizId: quizID,
+      questionId: quizData.questions[quizData.indexOnScreen].id,
       arrayOfChecked: requestQuestion.checkedAnswer,
     };
 
-    await api.post('/studentQuiz/createChoice', {
+    await api.post('/studentGameInfo/createChoice', {
       ...requestData,
     });
 
-    setRequestQuestion(initialRequestQuestion);
+    setRequestQuestion(JSON.parse(JSON.stringify(initialRequestQuestion)));
   };
 
   // eslint-disable-next-line camelcase
-  const getQuestionsOfQuizFromDatabase = async (quiz_id, id_student_quiz) => {
-    const { data } = await api.post('/studentQuiz/getQuestionQuiz', {
-      quiz_id,
-      id_student_quiz,
+  const getQuestionsOfQuizFromDatabase = async (quizId, idStudentQuiz) => {
+    const { data } = await api.post('/studentGameInfo/getQuestionQuiz', {
+      quizId,
+      idStudentQuiz,
     });
 
     setAlreadyAnswered(data.amountStudentChoice);
-    setQuizID(quiz_id);
-    setStudentQuizID(id_student_quiz);
+    setQuizID(quizId);
+    setStudentQuizID(idStudentQuiz);
     setAmountOfQuestion(data.amountOfQuestion);
     setQuizData({
       indexOnScreen: 0,
@@ -81,15 +85,34 @@ const Question = ({ children }) => {
   };
 
   const handleSetCheckedAnswer = (index) => {
-    setRequestQuestion((prevState) => {
-      const newCheckedAnswer = prevState.checkedAnswer;
-      newCheckedAnswer[index] = !newCheckedAnswer[index];
+    const { type } = quizData.questions[quizData.indexOnScreen];
 
-      return {
-        ...prevState,
-        checkedAnswer: newCheckedAnswer,
-      };
-    });
+    if (type === 'singleChoice') {
+      setRequestQuestion((prevState) => {
+        const newCheckedAnswer = prevState.checkedAnswer;
+        if (index === 0) {
+          newCheckedAnswer[1] = false;
+        } else {
+          newCheckedAnswer[0] = false;
+        }
+        newCheckedAnswer[index] = true;
+
+        return {
+          ...prevState,
+          checkedAnswer: newCheckedAnswer,
+        };
+      });
+    } else {
+      setRequestQuestion((prevState) => {
+        const newCheckedAnswer = prevState.checkedAnswer;
+        newCheckedAnswer[index] = !newCheckedAnswer[index];
+
+        return {
+          ...prevState,
+          checkedAnswer: newCheckedAnswer,
+        };
+      });
+    }
   };
 
   return (
@@ -106,6 +129,16 @@ const Question = ({ children }) => {
         StudentQuizID,
         amountOfQuestion,
         amountAlreadyAnswered,
+        noTime,
+        setNoTime,
+        setQuizInfo,
+        quizInfo,
+        initialValue,
+        setQuizID,
+        setAmountOfQuestion,
+        setAlreadyAnswered,
+        setStudentQuizID,
+        setRequestQuestion,
       }}
     >
       {children}

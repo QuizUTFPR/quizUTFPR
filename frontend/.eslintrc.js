@@ -3,23 +3,32 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['airbnb', 'prettier', 'plugin:import/recommended'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
-    __DEV__: 'readonly',
+    DEV: 'readonly',
   },
-  parser: 'babel-eslint',
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+    'plugin:import/recommended',
+    'plugin:prettier/recommended',
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 12,
+    ecmaVersion: 'latest',
     sourceType: 'module',
   },
   plugins: ['react', 'prettier'],
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'react/jsx-filename-extension': [
       'warn',
       {
@@ -32,10 +41,22 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/prop-types': 'off',
     'no-param-reassign': 'off',
+    'react/forbid-prop-types': 'off',
     'no-console': 'off',
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
+    'no-unused-vars': 'off',
   },
   settings: {
     'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
       alias: {
         map: [
           ['@components', './src/components/'],
@@ -48,7 +69,7 @@ module.exports = {
           ['@utils', './src/utils/'],
         ],
       },
-      extensions: ['.js', '.less', '.json', '.vue'],
+      extensions: ['.js', '.less', '.json'],
     },
   },
 };

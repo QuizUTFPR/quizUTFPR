@@ -2,15 +2,18 @@ module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable('quiz', {
       id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
+        type: Sequelize.UUID,
         primaryKey: true,
+        allowNull: false,
+        defaultValue: Sequelize.UUIDV4,
       },
       id_teacher: {
         type: Sequelize.INTEGER,
         foreignKey: true,
-        references: { model: 'teacher', key: 'id' },
+        references: {
+          model: 'teacher',
+          key: 'id',
+        },
         allowNull: false,
       },
       title: {
@@ -32,15 +35,25 @@ module.exports = {
       id_image: {
         type: Sequelize.INTEGER,
         foreignKey: true,
-        references: { model: 'file', key: 'id' },
+        references: {
+          model: 'file',
+          key: 'id',
+        },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
         allowNull: true,
       },
       pin: {
         type: Sequelize.STRING,
         allowNull: true,
         unique: true,
+      },
+      publish_date: {
+        type: Sequelize.DATE,
+      },
+      no_time: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       created_at: {
         type: Sequelize.DATE,

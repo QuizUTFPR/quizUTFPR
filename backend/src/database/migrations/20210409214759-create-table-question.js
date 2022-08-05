@@ -46,13 +46,13 @@ module.exports = {
         foreignKey: true,
         references: { model: 'file', key: 'id' },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
         allowNull: true,
       },
       type: {
-        type: Sequelize.ENUM('multiple_choice', 'single_choice'),
+        type: Sequelize.ENUM('multipleChoice', 'singleChoice'),
         allowNull: false,
-        defaultValue: 'multiple_choice',
+        defaultValue: 'multipleChoice',
       },
       created_at: {
         type: Sequelize.DATE,
