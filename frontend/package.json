@@ -5,9 +5,10 @@
   "dependencies": {
     "@babel/eslint-parser": "7.16.5",
     "@craco/craco": "6.4.3",
-    "@mui/icons-material": "5.3.1",
-    "@mui/material": "5.3.1",
-    "@mui/styled-engine-sc": "5.3.0",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.5",
+    "@mui/styled-engine-sc": "^5.10.3",
+    "@mui/system": "^5.10.5",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
@@ -25,13 +26,10 @@
     "react-dropzone": "11.5.1",
     "react-router-dom": "6.2.1",
     "react-scripts": "5.0.1",
-    "styled-components": "5.3.3",
+    "styled-components": "^5.3.5",
     "web-vitals": "2.1.4",
     "xlsx": "0.18.5",
     "yup": "0.32.11"
-  },
-  "resolutions": {
-    "@mui/styled-engine": "npm:@mui/styled-engine-sc@5.3.0"
   },
   "scripts": {
     "start": "craco start",
