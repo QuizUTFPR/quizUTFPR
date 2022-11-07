@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
 // COMPONENTS
 import { Grid, InputAdornment, IconButton } from '@mui/material';
 import ErrorMessage from '@components/Messages/error';
+import { GoogleLogin } from 'react-google-login';
 
 import {
   AccountCircle,
@@ -35,6 +36,9 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
 
   const { login } = useAuth();
+
+  const ref = useRef(null);
+  const inputRef = useRef(null);
 
   const [values, setValues] = useState({
     username: '',
@@ -85,7 +89,6 @@ const LoginPage = () => {
         >
           <LogoUTFPR />
         </Grid>
-
         <Grid item xs={12} sm={12} md={12} lg={6}>
           <DescriptionsGrid item xs={12}>
             <Title variant="h4" color="black">
@@ -93,10 +96,10 @@ const LoginPage = () => {
             </Title>
             <Subtitle color="black">
               Seja bem-vindo novamente! <br />
-              Por favor entre em sua conta utilizando seu login institucional.
+              Por favor entre em sua conta utilizando seu login institucional
+              @professores.
             </Subtitle>
           </DescriptionsGrid>
-
           <GridForm
             item
             xs={12}
@@ -155,6 +158,7 @@ const LoginPage = () => {
                 {error}
               </ErrorMessage>
             )}
+
             <Grid item align="center">
               <StyledButton
                 loading={loading}
@@ -166,6 +170,23 @@ const LoginPage = () => {
               </StyledButton>
             </Grid>
           </GridForm>
+          <Grid
+            item
+            sx={{ mt: 1 }}
+            xs={12}
+            sm={12}
+            md={12}
+            lg={9}
+            align="center"
+          >
+            <GoogleLogin
+              clientId="886529009031-eopst89o226si82vi16g58tcccbdtgnb.apps.googleusercontent.com"
+              buttonText="Entrar com o Google"
+              // onSuccess={responseGoogle}
+              // onFailure={responseGoogle}
+              cookiePolicy="single_host_origin"
+            />
+          </Grid>
         </Grid>
       </Grid>
     </StyledContainer>
