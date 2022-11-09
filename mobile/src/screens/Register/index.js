@@ -152,12 +152,11 @@ const Register = ({ navigation }) => {
             </KeyboardAvoidingView>
             <WrapperButton>
               <ButtonGradient
-                title="Submit"
+                // title="Submit"
                 variant="primary"
                 onPress={handleSubmit}
-              >
-                CADASTRAR
-              </ButtonGradient>
+                title="CADASTRAR"
+              />
             </WrapperButton>
 
             <StyledTextButton

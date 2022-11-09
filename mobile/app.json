@@ -3,6 +3,7 @@
     "name": "Quiz UTFPR",
     "slug": "mobile",
     "version": "1.0.0",
+    "scheme": "quizutfpr",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "platforms": [

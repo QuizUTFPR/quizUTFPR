@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-
 import { useNavigate } from 'react-router-dom';
+
+// GOOGLE AUTH
+import * as AuthSession from 'expo-auth-session';
 
 // COMPONENTS
 import { Grid, InputAdornment, IconButton } from '@mui/material';
@@ -37,7 +39,7 @@ const LoginPage = () => {
   const { login } = useAuth();
 
   const [values, setValues] = useState({
-    username: '',
+    email: '',
     password: '',
     showPassword: false,
   });
@@ -61,7 +63,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const { response } = await login(values.username, values.password);
+    const { response } = await login(values.email, values.password);
 
     if (response.status === 200) {
       navigate(HOME);
@@ -93,7 +95,8 @@ const LoginPage = () => {
             </Title>
             <Subtitle color="black">
               Seja bem-vindo novamente! <br />
-              Por favor entre em sua conta utilizando seu login institucional.
+              Por favor entre em sua conta utilizando seu login institucional
+              <b> @professores.</b>
             </Subtitle>
           </DescriptionsGrid>
 
@@ -107,10 +110,10 @@ const LoginPage = () => {
             onSubmit={handleLogin}
           >
             <StyledInput
-              id="username"
-              label="Nome de Usuário"
-              value={values.username}
-              onChange={handleChange('username')}
+              id="email"
+              label="E-mail"
+              value={values.email}
+              onChange={handleChange('email')}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">

@@ -36,12 +36,12 @@ const HomeQuizzes = () => {
     setRefreshing(true);
     await getAllPublishedQuizzes();
     setRefreshing(false);
-  });
+  }, []);
 
   useFocusEffect(
     useCallback(() => {
       onRefresh();
-    }, [])
+    }, [onRefresh])
   );
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const HomeQuizzes = () => {
     });
 
     return unsubscribeListenTabPress;
-  }, [navigation]);
+  }, [navigation, onRefresh]);
 
   return (
     <Container>

@@ -114,9 +114,8 @@ const Feedback = () => {
               loading={loading}
               onPress={handleSendFeedback}
               variant="primary"
-            >
-              ENVIAR
-            </ButtonGradient>
+              title="ENVIAR"
+            />
           </InputWrapper>
         </BottomWrapper>
       </StyledContainer>

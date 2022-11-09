@@ -26,12 +26,11 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
   const navigation = useNavigation();
   const { studentInfo, logout } = useStudentAuth();
 
-
   return (
     <WrapperMyDrawer style={{ flex: 1 }}>
       <Avatar
         source={{
-          uri: studentInfo.student.image,
+          uri: studentInfo?.student?.image,
         }}
       />
       <StudentName fill="purple">

@@ -8,10 +8,15 @@ class File extends Model {
       {
         name: Sequelize.STRING,
         path: Sequelize.STRING,
+        isLocalImage: Sequelize.BOOLEAN,
         url: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `${process.env.APP_URL}/files/${this.path}`;
+            if (this.isLocalImage) {
+              return `${process.env.APP_URL}/files/${this.path}`;
+            }
+
+            return this.path;
           },
         },
       },

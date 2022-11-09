@@ -1,5 +1,14 @@
-import React from 'react';
-import ButtonGradient from '@components/ButtonGradient';
+import React, { useEffect } from 'react';
+import { AntDesign } from '@expo/vector-icons';
+
+// EXPO AUTH
+import { useAuthRequest } from 'expo-auth-session/providers/google';
+import * as WebBrowser from 'expo-web-browser';
+
+import useStudentAuth from '@hook/useStudentAuth';
+
+// .env
+import { expoClientId } from '../../../env';
 
 // THEME
 import theme from '../../styles/theme';
@@ -11,41 +20,69 @@ import {
   WrapperButton,
   StyledTitle,
   StyledParagraph,
+  StyledButtonGradient,
   Logo,
 } from './styles';
 
-const InitialScreen = ({ navigation }) => (
-  <Container fill="purple">
-    <ImageView>
-      <Logo />
-      <StyledTitle fill="white">Bem-Vindo!</StyledTitle>
-      <StyledParagraph fill="white">
-        Aqui você poderá encontrar os quizzes criados por seus professores para
-        respondê-los e aprimorar seus conhecimentos.
-      </StyledParagraph>
+WebBrowser.maybeCompleteAuthSession();
 
-      <WrapperButton>
-        <ButtonGradient
-          variant="primary"
-          colors={theme.color.gradients.secondary}
-          onPress={() => navigation.navigate('Login')}
-          icon="login-variant"
-        >
-          LOGIN UTFPR
-        </ButtonGradient>
-      </WrapperButton>
-      {/* <WrapperButton>
-        <ButtonGradient
-          variant="primary"
-          colors={theme.color.gradients.secondary}
-          onPress={() => navigation.navigate('Register')}
-          icon="account-plus"
-        >
-          CRIAR CONTA
-        </ButtonGradient>
-      </WrapperButton> */}
-    </ImageView>
-  </Container>
-);
+const InitialScreen = ({ navigation }) => {
+  const { login } = useStudentAuth();
+
+  const [request, response, promptAsync] = useAuthRequest({
+    expoClientId,
+  });
+
+  const fetchUserInfo = async (token) => {
+    try {
+      console.log('indo', token);
+      const res = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { email } = await res.json();
+
+      await login({ email });
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { authentication } = response;
+      fetchUserInfo(authentication.accessToken);
+    }
+  }, [response]);
+
+  return (
+    <Container fill="purple">
+      <ImageView>
+        <Logo />
+        <StyledTitle fill="white">Bem-Vindo!</StyledTitle>
+        <StyledParagraph fill="white">
+          Aqui você poderá encontrar os quizzes criados por seus professores
+          para respondê-los e aprimorar seus conhecimentos.
+        </StyledParagraph>
+
+        <WrapperButton>
+          <StyledButtonGradient
+            variant="primary"
+            colors={theme.color.gradients.secondary}
+            onPress={() => {
+              promptAsync();
+            }}
+            disabled={!request}
+            title="ENTRAR COM GOOGLE"
+          >
+            <AntDesign name="google" size={24} color="white" />
+          </StyledButtonGradient>
+        </WrapperButton>
+      </ImageView>
+    </Container>
+  );
+};
 
 export default InitialScreen;

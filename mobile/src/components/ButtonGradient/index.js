@@ -7,6 +7,8 @@ import { WrapperButton, StyledButton, StyledText } from './style';
 // THEME
 import theme from '../../styles/theme';
 
+const styleActivityIndicator = { marginRight: 20 };
+
 const WrapperStyledButton = ({
   children,
   onPress,
@@ -16,6 +18,7 @@ const WrapperStyledButton = ({
   activeOpacity,
   underlayColor,
   loading,
+  title,
   ...props
 }) => (
   <WrapperButton
@@ -27,12 +30,13 @@ const WrapperStyledButton = ({
     <StyledButton colors={colors} {...props}>
       {loading && (
         <ActivityIndicator
-          style={{ marginRight: 20 }}
+          style={styleActivityIndicator}
           size="small"
           color="white"
         />
       )}
-      <StyledText fill="white">{children}</StyledText>
+      <StyledText fill="white">{title}</StyledText>
+      {children}
     </StyledButton>
   </WrapperButton>
 );
@@ -43,15 +47,18 @@ WrapperStyledButton.defaultProps = {
   underlayColor: theme.color.whiteGrey,
   colors: theme.color.gradients.primary,
   loading: false,
+  children: '',
+  title: 'title',
 };
 
 WrapperStyledButton.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   onPress: PropTypes.func,
   activeOpacity: PropTypes.number,
   underlayColor: PropTypes.string,
   colors: PropTypes.arrayOf(PropTypes.string),
   loading: PropTypes.bool,
+  title: PropTypes.string,
 };
 
 export default WrapperStyledButton;
