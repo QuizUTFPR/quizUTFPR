@@ -72,10 +72,13 @@ const StudentAuth = ({ children }) => {
   const login = useCallback(async (values) => {
     try {
       const { email } = values;
+      console.log('Context -> login', email);
 
       const response = await api.post('/student/login', {
         email,
       });
+
+      console.log('Context -> login -> response', response.data);
 
       const {
         student,
@@ -83,6 +86,8 @@ const StudentAuth = ({ children }) => {
         refreshToken: RefreshToken,
         isFirstLogin,
       } = response.data;
+
+      console.log(response.data);
 
       const studentValues = {
         student,
@@ -100,7 +105,13 @@ const StudentAuth = ({ children }) => {
       setLoggedIn(true);
       return response;
     } catch (error) {
-      console.log(error.response);
+      if (error.response) {
+        console.log(error.response);
+      } else if (error.request) {
+        console.log(error.request);
+      } else {
+        console.log(error.message);
+      }
       return {
         status: error.response.status,
         message: error.response.data.response,

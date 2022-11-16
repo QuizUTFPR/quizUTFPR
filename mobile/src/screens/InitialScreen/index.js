@@ -35,7 +35,6 @@ const InitialScreen = ({ navigation }) => {
 
   const fetchUserInfo = async (token) => {
     try {
-      console.log('indo', token);
       const res = await fetch('https://www.googleapis.com/userinfo/v2/me', {
         method: 'GET',
         headers: {
@@ -43,7 +42,7 @@ const InitialScreen = ({ navigation }) => {
         },
       });
       const { email } = await res.json();
-
+      console.log('email', email);
       await login({ email });
     } catch (error) {
       console.warn(error);
