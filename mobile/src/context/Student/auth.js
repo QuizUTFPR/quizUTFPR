@@ -72,13 +72,10 @@ const StudentAuth = ({ children }) => {
   const login = useCallback(async (values) => {
     try {
       const { email } = values;
-      console.log('Context -> login', email);
 
       const response = await api.post('/student/login', {
         email,
       });
-
-      console.log('Context -> login -> response', response.data);
 
       const {
         student,
@@ -94,8 +91,6 @@ const StudentAuth = ({ children }) => {
         token,
         isFirstLogin,
       };
-
-      console.log('abbbaa', studentValues);
 
       setStudentInfo(studentValues);
       saveOnLocalStorage(studentStorageItem, studentValues);

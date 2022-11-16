@@ -12,10 +12,11 @@ export const initialValue = {
 const Auth = ({ children }) => {
   const [teacherInfo, setTeacherInfo] = useState(initialValue);
 
-  const login = async (username, password) => {
-    if (!username || !password) return 404;
+  const login = async (email) => {
+    if (!email) return 404;
+
     try {
-      const response = await api.post('/teacher/login', { username, password });
+      const response = await api.post('/teacher/login', { email });
 
       const { data } = response;
       setTeacherInfo({
