@@ -104,11 +104,11 @@ const MenuDrawer = () => {
                 horizontal: 'right',
               }}
             >
-              <Avatar alt={teacherInfo.teacher.name.toUpperCase()} src="" />
+              <Avatar alt={teacherInfo?.teacher?.name?.toUpperCase()} src="" />
             </StyledBadge>
 
             <TextBox>
-              <AdminName color="primary">{teacherInfo.teacher.name}</AdminName>
+              <AdminName color="primary">{teacherInfo?.teacher.name}</AdminName>
               <AdminDescription color="primary">UTFPR</AdminDescription>
             </TextBox>
           </>

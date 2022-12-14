@@ -42,10 +42,16 @@ export const StyledInput = styled(TextField)`
 
 export const StyledButton = styled(Button)`
   && {
-    width: 50%;
+    /* width: 50%; */
+    min-width: 300px;
     height: 50px;
     font-weight: bolder;
     font-size: 1.3em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    white-space: nowrap;
+    gap: 8px;
   }
 `;
 

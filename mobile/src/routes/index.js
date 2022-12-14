@@ -22,11 +22,18 @@ const routes = () => {
   useEffect(() => {
     const fetchData = async () => {
       const studentData = await getOnLocalStorage(studentStorageItem);
+      console.log(studentData, 'data');
       if (studentData) setStudentInfo(studentData);
     };
 
     fetchData();
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    console.log('studentInfo.token', studentInfo.token);
+    console.log('studentInfo.student', studentInfo.student);
+    console.log('isLoggedIn', isLoggedIn);
+  }, [studentInfo.token, studentInfo.student, isLoggedIn]);
 
   return (
     <NavigationContainer theme={navigationTheme} ref={navigationRef}>

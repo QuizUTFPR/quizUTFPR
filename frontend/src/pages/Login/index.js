@@ -1,42 +1,36 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+
+// import GoogleButton from 'react-google-button';
 
 // GOOGLE AUTH
 // import * as AuthSession from 'expo-auth-session';
 
 // COMPONENTS
-import { Grid, InputAdornment, IconButton } from '@mui/material';
-import ErrorMessage from '@components/Messages/error';
+import { Grid } from '@mui/material';
+
+import GoogleIcon from '@mui/icons-material/Google';
+
+// import ErrorMessage from '@components/Messages/error';
 // import { GoogleLogin } from 'react-google-login';
 
-import {
-  GoogleLogin,
-  hasGrantedAllScopesGoogle,
-  useGoogleLogin,
-} from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 
-import {
-  AccountCircle,
-  Visibility,
-  VisibilityOff,
-  Lock,
-} from '@mui/icons-material';
+// import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
 
 // HOOKS
 import useAuth from '@hooks/Auth';
 
 // ROTAS
-import { HOME } from '@routes';
+// import { HOME } from '@routes';
 
 import {
   StyledContainer,
   DescriptionsGrid,
   Title,
   Subtitle,
-  GridForm,
-  StyledInput,
   StyledButton,
   LogoUTFPR,
 } from './style';
@@ -102,8 +96,11 @@ const LoginPage = () => {
         },
       });
       const { email } = await res.json();
-      console.log('email', email);
-      if (email.includes('professores')) {
+
+      if (
+        email.includes('@professores') ||
+        process.env.REACT_APP_AMBIENT === 'development'
+      ) {
         await login({ email });
       } else {
         enqueueSnackbar('Você deve entrar com email @professores', {
@@ -238,7 +235,8 @@ const LoginPage = () => {
             variant="contained"
             onClick={() => googleLogin()}
           >
-            ENTRAR COM O GOOGLE
+            <p>ENTRAR COM O GOOGLE</p>
+            <GoogleIcon />
           </StyledButton>
           {/* </Grid> */}
         </Grid>

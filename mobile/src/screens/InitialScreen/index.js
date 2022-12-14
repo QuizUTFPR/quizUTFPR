@@ -34,6 +34,7 @@ const InitialScreen = ({ navigation }) => {
   });
 
   const fetchUserInfo = async (token) => {
+    console.log('fetchUserInfo');
     try {
       const res = await fetch('https://www.googleapis.com/userinfo/v2/me', {
         method: 'GET',
