@@ -87,7 +87,6 @@ const LoginPage = () => {
   });
 
   const fetchUserInfo = async (credential) => {
-    console.log(credential);
     try {
       const res = await fetch('https://www.googleapis.com/userinfo/v2/me', {
         method: 'GET',
@@ -95,13 +94,15 @@ const LoginPage = () => {
           Authorization: `Bearer ${credential}`,
         },
       });
-      const { email } = await res.json();
+      const data = await res.json();
+      console.log(data);
+      const { email } = data;
 
       if (
-        email.includes('@professores') ||
+        email.includes('@alunos') ||
         process.env.REACT_APP_AMBIENT === 'development'
       ) {
-        await login({ email });
+        await login(data);
       } else {
         enqueueSnackbar('Você deve entrar com email @professores', {
           variant: 'error',
