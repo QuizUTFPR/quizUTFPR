@@ -99,7 +99,7 @@ const LoginPage = () => {
       const { email } = data;
 
       if (
-        email.includes('@alunos') ||
+        email.includes('@professores') ||
         process.env.REACT_APP_AMBIENT === 'development'
       ) {
         await login(data);
