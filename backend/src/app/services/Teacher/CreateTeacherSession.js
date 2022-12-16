@@ -28,7 +28,7 @@ class CreateTeacherSessionService {
       throw error;
     }
 
-    const { email, name } = data;
+    const { email, name, picture } = data;
 
     // // OBTENDO TOKEN PARA CONSEGUIR UTILIZAR API DO LDAP
     // const responseLDAP = await axios.post(`${process.env.LDAP_URL}/login`, {
@@ -83,7 +83,7 @@ class CreateTeacherSessionService {
     // CASO NÃO EXISTA CRIO UMA CONTA NO BANCO PARA O MESMO
     // USADO NOS TESTES DENTRO DA REDE DA UTF
     if (!teacher) {
-      teacher = await this.teacherRepository.create({ email, name });
+      teacher = await this.teacherRepository.create({ email, name, picture });
     }
 
     const { id } = teacher;
@@ -100,6 +100,7 @@ class CreateTeacherSessionService {
       teacher: {
         name,
         email,
+        picture,
         // uid,
       },
       token,
