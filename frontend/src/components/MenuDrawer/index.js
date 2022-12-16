@@ -96,17 +96,10 @@ const MenuDrawer = () => {
       {open && (
         <AvatarBox>
           <>
-            <StyledBadge
-              overlap="circular"
-              variant="dot"
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-            >
-              <Avatar alt={teacherInfo?.teacher?.name?.toUpperCase()} src="" />
-            </StyledBadge>
-
+            <Avatar sx={{ width: 56, height: 56 }}
+              alt={teacherInfo?.teacher?.name?.toUpperCase()}
+              src={teacherInfo?.teacher?.picture}
+            />
             <TextBox>
               <AdminName color="primary">{teacherInfo?.teacher.name}</AdminName>
               <AdminDescription color="primary">UTFPR</AdminDescription>

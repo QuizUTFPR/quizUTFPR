@@ -17,7 +17,7 @@ const Home = () => {
       </Grid>
       <Grid item>
         <Typography color="primary">
-          Seja Bem-Vindo ao Painel de Controle
+          Bem-vindo ao painel de controle.
         </Typography>
       </Grid>
     </StyledHomeGrid>

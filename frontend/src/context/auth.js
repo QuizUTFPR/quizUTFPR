@@ -16,7 +16,6 @@ const Auth = ({ children }) => {
     if (!email) return 404;
     try {
       const response = await api.post('/teacher/login', email);
-
       const { data } = response;
       setTeacherInfo({
         token: data.token,
