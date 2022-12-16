@@ -96,7 +96,8 @@ const MenuDrawer = () => {
       {open && (
         <AvatarBox>
           <>
-            <Avatar sx={{ width: 56, height: 56 }}
+            <Avatar
+              sx={{ width: 56, height: 56 }}
               alt={teacherInfo?.teacher?.name?.toUpperCase()}
               src={teacherInfo?.teacher?.picture}
             />
