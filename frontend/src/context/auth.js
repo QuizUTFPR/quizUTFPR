@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import api from '@api';
@@ -12,19 +13,20 @@ export const initialValue = {
 const Auth = ({ children }) => {
   const [teacherInfo, setTeacherInfo] = useState(initialValue);
 
-  const login = async (email) => {
-    if (!email) return 404;
+  const login = async (data) => {
+    if (!data) return 404;
+
     try {
-      const response = await api.post('/teacher/login', email);
-      const { data } = response;
+      const response = await api.post('/teacher/login', data);
+
       setTeacherInfo({
-        token: data.token,
-        teacher: data.teacher,
+        token: response.data.token,
+        teacher: response.data.teacher,
       });
 
-      localStorage.setItem('@TOKEN', data.token);
-      localStorage.setItem('@TEACHER', JSON.stringify(data.teacher));
-      localStorage.setItem('@REFRESH_TOKEN', data.refreshToken);
+      localStorage.setItem('@TOKEN', response.data.token);
+      localStorage.setItem('@TEACHER', JSON.stringify(response.data.teacher));
+      localStorage.setItem('@REFRESH_TOKEN', response.data.refreshToken);
 
       return { response };
     } catch (err) {

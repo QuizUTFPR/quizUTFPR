@@ -71,11 +71,11 @@ const StudentAuth = ({ children }) => {
 
   const login = useCallback(async (values) => {
     try {
-      const { email } = values;
+      // const { email } = values;
 
-      const response = await api.post('/student/login', {
-        email,
-      });
+      console.log(99999999, values);
+
+      const response = await api.post('/student/login', values);
 
       const {
         student,

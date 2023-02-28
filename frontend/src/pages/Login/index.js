@@ -95,13 +95,13 @@ const LoginPage = () => {
         },
       });
       const data = await res.json();
-      console.log(data);
-      const { email } = data;
 
+      const { email } = data;
       if (
         email.includes('@professores') ||
         process.env.REACT_APP_AMBIENT === 'development'
       ) {
+        console.log(777, data);
         await login(data);
       } else {
         enqueueSnackbar('Você deve entrar com email @professores', {

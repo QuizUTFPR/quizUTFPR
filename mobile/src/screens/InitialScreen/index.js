@@ -41,9 +41,9 @@ const InitialScreen = ({ navigation }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log({ data });
-      const { email } = await data.json();
-      await login({ email });
+      const { email, name, picture } = await data.json();
+
+      await login({ email, name, picture });
     } catch (error) {
       console.warn(error);
     }
@@ -51,7 +51,6 @@ const InitialScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (response?.type === 'success') {
-      console.log('Entrei aqui');
       const { authentication } = response;
       fetchUserInfo(authentication.accessToken);
     }
