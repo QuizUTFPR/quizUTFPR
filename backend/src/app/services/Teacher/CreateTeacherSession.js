@@ -15,7 +15,8 @@ class CreateTeacherSessionService {
   }
 
   async execute(data) {
-    console.log('data ---->>>> ', data);
+    const { email, name, picture } = data;
+
     const schema = Yup.object().shape({
       email: Yup.string().required(),
     });
@@ -27,8 +28,6 @@ class CreateTeacherSessionService {
       error.response = 'Falha na validação!';
       throw error;
     }
-
-    const { email, name, picture } = data;
 
     // // OBTENDO TOKEN PARA CONSEGUIR UTILIZAR API DO LDAP
     // const responseLDAP = await axios.post(`${process.env.LDAP_URL}/login`, {
@@ -79,9 +78,10 @@ class CreateTeacherSessionService {
     //   splittedName[splittedName.length - 1]
     // }`;
 
-    console.log('teacher ---->>>> ', { teacher });
+    console.log('EXISTE ESSE TEACHER? ---->>>> ', teacher);
     // CASO NÃO EXISTA CRIO UMA CONTA NO BANCO PARA O MESMO
     // USADO NOS TESTES DENTRO DA REDE DA UTF
+
     if (!teacher) {
       teacher = await this.teacherRepository.create({ email, name, picture });
     }

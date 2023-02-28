@@ -34,16 +34,15 @@ const InitialScreen = ({ navigation }) => {
   });
 
   const fetchUserInfo = async (token) => {
-    console.log('fetchUserInfo');
     try {
-      const res = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+      const data = await fetch('https://www.googleapis.com/userinfo/v2/me', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      const { email } = await res.json();
-      console.log('email', email);
+      console.log({ data });
+      const { email } = await data.json();
       await login({ email });
     } catch (error) {
       console.warn(error);
@@ -52,6 +51,7 @@ const InitialScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (response?.type === 'success') {
+      console.log('Entrei aqui');
       const { authentication } = response;
       fetchUserInfo(authentication.accessToken);
     }
@@ -71,9 +71,7 @@ const InitialScreen = ({ navigation }) => {
           <StyledButtonGradient
             variant="primary"
             colors={theme.color.gradients.secondary}
-            onPress={() => {
-              promptAsync();
-            }}
+            onPress={() => promptAsync()}
             disabled={!request}
             title="ENTRAR COM GOOGLE"
           >

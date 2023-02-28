@@ -84,8 +84,6 @@ const StudentAuth = ({ children }) => {
         isFirstLogin,
       } = response.data;
 
-      console.log(response.data);
-
       const studentValues = {
         student,
         token,

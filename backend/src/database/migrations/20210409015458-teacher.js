@@ -7,11 +7,11 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      uid: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
+      // uid: {
+      //   type: Sequelize.STRING,
+      //   allowNull: false,
+      //   unique: true,
+      // },
       name: {
         type: Sequelize.STRING,
         defaultValue: 'Sem Nome',

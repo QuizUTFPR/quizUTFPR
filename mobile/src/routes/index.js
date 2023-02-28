@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import useStudentAuth from '@hook/useStudentAuth';
@@ -30,10 +31,9 @@ const routes = () => {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    console.log('studentInfo.token', studentInfo.token);
-    console.log('studentInfo.student', studentInfo.student);
+    console.log('studentInfo', studentInfo);
     console.log('isLoggedIn', isLoggedIn);
-  }, [studentInfo.token, studentInfo.student, isLoggedIn]);
+  }, [studentInfo, isLoggedIn]);
 
   return (
     <NavigationContainer theme={navigationTheme} ref={navigationRef}>
