@@ -23,7 +23,7 @@ Outra funcionalidade existente na plataforma web é a criação de um banco de q
 
 #### 🧑‍🏫 Professor
 
-- Login via LDAP (_Lightweight Directory Access Protocol_).
+- Login pelo Google @professores.
 - Gerenciamento de Turmas.
 - Gerenciamento de Quizzes.
 - Banco de Questões Pessoal Disponíveis para Criação dos Quizzes.
@@ -41,7 +41,7 @@ Outra funcionalidade existente na plataforma web é a criação de um banco de q
 
 #### 🧑‍🎓 Aluno
 
-- Login via LDAP.
+- Login pelo Google.
 - Busca Personalizada de Quizzes por Tags.
 - Acesso a Turmas por meio do PIN.
 - Busca de Quizzes por meio de PIN.
