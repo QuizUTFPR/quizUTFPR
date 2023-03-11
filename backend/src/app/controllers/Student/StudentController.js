@@ -5,12 +5,14 @@ import CreateStudentService from '../../services/Student/CreateStudent';
 class StudentController {
   // Cadastra um único registro
   async store(req, res) {
-    const { email, name } = req.body;
+    const { email, name, picture, isLocalImage } = req.body;
     console.log(req.body);
     try {
       const student = await CreateStudentService.execute({
         email,
         name,
+        picture,
+        isLocalImage,
       });
 
       return res.status(200).json(student);
