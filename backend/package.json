@@ -13,7 +13,8 @@
     "dev:debug": "nodemon --inspect src/server",
     "debug": "nodemon --inspect src/server",
     "test": "jest",
-    "migrate": "npx sequelize-cli db:migrate",
+    "migrate": "npx sequelize-cli migration:generate",
+    "migrate:run": "npx sequelize-cli db:migrate",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
     "pretest": "cross-env NODE_ENV=test npm run migrate:reset"
   },
