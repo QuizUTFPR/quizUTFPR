@@ -3,7 +3,6 @@ import StudentRepository from '../../repositories/Student';
 import DeleteRefreshTokenService from '../RefreshToken/DeleteRefreshToken';
 import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
 import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
-// import File from '../../models/FileModel';
 
 class StudentSessionService {
   constructor() {
@@ -11,13 +10,14 @@ class StudentSessionService {
   }
 
   async execute(data) {
+    const { name, email, picture, isLocalImage } = data;
+
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string().email().required(),
+      picture: Yup.string().required(),
+      isLocalImage: Yup.boolean().required(),
     });
-
-    console.log(777, data);
-
     if (!(await schema.isValid(data))) {
       const error = new Error();
       error.status = 403;
@@ -26,14 +26,23 @@ class StudentSessionService {
     }
 
     let student = await this.studentRepository.findOne({
-      where: { email: data.email },
+      where: { email },
     });
 
     if (!student) {
-      student = await this.studentRepository.create(data);
+      const idImage = isLocalImage ? picture : null;
+      const urlImage = !isLocalImage ? picture : null;
+
+      student = await this.studentRepository.create({
+        email,
+        name,
+        idImage,
+        urlImage,
+        isLocalImage,
+      });
     }
 
-    const { id, imageProfile, name, email } = student;
+    const { id } = student;
 
     // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
     await DeleteRefreshTokenService.execute({
@@ -45,12 +54,7 @@ class StudentSessionService {
     const refreshToken = await GenerateRefreshTokenProvider.execute(id);
 
     return {
-      student: {
-        id,
-        email,
-        name,
-        image: imageProfile?.url,
-      },
+      student,
       token,
       refreshToken: refreshToken.id,
       isFirstLogin: !name,
