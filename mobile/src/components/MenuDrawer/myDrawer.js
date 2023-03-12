@@ -31,7 +31,9 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
     <WrapperMyDrawer style={{ flex: 1 }}>
       <Avatar
         source={{
-          uri: studentInfo?.student?.image,
+          uri: studentInfo?.student?.isLocalImage
+            ? studentInfo?.student?.idImage
+            : studentInfo?.student?.urlImage,
         }}
       />
       <StudentName fill="purple">
