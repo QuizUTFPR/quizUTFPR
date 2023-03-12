@@ -1,4 +1,5 @@
-import React, { lazy, Suspense } from 'react';
+/* eslint-disable react-perf/jsx-no-new-object-as-prop */
+import React, { Suspense } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Loading from '@components/Loading';
 import { useTheme } from '@react-navigation/native';
@@ -14,14 +15,8 @@ import { DrawerLabelStyled } from './styles';
 // COMPONENT
 import MyDrawer from './myDrawer';
 
-// Screens
-
+// SCREENS
 const Drawer = createDrawerNavigator();
-// const BottomTabNavigator = lazy(() =>
-//   import('@routes/bottomTab/BottomTabNavigator')
-// );
-
-// const HomeStack = lazy(() => import('@routes/stacks/home'));
 
 const DrawerComponent = () => {
   const { colors } = useTheme();
