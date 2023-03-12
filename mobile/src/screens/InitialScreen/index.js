@@ -41,9 +41,10 @@ const InitialScreen = ({ navigation }) => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       const { email, name, picture } = await data.json();
 
-      await login({ email, name, picture });
+      await login({ email, name, picture, isLocalImage: false });
     } catch (error) {
       console.warn(error);
     }

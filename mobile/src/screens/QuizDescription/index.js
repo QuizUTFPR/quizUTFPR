@@ -1,3 +1,4 @@
+/* eslint-disable react-perf/jsx-no-new-object-as-prop */
 /* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
 import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
