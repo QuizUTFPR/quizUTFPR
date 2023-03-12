@@ -101,7 +101,6 @@ const LoginPage = () => {
         email.includes('@professores') ||
         process.env.REACT_APP_AMBIENT === 'development'
       ) {
-        console.log(777, data);
         await login(data);
       } else {
         enqueueSnackbar('Você deve entrar com email @professores', {
@@ -114,7 +113,6 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    console.log({ token });
     fetchUserInfo(token);
   }, [token]);
 
