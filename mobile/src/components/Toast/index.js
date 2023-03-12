@@ -1,3 +1,4 @@
+/* eslint-disable react-perf/jsx-no-new-object-as-prop */
 import PropTypes from 'prop-types';
 
 import React, { useEffect, useRef, useState } from 'react';
