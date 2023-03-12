@@ -44,8 +44,6 @@ const StudentAuth = ({ children }) => {
         email,
       });
 
-      console.log('register', response);
-
       const { student, token, refreshToken: RefreshToken } = response.data;
 
       const studentValues = {
@@ -71,11 +69,14 @@ const StudentAuth = ({ children }) => {
 
   const login = useCallback(async (values) => {
     try {
-      // const { email } = values;
+      const { name, email, picture, isLocalImage } = values;
 
-      console.log(99999999, values);
-
-      const response = await api.post('/student/login', values);
+      const response = await api.post('/student/login', {
+        name,
+        email,
+        picture,
+        isLocalImage,
+      });
 
       const {
         student,
