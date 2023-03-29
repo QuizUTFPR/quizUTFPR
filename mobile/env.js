@@ -2,7 +2,7 @@
 // export const API_URL = 'http://quizapi.dacom.cm.utfpr.edu.br'; // JHONATAN
 // export const API_URL = 'http://192.168.1.9:3333'; // IAGO CM
 // export const API_URL = 'http://172.17.0.1:3333'; // IAGO Cianorte
-export const API_URL = 'http://localhost:3333';
+export const API_URL = 'http://192.168.100.5:3333';
 
 // export const API_URL = 'http://10.0.2.2:3333'; // VITOR
 
