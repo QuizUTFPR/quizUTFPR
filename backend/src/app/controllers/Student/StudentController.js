@@ -6,7 +6,6 @@ class StudentController {
   // Cadastra um único registro
   async store(req, res) {
     const { email, name, picture, isLocalImage } = req.body;
-    console.log(req.body);
     try {
       const student = await CreateStudentService.execute({
         email,
