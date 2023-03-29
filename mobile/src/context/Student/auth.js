@@ -1,7 +1,7 @@
 import React, { createContext, useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import api from '@api';
+import api from '../../services/api';
 
 export const StudentAuthContext = createContext();
 const initialValue = {
@@ -58,7 +58,7 @@ const StudentAuth = ({ children }) => {
       saveOnLocalStorage(refreshStorageItem, RefreshToken);
       return response;
     } catch (error) {
-      console.log(error);
+      console.warn(error);
       const err = {
         status: error.response.status,
         message: error.response.data.response,
@@ -100,15 +100,15 @@ const StudentAuth = ({ children }) => {
       return response;
     } catch (error) {
       if (error.response) {
-        console.log(error.response);
+        console.error("RESPONSE",error.response);
       } else if (error.request) {
-        console.log(error.request);
+        console.error("REQUEST",error.request);
       } else {
-        console.log(error.message);
+        console.error("MESSAGE",error.message);
       }
       return {
-        status: error.response.status,
-        message: error.response.data.response,
+        status: error?.response?.status,
+        message: error?.response?.data?.response,
       };
     }
   }, []);

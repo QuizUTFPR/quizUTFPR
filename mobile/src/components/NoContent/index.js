@@ -15,8 +15,8 @@ import {
 
 const NoContent = ({ fill, title, subtitle, sourceLottie, imageType }) => (
   <Wrapper>
-    {imageType && <StyledImage source={DefaultImage} />}
-    {!imageType && (
+    {imageType ? <StyledImage source={DefaultImage} /> : null}
+    {!imageType ? (
       <StyledLottieView
         autoPlay
         loop
@@ -24,7 +24,7 @@ const NoContent = ({ fill, title, subtitle, sourceLottie, imageType }) => (
         speed={1}
         source={sourceLottie}
       />
-    )}
+    ) : null}
     <Title fill={fill}>{title}</Title>
     <Subtitle fill={fill}>{subtitle}</Subtitle>
   </Wrapper>

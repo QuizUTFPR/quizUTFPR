@@ -3,9 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_URL } from '@env';
 import { navigate } from './rootNavigation';
 
+
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: "http://192.168.1.6:3333",
 });
+
+console.log(api.defaults.baseURL)
 
 // USADO PARA CANCELAR REQUEST QUANDO COMPONENTE DESMONTAR
 api.CancelToken = axios.CancelToken;

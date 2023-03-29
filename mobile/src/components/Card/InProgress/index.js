@@ -35,11 +35,11 @@ const CardInProgress = ({ navigate, data, color, ...props }) => (
     <StyledView>
       <Description>
         <QuizTitle fill="black">{data.quiz.title}</QuizTitle>
-        {data?.classInstance && (
+        {data?.classInstance ? (
           <ClassTitle fill="black">
             Turma {data.classInstance?.title}
           </ClassTitle>
-        )}
+        ) : null}
       </Description>
       <QuizProgressBarBackground fill="lightGrey">
         <QuizProgressBar

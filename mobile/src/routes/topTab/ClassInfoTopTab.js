@@ -61,7 +61,7 @@ const SearchQuizByTagTopTab = () => {
             tabBarLabel: 'Info',
           }}
         />
-        {subscribed && (
+        {subscribed ? (
           <>
             <TopTab.Screen
               name="QuizzesOfClass"
@@ -85,7 +85,7 @@ const SearchQuizByTagTopTab = () => {
               }}
             /> */}
           </>
-        )}
+        ) : null }
       </TopTab.Navigator>
     </Suspense>
   );

@@ -34,7 +34,7 @@ const Input = ({
     <Wrapper>
       <Label fill={fill} error={error}>
         {label}
-        {error && ` (${errorMessage})`}
+        {error ? ` (${errorMessage})` : null}
       </Label>
       <InputWrapper
         fill={fill}
@@ -49,7 +49,7 @@ const Input = ({
             {...props}
           />
         </InputView>
-        {secureTextEntry && (
+        {secureTextEntry ? (
           <ShowPasswordView onPress={handleShowPassword}>
             <Ionicons
               name={isChecked ? 'eye-sharp' : 'eye-off-sharp'}
@@ -57,7 +57,7 @@ const Input = ({
               color="black"
             />
           </ShowPasswordView>
-        )}
+        ) : null}
       </InputWrapper>
     </Wrapper>
   );

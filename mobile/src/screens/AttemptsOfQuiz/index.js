@@ -139,11 +139,11 @@ const Home = ({ route }) => {
         </ButtonWrapper>
       </ButtonsContainer>
 
-      {isAttemptsSelected && (
+      {isAttemptsSelected ? (
         <Attempts attempts={attempts} amountOfQuestions={amountOfQuestions} />
-      )}
+      ) : null}
 
-      {isTagsSelected && <Tags tags={tagsNames} />}
+      {isTagsSelected ? <Tags tags={tagsNames} /> : null}
     </StyledScrollView>
   );
 };

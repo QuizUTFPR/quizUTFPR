@@ -55,18 +55,18 @@ const HomeQuizInProgress = () => {
 
   return (
     <Container>
-      {!isRefreshing && allQuizzesInProgress.length === 0 && (
+      {!isRefreshing && allQuizzesInProgress.length === 0 ? (
         <NoContent
           title="Opps..."
           subtitle="Você não possui nenhum quiz em andamento."
         />
-      )}
+      ) : null}
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
-        {allQuizzesInProgress.length > 0 && (
+        {allQuizzesInProgress.length > 0 ? (
           <>
             <SeeMoreButton
               onPress={() => {
@@ -109,7 +109,7 @@ const HomeQuizInProgress = () => {
               })}
             </QuizContainer>
           </>
-        )}
+        ) : null}
       </StyledScrollView>
     </Container>
   );

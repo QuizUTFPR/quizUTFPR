@@ -56,7 +56,7 @@ const Toast = ({ type, children, open, timeToErase, handleClose }) => {
 
   return (
     <>
-      {open && (
+      {open ? (
         <Wrapper>
           <StyledView
             type={type}
@@ -80,7 +80,7 @@ const Toast = ({ type, children, open, timeToErase, handleClose }) => {
             <StyledText type={type}>{children}</StyledText>
           </StyledView>
         </Wrapper>
-      )}
+      ) : null}
     </>
   );
 };

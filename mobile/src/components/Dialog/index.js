@@ -54,11 +54,11 @@ const Dialog = ({
           <StyledTitle fill="purple">{title}</StyledTitle>
           <StyledWrapperChildren>
             {lottieAnimation}
-            {!!childrenNode && childrenNode}
-            {!!childrenText && <StyledText>{childrenText}</StyledText>}
+            {!!childrenNode ? childrenNode : null}
+            {!!childrenText ? <StyledText>{childrenText}</StyledText> : null}
           </StyledWrapperChildren>
           <StyledWrapperButtons>
-            {firstButtonLabel && (
+            {firstButtonLabel ? (
               <FirstButton
                 loading={loading}
                 onPress={async () => {
@@ -69,14 +69,14 @@ const Dialog = ({
               >
                 {firstButtonLabel}
               </FirstButton>
-            )}
-            {secondButtonLabel && (
+            ) : null}
+            {secondButtonLabel ? (
               <SecondButton>
                 <SecondButtonText onPress={secondButtonOnPress} fill="purple">
                   {secondButtonLabel}
                 </SecondButtonText>
               </SecondButton>
-            )}
+            ) : null}
           </StyledWrapperButtons>
         </Wrapper>
       </BlurView>

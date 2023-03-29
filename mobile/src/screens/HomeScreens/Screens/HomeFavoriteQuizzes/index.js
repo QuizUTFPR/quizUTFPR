@@ -48,15 +48,15 @@ const FavoriteQuizzes = () => {
 
   return (
     <Container>
-      {!isRefreshing && allQuizzes.length === 0 && (
+      {!isRefreshing && allQuizzes.length === 0 ? (
         <NoContent title="Opps..." subtitle="Você favoritou nenhum quiz." />
-      )}
+      ) : null}
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
-        {allQuizzes.length > 0 && (
+        {allQuizzes.length > 0 ? (
           <>
             <SeeMoreButton
               onPress={() => {
@@ -120,7 +120,7 @@ const FavoriteQuizzes = () => {
               })}
             </QuizContainer>
           </>
-        )}
+        ) : null}
       </StyledScrollView>
     </Container>
   );

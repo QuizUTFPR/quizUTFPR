@@ -55,15 +55,15 @@ const HomeRecentQuizzes = () => {
 
   return (
     <Container>
-      {!isRefreshing && allQuizzes.length === 0 && (
+      {!isRefreshing && allQuizzes.length === 0 ? (
         <NoContent title="Opps..." subtitle="Nenhum quiz encontrado." />
-      )}
+      ) : null}
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
       >
-        {allQuizzes.length > 0 && (
+        {allQuizzes.length > 0 ? (
           <>
             <SeeMoreButton
               onPress={() => {
@@ -97,7 +97,7 @@ const HomeRecentQuizzes = () => {
               ))}
             </QuizContainer>
           </>
-        )}
+        ) : null}
       </StyledScrollView>
     </Container>
   );

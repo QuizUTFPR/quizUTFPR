@@ -52,7 +52,7 @@ const ChipInput = ({ chips, setChips, placeholder, refInput }) => {
 
   return (
     <Wrapper>
-      {chips.length > 0 && (
+      {chips.length > 0 ? (
         <ChipWrapper
           ref={ref}
           onContentSizeChange={() => {
@@ -68,7 +68,7 @@ const ChipInput = ({ chips, setChips, placeholder, refInput }) => {
             </Chip>
           ))}
         </ChipWrapper>
-      )}
+      ) : null}
       <StyledInput
         ref={refInput}
         value={value}
@@ -82,7 +82,7 @@ const ChipInput = ({ chips, setChips, placeholder, refInput }) => {
         returnKeyType="done"
         blurOnSubmit={false}
         onKeyPress={({ nativeEvent }) => {
-          if (value === '' && nativeEvent.key === 'Backspace') {
+          if (value === '' ? nativeEvent.key === 'Backspace' : null) {
             removeLastWhenPressBackSpace();
           }
         }}

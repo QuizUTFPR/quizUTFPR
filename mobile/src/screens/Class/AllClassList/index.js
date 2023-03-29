@@ -48,12 +48,12 @@ const ClassPage = () => {
 
   return (
     <Container>
-      {!loading && classList.length === 0 && (
+      {!loading && classList.length === 0 ? (
         <NoContent
           title="Opps..."
           subtitle="Ainda não encontramos turmas públicas."
         />
-      )}
+      ) : null}
       <StyledScrollView>
         <ClassContainer>
           {classList.map((item) => (

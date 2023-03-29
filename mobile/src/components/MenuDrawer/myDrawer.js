@@ -37,7 +37,7 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
         }}
       />
       <StudentName fill="purple">
-        {studentInfo.student && studentInfo.student.name}
+        {studentInfo.student ? studentInfo.student.name : null}
       </StudentName>
 
       <Divider fill="purple" />

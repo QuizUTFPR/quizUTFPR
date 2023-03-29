@@ -28,13 +28,13 @@ const WrapperStyledButton = ({
     disabled={loading}
   >
     <StyledButton colors={colors} {...props}>
-      {loading && (
+      {loading ? (
         <ActivityIndicator
           style={styleActivityIndicator}
           size="small"
           color="white"
         />
-      )}
+      ) : null}
       <StyledText fill="white">{title}</StyledText>
       {children}
     </StyledButton>

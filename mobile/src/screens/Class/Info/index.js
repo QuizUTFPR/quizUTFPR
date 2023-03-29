@@ -107,14 +107,14 @@ const InfoOfClass = () => {
 
         <Footer>
           <CancelButton>
-            {subscribed && (
+            {subscribed ? (
               <TextCancel
                 onPress={showConfirmExit}
                 // onPress={unSubscribeStudent}
               >
                 Cancelar Inscrição
               </TextCancel>
-            )}
+            ) : null}
           </CancelButton>
         </Footer>
       </ClassContainer>

@@ -49,6 +49,7 @@ const Header = () => {
         />
       </BackgroundHeader>
       <StyledButton
+        title="Pesquisar"
         loading={loading}
         colors={theme.color.gradients.secondary}
         variant="primary"
@@ -70,7 +71,6 @@ const Header = () => {
           setLoading(false);
         }}
       >
-        Pesquisar
       </StyledButton>
     </HeaderWrapper>
   );

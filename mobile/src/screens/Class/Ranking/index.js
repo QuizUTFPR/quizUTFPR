@@ -71,13 +71,13 @@ const RankingClass = () => {
   return (
     <>
       <RankingContainer fill="white">
-        {!loading && rankingQuizList.length === 0 && (
+        {!loading && rankingQuizList.length === 0 ? (
           <NoContent
             title="Opps..."
             subtitle="Nenhum aluno respondeu algum quiz até o momento."
           />
-        )}
-        {rankingQuizList.length > 0 && (
+        ) : null}
+        {rankingQuizList.length > 0 ? (
           <>
             <StyledFlatList
               ref={refList}
@@ -119,7 +119,7 @@ const RankingClass = () => {
               }}
             />
           </>
-        )}
+        ) : null}
       </RankingContainer>
     </>
   );
