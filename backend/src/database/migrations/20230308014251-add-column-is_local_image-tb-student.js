@@ -3,6 +3,7 @@ module.exports = {
     await queryInterface.addColumn('student', 'is_local_image', {
       type: Sequelize.BOOLEAN,
       allowNull: true,
+      defaultValue: false,
     });
   },
 
