@@ -2,7 +2,6 @@ import * as Yup from 'yup';
 
 // MODELS
 import StudentQuiz from '../../models/StudentQuiz';
-import File from '../../models/FileModel';
 
 // REPOSITORIES
 import ClassRepository from '../../repositories/Class';
@@ -50,13 +49,8 @@ class GetStudentWhoHitMostQuestions {
     const studentsFromClass = await this.classRepository.getAllStudents(
       classInstance,
       {
-        attributes: ['id', 'name', 'ra', 'email'],
+        attributes: ['id', 'name', 'url_image', 'email'],
         include: [
-          {
-            model: File,
-            as: 'imageProfile',
-            attributes: ['url', 'path'],
-          },
           {
             model: StudentQuiz,
             as: 'studentQuiz',
