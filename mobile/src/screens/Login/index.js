@@ -149,12 +149,6 @@ const Login = ({ navigation }) => {
                   title="ENTRAR"
                 />
               </WrapperButton>
-              {/* <StyledTextButton
-                variant="secondary"
-                onPress={() => navigation.navigate('Register')}
-              >
-                Não possui uma conta? Cadastre-se
-              </StyledTextButton> */}
             </>
           )}
         </Formik>

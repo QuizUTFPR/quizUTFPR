@@ -94,7 +94,7 @@ const InfoOfClass = () => {
           {/* PROFESSOR */}
           <DetailCard>
             <MaterialCommunityIcons
-              name="teach"
+              name="account"
               size={24}
               color={theme.color.blackRussian}
             />

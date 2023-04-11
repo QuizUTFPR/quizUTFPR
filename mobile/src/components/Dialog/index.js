@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BlurView } from 'expo-blur';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 import {
   Wrapper,
@@ -66,15 +66,12 @@ const Dialog = ({
                   await firstButtonOnPress();
                   setLoading(false);
                 }}
-              >
-                {firstButtonLabel}
-              </FirstButton>
+                title={firstButtonLabel}
+              />
             ) : null}
             {secondButtonLabel ? (
               <SecondButton>
-                <SecondButtonText onPress={secondButtonOnPress} fill="purple">
-                  {secondButtonLabel}
-                </SecondButtonText>
+                <SecondButtonText onPress={secondButtonOnPress} fill="purple"><Text>{secondButtonLabel}</Text></SecondButtonText>
               </SecondButton>
             ) : null}
           </StyledWrapperButtons>

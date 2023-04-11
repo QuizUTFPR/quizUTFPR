@@ -5,7 +5,7 @@ import { navigate } from './rootNavigation';
 
 
 const api = axios.create({
-  baseURL: "http://192.168.1.6:3333",
+  baseURL: API_URL,
 });
 
 console.log(api.defaults.baseURL)
