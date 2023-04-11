@@ -14,32 +14,27 @@ import RoutesTokenIsRequired from './category/tokenIsRequired';
 const routes = () => {
   const {
     isLoggedIn,
-    studentInfo,
     setStudentInfo,
     getOnLocalStorage,
     studentStorageItem,
+    setLoggedIn,
   } = useStudentAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       const studentData = await getOnLocalStorage(studentStorageItem);
-      console.log(studentData, 'data');
-      if (studentData) setStudentInfo(studentData);
+      if (studentData) {
+        setStudentInfo(studentData);
+        setLoggedIn(true)
+      } 
     };
 
     fetchData();
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    console.log('studentInfo', studentInfo);
-    console.log('isLoggedIn', isLoggedIn);
-  }, [studentInfo, isLoggedIn]);
-
   return (
     <NavigationContainer theme={navigationTheme} ref={navigationRef}>
-      {!isLoggedIn &&
-      studentInfo.token === null &&
-      studentInfo.student === null ? (
+      {!isLoggedIn ? (
         <RoutesTokenNotRequired />
       ) : (
         <RoutesTokenIsRequired />
