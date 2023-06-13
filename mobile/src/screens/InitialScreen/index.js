@@ -30,7 +30,7 @@ const InitialScreen = ({ navigation }) => {
   const { login } = useStudentAuth();
 
   const [request, response, promptAsync] = useAuthRequest({
-    expoClientId,
+    androidClientId: expoClientId,
   });
 
   const fetchUserInfo = async (token) => {
