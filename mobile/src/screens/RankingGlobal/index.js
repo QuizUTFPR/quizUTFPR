@@ -54,12 +54,12 @@ const Ranking = () => {
   return (
     <>
       <StyledContainer fill="white">
-        {!loading && rankingList.length === 0 && (
+        {!loading && rankingList.length === 0 ? (
           <NoContent
             title="Opps..."
             subtitle="Nenhuma tentativa de resposta para os quizzes foi encontrada."
           />
-        )}
+        ) : null}
         <StyledFlatList
           ref={refList}
           data={rankingList}
@@ -84,7 +84,7 @@ const Ranking = () => {
           }}
           keyExtractor={({ studentId }) => studentId}
         />
-        {rankingList.length > 0 && (
+        {rankingList.length > 0 ? (
           <FabButton
             icon={
               <MaterialCommunityIcons name="target" size={28} color="white" />
@@ -99,7 +99,7 @@ const Ranking = () => {
               }
             }}
           />
-        )}
+        ) : null}
       </StyledContainer>
     </>
   );

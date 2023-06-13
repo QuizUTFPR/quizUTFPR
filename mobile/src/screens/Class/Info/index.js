@@ -94,7 +94,7 @@ const InfoOfClass = () => {
           {/* PROFESSOR */}
           <DetailCard>
             <MaterialCommunityIcons
-              name="teach"
+              name="account"
               size={24}
               color={theme.color.blackRussian}
             />
@@ -107,14 +107,14 @@ const InfoOfClass = () => {
 
         <Footer>
           <CancelButton>
-            {subscribed && (
+            {subscribed ? (
               <TextCancel
                 onPress={showConfirmExit}
                 // onPress={unSubscribeStudent}
               >
                 Cancelar Inscrição
               </TextCancel>
-            )}
+            ) : null}
           </CancelButton>
         </Footer>
       </ClassContainer>

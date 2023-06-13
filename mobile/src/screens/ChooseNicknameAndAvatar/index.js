@@ -113,9 +113,11 @@ const ChooseNicknameAndAvatar = () => {
 
         <BottomWrapper>
           <InputWrapper>
-            <ButtonGradient onPress={handleNext} variant="primary">
-              AVANÇAR
-            </ButtonGradient>
+            <ButtonGradient
+              onPress={handleNext}
+              variant="primary"
+              title="AVANÇAR"
+            />
           </InputWrapper>
         </BottomWrapper>
       </StyledContainer>

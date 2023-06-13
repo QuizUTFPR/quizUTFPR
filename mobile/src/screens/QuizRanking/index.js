@@ -59,12 +59,12 @@ const Ranking = ({ route }) => {
   return (
     <>
       <StyledContainer fill="white">
-        {!loading && rankingQuizList.length === 0 && (
+        {!loading && rankingQuizList.length === 0 ? (
           <NoContent
             title="Opps..."
             subtitle="Nenhuma tentativa de resposta para os quizzes foi encontrada."
           />
-        )}
+        ) : null}
         <StyledFlatList
           ref={refList}
           data={rankingQuizList}

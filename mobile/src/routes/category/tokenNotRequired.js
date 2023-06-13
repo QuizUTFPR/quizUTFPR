@@ -4,8 +4,8 @@ import Loading from '@components/Loading';
 
 // Screens
 const InitialScreen = lazy(() => import('@screens/InitialScreen'));
-const Login = lazy(() => import('@screens/Login'));
-const Register = lazy(() => import('@screens/Register'));
+// const Login = lazy(() => import('@screens/Login'));
+// const Register = lazy(() => import('@screens/Register'));
 
 // STACK
 const Stack = createStackNavigator();
@@ -20,8 +20,8 @@ const DontHaveTokenStack = () => (
       }}
     >
       <Stack.Screen name="InitialScreen" component={InitialScreen} />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={Register} />
+      {/* <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Register" component={Register} /> */}
     </Stack.Navigator>
   </Suspense>
 );

@@ -54,7 +54,7 @@ const HeaderInfoClassPage = () => {
             <Ionicons name="chevron-back" size={32} color="white" />
           </StyledIconButton>
         </GoBackButtonWrapper>
-        {!subscribed && (
+        {!subscribed ? (
           <ButtonWrapper>
             <ButtonStyled onPress={registerStudentInClass}>
               <SubscribeButton>
@@ -62,7 +62,7 @@ const HeaderInfoClassPage = () => {
               </SubscribeButton>
             </ButtonStyled>
           </ButtonWrapper>
-        )}
+        ) : null}
       </StyledImageBackground>
     </ClassInfoHeader>
   );

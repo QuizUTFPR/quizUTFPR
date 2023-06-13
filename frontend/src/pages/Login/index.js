@@ -1,76 +1,65 @@
-import React, { useState } from 'react';
-
-import { useNavigate } from 'react-router-dom';
-
-// COMPONENTS
-import { Grid, InputAdornment, IconButton } from '@mui/material';
-import ErrorMessage from '@components/Messages/error';
-
-import {
-  AccountCircle,
-  Visibility,
-  VisibilityOff,
-  Lock,
-} from '@mui/icons-material';
+import React, { useState, useEffect } from 'react';
+import { useSnackbar } from 'notistack';
+import { Grid } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
+import { useGoogleLogin } from '@react-oauth/google';
 
 // HOOKS
 import useAuth from '@hooks/Auth';
-
-// ROTAS
-import { HOME } from '@routes';
 
 import {
   StyledContainer,
   DescriptionsGrid,
   Title,
   Subtitle,
-  GridForm,
-  StyledInput,
   StyledButton,
   LogoUTFPR,
 } from './style';
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState('');
 
   const { login } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
 
-  const [values, setValues] = useState({
-    username: '',
-    password: '',
-    showPassword: false,
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => setToken(tokenResponse.access_token),
   });
 
-  const [error, setError] = useState(false);
-
-  const handleChange = (prop) => (event) => {
-    setValues({
-      ...values,
-      [prop]: event.target.value,
-    });
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const fetchUserInfo = async (credential) => {
     setLoading(true);
-    const { response } = await login(values.username, values.password);
+    try {
+      const res = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${credential}`,
+        },
+      });
+      const data = await res.json();
 
-    if (response.status === 200) {
-      navigate(HOME);
-    } else {
-      setError(response.data.response);
+      const { email } = data;
+      if (
+        email.includes('@professores') ||
+        process.env.REACT_APP_AMBIENT === 'development'
+      ) {
+        await login(data);
+        setLoading(false);
+      } else {
+        enqueueSnackbar('Você deve entrar com email @professores', {
+          variant: 'error',
+        });
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.warn(error);
     }
-
-    setLoading(false);
   };
+
+  useEffect(() => {
+    fetchUserInfo(token);
+  }, [token]);
 
   return (
     <StyledContainer>
@@ -85,7 +74,6 @@ const LoginPage = () => {
         >
           <LogoUTFPR />
         </Grid>
-
         <Grid item xs={12} sm={12} md={12} lg={6}>
           <DescriptionsGrid item xs={12}>
             <Title variant="h4" color="black">
@@ -93,79 +81,20 @@ const LoginPage = () => {
             </Title>
             <Subtitle color="black">
               Seja bem-vindo novamente! <br />
-              Por favor entre em sua conta utilizando seu login institucional.
+              Por favor entre em sua conta utilizando seu login institucional
+              <b> @professores.</b>
             </Subtitle>
           </DescriptionsGrid>
-
-          <GridForm
-            item
-            xs={12}
-            sm={12}
-            md={12}
-            lg={9}
-            component="form"
-            onSubmit={handleLogin}
+          <StyledButton
+            loading={loading}
+            type="submit"
+            color="primary"
+            variant="contained"
+            onClick={() => googleLogin()}
           >
-            <StyledInput
-              id="username"
-              label="Nome de Usuário"
-              value={values.username}
-              onChange={handleChange('username')}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountCircle />
-                  </InputAdornment>
-                ),
-              }}
-              autoFocus
-              required
-            />
-
-            <StyledInput
-              color="primary"
-              id="password"
-              label="Senha"
-              type={values.showPassword ? 'text' : 'password'}
-              value={values.password}
-              onChange={handleChange('password')}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Lock />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                    >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              required
-              autoComplete="on"
-            />
-
-            {error && (
-              <ErrorMessage style={{ marginBottom: '20px' }}>
-                {error}
-              </ErrorMessage>
-            )}
-            <Grid item align="center">
-              <StyledButton
-                loading={loading}
-                type="submit"
-                color="primary"
-                variant="contained"
-              >
-                ENTRAR
-              </StyledButton>
-            </Grid>
-          </GridForm>
+            <p>ENTRAR COM O GOOGLE</p>
+            <GoogleIcon />
+          </StyledButton>
         </Grid>
       </Grid>
     </StyledContainer>

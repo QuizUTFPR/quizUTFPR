@@ -25,6 +25,8 @@ const CustomToolBar = () => {
   const { teacherInfo } = useAuth();
   // const location = useLocation();
 
+  console.log(teacherInfo);
+
   return (
     <ToolBar>
       <StyledButton
@@ -40,7 +42,16 @@ const CustomToolBar = () => {
       {/* <ClassName>{location?.state?.title || 'Sem Título'}</ClassName> */}
 
       <WrapperTeacher>
-        <StyledAvatar alt={teacherInfo.teacher.name} src="" />
+        <img
+          style={{
+            width: 42,
+            height: 42,
+            borderRadius: '50%',
+          }}
+          alt={teacherInfo?.teacher?.name?.toUpperCase()}
+          src={teacherInfo?.teacher?.picture}
+          referrerPolicy="no-referrer"
+        />
         <NameTeacher>{teacherInfo.teacher.name}</NameTeacher>
       </WrapperTeacher>
     </ToolBar>

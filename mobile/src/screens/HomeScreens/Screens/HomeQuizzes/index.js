@@ -36,12 +36,12 @@ const HomeQuizzes = () => {
     setRefreshing(true);
     await getAllPublishedQuizzes();
     setRefreshing(false);
-  });
+  }, []);
 
   useFocusEffect(
     useCallback(() => {
       onRefresh();
-    }, [])
+    }, [onRefresh])
   );
 
   useEffect(() => {
@@ -50,13 +50,13 @@ const HomeQuizzes = () => {
     });
 
     return unsubscribeListenTabPress;
-  }, [navigation]);
+  }, [navigation, onRefresh]);
 
   return (
     <Container>
-      {!isRefreshing && allQuizzes.length === 0 && (
+      {!isRefreshing && allQuizzes.length === 0 ? (
         <NoContent title="Opps..." subtitle="Nenhum quiz encontrado." />
-      )}
+      ) : null}
       <StyledScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
@@ -65,7 +65,7 @@ const HomeQuizzes = () => {
         {/* <animated.View style={move}>
           <Text onPress={() => toggleMoveMe(!moveMe)}>teste</Text>
         </animated.View> */}
-        {allQuizzes.length > 0 && (
+        {allQuizzes.length > 0 ? (
           <>
             <SeeMoreButton
               onPress={() => {
@@ -100,7 +100,7 @@ const HomeQuizzes = () => {
               ))}
             </QuizContainer>
           </>
-        )}
+        ) : null}
       </StyledScrollView>
     </Container>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable react-perf/jsx-no-new-object-as-prop */
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
@@ -26,16 +27,17 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
   const navigation = useNavigation();
   const { studentInfo, logout } = useStudentAuth();
 
-
   return (
     <WrapperMyDrawer style={{ flex: 1 }}>
       <Avatar
         source={{
-          uri: studentInfo.student.image,
+          uri: studentInfo?.student?.isLocalImage
+            ? studentInfo?.student?.idImage
+            : studentInfo?.student?.urlImage,
         }}
       />
       <StudentName fill="purple">
-        {studentInfo.student && studentInfo.student.name}
+        {studentInfo.student ? studentInfo.student.name : null}
       </StudentName>
 
       <Divider fill="purple" />

@@ -1,16 +1,15 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import api from '@api';
+import api from '../../services/api';
 
 export const StudentAuthContext = createContext();
+const initialValue = {
+  student: null,
+  token: null,
+};
 
 const StudentAuth = ({ children }) => {
-  const initialValue = {
-    student: null,
-    token: null,
-  };
-
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [studentInfo, setStudentInfo] = useState(initialValue);
   const studentStorageItem = '@student';
@@ -38,13 +37,11 @@ const StudentAuth = ({ children }) => {
     }
   };
 
-  const register = async (values) => {
+  const register = useCallback(async ({ name, email }) => {
     try {
-      const { name, email, password } = values;
       const response = await api.post('/student/register', {
         name,
         email,
-        password,
       });
 
       const { student, token, refreshToken: RefreshToken } = response.data;
@@ -61,20 +58,24 @@ const StudentAuth = ({ children }) => {
       saveOnLocalStorage(refreshStorageItem, RefreshToken);
       return response;
     } catch (error) {
+      console.warn(error);
       const err = {
         status: error.response.status,
         message: error.response.data.response,
       };
       throw err;
     }
-  };
+  }, []);
 
-  const login = async (values) => {
+  const login = useCallback(async (values) => {
     try {
-      const { ra, password } = values;
-      const response = await api.post('/student/loginLDAP', {
-        ra,
-        password,
+      const { name, email, picture, isLocalImage } = values;
+
+      const response = await api.post('/student/login', {
+        name,
+        email,
+        picture,
+        isLocalImage,
       });
 
       const {
@@ -89,6 +90,7 @@ const StudentAuth = ({ children }) => {
         token,
         isFirstLogin,
       };
+
       setStudentInfo(studentValues);
       saveOnLocalStorage(studentStorageItem, studentValues);
       saveOnLocalStorage(tokenStorageItem, token);
@@ -97,48 +99,58 @@ const StudentAuth = ({ children }) => {
       setLoggedIn(true);
       return response;
     } catch (error) {
+      if (error.response) {
+        console.error("RESPONSE",error.response);
+      } else if (error.request) {
+        console.error("REQUEST",error.request);
+      } else {
+        console.error("MESSAGE",error.message);
+      }
       return {
-        status: error.response.status,
-        message: error.response.data.response,
+        status: error?.response?.status,
+        message: error?.response?.data?.response,
       };
     }
-  };
+  }, []);
 
-  const update = async (values) => {
-    try {
-      const { name, avatar } = values;
+  const update = useCallback(
+    async (values) => {
+      try {
+        const { name, avatar } = values;
 
-      const { data } = await api.post('/student/update', {
-        id: studentInfo.student.id,
-        name,
-        avatar,
-      });
-
-      const isFirstLogin = !data.name;
-
-      const studentValues = {
-        ...studentInfo,
-        student: {
-          ...studentInfo.student,
+        const { data } = await api.post('/student/update', {
+          id: studentInfo.student.id,
           name,
-          image: data.image,
-        },
-        isFirstLogin,
-      };
+          avatar,
+        });
 
-      setStudentInfo(studentValues);
-      saveOnLocalStorage(studentStorageItem, studentValues);
+        const isFirstLogin = !data.name;
 
-      return data;
-    } catch (error) {
-      console.log('error', error.response, { ...error });
+        const studentValues = {
+          ...studentInfo,
+          student: {
+            ...studentInfo.student,
+            name,
+            image: data.image,
+          },
+          isFirstLogin,
+        };
 
-      return {
-        status: error.response.status,
-        message: error.response.data.message,
-      };
-    }
-  };
+        setStudentInfo(studentValues);
+        saveOnLocalStorage(studentStorageItem, studentValues);
+
+        return data;
+      } catch (error) {
+        console.log('error', error.response, { ...error });
+
+        return {
+          status: error.response.status,
+          message: error.response.data.message,
+        };
+      }
+    },
+    [studentInfo]
+  );
 
   const logout = async () => {
     try {
@@ -150,22 +162,25 @@ const StudentAuth = ({ children }) => {
     }
   };
 
+  const returndedValues = useMemo(
+    () => ({
+      studentInfo,
+      setStudentInfo,
+      login,
+      logout,
+      register,
+      getOnLocalStorage,
+      studentStorageItem,
+      isLoggedIn,
+      setLoggedIn,
+      initialValue,
+      update,
+    }),
+    [isLoggedIn, login, register, studentInfo, update]
+  );
+
   return (
-    <StudentAuthContext.Provider
-      value={{
-        studentInfo,
-        setStudentInfo,
-        login,
-        logout,
-        register,
-        getOnLocalStorage,
-        studentStorageItem,
-        isLoggedIn,
-        setLoggedIn,
-        initialValue,
-        update,
-      }}
-    >
+    <StudentAuthContext.Provider value={returndedValues}>
       {children}
     </StudentAuthContext.Provider>
   );

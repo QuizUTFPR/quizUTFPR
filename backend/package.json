@@ -13,7 +13,8 @@
     "dev:debug": "nodemon --inspect src/server",
     "debug": "nodemon --inspect src/server",
     "test": "jest",
-    "migrate": "npx sequelize-cli db:migrate",
+    "migrate": "npx sequelize-cli migration:generate",
+    "migrate:run": "npx sequelize-cli db:migrate",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
     "pretest": "cross-env NODE_ENV=test npm run migrate:reset"
   },
@@ -45,6 +46,7 @@
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.5.1",
+    "mysql": "2.18.1",
     "nodemon": "2.0.12",
     "prettier": "2.4.1",
     "supertest": "6.2.2"

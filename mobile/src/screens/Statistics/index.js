@@ -131,9 +131,8 @@ const Statistics = ({ route }) => {
                 )
               }
               colors={theme.color.gradients.secondary}
-            >
-              CONCLUIR
-            </ButtonGradient>
+              title="CONCLUIR"
+            />
           </Footer>
         </InformationsCard>
       </ImageView>

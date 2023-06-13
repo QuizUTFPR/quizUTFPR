@@ -6,9 +6,9 @@ export const WrapperButton = styled.TouchableOpacity``;
 export const StyledButton = styled(LinearGradient)`
   height: 60px;
   justify-content: center;
+  align-items: center;
   border-radius: 30px;
   flex-direction: row;
-  align-items: center;
 `;
 
 export const StyledText = styled.Text`

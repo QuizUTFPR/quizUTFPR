@@ -52,19 +52,19 @@ const QuizzesOfClass = () => {
 
   return (
     <ClassContainer fill="white">
-      {!loading && classQuizzes.length === 0 && (
+      {!loading && classQuizzes.length === 0 ? (
         <NoContent
           title="Opps..."
           subtitle="A turma não possui nenhum quiz vinculado."
         />
-      )}
+      ) : null}
       <StyledScrollView>
-        {!loading && <Title>Quizzes da Turma</Title>}
+        {!loading ? <Title>Quizzes da Turma</Title> : null}
 
         <QuizContainer>
-          {classQuizzes.length <= 0 && !loading && (
+          {classQuizzes.length <= 0 && !loading ? (
             <Text>Nenhum quiz cadastrado...</Text>
-          )}
+          ) : null}
           {classQuizzes.map((quiz) => (
             <StyledCardQuizBasic
               key={quiz.id}

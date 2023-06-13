@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import ButtonGradient from '@components/ButtonGradient';
 
 // DIMENSION TRANSFORMERS
 import { widthPercentageToDp } from '@styles/dimensions';
@@ -36,6 +37,10 @@ export const Logo = styled.Image.attrs({
 
 export const WrapperButton = styled.SafeAreaView`
   margin-top: 15px;
+`;
+
+export const StyledButtonGradient = styled(ButtonGradient)`
+  justify-content: space-evenly;
 `;
 
 export const StyledTitle = styled.Text`

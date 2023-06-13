@@ -1,39 +1,48 @@
 import * as Yup from 'yup';
-import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
-import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
 import StudentRepository from '../../repositories/Student';
 import DeleteRefreshTokenService from '../RefreshToken/DeleteRefreshToken';
+import GenerateRefreshTokenProvider from '../../provider/GenerateRefreshTokenProvider';
+import GenerateTokenProvider from '../../provider/GenerateTokenProvider';
 
-class CreateStudentService {
+class StudentSessionService {
   constructor() {
     this.studentRepository = new StudentRepository();
   }
 
   async execute(data) {
+    const { name, email, picture, isLocalImage } = data;
+
     const schema = Yup.object().shape({
       name: Yup.string().required(),
       email: Yup.string().email().required(),
-      password: Yup.string().required(),
+      picture: Yup.string().required(),
+      isLocalImage: Yup.boolean().required(),
     });
-
     if (!(await schema.isValid(data))) {
       const error = new Error();
+      error.status = 403;
       error.response = 'Falha na validação!';
-      error.status = 403;
       throw error;
     }
 
-    if (
-      await this.studentRepository.findOne({ where: { email: data.email } })
-    ) {
-      const error = new Error();
-      error.status = 403;
-      error.response = 'E-mail já cadastrado!';
-      throw error;
+    let student = await this.studentRepository.findOne({
+      where: { email },
+    });
+
+    if (!student) {
+      const idImage = isLocalImage ? picture : null;
+      const urlImage = !isLocalImage ? picture : null;
+
+      student = await this.studentRepository.create({
+        email,
+        name,
+        idImage,
+        urlImage,
+        isLocalImage,
+      });
     }
 
-    const student = await this.studentRepository.create(data);
-    const { id, email, name } = student;
+    const { id } = student;
 
     // REMOVE REFRESH TOKENS ANTIGOS SALVOS NO BANCO
     await DeleteRefreshTokenService.execute({
@@ -41,17 +50,16 @@ class CreateStudentService {
     });
 
     const token = await GenerateTokenProvider.execute(id);
+
     const refreshToken = await GenerateRefreshTokenProvider.execute(id);
 
     return {
-      student: {
-        email,
-        name,
-      },
+      student,
       token,
       refreshToken: refreshToken.id,
+      isFirstLogin: !name,
     };
   }
 }
 
-export default new CreateStudentService();
+export default new StudentSessionService();

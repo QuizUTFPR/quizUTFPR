@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BlurView } from 'expo-blur';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
 import {
   Wrapper,
@@ -54,11 +54,11 @@ const Dialog = ({
           <StyledTitle fill="purple">{title}</StyledTitle>
           <StyledWrapperChildren>
             {lottieAnimation}
-            {!!childrenNode && childrenNode}
-            {!!childrenText && <StyledText>{childrenText}</StyledText>}
+            {!!childrenNode ? childrenNode : null}
+            {!!childrenText ? <StyledText>{childrenText}</StyledText> : null}
           </StyledWrapperChildren>
           <StyledWrapperButtons>
-            {firstButtonLabel && (
+            {firstButtonLabel ? (
               <FirstButton
                 loading={loading}
                 onPress={async () => {
@@ -66,17 +66,14 @@ const Dialog = ({
                   await firstButtonOnPress();
                   setLoading(false);
                 }}
-              >
-                {firstButtonLabel}
-              </FirstButton>
-            )}
-            {secondButtonLabel && (
+                title={firstButtonLabel}
+              />
+            ) : null}
+            {secondButtonLabel ? (
               <SecondButton>
-                <SecondButtonText onPress={secondButtonOnPress} fill="purple">
-                  {secondButtonLabel}
-                </SecondButtonText>
+                <SecondButtonText onPress={secondButtonOnPress} fill="purple"><Text>{secondButtonLabel}</Text></SecondButtonText>
               </SecondButton>
-            )}
+            ) : null}
           </StyledWrapperButtons>
         </Wrapper>
       </BlurView>

@@ -1,3 +1,4 @@
+/* eslint-disable react-perf/jsx-no-new-object-as-prop */
 /* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
 import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
@@ -280,7 +281,7 @@ const QuizDescription = ({ route }) => {
               ))}
             </TagsContainer>
 
-            {classInstance && (
+            {classInstance ? (
               <>
                 <StyledTitle>Tentativa da Turma</StyledTitle>
 
@@ -288,17 +289,17 @@ const QuizDescription = ({ route }) => {
                   {classInstance?.title}
                 </StyledDescriptionText>
               </>
-            )}
+            ) : null}
           </BodyDescription>
         </StyledScrollView>
-        {studentQuizID && (
+        {studentQuizID ? (
           <QuizProgress fill="purple">
             <StyledTitleProgress>Questões repondidas: </StyledTitleProgress>
             <StyledTextProgress>
               {studentChoicesAmount}/{questionAmount}
             </StyledTextProgress>
           </QuizProgress>
-        )}
+        ) : null}
       </DetailsContainer>
 
       <Dialog

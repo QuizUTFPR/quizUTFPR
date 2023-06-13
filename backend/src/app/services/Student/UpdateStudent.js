@@ -9,7 +9,7 @@ import StudentRepository from '../../repositories/Student';
 // Models
 import File from '../../models/FileModel';
 
-class LDAPUpdateStudentService {
+class UpdateStudentService {
   constructor() {
     this.studentRepository = new StudentRepository();
   }
@@ -19,6 +19,7 @@ class LDAPUpdateStudentService {
       id: Yup.number().required(),
       name: Yup.string().required('Nickname é obrigatorio!'),
       avatar: Yup.string().required('Avatar é obrigatorio!'),
+      isLocalImage: Yup.boolean(),
     });
 
     const validation = await schema.validate(data);
@@ -30,7 +31,7 @@ class LDAPUpdateStudentService {
       throw error;
     }
 
-    const { id, name, avatar } = data;
+    const { id, name, avatar, isLocalImage } = data;
 
     const student = await this.studentRepository.findOne({ where: { id } });
 
@@ -46,12 +47,16 @@ class LDAPUpdateStudentService {
     let image;
     // Avatar
     if (avatar) {
-      const path = crypto.randomBytes(16).toString('hex') + extname(avatar);
+      let path = avatar;
 
-      fs.copyFileSync(
-        resolve('avatars', avatar),
-        resolve('tmp', 'uploads', path)
-      );
+      if (isLocalImage) {
+        path = crypto.randomBytes(16).toString('hex') + extname(avatar);
+
+        fs.copyFileSync(
+          resolve('avatars', avatar),
+          resolve('tmp', 'uploads', path)
+        );
+      }
 
       image = await File.create({
         name: avatar,
@@ -75,4 +80,4 @@ class LDAPUpdateStudentService {
   }
 }
 
-export default new LDAPUpdateStudentService();
+export default new UpdateStudentService();

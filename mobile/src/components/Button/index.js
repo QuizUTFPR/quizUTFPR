@@ -19,13 +19,13 @@ const WrapperStyledButton = ({
     disabled={loading}
     {...props}
   >
-    {loading && (
+    {loading ? (
       <ActivityIndicator
         style={{ marginRight: 20 }}
         size="small"
         color="white"
       />
-    )}
+    ) : null}
     <StyledText variant={variant}>{children}</StyledText>
   </StyledButton>
 );

@@ -96,7 +96,18 @@ const StudentOfClass = () => {
         {students.map((item, index) => (
           // eslint-disable-next-line react/no-array-index-key
           <Student key={index}>
-            <StyledAvatar src={item?.imageProfile?.url} />
+            {/* <StyledAvatar src={item?.imageProfile?.url} /> */}
+            <img
+              style={{
+                width: 56,
+                height: 56,
+                borderRadius: '50%',
+                marginRight: 16,
+              }}
+              alt={item?.name?.toUpperCase()}
+              src={item?.url_image}
+              referrerPolicy="no-referrer"
+            />
             <WrapperText>
               <TextBold>{item.name}</TextBold>
               <Text>{item.email}</Text>

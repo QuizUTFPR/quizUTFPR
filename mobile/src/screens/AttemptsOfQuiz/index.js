@@ -27,6 +27,7 @@ import {
   StyledButtonText,
   StyledScrollView,
 } from './styles';
+import { Text } from 'react-native';
 
 const Home = ({ route }) => {
   const navigation = useNavigation();
@@ -126,7 +127,7 @@ const Home = ({ route }) => {
             selected={isAttemptsSelected}
             onPress={() => handleClickAttemptsSelected()}
           >
-            Tentativas
+            <Text>Tentativas</Text>
           </StyledButtonNavigation>
         </ButtonWrapper>
         <ButtonWrapper selected={isTagsSelected}>
@@ -134,16 +135,16 @@ const Home = ({ route }) => {
             selected={isTagsSelected}
             onPress={() => handleClickTagsSelected()}
           >
-            Tags
+            <Text>Tags</Text>
           </StyledButtonNavigation>
         </ButtonWrapper>
       </ButtonsContainer>
 
-      {isAttemptsSelected && (
+      {isAttemptsSelected ? (
         <Attempts attempts={attempts} amountOfQuestions={amountOfQuestions} />
-      )}
+      ) : null}
 
-      {isTagsSelected && <Tags tags={tagsNames} />}
+      {isTagsSelected ? <Tags tags={tagsNames} /> : null}
     </StyledScrollView>
   );
 };

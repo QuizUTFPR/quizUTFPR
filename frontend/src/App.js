@@ -2,6 +2,9 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { LinearProgress } from '@mui/material';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
+import { SnackbarProvider } from 'notistack';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 // CONTEXT
 import QuestionQuizProvider from '@context/questionsQuiz';
 
@@ -39,6 +42,7 @@ const App = () => {
     }
     setCheckedToken(true);
   }, []);
+
   if (!checkedToken) {
     return <LinearProgress />;
   }
@@ -58,18 +62,26 @@ const App = () => {
   return (
     <Suspense fallback={<LinearProgress />}>
       <QuestionQuizProvider>
-        <Routes>
-          <Route path={TOKENEXPIRED} exact element={<ExpiredToken />} />
-          <Route path={LOGIN} exact element={<Login />} />
+        <GoogleOAuthProvider clientId="886529009031-lbqc3rcfharavqrljp9rvqstretrrrkr.apps.googleusercontent.com">
+          <SnackbarProvider maxSnack={3}>
+            <Routes>
+              <Route path={TOKENEXPIRED} exact element={<ExpiredToken />} />
+              <Route path={LOGIN} exact element={<Login />} />
 
-          <Route path={`${QUESTION}:idQuiz`} exact element={<ManageQuiz />} />
-          <Route
-            path={`${MANAGE_CLASSES}/:idClass`}
-            exact
-            element={<ManageClass />}
-          />
-          <Route path="*" element={<MainPage />} />
-        </Routes>
+              <Route
+                path={`${QUESTION}:idQuiz`}
+                exact
+                element={<ManageQuiz />}
+              />
+              <Route
+                path={`${MANAGE_CLASSES}/:idClass`}
+                exact
+                element={<ManageClass />}
+              />
+              <Route path="*" element={<MainPage />} />
+            </Routes>
+          </SnackbarProvider>
+        </GoogleOAuthProvider>
       </QuestionQuizProvider>
     </Suspense>
   );

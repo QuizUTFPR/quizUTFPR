@@ -11,6 +11,11 @@ class Student extends Model {
         password: Sequelize.VIRTUAL,
         passwordHash: Sequelize.STRING,
         idImage: Sequelize.INTEGER,
+        urlImage: Sequelize.STRING,
+        isLocalImage: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false,
+        },
       },
       {
         sequelize,

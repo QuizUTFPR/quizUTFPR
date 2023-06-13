@@ -3,8 +3,6 @@ import { KeyboardAvoidingView, Platform } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-// THEME
-
 // ICONS
 import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 
@@ -28,6 +26,8 @@ import {
   // StyledTextButton,
 } from './styles';
 
+const formikInitialValues = { ra: '', password: '' };
+
 const Login = ({ navigation }) => {
   const loginValidationSchema = Yup.object().shape({
     ra: Yup.string().required('Obrigatório'),
@@ -44,6 +44,19 @@ const Login = ({ navigation }) => {
     message: '',
   });
 
+  const handleSubmitFormik = async (values) => {
+    setLoading(true);
+    const data = await login(values);
+    if (data.status !== 200) {
+      setShowToast({
+        open: true,
+        message: data.message,
+      });
+    }
+
+    setLoading(false);
+  };
+
   const handleCloseToast = () => {
     setShowToast({
       open: false,
@@ -55,23 +68,9 @@ const Login = ({ navigation }) => {
     <>
       <Container>
         <Formik
-          initialValues={{
-            ra: '',
-            password: '',
-          }}
+          initialValues={formikInitialValues}
           validationSchema={loginValidationSchema}
-          onSubmit={async (values) => {
-            setLoading(true);
-            const response = await login(values);
-            if (response.status !== 200) {
-              setShowToast({
-                open: true,
-                message: response.message,
-              });
-            }
-
-            setLoading(false);
-          }}
+          onSubmit={(values) => handleSubmitFormik(values)}
         >
           {({
             handleChange,
@@ -98,7 +97,7 @@ const Login = ({ navigation }) => {
                     />
                     <InputWrapper>
                       <Input
-                        error={errors.ra && touched.ra}
+                        error={errors.ra ? touched.ra : null}
                         errorMessage={errors.ra}
                         fill="black"
                         placeholder="Digite seu RA"
@@ -109,7 +108,7 @@ const Login = ({ navigation }) => {
                             color={theme.color.darkGrey}
                           />
                         }
-                        label="RA"
+                        label="E-mail"
                         onChangeText={handleChange('ra')}
                         onBlur={handleBlur('ra')}
                         value={values.ra}
@@ -118,7 +117,7 @@ const Login = ({ navigation }) => {
                       />
 
                       <Input
-                        error={errors.password && touched.password}
+                        error={errors.password ? touched.password : null}
                         errorMessage={errors.password}
                         fill="black"
                         placeholder="Digite sua senha"
@@ -145,18 +144,11 @@ const Login = ({ navigation }) => {
                 <ButtonGradient
                   variant="primary"
                   onPress={handleSubmit}
-                  icon="login-variant"
+                  // icon="login-variant"
                   loading={loading}
-                >
-                  ENTRAR
-                </ButtonGradient>
+                  title="ENTRAR"
+                />
               </WrapperButton>
-              {/* <StyledTextButton
-                variant="secondary"
-                onPress={() => navigation.navigate('Register')}
-              >
-                Não possui uma conta? Cadastre-se
-              </StyledTextButton> */}
             </>
           )}
         </Formik>

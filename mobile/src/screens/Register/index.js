@@ -87,7 +87,7 @@ const Register = ({ navigation }) => {
 
                   <InputWrapper>
                     <Input
-                      error={errors.name && touched.name}
+                      error={errors.name ? touched.name : null}
                       errorMessage={errors.name}
                       fill="black"
                       placeholder="Digite seu apelido"
@@ -102,7 +102,7 @@ const Register = ({ navigation }) => {
 
                     <Input
                       fill="black"
-                      error={errors.email && touched.email}
+                      error={errors.email ? touched.email : null}
                       errorMessage={errors.email}
                       autoCompleteType="email"
                       placeholder="Digite seu endereço eletrônico"
@@ -116,7 +116,7 @@ const Register = ({ navigation }) => {
                     />
 
                     <Input
-                      error={errors.password && touched.password}
+                      error={errors.password ? touched.password : null}
                       errorMessage={errors.password}
                       fill="black"
                       placeholder="Digite uma senha"
@@ -132,7 +132,7 @@ const Register = ({ navigation }) => {
                     />
 
                     <Input
-                      error={errors.confirmPassword && touched.confirmPassword}
+                      error={errors.confirmPassword ? touched.confirmPassword : null}
                       errorMessage={errors.confirmPassword}
                       fill="black"
                       placeholder="Confirme a senha digitada"
@@ -152,12 +152,11 @@ const Register = ({ navigation }) => {
             </KeyboardAvoidingView>
             <WrapperButton>
               <ButtonGradient
-                title="Submit"
+                // title="Submit"
                 variant="primary"
                 onPress={handleSubmit}
-              >
-                CADASTRAR
-              </ButtonGradient>
+                title="CADASTRAR"
+              />
             </WrapperButton>
 
             <StyledTextButton

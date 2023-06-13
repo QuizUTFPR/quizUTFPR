@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 // COMPONENTS
-import { List, Divider, Avatar, Tooltip } from '@mui/material';
+import { List, Divider, Tooltip } from '@mui/material';
 import {
   Help,
   Home,
@@ -96,19 +96,14 @@ const MenuDrawer = () => {
       {open && (
         <AvatarBox>
           <>
-            <StyledBadge
-              overlap="circular"
-              variant="dot"
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-            >
-              <Avatar alt={teacherInfo.teacher.name.toUpperCase()} src="" />
-            </StyledBadge>
-
+            <img
+              style={{ width: 56, height: 56, borderRadius: '50%' }}
+              alt={teacherInfo?.teacher?.name?.toUpperCase()}
+              src={teacherInfo?.teacher?.picture}
+              referrerPolicy="no-referrer"
+            />
             <TextBox>
-              <AdminName color="primary">{teacherInfo.teacher.name}</AdminName>
+              <AdminName color="primary">{teacherInfo?.teacher.name}</AdminName>
               <AdminDescription color="primary">UTFPR</AdminDescription>
             </TextBox>
           </>

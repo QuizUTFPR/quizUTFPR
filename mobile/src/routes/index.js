@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import useStudentAuth from '@hook/useStudentAuth';
@@ -13,16 +14,19 @@ import RoutesTokenIsRequired from './category/tokenIsRequired';
 const routes = () => {
   const {
     isLoggedIn,
-    studentInfo,
     setStudentInfo,
     getOnLocalStorage,
     studentStorageItem,
+    setLoggedIn,
   } = useStudentAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       const studentData = await getOnLocalStorage(studentStorageItem);
-      if (studentData) setStudentInfo(studentData);
+      if (studentData) {
+        setStudentInfo(studentData);
+        setLoggedIn(true)
+      } 
     };
 
     fetchData();
@@ -30,9 +34,7 @@ const routes = () => {
 
   return (
     <NavigationContainer theme={navigationTheme} ref={navigationRef}>
-      {!isLoggedIn &&
-      studentInfo.token === null &&
-      studentInfo.student === null ? (
+      {!isLoggedIn ? (
         <RoutesTokenNotRequired />
       ) : (
         <RoutesTokenIsRequired />

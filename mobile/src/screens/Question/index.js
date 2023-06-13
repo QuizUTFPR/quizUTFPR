@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Animated, Dimensions, ImageBackground, View } from 'react-native';
+import { Animated, Dimensions, ImageBackground, Text, View } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { useNavigation, StackActions } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
@@ -195,6 +195,11 @@ const Question = () => {
     [navigation]
   );
 
+  useEffect(() => {
+    console.log("entrei aqui")
+  }, [])
+  
+
   return (
     <Container>
       <LinearContainer>
@@ -227,17 +232,17 @@ const Question = () => {
               <ScrollWrapper>
                 <QuestionDescription>
                   {quizData?.questions[quizData.indexOnScreen]?.imageQuestion
-                    ?.url.length && (
+                    ?.url.length ? (
                     <QuestionImage
                       source={{
                         uri: quizData.questions[quizData.indexOnScreen]
                           ?.imageQuestion?.url,
                       }}
                     />
-                  )}
+                  ) : null}
 
                   {!quizData.questions[quizData.indexOnScreen]?.imageQuestion
-                    ?.url.length && <View style={{ paddingTop: 25 }} />}
+                    ?.url.length ? <View style={{ paddingTop: 25 }} /> : null}
 
                   <MathJaxSvg
                     fontSize={theme.fontSize.normal}
@@ -291,18 +296,17 @@ const Question = () => {
               </ScrollWrapper>
               <Footer>
                 <ConfirmButton
+                  title="CONFIRMAR"
                   loading={loading}
                   onPress={handleGoToNextQuestionAndSave}
-                >
-                  CONFIRMAR
-                </ConfirmButton>
+                />
               </Footer>
             </InformationsWrapper>
           </QuestionWrapper>
 
-          {!noTime && (
+          {!noTime ? (
             <Timer widthAnimation={widthAnimation} timerState={timer} />
-          )}
+          ) : null}
         </ImageBackground>
       </LinearContainer>
 

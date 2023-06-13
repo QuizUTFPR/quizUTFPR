@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import renderMathInElement from 'katex/dist/contrib/auto-render';
-import 'katex/dist/katex.css';
+// import 'katex/dist/katex.css';
 
 const Katex = ({ children, ...props }) => {
   const ref = useRef(null);

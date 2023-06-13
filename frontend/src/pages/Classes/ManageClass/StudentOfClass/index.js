@@ -37,6 +37,7 @@ const StudentOfClass = () => {
         `/teacherClass/getAllClassStudents/${idClass}`
       );
       setStudents(data);
+      console.log(students);
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +85,17 @@ const StudentOfClass = () => {
 
           {students.map((item) => (
             <Student key={item.id}>
-              <StyledAvatar src={item?.imageProfile?.url} />
+              <img
+                style={{
+                  width: 56,
+                  height: 56,
+                  borderRadius: '50%',
+                  marginRight: 16,
+                }}
+                alt={item?.name?.toUpperCase()}
+                src={item?.url_image}
+                referrerPolicy="no-referrer"
+              />
               <WrapperText>
                 <TextBold>{item.name}</TextBold>
                 <Text>{item.email}</Text>

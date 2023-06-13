@@ -30,7 +30,7 @@ const TabBar = ({ state, descriptors, navigation }) => (
             target: route.key,
           });
 
-          if (!isFocused && !event.defaultPrevented) {
+          if (!isFocused ? !event.defaultPrevented : null) {
             navigation.navigate(route.name);
           }
         };
