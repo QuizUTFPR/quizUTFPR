@@ -28,6 +28,7 @@ const LoginPage = () => {
   });
 
   const fetchUserInfo = async (credential) => {
+    setLoading(true)
     try {
       const res = await fetch('https://www.googleapis.com/userinfo/v2/me', {
         method: 'GET',
@@ -43,12 +44,15 @@ const LoginPage = () => {
         process.env.REACT_APP_AMBIENT === 'development'
       ) {
         await login(data);
+        setLoading(false)
       } else {
         enqueueSnackbar('Você deve entrar com email @professores', {
           variant: 'error',
         });
+        setLoading(false)
       }
     } catch (error) {
+      setLoading(false)
       console.warn(error);
     }
   };
