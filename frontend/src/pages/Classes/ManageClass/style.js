@@ -13,11 +13,10 @@ export const WrapperMenu = styled.div`
   width: 90vw;
   justify-content: center;
   padding: 0 10px;
-  border-radius: 4px;
+  border-radius: 8px;
   background: white;
   gap: 10px;
   box-shadow: 1px 1px 8px -3px rgb(54 48 48 / 49%);
-  border: 1px solid gray;
 `;
 
 export const Wrapper = styled.div`
