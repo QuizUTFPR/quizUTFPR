@@ -8,8 +8,9 @@ export const Wrapper = styled(motion.div)``;
 export const QuizzesWrapper = styled.div`
   box-shadow: 1px 1px 8px -3px rgb(54 48 48 / 49%);
   background: white;
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 20px;
+  border: 1px solid gray;
 `;
 
 export const HeaderWrapper = styled.div`
@@ -39,8 +40,10 @@ export const WrapperQuiz = styled.div`
   width: 100%;
   justify-content: space-between;
 
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+
+  border-radius: 4px;
   display: flex;
   align-items: center;
 
@@ -56,7 +59,7 @@ export const ImageQuiz = styled.img`
 `;
 
 export const EmptyImage = styled.div`
-  border-radius: 8px 0 0 8px;
+  border-radius: 4px 0 0 4px;
   flex-shrink: 0;
   height: 100%;
   width: 200px;
@@ -65,7 +68,7 @@ export const EmptyImage = styled.div`
   @media (max-width: 768px) {
     height: 70%;
     width: 100%;
-    border-radius: 8px 8px 0 0px;
+    border-radius: 4px 4px 0 0px;
   }
 `;
 
@@ -84,7 +87,7 @@ export const QuizRightWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 4px 4px 0;
   overflow: hidden;
 `;
 
