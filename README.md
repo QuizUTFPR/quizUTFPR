@@ -93,10 +93,6 @@ EXPIRE_IN="DIAS_PARA_EXPIRAR_TOKEN"
 REFRESH_EXPIRATION="MINUTOS_PARA_EXPIRAR_REFRESH_TOKEN"
 TIMEZONE="DIGITE_TIMEZONE_AQUI"
 
-LDAP_URL="URL_LDAP_AQUI"
-LDAP_USERNAME="USUARIO_LDAP"
-LDAP_PASSWORD="SENHA_LDAP"
-
 NODE_ENV=development OU production
 PORT=PORTA_USADA_PELO_BACKEND
 ```
@@ -223,7 +219,10 @@ $ git push origin <nome-da-branch>
  <b>Iago Carmona</b>
  </a> <a href="https://github.com/iagocarmona" title="Repositorio Iago"></a>
 
-[![Linkedin Badge](https://img.shields.io/badge/-iagocarmona-4040ff?style=flat-square&logo=linkedin&logoColor=white&link=https://www.linkedin.com/in/iagocarmona/)](https://www.linkedin.com/in/iagocarmona/)</td>
+[![Gmail Badge](https://img.shields.io/badge/-iagocarmona@alunos.utfpr.edu.br-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:iagocarmona@alunos.utfpr.edu.br)](mailto:iagocarmona@alunos.utfpr.edu.br)</td>
+
+</tr>
+<tr>
 
 <td align="center"><a href="https://github.com/vitorRibeiro7">
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/72838474?v=4" width="100px;" alt=""/>
@@ -241,5 +240,7 @@ $ git push origin <nome-da-branch>
 
 [![Linkedin Badge](https://img.shields.io/badge/-diogorodriguees-4040ff?style=flat-square&logo=linkedin&logoColor=white&link=https://www.linkedin.com/in/diogorodriguees/)](https://www.linkedin.com/in/diogorodriguees/)</td>
 
-</tr></table>
+</tr>
+
+</table>
 </center>
