@@ -7,7 +7,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import { nameFormatter } from '../../utils/nameFromatter';
+import { nameFormatter } from '../../utils/nameFormatter';
 
 // ICONS
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
@@ -38,7 +38,7 @@ const CustomSidebarMenu = ({ colors, ...props }) => {
         }}
       />
       <StudentName fill="purple">
-        {studentInfo.student ? nameFormatter(studentInfo.student.name) : null}
+        {studentInfo.student ? nameFormatter(studentInfo.student.name) : 'null'}
       </StudentName>
 
       <Divider fill="purple" />
