@@ -16,6 +16,10 @@ export const StyledContainer = styled(Container)`
 
 export const DescriptionsGrid = styled(Grid)`
   padding-bottom: 20px;
+
+  @media only screen and (max-width: 1200px) {
+    text-align: center;
+  }
 `;
 
 export const Title = styled(Typography)`
@@ -52,6 +56,9 @@ export const StyledButton = styled(Button)`
     align-items: center;
     white-space: nowrap;
     gap: 8px;
+  }
+  @media only screen and (max-width: 1200px) {
+    margin: 0px auto;
   }
 `;
 
