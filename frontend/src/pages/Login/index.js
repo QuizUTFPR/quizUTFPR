@@ -18,14 +18,9 @@ import {
 
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
-  const [token, setToken] = useState('');
 
   const { login } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
-
-  const googleLogin = useGoogleLogin({
-    onSuccess: (tokenResponse) => setToken(tokenResponse.access_token),
-  });
 
   const validationEmail = (email) => {
     const regexEmail = /^[A-Z0-9._%+-]+@professores+\.[A-Z]{2,}$/i;
@@ -63,9 +58,9 @@ const LoginPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchUserInfo(token);
-  }, [token]);
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => fetchUserInfo(tokenResponse.access_token),
+  });
 
   return (
     <StyledContainer>
