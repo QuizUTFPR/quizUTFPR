@@ -184,7 +184,7 @@ const Quiz = () => {
                     key={quiz.id}
                     image={quiz.image?.url}
                     imageTitle={quiz.title}
-                    title={`${quiz.title}`}
+                    title={quiz.title}
                     description={quiz.description}
                     to={`${QUESTION}${quiz.id}`}
                     published={quiz.published}
@@ -276,7 +276,7 @@ const Quiz = () => {
                   key={quiz.id}
                   image={quiz.image?.url}
                   imageTitle={quiz.title}
-                  title={`${quiz.title}`}
+                  title={quiz.title}
                   description={quiz.description}
                   to={`${QUESTION}${quiz.id}`}
                   published={quiz.published}
