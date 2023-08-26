@@ -93,10 +93,6 @@ EXPIRE_IN="DIAS_PARA_EXPIRAR_TOKEN"
 REFRESH_EXPIRATION="MINUTOS_PARA_EXPIRAR_REFRESH_TOKEN"
 TIMEZONE="DIGITE_TIMEZONE_AQUI"
 
-LDAP_URL="URL_LDAP_AQUI"
-LDAP_USERNAME="USUARIO_LDAP"
-LDAP_PASSWORD="SENHA_LDAP"
-
 NODE_ENV=development OU production
 PORT=PORTA_USADA_PELO_BACKEND
 ```
@@ -221,9 +217,30 @@ $ git push origin <nome-da-branch>
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/69121686?s=400&u=c6fc38d355b96f4abf690ae95912c07e5f057b94&v=4" width="100px;" alt=""/>
 <br />
  <b>Iago Carmona</b>
- </a> <a href="https://github.com/JessePires" title="Repositorio Iago"></a>
+ </a> <a href="https://github.com/iagocarmona" title="Repositorio Iago"></a>
 
-[![Gmail Badge](https://img.shields.io/badge/-iagoortegacarmona@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:iagoortegacarmona@gmail.com)](mailto:iagoortegacarmona@gmail.com)</td>
+[![Gmail Badge](https://img.shields.io/badge/-iagocarmona@alunos.utfpr.edu.br-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:iagocarmona@alunos.utfpr.edu.br)](mailto:iagocarmona@alunos.utfpr.edu.br)</td>
 
-</tr></table>
+</tr>
+<tr>
+
+<td align="center"><a href="https://github.com/vitorRibeiro7">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/72838474?v=4" width="100px;" alt=""/>
+<br />
+ <b>Vitor Ribeiro</b>
+ </a> <a href="https://github.com/vitorRibeiro7" title="Repositorio Vitor"></a>
+
+[![Linkedin Badge](https://img.shields.io/badge/-vitorribeiro7-4040ff?style=flat-square&logo=linkedin&logoColor=white&link=https://www.linkedin.com/in/vitorribeiro7/)](https://www.linkedin.com/in/vitorribeiro7/)</td>
+
+<td align="center"><a href="https://github.com/DiogoRodriguees">
+ <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/92277603?v=4" width="100px;" alt=""/>
+<br />
+ <b>Diogo Rodrigues</b>
+ </a> <a href="https://github.com/DiogoRodriguees" title="Repositorio Diogo"></a>
+
+[![Linkedin Badge](https://img.shields.io/badge/-diogorodriguees-4040ff?style=flat-square&logo=linkedin&logoColor=white&link=https://www.linkedin.com/in/diogorodriguees/)](https://www.linkedin.com/in/diogorodriguees/)</td>
+
+</tr>
+
+</table>
 </center>

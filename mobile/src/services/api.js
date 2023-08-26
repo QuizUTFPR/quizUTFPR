@@ -8,8 +8,6 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
-console.log(api.defaults.baseURL)
-
 // USADO PARA CANCELAR REQUEST QUANDO COMPONENTE DESMONTAR
 api.CancelToken = axios.CancelToken;
 api.isCancel = axios.isCancel;
