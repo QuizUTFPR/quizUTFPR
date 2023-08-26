@@ -27,6 +27,12 @@ const LoginPage = () => {
     onSuccess: (tokenResponse) => setToken(tokenResponse.access_token),
   });
 
+  const validationEmail = (email) => {
+    const regexEmail = /^[A-Z0-9._%+-]+@professores+\.[A-Z]{2,}$/i;
+
+    return regexEmail.test(email);
+  };
+
   const fetchUserInfo = async (credential) => {
     setLoading(true);
     try {
@@ -40,7 +46,7 @@ const LoginPage = () => {
 
       const { email } = data;
       if (
-        email.includes('@professores') ||
+        validationEmail(email) ||
         process.env.REACT_APP_AMBIENT === 'development'
       ) {
         await login(data);
