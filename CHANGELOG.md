@@ -1,4 +1,7 @@
+* [#17](https://github.com/QuizUTFPR/quizUTFPR/issues/17) - Atualizando informações do README
+
 ## MOBILE
+* [#10](https://github.com/QuizUTFPR/quizUTFPR/issues/10) - Formatando nome do usuário para exibir no mobile
 
 ## BACKEND
 
