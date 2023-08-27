@@ -1,20 +1,23 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[FEAT] "
+title: ''
 labels: enhancement
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### Detailed Description
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+<!--- Provide a detailed description of the change or addition you are proposing -->
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+### Additional context
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+### Task requirements
+
+- [ ] 
+
+
+### Possible Implementation
+<!--- Not obligatory, but suggest an idea for implementing addition or change -->
+
