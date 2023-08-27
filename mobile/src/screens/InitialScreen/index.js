@@ -8,7 +8,7 @@ import * as WebBrowser from 'expo-web-browser';
 import useStudentAuth from '@hook/useStudentAuth';
 
 // .env
-import { expoClientId } from '../../../env';
+import { expoClientId, ambient, googleApi } from '../../../env';
 
 // THEME
 import theme from '../../styles/theme';
@@ -26,16 +26,23 @@ import {
 
 WebBrowser.maybeCompleteAuthSession();
 
-const InitialScreen = ({ navigation }) => {
+const InitialScreen = () => {
   const { login } = useStudentAuth();
 
-  const [request, response, promptAsync] = useAuthRequest({
-    androidClientId: expoClientId,
-  });
+  const clientId = {
+    expoClientId: expoClientId,
+  }
+
+  if(ambient === 'production'){
+    clientId.androidClientId = expoClientId;
+    delete clientId.expoClientId;
+  }
+
+  const [request, response, promptAsync] = useAuthRequest(clientId);
 
   const fetchUserInfo = async (token) => {
     try {
-      const data = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+      const data = await fetch(googleApi, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
