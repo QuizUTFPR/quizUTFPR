@@ -3,7 +3,7 @@
 ![image info](./capa.png)
 
 <p align="center">
-  <img alt="Licença" src="https://img.shields.io/github/license/quizUTFPR/quizUTFPR?color=%23372775&style=for-the-badge">
+  <img alt="Licença" src="https://img.shields.io/badge/LICENSE-MIT-blue?color=%23372775&style=for-the-badge">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/quizUTFPR/quizUTFPR?color=%23372775&style=for-the-badge">
   <img src="https://img.shields.io/github/stars/quizUTFPR/quizUTFPR?color=%23372775&style=for-the-badge" alt="Quantidade de Estrelas">
   <img src="https://img.shields.io/github/forks/quizUTFPR/quizUTFPR?color=%23372775&style=for-the-badge" alt="Quantidade de Forks!">
