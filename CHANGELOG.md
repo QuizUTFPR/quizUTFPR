@@ -1,3 +1,4 @@
+* Criando licença e código de conduta
 * [#17](https://github.com/QuizUTFPR/quizUTFPR/issues/17) - Atualizando informações do README
 
 ## MOBILE
