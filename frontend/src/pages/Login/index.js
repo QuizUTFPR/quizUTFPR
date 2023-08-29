@@ -42,7 +42,7 @@ const LoginPage = () => {
       const { email } = data;
       if (
         validationEmail(email) ||
-        process.env.REACT_APP_AMBIENT === 'development'
+        process.env.NODE_ENV === 'development'
       ) {
         await login(data);
         setLoading(false);
