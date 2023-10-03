@@ -40,10 +40,7 @@ const LoginPage = () => {
       const data = await res.json();
 
       const { email } = data;
-      if (
-        validationEmail(email) ||
-        process.env.NODE_ENV === 'development'
-      ) {
+      if (validationEmail(email) || process.env.NODE_ENV === 'development') {
         await login(data);
         setLoading(false);
       } else {

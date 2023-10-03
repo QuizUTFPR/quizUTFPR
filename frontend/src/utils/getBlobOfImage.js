@@ -1,5 +1,5 @@
 export default (file) =>
-  new Promise(() => {
+  new Promise((resolve) => {
     const blob = new Blob(file);
-    return blob;
+    resolve(blob);
   });
