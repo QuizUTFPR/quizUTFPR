@@ -2,7 +2,7 @@ FROM node:16.13.0-alpine3.14
 
 WORKDIR /home/node/api
 
-COPY ./package*.json .
+COPY ./package*.json ./
 
 RUN apk update && apk add python3 make g++
 
